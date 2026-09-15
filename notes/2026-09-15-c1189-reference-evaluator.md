@@ -127,6 +127,8 @@ what catches a source whose free name is not in fact free.
 | `8e746ec` | every backend bound taken out of the evaluator; the harness's backend-divergence class                |
 | `3eee87c` | binarization keeps one column when a join carries nothing forward, with its closure-shape fixture     |
 | `fe036f9` | the two A/B receipts for the three repairs against the `b7c26e5` control                              |
+| `c67e8d5` | the contributing-literal join-order tiebreak, and a ground body refused as `REL0504`                  |
+| `2d260a1` | the two A/B receipts for the join-order tiebreak against the `3eee87c` control                        |
 
 ## The evaluator's stated contract
 
@@ -177,7 +179,9 @@ two defects agrees on *which* one is reported, not merely that it is rejected.
 largest number of variables in a rule, no bound on relations, rules, domain size or disjunctive
 expansion, and no binarization, because none of those is a property of the Figure 3 and Figure 4
 denotations. The evaluator admits a five-column relation, a rule of nine variables and a body that
-expands to a hundred disjuncts, and computes their closures.
+expands to a hundred disjuncts, and computes their closures. It has no join order either, which is
+what made it able to certify that the join-order change left every closure alone: a body of any
+length is matched directly, so its answers do not depend on the order the lowering picks.
 
 An earlier version of this module did mirror one of them. `binarization_budget` reproduced the
 lowering's join-order heuristic so that the two sides agreed on the auxiliary-arity bound, which
@@ -311,14 +315,14 @@ kinds. It is now a recorded row rather than an accident.
 | the eight committed milestone (a) fixtures | 8        | all accepted, and each closure also equals the committed Python oracle's     |
 | the milestone (a) audit's further programs | 6        | five accepted, one rejected for range restriction                            |
 | the recorded rejection surface             | 17       | all rejected, each with the recorded semantic class                          |
-| the recorded backend divergences           | 4        | all refused by a bound the evaluator does not have, each diagnostic asserted |
+| the recorded backend divergences           | 3        | all refused by a bound the evaluator does not have, each diagnostic asserted |
 | the Figure 3 and Figure 4 equations        | 35       | 14 evaluated, 17 outside fragment, 2 admission, 2 not parsed                 |
 | the surface constructs outside Figure 2    | 26       | as the table above                                                           |
 | value kinds and formula forms              | 12       | all accepted                                                                 |
-| the seeded in-fragment generator           | 1,200    | 1,189 accepted, 11 backend divergences, 0 semantic rejections, 0 unadmitted  |
+| the seeded in-fragment generator           | 1,200    | all accepted; no divergence, no semantic rejection, nothing unadmitted       |
 | the seeded near-miss generator             | 400      | 357 rejected (248 outside fragment, 109 range restriction), 43 divergences   |
 | the name-resolution templates              | 120      | all accepted                                                                 |
-| closure-shape regressions                  | 6        | as described below                                                           |
+| closure-shape regressions                  | 7        | as described below                                                           |
 
 **Seed and shape mix.** The corpus is a function of the seed `0x000c_1189_0915` alone, through
 SplitMix64, so it reproduces across platforms. The in-fragment corpus's program shapes are 291 plain,
@@ -336,17 +340,19 @@ name-resolution corpus's six templates appear 27, 22, 21, 19, 17 and 14 times.
 **The backend-divergence population, by diagnostic.** Every entry is a program whose closure the
 reference evaluator computes and which the lowering refuses on a declared bound.
 
-| Corpus                | Code      | Budget                       | `found` | Programs | What the class is                             |
-|-----------------------|-----------|------------------------------|--------:|---------:|-----------------------------------------------|
-| in-fragment generator | `REL0503` | relation arity               |       0 |       11 | a join of two fully ground atoms              |
-| near-miss generator   | `REL0503` | relation arity               |       5 |       43 | a five-column relation                        |
-| hand-written          | `REL0503` | relation arity               |       5 |        1 | a five-column fact set, read out              |
-| hand-written          | `REL0503` | variables in one rule        |       9 |        1 | nine distinct variables in one rule           |
-| hand-written          | `REL0505` | disjuncts of one definition  |     128 |        1 | seven nested two-way disjunctions             |
-| hand-written          | `REL0503` | relation arity               |       0 |        1 | a join of two fully ground atoms              |
+| Corpus                | Code      | Budget                      | `found` | Programs | What the class is                   |
+|-----------------------|-----------|-----------------------------|--------:|---------:|-------------------------------------|
+| near-miss generator   | `REL0503` | relation arity              |       5 |       43 | a five-column relation              |
+| hand-written          | `REL0503` | relation arity              |       5 |        1 | a five-column fact set, read out    |
+| hand-written          | `REL0503` | variables in one rule       |       9 |        1 | nine distinct variables in one rule |
+| hand-written          | `REL0505` | disjuncts of one definition |     128 |        1 | seven nested two-way disjunctions   |
 
-The in-fragment generator's arity-zero class held 227 programs before the empty-live-set repair
-below; those 216 now lower, and each one's closure agrees with the reference evaluator's.
+The in-fragment generator contributes nothing to this table, which is the result rather than an
+omission. Its arity-zero class held 227 programs before the empty-live-set repair and 11 after it;
+the join-order tiebreak took the last 11, so all 1,200 generated programs now lower and every closure
+agrees with the reference evaluator's. Every entry that remains is a bound on a *width* — five
+columns, nine variables, 128 disjuncts — and none of them is a shape the lowering could have chosen
+differently.
 
 **Three disagreements, all found, all diagnosed, and all three now repaired.**
 
@@ -494,17 +500,53 @@ comparison the repair had to earn, and it is the differential's own test rather 
 check. The divergence class goes 227 → 11. The canonical parity hash is unchanged at 213 cases,
 `04b5ebdd72…02bb23b0`, 433,805 canonical bytes, confirming that no parity case had the shape.
 
-*The sub-case that remains, deliberately.* When *both* joined atoms are fully ground (`g(1) and g(2)
-and e(x, x)`) the join has no variable to keep, and the auxiliary really is nullary. Those are the 11
-programs left in the class, and their code is unchanged: they stay `REL0503` with budget "relation
-arity" and `found` 0, recorded as the `a fully ground binarization auxiliary` row of
-`BACKEND_DIVERGENCES` with that exact diagnostic asserted. Whether a fully ground conjunct should
-instead be `REL0504` is a diagnostic decision, not a mechanical one, and it is not taken here.
+*Both follow-ups you then took, in `c67e8d5`.* The widening was the narrow repair; the two decisions
+finished the job.
 
-*The broader repair, still not taken.* Changing `order_positives` so that its tiebreak cannot create
-an empty intermediate is a join-order policy change: it would move every binarized rule's recorded
-order and therefore the canonical fingerprint and the parity hash. That remains an architecture
-choice with downstream shape and is not in this task.
+**The join order now prefers a literal that contributes a column.** `order_positives` gained one
+tiebreak, between "most already-bound variables shared" and "fewer variables": prefer a literal whose
+join with what is already accumulated leaves something the head or an unplaced literal still needs.
+A literal all of whose variables are private to it contributes no column to the next link, and a
+fully ground literal contributes none by construction, so both now sort behind a literal that does
+contribute — ground atoms sort last, whatever their source position. The predicate is computed from
+the head's variable mask and prefix/suffix unions over the unplaced range, so the function stays
+quadratic in the body length rather than becoming cubic.
+
+**The widening survives as a guarded fallback, and it is now unreachable.** That is worth stating
+precisely rather than hedging. Range restriction puts every head variable into some positive body
+literal, and an admitted rule's head always has at least one variable — a constant head parameter is
+refused where the parameter is bound, and an anonymous one becomes an unbound variable. So at
+position zero there is always a candidate whose mask meets the head's, whose live flag is therefore
+true, and which the tiebreak places first; the accumulated mask is that literal's or a later
+non-empty live set, so the join is never empty and the branch is never taken. There is deliberately
+no source-level fixture for it, because no source reaches it. It stays for a future ordering policy,
+or a fragment that admits a variable-free head, and the comment in `chain` says so.
+
+**A nullary auxiliary is now `REL0504`, not a budget.** If the fallback is ever reached and there is
+no variable to keep, the diagnostic says what the shape is: *a conjunction of ground atoms is a truth
+value, and the rule contract has no carrier for one: it holds relations of one to four columns and
+nothing else*. It reports no numbers, because there is no bound to compare against. `Budget` gained
+one variant that names a shape rather than a budget, documented as such, and `enrich_lowering` is now
+code-aware so the numbers note is not printed for it.
+
+*What the two decisions moved, measured by toggling the tiebreak off and on over the seeded corpus.*
+
+| Quantity                                                            | Count |
+|---------------------------------------------------------------------|------:|
+| generated programs                                                  | 1,200 |
+| whose canonical lowered form differs under the new order            |   447 |
+| of those, previously refused and now lowering                       |    11 |
+| of those, already lowering and merely reordered                     |   436 |
+| whose closure differs                                               |     0 |
+| `datalog` cohort binarized rules whose order moved                  |     0 |
+
+The closure row is the one that matters and it is not merely "still agreed": the reference evaluator
+does not binarize, so its closures are independent of the join order, and it agreed with the lowering
+on all 1,200 programs both before and after. Equal to an order-independent oracle before and after
+means equal to each other.
+
+The residual divergence class is **empty** for the in-fragment corpus: all 1,200 generated programs
+lower. What remains anywhere is the 43 five-column near-misses and the three hand-written bound rows.
 
 ### Two further findings that are not disagreements
 
@@ -570,10 +612,10 @@ nix develop ~/src/ergodis --command python3 analysis/rel-frontend/bench.py \
 Results, verbatim:
 
 ```text
-rel_lowering:              29 passed; 0 failed
+rel_lowering:              30 passed; 0 failed
 rel_frontend:              28 passed; 0 failed
 rel_frontend_portability:   1 passed; 0 failed
-rel_reference_eval:        15 passed; 0 failed
+rel_reference_eval:        16 passed; 0 failed
 cargo clippy -p ergodis-private --lib --tests -- -D warnings:  exit 0
 cargo clippy -p ergodis-tools --bins -- -D warnings:           exit 0
 cargo fmt -p ergodis-private -p ergodis-tools -- --check:      exit 0
@@ -584,15 +626,23 @@ portability.py:            213 cases, 433805 canonical bytes, native/WASM exact 
 The whole `rel_reference_eval` binary takes about 2 seconds in a debug `cargo test`.
 
 **Parity hash, before and after.** `04b5ebdd72fb08184f3143e3ca8393d207b9a6109c549e9806e1bfae02bb23b0`
-at 213 cases and 433,805 canonical bytes, unchanged before the repairs, after the two resolution and
-state repairs, and after the empty-live-set repair. Only the receipt's source and library hashes
-moved. No parity case has any of the three repaired shapes, which is the same situation the
-`resolve_name` repair reported.
+at 213 cases and 433,805 canonical bytes — unchanged before the repairs, after the two resolution and
+state repairs, after the empty-live-set repair, and after the join-order tiebreak. Only the receipt's
+source and library hashes moved each time.
 
-**Allocation gate.** `the_lowering_stage_does_not_allocate` passes unchanged. None of the three
+The last of those was expected to move it, and did not. The join order *is* part of the canonical
+form, so the prediction was reasonable; the reason it held still is that the new tiebreak only
+separates candidates that tie on shared bound variables and differ on whether they contribute a
+column, and no program in the parity corpus has that shape — nor does the `datalog` cohort, whose
+lowered program is bit-identical. The corpus where the tiebreak does decide is the seeded generator,
+and there 447 of 1,200 canonical forms moved. A parity case that exercises the tiebreak is a queue
+candidate below.
+
+**Allocation gate.** `the_lowering_stage_does_not_allocate` passes unchanged. None of the four
 repairs allocates: the widened restore array is a stack array of nine `u16`, `number`'s `next` became
-a `&mut` to a stack local, and the empty-live-set widening is a test, a `trailing_zeros` and a shift
-on a value already in a register.
+a `&mut` to a stack local, the empty-live-set widening is a test, a `trailing_zeros` and a shift on a
+value already in a register, and the join-order tiebreak adds two stack arrays of 65 `u16` beside the
+two `chain` already had, with no heap traffic and no call.
 
 ## The A/B for the lowering stage
 
@@ -698,7 +748,106 @@ lower a real program. No loss anywhere.
 
 **Receipts.** `analysis/rel-frontend/performance-v1-empty-live-set-3eee87c.json` for the five default
 cohorts and `analysis/rel-frontend/performance-v1-empty-live-set-datalog-3eee87c.json` for the
-`datalog` cohort, both committed.
+`datalog` cohort, both committed in `fe036f9`.
+
+*Read this section together with the join-order A/B below, which reverses its `comment-string`
+figure and shows the "win" recorded here to be layout rather than code.*
+
+## The A/B for the join-order change
+
+**Arms.** Same recipe, same pin, both trees clean. The control is the revision the previous A/B
+nominated.
+
+| Arm       | Repository        | Revision  | Dirty | Retained name           | Measured sha256                                                    |
+|-----------|-------------------|-----------|-------|-------------------------|--------------------------------------------------------------------|
+| control   | `ergodis-private` | `3eee87c` | no    | `ergodis-tools-3eee87c` | `56c7030b9be2d02d3c1ffbd8068c3b6546ff2854e112dc7181e99a263b12abc3` |
+| candidate | `ergodis-private` | `c67e8d5` | no    | `ergodis-tools-c67e8d5` | `8be188f15a73e34425446485d8630134aee20aea8b5981919d6f4fbcaf4452d0` |
+
+**Method.** As above: five rounds, interleaved, byte/scalar order alternating, pinned to CPU 5, the
+six-event non-multiplexing set, two-point differenced, all cohorts including `datalog`.
+
+**Cohort freeze, and the rules whose order moved.** The `datalog` cohort's lowered program is
+bit-identical across arms — lowering fingerprint `aa9451450b65b83e`, 96 rules, 8 auxiliaries, 8
+binarized rules — and **none of its eight binarized rules changed order**. That is the answer to the
+question the tiebreak raised, and it is why this cohort's ratio measures code layout and not a
+different program. The corpus where the tiebreak does decide is the seeded generator, which is not a
+bench cohort; 447 of its 1,200 canonical forms moved, with every closure unchanged.
+
+**A/A nulls,** instructions: 1.0000006, 0.9999999, 1.0000040, 1.0000019, 1.0000008 on the default
+cohorts and 0.9999944 on `datalog`, so the noise floor is again a few parts per million. `scan`,
+`parse` and `admit` are 1.000000 on every cohort and both variants.
+
+**Which cohorts can price this change at all.** Only one. `order_positives` runs from `binarize`,
+which runs only for a rule with three or more positive body literals, so a cohort whose lowering
+never gets that far cannot measure the tiebreak. Checked on both arms with the driver rather than
+assumed:
+
+| Cohort            | What its lowering does                                        | Reaches `chain`? |
+|-------------------|---------------------------------------------------------------|------------------|
+| `ascii`           | rejects inside `declare` at the second definition             | no               |
+| `unicode`         | the same                                                      | no               |
+| `comment-string`  | declares 896 relations, then `REL0503` relations 896 over 64  | no               |
+| `malformed-early` | fails at parse or admission; the stage does no work           | no               |
+| `malformed-late`  | the same                                                      | no               |
+| `datalog`         | lowers: 96 rules, 8 auxiliaries, 8 binarized rules            | **yes**          |
+
+**Composed `lower` − `admit`, candidate over control.**
+
+| Cohort            | Variant | Candidate |   Control |        Ratio |
+|-------------------|---------|----------:|----------:|-------------:|
+| `ascii`           | byte    |     6,234 |     6,227 |      1.00102 |
+| `ascii`           | scalar  |     6,232 |     6,227 |      1.00075 |
+| `unicode`         | byte    |     6,245 |     6,247 |      0.99973 |
+| `unicode`         | scalar  |     6,253 |     6,245 |      1.00135 |
+| `comment-string`  | byte    | 1,832,000 | 1,826,819 |      1.00284 |
+| `comment-string`  | scalar  | 1,831,996 | 1,826,812 |      1.00284 |
+| `malformed-early` | byte    |         6 |         6 | not readable |
+| `malformed-early` | scalar  |         0 |         0 | not readable |
+| `malformed-late`  | byte    |        −1 |        −2 | not readable |
+| `malformed-late`  | scalar  |        −3 |         2 | not readable |
+| `datalog`         | byte    | 1,313,560 | 1,311,006 |      1.00195 |
+| `datalog`         | scalar  | 1,313,560 | 1,311,007 |      1.00195 |
+
+**The `datalog` loss is real and it is this change.** 1.00195 on both variants, +2,554 instructions
+on 1,311,006, with an interval of under a part per million. This is the one cohort whose lowering
+reaches binarization, and the number is what the tiebreak costs. It prices cleanly: the cohort has
+eight binarized rules, so the loss is +319 per rule; each of those rules has a three-atom body, and
+the new predicate adds twelve `mask_of` calls per rule for the prefix and suffix unions over the
+unplaced range; at the twenty-odd instructions a four-term mask loop costs, that model closes on the
+measurement to within a factor of one and a half.
+
+Kept, not reverted, because the change is a coverage decision rather than a performance candidate —
+reverting it would put back a refusal of 11 in 1,200 generated programs. The playbook's rule for a
+kept change with a loss is to record it with its cause, which is this paragraph. **The remedy is
+named and priced**: compute each literal's mask once per rule into a stack array instead of
+recomputing it per position, which leaves `order_positives` with `count` `mask_of` calls rather than
+about three times `count²`, and should turn the 0.20 per cent loss into a win against even the
+original control. It belongs in its own commit with its own A/B, and it is a queue candidate below
+rather than something smuggled into this one.
+
+**The `comment-string` loss is real, and it is not this change.** 1.00284 on both variants, about
+5,181 instructions on 1.83 million, with an interval of two parts per million: too large and too
+tight to call noise, and it must be reported rather than absorbed. But that cohort's lowering is
+refused at 896 relations against a bound of 64, on both arms, before `binarize` is reached at all, so
+the tiebreak is not executed on it and cannot be the cause. What it is, is the reversal of the "win"
+the previous A/B recorded on the same cohort:
+
+| Revision  | `comment-string` composed `lower` − `admit` | Against `b7c26e5` |
+|-----------|--------------------------------------------:|------------------:|
+| `b7c26e5` |                                   1,831,739 |                 — |
+| `3eee87c` |                                   1,826,819 |           0.99731 |
+| `c67e8d5` |                                   1,832,000 |           1.00014 |
+
+Over the whole C1189 series this cohort is flat: +261 instructions on 1.83 million, 1.00014. The
+0.27 per cent dip at `3eee87c` and the 0.28 per cent rise at `c67e8d5` are one oscillation in code
+layout, and the earlier report's reading of the dip as a win was too generous — it was real for that
+pair of binaries and not attributable to the code. The workspace builds with thin LTO and one
+codegen unit; the playbook records this effect twice, and this is a third instance, now with the
+round trip visible. The `ascii` and `unicode` rows, five to eight instructions on a stage of 6,230,
+are the same phenomenon at the resolution the method offers.
+
+**Receipts.** `analysis/rel-frontend/performance-v1-join-order-c67e8d5.json` and
+`analysis/rel-frontend/performance-v1-join-order-datalog-c67e8d5.json`, both committed in `2d260a1`.
 
 ## Claims and how to check them
 
@@ -729,16 +878,13 @@ cohorts and `analysis/rel-frontend/performance-v1-empty-live-set-datalog-3eee87c
 
 ## Mystery ledger
 
-1. **Why did a fifth of the generated corpus hit the empty-auxiliary bound?** *Settled, and now
-   repaired.* It was not a corner case reached by an unlucky generator: the join-order heuristic's
-   "fewer variables first" tiebreak actively creates the empty intermediate whenever a body has three
-   or more atoms and two of them are narrow and unrelated to the rest, which is a common shape. The
-   narrow widening removed 216 of the 227, closure-for-closure against the reference evaluator, with
-   the parity hash unchanged. What is left open is narrower and stated: whether a fully ground
-   conjunct — the 11 that remain — should be `REL0504` rather than a budget, and whether
-   `order_positives` should be changed so the tiebreak cannot create an empty intermediate at all.
-   The first is a diagnostic decision; the second moves the canonical fingerprint and the parity
-   hash. Owner: you, then a successor task.
+1. **Why did a fifth of the generated corpus hit the empty-auxiliary bound?** *Settled, and closed.*
+   It was not a corner case reached by an unlucky generator: the old tiebreak's "fewer variables
+   first" rule actively created the empty intermediate whenever a body had three or more atoms and
+   two of them were narrow and unrelated to the rest, which is a common shape. The narrow widening
+   took 216 of the 227; the join-order tiebreak took the last 11. All 1,200 generated programs now
+   lower, and the fallback that the widening provides is unreachable by the argument recorded in
+   `chain`'s own comment. Nothing about this item is open.
 2. **Why did the variable-map leak never show up in milestone (a) or its audit?** *Settled, and the
    answer applies to this harness too.* Every existing test and the audit driver use a fresh
    workspace per source, so nothing ever lowered a valid source after a failed one on the same
@@ -759,13 +905,23 @@ cohorts and `analysis/rel-frontend/performance-v1-empty-live-set-datalog-3eee87c
    None of these is hard to add; none was needed to find the three disagreements. Owner: whoever
    extends the corpus, most naturally the milestone (b) task, which will want generated negation
    anyway.
-6. **Why are exactly 11 programs left in the arity-zero divergence class?** *Settled by
-   construction, and worth stating because the number is small enough to look arbitrary.* After the
-   repair an auxiliary can only be nullary when the join it summarizes has no variable at all, which
-   means both joined atoms are fully ground. The generator writes a ground atom whenever it fills a
-   column with a constant rather than a variable, so the shape needs two such atoms chosen first by
-   the width tiebreak in one body of three or more — rare but not vanishing. The class is asserted at
-   11 rather than described, so if the generator's mix moves, the test says so.
+6. **Why did the canonical parity hash not move when the join order changed?** *Settled, and it is
+   the one prediction of this follow-up that came out wrong.* The join order is part of the canonical
+   form, so changing the policy was expected to move the hash; it did not, and neither did the
+   `datalog` cohort's lowered program. The reason is that the new tiebreak only decides between
+   candidates that tie on shared bound variables *and* differ on whether they contribute a column,
+   and in the parity corpus and the `datalog` cohort every candidate contributes: those programs'
+   bodies are connected through their head variables, so the tiebreak is a no-op and width decides as
+   before. The corpus where it does decide is the seeded generator, which writes constants and
+   private variables into argument positions; there 447 of 1,200 canonical forms moved. So the hash
+   is stable for the reason that makes the change safe, not because the change did nothing.
+7. **Is the nullary-auxiliary path now dead code?** *Settled, and deliberately kept.* It is
+   unreachable from any admitted source, by the range-restriction argument in `chain`'s comment, and
+   it has no source-level fixture because no source can reach it — the same distinction milestone
+   (a)'s gap 4 was reaching for about `REL0502`, with the opposite outcome. It was exercised once, by toggling the
+   tiebreak off, which is how the 11-program figure above was measured and how the `REL0504`
+   diagnostic was seen to fire. It stays because it is the only thing between a future ordering
+   policy, or a fragment with a variable-free head, and a nullary relation reaching the contract.
 5. **How should the two sides treat a backend bound at all?** *Settled, and it was the one thing the
    first version of this task got wrong.* Mirroring the lowering's binarization so that both sides
    agreed on the auxiliary-arity bound made the verdicts total at the cost of the oracle's
@@ -810,28 +966,37 @@ harness checks, which is the freeze check a lowering repair actually needs.
    records *how* each construct outside Figure 2 is desugared, dropped or refused, which is the part
    a reader of the manifest currently has to reconstruct from the code.
 
+**The two decisions that were open, now closed.** Both were yours, both landed in `c67e8d5`, and both
+are recorded above with what they moved: `order_positives` gained the contributing-literal tiebreak
+so ground atoms sort last, and a nullary auxiliary is `REL0504` with a message naming the shape
+rather than a `REL0503` budget with a meaningless zero. Nothing about the empty-auxiliary family is
+open.
+
 **Candidates to queue** (no IDs allocated):
 
-- Decide whether a fully ground conjunct should be `REL0504` rather than a budget, which would empty
-  the last divergence class or rename it.
-- Change `order_positives` so its tiebreak cannot create an empty intermediate at all. This is the
-  broader form of the repair that landed; it moves the canonical fingerprint and the parity hash, so
-  it is an architecture decision with a measured A/B attached.
+- Cache each literal's variable mask once per rule in `order_positives`, so the function makes
+  `count` `mask_of` calls instead of about three times `count²`. This is the named remedy for the
+  0.20 per cent loss the join-order tiebreak measured on the `datalog` lowering stage, and the
+  arithmetic says it should end up ahead of the original control rather than merely level. Its own
+  commit, its own A/B against `ergodis-tools-c67e8d5`.
 - Extend the differential to milestone (b) as its acceptance gate, with generated negation and
   stratified evaluation on both sides.
 - Compare budget *names* rather than the single budget class, which is the stronger version of the
-  verdict comparison.
-- Add a parity case for each of the two repaired resolution-order shapes. Both were deliberately left
-  out here because adding one moves the canonical parity hash, which should not happen on a repair
-  commit.
+  verdict comparison. With the in-fragment corpus now diverging nowhere, the remaining classes are
+  few enough that this is cheap.
+- Add a parity case for each of the two repaired resolution-order shapes, and one for a body whose
+  join order the new tiebreak decides. The parity corpus contains no program in which the tiebreak
+  decides anything, which is why the canonical hash did not move; a case that exercises it would put
+  the policy under the parity replay as well as under the differential.
 
 ## Vibe check
 
-Good, and better after the vetting than before it. Three disagreements, three diagnoses, all three
-now repaired with fixtures and a parity hash that never moved; the largest of them was refusing a
-fifth of a random in-fragment corpus and now refuses eleven programs of one named shape. Taking the
-mirrored binarization bound out of the oracle was the right call and cost nothing: the divergence
-class it was hiding is now a counted, asserted population instead of a silent agreement. The A/B is
-a wash where the repairs cannot reach and a small win on both cohorts that lower a real program. The
-one soft spot left is that the corpus is broad but shallow in a few named places, which milestone
-(b) will want to fix anyway.
+Good, and finished. Three disagreements, three diagnoses, all three repaired with fixtures; the
+largest of them was refusing a fifth of a random in-fragment corpus and now refuses nothing — all
+1,200 generated programs lower and every closure agrees. Taking the mirrored binarization bound out
+of the oracle was the right call and paid for itself immediately: the class it had been hiding is now
+a counted, asserted population, and it is empty. Two blemishes, both stated plainly. The join-order tiebreak costs
+0.20 per cent on the one cohort that reaches binarization, which is kept and recorded with its cause
+and a priced remedy rather than reverted. And this report's earlier claim of a 0.27 per cent win on
+`comment-string` did not survive the second A/B, which reversed it: that cohort is flat across the
+whole series, the swings are thin-LTO layout, and I have said so where the claim was made.

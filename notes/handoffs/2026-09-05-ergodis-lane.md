@@ -230,12 +230,16 @@ programs and 400 near-misses. It found and the task repaired three lowering defe
 resolved the top level before the module chain (the `resolve_name` defect one function away), a
 variables-budget failure leaked a variable mapping into the next lowering on the same workspace, and
 binarization built a nullary auxiliary whenever a join carried nothing forward (a fifth of the
-generated corpus refused). Lowering-stage A/B against `ergodis-tools-b7c26e5` is a wash; parity hash
-unchanged; the paper is pinned in the coverage manifest; milestone (a)'s gap 4 is corrected
-(`REL0502` has a source fixture). Two decisions for Tavis: whether a fully ground conjunct should be
-`REL0504` rather than a `REL0503` budget (the last recorded backend-divergence class), and whether
-`order_positives` should change so its tiebreak cannot build an empty intermediate (moves the parity
-hash, needs an A/B). Control for the next frontend A/B: `ergodis-tools-3eee87c` (rustc 1.95.0).
+generated corpus refused). The paper is pinned in the coverage manifest, and milestone (a)'s gap 4 is
+corrected (`REL0502` has a source fixture). Both decisions Tavis then took are implemented:
+`order_positives` prefers a literal whose join leaves a column the head or an unplaced literal still
+needs, so ground atoms sort last and the nullary auxiliary is unreachable, and if it were reached it
+is now `REL0504` naming the shape rather than a `REL0503` budget with a zero; all 1,200 generated
+programs lower and the in-fragment divergence class is empty. Lowering-stage A/B against
+`ergodis-tools-3eee87c`: `datalog` is the only cohort that reaches binarization and none of its eight
+binarized rules changed order; the canonical parity hash did not move, because no parity case has a
+body where the tiebreak decides. Control for the next frontend A/B: `ergodis-tools-c67e8d5`
+(rustc 1.95.0).
 Next: milestone (b). Ergodis retains lowering, rules, joins and execution; no external evaluator or
 backend is adopted. Tree-sitter and a PLT Redex model remain deferred.
 
