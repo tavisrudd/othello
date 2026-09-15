@@ -571,11 +571,11 @@ and is the largest single call the lowering still makes on this cohort.
 All three candidates are **kept**, each by the forward commit that introduced it. Nothing was
 reverted.
 
-| Candidate                          | Commit    | Retained arm            | Verdict | Why                                                                                                             |
-|------------------------------------|-----------|-------------------------|---------|-----------------------------------------------------------------------------------------------------------------|
-| 1 — relation-resolution index      | `d8d9308` | `ergodis-tools-d8d9308` | keep    | comment-string `lower`−`admit` 0.4851; bounded 3.66 per cent loss on `datalog`, which the design predicted in kind |
-| 2 — module index in admission      | `6e06a24` | `ergodis-tools-6e06a24` | keep    | ascii and unicode `lower`−`admit` to 0.078; 8 instructions per module node added to admission                   |
-| 3 — mangled-name index             | `ec5d1d6` | `ergodis-tools-ec5d1d6` | keep    | comment-string `lower`−`admit` 0.2030 and one libc `bcmp` removed from a hot loop's common path                 |
+| Candidate                     | Commit    | Retained arm            | Verdict | Why                                                                                                                |
+|-------------------------------|-----------|-------------------------|---------|--------------------------------------------------------------------------------------------------------------------|
+| 1 — relation-resolution index | `d8d9308` | `ergodis-tools-d8d9308` | keep    | comment-string `lower`−`admit` 0.4851; bounded 3.66 per cent loss on `datalog`, which the design predicted in kind |
+| 2 — module index in admission | `6e06a24` | `ergodis-tools-6e06a24` | keep    | ascii and unicode `lower`−`admit` to 0.078; 8 instructions per module node added to admission                      |
+| 3 — mangled-name index        | `ec5d1d6` | `ergodis-tools-ec5d1d6` | keep    | comment-string `lower`−`admit` 0.2030 and one libc `bcmp` removed from a hot loop's common path                    |
 
 Receipts, all committed under `analysis/rel-frontend/` in `ergodis-private`:
 `performance-v1-relindex-d8d9308.json`, `performance-v1-moduleindex-6e06a24.json`,
@@ -783,17 +783,17 @@ Every gate was run after each kept commit and again at the tip, `ec5d1d6`, from
 `~/src/ergodis-private` under `nix develop ~/src/ergodis` (rustc 1.95.0). The table is the run at
 the tip.
 
-| Gate                                                                                                   | Outcome                                                                                                  |
-|----------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `cargo test -p ergodis-private --test rel_lowering --test rel_frontend --test rel_frontend_portability` | 25, 28 and 1 passed, 0 failed (`rel_lowering` gained the mangled-name collision fixture)                   |
-| `cargo clippy -p ergodis-private --lib --tests -- -D warnings`                                          | no diagnostics                                                                                            |
-| `cargo clippy -p ergodis-tools --bins -- -D warnings`                                                   | no diagnostics                                                                                            |
-| `cargo fmt -p ergodis-private -p ergodis-tools -- --check`                                              | clean                                                                                                     |
-| Independent oracle                                                                                      | 8 fixtures agree with the committed expectations                                                          |
-| Native/WASM parity replay                                                                               | 213 cases, 433,805 canonical bytes, byte-equal, SHA-256 `04b5ebdd72fb08184f3143e3ca8393d207b9a6109c549e9806e1bfae02bb23b0` |
-| Allocation regression                                                                                   | `the_lowering_stage_does_not_allocate` observes zero, retained bytes unchanged                            |
+| Gate                                                                                                    | Outcome                                                                                                                      |
+|---------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| `cargo test -p ergodis-private --test rel_lowering --test rel_frontend --test rel_frontend_portability` | 25, 28 and 1 passed, 0 failed (`rel_lowering` gained the mangled-name collision fixture)                                     |
+| `cargo clippy -p ergodis-private --lib --tests -- -D warnings`                                          | no diagnostics                                                                                                               |
+| `cargo clippy -p ergodis-tools --bins -- -D warnings`                                                   | no diagnostics                                                                                                               |
+| `cargo fmt -p ergodis-private -p ergodis-tools -- --check`                                              | clean                                                                                                                        |
+| Independent oracle                                                                                      | 8 fixtures agree with the committed expectations                                                                             |
+| Native/WASM parity replay                                                                               | 213 cases, 433,805 canonical bytes, byte-equal, SHA-256 `04b5ebdd72fb08184f3143e3ca8393d207b9a6109c549e9806e1bfae02bb23b0`   |
+| Allocation regression                                                                                   | `the_lowering_stage_does_not_allocate` observes zero, retained bytes unchanged                                               |
 | Driver fingerprint gate                                                                                 | equal tokens, nodes, failure, admission outcome and lowering fingerprint on every cohort and both variants, in all four A/Bs |
-| Stride assertions                                                                                       | `Relation` still 32 bytes, 4-byte aligned; the hash filter reuses its reserved half-word                  |
+| Stride assertions                                                                                       | `Relation` still 32 bytes, 4-byte aligned; the hash filter reuses its reserved half-word                                     |
 
 The parity hash is the one the milestone recorded and it did not move through any of the three
 candidates, which is the intended result: an index is not part of the canonical IR.
