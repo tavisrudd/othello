@@ -174,3 +174,42 @@ allocation regression compares before and after rather than to a constant.
 not folded into a kernel candidate's measurement.
 **Evidence level**: read from the source; unmeasured. No C-ID allocated; listed as the first
 remaining step in the task report.
+
+## 2026-09-15 — admission's symbol probe is quadratic when one spelling is declared many times (C1190)
+
+**Provenance**: C1190 milestone (a), `notes/2026-09-15-c1190-milestone-a.md`, private `41553c9`;
+profile `~/.cache/ergodis/perf-c1190/lower-datalog-41553c9.data`. **Was I looking for this?**: no —
+it surfaced as the largest symbol in a profile taken to attribute the lowering stage's cost.
+**Observation**: on the new `datalog` cohort, where 512 definitions all spell their relation `edge`,
+`admit::declare` is 50.58 per cent of the whole parse-admit-lower stage. `admit::insert` walks the
+open-addressed symbol index from the spelling's home slot to the first empty slot, and every one of
+the 512 identical spellings shares that home slot, so the walk is 512 entries long at the last
+insert and the declaring phase is quadratic in the number of clauses of one relation. Admission on
+that cohort costs 273 instructions per source byte against 40.68 on the ASCII cohort, whose
+spellings are all distinct.
+**Why it may matter**: several `def` clauses of one relation is idiomatic Rel — it is how a fragment
+writes its extensional data — so a realistic input is exactly the shape that triggers this. The
+existing measurement cohorts never exposed it because each of their definitions has a fresh
+spelling. A fix is a chained bucket or a second hash probe rather than linear probing, and it is a
+kernel candidate with its own A/B.
+**Evidence level**: one profile and one stage difference on one cohort, both at `41553c9`; the
+mechanism is read from `admit::insert`'s source and is not in doubt, the remedy is unmeasured. No
+C-ID allocated.
+
+## 2026-09-15 — relation resolution in the lowering is a linear scan, and it is quadratic in the relation count (C1190)
+
+**Provenance**: C1190 milestone (a), `notes/2026-09-15-c1190-milestone-a.md`, private `41553c9`;
+receipt `analysis/rel-frontend/performance-v1-lower-41553c9.json`. **Was I looking for this?**:
+partly — the stage cost was the deliverable, but the comment-string cohort's 284.66 instructions per
+source byte was not expected and its cause was not.
+**Observation**: `lower::build` resolves a relation by a linear scan of the relation pool in
+`find_relation`, called from `declare`, `resolve_name` and `qualified`. The comment-string cohort,
+whose string-bodied definitions are fact sets under the adopted semantics, declares 896 relations
+and pays about 400,000 spelling comparisons in the declaring phase alone; the ASCII and Unicode
+cohorts pay 512²/2 before they reject.
+**Why it may matter**: it is the difference between a stage that scales with the source and one that
+scales with its square, and the fix is the open-addressed spelling index admission already has,
+keyed by owner and spelling. It is a kernel candidate with a retained control and a Fermi that the
+comment-string row already prices.
+**Evidence level**: three measured cohort rows at `41553c9` and the source of `find_relation`;
+the remedy is unmeasured. No C-ID allocated; named as the first remaining step in the task report.
