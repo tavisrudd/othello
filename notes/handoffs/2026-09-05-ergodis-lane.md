@@ -251,9 +251,11 @@ Earlier C1154–C1168 increments and exact boundaries are indexed by the program
 reproduce their history here. Open programme follow-ups need allocation: the C1176 decisions for
 Tavis (identity/ownership redesign, evaluator policy, `Invariance` ABI code) and, only if count-axis
 parallelism is ever wanted, a merge-free core tile kernel (discovery track, 2026-09-13).
-Foreign issues: private workspace Clippy was repaired under C1170 (2026-09-13); `cargo fmt
---check` still reports pre-existing drift in eight untouched files (formatting them is a
-separate decision); the shared Cargo target directory produced a stale-rlib build failure under
+Foreign issues: private workspace Clippy was repaired under C1170 (2026-09-13); the `cargo fmt`
+drift is committed (private `7a8bc5a`, 2026-09-15; `fmt --check` is clean); three uncommitted
+interface-review edits from 2026-09-10 (a "Layered dynamic programs" ADR section and `scheduling`
+in two family lists) and five campaign-console mockups remain foreign C1130 work awaiting Tavis;
+the shared Cargo target directory produced a stale-rlib build failure under
 concurrent checkouts during C1176; the worktree `~/.cache/ergodis/worktrees/c1176-props` holds
 regenerated tracked `__pycache__` files.
 
