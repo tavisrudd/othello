@@ -117,10 +117,21 @@ reference fixed part 20.0 (71.49), hashing 11.5 (7.89 per byte), `declare` 8.9 (
 is 64 instructions, 4.6 per cent. The model ranks; a saving under about five per cent of the stage
 is inside its out-of-sample error and needs its own A/B.
 
-**Next:** remove the dead `scopes` pool (one commit, its own `prepare` A/B); `perf annotate` of
-`admit::reference` and `admit::declare` bucketed by address range, then price from the compiled
-loop; then the pop's field loads (kind-first load, cycle risk), each an A/B against
-`ergodis-tools-db47ee1`.
+Scopes pool and annotate: `../2026-09-14-c1170-scopes-pool-and-annotate.md` (private `3bd5e38`,
+`0dc1814`): the dead `scopes` pool is gone (`prepare` 0.9050, `prepare-touch` 0.9680 with faults
+unchanged, admission 0.9995, retained bytes −2,048); `admit::reference` and `admit::declare` are
+bucketed by address range (`annotate-buckets.py`, region map validated on four single-class
+sources). Shares are skid-shaped (2.2× on the entry region, 0.2× on a one-byte loop) and do not
+price; the disassembly path times the census does, and it says the call shape of `reference`
+(caller marshaling, prologue, epilogue: about 50 of the 71.49 fixed instructions per reference) is
+14 % of the stage. `declare` has no region above 1 %. No precise sampling on this host
+(`instructions:upp` and `ibs_op` refused at `perf_event_paranoid = 2`). The control for the next
+A/B is `ergodis-tools-3bd5e38` (rustc 1.95.0).
+
+**Next:** inline `reference` into `run` (`#[inline(always)]` first, split hot prefix as the
+fallback; 8.5–14 %); then the hash loop without its per-byte bounds check (2.9 %, three callers);
+then `same()` without its two per-byte bounds checks (1.6 %, explicit loop, no slice `==`); then
+the pop's field loads (kind-first load, cycle risk); each an A/B against `ergodis-tools-3bd5e38`.
 Then module-scoped visibility, module parameters and member tables in admission; then the
 remaining syntax gaps by manifest family (caret entity references, interpolation, Unicode boundary
 conformance). Ergodis retains lowering, rules, joins and
