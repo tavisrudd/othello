@@ -248,7 +248,79 @@ the start; nothing from the interrupted attempt is used.
 
 ## Results
 
-*(filled in with the measurements)*
+### Candidate 1 — the relation index, `d8d9308` against `4b8cfd7`
+
+Receipt: `analysis/rel-frontend/performance-v1-relindex-d8d9308.json`. A/A instruction nulls
+1.000000 / 1.000000 / 1.000000 / 0.999999 / 0.999999 / 0.999994 on the six cohorts, so the protocol
+carries its own noise floor at a few parts per million and a tenth-of-a-per-cent effect is readable.
+The fingerprint gate agreed on tokens, nodes, failure record, admission outcome and lowering
+fingerprint for every operation on both scanner variants.
+
+Stage differences, instructions per iteration, byte scanner. The scalar column is the same
+measurement through the scalar scanner and is given where it differs in the fourth digit.
+
+| Cohort          | `lower`−`admit` control | `lower`−`admit` candidate |   Ratio | Per source byte after | Per source byte before |
+|-----------------|------------------------:|--------------------------:|--------:|----------------------:|-----------------------:|
+| ascii           |                  79,209 |                    79,566 |  1.0045 |                  1.85 |                   1.84 |
+| unicode         |                  79,975 |                    80,344 |  1.0046 |                  1.30 |                   1.29 |
+| comment-string  |              18,677,398 |                 9,059,804 |  0.4851 |                138.09 |                 284.66 |
+| malformed-early |                       4 |                        −1 |     n/a |                  0.00 |                   0.00 |
+| malformed-late  |                      −1 |                         0 |     n/a |                  0.00 |                   0.00 |
+| datalog         |               1,299,538 |                 1,347,095 |  1.0366 |                 84.54 |                  81.56 |
+
+The scalar variant gives 79,563 / 80,350 / 9,059,804 / 1,347,095 for the same four cohorts, so the
+result does not depend on which scanner produced the tokens.
+
+Every earlier stage is unmoved. `scan`, `parse` and `admit` candidate-over-control ratios are
+1.00000 on every cohort and both variants, the largest departure being 0.99997 on the `datalog`
+scan, which is at the level of that cohort's null. The whole-stage `lower` ratios are 0.53169 (byte)
+and 0.54385 (scalar) on comment-string, 1.00842 and 1.00767 on datalog, and within one part in ten
+thousand of unity elsewhere. Cycles move with instructions: the comment-string `lower` stage goes
+from 3,123,418 to 1,743,212 cycles.
+
+**The Fermi was wrong, and the way it was wrong is the finding.** I predicted the comment-string
+difference would fall to about 285,000 instructions, a ratio near 0.015. It fell to 9,059,804, a
+ratio of 0.4851 — the candidate removed 9,617,594 instructions, which over the 400,960 comparisons
+the scan performed is **23.99 instructions per comparison**, not the 46 the model assumed. And
+18,677,398 / 400,960 is 46.58, which is exactly the milestone's figure. So the milestone's "about
+400,000 spelling comparisons at roughly 46 instructions each" was measuring the sum of *two*
+quadratic scans over the same 400,960 pairs, and attributing both to one of them.
+
+Widening the profile, as the playbook requires when measurement disagrees materially, found the
+second one immediately. `passes::mangle` breaks a collision between two relations' mangled backend
+names with `for earlier in 0..index`, comparing `rir.output[earlier]`'s length and then the bytes.
+It is the same 896 × 895 / 2 pairs, and at 22.6 instructions each it is the whole of the 9,059,804
+that remains. Its byte comparison is a slice equality over a runtime length, and the disassembly of
+`lower::run` in the candidate binary shows it: **one `bcmp@GLIBC_2.2.5` call inside the loop**, at
+`0x7efe12`, reached after the length test at `0x7efde7`. That is a libc call on a hot loop's common
+path, which the contract forbids outright, and it is why this cohort's names — `label0` through
+`label895`, four distinct lengths over 896 names — reach the byte comparison on most pairs rather
+than being rejected on length.
+
+This is dealt with as candidate 3 below. It is not in the task plan; the measurement put it there.
+
+**The `datalog` loss, which was predicted in direction and missed in sign.** I predicted a saving
+near 22,000 instructions on `datalog` and measured a loss of 47,557. The cause is in the compiled
+loop and is not in doubt. `declare` on that cohort resolves the spelling `edge` 512 times against a
+pool whose first entry is `edge`, so the scan answered on its first comparison; the index instead
+hashes the spelling before it can probe at all. The disassembly of `probe_relation` gives the hash
+loop as eight instructions per spelling byte — `movzbl`, `xor`, `imul`, `inc`, `cmp`, `jne` plus the
+`cmp`/`jae` of the source bounds check — so about 780 resolutions of a four-to-eight-byte spelling
+pay roughly 60 instructions each that the scan did not, which is the 47,557 to within a few per
+cent. The index is a large win where the pool is large and a bounded loss where the pool is tiny and
+the first comparison usually hits. That loss is 3.66 per cent of the `datalog` stage difference and
+0.84 per cent of the whole `lower` stage.
+
+**What it cost the cohorts that gain nothing.** ascii and unicode pay 357 and 369 more instructions
+per lowering, which is the new index's bulk clear, and is what the Fermi said it would be.
+
+**Reservation.** `prepare` — allocate a workspace and drop it — is 1.02363× the control
+(interval [1.02356, 1.02370]); retained bytes go from 10,324,492 to 10,332,684, the 8,192 bytes of
+the new index. That is a reservation cost paid once per workspace, not a per-source cost.
+
+### Candidate 2 — the module index
+
+*(filled in with its measurement)*
 
 ## Disposition
 
@@ -264,7 +336,59 @@ the start; nothing from the interrupted attempt is used.
 
 ## Replay commands
 
-*(filled in)*
+Run from `~/src/ergodis-private`. Every gate and every measurement ran under
+`nix develop ~/src/ergodis`, whose devShell asserts its rustc equals the `rust-toolchain.toml` pin,
+so gate and measurement describe one build.
+
+```sh
+# The arms. Each is the retain recipe at its own revision, with the tree clean.
+../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools     # at 4b8cfd7, d8d9308, 8ea0325
+
+# Gates.
+nix develop ~/src/ergodis --command cargo test -p ergodis-private \
+    --test rel_lowering --test rel_frontend --test rel_frontend_portability -j 8
+nix develop ~/src/ergodis --command cargo clippy -p ergodis-private --lib --tests -j 8 -- -D warnings
+nix develop ~/src/ergodis --command cargo clippy -p ergodis-tools --bins -j 8 -- -D warnings
+nix develop ~/src/ergodis --command cargo fmt -p ergodis-private -p ergodis-tools -- --check
+python3 tests/support/rel_closure_oracle.py --check tests/support/rel-closure-expected.json
+nix develop ~/src/ergodis --command python3 analysis/rel-frontend/portability.py \
+    --output analysis/rel-frontend/portability-v1.json
+
+# The three A/Bs. E is the non-multiplexing event set.
+E=instructions,cycles,branches,branch-misses,page-faults,minor-faults
+C=~/.cache/ergodis/bin
+COHORTS=ascii,unicode,comment-string,malformed-early,malformed-late,datalog
+nix develop ~/src/ergodis --command python3 analysis/rel-frontend/bench.py \
+    --binary $C/ergodis-tools-d8d9308 --control $C/ergodis-tools-4b8cfd7 \
+    --rounds 7 --cpu 5 --cohorts $COHORTS --stages scan,parse,admit,lower --events $E \
+    --out analysis/rel-frontend/performance-v1-relindex-d8d9308.json
+nix develop ~/src/ergodis --command python3 analysis/rel-frontend/bench.py \
+    --binary $C/ergodis-tools-8ea0325 --control $C/ergodis-tools-d8d9308 \
+    --rounds 7 --cpu 5 --cohorts $COHORTS --stages scan,parse,admit,lower --events $E \
+    --out analysis/rel-frontend/performance-v1-moduleindex-8ea0325.json
+nix develop ~/src/ergodis --command python3 analysis/rel-frontend/bench.py \
+    --binary $C/ergodis-tools-8ea0325 --control $C/ergodis-tools-4b8cfd7 \
+    --rounds 7 --cpu 5 --cohorts $COHORTS --stages scan,parse,admit,lower --events $E \
+    --out analysis/rel-frontend/performance-v1-lower-composed-8ea0325.json
+
+# The scaling probes: the quadratic against the linear, at four definition counts.
+for N in 64 128 256 512; do
+  nix develop ~/src/ergodis --command python3 analysis/rel-frontend/bench.py \
+      --binary $C/ergodis-tools-8ea0325 --control $C/ergodis-tools-4b8cfd7 \
+      --rounds 3 --cpu 5 --definitions $N --cohorts comment-string,ascii \
+      --stages parse,admit,lower --events $E \
+      --out analysis/rel-frontend/performance-v1-lower-scaling-$N-8ea0325.json
+done
+
+# The kernel-scoped profiles.
+mkdir -p ~/.cache/ergodis/perf-c1190
+perf record -q -e instructions:u -F 4000 \
+    -o ~/.cache/ergodis/perf-c1190/lower-comment-string-8ea0325.data -- \
+    taskset -c 7 $C/ergodis-tools-8ea0325 rel-frontend-bench --cohort comment-string \
+    --stage lower --variant byte --definitions 512 --repeat 2000
+perf report -i ~/.cache/ergodis/perf-c1190/lower-comment-string-8ea0325.data --stdio -g none \
+    --percent-limit 0.05
+```
 
 ## Gates
 
