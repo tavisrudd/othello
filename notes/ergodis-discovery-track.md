@@ -213,3 +213,45 @@ keyed by owner and spelling. It is a kernel candidate with a retained control an
 comment-string row already prices.
 **Evidence level**: three measured cohort rows at `41553c9` and the source of `find_relation`;
 the remedy is unmeasured. No C-ID allocated; named as the first remaining step in the task report.
+
+## 2026-09-15 — correction to the two entries above: the ascii and unicode cost is a node-pool sweep, not the relation scan (C1190)
+
+**Provenance**: independent verification audit of C1190 milestone (a),
+`notes/2026-09-15-c1190-milestone-a-audit.md`; measurements against the retained
+`~/.cache/ergodis/bin/ergodis-tools-41553c9`. **Was I looking for this?**: yes — it is a
+correction to entries in this log, recorded here because the log is append-only and the two entries
+above must not be read as they stand.
+
+**What is corrected.** The entry "relation resolution in the lowering is a linear scan" says "the
+ASCII and Unicode cohorts pay 512²/2 before they reject". That is wrong. Those two cohorts reject
+inside `build::declare`, which refuses a bracketed head (`def score1[k] = …`) at the *second*
+top-level definition, and the declare loop returns on its first error, so one relation is in the
+pool when the failure fires — there is no quadratic scan. Their 79,208 and 79,977 instructions are
+`build::declare_modules`, which sweeps the entire node pool for module nodes before any definition
+is declared, at about 6.4 instructions per node: 12,288 nodes at 6.45 per node on ascii, 12,416 at
+6.44 on unicode, and the 769-instruction gap between the cohorts over their 128-node gap is 6.0 per
+extra node. The stage difference scales linearly with the definition count (11,450 / 21,122 /
+40,478 / 79,204 at 64 / 128 / 256 / 512), where a quadratic would rise fourfold per doubling.
+
+**What still stands.** Everything the entry says about the comment-string cohort. That cohort does
+declare all 896 relations, `find_relation`'s linear scan is quadratic in the relation count, and
+the 284.66 instructions per source byte are that scan: the stage difference there is 468,393 /
+1,397,718 / 4,748,879 / 18,676,568 instructions at 64 / 128 / 256 / 512 definitions, ratios 2.98,
+3.40 and 3.93, converging on fourfold per doubling. The open-addressed spelling index keyed by
+owner and spelling remains the fix and remains the largest measured win.
+
+**What the earlier entry on admission's probe chain gets wrong.** Only its comparison: "273
+instructions per source byte there against 40.68 on the ASCII cohort" puts the `datalog` composed
+stage beside the ASCII admission-only difference from the C1170 census. Like for like, both as
+`admit` minus `parse` from the same receipts, it is 199.95 against 29.27. The mechanism that entry
+describes is right and is now confirmed by counting rather than by a profile share: the `datalog`
+admission difference is 97,626 / 279,711 / 902,976 / 3,185,977 instructions at 64 / 128 / 256 / 512
+definitions, ratios 2.87, 3.23 and 3.53.
+
+**Why it may matter**: a successor reading the uncorrected entries would price the node-pool sweep
+as a quadratic and size its saving from the wrong model. Two separate candidates exist, not one: a
+spelling index for the quadratic on programs with many relations, and a module index built during
+admission for the linear sweep every lowering pays before its first declaration.
+**Evidence level**: scaling runs on three cohorts against the retained `41553c9` binary, two-point
+differenced and pinned, plus the failing span and the source of `build::declare` and
+`build::declare_modules`. No C-ID allocated.

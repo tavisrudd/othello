@@ -188,10 +188,28 @@ module-scope reports for a later resumption and are not queued. The syntax-gap r
 larger untaken lever: a feature-presence prepass that monomorphizes the scanner on the lexical
 features a source actually contains, so sources without interpolation pay no per-token guard. Not
 built, not queued. Feature order now: lowering of admitted programs into Ergodis rules end to end,
-allocated as **C1190** (`../2026-09-15-c1190-rel-lowering.md`), which waits on two decisions from
-Tavis recorded in the card: fragment staging (recommended: positive fragment end to end first,
-negation/aggregation rejected with `REL05xx`) and value encoding (recommended: per-program literal
-dictionary over the existing `u32` term, not a core contract change). Ergodis retains lowering, rules, joins and execution; no external evaluator or
+allocated as **C1190** (`../2026-09-15-c1190-rel-lowering.md`). Tavis took the card's two
+recommendations (positive fragment first, per-program literal dictionary over the `u32` term) and
+asked for architectural planning ahead: design `../2026-09-15-c1190-lowering-architecture.md` and
+private ADR 0004 (`a90168b`) put an owned relational IR (four literal signs, typed dictionary,
+column types, strata, auxiliaries) between the frontend and the rule contract, with fixed routes
+for stratified negation (per-stratum projection with complement facts), aggregation at stratum
+boundaries and per-column domains. **Milestone (a) is complete and audited**:
+`../2026-09-15-c1190-milestone-a.md` (private `2543802` … `5180507`), audit
+`../2026-09-15-c1190-milestone-a-audit.md` (Opus, read-only replay: eight fixtures plus five
+further programs agree with an independent evaluator, both checkers accept every certificate,
+thirteen negative programs give the contracted `REL05xx`, parity 213 cases at `04b5ebdd…`
+reproduces, A/B reproduces; the wrong cost attribution for the ASCII/Unicode cohorts was
+corrected in the report and discovery track). Source → parse → admit → lower → `Demand` →
+certificate → core and ranked checkers works on native and WASM; scan/parse/admit stages unchanged
+against `ergodis-tools-e8b4c7c`. Lowering cost is far above its Fermi and has two measured causes,
+priced for the successor: `find_relation`'s linear scan (quadratic in relation count; the
+comment-string cohort at 896 relations pays 284.66 instructions per byte) and
+`declare_modules`'s whole-node-pool sweep (linear, about 6.4 per node; the ASCII/Unicode cohorts).
+Recorded deviations: backend as sibling `src/rel_lowering.rs` (the bare-`rustc` parity harness
+cannot depend on `ergodis-verify`), capacity from `Limits` not `Admission`, `exists(x in D: F)`
+rejected. C1189 is unblocked. Next in order: the two priced lowering kernel candidates (A/B
+against the retained milestone binary named in the report), C1189, then milestone (b). Ergodis retains lowering, rules, joins and execution; no external evaluator or
 backend is adopted. Tree-sitter and a PLT Redex model remain deferred; C1189 (queued, gated on the
 start of lowering) is a test-only naive reference evaluator for the lowered fragment, the
 differential oracle for lowering.
