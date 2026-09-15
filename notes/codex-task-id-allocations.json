@@ -5147,8 +5147,17 @@
       "last": 1188,
       "purpose": "remove runtime-length tuple memmove from the demand derivation loop",
       "sequence": 572
+    },
+    {
+      "count": 1,
+      "first": 1189,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1189,
+      "purpose": "reference evaluator for the lowered Rel fragment, differential oracle for lowering",
+      "sequence": 573
     }
   ],
-  "next_id": 1189,
+  "next_id": 1190,
   "schema": "codex-task-id-allocations-v1"
 }

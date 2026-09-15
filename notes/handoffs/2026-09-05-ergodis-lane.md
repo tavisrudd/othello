@@ -155,8 +155,9 @@ pop's field loads, pricing `is_builtin`, the `insert` shadow walk) are listed in
 module-scope reports for a later resumption and are not queued. Feature order: the remaining
 syntax gaps by manifest family (caret entity references, interpolation, Unicode boundary
 conformance); then lowering of admitted programs into Ergodis rules end to end. Ergodis retains lowering, rules, joins and
-execution; no external evaluator or backend is adopted. Tree-sitter and executable reference
-semantics remain deferred.
+execution; no external evaluator or backend is adopted. Tree-sitter and a PLT Redex model remain
+deferred; C1189 (queued, gated on the start of lowering) is a test-only naive reference evaluator
+for the lowered fragment, the differential oracle for lowering.
 
 ### Datalog evaluation — C1179, C1182 and C1183 closed
 
