@@ -194,6 +194,28 @@ the slots the previous lowering wrote would need either the slot stored in each 
 a re-hash of every previous spelling; both cost more than the bulk clear at these bounds, and the
 bulk clear is the shape admission already uses.
 
+### Candidate 3 as built, and why it exists
+
+Candidate 3 is not in the task plan. Candidate 1's measurement put it there: the comment-string
+stage difference fell by only half, and widening the profile showed a second scan over the same
+896 × 895 / 2 pairs in `passes::mangle`, carrying a libc `bcmp` on its common path.
+
+`Rir` gains a `mangled_index` pool, sized like the relation index from `Limits::relations`, but
+sized and cleared inside `mangle` rather than in `Rir::clear`, because `mangle` is the only pass that
+writes it and a lowering that fails before the closing pass should not pay for it. Each relation's
+mangled name is hashed with FNV-1a over the IR's own byte pool, probed once, and — when the probe
+found an equal name — disambiguated by appending the relation id and re-probed under the new name's
+hash, so a later relation is compared against the disambiguated spelling exactly as before. The
+entry is written only after `output[index]` names the final span, so every probe reads a span that
+is written. The byte comparison is an explicit loop, which is what removes the `bcmp`.
+
+**Exactness.** The old scan set a boolean on the first earlier equal name; the index sets it on any
+equal name, and for a boolean those are the same question. A new fixture,
+`two_relations_that_mangle_to_one_name_are_disambiguated`, drives the collision path directly:
+`M:link` and a top-level definition spelled `M_link` both flatten to `M_link`, and the test asserts
+that no two relations share a backend name and that one of them carries the id suffix. Nothing in
+the parity corpus moved.
+
 ### Candidate 2 as built
 
 `Workspace` gains a `module_nodes` pool of node ids, reserved to `Limits::symbols` and cleared by
@@ -318,7 +340,49 @@ per lowering, which is the new index's bulk clear, and is what the Fermi said it
 (interval [1.02356, 1.02370]); retained bytes go from 10,324,492 to 10,332,684, the 8,192 bytes of
 the new index. That is a reservation cost paid once per workspace, not a per-source cost.
 
-### Candidate 2 — the module index
+### Candidate 2 — the module index, `6e06a24` against `d8d9308`
+
+Receipt: `analysis/rel-frontend/performance-v1-moduleindex-6e06a24.json`. A/A instruction nulls
+1.000001 and 1.000000 on ascii and unicode and at that level on the rest. Fingerprint gate agreed on
+every operation and both variants.
+
+| Cohort          | `lower`−`admit` control | `lower`−`admit` candidate |  Ratio | `admit`−`parse` control | `admit`−`parse` candidate |  Ratio |
+|-----------------|------------------------:|--------------------------:|-------:|------------------------:|--------------------------:|-------:|
+| ascii           |                  79,564 |                     6,229 | 0.0783 |               1,258,884 |                 1,259,915 | 1.0008 |
+| unicode         |                  80,348 |                     6,243 | 0.0777 |               1,446,303 |                 1,447,342 | 1.0007 |
+| comment-string  |               9,059,801 |                 9,031,829 | 0.9969 |                 409,054 |                   409,575 | 1.0013 |
+| malformed-early |                      −0 |                         2 |    n/a |                       3 |                         0 |    n/a |
+| malformed-late  |                      −1 |                         1 |    n/a |                       1 |                         1 |    n/a |
+| datalog         |               1,347,097 |                 1,317,835 | 0.9783 |               3,186,005 |                 3,186,601 | 1.0002 |
+
+The scalar variant reproduces every figure to the fourth digit (6,225 / 6,240 / 9,031,836 /
+1,317,835). `scan` and `parse` are 1.00000 on every cohort and both variants. Whole-stage `lower`
+candidate-over-control: 0.98197 ascii, 0.99296 unicode, 0.99749 comment-string, 0.99497 datalog,
+1.00000 on both malformed cohorts.
+
+**Where the cost went, counted rather than assumed.** Admission rose on every cohort, and the
+receipt separates the two reasons. The comment-string and `datalog` cohorts declare **no modules at
+all**, so admission's new push never runs there, yet their `admit`−`parse` difference still rose by
+521 and 596 instructions: that is the ThinLTO layout effect the playbook warns about, and it is why
+a stage is read as a difference rather than alone. ascii and unicode declare **64 modules each**,
+and their admission rose by 1,031 and 1,039 — about 510 more than the zero-module cohorts, or
+roughly eight instructions per module node, which is the push and its capacity test. Against that,
+ascii's lowering dropped 73,335 instructions. The exchange is 8 instructions in admission for about
+1,150 in the lowering, per module, on this cohort.
+
+**My Fermi contained a factual error and the receipt corrected it.** I wrote that none of the six
+cohorts declares a module and that `declare_modules` would therefore be entered and left in under
+ten instructions. The admission record says ascii and unicode declare 64 modules apiece; I had
+checked comment-string and `datalog`, found none, and generalized. That is why the residual is 6,229
+rather than the 1,000 to 4,000 I predicted: about 2,600 of it is 64 genuine `module_name` calls that
+the list still has to make, and the rest is `Rir::clear`'s pool clears and the walk to the second
+definition where lowering rejects. The direction and the size of the saving were right; the
+composition of the residual was not.
+
+**Reservation.** `prepare` is 1.01125× the candidate-1 control; retained bytes go from 10,332,684 to
+10,365,452, the 32,768 bytes of `module_nodes` at the bench's `Limits::symbols` of 8,192.
+
+### Candidate 3 — the mangled-name index, `ec5d1d6` against `6e06a24`
 
 *(filled in with its measurement)*
 
