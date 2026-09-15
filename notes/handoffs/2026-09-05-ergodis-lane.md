@@ -187,8 +187,11 @@ pop's field loads, pricing `is_builtin`, the `insert` shadow walk) are listed in
 module-scope reports for a later resumption and are not queued. The syntax-gap report adds one
 larger untaken lever: a feature-presence prepass that monomorphizes the scanner on the lexical
 features a source actually contains, so sources without interpolation pay no per-token guard. Not
-built, not queued. Feature order now: lowering of admitted programs into Ergodis rules end to end
-(unallocated). Ergodis retains lowering, rules, joins and execution; no external evaluator or
+built, not queued. Feature order now: lowering of admitted programs into Ergodis rules end to end,
+allocated as **C1190** (`../2026-09-15-c1190-rel-lowering.md`), which waits on two decisions from
+Tavis recorded in the card: fragment staging (recommended: positive fragment end to end first,
+negation/aggregation rejected with `REL05xx`) and value encoding (recommended: per-program literal
+dictionary over the existing `u32` term, not a core contract change). Ergodis retains lowering, rules, joins and execution; no external evaluator or
 backend is adopted. Tree-sitter and a PLT Redex model remain deferred; C1189 (queued, gated on the
 start of lowering) is a test-only naive reference evaluator for the lowered fragment, the
 differential oracle for lowering.

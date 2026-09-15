@@ -5156,8 +5156,17 @@
       "last": 1189,
       "purpose": "reference evaluator for the lowered Rel fragment, differential oracle for lowering",
       "sequence": 573
+    },
+    {
+      "count": 1,
+      "first": 1190,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1190,
+      "purpose": "Rel lowering of admitted programs into Ergodis rules end to end (C1170 successor)",
+      "sequence": 574
     }
   ],
-  "next_id": 1190,
+  "next_id": 1191,
   "schema": "codex-task-id-allocations-v1"
 }

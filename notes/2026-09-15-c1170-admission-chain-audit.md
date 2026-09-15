@@ -577,11 +577,18 @@ canonical bytes and native/WASM exact equality, and its canonical SHA-256 is
 **`c5d836251b8b24e2b58c513a89a7726acc8f922533e9df681fc24ec3ca9aafba` — unchanged**, with a
 `record_summary` identical in every field to the committed receipt. The replay was written to the
 audit scratchpad rather than over `analysis/rel-frontend/portability-v1.json`, because the only
-difference between the fresh receipt and the committed one is the `source_sha256` entry for
-`tests/rel_frontend.rs`, and the concurrent syntax-gaps work is adding a parity case that will force
-a regeneration of that receipt anyway. **One follow-up for whoever lands that work: regenerate
-`portability-v1.json` after both fixture edits are in, so its `tests/rel_frontend.rs` source hash
-matches the committed file.** This is the same receipt-coverage weakness the module-scopes report
-records as its ledger item 11.
+difference between the fresh receipt and the committed one was the `source_sha256` entry for
+`tests/rel_frontend.rs`.
+
+That entry was then stale in the committed receipt, because the concurrent syntax-gaps repair
+(`837c441`) regenerated the receipt before `fb69af8` changed the test file. It was regenerated in
+place and committed as **`5eb9df8`**, "C1170: parity receipt regenerated after the audit fixtures",
+one file changed, one line: the `tests/rel_frontend.rs` hash moves from `f1f15f03…` to `d3fb4d19…`,
+which is the sha256 of the committed file. The replay still reports 193 cases, 369,710 canonical
+bytes, native/WASM exact equality and canonical SHA-256
+`c5d836251b8b24e2b58c513a89a7726acc8f922533e9df681fc24ec3ca9aafba`, and both library hashes are
+unchanged, so the rebuild was reproducible. This episode is the module-scopes report's ledger item
+11 happening in practice: a receipt whose source map does not list `src/rel_frontend/admit.rs` also
+goes stale whenever a tracked source changes between a regeneration and a commit.
 
 
