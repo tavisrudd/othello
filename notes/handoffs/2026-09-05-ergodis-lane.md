@@ -134,15 +134,27 @@ Inline `reference`: `../2026-09-14-c1170-inline-reference.md` (private `93bb343`
 end); parity hash unchanged, no gate failed, peak RSS down 12 KiB. The two inlined copies pay
 unequally (about 40 per reference at the `Atom` site, 9 at the `Apply` site, which spills), and
 `is_builtin` became an out-of-line call on the first-sight path. The stage stands at 0.6515 of
-`185015e`. The control for any later frontend A/B is `ergodis-tools-93bb343` (rustc 1.95.0).
+`185015e`.
 
-**Next (Tavis, 2026-09-14): the frontend micro-optimization sequence stops here; the lane moves
-on to end-to-end features.** The remaining priced candidates (the `Apply`-site spills, the hash
-loop's bounds check, `same()`'s bounds checks, the pop's field loads, pricing `is_builtin`) are
-listed in the inline report for a later resumption and are not queued. Feature order: module-scoped
-visibility, module parameters and member tables in admission; then the remaining syntax gaps by
-manifest family (caret entity references, interpolation, Unicode boundary conformance); then
-lowering of admitted programs into Ergodis rules end to end. Ergodis retains lowering, rules, joins and
+Module scopes: `../2026-09-14-c1170-module-scopes.md` (private `7b38c65`, `4b02031`, `9bfe19d`,
+receipts `5710a77`): definitions are owned by their innermost module and visible only on the
+body's module chain (innermost first), module parameters are binders in every body the module
+owns, `M:x` / `M:N:x` / `M[a]:x` resolve members with arity checks and `REL0406 UnknownMember`;
+base relations and builtins stay global; qualification of a non-module is symbol-keyed access.
+Semantics are the stage's stated contract (report section "Semantics adopted"), not a Rel claim.
+Parity corpus 166 cases, canonical `f3d83752…`. Composed ASCII admission cost **1.0976** against
+`ergodis-tools-93bb343` after two shape repairs (the lean probe loop with insert-time shadow
+flagging, then `insert` force-inlined); `prepare` 1.21 and retained bytes +67,588 for the two new
+pools. Three-term cost model closes on both cohorts; the shadow-flagging walk in `insert` (35 per
+symbol) is half the cost and is the first candidate if micro-optimization resumes. The control for
+any later frontend A/B is `ergodis-tools-9bfe19d` (rustc 1.95.0).
+
+**Next (Tavis, 2026-09-14): end-to-end features, not micro-optimization.** The remaining priced
+candidates (the `Apply`-site spills, the hash loop's bounds check, `same()`'s bounds checks, the
+pop's field loads, pricing `is_builtin`, the `insert` shadow walk) are listed in the inline and
+module-scope reports for a later resumption and are not queued. Feature order: the remaining
+syntax gaps by manifest family (caret entity references, interpolation, Unicode boundary
+conformance); then lowering of admitted programs into Ergodis rules end to end. Ergodis retains lowering, rules, joins and
 execution; no external evaluator or backend is adopted. Tree-sitter and executable reference
 semantics remain deferred.
 
