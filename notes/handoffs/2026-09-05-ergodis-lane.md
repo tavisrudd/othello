@@ -8,7 +8,7 @@ correction trails live in dated reports and the append-only
 
 **Date**: 2026-09-15
 **Mode**: intent-based.
-**Status**: ACTIVE. Immediate engineering frontier is C1170 (owned Rel-rich frontend); the
+**Status**: ACTIVE. Immediate engineering frontier is C1190 (Rel lowering, milestone b next; C1170 frontend and C1189 oracle closed); the
 rule-contract programme C1172–C1177 and the Datalog evaluation tasks C1179/C1182–C1186 are closed. C1143, C1130, C1016,
 C1017, C1061 and C985 remain in progress. C1062 and C1070 await Tavis's close call.
 
@@ -220,11 +220,24 @@ shadowed a module's own member inside that module; now innermost owner first wit
 Control for the next frontend A/B: `ergodis-tools-b7c26e5` (rustc 1.95.0; receipt commit `e028f15`). Unallocated candidates
 the report ranks: admission's repeated-spelling quadratic in `admit::insert` (now the only quadratic
 in the frontend, half the composed stage on `datalog`), the source bounds check inside the spelling
-hash and comparison loops, the nine-store `Value` push, and `qualified`'s linear module scan. C1189
-is unblocked. Next in order: C1189, then milestone (b). Ergodis retains lowering, rules, joins and
-execution; no external evaluator or backend is adopted. Tree-sitter and a PLT Redex model remain deferred; C1189 (queued, gated on the
-start of lowering) is a test-only naive reference evaluator for the lowered fragment, the
-differential oracle for lowering.
+hash and comparison loops, the nine-store `Value` push, and `qualified`'s linear module scan.
+**C1189 reference evaluator done** (`../2026-09-15-c1189-reference-evaluator.md`, private `19f9d71`
+… `fe036f9`, Opus, vetted): a test-only naive evaluator over the admitted AST (Figure 3/4 contract
+plus range restriction, no backend bound, an enumeration cross-check) and a seeded differential
+harness against the lowered rules, the demand evaluator and both checkers, over the committed
+fixtures, all 35 Addendum A equations, surface-construct and rejection tables, 1,200 generated
+programs and 400 near-misses. It found and the task repaired three lowering defects: `qualified`
+resolved the top level before the module chain (the `resolve_name` defect one function away), a
+variables-budget failure leaked a variable mapping into the next lowering on the same workspace, and
+binarization built a nullary auxiliary whenever a join carried nothing forward (a fifth of the
+generated corpus refused). Lowering-stage A/B against `ergodis-tools-b7c26e5` is a wash; parity hash
+unchanged; the paper is pinned in the coverage manifest; milestone (a)'s gap 4 is corrected
+(`REL0502` has a source fixture). Two decisions for Tavis: whether a fully ground conjunct should be
+`REL0504` rather than a `REL0503` budget (the last recorded backend-divergence class), and whether
+`order_positives` should change so its tiebreak cannot build an empty intermediate (moves the parity
+hash, needs an A/B). Control for the next frontend A/B: `ergodis-tools-3eee87c` (rustc 1.95.0).
+Next: milestone (b). Ergodis retains lowering, rules, joins and execution; no external evaluator or
+backend is adopted. Tree-sitter and a PLT Redex model remain deferred.
 
 ### Datalog evaluation — C1179, C1182 and C1183 closed
 
