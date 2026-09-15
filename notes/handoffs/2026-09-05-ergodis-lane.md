@@ -222,7 +222,7 @@ the report ranks: admission's repeated-spelling quadratic in `admit::insert` (no
 in the frontend, half the composed stage on `datalog`), the source bounds check inside the spelling
 hash and comparison loops, the nine-store `Value` push, and `qualified`'s linear module scan.
 **C1189 reference evaluator done** (`../2026-09-15-c1189-reference-evaluator.md`, private `19f9d71`
-… `fe036f9`, Opus, vetted): a test-only naive evaluator over the admitted AST (Figure 3/4 contract
+… `2d260a1`, Opus, vetted): a test-only naive evaluator over the admitted AST (Figure 3/4 contract
 plus range restriction, no backend bound, an enumeration cross-check) and a seeded differential
 harness against the lowered rules, the demand evaluator and both checkers, over the committed
 fixtures, all 35 Addendum A equations, surface-construct and rejection tables, 1,200 generated
