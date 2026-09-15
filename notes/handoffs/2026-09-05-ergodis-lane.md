@@ -208,9 +208,21 @@ comment-string cohort at 896 relations pays 284.66 instructions per byte) and
 `declare_modules`'s whole-node-pool sweep (linear, about 6.4 per node; the ASCII/Unicode cohorts).
 Recorded deviations: backend as sibling `src/rel_lowering.rs` (the bare-`rustc` parity harness
 cannot depend on `ergodis-verify`), capacity from `Limits` not `Admission`, `exists(x in D: F)`
-rejected. C1189 is unblocked. Next in order: the two priced lowering kernel candidates (A/B
-against the retained milestone binary named in the report), C1189, then milestone (b). Ergodis retains lowering, rules, joins and execution; no external evaluator or
-backend is adopted. Tree-sitter and a PLT Redex model remain deferred; C1189 (queued, gated on the
+rejected. **Lowering kernel candidates done** (`../2026-09-15-c1190-lowering-kernel-candidates.md`,
+private `d8d9308` … `a93ae96`, Opus, vetted): relation-resolution index, module list recorded by
+admission's existing sweep, and a third candidate the first one's measurement exposed, a
+mangled-name index in the closing pass that also removed a libc `bcmp` from a hot loop; all kept.
+Composed against `ergodis-tools-4b8cfd7`: comment-string `lower`−`admit` 0.0982 and now linear
+across three doublings, ascii/unicode 0.078, `datalog` a bounded 1.0107 loss kept as design
+evidence; parity hash unchanged. The vetting pass found and fixed a milestone (a) defect (private
+`b7c26e5`): `resolve_name` probed the top level before the module chain, so a top-level definition
+shadowed a module's own member inside that module; now innermost owner first with a closure fixture.
+Control for the next frontend A/B: `ergodis-tools-b7c26e5` (rustc 1.95.0; receipt commit `e028f15`). Unallocated candidates
+the report ranks: admission's repeated-spelling quadratic in `admit::insert` (now the only quadratic
+in the frontend, half the composed stage on `datalog`), the source bounds check inside the spelling
+hash and comparison loops, the nine-store `Value` push, and `qualified`'s linear module scan. C1189
+is unblocked. Next in order: C1189, then milestone (b). Ergodis retains lowering, rules, joins and
+execution; no external evaluator or backend is adopted. Tree-sitter and a PLT Redex model remain deferred; C1189 (queued, gated on the
 start of lowering) is a test-only naive reference evaluator for the lowered fragment, the
 differential oracle for lowering.
 

@@ -819,6 +819,58 @@ is the milestone's and is named by its report, not by this one.
 All of these are named by this report, so `scripts/cache-gc.sh` will show them as referenced. No
 deletion was performed; that is the user's call.
 
+## Vetting pass (2026-09-15, Fable, after the Opus run)
+
+Every claim above was re-checked against the tree and the receipts before this report was accepted.
+
+- **Gates re-run at `ec5d1d6`**: the three test targets pass (25, 28, 1), both Clippy runs are
+  clean, `fmt --check` is clean, the oracle reports eight fixtures in agreement, and the parity
+  replay reproduces 213 cases at the recorded canonical hash with the tree left clean.
+- **Receipts re-derived**: the six composed `lower`−`admit` ratios and the `admit`−`parse` ratios
+  were recomputed from `performance-v1-lower-composed-ec5d1d6.json` and match the tables above to
+  every printed digit. The four retained arms are in `MANIFEST.tsv` as clean-tree builds at rustc
+  1.95.0 with the hashes listed.
+- **Code read**: the three indexes are reserved by `Rir::new`/`Workspace::new`, cleared inside
+  reserved capacity, and probed with the explicit byte loops; `Relation` keeps its 32-byte stride
+  with the hash filter in the formerly reserved half-word; `module_nodes` is bounded by the same
+  symbol slot the module's declaration consumes; the `filter` field stays out of the canonical form,
+  which the unchanged parity hash confirms.
+
+**One defect found, older than this task, and fixed** (private `b7c26e5`, receipt
+`analysis/rel-frontend/performance-v1-resolve-order-b7c26e5.json`). `build::resolve_name` probed the top level *before*
+the module chain, so inside a module a bare name resolved to a top-level definition of the same
+spelling ahead of the module's own member. The module-scope contract
+(`2026-09-14-c1170-module-scopes.md`) is innermost owner first, and admission resolves that way. The
+probe that exposed it:
+
+```
+def e = {(1, 2)}
+def f(x) = e(x, _)
+module M
+  def f(x) = e(_, x)
+  def g(x) = f(x)
+end
+```
+
+At `ec5d1d6` the closure of `M:g` was `{(1)}`; it is now `{(2)}`, and the fixture
+`a_module_member_shadows_a_top_level_definition_inside_the_module` in `tests/rel_lowering.rs` asserts
+both that and the top-level reading. The loop now walks the chain from its innermost entry and probes
+`TOP` last, keeping the top-level miss as the key the free-name declaration takes. No parity case had
+this shape, so the canonical hash is unchanged (213 cases, `04b5ebdd72…02bb23b0`); a parity case for
+it is a candidate addition, not made here because it would move the hash on a vetting commit.
+
+A/B of `b7c26e5` against `ergodis-tools-ec5d1d6`, five rounds, CPU 5, the six-event
+non-multiplexing set, all six cohorts and both variants, A/A instruction nulls within four parts per
+million: `parse` and `admit` are 1.00000 everywhere; `lower`−`admit` is 6,227 → 6,226 on ascii,
+6,243 → 6,242 on unicode, 1,833,280 → 1,831,740 on comment-string (0.9992) and 1,313,490 →
+1,313,663 on `datalog` (1.0001). A wash, as a probe-order change on cohorts that never exercise the
+module chain in the body phase should be. Retained as `ergodis-tools-b7c26e5` (measured sha256
+`a8bae90c64ad43ece35f079a6ed2fd3074eb2e673ca19de9145759c266a5e336`), which is now the control for
+the next frontend A/B.
+
+Gates at `b7c26e5`: `rel_lowering` 26 passed, `rel_frontend` 28, `rel_frontend_portability` 1, 0
+failed; both Clippy runs clean; `fmt --check` clean; parity 213 cases at the unchanged hash.
+
 ## Vibe check
 
 Good, and better than the plan asked for. The two planned candidates both landed, and the first
