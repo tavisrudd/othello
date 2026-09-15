@@ -107,9 +107,20 @@ parity hash unchanged, no gate failed, `prepare` unchanged. Both Fermis were pri
 compiled loop and landed inside that reading. The stage stands at 0.7145 of `185015e`. The
 control for the next A/B is `ergodis-tools-db47ee1` (rustc 1.95.0).
 
-**Next:** remove the dead `scopes` pool (one commit, its own `prepare` A/B); update the census to
-the current kernel and re-run the decomposition at `db47ee1` before pricing anything further; then
-`declare` (annotate first) and the pop's field loads, each an A/B against `ergodis-tools-db47ee1`.
+Census at `db47ee1`: `../2026-09-14-c1170-admission-census-db47ee1.md` (private `1210f29`,
+`63d6fca`, no kernel change): the census replays the current kernel, the unit list gained
+`builtin_iters` (the gate made the `BUILTINS` walk a variable unit) and `bind_one_nodes`, lost
+the redundant `probe_slot_reads`, and a `mixed-k` family separates the per-definition cost from
+inert literal visits. Cohorts predict at +0.91 / +0.81 / +1.98 per cent out of sample, every
+synthetic row inside 1.1 per cent. ASCII ranking: traversal 21.2 per cent (31.98 per visit),
+reference fixed part 20.0 (71.49), hashing 11.5 (7.89 per byte), `declare` 8.9 (194); first sight
+is 64 instructions, 4.6 per cent. The model ranks; a saving under about five per cent of the stage
+is inside its out-of-sample error and needs its own A/B.
+
+**Next:** remove the dead `scopes` pool (one commit, its own `prepare` A/B); `perf annotate` of
+`admit::reference` and `admit::declare` bucketed by address range, then price from the compiled
+loop; then the pop's field loads (kind-first load, cycle risk), each an A/B against
+`ergodis-tools-db47ee1`.
 Then module-scoped visibility, module parameters and member tables in admission; then the
 remaining syntax gaps by manifest family (caret entity references, interpolation, Unicode boundary
 conformance). Ergodis retains lowering, rules, joins and
