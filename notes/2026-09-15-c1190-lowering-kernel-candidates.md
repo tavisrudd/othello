@@ -384,7 +384,33 @@ composition of the residual was not.
 
 ### Candidate 3 — the mangled-name index, `ec5d1d6` against `6e06a24`
 
-*(filled in with its measurement)*
+Receipt: `analysis/rel-frontend/performance-v1-nameindex-ec5d1d6.json`.
+
+| Cohort          | `lower`−`admit` control | `lower`−`admit` candidate |  Ratio | `admit`−`parse` ratio |
+|-----------------|------------------------:|--------------------------:|-------:|----------------------:|
+| ascii           |                   6,227 |                     6,230 | 1.0005 |                1.0000 |
+| unicode         |                   6,245 |                     6,244 | 0.9999 |                1.0000 |
+| comment-string  |               9,031,845 |                 1,833,277 | 0.2030 |                1.0000 |
+| malformed-early |                      −1 |                        −4 |    n/a |                   n/a |
+| malformed-late  |                       0 |                        −3 |    n/a |                   n/a |
+| datalog         |               1,317,835 |                 1,313,492 | 0.9967 |                1.0000 |
+
+The scalar variant reproduces every figure (6,231 / 6,258 / 1,833,276 / 1,313,492). `scan`, `parse`
+and `admit` are unity on every cohort and both variants — this candidate touches only the closing
+pass, and the receipt says so.
+
+The comment-string difference fell by 7,198,568 instructions, which over the same 400,960 pairs is
+**17.95 instructions per pair**. Together with candidate 1's 23.99 that is 41.94 of the milestone's
+46.58, and the remainder is the per-relation work neither scan was doing. The `datalog` saving of
+4,343 instructions is the same mechanism at 14 relations: 91 pairs, most of them reaching the call.
+
+## Composed
+
+*(filled in)*
+
+## Scaling: the quadratic becomes linear
+
+*(filled in)*
 
 ## Disposition
 
