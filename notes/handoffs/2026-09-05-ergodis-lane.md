@@ -128,13 +128,21 @@ price; the disassembly path times the census does, and it says the call shape of
 (`instructions:upp` and `ibs_op` refused at `perf_event_paranoid = 2`). The control for the next
 A/B is `ergodis-tools-3bd5e38` (rustc 1.95.0).
 
-**Next:** inline `reference` into `run` (`#[inline(always)]` first, split hot prefix as the
-fallback; 8.5–14 %); then the hash loop without its per-byte bounds check (2.9 %, three callers);
-then `same()` without its two per-byte bounds checks (1.6 %, explicit loop, no slice `==`); then
-the pop's field loads (kind-first load, cycle risk); each an A/B against `ergodis-tools-3bd5e38`.
-Then module-scoped visibility, module parameters and member tables in admission; then the
-remaining syntax gaps by manifest family (caret entity references, interpolation, Unicode boundary
-conformance). Ergodis retains lowering, rules, joins and
+Inline `reference`: `../2026-09-14-c1170-inline-reference.md` (private `93bb343`, `9c8dac3`):
+`#[inline(always)]` on `admit::reference`, ASCII admission **0.9120** against
+`ergodis-tools-3bd5e38` (109,600 removed, 31 per reference, inside the Fermi band at its shallow
+end); parity hash unchanged, no gate failed, peak RSS down 12 KiB. The two inlined copies pay
+unequally (about 40 per reference at the `Atom` site, 9 at the `Apply` site, which spills), and
+`is_builtin` became an out-of-line call on the first-sight path. The stage stands at 0.6515 of
+`185015e`. The control for any later frontend A/B is `ergodis-tools-93bb343` (rustc 1.95.0).
+
+**Next (Tavis, 2026-09-14): the frontend micro-optimization sequence stops here; the lane moves
+on to end-to-end features.** The remaining priced candidates (the `Apply`-site spills, the hash
+loop's bounds check, `same()`'s bounds checks, the pop's field loads, pricing `is_builtin`) are
+listed in the inline report for a later resumption and are not queued. Feature order: module-scoped
+visibility, module parameters and member tables in admission; then the remaining syntax gaps by
+manifest family (caret entity references, interpolation, Unicode boundary conformance); then
+lowering of admitted programs into Ergodis rules end to end. Ergodis retains lowering, rules, joins and
 execution; no external evaluator or backend is adopted. Tree-sitter and executable reference
 semantics remain deferred.
 
