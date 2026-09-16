@@ -125,7 +125,7 @@ Both re-execute themselves inside `nix develop` of the core checkout, so the too
 | `ergodis-private` | `b46572e` | the four backend cohorts re-measured at `ergodis-tools-f12e27b` |
 | `ergodis-private` | `8d9c5bd` | the cache-event receipts |
 | `othello` | `0ef05ec`…`9a3ce47` | this report, written incrementally in twelve commits |
-| `othello` | `9a3ce47`…HEAD | the Soufflé, post-C1188 backend and cache-event sections, and this report's close |
+| `othello` | `9a3ce47`…`3b1116d` | the Soufflé, post-C1188 backend and cache-event sections, and this report's close |
 
 ## Fermi predictions, written before any code
 
