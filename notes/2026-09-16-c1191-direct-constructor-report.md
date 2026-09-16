@@ -17,11 +17,11 @@ complement records). Repositories: `~/src/ergodis` (core) and `~/src/ergodis-pri
 Filled in as each is retained. Every hash is recorded **as measured**, never cited: the thing to run
 is the retain recipe at the named revision.
 
-| Arm | Repository | Revision | Dirty | Retained name | rustc | Measured sha256 |
-| --- | ---------- | -------- | ----- | ------------- | ----- | --------------- |
-| control, harness A/B | `ergodis-private` | `b7c624d` | no | `ergodis-tools-b7c624d` | 1.95.0 (59807616e 2026-04-14) | `15f7c83aba28c3732b53854226e97809e80da2737073439c1b92bf7ff5bf7e2c` |
-| harness, and control of the constructor A/B | `ergodis-private` | `3778763` | no | `ergodis-tools-3778763` | 1.95.0 (59807616e 2026-04-14) | `c3bc2ba80ba7851a4b66b520540f07d83ca9ca4fcf0029989cddb98ec30f6dad` |
-| candidate | `ergodis-private` | `8191ab7` | no | `ergodis-tools-8191ab7` | 1.95.0 (59807616e 2026-04-14) | `efbb5987e56edfe95c439ed5d3bc12e1a86a9f9a7a76d83193848b213b7a7ca1` |
+| Arm                                         | Repository        | Revision  | Dirty | Retained name           | rustc                         | Measured sha256                                                    |
+| ------------------------------------------- | ----------------- | --------- | ----- | ----------------------- | ----------------------------- | ------------------------------------------------------------------ |
+| control, harness A/B                        | `ergodis-private` | `b7c624d` | no    | `ergodis-tools-b7c624d` | 1.95.0 (59807616e 2026-04-14) | `15f7c83aba28c3732b53854226e97809e80da2737073439c1b92bf7ff5bf7e2c` |
+| harness, and control of the constructor A/B | `ergodis-private` | `3778763` | no    | `ergodis-tools-3778763` | 1.95.0 (59807616e 2026-04-14) | `c3bc2ba80ba7851a4b66b520540f07d83ca9ca4fcf0029989cddb98ec30f6dad` |
+| candidate                                   | `ergodis-private` | `8191ab7` | no    | `ergodis-tools-8191ab7` | 1.95.0 (59807616e 2026-04-14) | `efbb5987e56edfe95c439ed5d3bc12e1a86a9f9a7a76d83193848b213b7a7ca1` |
 
 Every arm is `ergodis-tools`, `release`, no features, built through the retain recipe below, which
 re-executes itself inside `nix develop` of the core checkout so the toolchain is the
@@ -40,14 +40,14 @@ which re-executes itself inside `nix develop` of the core checkout, so the toolc
 
 ## Commits
 
-| Repository | Commit | What |
-| ---------- | ------ | ---- |
-| `othello` | `715fff0` | this report's skeleton and the Fermi predictions, written before any code |
-| `ergodis-private` | `3778763` | the `stratify` bench stage; `bench.py` records the load average and the counter enabled fraction |
-| `ergodis-private` | `30cebc2` | the harness A/B receipt against the `b7c624d` control |
-| `ergodis` | `2517852` | `Demand::from_prepared`, `datalog::admit_prepared`, the flat fact pool in `Admitted`, both checkers' admitted-form entry points, the prepared-constructor test suite and the constructor allocation regression |
-| `ergodis-private` | `1c7e42c` | every layer built through the prepared constructor; `Budget::LayerTuples` for `Budget::ProgramBytes`; `LayerReport::layer_values` for `program_bytes` |
-| `ergodis-private` | `8191ab7` | `Error::LayerCapacity` names the evaluator's row capacity; `rel-lower --values` lets a boundary probe raise the lowering workspace |
+| Repository        | Commit    | What                                                                                                                                                                                                           |
+| ----------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `othello`         | `715fff0` | this report's skeleton and the Fermi predictions, written before any code                                                                                                                                      |
+| `ergodis-private` | `3778763` | the `stratify` bench stage; `bench.py` records the load average and the counter enabled fraction                                                                                                               |
+| `ergodis-private` | `30cebc2` | the harness A/B receipt against the `b7c624d` control                                                                                                                                                          |
+| `ergodis`         | `2517852` | `Demand::from_prepared`, `datalog::admit_prepared`, the flat fact pool in `Admitted`, both checkers' admitted-form entry points, the prepared-constructor test suite and the constructor allocation regression |
+| `ergodis-private` | `1c7e42c` | every layer built through the prepared constructor; `Budget::LayerTuples` for `Budget::ProgramBytes`; `LayerReport::layer_values` for `program_bytes`                                                          |
+| `ergodis-private` | `8191ab7` | `Error::LayerCapacity` names the evaluator's row capacity; `rel-lower --values` lets a boundary probe raise the lowering workspace                                                                             |
 
 ## Fermi predictions, written before any code
 
@@ -64,12 +64,12 @@ refusal has nothing to check and is replaced by whichever declared bound binds f
 with the dictionary size `d` each admits on a cohort whose negated relation has arity two and both
 columns over the whole dictionary:
 
-| Bound | Value | Checked against | Largest `d` at arity two |
-| ----- | ----: | --------------- | -----------------------: |
-| `MAX_COMPLEMENT` (this route's own) | 2^22 = 4,194,304 | `∏ᵢ \|Dᵢ\|` per negated literal | **2,048** |
-| `MAX_INDEX_KEYS` (core) | 2^24 = 16,777,216 | `domain^arity` of an indexed relation | 4,096 |
-| `MAX_UNIVERSE` (core) | 2^30 | `domain^arity` of any relation | 32,768 |
-| `MAX_DOMAIN` (core) | 65,536 | the declared domain | 65,536 |
+| Bound                               |             Value | Checked against                       | Largest `d` at arity two |
+| ----------------------------------- | ----------------: | ------------------------------------- | -----------------------: |
+| `MAX_COMPLEMENT` (this route's own) |  2^22 = 4,194,304 | `∏ᵢ \|Dᵢ\|` per negated literal       |                **2,048** |
+| `MAX_INDEX_KEYS` (core)             | 2^24 = 16,777,216 | `domain^arity` of an indexed relation |                    4,096 |
+| `MAX_UNIVERSE` (core)               |              2^30 | `domain^arity` of any relation        |                   32,768 |
+| `MAX_DOMAIN` (core)                 |            65,536 | the declared domain                   |                   65,536 |
 
 **I predict `MAX_COMPLEMENT` is the bound that binds on `stratified`, at a dictionary of about
 2,048**, against today's 153 — a factor of about **13.4**, which is the order of magnitude the
@@ -325,32 +325,32 @@ well, because that is the axis the earlier reports measured.
 the canonical JSON of one layer's program against the core's `MAX_BYTES` of 1,048,576 — at about
 22,000 materialized facts in a layer:
 
-| Cohort | Arity | Largest dictionary | Materialized facts there |
+| Cohort       | Arity | Largest dictionary | Materialized facts there |
 | ------------ | ----: | -----------------: | -----------------------: |
-| `stratified` | 2 | 153 | 23,182 complement |
-| `columns` | 2 | 302 | 22,577 complement |
-| `columns3` | 3 | 84 | 21,938 complement |
-| `aggregate` | 2 | 213 (key set) | 22,578 filter |
+| `stratified` |     2 |                153 |        23,182 complement |
+| `columns`    |     2 |                302 |        22,577 complement |
+| `columns3`   |     3 |                 84 |        21,938 complement |
+| `aggregate`  |     2 |      213 (key set) |            22,578 filter |
 
 **After**, with the tool's committed defaults (`--max-rows 1048576`, `--values 4096`):
 
-| Cohort | Largest dictionary | Factor | Materialized facts there | First refused, and the bound |
-| ------------ | -----------------: | -----: | -----------------------: | ---------------------------- |
-| `stratified` | **1,024** | ×6.7 | 1,047,043 complement | 1,025: the demand evaluator's **row capacity**, 2^20, at layer 1 |
-| `columns` | **1,820** | ×6.0 | 826,738 complement | dictionary 1,822: the lowering workspace's **fact pool**, 4,097 against 4,096 |
-| `columns3` | **255** | ×3.04 | 614,082 complement | 258: the core's **`MAX_INDEX_KEYS`**, 17,173,512 against 16,777,216 |
-| `aggregate` | **3,959** (key set 1,365) | ×6.4 on the key set | 930,930 filter | key set 1,366: the lowering workspace's **fact pool**, 4,097 against 4,096 |
+| Cohort       |        Largest dictionary |              Factor | Materialized facts there | First refused, and the bound                                                  |
+| ------------ | ------------------------: | ------------------: | -----------------------: | ----------------------------------------------------------------------------- |
+| `stratified` |                 **1,024** |                ×6.7 |     1,047,043 complement | 1,025: the demand evaluator's **row capacity**, 2^20, at layer 1              |
+| `columns`    |                 **1,820** |                ×6.0 |       826,738 complement | dictionary 1,822: the lowering workspace's **fact pool**, 4,097 against 4,096 |
+| `columns3`   |                   **255** |               ×3.04 |       614,082 complement | 258: the core's **`MAX_INDEX_KEYS`**, 17,173,512 against 16,777,216           |
+| `aggregate`  | **3,959** (key set 1,365) | ×6.4 on the key set |           930,930 filter | key set 1,366: the lowering workspace's **fact pool**, 4,097 against 4,096    |
 
 **And with the workspace raised** (`--max-rows 16777216 --values 262144`, both flags of the committed
 tool, so these replay from this revision too), which is what shows which bound belongs to the *route*
 rather than to the workspace the operator asked for:
 
-| Cohort | Largest dictionary | Factor over before | Materialized facts there | Peak RSS | First refused, and the bound |
-| ------------ | -----------------: | -----------------: | -----------------------: | -------: | ---------------------------- |
-| `stratified` | **2,047** | ×13.4 | 4,187,141 complement | 1.39 GB | 2,048: **`Budget::LayerTuples`**, 4,197,376 against 4,194,304 |
-| `columns` | **4,092** | ×13.5 | 4,183,050 complement | 2.73 GB | 4,094: **`Budget::LayerTuples`**, 4,195,326 against 4,194,304 |
-| `columns3` | **255** | ×3.04 | 614,082 complement | 564 MB | 258: **`MAX_INDEX_KEYS`**, unchanged by the workspace |
-| `aggregate` | **4,096** (key set 1,412) | ×6.6 on the key set | 996,166 filter | 1.86 GB | key set 1,413: **`MAX_INDEX_KEYS`**, 16,793,604 against 16,777,216 |
+| Cohort       |        Largest dictionary |  Factor over before | Materialized facts there | Peak RSS | First refused, and the bound                                       |
+| ------------ | ------------------------: | ------------------: | -----------------------: | -------: | ------------------------------------------------------------------ |
+| `stratified` |                 **2,047** |               ×13.4 |     4,187,141 complement |  1.39 GB | 2,048: **`Budget::LayerTuples`**, 4,197,376 against 4,194,304      |
+| `columns`    |                 **4,092** |               ×13.5 |     4,183,050 complement |  2.73 GB | 4,094: **`Budget::LayerTuples`**, 4,195,326 against 4,194,304      |
+| `columns3`   |                   **255** |               ×3.04 |       614,082 complement |   564 MB | 258: **`MAX_INDEX_KEYS`**, unchanged by the workspace              |
+| `aggregate`  | **4,096** (key set 1,412) | ×6.6 on the key set |           996,166 filter |  1.86 GB | key set 1,413: **`MAX_INDEX_KEYS`**, 16,793,604 against 16,777,216 |
 
 **The number that transfers is the fact ceiling, and it moved by about two orders of magnitude.**
 Every product-shaped construct on this route used to stop at about 22,000 materialized facts in one
@@ -397,13 +397,13 @@ all within two parts per million of unity. **Counter enabled fraction 100.00 per
 event**, recorded rather than inferred. **Load 2.02 to 2.36** over the rounds. Receipt
 `analysis/rel-frontend/performance-v6-prepared-8191ab7.json`.
 
-| Cohort | `scan` | `parse` | `admit` | `lower` | `stratify` − `lower`, candidate | control |
-| ----------------- | -------: | -------: | -------: | -------: | ------: | ------: |
-| `ascii`           | 0.999997 | 0.999999 | 0.999998 | 1.000000 | 1 | −1 |
-| `unicode`         | 1.000000 | 0.999999 | 1.000001 | 1.000001 | −1 | 1 |
-| `comment-string`  | 1.000022 | 1.000014 | 1.000006 | 1.000003 | 1 | −2 |
-| `malformed-early` | 1.000000 | 0.999997 | 0.999998 | 0.999991 | 2 | −4 |
-| `malformed-late`  | 0.999994 | 0.999999 | 1.000000 | 1.000000 | −3 | −3 |
+| Cohort            |   `scan` |  `parse` |  `admit` |  `lower` | `stratify` − `lower`, candidate | control |
+| ----------------- | -------: | -------: | -------: | -------: | ------------------------------: | ------: |
+| `ascii`           | 0.999997 | 0.999999 | 0.999998 | 1.000000 |                               1 |      −1 |
+| `unicode`         | 1.000000 | 0.999999 | 1.000001 | 1.000001 |                              −1 |       1 |
+| `comment-string`  | 1.000022 | 1.000014 | 1.000006 | 1.000003 |                               1 |      −2 |
+| `malformed-early` | 1.000000 | 0.999997 | 0.999998 | 0.999991 |                               2 |      −4 |
+| `malformed-late`  | 0.999994 | 0.999999 | 1.000000 | 1.000000 |                              −3 |      −3 |
 
 **Scan, parse, admission and the lowering stage are unity to within twenty-two parts per million**,
 which is the level of the nulls, so the front end did not move. All five cohorts are refused before
@@ -419,12 +419,12 @@ The composed figure is `stratify` minus `lower`: the backend boundary, the evalu
 its derivation certificate and both of the core's independent checkers. `datalog` runs at 512
 definitions and the rest at 128, which is where both arms complete.
 
-| Cohort | Stage instructions, candidate | control | instruction ratio | cycles | wall p50, candidate over control | peak RSS |
-| ------------ | ------------: | ------------: | ----------: | ------: | ------------------------------: | --------------------: |
-| `datalog`    | 1,680,329,956 | 1,690,474,760 |     0.99400 | 0.96864 | 120.4 / 100.2 ms = **1.20** | 127,240 / 127,592 KiB |
-| `stratified` |   168,175,532 |   323,491,619 | **0.51988** | 0.47000 |  10.29 / 19.88 ms = **0.518** | 11,420 / 15,960 KiB (**−28 %**) |
-| `columns`    |   168,662,964 |   326,736,068 | **0.51621** | 0.46909 |  11.83 / 20.22 ms = **0.585** | 16,652 / 23,348 KiB (**−29 %**) |
-| `aggregate`  |    59,064,703 |   136,776,315 | **0.43183** | 0.44332 |   7.89 / 12.09 ms = **0.653** | 21,080 / 23,656 KiB (**−11 %**) |
+| Cohort       | Stage instructions, candidate |       control | instruction ratio |  cycles | wall p50, candidate over control |                        peak RSS |
+| ------------ | ----------------------------: | ------------: | ----------------: | ------: | -------------------------------: | ------------------------------: |
+| `datalog`    |                 1,680,329,956 | 1,690,474,760 |           0.99400 | 0.96864 |      120.4 / 100.2 ms = **1.20** |           127,240 / 127,592 KiB |
+| `stratified` |                   168,175,532 |   323,491,619 |       **0.51988** | 0.47000 |     10.29 / 19.88 ms = **0.518** | 11,420 / 15,960 KiB (**−28 %**) |
+| `columns`    |                   168,662,964 |   326,736,068 |       **0.51621** | 0.46909 |     11.83 / 20.22 ms = **0.585** | 16,652 / 23,348 KiB (**−29 %**) |
+| `aggregate`  |                    59,064,703 |   136,776,315 |       **0.43183** | 0.44332 |      7.89 / 12.09 ms = **0.653** | 21,080 / 23,656 KiB (**−11 %**) |
 
 **`scan`, `parse`, `admit` and `lower` are unity on every cohort** — the largest departure is
 forty-two parts per million on the `aggregate` scanner — so the front end did not move. The A/A
@@ -459,16 +459,16 @@ and what it means for a real invocation are in the disposition below.
 
 ### Exactness
 
-| Gate | Outcome |
-| ---- | ------- |
-| Native/WASM parity replay | **243 cases, 530,505 canonical bytes, byte-equal, SHA-256 `f0e2b581…b448b40` — unchanged.** The corpus compares the canonical bytes of the lowered relational IR, which this change does not touch; the layer programs are downstream of it and carry no canonical form of their own. So the parity hash did not move, and the reason it could not is structural rather than lucky. |
-| `rel_lowering` | 52 passed, 0 failed (51 before, plus the new layer-payload fixture) |
-| `rel_frontend` | 28 passed, 0 failed |
-| `rel_frontend_portability` | 1 passed, 0 failed |
-| `rel_reference_eval` (the C1189 differential) | 19 passed, 0 failed; **zero disagreements** over the committed fixtures, the milestone (a) audit's further programs, the recorded rejection surface, the 35 Addendum A equations, the surface-construct table, and the seeded in-fragment, negation, aggregation, comparison, near-miss and name-resolution corpora, all at their unchanged seeds |
-| Core `cargo test --all-features` | every test binary passed, including the new prepared-constructor suite and the constructor allocation regression |
-| Clippy, both repositories | no diagnostics |
-| `cargo fmt --check`, both repositories | clean |
+| Gate                                          | Outcome                                                                                                                                                                                                                                                                                                                                                                             |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Native/WASM parity replay                     | **243 cases, 530,505 canonical bytes, byte-equal, SHA-256 `f0e2b581…b448b40` — unchanged.** The corpus compares the canonical bytes of the lowered relational IR, which this change does not touch; the layer programs are downstream of it and carry no canonical form of their own. So the parity hash did not move, and the reason it could not is structural rather than lucky. |
+| `rel_lowering`                                | 52 passed, 0 failed (51 before, plus the new layer-payload fixture)                                                                                                                                                                                                                                                                                                                 |
+| `rel_frontend`                                | 28 passed, 0 failed                                                                                                                                                                                                                                                                                                                                                                 |
+| `rel_frontend_portability`                    | 1 passed, 0 failed                                                                                                                                                                                                                                                                                                                                                                  |
+| `rel_reference_eval` (the C1189 differential) | 19 passed, 0 failed; **zero disagreements** over the committed fixtures, the milestone (a) audit's further programs, the recorded rejection surface, the 35 Addendum A equations, the surface-construct table, and the seeded in-fragment, negation, aggregation, comparison, near-miss and name-resolution corpora, all at their unchanged seeds                                   |
+| Core `cargo test --all-features`              | every test binary passed, including the new prepared-constructor suite and the constructor allocation regression                                                                                                                                                                                                                                                                    |
+| Clippy, both repositories                     | no diagnostics                                                                                                                                                                                                                                                                                                                                                                      |
+| `cargo fmt --check`, both repositories        | clean                                                                                                                                                                                                                                                                                                                                                                               |
 
 ### The three deliberate mutations
 
@@ -516,25 +516,25 @@ measurement: the playbook is explicit that a symbol's profile share is not its c
 has been misled by shares twice. They are used here to say *where the saving went*, which is what a
 profile is for, and the total they account for is checked against the measured saving at the end.
 
-| Symbol | control, M instructions | candidate, M |
-| ------------------------------------------------------ | ------: | -----: |
-| `serde_json::ser::format_escaped_str`                   |   28.40 |   — |
-| `serde_core` map/vec entry serialization, `itoa`        |   22.07 |   — |
-| `ergodis_verify::datalog::admit`                        |   22.26 |   — |
-| `hashbrown` rehash, `DefaultHasher::write`, `hash_one`  |   22.61 |   — |
-| `alloc::vec::Vec::push_mut`                             |   12.94 |   — |
-| `malloc_consolidate`, `cfree`, `_int_free_chunk`        |   12.07 |   — |
-| `__memmove_avx512_unaligned_erms`                       |   19.47 | 12.36 |
-| `__memcmp_evex_movbe`                                   |    4.27 |  2.61 |
-| `sha2::sha256::x86::digest_blocks`                      |    6.34 |  0.92 |
-| `ergodis_rules::demand::Demand::prepare`                |       — |  2.61 |
-| `core::slice::sort::unstable::ipnsort`                  |       — |  2.54 |
-| `ergodis_verify::datalog::Streaming::word`              |       — |  1.35 |
-| `ergodis_verify::datalog::admit_prepared`               |       — |  1.31 |
-| `derivation::closed_world`                              |   18.63 | 17.09 |
-| `Demand::evaluate_into`                                 |   13.33 | 13.45 |
-| `datalog_store::JoinIndexes::probe`                     |   10.68 | 14.58 |
-| `datalog_store::RelationStore::insert`                  |   13.36 | 11.76 |
+| Symbol                                                 | control, M instructions | candidate, M |
+| ------------------------------------------------------ | ----------------------: | -----------: |
+| `serde_json::ser::format_escaped_str`                  |                   28.40 |            — |
+| `serde_core` map/vec entry serialization, `itoa`       |                   22.07 |            — |
+| `ergodis_verify::datalog::admit`                       |                   22.26 |            — |
+| `hashbrown` rehash, `DefaultHasher::write`, `hash_one` |                   22.61 |            — |
+| `alloc::vec::Vec::push_mut`                            |                   12.94 |            — |
+| `malloc_consolidate`, `cfree`, `_int_free_chunk`       |                   12.07 |            — |
+| `__memmove_avx512_unaligned_erms`                      |                   19.47 |        12.36 |
+| `__memcmp_evex_movbe`                                  |                    4.27 |         2.61 |
+| `sha2::sha256::x86::digest_blocks`                     |                    6.34 |         0.92 |
+| `ergodis_rules::demand::Demand::prepare`               |                       — |         2.61 |
+| `core::slice::sort::unstable::ipnsort`                 |                       — |         2.54 |
+| `ergodis_verify::datalog::Streaming::word`             |                       — |         1.35 |
+| `ergodis_verify::datalog::admit_prepared`              |                       — |         1.31 |
+| `derivation::closed_world`                             |                   18.63 |        17.09 |
+| `Demand::evaluate_into`                                |                   13.33 |        13.45 |
+| `datalog_store::JoinIndexes::probe`                    |                   10.68 |        14.58 |
+| `datalog_store::RelationStore::insert`                 |                   13.36 |        11.76 |
 
 **Where the saving went.** Every serde symbol is gone; `datalog::admit` is gone; the hash table that
 deduplicated facts inside it is gone, replaced by a sort of packed keys (`ipnsort`, 2.54 M); the
