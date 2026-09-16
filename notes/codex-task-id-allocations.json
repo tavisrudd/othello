@@ -5174,8 +5174,17 @@
       "last": 1191,
       "purpose": "C1190 successor: direct constructor from the relational IR into the demand evaluator prepared form",
       "sequence": 575
+    },
+    {
+      "count": 5,
+      "first": 1192,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1196,
+      "purpose": "Datalog programme next steps: sparse join index, n-ary bodies, min-plus lowering, end-to-end benchmark suite, certificate encoding",
+      "sequence": 576
     }
   ],
-  "next_id": 1192,
+  "next_id": 1197,
   "schema": "codex-task-id-allocations-v1"
 }
