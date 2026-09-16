@@ -2,8 +2,11 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-16
-**Status**: IN PROGRESS. Successor of C1190 (`2026-09-15-c1190-rel-lowering.md`); the lever the
-per-column and milestone (c) reports rank first.
+**Status**: BUILT, GATED AND MEASURED; the independent audit is outstanding. Successor of C1190
+(`2026-09-15-c1190-rel-lowering.md`); the lever the per-column and milestone (c) reports rank first.
+Report: `2026-09-16-c1191-direct-constructor-report.md`. Every acceptance item below is met except
+the read-only audit, which an author cannot write for their own change; the report's next steps say
+what it should reproduce first.
 
 ## Goal
 
