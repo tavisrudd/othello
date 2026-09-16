@@ -419,19 +419,21 @@ The composed figure is `stratify` minus `lower`: the backend boundary, the evalu
 its derivation certificate and both of the core's independent checkers. `datalog` runs at 512
 definitions and the rest at 128, which is where both arms complete.
 
-| Cohort | Stage instructions, candidate | control | ratio | cycles | wall p50 | peak RSS |
-| ------------ | --------------: | --------------: | ------: | ------: | ------: | ------: |
-| `datalog`    | 1,680,329,956 | 1,690,474,760 | 0.99400 | 0.96864 | 120.4 ms / 100.2 ms = **1.20** | 127,240 / 127,592 KiB |
-| `stratified` |   168,175,532 |   323,491,619 | **0.51988** | 0.47000 | 10.29 ms / 19.88 ms = **0.518** | 11,420 / 15,960 KiB (**−28 %**) |
+| Cohort | Stage instructions, candidate | control | instruction ratio | cycles | wall p50, candidate over control | peak RSS |
+| ------------ | ------------: | ------------: | ----------: | ------: | ------------------------------: | --------------------: |
+| `datalog`    | 1,680,329,956 | 1,690,474,760 |     0.99400 | 0.96864 | 120.4 / 100.2 ms = **1.20** | 127,240 / 127,592 KiB |
+| `stratified` |   168,175,532 |   323,491,619 | **0.51988** | 0.47000 |  10.29 / 19.88 ms = **0.518** | 11,420 / 15,960 KiB (**−28 %**) |
+| `columns`    |   168,662,964 |   326,736,068 | **0.51621** | 0.46909 |  11.83 / 20.22 ms = **0.585** | 16,652 / 23,348 KiB (**−29 %**) |
+| `aggregate`  |    59,064,703 |   136,776,315 | **0.43183** | 0.44332 |   7.89 / 12.09 ms = **0.653** | 21,080 / 23,656 KiB (**−11 %**) |
 
-**`scan`, `parse`, `admit` and `lower` are unity on both cohorts** — the largest departure is
-thirteen parts per million on `datalog`'s scanner — so the front end did not move, and the A/A
-instruction nulls are 1.0000118 on `datalog` and 1.0000013 on `stratified`. Counter enabled fraction
-100.00 per cent on every event; load 2.08 to 2.20.
+**`scan`, `parse`, `admit` and `lower` are unity on every cohort** — the largest departure is
+forty-two parts per million on the `aggregate` scanner — so the front end did not move. The A/A
+instruction nulls are 1.0000118, 1.0000013, 1.0000011 and 0.9999855. Counter enabled fraction
+**100.00 per cent on every event of every run**; load 2.08 to 2.61.
 
-**The closure SHA-256 is identical across arms on every cohort**: `5c455ad4…ab8101a` on `datalog`
-and `dffdcd35…e896c6fb` on `stratified`, over every relation's certified rows. That is the exactness
-evidence the receipts carry themselves, beside the differential.
+**The closure SHA-256 is identical across arms on every cohort**, over every relation's certified
+rows: `5c455ad4…ab8101a`, `dffdcd35…e896c6fb`, `3f5c4cdd…13c39e4f` and `ec562d2c…54e314e1e`. That is
+the exactness evidence the receipts carry themselves, beside the differential.
 
 **On the negation cohort the backend is halved**, in instructions, in cycles and in wall time, and
 its peak resident set falls by 28 per cent. That is far more than the per-fact Fermi predicted, and
@@ -468,6 +470,32 @@ and what it means for a real invocation are in the disposition below.
 | Clippy, both repositories | no diagnostics |
 | `cargo fmt --check`, both repositories | clean |
 
+### The three deliberate mutations
+
+Each is a one-line change, run with the gates and then reverted. None is committed. They are the
+load-bearing evidence that the agreement discriminates, because the corpora cannot: the prepared path
+is a second construction of the same structures from the same information, so a corpus that exercises
+the construction only sees the two agreeing.
+
+1. **The prepared identity taken over the tuples as supplied rather than over the sorted set** — one
+   line restoring the supplied order after the deduplication. It fails **exactly one test in either
+   repository**: the core's `the_prepared_identity_is_a_function_of_the_fact_set`. Every lowering
+   fixture and every corpus of the differential passes, because the closure is unaffected. That is
+   the sharpest thing the mutations say: **an identity defect is invisible to every corpus this lane
+   has**, and it is caught only by a unit test written to catch it.
+2. **A negative literal read over its own relation instead of over the complement the layer built** —
+   the `atom_over` lookup forced to the relational-IR relation. Twenty of the fifty-two lowering
+   fixtures fail and six of the nineteen differential tests, including the negation, comparison and
+   aggregation corpora, the committed fixtures, the Figure 3/4 table and the independent Python
+   oracle. Some fail as a refusal (a comparison literal names no relation, so the rule is
+   `REL0504`) and some as a wrong closure, which is the pair of failure modes the construction has.
+3. **The driver's canonical variable renumbering dropped**, passing the rule-local variable index
+   straight through. Ten lowering fixtures and ten differential tests fail, every one of them with
+   `Core(Source)` — the core refusing the rule because its body does not number its first variable
+   zero. That is the check described under "Variable numbering is canonical and checked" doing its
+   job: a producer that ignores the canonical order is refused rather than given a second identity
+   for one rule.
+
 Fermi prediction 6 said zero differential disagreements, for a weaker reason than milestone (b)'s:
 the prepared path is a second construction of the same structures from the same information, so it
 can only be wrong by building them differently, and a corpus that exercises the construction cannot
@@ -477,11 +505,115 @@ agreement discriminates is the deliberate mutations below, not the corpora.
 
 ## Profile
 
-(to be filled)
+Kernel-scoped: `perf record -e instructions:u -F 4000` on
+`rel-frontend-bench --cohort stratified --stage stratify --definitions 128 --repeat 300`, pinned to
+CPU 5, on each retained binary. That harness mode runs parse, admit and lower once per iteration
+against a backend stage of 168 to 323 million instructions, so better than 99 per cent of the profile
+is the stage under test. `perf.data` under `~/.cache/ergodis/perf-c1191/`.
+
+The figures below are **share times the measured stage instructions**, which is an estimate and not a
+measurement: the playbook is explicit that a symbol's profile share is not its cost, and this project
+has been misled by shares twice. They are used here to say *where the saving went*, which is what a
+profile is for, and the total they account for is checked against the measured saving at the end.
+
+| Symbol | control, M instructions | candidate, M |
+| ------------------------------------------------------ | ------: | -----: |
+| `serde_json::ser::format_escaped_str`                   |   28.40 |   — |
+| `serde_core` map/vec entry serialization, `itoa`        |   22.07 |   — |
+| `ergodis_verify::datalog::admit`                        |   22.26 |   — |
+| `hashbrown` rehash, `DefaultHasher::write`, `hash_one`  |   22.61 |   — |
+| `alloc::vec::Vec::push_mut`                             |   12.94 |   — |
+| `malloc_consolidate`, `cfree`, `_int_free_chunk`        |   12.07 |   — |
+| `__memmove_avx512_unaligned_erms`                       |   19.47 | 12.36 |
+| `__memcmp_evex_movbe`                                   |    4.27 |  2.61 |
+| `sha2::sha256::x86::digest_blocks`                      |    6.34 |  0.92 |
+| `ergodis_rules::demand::Demand::prepare`                |       — |  2.61 |
+| `core::slice::sort::unstable::ipnsort`                  |       — |  2.54 |
+| `ergodis_verify::datalog::Streaming::word`              |       — |  1.35 |
+| `ergodis_verify::datalog::admit_prepared`               |       — |  1.31 |
+| `derivation::closed_world`                              |   18.63 | 17.09 |
+| `Demand::evaluate_into`                                 |   13.33 | 13.45 |
+| `datalog_store::JoinIndexes::probe`                     |   10.68 | 14.58 |
+| `datalog_store::RelationStore::insert`                  |   13.36 | 11.76 |
+
+**Where the saving went.** Every serde symbol is gone; `datalog::admit` is gone; the hash table that
+deduplicated facts inside it is gone, replaced by a sort of packed keys (`ipnsort`, 2.54 M); the
+allocator's consolidation and free work is gone with the per-fact allocations; and SHA-256 falls from
+6.34 M to 0.92 M, because the control hashes 748,012 bytes of JSON three times and the candidate
+hashes a 133 KB tuple payload once. **The whole prepared boundary — `Demand::prepare`,
+`admit_prepared`, the streaming encoder and the tuple sort — is about 7.8 M instructions**, against
+about 110 M for the four serializations, three admissions and their allocator traffic. At 16,897
+materialized facts over three layers that is a recorded per-unit budget of about **460 instructions
+per materialized fact** for the prepared boundary, against about 6,500 for the wire one.
+
+The symbols that are *not* the boundary barely move: `closed_world`, `evaluate_into`,
+`RelationStore::insert` and `JoinIndexes::build` are within about 10 per cent either way, and
+`JoinIndexes::probe` is up 3.9 M, which is thin-LTO layout on a function neither arm changed. Two
+renames are not savings and are excluded from the table for that reason: `derivation::check_bounded`
+becomes `check_admitted_bounded` (13.75 M against 14.87 M) and `ranked::check_bounded` becomes
+`ranked::check_admitted_bounded` (7.86 M against 8.21 M).
+
+The identified terms sum to about 134 M against a measured saving of 155.3 M, so the attribution
+closes to about 86 per cent; the remainder is in symbols below the profile's 0.15 per cent cut and in
+`Map::fold`, which is down 2.5 M.
+
+**Out-of-line calls in the candidate's loops, listed as the playbook requires.** Two libc symbols
+appear: `__memmove_avx512_unaligned_erms` at 12.36 M and `__memcmp_evex_movbe` at 2.61 M. Neither is
+new — the control carries both, at 19.47 M and 4.27 M — and both are **lower** on the candidate, so
+each is justified by measurement rather than removed. `memmove` is the runtime-length
+`extend_from_slice` that fills each relation's row store in `Demand::prepare` and the tuple pool in
+`admit_prepared`, plus the workspace reset in `evaluate_into`; `memcmp` is the slice comparison in the
+driver's tuple sort and the one-per-synthetic-relation name comparison in `synthetic_name`. None is
+in the evaluator's per-derivation inner loop, whose zero-allocation regression is unchanged and still
+passes.
 
 ## Disposition
 
-(to be filled)
+**Kept**, by the forward commits in the table above; nothing is reverted. The instruction ratio on
+the backend stage is 0.520 on `stratified`, 0.516 on `columns` and 0.994 on `datalog`, the closure
+digests are identical across arms on every cohort, and the boundary the task exists to move went
+from about 22,000 materialized facts in a layer to 4,194,304.
+
+**The one measured loss, and what it is.** On `datalog` the repeated-loop wall time is up 20 per cent
+while instructions are down 0.6 per cent, and the counter that explains it is 30,162 minor faults per
+iteration against 4,971. Diagnosis, in the order the playbook prescribes — count the events, then
+find the mechanism, then check it:
+
+- With glibc's trim and mmap thresholds pinned above the pool sizes
+  (`MALLOC_TRIM_THRESHOLD_` and `MALLOC_MMAP_THRESHOLD_` at 2^30), the candidate's faults go to
+  **0 to 2 per iteration** and the control's to 279, and the two arms' wall times become equal:
+  medians of about 65.2 ms over three alternating pairs each.
+- A single `rel-lower` invocation on the same cohort — which is what a consumer actually runs — is
+  **102.8 ms on the candidate against 106.9 ms on the control**, with peak resident set 126,992 KiB
+  against 127,568 KiB.
+
+So the mechanism is the allocator returning pages to the kernel between iterations: the wire route
+left 512 owned relation names and 512 owned tuples alive above the freed workspace, which pinned the
+heap; the prepared route frees everything, glibc trims, and the next iteration faults the pages back
+in. It is a property of running the whole chain repeatedly in one process, which is what the bench
+probe does and what nothing else does. It is recorded rather than dismissed, because a
+harness-shaped cost is still a cost if a consumer ever loops, and because the diagnosis is the
+evidence that the instruction ratio was not hiding a real regression.
+
+**What the saving actually is, which the Fermi did not have.** The old route encoded each layer's
+program **four** times: the driver serialized it for the `MAX_BYTES` check; `Demand::new`'s admission
+serialized and hashed it for the source identity; and each of the two independent checkers admitted
+the program for itself, serializing and hashing it again. Three of those four also re-resolved every
+relation name and cloned every tuple. The prepared route encodes once, in a binary canonical form
+over tuples rather than JSON over names, and both checkers read the admitted source. On `stratified`
+that is 748,012 bytes of JSON per pass replaced by a 33,281-value tuple payload hashed once. The
+per-fact Fermi predicted a factor of four to six on the *per-fact* boundary cost and had no term for
+the repeated whole-program encodings, which is why it predicted 40 to 70 per cent off the stage and
+the measurement is 48 per cent — right by accident, from a cost model that was missing its largest
+term. The model is corrected here rather than left to look prescient.
+
+**Two components of that saving, separated.** Removing the serialization is the change the card asked
+for. Removing the two checkers' re-admissions is a consequence of `check_admitted`, which the
+prepared path needs because it has no wire program to hand them. The wire path still re-admits, by
+design, so the comparison is between the two routes as they now stand and not between two spellings
+of one route. *Evidence gap*: the split between the two components is not measured, and measuring it
+would need a third arm with `check_admitted` on the wire path, which is a shape this task chose not
+to build.
 
 ## Recorded deviations
 
