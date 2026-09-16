@@ -448,11 +448,19 @@ the five default cohorts, 0.9999912 on `datalog`, 1.0000012 on `stratified` and 
 `columns`. All within nine parts per million of unity, so the protocol carries its own noise floor
 and a tenth of a per cent is readable.
 
-**Cohort freeze.** The harness's fingerprint gate was armed on every measured operation and reported
-no difference on any cohort or variant. The `datalog` cohort's *lowered program* is bit-identical
-across arms; its canonical fingerprint moved from `aa9451450b65b83e` to a new value on both arms,
-because the canonical form gained the dictionary's per-type ranges, and the point of the check —
-that both arms lower the same program — holds.
+**Cohort freeze.** The harness's gate compares tokens, nodes, the failure record, the admission
+outcome and the token/node representation fingerprint per operation and refuses the run on any
+difference; it was armed on every measured operation and the run completed, so all five are equal on
+every cohort and both variants.
+
+The harness does not gate the *lowering* fingerprint, and that one did move: the `datalog` cohort
+lowers to `aa9451450b65b83e` on the control and `16adff1ed85f7e04` on the candidate. It moved because
+the canonical form gained the dictionary's per-type dense ranges, which every program has; the
+lowered program itself is the same one, 14 relations, 96 rules, 8 auxiliaries, 8 binarized rules and
+513 dictionary values on both arms, which is the figure milestone (a), C1189 and milestone (b) all
+recorded. So that cohort's ratio measures the same program under a changed canonical form, and the
+freeze the measurement needs — identical input, identical shape — holds. A declared, checked
+fingerprint move is what the `CANONICAL_SCHEMA` tag in the canonical bytes exists for.
 
 ### Scan, parse and admission did not move
 
