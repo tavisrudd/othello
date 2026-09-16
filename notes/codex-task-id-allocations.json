@@ -5165,8 +5165,17 @@
       "last": 1190,
       "purpose": "Rel lowering of admitted programs into Ergodis rules end to end (C1170 successor)",
       "sequence": 574
+    },
+    {
+      "count": 1,
+      "first": 1191,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1191,
+      "purpose": "C1190 successor: direct constructor from the relational IR into the demand evaluator prepared form",
+      "sequence": 575
     }
   ],
-  "next_id": 1191,
+  "next_id": 1192,
   "schema": "codex-task-id-allocations-v1"
 }
