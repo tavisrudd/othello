@@ -635,6 +635,74 @@ nix develop ~/src/ergodis --command python3 $B/bench.py \
 
 (to be filled)
 
+## `ej`/`tt` closeout
+
+Run after the acceptance gate passed, as the lane requires.
+
+**Cheap upgrades taken during the task.** Three, none of which the card asked for and each of which
+cost a handful of lines. The flat fact pool in `Admitted` removes a per-tuple allocation from the
+*wire* path as well, which nobody had noticed was there. `bench.py` now records the load average and
+the counter enabled fraction — two of the four small repairs the per-column audit asked for, queued
+by two reports and done here because this task's own receipts needed them; the enabled fraction came
+back 100.00 per cent on every event over 1,337 measurements, which turns a claim this lane has been
+making from the A/A nulls into a recorded observation. And `rel-lower --values` is what makes the
+deep half of the boundary table replay from a committed revision instead of from a probe nobody
+committed, which is the reproducibility defect the milestone (c) audit recorded against that
+milestone's own deepest figure.
+
+**What the `tt` pass found, and it is a change of question.** Milestone (c)'s closeout ended with a
+rule of thumb: on this route, ask whether a construct is a *product* or a *reduction*, because a
+product is capped at about 22,000 facts and a reduction is free. That rule is now obsolete in its
+second half and misleading in its first. The cap on a product is 4,194,304 facts, which is not a cap
+any Rel program a person writes will reach; and what actually stops three of the four cohorts is
+`domain^arity` against the demand evaluator's direct-addressed index, which is a property of the
+**arity and the dictionary**, not of the construct. The new question is:
+
+> Does this construct raise the *arity* of a relation the evaluator must index, or the *size of the
+> dictionary*? Because `domain^arity` against 2^24 is what decides the reach now.
+
+That reframes the two things ADR 0004 records as alternatives. The `Negative` atom kind in the core
+`Rule` was the route to take "as soon as a program needs a dictionary in the thousands or a negated
+relation of arity four"; a dictionary in the thousands now works, and arity four is `domain^4`
+against 2^24, which is a dictionary of 64 — so the case for that alternative is now entirely about
+*arity*, and not at all about dictionary size. And per-column domains, which bought a factor of two
+or three on the number of facts, buy nothing at all against an addressing bound computed from the
+declared domain: the close pass checks `dictionary^arity`, not `∏ᵢ |Dᵢ|`. **Narrowing the addressing
+bound to the per-column domains a relation actually ranges over is the obvious next lever and it is
+a core change**, because the index is the core's.
+
+**Doors this opens.**
+
+1. **A layer may now hold millions of tuples, so incremental evaluation across layers is worth
+   asking about.** Every layer currently reads its predecessors' closures forward as input facts, and
+   at a dictionary of 2,047 that is 8.4 million tuple values copied into the evaluator's row stores
+   per layer. The prepared source hands them over by reference; the evaluator still copies them into
+   its workspace. A workspace that could borrow an immutable input relation instead of copying it is
+   a core change with a measurable prize that did not exist when a layer held 22,000 facts.
+2. **The prepared constructor is the entry point any other producer would want.** It is domain
+   neutral, it names nothing private, and it is what a second front end — or an external compiler —
+   would use. Nothing about it is Rel-specific.
+3. **The bound to attack is now `MAX_INDEX_KEYS`, and the shape of the fix is known**: a sparse index
+   for a relation whose tuple count is far below `domain^arity`, with an exact crossover policy and a
+   replay test, which the playbook already prescribes for every compressed representation.
+
+**Candidates to queue** (no IDs allocated):
+
+- The independent read-only audit of this task, which the card asks for and this report does not
+  contain.
+- Per-column domains in the *addressing* bound: check `∏ᵢ |Dᵢ|` rather than `dictionary^arity` for a
+  relation whose columns are narrow, which is where the two milestones' work would finally compound.
+- A sparse join index in the core for a relation far below `domain^arity`, which is what
+  `MAX_INDEX_KEYS` is a bound on.
+- A memory model for a layer, and a decision about whether `MAX_LAYER_TUPLES` should be expressed in
+  bytes; mystery ledger item 4.
+- Sizing the lowering workspace's fact pool separately from `Limits::values`, which is the coupling
+  that stops two cohorts under the tool's defaults.
+- The kernel-scoped profile of `lower::run` bucketed by address range, still overdue on three
+  reports.
+- The two repairs of the per-column audit's four that remain: a record shape naming the rule a
+  complement came from, and sizing the `BindSite` pool to the terms that occur in bodies.
+
 ## Next steps
 
 (to be filled)
