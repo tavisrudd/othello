@@ -746,3 +746,85 @@ Compounded, the derivation loop is at 0.81 to 0.88 of the control on the existin
    measurement of that.
 6. **`MAX_WORKSPACE_BYTES` is a number chosen, not measured**: `2^34`. It is a refusal that no cohort
    here reaches, and its only test constructs a program to exceed it.
+
+## Mystery ledger
+
+1. **Settled, and it corrects the card and the programme review: `MAX_INDEX_KEYS` was never what
+   bound the closure and same-generation families.** Both documents say the direct-addressed join
+   index caps every binary relation at a domain of 4,096. That is true of an index whose key mask
+   names two columns, which is what `columns3` and `aggregate` have. Closure and same generation
+   index on one column, so their key space is the domain and the bound they met was
+   `MAX_UNIVERSE`'s membership bitmap at a domain of 32,768 — and behind that, `MAX_ROWS`. Fermi
+   prediction 1 said this before any code and the measurement confirms it. *Nothing about this item
+   is open.*
+
+2. **Settled, and it is the more useful half: the reach the change buys is a large domain with a
+   small relation, and the old families cannot show it.** The generated closure derives 0.93 N² and
+   the generated same generation 0.115 N², so both hit the row capacity of `2^24` long before any
+   addressing bound: closure at N = 8,192 and same generation at N = 16,384. The card's request for
+   those two families at N = 16,384 and 65,536 is unreachable **under any index change**, and the
+   task added the `blocks` cohorts to have a family whose tuple universe is quadratic and whose size
+   is linear. At N = 65,536 that program has a universe of `2^32`, holds a million tuples, and is
+   refused at admission by the control. *Nothing about this item is open.*
+
+3. **Settled, and it is the one that changes the design rule: the two structures have different
+   crossovers, and only one has a crossover at all.** A dynamic join index is rebuilt before every
+   evaluation and its direct shape writes one word per key to do it, so above a density of about 48
+   the reset traffic outweighs the extra instructions. A membership bitmap is written once per
+   evaluation at one **bit** per key — eight times less traffic per key, and thirty-two times less
+   than the index's four bytes — and an input relation's counting-sorted index is not rewritten at
+   all. Neither of those has a crossover anywhere its ceiling allows. The design rule this replaces
+   is "a compressed representation needs a crossover policy": it needs one **per structure**, and
+   the answer can be "no crossover; the ceiling decides", which is a measurement and not an
+   omission. *Nothing about this item is open.*
+
+4. **Settled the hard way, and it is a warning about testing a hash: the multiply-shift hash is
+   close to injective on the key ranges every natural cohort uses, so the key-column comparison the
+   sparse bucket needs is almost never exercised.** Two designed collision tests passed with the
+   comparison deleted — one with 8,128 rows in 8,192 slots and sixteen constant-keyed probes across
+   128 values each. The reason is structural: for keys below `domain²` with a table of at least the
+   row count, the product's high bits are very nearly a bijection, and in particular two tuples that
+   share a column never collided in any configuration searched (four domains × four table sizes,
+   exhaustively). The test that does discriminate forces the table to **one slot**, by preparing the
+   plan with a row bound of one. *Nothing about this item is open, but the lesson is recorded: a
+   collision test that hopes for a collision is not a test.*
+
+5. **Settled: the direct path got faster, and by five times what the Fermi priced.** Prediction 3
+   said 0 to 2 per cent from hoisting the run-constant branch out of the delta loop; the measurement
+   is 1.8 to 9.3 per cent, ordered exactly as the mechanism predicts — largest where the bucket walk
+   is longest (dense closure, 33.6 M candidates against 328 K probes, 9.3 per cent) and smallest
+   where a step yields about one row per probe (same generation sparse, 1.8 per cent). The Fermi
+   priced the removed *test* and not what monomorphizing the bucket walk does to the whole loop
+   body. *Nothing about this item is open.*
+
+6. **Open: the sparse membership test is 1.20 to 1.26 times the instructions at every density, and
+   the instruction count should not depend on the density at all.** A probe is a hash, a load and a
+   tuple comparison whatever the table's size, so the *instruction* ratio ought to be flat and it
+   is — but it is flat at 1.20 to 1.26 while the *cycle* ratio swings from 1.31 to 2.10 over the same
+   rows. The cycle swing is explained (the `fill(NONE)` scales with the table). What is not measured
+   is the instruction-level decomposition of the flat 20 to 26 per cent: how much is the hash, how
+   much the chain walk's extra loads, and how much the tuple comparison. *Evidence gap*: a
+   class-decomposition in the playbook's sizing shape — per-unit instruction costs of a probe under
+   each kind from single-class synthetic inputs, checked against a census of the cohort's probes.
+   Nobody has done it, and it would say whether a sparse membership test could be made competitive
+   or is structurally 20 per cent behind.
+
+7. **Open, inherited and now with a second cause: nothing bounds a layer's memory, and the
+   reservation is eager.** `columns3` at a dictionary of 483 is 3.14 GB. C1191 recorded the eager
+   row reservation; this task adds that every sparse table is also sized from the caller's row bound
+   and is *touched* before every evaluation, so an over-declared bound costs time as well as address
+   space — measured at 1.35 against 2.05 on one program. *Evidence gap*: unchanged from C1191, a
+   measured bytes-per-materialized-tuple figure and a decision about whether the layer bound should
+   be expressed in bytes; and now also whether a workspace should size its tables from the previous
+   evaluation's row count.
+
+8. **Open and small: the C1188 cycle win is much larger than its instruction win** — 0.71 cycles
+   against 0.89 instructions on dense closure — which says the removed call was costing a stall and
+   not only instructions. The obvious candidate is the call/return pair sitting between a load of the
+   row store and the dependent branch, but no cache-event run was taken. *Evidence gap*: the
+   supplementary counter run (`cache-references,cache-misses,L1-dcache-loads,
+   L1-dcache-load-misses`) with its own null, which this task did not run for any arm.
+
+No discovery-track entry: everything found was inside what the task was looking for, with one
+exception already folded into item 4 above rather than logged, because it is a property of this
+evaluator's own hash and not an incidental observation about anything else.
