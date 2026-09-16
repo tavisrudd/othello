@@ -307,22 +307,28 @@ and forces one structure's kind at a time.
 
 ### The direct path, where it is still selected
 
-Control `closure_ballpark-e0e7331` against candidate `closure_ballpark-1dfc6ed`, five interleaved
+Control `closure_ballpark-e0e7331` against candidate `closure_ballpark-d2b1940`, five interleaved
 rounds, CPU 5, repeat counts 3 and 6 with two-point differencing, the six-event set at **100.00 per
-cent enabled on every event over 180 measurements**, load 2.47 to 3.38. Receipt
+cent enabled on every event over 180 measurements**, load 2.84 to 4.84. Receipt
 `analysis/datalog-comparison/ab-2026-09-16-c1192-direct.json` with its raw sidecar. On every one of
 these cohorts the candidate's plan selects the **direct** kind for every join index and a
 **bitmap** for every membership test, which the receipt records per cohort — so this is the direct
 path compared with itself across the change, not a representation comparison.
 
-| Cohort | derived | instructions per evaluation, control | candidate | instruction ratio [lo, hi] | A/A null | cycles | branches | peak RSS, control / candidate KiB |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `closure` sparse 256 | 62,979 | 45.25 M | 43.11 M | **0.95274** [0.95272, 0.95276] | 1.0000013 | 1.0187 | 1.0402 | 18,652 / 18,692 |
-| `closure` sparse 1024 | 979,983 | 703.1 M | 669.7 M | **0.95251** [0.95251, 0.95252] | 0.9999994 | 1.0272 | 1.0402 | 239,924 / 237,904 |
-| `closure` dense 256 | 65,536 | 636.8 M | 578.5 M | **0.90848** [0.90847, 0.90848] | 1.0000021 | 0.9448 | 1.0359 | 23,888 / 23,976 |
-| `closure` dense 512 | 262,144 | 5.013 G | 4.545 G | **0.90665** [0.90665, 0.90665] | 1.0000000 | 0.9321 | 1.0358 | 89,284 / 88,124 |
-| `samegen` sparse 1024 | 258,691 | 109.8 M | 107.8 M | **0.98200** [0.98200, 0.98201] | 1.0000027 | 1.0254 | 1.0213 | 123,696 / 123,788 |
-| `samegen` dense 512 | 507,425 | 284.5 M | 273.6 M | **0.96163** [0.96162, 0.96163] | 1.0000002 | 0.9930 | 1.0166 | 112,216 / 111,352 |
+| Cohort | derived | instruction ratio [lo, hi] | A/A null | cycle ratio [lo, hi] | cycle null | in-process evaluation, candidate / control | peak RSS, control / candidate KiB |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `closure` sparse 256 | 62,979 | **0.95274** [0.95272, 0.95276] | 0.9999964 | 1.0247 [0.9983, 1.0517] | 1.0275 | 2.958 / 2.966 ms | 18,684 / 18,688 |
+| `closure` sparse 1024 | 979,983 | **0.95251** [0.95251, 0.95251] | 1.0000007 | 1.0053 [0.9442, 1.0703] | 1.0132 | 46.12 / 46.13 ms | 239,920 / 237,904 |
+| `closure` dense 256 | 65,536 | **0.90848** [0.90848, 0.90849] | 1.0000013 | 0.9375 [0.9261, 0.9490] | 0.9947 | 29.93 / 31.80 ms | 23,888 / 23,976 |
+| `closure` dense 512 | 262,144 | **0.90665** [0.90665, 0.90665] | 1.0000002 | 0.9366 [0.9289, 0.9444] | 1.0031 | 229.9 / 245.7 ms | 89,284 / 88,124 |
+| `samegen` sparse 1024 | 258,691 | **0.98201** [0.98200, 0.98201] | 0.9999973 | 0.9886 [0.9079, 1.0766] | 0.9869 | 6.54 / 6.40 ms | 123,696 / 123,788 |
+| `samegen` dense 512 | 507,425 | **0.96163** [0.96162, 0.96163] | 1.0000017 | 0.9770 [0.9111, 1.0477] | 0.9846 | 19.44 / 19.27 ms | 112,216 / 111,352 |
+
+Per-evaluation instruction counts behind those ratios, control against candidate: 45.25 M / 43.11 M,
+703.1 M / 669.7 M, 636.8 M / 578.5 M, 5.013 G / 4.545 G, 109.8 M / 107.8 M, 284.5 M / 273.6 M.
+Branches are up 1.7 to 4.0 per cent on every cohort while instructions are down; branch misses are
+unchanged to within their own nulls (0.987 to 1.007 against nulls of 0.996 to 1.013), so the extra
+branches are predicted ones.
 
 **The direct path did not merely hold; it is between 1.8 and 9.3 per cent cheaper in instructions**,
 on every cohort, with A/A nulls inside three parts per million and paired intervals narrower than a
@@ -336,21 +342,15 @@ against 328 K probes, is 9.3 per cent — and smallest where a step yields about
 same generation sparse, 261 K candidates against 261 K probes, is 1.8 per cent. That ordering is the
 check on the mechanism.
 
-**Branches are up 2 to 4 per cent on every cohort while instructions are down.** Not a defect and
-worth stating: the removed per-row test was a comparison whose result fed a branch the compiler had
-already hoisted into a *predicated* form; what replaced it is a shorter loop body with a slightly
-higher branch density. Branch misses are unchanged to within their own noise (0.987 to 1.007, with
-nulls at 0.996 to 1.013), so the extra branches are predicted.
-
-**Cycles do not follow instructions on sparse closure**, 1.019 and 1.027 against instruction ratios
-of 0.953, while on dense closure they agree in direction and beat them (0.945 and 0.932). The cycle
-intervals are wide (the sparse-closure interval spans 0.963 to 1.096) and the cycle A/A nulls are
-1.012 and 1.010, an order of magnitude looser than the instruction nulls, so on a loaded box the
-sparse-closure cycle figure is not separated from unity. What can be said with the counters this run
-carries: instructions fell everywhere, branch misses did not move, and peak resident set is within
-1 per cent on every cohort. The in-process evaluation medians agree with the cycle picture — dense
-closure 230.7 ms against 245.8 ms, sparse closure 46.2 ms against 46.1 ms — so the wall win is on the
-cohorts where the bucket walk dominates and the rest is a wash.
+**Cycles follow instructions where the effect is large and are a wash where it is small.** Dense
+closure is 0.937 and 0.937 with intervals that exclude unity; the other four sit between 0.977 and
+1.025 with cycle A/A nulls of 0.985 to 1.028, so they are not separated from unity and are read as a
+wash. The in-process evaluation medians say the same: dense closure 229.9 ms against 245.7 ms and
+29.93 against 31.80 ms, everything else within a few per cent either way. **An earlier run of this
+same A/B, at the revision before the policy constants were set, reported the sparse-closure cycle
+ratio as 1.019 and 1.027 with cycle nulls of 1.012 and 1.010**; the instruction ratios reproduced to
+five decimal places and the cycle figures did not, which is the load on a shared box and is why this
+lane reads instructions. Both runs are in the sidecar history of the receipt path.
 
 ### The frontend and the stratified backend
 
