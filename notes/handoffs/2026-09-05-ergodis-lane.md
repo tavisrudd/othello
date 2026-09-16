@@ -8,7 +8,7 @@ correction trails live in dated reports and the append-only
 
 **Date**: 2026-09-16
 **Mode**: intent-based.
-**Status**: ACTIVE. Immediate engineering frontier is C1190 (Rel lowering; milestones a, b, per-column domains, c and the C1191 direct constructor done and audited; next step needs allocation; C1170 frontend and C1189 oracle closed); the
+**Status**: ACTIVE. Immediate engineering frontier is C1190 (Rel lowering; milestones a, b, per-column domains, c and the C1191 direct constructor done and audited; successors C1192–C1196 queued, C1192 in progress; C1170 frontend closed 2026-09-16 with C1197 queued later; C1189 oracle closed); the
 rule-contract programme C1172–C1177 and the Datalog evaluation tasks C1179/C1182–C1186 are closed. C1143, C1130, C1016,
 C1017, C1061 and C985 remain in progress. C1062 and C1070 await Tavis's close call.
 
@@ -38,7 +38,7 @@ restate its binding items in every sub-agent prompt.
 
 ## Immediate frontiers
 
-### C1170 — owned Rel-rich frontend (in progress)
+### C1170 — owned Rel-rich frontend (closed 2026-09-16; micro-optimization queued as C1197)
 
 Contract: `../2026-09-12-c1170-owned-rel-frontend.md`; source study:
 `../2026-09-12-c1169-datalog-frontends.md`; measurements, cost model and bounded recovery:
@@ -181,10 +181,10 @@ contract. Note for the lowering work: at the admission stage the two shadowing d
 body parameter and a module parameter are observationally identical, so that fixture cannot exist
 until lowering distinguishes them.
 
-**Next (Tavis, 2026-09-14): end-to-end features, not micro-optimization.** The remaining priced
-candidates (the `Apply`-site spills, the hash loop's bounds check, `same()`'s bounds checks, the
-pop's field loads, pricing `is_builtin`, the `insert` shadow walk) are listed in the inline and
-module-scope reports for a later resumption and are not queued. The syntax-gap report adds one
+**Next (Tavis, 2026-09-14): end-to-end features, not micro-optimization.** C1170 was closed on
+2026-09-16; the remaining priced candidates (the `Apply`-site spills, the hash loop's bounds check,
+`same()`'s bounds checks, the pop's field loads, pricing `is_builtin`, the `insert` shadow walk) are
+queued as **C1197** (`../2026-09-16-c1197-frontend-micro-optimization.md`, later). The syntax-gap report adds one
 larger untaken lever: a feature-presence prepass that monomorphizes the scanner on the lexical
 features a source actually contains, so sources without interpolation pay no per-token guard. Not
 built, not queued. Feature order now: lowering of admitted programs into Ergodis rules end to end,

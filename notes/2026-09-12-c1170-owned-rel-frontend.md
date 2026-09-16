@@ -2,8 +2,10 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-12
-**Status**: IN PROGRESS. Two-hour continuation began 2026-09-13 05:24:50 UTC;
-target stop 07:24:50 UTC.
+**Status**: CLOSED 2026-09-16 (Tavis). Frontend delivered and measured; micro-optimization
+paused, its priced candidates queued as C1197 (`2026-09-16-c1197-frontend-micro-optimization.md`).
+Successors: C1189 reference evaluator, C1190 lowering. Dated reports: `2026-09-13-c1170-*` and
+`2026-09-14-c1170-*`; lane handoff carries the current control.
 
 Establish a versioned syntax/admission coverage contract with at least the
 expressive richness of Rel, then implement a bounded owned lexer/parser and

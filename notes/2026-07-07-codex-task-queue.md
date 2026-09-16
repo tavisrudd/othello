@@ -217,7 +217,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 
 
-- **C1170 `[ergodis]` [IN PROGRESS]** — Rel-rich owned frontend contract and parser/diagnostic performance prototype; Ergodis backend/rules handling → `notes/2026-09-12-c1170-owned-rel-frontend.md`
+- **C1197 `[ergodis]` [QUEUED — LATER; C1170 FOLLOW-UP]** — Rel frontend micro-optimization candidates priced in the C1170 reports (insert shadow walk, Apply-site spills, bounds checks, scanner feature prepass, shadowed-spelling corpus) → `notes/2026-09-16-c1197-frontend-micro-optimization.md`
 - **C1156 `[ergodis]` [QUEUED]** — Evolve slice (C1151 rows 10, 13, Aksu cost rule): learned proposal scorer (linear or tree model) and sliding-window UCB operator selection, Markov-category discipline on proposal sampling, one-sided screen cost rule; gate = counted drop in wasted proposals at matched budget, no evidence claim touched → `notes/2026-09-12-c1151-category-theory-capability-pass.md`.
 - **C1157 `[ergodis]` [QUEUED — C1152/C1154 PREDECESSORS CLOSED]** — equality-saturation spike (C1151 row 9): egg-style e-graph over plan terms with cost-driven extraction and preservation analysis; matched plan cost versus current simplifier and invalid-merge rejection gates; coordinate generalization with C1180 without duplicating its lift/lower scope → `notes/2026-09-12-c1151-category-theory-capability-pass.md`.
 - **C1180 `[ergodis]` [QUEUED]** — investigate categorical lift–fold–lower and general equivalent-representation recognition, checked semantic transport/reuse and continuing Evolve; include C1139 AME frames as a candidate behind a real-workload gate; capability/code study and architecture memo → `notes/2026-09-13-c1180-c1181-categorical-structure-folding.md`.

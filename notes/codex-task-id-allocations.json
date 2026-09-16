@@ -5183,8 +5183,17 @@
       "last": 1196,
       "purpose": "Datalog programme next steps: sparse join index, n-ary bodies, min-plus lowering, end-to-end benchmark suite, certificate encoding",
       "sequence": 576
+    },
+    {
+      "count": 1,
+      "first": 1197,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1197,
+      "purpose": "C1170 follow-up: frontend micro-optimization candidates priced in the C1170 reports",
+      "sequence": 577
     }
   ],
-  "next_id": 1197,
+  "next_id": 1198,
   "schema": "codex-task-id-allocations-v1"
 }
