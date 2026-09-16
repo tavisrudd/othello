@@ -431,3 +431,40 @@ of 2^24, because every sparse table is sized from the capacity rather than from 
 every witness column is reserved eagerly. That is the same eager-reservation effect C1191 recorded
 as its remaining gap 4, seen from the other side: it is now the dominant term in peak memory on a
 cohort whose relation is small.
+
+### Reach: the C1191 boundary cohorts
+
+Bisection over the committed `rel-lower` tool on committed cohorts, with the flags C1191's own
+boundary table used (`--max-rows 16777216 --values 262144`), so the two tables are comparable line
+for line. Each row is the largest `--definitions` that completes the whole chain — both independent
+checkers included — and the first that is refused, with the bound that refuses it and its numbers.
+`--definitions` is the dictionary on `stratified`, half of it on `columns`, a third on `columns3`,
+and the key set on `aggregate`.
+
+| Cohort | C1191: largest dictionary, and the bound | C1192: largest dictionary | Factor | Materialized there | Peak RSS | First refused, and the bound |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| `stratified` | 2,047 — `MAX_LAYER_TUPLES` | 2,047 | ×1 | 4,187,141 complement | 1.39 GB | 2,048: `MAX_LAYER_TUPLES`, 4,197,376 against 4,194,304 |
+| `columns` | 4,092 — `MAX_LAYER_TUPLES` | 4,092 | ×1 | 4,183,050 complement | 2.72 GB | 4,094: `MAX_LAYER_TUPLES`, 4,195,326 against 4,194,304 |
+| `columns3` | 255 — **`MAX_INDEX_KEYS`** | **483** | **×1.89** | 4,173,200 complement | 3.14 GB | 486: `MAX_COMPLEMENT`, 4,251,528 against 4,194,304 |
+| `aggregate` | 4,096, key set 1,412 — **`MAX_INDEX_KEYS`** | **5,934, key set 2,046** | **×1.45** | 2,092,035 filter | 2.31 GB | key set 2,047: `MAX_LAYER_TUPLES`, 4,196,350 against 4,194,304 |
+
+**Nothing on this route is stopped by an addressing bound any more.** Before this task, two of the
+four cohorts were: `columns3` and `aggregate` stopped at `domain^arity` against 2^24, which is a
+property of arity and dictionary size and not of what the program computes. All four are now stopped
+by a budget the route declares for itself — how many tuples one layer may materialize, or how many
+complement facts one negated literal may have — and both numbers are about materialization. That is
+the shape C1191's closeout asked for and could not reach.
+
+**The `stratified` and `columns` boundaries are unchanged to the definition**, which is the control
+this table needs: the two cohorts that were already stopped by `MAX_LAYER_TUPLES` did not move, and
+their peak resident sets reproduce C1191's 1.39 GB and 2.73 GB.
+
+**A second bound was behind the addressing one on `columns3`, and it is not the one C1191 expected.**
+That cohort's negated relation has arity three with each column a third of the dictionary, so its
+complement is `(d/3)³`; the refusal at a dictionary of 486 is `MAX_COMPLEMENT` at 4,251,528 against
+4,194,304, exactly `162³`. The backend's own check was also the conservative one of the two: it
+compared `dictionary^arity` for every indexed relation, while the evaluator indexes on
+`domain^popcount(mask)`, which for a join with a free column is smaller by a factor of the
+dictionary. On `columns3` that is 258³ against 258², so **part of this cohort's ×1.89 is the removal
+of a mirror that was stricter than the thing it mirrored**, and the report says so rather than
+crediting it all to the sparse index.
