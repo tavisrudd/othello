@@ -829,6 +829,35 @@ nix develop ~/src/ergodis --command python3 $B/bench.py \
     --out $B/performance-v5-harness-3778763.json
 ```
 
+## Vibe check
+
+Good, and the number is larger than the lever was priced at. The encoding that decided this route's
+reach is gone: a layer used to be capped at about 22,000 materialized facts because that is a
+mebibyte of JSON, and it is now capped at 4,194,304 because that is what this route declares a layer
+may hold. At arity two the dictionary goes from 153 to 2,047, which is ×13.4 against a Fermi of
+"roughly 10×". The backend stage is halved in instructions, halved in wall time and about a quarter
+smaller in peak resident set on the negation cohorts, and the profile says where it went: every
+serde symbol, the whole of `datalog::admit`, the hash table inside it and the allocator's
+consolidation work are simply absent, because the old route encoded each layer's program four times
+and the new one encodes it once. The closure digests are identical across arms on all four cohorts
+and the parity hash did not move.
+
+The more interesting half is that the route is now stopped by three different bounds on four cohorts
+and only one of them is about materialization — two are the demand evaluator's `domain^arity`
+addressing, which is a property of arity and dictionary size rather than of any construct. That
+retires milestone (c)'s "product or reduction" rule of thumb and replaces it with a question about
+arity, and it makes the per-column milestone's narrowing suddenly relevant again in a place nobody
+had looked: the addressing check uses the declared dictionary, not the per-column domains.
+
+Two blemishes stated plainly. The `datalog` cohort's repeated-loop wall time is up 20 per cent while
+its instructions are down, and the cause is 25,000 extra minor faults per iteration from the
+allocator returning pages the old route's surviving `Fact` allocations used to pin — it vanishes with
+the trim threshold pinned and does not appear in a single invocation, but it is a measured wall-time
+loss and it is in the disposition rather than in a footnote. And the differential found zero
+disagreements on the first run of every corpus, which for this change is weak evidence by
+construction; the three deliberate mutations are what carries the claim, and the sharpest of them
+shows that an identity defect is invisible to every corpus this lane has.
+
 ## What this task left under `~/.cache/ergodis/`
 
 `bin/ergodis-tools-3778763` and `bin/ergodis-tools-8191ab7`, each with its `.sha256` sidecar and its
@@ -840,7 +869,14 @@ logs and the parity replay's receipt, none of which anything cites — the parit
 is reproduced by the committed `analysis/rel-frontend/portability-v1.json` and by the replay command,
 and the A/B figures by the committed receipts. Under `perf-c1191/`: the kernel-scoped profiles.
 `target/ergodis-private` and `target/ergodis` are the two shared build trees, which are not this
-task's to remove. Deletion is the user's call.
+task's to remove.
+
+`../ergodis-dev/scripts/cache-gc.sh` was run in its listing mode and nothing was deleted. It scanned
+41 entries and showed eight as unreferenced and old enough to remove, of which none belongs to this
+task: the largest are `datalog-comparison` at 281 MB, `module-loading` at 124 MB and `worktrees` at
+105 MB, all from other lanes. This task's `perf-c1191` (423 KB) and `c1191` (49 KB) are held as
+younger than two days, and both retained binaries are named by this report, so the listing shows them
+as referenced. Deletion is the user's call.
 
 ## `ej`/`tt` closeout
 
@@ -910,6 +946,26 @@ a core change**, because the index is the core's.
 - The two repairs of the per-column audit's four that remain: a record shape naming the rule a
   complement came from, and sizing the `BindSite` pool to the terms that occur in bodies.
 
+## The control for the next A/B
+
+`~/.cache/ergodis/bin/ergodis-tools-8191ab7`, measured sha256
+`efbb5987e56edfe95c439ed5d3bc12e1a86a9f9a7a76d83193848b213b7a7ca1`, retained from a clean tree at
+`ergodis-private` `8191ab7` with core `2517852` under rustc 1.95.0. The commits after it in either
+repository add receipts and this report and change no code, so the binary at the tip is the binary
+that was measured.
+
 ## Next steps
 
-(to be filled)
+1. **The independent read-only audit** the task card asks for, as
+   `notes/2026-09-16-c1191-direct-constructor-audit.md`. It is the one acceptance item this report
+   does not contain, and it cannot be: an audit written by the author of the change is not the thing
+   the card asks for. What it should reproduce first, in order of how much rests on it: the boundary
+   bisection on all four cohorts in both configurations, the closure digests across arms in the four
+   receipts, the three deliberate mutations, and the identity's independence from the supplied tuple
+   order.
+2. **Per-column domains in the addressing bound.** `MAX_INDEX_KEYS` now decides the reach on two of
+   the four cohorts, and the close pass checks `dictionary^arity` while the complement is built over
+   `∏ᵢ |Dᵢ|`. Narrowing the addressing check to the domains a relation's columns actually range over
+   is where the per-column milestone's work and this one would compound, and it is a core change.
+3. **A memory model for a layer**, and the decision about whether `MAX_LAYER_TUPLES` should be a byte
+   bound; mystery ledger item 4.
