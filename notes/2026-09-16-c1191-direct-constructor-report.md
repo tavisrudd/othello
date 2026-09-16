@@ -413,6 +413,48 @@ should measure. That is also the check that the new stage is a real stage rather
 cohort that reaches the backend it is millions of instructions, and on a cohort that does not it is
 three.
 
+### The A/B: the backend stage on the cohorts that reach it
+
+The composed figure is `stratify` minus `lower`: the backend boundary, the evaluation of every layer,
+its derivation certificate and both of the core's independent checkers. `datalog` runs at 512
+definitions and the rest at 128, which is where both arms complete.
+
+| Cohort | Stage instructions, candidate | control | ratio | cycles | wall p50 | peak RSS |
+| ------------ | --------------: | --------------: | ------: | ------: | ------: | ------: |
+| `datalog`    | 1,680,329,956 | 1,690,474,760 | 0.99400 | 0.96864 | 120.4 ms / 100.2 ms = **1.20** | 127,240 / 127,592 KiB |
+| `stratified` |   168,175,532 |   323,491,619 | **0.51988** | 0.47000 | 10.29 ms / 19.88 ms = **0.518** | 11,420 / 15,960 KiB (**−28 %**) |
+
+**`scan`, `parse`, `admit` and `lower` are unity on both cohorts** — the largest departure is
+thirteen parts per million on `datalog`'s scanner — so the front end did not move, and the A/A
+instruction nulls are 1.0000118 on `datalog` and 1.0000013 on `stratified`. Counter enabled fraction
+100.00 per cent on every event; load 2.08 to 2.20.
+
+**The closure SHA-256 is identical across arms on every cohort**: `5c455ad4…ab8101a` on `datalog`
+and `dffdcd35…e896c6fb` on `stratified`, over every relation's certified rows. That is the exactness
+evidence the receipts carry themselves, beside the differential.
+
+**On the negation cohort the backend is halved**, in instructions, in cycles and in wall time, and
+its peak resident set falls by 28 per cent. That is far more than the per-fact Fermi predicted, and
+the reason is a mechanism the Fermi did not have: **the old route encoded each layer's program four
+times.** The driver serialized it for the byte check; `Demand::new`'s admission serialized it again
+and hashed it for the source identity; and each of the two independent checkers admitted the program
+for itself, serializing and hashing it a third and a fourth time. The prepared route encodes once,
+into a binary canonical form over tuples rather than JSON over names, and both checkers read the
+admitted source. On `stratified` the control's three layers serialize to 748,012 bytes and the
+candidate's tuple payload is 33,281 values.
+
+**`datalog` is the instructive one, and it is a loss in wall time while being a win in
+instructions.** Its layer holds 512 facts and its evaluation derives 135,926 tuples, so the boundary
+is a small part of the stage and the instruction saving is 10.1 million on 1.68 billion, −0.6 per
+cent. But its wall time is up 20 per cent, and the counter that explains it is the fault count:
+**30,162 minor faults per iteration on the candidate against 4,971 on the control**, which at a few
+hundred nanoseconds each is the whole of the 20 milliseconds. `perf_event_paranoid` is 2 on this
+host, so perf counts user-mode events only and that cost is invisible in the instruction ratio — the
+playbook's rule that a stage whose cost is kernel time is read from its faults and its wall time,
+caught in the act. Peak resident set is the same on both arms, 127 MB, so nothing is using more
+memory; pages are being returned to the kernel between iterations and faulted back in. The mechanism
+and what it means for a real invocation are in the disposition below.
+
 ### Exactness
 
 | Gate | Outcome |
