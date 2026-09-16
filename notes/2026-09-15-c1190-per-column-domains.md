@@ -2,8 +2,12 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-15
-**Status**: IN PROGRESS. Written incrementally from the start of the task, so a crash leaves a
+**Status**: COMPLETE. Written incrementally from the start of the task, so a crash would have left a
 partial record rather than none.
+
+**Commits**: private `ergodis-private` `3895dbc` … `3c0992f` (ten commits from `73dd56b`). The
+measured candidate is `606136e`; the three commits after it change the parity corpus, the cohort doc
+comments and the receipts, and none of them changes a measured stage.
 
 Task card: `2026-09-15-c1190-rel-lowering.md`. Adopted design:
 `2026-09-15-c1190-lowering-architecture.md`, the "Per-column domains" bullet. Decision record:
@@ -23,8 +27,8 @@ canonical JSON per complement fact; the layer program's serialization crossing t
 new cohorts this task adds.
 
 The new cohort `columns` mirrors `stratified` exactly except that its negated binary relation's two
-columns range over disjoint value sets: `dom` holds `N` integers and `tag` holds `N` entity
-references, so the value dictionary is `2N` entries and each column of `e` occupies half of it. The
+columns range over disjoint value sets: `dom` holds `N` integers and `tag` holds `N` symbols,
+so the value dictionary is `2N` entries and each column of `e` occupies half of it. The
 new cohort `columns3` does the same at arity three with three disjoint sets of `N`, so each column
 occupies a third of a dictionary of `3N`.
 
@@ -223,10 +227,20 @@ and the fixture `an_empty_column_domain_gives_an_empty_complement` is the case.
 - **The column type's dense sub-range is recorded per complement column and is deliberately *not*
   used to narrow `Dᵢ`.** The task this milestone was given named the intersection with the type
   sub-range as part of the construction, and it is not exact. A variable can be bound to a value
-  whose type differs from the negated column's: in the parity corpus's fourth new case,
-  `def k = {:x}` gives `k`'s only column the entity type, while `not k(b)` is reached with `b` bound
-  by a relation of integers. The negated atom `k(1)` is false, so the complement must hold the tuple
-  `(1)`, and intersecting `Dᵢ` with the entity sub-range would drop it and lose the derivation. The
+  whose type differs from the negated column's, and the parity corpus's fourth new case is the
+  worked counterexample:
+
+  ```text
+  def w = {"a"; ^E1}
+  def n = {1; 2}
+  def k = {^E2}
+  def mix(a, b) = w(a) and n(b) and not k(b)
+  ```
+
+  `k`'s only column is entity-typed, so its recorded type sub-range is `[3, 5)` — the two entity
+  references — while its domain is `{0, 1}`, the two integers `n`'s column holds. `k(1)` is false,
+  so the complement must hold `(1)`, and `mix` derives all four tuples. Intersecting with the type
+  sub-range would empty the domain and derive nothing. The
   sub-ranges are therefore infrastructure — for the typed readout, for milestone (c)'s aggregates
   over integers, and as the recorded bound a reader checks `Dᵢ` against — and the construction takes
   the union alone. This is the one place this task deviates from its instructions, and it is
@@ -253,7 +267,8 @@ and the fixture `an_empty_column_domain_gives_an_empty_complement` is the case.
    binding columns "intersected with the column type's sub-range". That intersection is not exact,
    and the counterexample is a two-line program: `def k = {:x}` gives `k`'s column the entity type,
    and `def mix(a, b) = w(a) and n(b) and not k(b)` reaches `not k(b)` with `b` bound to an integer.
-   `k(1)` is false, so the complement must contain `(1)`, and the intersection would drop it. The
+   `k(1)` is false, so the complement must contain `(1)`, and the intersection would drop it and
+   derive nothing where the rule derives four tuples. The
    dictionary ordering and the per-type dense ranges were built as the brief asked, are carried
    through the passes, are in the canonical bytes and are recorded per complement column; they are
    simply not used as a filter. Reported here rather than applied quietly, because exactness comes
@@ -428,11 +443,98 @@ with their intervals. Receipts, all under `analysis/rel-frontend/`:
 that cohort, which milestone (b) could not run) and `…-cohort-606136e.json` (`columns`,
 candidate-only). The first candidate's four are the same names with `v1` and `ef358f8`.
 
+**A/A instruction nulls**, per cohort: 0.9999992, 1.0000001, 0.9999952, 0.9999958 and 0.9999994 on
+the five default cohorts, 0.9999912 on `datalog`, 1.0000012 on `stratified` and 1.0000003 on
+`columns`. All within nine parts per million of unity, so the protocol carries its own noise floor
+and a tenth of a per cent is readable.
+
+**Cohort freeze.** The harness's fingerprint gate was armed on every measured operation and reported
+no difference on any cohort or variant. The `datalog` cohort's *lowered program* is bit-identical
+across arms; its canonical fingerprint moved from `aa9451450b65b83e` to a new value on both arms,
+because the canonical form gained the dictionary's per-type ranges, and the point of the check —
+that both arms lower the same program — holds.
+
 ### Scan, parse and admission did not move
 
-_(stage tables pending the final interleaved run; the first candidate's receipts already show every
-`scan`, `parse` and `admit` ratio at 1.000000 within thirteen parts per million on every cohort and
-both variants, with A/A instruction nulls between 1.000000 and 1.000011.)_
+| Cohort            | `scan` byte | `parse` byte | `admit` byte | `scan` scalar | `parse` scalar | `admit` scalar |
+| ----------------- | ----------: | -----------: | -----------: | ------------: | -------------: | -------------: |
+| `ascii`           |    0.999999 |     1.000001 |     1.000001 |      1.000000 |       1.000000 |       1.000001 |
+| `unicode`         |    1.000000 |     1.000000 |     1.000001 |      1.000000 |       1.000000 |       1.000000 |
+| `comment-string`  |    1.000004 |     1.000005 |     1.000012 |      1.000003 |       1.000004 |       1.000005 |
+| `malformed-early` |    1.000001 |     1.000000 |     0.999995 |      1.000000 |       1.000000 |       1.000000 |
+| `malformed-late`  |    1.000002 |     1.000001 |     1.000000 |      1.000000 |       1.000000 |       1.000000 |
+| `datalog`         |    1.000015 |     1.000003 |     1.000000 |      0.999998 |       1.000001 |       1.000000 |
+| `stratified`      |    0.999988 |     1.000002 |     0.999999 |      0.999997 |       1.000000 |       0.999999 |
+
+Every ratio is candidate over control, instructions. The largest is fifteen parts per million on the
+`datalog` byte scanner, which is at the level of the nulls. **Parse and admission are 1.000000.**
+
+### The lowering stage, which is what this change costs
+
+The composed figure is `lower` minus `admit`, the lowering stage on its own: the two share every
+earlier boundary, so code the workspace's layout shifts in both is differenced away. Both candidates
+are shown, because the difference between them is the measurement that chose the three placements.
+
+| Cohort            | first candidate | candidate | control (instructions) | candidate ratio |
+| ----------------- | --------------: | --------: | ---------------------: | --------------: |
+| `ascii`           |         1.03445 |   1.03442 |                  6,074 |         1.03442 |
+| `unicode`         |         1.03224 |   1.03330 |                  6,091 |         1.03330 |
+| `comment-string`  |         1.05444 |   1.02811 |              1,832,782 |         1.02811 |
+| `datalog`         |         1.08818 |   1.04536 |              1,309,369 |         1.04536 |
+| `stratified`      |         1.04844 |   1.02337 |              2,217,375 |         1.02337 |
+| `malformed-early` |    not readable | not readable |                    −3 |    not readable |
+| `malformed-late`  |    not readable | not readable |                     0 |    not readable |
+
+**Four readings.**
+
+- **This change makes the lowering stage more expensive, and the report says so.** On `datalog`, a
+  purely positive source with no complement to build, it is **+4.5 per cent**, 59,392 instructions
+  on 1.31 million; on `stratified`, which carries negation, **+2.3 per cent**. The work is the `bind`
+  pass over every rule's variables, the dictionary's ordering where a program interns more than one
+  typed-literal kind, and the canonical form's extra bytes for a rule that carries negation. It is
+  paid by every program, including one with no negation, and it buys the complement route a factor
+  on its reach.
+- **The three placements halved it.** `datalog` went from +8.8 to +4.5, `stratified` from +4.8 to
+  +2.3 and `comment-string` from +5.4 to +2.8, on code that computes exactly the same thing. That
+  difference is the whole of instructive negatives 3 and 4.
+- **The control reproduces milestone (b) to three instructions.** `stratified`'s control composed
+  figure is 2,217,375 here against the 2,217,378 milestone (b) recorded, on a different day with a
+  different load. The `stratified` cohort is a real A/B for the first time — milestone (b) could only
+  run it candidate-only, because the control predated the cohort.
+- **`ascii` and `unicode` are up 3.4 and 3.3 per cent, and I cannot attribute it.** Both reject
+  inside `declare` at their second definition, so no instruction of this milestone's new code runs on
+  them: they never reach projection, `bind`, the close or the canonical form. The absolute figure is
+  209 instructions on a stage of 6,074. Two mechanisms could produce it and this measurement does not
+  separate them: the `Rir` struct gained four pooled vectors and a type-range table, and `lower`
+  moves that struct out of the workspace and back on every call including a failing one; or thin-LTO
+  layout, which this lane has recorded four times at this magnitude, once on this very cohort at
+  −158 instructions. Reported as unattributed, and the disassembly that would settle it is in the
+  mystery ledger.
+
+### The `columns` cohort: what a lowering with per-column domains costs
+
+Candidate-only, because the control cannot generate the cohort. Receipt
+`analysis/rel-frontend/performance-v2-percolumn-cohort-606136e.json`, five rounds, CPU 5, A/A
+instruction null 1.0000003.
+
+At 512 — which for this cohort is a per-column domain of 512 and so a dictionary of 1,024 — the
+source is 20,977 bytes, 10,587 tokens and 7,870 nodes, and it lowers completely: 10 relations
+(4 inputs, 3 derived, 3 pass-introduced, one of them the universal's witness), 6 rules, 2,303 facts,
+1,024 dictionary values, 8 strata, 2 binarized rules, canonical fingerprint `4e25aa3a9aca2655`.
+
+| Stage   | Instructions |    Cycles |
+| ------- | -----------: | --------: |
+| `scan`  |      717,695 |   101,638 |
+| `parse` |    1,712,643 |   307,950 |
+| `admit` |    2,070,037 |   392,343 |
+| `lower` |    4,860,279 | 1,323,866 |
+
+The lowering stage is **2,790,242 instructions, 133.0 per source byte and 354 per node**, against
+the `stratified` cohort's 2,269,201 on a source of 15,279 bytes. The two are the same shapes over the
+same number of values per column; this one carries twice the dictionary and two typed-literal kinds,
+so it pays the ordering `stratified` skips. **Per-column domains cost the lowering stage a little and
+the backend nothing: the domain-set pass is linear in the closures it reads against a materialization
+that is their product.**
 
 ### The complement series, which is the result
 
@@ -477,11 +579,14 @@ cohort inside the bound at all at its measured boundary.
 `REL0503`, canonical bytes of one layer's program against the core contract's `MAX_BYTES` of
 1,048,576. Each row is the largest count that runs and the first that is refused.
 
-| Cohort        | Arity | Largest dictionary that runs | Complement facts there | First refused | Bytes reported |
-| ------------- | ----: | ---------------------------: | ---------------------: | ------------: | -------------: |
-| `stratified`  |     2 |                      **153** |                 23,182 |           154 |      1,054,530 |
-| `columns`     |     2 |                      **302** |                 22,577 |           304 |      1,049,798 |
-| `columns3`    |     3 |                       **84** |                 21,938 |            87 |      1,142,025 |
+| Cohort        | Arity | Largest dictionary that runs | Complement facts there | Whole-dictionary route would need | First refused | Bytes reported |
+| ------------- | ----: | ---------------------------: | ---------------------: | --------------------------------: | ------------: | -------------: |
+| `stratified`  |     2 |                      **153** |                 23,182 |                            23,409 |           154 |      1,054,530 |
+| `columns`     |     2 |                      **302** |                 22,577 |                            91,204 |           304 |      1,049,798 |
+| `columns3`    |     3 |                       **84** |                 21,938 |                           592,704 |            87 |      1,142,025 |
+
+The fourth column is `dictionary^arity`, which is what milestone (b) would have materialized at the
+same dictionary size: unchanged on `stratified`, 4× on `columns`, **27×** on `columns3`.
 
 **The number that transfers is not the dictionary size.** All three boundaries sit at about
 **22,000 complement facts in one layer**, which is the byte budget divided by the roughly 46 bytes
@@ -505,9 +610,10 @@ tuple.
 ## Parity
 
 The corpus gains four cases, each one where per-column domains change the complement's size:
-disjoint columns over two types, a singleton binding column beside a wide one, a constant argument
-under negation, and three typed-literal kinds in one dictionary — the last being the counterexample
-to narrowing by type sub-range, kept as a case so the reading is gated rather than only argued.
+disjoint columns over two typed-literal kinds, a singleton binding column beside a wide one, a
+constant argument under negation, and three kinds in one dictionary — the last being the worked
+counterexample to narrowing by type sub-range, kept as a case so the reading is gated rather than
+only argued.
 
 The canonical bytes of the lowered program gain the dictionary's per-type dense ranges, and — for a
 rule that carries a negative literal — that rule's binding sites per variable. So the parity gate
@@ -515,10 +621,11 @@ compares the two new structures the backend reads, not a hash of them.
 
 - Before, at milestone (b)'s close: **226 cases, 471,171 canonical bytes**, canonical SHA-256
   `91b007eb67135840cfd1c4f46cddf5671fe460973f4ef19ce08e9c42ff8c384b`.
-- After the code change and before the new cases: **226 cases, 473,349 canonical bytes**. The 2,178
-  bytes are the canonical-form additions across the 31 lowered cases.
-- After the new cases and the three placements: **230 cases, 484,312 canonical bytes**, canonical
-  SHA-256 **`fce84314fd8442d3f28b66ba5b3b6c87d5bec71c3d7491a4e74ecb31f70ac1b0`**, native and WASM
+- After the construction and before the new cases, with the binding sites written for every rule:
+  **226 cases, 473,349 canonical bytes** — 2,178 bytes of canonical-form addition across the 31
+  lowered cases, which is what gating the block on a rule carrying a negative literal then cut back.
+- After the new cases and the three placements: **230 cases, 484,293 canonical bytes**, canonical
+  SHA-256 **`8ae389f46a3076e53618af2ccdcd992dae25f92f56bd6494553ca3d49b856eba`**, native and WASM
   byte-equal.
 
 Of the 230 cases, 86 admit, 35 lower, 51 are rejected by the lowering and 144 never reach it because
@@ -563,7 +670,7 @@ moved: the four new cases are the only change to the counts.
    strided walk of each closure setting one bit in a bitset the whole evaluation shares; the only
    per-column allocation is the extracted value list.
 9. **Native and WASM agree on the lowered program itself**, including the binding sites and the
-   per-type ranges: 230 cases, 484,312 canonical bytes, byte-equal.
+   per-type ranges: 230 cases, 484,293 canonical bytes, byte-equal.
 
 ## Remaining gaps
 
@@ -670,6 +777,55 @@ nix develop ~/src/ergodis --command python3 $B/bench.py \
 
 `ergodis-tools-606136e` is the control the next frontend A/B should use.
 
+## Gates
+
+Run from `~/src/ergodis-private` at `3c0992f`, all under `nix develop ~/src/ergodis` (rustc 1.95.0).
+
+```text
+rel_lowering:              46 passed; 0 failed
+rel_frontend:              28 passed; 0 failed
+rel_frontend_portability:   1 passed; 0 failed
+rel_reference_eval:        17 passed; 0 failed
+cargo clippy -p ergodis-private --lib --tests -- -D warnings:  exit 0, no diagnostics
+cargo clippy -p ergodis-tools --bins -- -D warnings:           exit 0, no diagnostics
+cargo fmt -p ergodis-private -p ergodis-tools -- --check:      exit 0
+rel_closure_oracle.py:     13 fixtures agree with the committed expectations
+portability.py:            230 cases, 484293 canonical bytes, native/WASM exact equality
+```
+
+| Gate                            | Outcome                                                                                                          |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| the four `rel_*` test binaries  | 46, 28, 1 and 17 passed, 0 failed                                                                                |
+| Clippy, both crates             | no diagnostics                                                                                                   |
+| `cargo fmt`                     | clean                                                                                                            |
+| Independent Python oracle       | 13 fixtures agree, five of them carrying negation                                                                |
+| Native/WASM parity replay       | 230 cases, 484,293 canonical bytes, byte-equal, SHA-256 `8ae389f46a…9b856eba`                                    |
+| Allocation regression           | zero allocations over all nine sources, retained bytes unchanged                                                 |
+| Both checkers per layer         | the derivation checker's replay and the ranked checker agree, and each is compared tuple-wise against the rows   |
+| Complement records              | every column's domain recomputed from its provenance, then the product minus the closure rebuilt and digested    |
+| Driver fingerprint gate         | equal tokens, nodes, failure, admission outcome and representation fingerprint on every cohort and both variants |
+| `datalog` cohort freeze         | lowered program bit-identical across arms                                                                        |
+| `stratified` complement freeze  | complement facts and layer-program bytes bit-identical to milestone (b)'s                                        |
+| Stride assertions               | every `#[repr(C)]` record's size and alignment asserted at compile time, `VarBinding` and `BindSite` included    |
+| Both scanner variants           | every source of every corpus lowers to the same canonical fingerprint or the same rejection code                 |
+
+## Commits
+
+All in `~/src/ergodis-private`, forward commits on `main`.
+
+| Commit    | What                                                                                            |
+| --------- | ------------------------------------------------------------------------------------------------- |
+| `3895dbc` | per-column domains for the complement, the `bind` pass, and a dictionary ordered by type        |
+| `62ed58b` | the `columns` and `columns3` cohorts, and the tool prints each column's domain                  |
+| `4328f8e` | three per-column domain shapes in the negation corpus                                           |
+| `ac7f091` | four parity cases where per-column domains change the complement size                           |
+| `ef358f8` | a negation shape whose negated variable is bound only inside its own layer                      |
+| `c61c5e2` | the frontend coverage manifest records per-column domains                                       |
+| `9b1371a` | the dictionary ordering and the binding-site bytes put where they are read                      |
+| `606136e` | the first candidate's four A/B receipts against the `ebecae2` control                           |
+| `9d5bf64` | the parity counterexample uses a real entity; the cohort doc comments say symbols                |
+| `3c0992f` | the candidate's four A/B receipts against the `ebecae2` control                                 |
+
 ## Mystery ledger
 
 1. **Settled: what per-column domains buy, and it is a factor rather than an order.** All three
@@ -693,27 +849,37 @@ nix develop ~/src/ergodis --command python3 $B/bench.py \
    sharing is what keeps the measurement inside the bound.** On both new cohorts two use sites share
    one complement; without sharing, the `columns` cohort at its measured boundary would carry that
    complement's facts twice and exceed the byte budget.
-5. **Open: the lowering stage's cost model does not close.** What I can attribute — the `bind` pass,
+5. **Settled, and it is the largest finding here: the layer program's serialization is 96 per cent
+   overhead.** A complement fact costs about 44 bytes fixed and about 1 byte per value, measured by
+   solving the arity-two and arity-three boundaries, so the tuple is about 4 per cent of what a fact
+   serializes to. The 22,000-fact ceiling is therefore a property of the encoding, not of the
+   complement, and the direct constructor into the demand evaluator's prepared form that ADR 0004
+   names as the removal of the backend's boundary allocation would move it by roughly an order of
+   magnitude. *Nothing about the measurement is open; what is open is whether anyone takes it, and
+   the Fermi is written in the queue candidates below.*
+6. **Open: the lowering stage's cost model does not close.** What I can attribute — the `bind` pass,
    the dictionary ordering with its two remaps, and the canonical form's extra bytes — accounts for
    about 60 per cent of the first candidate's measured regression on the `datalog` cohort. *Evidence
    gap*: a kernel-scoped `perf record -e instructions:u` profile of `lower::run` bucketed by address
    range, in both retained binaries, which is the method the playbook prescribes and which has
    settled this lane's attribution questions before. Not attempted here because nothing in this
    milestone's acceptance depends on the split and because the three placements already removed the
-   part that was pure waste.
-6. **Open: what the same-layer fallback costs, and whether the monotone fixpoint is worth its change
+   part that was pure waste. The same profile would also separate the two mechanisms behind the
+   `ascii` and `unicode` cohorts' unattributed 209 instructions — the enlarged `Rir` move against
+   thin-LTO layout.
+7. **Open: what the same-layer fallback costs, and whether the monotone fixpoint is worth its change
    to the record.** Every column bound only by a relation the layer is still deriving takes the whole
    dictionary. No cohort measures it, because both new cohorts bind through input relations.
    *Evidence gap*: a cohort with a recursive relation binding a negated literal, and the record-shape
    decision in remaining gap 2, which is a design question rather than a measurement.
-7. **Open: whether the intersection over binding sites is worth taking.** Sound and strictly tighter
+8. **Open: whether the intersection over binding sites is worth taking.** Sound and strictly tighter
    than the union. *Evidence gap*: no program in any corpus has a negative-literal variable bound
    twice by columns whose value sets differ, so there is nothing to measure it on yet. Owner:
-   whoever adds the cohort for item 6, which is the same shape of work.
-8. **Open, inherited and unchanged: milestone (a)'s interning cost, the relation-resolution scan and
+   whoever adds the cohort for item 7, which is the same shape of work.
+9. **Open, inherited and unchanged: milestone (a)'s interning cost, the relation-resolution scan and
    the admission repeated-spelling quadratic**, and milestone (b)'s open item 4 — the `datalog`
    cohort's thin-LTO layout swings. Nothing here moved any of them.
-9. **No genuine mystery remains about the semantics.** Every construct outside the fragment is in the
+10. **No genuine mystery remains about the semantics.** Every construct outside the fragment is in the
    Figure 3/4 table or the surface-construct table with its exact outcome, no row moved, and both
    scanner variants decide every row identically.
 
@@ -732,6 +898,32 @@ each column's values *follow from* the relations and columns the record names, a
 grew from four cases to seven. And the `stratified` cohort became a real A/B rather than a
 candidate-only snapshot, because the control can now generate it, which is what turned "the old
 cohort did not move" from a comparison against a report into a comparison against a binary.
+
+**What the `tt` pass found, and it is larger than this milestone.** The three boundaries all sit at
+about 22,000 complement facts, and the per-fact byte cost barely moves with arity: 44.89 bytes at
+arity two on `stratified`, 45.88 at arity two on `columns`, 46.86 at arity three on `columns3`.
+Solving the two arities for a fixed cost and a per-value cost gives **about 44 bytes fixed per
+complement fact and about 1 byte per value** — so a complement fact's *tuple*, the only part of it
+that carries information, is about **4 per cent** of what it serializes to. The other 96 per cent is
+the relation name repeated, the JSON keys `relation`, `tuple` and `cost`, and the punctuation.
+
+That reframes the route's remaining headroom. Per-column domains bought a factor of two or three on
+the dictionary size by shrinking the *number* of facts. **Shrinking what a fact costs to serialize is
+worth an order of magnitude and nobody has taken it**, and it is not a new mechanism: ADR 0004
+already names the direct constructor from the relational IR into the demand evaluator's prepared
+form, which skips the serialized `Program` altogether, as the planned removal of the backend's
+boundary allocation. It removes this bound at the same time, and it is the highest-value next move
+on this route — ahead of the `Negative` atom kind in the core, which is a contract change, and ahead
+of any further narrowing of the domains. One measured detail for whoever owns the contract: every
+complement fact carries `"cost":1` on a Boolean carrier where cost means nothing, which is eight of
+those 44 bytes on its own.
+
+**A second `tt` reading, for whoever writes Rel against this route.** The cost is the product of the
+*non-constant* columns' domains. A negative literal whose arguments are mostly constants — a member
+reference supplying a module parameter, a lookup pinned to one key — is now nearly free whatever its
+arity: the module-member fixture went from 22 complement facts to 1, and the four-column program
+milestone (b) refused at 4,477,456 now builds one tuple. That is a usable rule of thumb and it did
+not exist before this milestone.
 
 **Doors this opens.**
 
@@ -753,12 +945,27 @@ cohort did not move" from a comparison against a report into a comparison agains
 
 **Candidates to queue** (no IDs allocated):
 
+- **The direct constructor from the relational IR into the demand evaluator's prepared form**, which
+  ADR 0004 already names as the removal of the backend's boundary allocation and which the `tt` pass
+  above shows is also worth an order of magnitude on the one bound that decides this route's reach.
+  Fermi, written here so the next task does not have to: a complement fact costs 44 bytes fixed and
+  about 1 per value, of which the tuple is 4 per cent, so a form that carries the tuple and not the
+  name should move the 22,000-fact ceiling by roughly 10×, to a dictionary of about 1,000 at arity
+  two with whole-dictionary columns.
 - Milestone (c): aggregation at layer boundaries, on the driver this milestone leaves.
 - The monotone column-value fixpoint for same-layer binding relations, with the
   `ComplementRecord` shape decision it forces.
 - The intersection over binding sites, with a cohort that has a doubly-bound negated variable.
 - A kernel-scoped profile of `lower::run` in `ergodis-tools-ebecae2` against `ergodis-tools-606136e`,
   bucketed by address range, to close mystery item 5 and milestone (b)'s item 4 at once.
+- **Borrow the workspace's fields instead of moving the relational IR out of it and back.** `lower`
+  does `mem::take` on the node pool and on the whole `Rir` to split the borrows, and `Rir` is now
+  four pooled vectors and a type-range table larger, so a source that rejects in the first pass pays
+  for two moves of a struct it never fills. Destructuring the workspace gives the same disjoint
+  mutable borrows at no cost. Fermi: it should remove most of the 209 unattributed instructions on
+  the `ascii` and `unicode` cohorts and a similar absolute amount everywhere, which is a win on the
+  reject path and noise on `datalog`. Not taken here because it needs its own A/B round and this
+  task already carries two.
 - `exists(x in D: F)` and `not` over a non-application, both through the witness machinery `forall`
   already has, which milestone (b) queued and this milestone did not touch.
 
@@ -783,5 +990,9 @@ arity two with disjoint columns and ×3 at arity three, and the `Negative`-atom 
 still what a program with a dictionary in the thousands needs. The old cohort came back
 bit-identical, which is the result I most wanted and the one that says the construction is a
 narrowing rather than a different reading. One blemish stated plainly: the lowering stage is
-measurably more expensive and my cost model for it accounts for only about 60 per cent of that, so
-the attribution is recorded as open with the profile that would close it rather than claimed.
+measurably more expensive — 4.5 per cent on a purely positive source — and my cost model accounts
+for only about 60 per cent of that, so the attribution is recorded as open with the profile that
+would close it rather than claimed. The best thing the closeout pass turned up is not in this
+milestone at all: 96 per cent of what a complement fact serializes to is its relation name and JSON
+punctuation, so the direct constructor into the evaluator's prepared form that ADR 0004 already
+names is worth about ten times what per-column domains bought, on the same bound.
