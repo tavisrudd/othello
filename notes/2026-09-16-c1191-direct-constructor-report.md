@@ -970,9 +970,10 @@ shows that an identity defect is invisible to every corpus this lane has.
 
 ## What this task left under `~/.cache/ergodis/`
 
-`bin/ergodis-tools-3778763` and `bin/ergodis-tools-8191ab7`, each with its `.sha256` sidecar and its
-`MANIFEST.tsv` row: the harness arm, which is this task's control, and the candidate, which is
-**the control the next backend A/B should use**. Beside them, `ergodis-tools-b7c624d`, which milestone
+`bin/ergodis-tools-3778763`, `bin/ergodis-tools-8191ab7` and `bin/ergodis-tools-e0e7331`, each with
+its `.sha256` sidecar and its `MANIFEST.tsv` row: the harness arm, which is this task's control; the
+candidate, which every figure here was measured on; and the audit-repair revision, which is **the
+control the next backend A/B should use**. Beside them, `ergodis-tools-b7c624d`, which milestone
 (c) left and which the harness A/B measured against, and `ergodis-tools-b1ce519` and
 `ergodis-tools-606136e` from the two milestones before that. Under `c1191/`: the three A/B driver
 logs and the parity replay's receipt, none of which anything cites — the parity figure in this report
@@ -1058,11 +1059,17 @@ a core change**, because the index is the core's.
 
 ## The control for the next A/B
 
-`~/.cache/ergodis/bin/ergodis-tools-8191ab7`, measured sha256
-`efbb5987e56edfe95c439ed5d3bc12e1a86a9f9a7a76d83193848b213b7a7ca1`, retained from a clean tree at
-`ergodis-private` `8191ab7` with core `2517852` under rustc 1.95.0. The commits after it in either
-repository add receipts and this report and change no code, so the binary at the tip is the binary
-that was measured.
+`~/.cache/ergodis/bin/ergodis-tools-e0e7331`, measured sha256
+`e58752d20e1856353a9787ed50d31b158daf8b87aaef26ca4e0c55c28882dbbb`, retained from a clean tree at
+`ergodis-private` `e0e7331` with core `2517852` under rustc 1.95.0.
+
+**That is not the binary the A/B measured**, and the difference is stated rather than glossed. Every
+figure in this report was measured on `ergodis-tools-8191ab7`, measured sha256
+`efbb5987e56edfe95c439ed5d3bc12e1a86a9f9a7a76d83193848b213b7a7ca1`; the only later code commit is the
+audit repair `e0e7331`, which adds one comparison per aggregate literal before `aggregate_over`. That
+is three comparisons on the whole `aggregate` cohort and none at all on any other measured cohort, so
+it is far below the protocol's noise floor — but **it was not re-measured**, and the next A/B should
+be taken against the fresh control above rather than against the measured one.
 
 ## Next steps
 
