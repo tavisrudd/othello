@@ -19,7 +19,15 @@ is the retain recipe at the named revision.
 
 | Arm | Repository | Revision | Dirty | Retained name | rustc | Measured sha256 |
 | --- | ---------- | -------- | ----- | ------------- | ----- | --------------- |
-| (to be filled) | | | | | | |
+| control, harness A/B | `ergodis-private` | `b7c624d` | no | `ergodis-tools-b7c624d` | 1.95.0 (59807616e 2026-04-14) | `15f7c83aba28c3732b53854226e97809e80da2737073439c1b92bf7ff5bf7e2c` |
+| harness, and control of the constructor A/B | `ergodis-private` | `3778763` | no | `ergodis-tools-3778763` | 1.95.0 (59807616e 2026-04-14) | `c3bc2ba80ba7851a4b66b520540f07d83ca9ca4fcf0029989cddb98ec30f6dad` |
+| candidate | `ergodis-private` | `8191ab7` | no | `ergodis-tools-8191ab7` | 1.95.0 (59807616e 2026-04-14) | `efbb5987e56edfe95c439ed5d3bc12e1a86a9f9a7a76d83193848b213b7a7ca1` |
+
+Every arm is `ergodis-tools`, `release`, no features, built through the retain recipe below, which
+re-executes itself inside `nix develop` of the core checkout so the toolchain is the
+`rust-toolchain.toml` pin. Every tree was clean. `ergodis-private` depends on `~/src/ergodis` by
+path, so the candidate arm also carries core revision `2517852`; the two control arms carry core
+`3c3e7f8`, the revision before this task's core commit.
 
 Retain recipe for every arm, from `~/src/ergodis-private`:
 
@@ -34,7 +42,12 @@ which re-executes itself inside `nix develop` of the core checkout, so the toolc
 
 | Repository | Commit | What |
 | ---------- | ------ | ---- |
-| (to be filled) | | |
+| `othello` | `715fff0` | this report's skeleton and the Fermi predictions, written before any code |
+| `ergodis-private` | `3778763` | the `stratify` bench stage; `bench.py` records the load average and the counter enabled fraction |
+| `ergodis-private` | `30cebc2` | the harness A/B receipt against the `b7c624d` control |
+| `ergodis` | `2517852` | `Demand::from_prepared`, `datalog::admit_prepared`, the flat fact pool in `Admitted`, both checkers' admitted-form entry points, the prepared-constructor test suite and the constructor allocation regression |
+| `ergodis-private` | `1c7e42c` | every layer built through the prepared constructor; `Budget::LayerTuples` for `Budget::ProgramBytes`; `LayerReport::layer_values` for `program_bytes` |
+| `ergodis-private` | `8191ab7` | `Error::LayerCapacity` names the evaluator's row capacity; `rel-lower --values` lets a boundary probe raise the lowering workspace |
 
 ## Fermi predictions, written before any code
 
@@ -146,19 +159,255 @@ have to say so.
 
 ## Status
 
-(to be filled)
+Built and gated; measured. A layer of the stratified backend is now handed to the demand-driven
+evaluator as a **prepared source** — relations by index, atom arguments as resolved slots, and each
+relation's tuples as a flat slice the driver already owns — instead of as a serialized
+`rule_contract::Program` with one owned `Fact` per tuple. Nothing per tuple is allocated, no relation
+name is resolved, nothing is serialized, and the one-mebibyte encoding budget that decided this
+route's reach is gone. The core rule contract, `Demand::new`, `encode_source`, `identity_of` and
+every existing certificate are unchanged.
 
 ## Design, and the shapes not built
 
-(to be filled)
+### The core: one admitted form, two ways in
+
+`ergodis_verify::datalog` gains `admit_prepared`, which takes a `PreparedSource`:
+
+```rust
+pub struct PreparedSource<'a> {
+    pub domain: u32,
+    pub relations: &'a [PreparedRelation<'a>],  // name, arity, input
+    pub rules: &'a [PreparedRule<'a>],          // head and body atoms of resolved Slots, variables
+    pub facts: &'a [&'a [u32]],                 // one flat slice per relation, stride its arity
+}
+```
+
+`ergodis_rules::Demand::from_prepared` admits it and runs the **same preparation body**
+`Demand::new` runs — `RelationPlan`, the semi-naive `Step`s and the `Index`es are built once, in one
+function, from an `Admitted` however it was admitted. Every budget is enforced through the same
+`Error` values over the same constants (`MAX_DOMAIN`, `MAX_RELATIONS`, `MAX_RULES`, `MAX_ARITY`,
+`MAX_BODY`, `MAX_VARIABLES`, `MAX_UNIVERSE`, values below the domain, identifier spelling, duplicate
+names, a head over an input relation, a head variable no body atom binds). `MAX_BYTES` has no
+prepared counterpart, because nothing is serialized.
+
+Three decisions inside that are worth stating because each could have gone the other way.
+
+**Variable numbering is canonical and checked, not accepted.** A prepared rule's variables must be
+numbered from zero by first occurrence in body order, then head order — the numbering `admit`
+derives from a wire program. A rule that numbers them any other way is `Error::Source`. The
+alternative was to accept the producer's numbering, which would have made one rule have several
+prepared forms and therefore several identities. The cost is a renumbering pass in the driver, which
+is a linear scan of at most eight entries per literal.
+
+**The identity is hashed over the tuple *set*, not the supplied order.** Admission sorts and
+deduplicates each relation's tuples before hashing, so a producer that emits the same tuples in
+another order, or emits one twice, prepares the same source. The encoding is streamed into SHA-256
+through a fixed 512-byte stack window rather than a serialized buffer; the tag
+`finite-boolean-prepared-rules.v1` domain-separates it from `identity_of`, whose tag is the wire
+schema. **The two identities differ and are meant to**: a certificate of a prepared source binds to
+the prepared source.
+
+**`Admitted` now holds its facts' tuples in one flat pool** with a 12-byte record per fact, instead
+of an owned `Vec<u32>` per fact. That is what lets a prepared source of a million tuples cost one
+allocation rather than a million, and it removes the same per-tuple allocation from the wire path,
+where it was never necessary either.
+
+### The core: what a prepared `Demand` answers for `source()`
+
+`Demand::source()` returns `Option<&Program>` and a prepared plan answers `None`. The three
+candidates the card names were an `Option`, a reconstructed `Program` on demand, and a documented
+refusal; the `Option` is the one taken, because reconstructing a program would invent a wire form
+whose identity is not the one the certificates bind to, and a refusal would lose a caller that has a
+wire program and wants it back. No caller of `Demand::source()` existed, in either repository, so
+the signature change costs nothing today.
+
+The consequence that mattered and nearly went wrong is the **checkers**. Both of the core's
+independent checkers take a `&Program`, and losing them for a prepared source would have thrown away
+the evidence chain this whole route rests on. `derivation` and `ranked` therefore each gain a
+`check_admitted` entry point that reads the admitted source directly; the `&Program` entry points are
+unchanged and still admit the source themselves. `Demand::verify` and `Demand::verify_ranked` hand a
+wire program to the `&Program` checker exactly as before and take the admitted door only when there
+is no wire program, so **the wire path re-admits its source twice and the prepared path admits it
+once**. That asymmetry is recorded under deviations rather than glossed.
+
+### The driver: what the layer loop does now
+
+`src/rel_stratified.rs` assembles each layer as parallel `names`/`arities`/`inputs` vectors, a
+`rows_from` vector saying where each declared relation's tuples come from — a certified closure the
+driver already holds, or the *k*th vector one of the layer's own constructions produced — and a slot
+pool for the rules. Nothing is copied: `complement_over`, `filter_over` and `aggregate_over` already
+returned flat `Vec<u32>` of tuples (milestone (c) made sure of it), and those vectors become the
+prepared source's fact slices directly. The `Fact` records, the per-tuple `String`, the per-tuple
+`Vec`, the `atom_named` indirection through relation *names*, and the `encode_source` byte check are
+all gone; relations are addressed by index throughout, and each record carries the index of the
+relation the layer declared for it (`declared`).
+
+`Budget::ProgramBytes` is replaced by `Budget::LayerTuples` against `MAX_LAYER_TUPLES`, and
+`LayerReport::program_bytes` by `LayerReport::layer_values`. The two are not the same quantity in
+different units: the old figure was JSON bytes, of which the per-column audit measured about 96 per
+cent to be the relation name repeated and the `relation`, `tuple` and `cost` keys; the new one counts
+tuple values and nothing else.
+
+### Shapes considered and not built
+
+1. **A `MAX_LAYER_TUPLES` set high enough never to bind, or no layer bound at all.** Rejected: a
+   layer may declare up to `MAX_RELATIONS` relations and each complement may be `MAX_COMPLEMENT`
+   tuples, so an unbounded layer is an out-of-memory failure where a refusal belongs. The bound is
+   set to `MAX_COMPLEMENT`'s own value — a layer may materialize as many tuples as one negation may —
+   and is checked against the *projected* total before each construct is enumerated, so the refusal
+   carries its numbers and nothing large is built first.
+2. **Keeping `Demand::source()` returning `&Program` by reconstructing one.** Rejected above.
+3. **Routing the prepared path through `Demand::new` by building a `Program` and skipping only the
+   serialization.** Rejected: the `Fact` per tuple, the name resolution and the per-tuple clone
+   inside admission are most of the cost, and `MAX_BYTES` would still have to be dealt with
+   separately.
+4. **Making the prepared identity equal the wire identity of the same program.** Rejected: it would
+   force the prepared path to serialize, which is the whole thing being removed. The two identities
+   differ, the report says so, and the differential compares closures rather than identities.
+5. **Deleting the serialized projection.** Not done. `rel_lowering::project` — the single-program,
+   whole-`Program` projection of milestone (a) — is untouched and still available to any consumer
+   that genuinely needs a wire program: an export, an external checker, or a reader that wants to
+   decode the program back. Nothing in the stratified driver uses it any more, and one lowering
+   fixture still exercises it.
 
 ## Method
 
-(to be filled)
+### The measured stage had to be built first
+
+Every existing `rel-frontend-bench` stage stops at `lower`, the frontend's lowering into the
+relational IR. **No stage ran the stratified backend at all**, which is why milestone (c) could
+measure the `aggregate` cohort at 512 definitions while the backend refused it at 214: the two were
+measuring different things. The candidate is entirely in the backend, so it was invisible to the
+stage set.
+
+The first commit of this task therefore adds a `stratify` stage — parse, admit, lower, then
+`rel_stratified::evaluate` over every layer, with each layer's evaluation, derivation certificate
+and both of the core's independent checkers — and its record carries a SHA-256 over every relation's
+certified rows, so the receipt itself is evidence that two arms building a layer by different routes
+establish the same closure. The stage difference `stratify` minus `lower` is the backend boundary.
+
+That commit is harness work, so it was made and a control retained at its revision **before** the
+constructor was written, and the harness commit got its own parity A/B against
+`ergodis-tools-b7c624d` on the stages that already existed. The playbook requires that: the
+workspace builds with thin LTO and one codegen unit, and this lane has recorded five swings of a
+few tenths of a per cent from adding code a cohort cannot execute.
+
+### The two repairs the receipts had been missing
+
+`bench.py` now records the load average over the rounds and, per event, the fraction of each
+`perf stat` measurement the counter was actually scheduled in. The per-column audit asked for both,
+the milestone (c) report restated both as omissions, and neither had been done. The harness A/B is
+the first receipt in this lane to carry them: **100.00 per cent enabled on every event over 1,337
+measurements**, so "the set
+`instructions,cycles,branches,branch-misses,page-faults,minor-faults` fits this PMU" is now a
+recorded observation rather than an inference from the A/A nulls.
+
+### Arms, cohorts and protocol
+
+Five interleaved rounds, both scanner variants, pinned to CPU 5, the non-multiplexing six-event set,
+two-point differencing between `N` and `N/2` iterations, `--stages scan,parse,admit,lower,stratify`.
+The five default cohorts and `datalog` run at 512 definitions; `stratified`, `columns` and
+`aggregate` run at **128**, because at 512 the control is refused by the byte bound and the
+candidate is not, and two arms doing different work have no ratio. Instruction ratios decide; cycle
+ratios are reported with their intervals.
 
 ## Results
 
-(to be filled)
+### The boundary: where the route runs out now
+
+This is the headline. Each row is the largest `--definitions` that completes the whole chain and the
+first that is refused, by bisection over the committed `rel-lower` tool on committed cohorts. The
+cohorts' `--definitions` is the *per-column* domain, which is the dictionary on `stratified`, half of
+it on `columns`, a third on `columns3`, and the key set on `aggregate`; the dictionary is given as
+well, because that is the axis the earlier reports measured.
+
+**Before**, at milestone (c)'s close, every one of the four was refused by `Budget::ProgramBytes` —
+the canonical JSON of one layer's program against the core's `MAX_BYTES` of 1,048,576 — at about
+22,000 materialized facts in a layer:
+
+| Cohort | Arity | Largest dictionary | Materialized facts there |
+| ------------ | ----: | -----------------: | -----------------------: |
+| `stratified` | 2 | 153 | 23,182 complement |
+| `columns` | 2 | 302 | 22,577 complement |
+| `columns3` | 3 | 84 | 21,938 complement |
+| `aggregate` | 2 | 213 (key set) | 22,578 filter |
+
+**After**, with the tool's committed defaults (`--max-rows 1048576`, `--values 4096`):
+
+| Cohort | Largest dictionary | Factor | Materialized facts there | First refused, and the bound |
+| ------------ | -----------------: | -----: | -----------------------: | ---------------------------- |
+| `stratified` | **1,024** | ×6.7 | 1,047,043 complement | 1,025: the demand evaluator's **row capacity**, 2^20, at layer 1 |
+| `columns` | **1,820** | ×6.0 | 826,738 complement | dictionary 1,822: the lowering workspace's **fact pool**, 4,097 against 4,096 |
+| `columns3` | **255** | ×3.04 | 614,082 complement | 258: the core's **`MAX_INDEX_KEYS`**, 17,173,512 against 16,777,216 |
+| `aggregate` | **3,959** (key set 1,365) | ×6.4 on the key set | 930,930 filter | key set 1,366: the lowering workspace's **fact pool**, 4,097 against 4,096 |
+
+**And with the workspace raised** (`--max-rows 16777216 --values 262144`, both flags of the committed
+tool, so these replay from this revision too), which is what shows which bound belongs to the *route*
+rather than to the workspace the operator asked for:
+
+| Cohort | Largest dictionary | Factor over before | Materialized facts there | Peak RSS | First refused, and the bound |
+| ------------ | -----------------: | -----------------: | -----------------------: | -------: | ---------------------------- |
+| `stratified` | **2,047** | ×13.4 | 4,187,141 complement | 1.39 GB | 2,048: **`Budget::LayerTuples`**, 4,197,376 against 4,194,304 |
+| `columns` | **4,092** | ×13.5 | 4,183,050 complement | 2.73 GB | 4,094: **`Budget::LayerTuples`**, 4,195,326 against 4,194,304 |
+| `columns3` | **255** | ×3.04 | 614,082 complement | 564 MB | 258: **`MAX_INDEX_KEYS`**, unchanged by the workspace |
+| `aggregate` | **4,096** (key set 1,412) | ×6.6 on the key set | 996,166 filter | 1.86 GB | key set 1,413: **`MAX_INDEX_KEYS`**, 16,793,604 against 16,777,216 |
+
+**The number that transfers is the fact ceiling, and it moved by about two orders of magnitude.**
+Every product-shaped construct on this route used to stop at about 22,000 materialized facts in one
+layer, because that is a mebibyte of JSON divided by the roughly 45 bytes a fact serialized to. It
+now stops at **4,194,304** — `MAX_LAYER_TUPLES`, this route's own declared materialization budget,
+which is a number chosen for what a layer may hold in memory rather than for what an encoding can
+carry. That is **×190 on the ceiling**, against the per-column closeout's Fermi of "roughly 10× on
+the dictionary", which in dictionary terms is ×13.4 and ×13.5 at arity two. The closeout predicted
+"a dictionary of about 1,000 at arity two with whole-dictionary columns"; the measurement is 2,047,
+so it was right in order and about twice conservative.
+
+**Three of the four cohorts are now stopped by something other than this route's own bound**, which
+is the more useful half of the result:
+
+- `columns3`, at arity three, is stopped by the **core's `MAX_INDEX_KEYS`** — `domain^arity` of a
+  relation read as one of two body atoms, against 2^24. Fermi prediction 1 named this bound and this
+  cohort and predicted about 256; the measurement is 255.
+- `aggregate` is stopped by **`MAX_INDEX_KEYS` too**, at a post-extension dictionary of exactly
+  4,096 — `4096² = 2^24`. Milestone (c)'s Fermi prediction 3 predicted precisely this ("`MAX_INDEX_KEYS`
+  is the bound that binds for aggregation, at a post-extension domain of 4,096 at arity two") and was
+  recorded as **wrong**, because the lowering workspace's fact pool fired first. It was right about
+  the bound and wrong only about what stood in front of it, and with that removed it is the bound.
+  My own Fermi predicted `MAX_FILTER` at a key set of about 2,048 for this cohort and was wrong for
+  the same reason it was wrong then: the aggregate extends the dictionary by about 2.9 entries per
+  key, so the addressing bound arrives before the filter's `N(N−1)/2` reaches 2^22.
+- Under the tool's defaults, `stratified` is stopped by the **demand evaluator's row capacity** and
+  `columns` and `aggregate` by the **lowering workspace's fact pool**. Both are capacities the
+  operator asks for rather than bounds of the route, and neither had ever been reachable before,
+  because the encoding stopped the route an order of magnitude earlier. The row capacity was passed
+  through as an unnumbered `Core(Budget)`; it is now `Error::LayerCapacity` with its layer and its
+  number.
+
+**So the shape of the answer has changed.** Before, one bound decided this route's reach on every
+construct and it was an encoding. Now four different bounds decide it on four cohorts, three of them
+about *addressing and capacity* — how large an index the evaluator direct-addresses, how many rows a
+workspace was asked for, how many facts a lowering pool holds — and only one about materialization.
+That is a route whose limits are where the evaluation actually is.
+
+### Exactness
+
+| Gate | Outcome |
+| ---- | ------- |
+| Native/WASM parity replay | **243 cases, 530,505 canonical bytes, byte-equal, SHA-256 `f0e2b581…b448b40` — unchanged.** The corpus compares the canonical bytes of the lowered relational IR, which this change does not touch; the layer programs are downstream of it and carry no canonical form of their own. So the parity hash did not move, and the reason it could not is structural rather than lucky. |
+| `rel_lowering` | 52 passed, 0 failed (51 before, plus the new layer-payload fixture) |
+| `rel_frontend` | 28 passed, 0 failed |
+| `rel_frontend_portability` | 1 passed, 0 failed |
+| `rel_reference_eval` (the C1189 differential) | 19 passed, 0 failed; **zero disagreements** over the committed fixtures, the milestone (a) audit's further programs, the recorded rejection surface, the 35 Addendum A equations, the surface-construct table, and the seeded in-fragment, negation, aggregation, comparison, near-miss and name-resolution corpora, all at their unchanged seeds |
+| Core `cargo test --all-features` | every test binary passed, including the new prepared-constructor suite and the constructor allocation regression |
+| Clippy, both repositories | no diagnostics |
+| `cargo fmt --check`, both repositories | clean |
+
+Fermi prediction 6 said zero differential disagreements, for a weaker reason than milestone (b)'s:
+the prepared path is a second construction of the same structures from the same information, so it
+can only be wrong by building them differently, and a corpus that exercises the construction cannot
+distinguish two constructions that agree. It came out zero **on the first run of every corpus**,
+which is worth stating plainly as the weak evidence it is — the load-bearing evidence that the
+agreement discriminates is the deliberate mutations below, not the corpora.
 
 ## Profile
 
@@ -170,11 +419,75 @@ have to say so.
 
 ## Recorded deviations
 
-(to be filled)
+Each of these is a departure from the card's design, or a change the card did not ask for, and each
+is here rather than buried in a commit message.
+
+1. **`Admitted`'s fact representation changed, which the card did not ask for.** The card asks for a
+   constructor with no `Fact` per tuple; `Admitted` held an owned `Vec<u32>` per fact, so a prepared
+   source would have traded one allocation per tuple for another. `AdmittedFact` is now a 12-byte
+   record and the tuples live in one flat pool. This is a change to a public type of the core, it
+   removes the same per-tuple allocation from the wire path, and it is why the constructor's
+   allocation count is a constant.
+2. **Both checkers gained an admitted-form entry point, and the two paths now re-admit differently.**
+   The card says to decide how a prepared `Demand` answers `source()`; it does not say what the
+   checkers do, and both take a `&Program`. `derivation::check_admitted` and `ranked::check_admitted`
+   read the admitted source directly. `Demand::verify` and `verify_ranked` hand a wire program to the
+   `&Program` door when there is one, so **the wire path admits its source twice and the prepared
+   path admits it once**. The re-admission was never the independence that matters — the checkers
+   are independent *implementations of the evaluation*, replaying a certificate against the source —
+   but the asymmetry is real and is recorded rather than smoothed over.
+3. **The prepared source identity is not the wire identity**, which the card permits and this report
+   states as a consequence: a certificate of a prepared source binds to the prepared source, and the
+   two encodings are domain-separated by their own tags. Nothing compares the two identities; the
+   differential compares closures.
+4. **The identity is streamed through a fixed 512-byte stack window, not value by value.** The card
+   says "with no intermediate buffer". A per-value `update` call into SHA-256 would add about a
+   third again to the hashing cost for nothing; the window is one compression block's worth of stack
+   and never holds anything the size of the encoding. This is the reading of "no intermediate
+   buffer" taken, and it is stated rather than assumed.
+5. **A prepared rule's variable numbering is checked, not accepted.** The card describes the rules as
+   "already-resolved slots (relation index + `Slot::Constant | Slot::Variable`, variable count)". The
+   constructor additionally requires the canonical numbering and refuses anything else, so that a
+   rule has one prepared form and therefore one identity. The driver pays a renumbering pass for it.
+6. **`Budget::ProgramBytes` is replaced by a bound of the same kind rather than deleted.** The card
+   says to replace it with "the bound that now binds first". Measurement says three different bounds
+   bind first on four cohorts and two of them are workspace capacities, so simply deleting the check
+   would have left a layer able to materialize up to `MAX_RELATIONS` complements of `MAX_COMPLEMENT`
+   tuples each — an out-of-memory failure where a refusal belongs. `MAX_LAYER_TUPLES` is this route's
+   own declared bound at `MAX_COMPLEMENT`'s value, checked against the projected total before each
+   construct is enumerated.
+7. **`rel-lower` gained a `--values` flag**, which the card did not ask for. Without it the deeper
+   half of the boundary table would have had to come from an uncommitted source, which is exactly the
+   defect the milestone (c) audit recorded against the aggregate-only probe. With it every figure in
+   the boundary table replays from a committed revision.
+8. **The JSON path is kept, and here is where.** `rel_lowering::project`, the single-program
+   whole-`Program` projection of milestone (a), is untouched and still exercised by one lowering
+   fixture. Nothing in the stratified driver uses it. A consumer that genuinely needs a wire program
+   — an export, an external checker, a reader that wants to decode the program back — uses it and
+   gets the unchanged wire identity.
 
 ## Remaining gaps
 
-(to be filled)
+1. **`MAX_INDEX_KEYS` is now the bound to attack**, on two of the four cohorts. It is a core bound on
+   the demand evaluator's direct-addressed join index, `domain^arity` against 2^24, and what would
+   move it is a non-direct index for a sparse relation with an exact crossover policy — a core
+   change with its own measurement, not a driver one.
+2. **The lowering workspace's fact pool is sized from `Limits::values`**, so a source with many facts
+   needs a dictionary limit it does not otherwise need. That coupling is now visible because it
+   binds; sizing the fact pool separately is a small change nobody has made.
+3. **`rel-lower`'s `--max-rows` default of 2^20 is what stops `stratified` at a dictionary of 1,024**,
+   against the core's `MAX_ROWS` of 2^24. It is an operator default, it is now reported with its
+   number, and whether it should be raised is a decision about how much memory a default invocation
+   may take rather than a defect.
+4. **Peak resident set at the new boundary is gigabytes**: 1.39 GB on `stratified` at 2,047 and
+   2.73 GB on `columns` at 2,046. The encoding bound was also a memory bound, and removing it removed
+   that too. Nothing sizes a layer against available memory; `MAX_LAYER_TUPLES` is a tuple count, and
+   a tuple's cost in the evaluator's workspace is seven `u32` per derived row rather than the four
+   bytes per value the bound counts.
+5. **Milestone (c)'s and the per-column report's gaps are unchanged**: min-plus is deferred, an
+   aggregate's body is one positive application, arithmetic in a term position is refused, the
+   same-layer fallback takes the whole dictionary, `bind` records no site for a variable an aggregate
+   binds, and `exists(x in D: F)` and `not` over a non-application are still unwritten.
 
 ## Mystery ledger
 
