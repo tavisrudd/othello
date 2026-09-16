@@ -468,3 +468,90 @@ compared `dictionary^arity` for every indexed relation, while the evaluator inde
 dictionary. On `columns3` that is 258³ against 258², so **part of this cohort's ×1.89 is the removal
 of a mirror that was stricter than the thing it mirrored**, and the report says so rather than
 crediting it all to the sparse index.
+
+### The crossover, measured
+
+Both arms are the **same binary** with the kind of one structure forced, so the two do identical
+work on identical input and the comparison is not confounded by a compiler difference. Five
+interleaved rounds, CPU 5, repeat counts 3 and 6, the six-event set, `--evaluate-only` so the
+counters are the derivation loop's. Each row's density is the structure's key space divided by the
+row capacity the caller asked for, which is the number the policy reads. Receipts
+`analysis/datalog-comparison/ab-2026-09-16-c1192-crossover-{membership,index}[-high].json`.
+
+**The membership test: the bitmap wins everywhere it exists.**
+
+| Cohort | universe | row bound | density | sparse over bitmap, instructions | cycles | A/A null |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `closure` blocks 4,096 | 2^24 | 16,777,216 | 1 | 1.2128 | 2.0489 | 1.0000122 |
+| `closure` blocks 4,096 | 2^24 | 4,194,304 | 4 | 1.2041 | 1.6609 | 1.0000105 |
+| `closure` blocks 4,096 | 2^24 | 1,048,576 | 16 | 1.2019 | 1.3434 | 1.0000145 |
+| `closure` blocks 4,096 | 2^24 | 262,144 | 64 | 1.2118 | 1.2666 | 0.9999859 |
+| `closure` blocks 4,096 | 2^24 | 65,536 | 256 | 1.2323 | 1.3517 | 1.0000088 |
+| `closure` blocks 16,384 | 2^28 | 16,777,216 | 16 | 1.2027 | 2.0960 | 1.0000011 |
+| `closure` blocks 16,384 | 2^28 | 4,194,304 | 64 | 1.2005 | 1.6800 | 0.9999962 |
+| `closure` blocks 16,384 | 2^28 | 1,048,576 | 256 | 1.2420 | 1.6006 | 1.0000041 |
+| `closure` blocks 16,384 | 2^28 | 262,144 | 1,024 | 1.2556 | 1.3827 | 1.0000074 |
+| `closure` blocks 32,768 | 2^30 | 2,097,152 | 512 | 1.1983 | 1.4822 | 1.0000005 |
+| `closure` blocks 32,768 | 2^30 | 524,288 | 2,048 | 1.2295 | 1.3093 | 1.0000091 |
+
+**There is no crossover for the membership test inside what the ceiling allows.** The last row is a
+tuple universe of 2^30, which is `MAX_DIRECT_UNIVERSE` exactly and a 128 MiB bitmap, against a row
+capacity of 524,288 — and the bitmap is still ahead by 1.23 in instructions and 1.31 in cycles. The
+mechanism is the one C1186 recorded from the other side: a bitmap probe resolves the
+"is this tuple new" branch from one bit, and the sparse probe puts a hash, a chained load and a tuple
+comparison against the row store on that branch's dependency chain. **So the policy has no density
+rule for membership: the bitmap is kept whenever it exists**, and the sparse membership test is what
+makes a universe above the ceiling evaluable at all.
+
+The sparse arm gets *worse* as the row bound rises — 1.35 at a bound of 65,536 against 2.05 at
+16,777,216 on the same program — because the table is presized from the capacity the caller asked
+for and `fill(NONE)` writes all of it before every evaluation, while the bitmap is sized from the
+universe and does not move. That is the same eager-reservation effect the reach table shows in
+memory, appearing here in time.
+
+**The join index over an input relation: the counting-sorted bucket wins too.**
+
+| Cohort | key space | capacity (facts) | density | sorted over CSR, instructions | cycles |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `mutual` blocks 4,096 | 2^24 | 61,440 | 273 | 1.3916 | 2.0745 |
+| `mutual` blocks 4,096, bound 2^20 | 2^24 | 61,440 | 273 | 1.3919 | 2.4254 |
+| `mutual` blocks 4,096, bound 2^22 | 2^24 | 61,440 | 273 | 1.3920 | 2.1495 |
+| `mutual` blocks 4,096, bound 2^24 | 2^24 | 61,440 | 273 | 1.3920 | 2.1635 |
+
+A static index is built once at preparation and never rebuilt, so the direct shape pays no
+per-evaluation reset at all and its only cost is the offsets array, which `MAX_DIRECT_KEYS` bounds.
+The sparse shape pays a binary search over 61,440 distinct keys — about sixteen dependent loads
+against one — on every probe. The four rows are the same index under four row bounds, which is the
+check that the caller's bound does not reach a static index: the ratio moves by four parts in ten
+thousand across them. **So the policy has no density rule for an input relation's index either.**
+
+**The join index over a relation that grows: this is the one crossover, and it is in cycles.**
+
+| Cohort | key space | row bound | density | sparse over direct, instructions | cycles | A/A null |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `cycle` blocks 4,096 | 2^24 | 16,777,216 | 1 | 1.0650 | 1.5000 | 0.9999918 |
+| `cycle` blocks 4,096 | 2^24 | 4,194,304 | 4 | 1.0504 | 1.2285 | 1.0000063 |
+| `cycle` blocks 4,096 | 2^24 | 1,048,576 | 16 | 1.0467 | 1.0665 | 1.0000047 |
+| `cycle` blocks 4,096 | 2^24 | 524,288 | 32 | 1.0461 | 1.0508 | 0.9999996 |
+| `cycle` blocks 4,096 | 2^24 | 262,144 | 64 | 1.0516 | **0.9842** | 0.9999954 |
+| `cycle` blocks 4,096 | 2^24 | 131,072 | 128 | 1.0528 | **0.9911** | 1.0000081 |
+| `cycle` blocks 4,096 | 2^24 | 65,536 | 256 | 1.0620 | **0.9743** | 0.9999841 |
+
+**The crossover in cycles is between a density of 32 and a density of 64**: the direct kind is ahead
+by 5.1 per cent at 32 and behind by 1.6 per cent at 64. `DIRECT_INDEX_DENSITY` is set to **48**,
+inside that bracket; anywhere in it costs at most about five per cent on one side. A dynamic index
+*is* rebuilt every evaluation, and the direct shape writes one word per key of
+`domain^popcount(mask)` to do it — 64 MiB here — while the sparse shape writes one word per presized
+slot. That reset traffic is the whole of the effect, and it is why this structure has a crossover
+and the other two do not.
+
+**Instructions say "always direct" on every one of the three structures, and Fermi prediction 2 said
+they would.** The sparse kind costs 4.6 to 6.5 per cent more instructions on the dynamic index, 20
+to 26 per cent more on the membership test and 39 per cent more on the static index, at every
+density measured. `PERFORMANCE.md` says instruction ratios decide; here they decide only the
+direction of the constant factor, and what sets the policy is the memory traffic the two shapes move,
+which is the playbook's own second rule of attack ranked above instructions. **This is stated as the
+one place in this lane where a cycle ratio is load-bearing**, with the qualification that the cycle
+A/A nulls in these runs are within 2 parts per 10,000 of unity — much tighter than the
+control-against-candidate run's, because both arms are the same binary — so the 0.974 to 1.051 band
+that brackets the crossover is separated from unity by more than the noise floor.
