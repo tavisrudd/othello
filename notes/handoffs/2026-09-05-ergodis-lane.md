@@ -6,9 +6,9 @@
 correction trails live in dated reports and the append-only
 [`2026-09-05-ergodis-lane-archive.md`](2026-09-05-ergodis-lane-archive.md).
 
-**Date**: 2026-09-15
+**Date**: 2026-09-16
 **Mode**: intent-based.
-**Status**: ACTIVE. Immediate engineering frontier is C1190 (Rel lowering, milestones a and b done, per-column domains in progress, then milestone c; C1170 frontend and C1189 oracle closed); the
+**Status**: ACTIVE. Immediate engineering frontier is C1190 (Rel lowering; milestones a, b, per-column domains, c and the C1191 direct constructor done and audited; next step needs allocation; C1170 frontend and C1189 oracle closed); the
 rule-contract programme C1172–C1177 and the Datalog evaluation tasks C1179/C1182–C1186 are closed. C1143, C1130, C1016,
 C1017, C1061 and C985 remain in progress. C1062 and C1070 await Tavis's close call.
 
@@ -279,13 +279,35 @@ term-level arithmetic. Parity 243 cases at `f0e2b581…`; scan/parse/admit unity
 reserved workspace byte-identical. Cost shape: constructs that reduce a closure (aggregates) are
 free, constructs that need a product over one (negation, comparison) hit the ~22,000-fact
 encoding ceiling. Control for the next frontend A/B: `ergodis-tools-b7c624d` (rustc 1.95.0).
-**Next, unallocated, in EV order**: the direct constructor from the relational IR into the demand
-evaluator's prepared form (removes the encoding ceiling for every product-shaped construct, no
-contract change; aggregate-result relations were designed for it, see the milestone (c) report);
-the kernel-scoped profile of `lower::run` closing the two unattributed lowering-stage swings
-(74 % of the per-column increase, the recurring `comment-string` thin-LTO swing); then the
-coverage rows the reports list (`exists(x in D: F)`, `not (F and G)`, term-level arithmetic). Ergodis retains lowering, rules, joins and execution; no external
-evaluator or backend is adopted. Tree-sitter and a PLT Redex model remain deferred.
+**C1191 direct constructor done and audited** (`../2026-09-16-c1191-direct-constructor-report.md`,
+core `2517852`, private `3778763` … `e0e7331`, Opus; audit
+`../2026-09-16-c1191-direct-constructor-audit.md`: every record reproduces, no code defect, one RSS
+figure and prose repaired, one code repair moved the aggregate's tuple-budget check before
+enumeration). A second core constructor builds `Demand` from resolved relations, resolved rules and
+flat tuple slices with a core-computed streamed binary identity (domain-separated from the JSON
+identity, which is unchanged with `rule_contract.rs` byte-identical); every layer goes through it.
+The 1 MiB JSON ceiling is gone: product-shaped layers now stop at the route's own
+`MAX_LAYER_TUPLES` (4,194,304) or the core's `MAX_INDEX_KEYS`; arity-two dictionary reach 153 →
+2,047 (`stratified`) and 302 → 4,092 (`columns`), arity three 84 → 255, aggregation 618 → 4,096.
+Backend stage 0.52/0.52/0.43 (`datalog` 0.99) against `ergodis-tools-3778763`, peak RSS −28/−29/
+−11 %, scan/parse/admit/lower unity within 42 ppm; the old route encoded each layer four times.
+Parity hash unchanged at 243 cases; C1189 differential zero disagreements; the two routes yield
+identical admitted forms differing only in identity. Recorded: core `Admitted` holds a flat fact
+pool, both checkers gained `check_admitted` (wire path re-admits twice, prepared once),
+`Demand::source()` is an `Option`, `rel-lower` gained `--values`; `datalog`'s repeated-loop wall
+loss is minor faults once the old `Fact` allocations stop pinning the heap (arms tie under a pinned
+trim threshold); `--max-rows 16777216` alone reserves about 1.6 GB of eager row store on an
+arity-three cohort. Control for the next frontend A/B: `ergodis-tools-e0e7331` (rustc 1.95.0; the
+repair commit was not re-measured).
+**Next, unallocated, in EV order**: narrowing the core's addressing bound (`MAX_INDEX_KEYS`,
+checked as `dictionary^arity`) to per-column domains, where the per-column and C1191 work compound
+(core change); a memory model for a layer and whether `MAX_LAYER_TUPLES` should be a byte bound,
+with the eager row reservation as an input; the kernel-scoped profile of `lower::run` closing the
+two unattributed lowering-stage swings (74 % of the per-column increase, the recurring
+`comment-string` thin-LTO swing); then the coverage rows the reports list (`exists(x in D: F)`,
+`not (F and G)`, term-level arithmetic) and the `Prepared` name clash in `ergodis_rules`. Ergodis
+retains lowering, rules, joins and execution; no external evaluator or backend is adopted.
+Tree-sitter and a PLT Redex model remain deferred.
 
 ### Datalog evaluation — C1179, C1182 and C1183 closed
 
