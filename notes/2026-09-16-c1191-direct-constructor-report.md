@@ -2,9 +2,8 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-16
-**Status**: COMPLETE except for the independent read-only audit, which an author cannot write for
-their own change and which the next steps name. Written incrementally from the start of the task, so
-a crash would have left a partial record rather than none.
+**Status**: COMPLETE AND AUDITED. Written incrementally from the start of the task, so a crash would
+have left a partial record rather than none.
 
 Task card: `2026-09-16-c1191-direct-constructor.md`. Decision record: private
 `docs/adr/0004-rel-lowering-ir.md`, whose "direct constructor into the demand evaluator's prepared
@@ -12,6 +11,12 @@ form" is what this task builds. Predecessors: `2026-09-15-c1190-milestone-c.md` 
 "Designing for the direct constructor"), `2026-09-15-c1190-per-column-domains.md` (the 96 per cent
 encoding finding and the boundary experiment), `2026-09-15-c1190-milestone-b.md` (layer programs and
 complement records). Repositories: `~/src/ergodis` (core) and `~/src/ergodis-private` (driver).
+
+**Audited** by `2026-09-16-c1191-direct-constructor-audit.md`, which reproduced every record, found
+no code defect, and raised one measurement defect and nine smaller items. All are repaired: one in
+code — the aggregate's layer-bound check now runs before its enumeration — and the rest at the places
+this report names below. The audit also settles mystery ledger item 6 and strengthens the identity
+claim, and both are folded in.
 
 ## Arms
 
@@ -49,6 +54,8 @@ which re-executes itself inside `nix develop` of the core checkout, so the toolc
 | `ergodis`         | `2517852` | `Demand::from_prepared`, `datalog::admit_prepared`, the flat fact pool in `Admitted`, both checkers' admitted-form entry points, the prepared-constructor test suite and the constructor allocation regression |
 | `ergodis-private` | `1c7e42c` | every layer built through the prepared constructor; `Budget::LayerTuples` for `Budget::ProgramBytes`; `LayerReport::layer_values` for `program_bytes`                                                          |
 | `ergodis-private` | `8191ab7` | `Error::LayerCapacity` names the evaluator's row capacity; `rel-lower --values` lets a boundary probe raise the lowering workspace                                                                             |
+| `ergodis-private` | `c60d335` | the five A/B receipts against the `3778763` control                                                                                                                                                            |
+| `ergodis-private` | `e0e7331` | audit repair: the aggregate's layer-bound check runs before its enumeration                                                                                                                                    |
 
 ## Fermi predictions, written before any code
 
@@ -200,6 +207,11 @@ alternative was to accept the producer's numbering, which would have made one ru
 prepared forms and therefore several identities. The cost is a renumbering pass in the driver, which
 is a linear scan of at most eight entries per literal.
 
+**The identity is of the program as presented, not up to equivalence.** A permutation of one rule's
+body gives a different identity and the same closure, which is the property the wire identity already
+has and is not a defect — but it is worth saying, because it means a producer that reorders a join
+prepares a different source. The audit established it from outside both repositories.
+
 **The identity is hashed over the tuple *set*, not the supplied order.** Admission sorts and
 deduplicates each relation's tuples before hashing, so a producer that emits the same tuples in
 another order, or emits one twice, prepares the same source. The encoding is streamed into SHA-256
@@ -350,8 +362,19 @@ rather than to the workspace the operator asked for:
 | ------------ | ------------------------: | -----------------: | -----------------------: | -------: | ------------------------------------------------------------------ |
 | `stratified` |                 **2,047** |              ×13.4 |     4,187,141 complement |  1.39 GB | 2,048: **`Budget::LayerTuples`**, 4,197,376 against 4,194,304      |
 | `columns`    |                 **4,092** |              ×13.5 |     4,183,050 complement |  2.73 GB | 4,094: **`Budget::LayerTuples`**, 4,195,326 against 4,194,304      |
-| `columns3`   |                   **255** |              ×3.04 |       614,082 complement |   564 MB | 258: **`MAX_INDEX_KEYS`**, unchanged by the workspace              |
+| `columns3`   |                   **255** |              ×3.04 |       614,082 complement |  2.14 GB | 258: **`MAX_INDEX_KEYS`**, unchanged by the workspace              |
 | `aggregate`  | **4,096** (key set 1,412) |               ×6.6 |           996,166 filter |  1.86 GB | key set 1,413: **`MAX_INDEX_KEYS`**, 16,793,604 against 16,777,216 |
+
+**A note on the peak resident set in that table, because one of its rows taught something.** The
+figures are what the stated command gives, and on `columns3` that is 2.14 GB rather than the 564 MB
+an earlier draft printed, which was a run with `--values 262144` alone. The audit attributed the
+difference by running the four flag combinations at `--definitions 85`: no flags 561,356 KiB,
+`--values 262144` alone 563,728 KiB, `--max-rows 16777216` alone 2,139,432 KiB, both 2,140,716 KiB.
+**Raising `--max-rows` to 2^24 by itself costs about 1.6 GB on that cohort**, because the demand
+evaluator reserves each derived relation's row store eagerly from `--max-rows` and an arity-three
+relation pays three words per reserved row — a capacity `columns3` never uses. The cohort's bound is
+unaffected by either flag, which is the point the row exists to make, so the conclusion is unchanged
+and only the figure moved.
 
 **The number that transfers is the fact ceiling, and it moved by about two orders of magnitude.**
 Every product-shaped construct on this route used to stop at about 22,000 materialized facts in one
@@ -420,12 +443,12 @@ The composed figure is `stratify` minus `lower`: the backend boundary, the evalu
 its derivation certificate and both of the core's independent checkers. `datalog` runs at 512
 definitions and the rest at 128, which is where both arms complete.
 
-| Cohort       | Stage instructions, candidate |       control | instruction ratio |  cycles | wall p50, candidate over control |                        peak RSS |
-| ------------ | ----------------------------: | ------------: | ----------------: | ------: | -------------------------------: | ------------------------------: |
-| `datalog`    |                 1,680,329,956 | 1,690,474,760 |           0.99400 | 0.96864 |      120.4 / 100.2 ms = **1.20** |           127,240 / 127,592 KiB |
-| `stratified` |                   168,175,532 |   323,491,619 |       **0.51988** | 0.47000 |     10.29 / 19.88 ms = **0.518** | 11,420 / 15,960 KiB (**−28 %**) |
-| `columns`    |                   168,662,964 |   326,736,068 |       **0.51621** | 0.46909 |     11.83 / 20.22 ms = **0.585** | 16,652 / 23,348 KiB (**−29 %**) |
-| `aggregate`  |                    59,064,703 |   136,776,315 |       **0.43183** | 0.44332 |      7.89 / 12.09 ms = **0.653** | 21,080 / 23,656 KiB (**−11 %**) |
+| Cohort       | Stage instructions, candidate |       control | instruction ratio |  cycles | wall, candidate over control (medians; means on `datalog`) |                        peak RSS |
+| ------------ | ----------------------------: | ------------: | ----------------: | ------: | ---------------------------------------------------------: | ------------------------------: |
+| `datalog`    |                 1,680,329,956 | 1,690,474,760 |           0.99400 | 0.96864 |                                120.4 / 100.2 ms = **1.20** |           127,240 / 127,592 KiB |
+| `stratified` |                   168,175,532 |   323,491,619 |       **0.51988** | 0.47000 |                               10.29 / 19.88 ms = **0.518** | 11,420 / 15,960 KiB (**−28 %**) |
+| `columns`    |                   168,662,964 |   326,736,068 |       **0.51621** | 0.46909 |                               11.83 / 20.22 ms = **0.585** | 16,652 / 23,348 KiB (**−29 %**) |
+| `aggregate`  |                    59,064,703 |   136,776,315 |       **0.43183** | 0.44332 |                                7.89 / 12.09 ms = **0.653** | 21,080 / 23,656 KiB (**−11 %**) |
 
 **`scan`, `parse`, `admit` and `lower` are unity on every cohort** — the largest departure is
 forty-two parts per million on the `aggregate` scanner — so the front end did not move. The A/A
@@ -450,7 +473,7 @@ candidate's tuple payload is 33,281 values.
 instructions.** Its layer holds 512 facts and its evaluation derives 135,926 tuples, so the boundary
 is a small part of the stage and the instruction saving is 10.1 million on 1.68 billion, −0.6 per
 cent. But its wall time is up 20 per cent, and the counter that explains it is the fault count:
-**30,162 minor faults per iteration on the candidate against 4,971 on the control**, which at a few
+**30,162 minor faults per iteration on the candidate against 4,968 on the control**, which at a few
 hundred nanoseconds each is the whole of the 20 milliseconds. `perf_event_paranoid` is 2 on this
 host, so perf counts user-mode events only and that cost is invisible in the instruction ratio — the
 playbook's rule that a stage whose cost is kernel time is read from its faults and its wall time,
@@ -467,10 +490,21 @@ and what it means for a real invocation are in the disposition below.
 | `rel_frontend`                                           | 28 passed, 0 failed                                                                                                                                                                                                                                                                                                                                                                 |     |     |     |
 | `rel_frontend_portability`                               | 1 passed, 0 failed                                                                                                                                                                                                                                                                                                                                                                  |     |     |     |
 | `rel_reference_eval` (the C1189 differential)            | 19 passed, 0 failed; **zero disagreements** over the committed fixtures, the milestone (a) audit's further programs, the recorded rejection surface, the 35 Addendum A equations, the surface-construct table, and the seeded in-fragment, negation, aggregation, comparison, near-miss and name-resolution corpora, all at their unchanged seeds                                   |     |     |     |
-| Core `cargo test --all-features`                         | every test binary passed, including the new prepared-constructor suite and the constructor allocation regression                                                                                                                                                                                                                                                                    |     |     |     |
+| Core `cargo test --all-features`                         | every test binary passed, including the new prepared-constructor suite and the constructor allocation regression (see the note below the table on what that regression pins)                                                                                                                                                                                                        |     |     |     |
 | Private `cargo test -p ergodis-private -p ergodis-tools` | every test binary passed, zero failures; the whole-package run drives every other lane's suite in this workspace as well as this one                                                                                                                                                                                                                                                |     |     |     |
 | Clippy, both repositories                                | no diagnostics                                                                                                                                                                                                                                                                                                                                                                      |     |     |     |
 | `cargo fmt --check`, both repositories                   | clean                                                                                                                                                                                                                                                                                                                                                                               |     |     |     |
+
+**What the constructor's allocation regression claims, and what it does not.** `PERFORMANCE.md`'s
+first invariant asks a changed hot loop to ship a regression that enters the real loop repeatedly
+after setup and observes **zero**. A constructor is not a loop and cannot observe zero: it allocates
+the plan's own row stores, steps and indexes, which are its output.
+`the_prepared_constructor_allocates_independently_of_the_fact_count` therefore pins the invariant a
+constructor can have — that the allocation count is **independent of the number of facts**, measured
+equal at 256, 512 and 1,024 and below 64, after entering the constructor eight times at each size —
+against the wire path's count, which grows at about two allocations per fact. It does not replace the
+zero-allocation regression, which is the **evaluator's** per-derivation one; that test is untouched
+by this task and still passes.
 
 ### The three deliberate mutations
 
@@ -547,7 +581,7 @@ hashes a 133 KB tuple payload once. **The whole prepared boundary — `Demand::p
 about 120 M for the four serializations, three admissions, the owned `Fact` per tuple and the
 allocator traffic they generate. At 16,897
 materialized facts over three layers that is a recorded per-unit budget of about **460 instructions
-per materialized fact** for the prepared boundary, against about 6,500 for the wire one.
+per materialized fact** for the prepared boundary, against about **7,100** for the wire one.
 
 The symbols that are *not* the boundary barely move: `closed_world`, `evaluate_into`,
 `RelationStore::insert` and `JoinIndexes::build` are within about 10 per cent either way, and
@@ -561,8 +595,12 @@ closes to about 86 per cent; the remainder is in symbols below the profile's 0.1
 `Map::fold`, which is down 2.5 M.
 
 **Out-of-line calls in the candidate's loops, listed as the playbook requires.** Two libc symbols
-appear: `__memmove_avx512_unaligned_erms` at 12.36 M and `__memcmp_evex_movbe` at 2.61 M. Neither is
-new — the control carries both, at 19.47 M and 4.27 M — and both are **lower** on the candidate, so
+appear **inside the loops**: `__memmove_avx512_unaligned_erms` at 12.36 M and `__memcmp_evex_movbe`
+at 2.61 M. Three more clear the profile's 0.15 per cent cut and are not inside any loop —
+`__rustc::__rust_alloc`, `malloc` and `cfree` at about 0.18 per cent each — and they are the plan's
+own per-layer setup allocations, which is exactly what the constructor's allocation regression
+bounds: it shows that count is the same at 256, 512 and 1,024 facts. Neither of the two loop symbols
+is new — the control carries both, at 19.47 M and 4.27 M — and both are **lower** on the candidate, so
 each is justified by measurement rather than removed. `memmove` is the runtime-length
 `extend_from_slice` that fills each relation's row store in `Demand::prepare` and the tuple pool in
 `admit_prepared`, plus the workspace reset in `evaluate_into`; `memcmp` is the slice comparison in the
@@ -579,16 +617,22 @@ from about 22,000 materialized facts in a layer to 4,194,304.
 
 **The one measured loss, and what it is.** On `datalog` the repeated-loop wall time is up 20 per cent
 while instructions are down 0.6 per cent, and the counter that explains it is 30,162 minor faults per
-iteration against 4,971. Diagnosis, in the order the playbook prescribes — count the events, then
+iteration against 4,968. Diagnosis, in the order the playbook prescribes — count the events, then
 find the mechanism, then check it:
 
 - With glibc's trim and mmap thresholds pinned above the pool sizes
-  (`MALLOC_TRIM_THRESHOLD_` and `MALLOC_MMAP_THRESHOLD_` at 2^30), the candidate's faults go to
-  **0 to 2 per iteration** and the control's to 279, and the two arms' wall times become equal:
-  medians of about 65.2 ms over three alternating pairs each.
+  (`MALLOC_TRIM_THRESHOLD_` and `MALLOC_MMAP_THRESHOLD_` at 2^30) and forty iterations, the
+  candidate's loop minor faults fall from **1,206,486 to 2 over the run** and the control's from
+  191,573 to 281, and the two arms' median iterations become **94.73 ms and 95.08 ms — a ratio of
+  0.996**, equal to within half a per cent. The ratio is the part that carries the argument; the
+  absolutes are from the audit's run under the replay command below, and an earlier unreproduced run
+  of mine gave about 65 ms on both arms with no command recorded, which is why the ratio and not the
+  absolute is what this report rests on.
 - A single `rel-lower` invocation on the same cohort — which is what a consumer actually runs — is
-  **102.8 ms on the candidate against 106.9 ms on the control**, with peak resident set 126,992 KiB
-  against 127,568 KiB.
+  **114.6 ms on the candidate against 116.2 ms on the control** over nine alternating pairs, with
+  peak resident set 127,104 KiB against 127,644 KiB. An earlier unpaired run of mine gave 102.8
+  against 106.9 ms and 126,992 against 127,568 KiB: the same direction, the same size of gap and the
+  same resident set to within half a per cent, at a different absolute wall time.
 
 So the mechanism is the allocator returning pages to the kernel between iterations: the wire route
 left 512 owned relation names and 512 owned tuples alive above the freed workspace, which pinned the
@@ -656,7 +700,13 @@ is here rather than buried in a commit message.
    would have left a layer able to materialize up to `MAX_RELATIONS` complements of `MAX_COMPLEMENT`
    tuples each — an out-of-memory failure where a refusal belongs. `MAX_LAYER_TUPLES` is this route's
    own declared bound at `MAX_COMPLEMENT`'s value, checked against the projected total before each
-   construct is enumerated.
+   construct is enumerated: a complement and a filter project their column domains' product, and an
+   aggregate the tuple count of the closure it reads, which bounds its groups because a group exists
+   exactly when the closure holds a tuple for it. **The aggregate's projection is the audit's one code
+   repair**: as first written the aggregate was built and then tested, so the invariant this sentence
+   states was true of two constructions out of three. It was never a memory hole — an aggregate
+   cannot exceed the closure the driver already holds — but the invariant is now true as written,
+   by `ergodis-private` `e0e7331`.
 7. **`rel-lower` gained a `--values` flag**, which the card did not ask for. Without it the deeper
    half of the boundary table would have had to come from an uncommitted source, which is exactly the
    defect the milestone (c) audit recorded against the aggregate-only probe. With it every figure in
@@ -684,8 +734,17 @@ is here rather than buried in a commit message.
    2.73 GB on `columns` at 2,046. The encoding bound was also a memory bound, and removing it removed
    that too. Nothing sizes a layer against available memory; `MAX_LAYER_TUPLES` is a tuple count, and
    a tuple's cost in the evaluator's workspace is seven `u32` per derived row rather than the four
-   bytes per value the bound counts.
-5. **Milestone (c)'s and the per-column report's gaps are unchanged**: min-plus is deferred, an
+   bytes per value the bound counts. The `columns3` attribution above makes the same point from the
+   other side: **`--max-rows 16777216` alone reserves about 1.6 GB on that cohort**, for rows it
+   never derives, because the reservation is eager and sized to the capacity asked for rather than to
+   the program.
+5. **`Prepared` now names two unrelated things in `ergodis_rules`**: the pre-existing
+   `ergodis_rules::Prepared`, which is the grounded min-plus contract plan, and the new
+   `PreparedSource` / `Demand::from_prepared`, which is a source in resolved form. Nothing is
+   ambiguous to the compiler, but a reader of that crate meets the word twice with two meanings.
+   Recorded as a follow-up rather than renamed here: renaming the older type reaches another lane's
+   tests, and renaming the newer one would lose the task card's own vocabulary.
+6. **Milestone (c)'s and the per-column report's gaps are unchanged**: min-plus is deferred, an
    aggregate's body is one positive application, arithmetic in a term position is refused, the
    same-layer fallback takes the whole dictionary, `bind` records no site for a variable an aggregate
    binds, and `exists(x in D: F)` and `not` over a non-application are still unwritten.
@@ -740,13 +799,19 @@ is here rather than buried in a commit message.
    `lower::run` bucketed by address range in the two milestone (c) binaries, which is now overdue on
    three reports.
 
-6. **Open: this route has no independent audit of the constructor's correctness beyond its own
-   corpora.** The differential found zero disagreements on the first run of every corpus, which for
-   this change is weak evidence by construction: the prepared path builds the same structures from
-   the same information, so a corpus that exercises the construction cannot distinguish two
-   constructions that agree. The deliberate mutations below are what shows the gates discriminate.
-   *Evidence gap*: the independent read-only audit the task card asks for, which is not in this
-   report and which the next step names.
+6. **Settled by the audit, and with a stronger statement than the differential can make.** The
+   worry was that the differential's zero disagreements are weak evidence for this change by
+   construction: the prepared path builds the same structures from the same information, so a corpus
+   that exercises the construction cannot distinguish two constructions that agree, and only the
+   deliberate mutations show the gates discriminate. The audit closed it from outside both
+   repositories, with a program none of the committed tests uses: for that program **`admit_prepared`
+   and `admit` produce identical admitted forms** — the same relations, the same rules, an identical
+   flat tuple pool, identical `(relation, offset)` fact records and an identical source fact count —
+   **differing only in the source identity**. That compares the structures rather than the fixed
+   point they produce, which is what the corpora could not do. The audit also moved the identity
+   under seven semantic mutations, six of which this report's three do not cover, and showed the
+   encoding self-delimiting at the one boundary where a length prefix is what separates two sources.
+   *Nothing about this item is open.*
 
 ## Replay commands
 
@@ -825,6 +890,36 @@ for c in stratified columns aggregate; do
       --definitions 128 --stages scan,parse,admit,lower,stratify --events $E \
       --out $B/performance-v6-prepared-$c-8191ab7.json
 done
+# The wall-loss diagnosis on `datalog`: the fault counts and the two arms' medians
+# with glibc's trim and mmap thresholds pinned above the pool sizes, and without.
+# Outcome pinned: loop minor faults 2 over the run on the candidate and 281 on the
+# control, medians 94.73 ms and 95.08 ms. Unpinned: 1,206,486 and 191,573 faults,
+# medians 119.21 ms and 100.08 ms. Every fault figure is a run total over forty
+# iterations, which is what the harness reports.
+for arm in 8191ab7 3778763; do
+  MALLOC_TRIM_THRESHOLD_=$((1<<30)) MALLOC_MMAP_THRESHOLD_=$((1<<30)) taskset -c 5 \
+    ~/.cache/ergodis/bin/ergodis-tools-$arm rel-frontend-bench --cohort datalog \
+    --stage stratify --definitions 512 --repeat 40 --timings
+  taskset -c 5 ~/.cache/ergodis/bin/ergodis-tools-$arm rel-frontend-bench --cohort datalog \
+    --stage stratify --definitions 512 --repeat 40 --timings
+done
+
+# The single invocation, which is what a consumer runs: nine alternating pairs, the
+# median of the `stratified` nanosecond field. Outcome: 114.6 ms on the candidate
+# against 116.2 on the control, peak RSS 127,104 against 127,644 KiB.
+for r in 1 2 3 4 5 6 7 8 9; do for arm in 8191ab7 3778763; do
+  taskset -c 5 ~/.cache/ergodis/bin/ergodis-tools-$arm \
+      rel-lower --cohort datalog --definitions 512 --max-tuples 0
+done; done
+
+# The peak-resident-set attribution of the `columns3` row. Outcome, in KiB:
+# 561,356 with no flags, 2,139,432 with --max-rows alone, 563,728 with --values
+# alone, 2,140,716 with both.
+for a in "" "--max-rows 16777216" "--values 262144" "--max-rows 16777216 --values 262144"; do
+  choom -n 1000 -- nix develop ~/src/ergodis --command cargo run --release -p ergodis-tools -- \
+      rel-lower --cohort columns3 --definitions 85 --max-tuples 0 $a
+done
+
 # The harness commit's own parity A/B, on the stages that already existed.
 nix develop ~/src/ergodis --command python3 $B/bench.py \
     --binary ~/.cache/ergodis/bin/ergodis-tools-3778763 \
@@ -852,6 +947,17 @@ addressing, which is a property of arity and dictionary size rather than of any 
 retires milestone (c)'s "product or reduction" rule of thumb and replaces it with a question about
 arity, and it makes the per-column milestone's narrowing suddenly relevant again in a place nobody
 had looked: the addressing check uses the declared dictionary, not the per-column domains.
+
+The independent audit reproduced every record — all sixteen boundary points, every A/B figure to the
+printed digit, the closure digests, the parity replay, every gate and the whole kernel-scoped profile
+— and found no code defect. It found one measurement defect, the `columns3` peak resident set, which
+had been taken with `--values` alone and is 2.14 GB under the flags the table states; that row is
+corrected and the 1.6 GB the row store reserves from `--max-rows` alone is now a recorded fact. Its
+one code finding is repaired: the aggregate's layer-bound test now runs before its enumeration, so
+the invariant the bound's doc comment states is true of all three constructions rather than two. And
+it took a free strengthening this report had earned and not taken: the two routes produce **identical
+admitted forms**, differing only in the identity, which is a structural statement the differential
+could not make and which closes the last open ledger item.
 
 Two blemishes stated plainly. The `datalog` cohort's repeated-loop wall time is up 20 per cent while
 its instructions are down, and the cause is 25,000 extra minor faults per iteration from the
@@ -960,16 +1066,13 @@ that was measured.
 
 ## Next steps
 
-1. **The independent read-only audit** the task card asks for, as
-   `notes/2026-09-16-c1191-direct-constructor-audit.md`. It is the one acceptance item this report
-   does not contain, and it cannot be: an audit written by the author of the change is not the thing
-   the card asks for. What it should reproduce first, in order of how much rests on it: the boundary
-   bisection on all four cohorts in both configurations, the closure digests across arms in the four
-   receipts, the three deliberate mutations, and the identity's independence from the supplied tuple
-   order.
-2. **Per-column domains in the addressing bound.** `MAX_INDEX_KEYS` now decides the reach on two of
+1. **Per-column domains in the addressing bound.** `MAX_INDEX_KEYS` now decides the reach on two of
    the four cohorts, and the close pass checks `dictionary^arity` while the complement is built over
    `∏ᵢ |Dᵢ|`. Narrowing the addressing check to the domains a relation's columns actually range over
    is where the per-column milestone's work and this one would compound, and it is a core change.
-3. **A memory model for a layer**, and the decision about whether `MAX_LAYER_TUPLES` should be a byte
-   bound; mystery ledger item 4.
+2. **A memory model for a layer**, and the decision about whether `MAX_LAYER_TUPLES` should be a byte
+   bound; mystery ledger item 4. The `columns3` attribution gives it a second input: the evaluator's
+   row reservation is eager and sized to `--max-rows`, so 1.6 GB can be reserved for rows a cohort
+   never derives.
+3. **Rename one of the two `Prepared`s in `ergodis_rules`**, or document the distinction in the
+   crate's module documentation; remaining gap 5.

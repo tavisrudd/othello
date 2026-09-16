@@ -2,11 +2,13 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-16
-**Status**: BUILT, GATED AND MEASURED; the independent audit is outstanding. Successor of C1190
-(`2026-09-15-c1190-rel-lowering.md`); the lever the per-column and milestone (c) reports rank first.
-Report: `2026-09-16-c1191-direct-constructor-report.md`. Every acceptance item below is met except
-the read-only audit, which an author cannot write for their own change; the report's next steps say
-what it should reproduce first.
+**Status**: DONE AND AUDITED. Successor of C1190 (`2026-09-15-c1190-rel-lowering.md`); the lever the
+per-column and milestone (c) reports rank first. Report:
+`2026-09-16-c1191-direct-constructor-report.md`. Audit:
+`2026-09-16-c1191-direct-constructor-audit.md`, which reproduced every record and found no code
+defect; its one measurement defect and nine smaller items are repaired, one of them in code
+(`ergodis-private` `e0e7331`, the aggregate's layer-bound check moved before its enumeration) and the
+rest in the report. Every acceptance item below is met.
 
 ## Goal
 
