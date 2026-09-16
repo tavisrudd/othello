@@ -828,3 +828,194 @@ Compounded, the derivation loop is at 0.81 to 0.88 of the control on the existin
 No discovery-track entry: everything found was inside what the task was looking for, with one
 exception already folded into item 4 above rather than logged, because it is a property of this
 evaluator's own hash and not an incidental observation about anything else.
+
+## Replay commands
+
+Run from `~/src/ergodis-private` unless stated. Every gate and every measurement was run under
+`nix develop ~/src/ergodis`, whose devShell asserts its rustc equals the `rust-toolchain.toml` pin,
+so the gates and the measurements describe one build.
+
+```sh
+# Gates, core.
+cd ~/src/ergodis
+nix develop . --command cargo test --all-features -j 8
+nix develop . --command cargo clippy --all-targets --all-features -j 8 -- -D warnings
+nix develop . --command cargo fmt --all -- --check
+cd ~/src/ergodis-private
+
+# Gates, private. This drives rel_lowering, rel_frontend, rel_frontend_portability
+# and rel_reference_eval, which is the C1189 differential.
+nix develop ~/src/ergodis --command cargo test -p ergodis-private -p ergodis-tools -j 8
+nix develop ~/src/ergodis --command cargo clippy -p ergodis-private -p ergodis-tools \
+    --lib --bins --tests --examples -j 8 -- -D warnings
+nix develop ~/src/ergodis --command cargo fmt -p ergodis-private -p ergodis-tools -- --check
+
+# The arms. Each is retained from a checkout at its own revision; the script
+# retains whatever the tree carries and names the binary for it.
+git checkout e0e7331 && ../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release
+git checkout e0e7331 && ../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools
+git checkout d2b1940 && ../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release
+git checkout d2b1940 && ../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools
+git checkout b7921a0 && ../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release
+
+A=analysis/datalog-comparison
+CTL=~/.cache/ergodis/bin/closure_ballpark-e0e7331
+CAND=~/.cache/ergodis/bin/closure_ballpark-d2b1940
+C1188=~/.cache/ergodis/bin/closure_ballpark-b7921a0
+W=~/.cache/ergodis/c1192/ab-work
+
+# The direct path, where the policy still selects the direct kind for every
+# structure. Both arms in the full harness mode, which is the one the control has.
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $CTL --a-name control \
+    --b $CAND --b-name candidate --mode full --rounds 5 --cpu 5 --repeats 3 \
+    --cohorts closure:sparse:256,closure:sparse:1024,closure:dense:256,closure:dense:512,samegen:sparse:1024,samegen:dense:512 \
+    --work $W --out $A/ab-2026-09-16-c1192-direct.json
+
+# C1188, the tuple copy, on its own.
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $CAND --a-name memmove \
+    --b $C1188 --b-name elements --mode evaluate --rounds 5 --cpu 5 --repeats 3 \
+    --cohorts closure:sparse:256,closure:sparse:1024,closure:dense:256,closure:dense:512,samegen:sparse:1024,samegen:dense:512,closure:blocks:16384,mutual:blocks:4096 \
+    --work $W --out $A/ab-2026-09-16-c1188-memmove.json
+
+# The crossover: one binary, one structure's kind forced on each arm.
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $CAND --a-name bitmap --b $CAND --b-name sparse \
+    --a-args "--index direct" --b-args "--index sparse-membership" --mode evaluate \
+    --rounds 5 --repeats 3 --cpu 5 --cohorts closure:blocks:4096,closure:blocks:16384 \
+    --sweep "--max-rows 65536;--max-rows 262144;--max-rows 1048576;--max-rows 4194304;--max-rows 16777216" \
+    --work ~/.cache/ergodis/c1192/sweep-work --out $A/ab-2026-09-16-c1192-crossover-membership.json
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $CAND --a-name bitmap --b $CAND --b-name sparse \
+    --a-args "--index direct" --b-args "--index sparse-membership" --mode evaluate \
+    --rounds 5 --repeats 3 --cpu 5 --cohorts closure:blocks:32768 \
+    --sweep "--max-rows 524288;--max-rows 2097152" \
+    --work ~/.cache/ergodis/c1192/sweep-work --out $A/ab-2026-09-16-c1192-crossover-membership-high.json
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $CAND --a-name direct --b $CAND --b-name sparse \
+    --a-args "--index direct" --b-args "--index sparse-indexes" --mode evaluate \
+    --rounds 5 --repeats 3 --cpu 5 --cohorts cycle:blocks:4096,mutual:blocks:4096 \
+    --sweep "--max-rows 262144;--max-rows 1048576;--max-rows 4194304;--max-rows 16777216" \
+    --work ~/.cache/ergodis/c1192/sweep-work --out $A/ab-2026-09-16-c1192-crossover-index.json
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $CAND --a-name direct --b $CAND --b-name sparse \
+    --a-args "--index direct" --b-args "--index sparse-indexes" --mode evaluate \
+    --rounds 5 --repeats 3 --cpu 5 --cohorts cycle:blocks:4096 \
+    --sweep "--max-rows 65536;--max-rows 131072;--max-rows 524288" \
+    --work ~/.cache/ergodis/c1192/sweep-work --out $A/ab-2026-09-16-c1192-crossover-index-high.json
+
+# The frontend and the stratified backend.
+E=instructions,cycles,branches,branch-misses,page-faults,minor-faults
+B=analysis/rel-frontend
+T=~/.cache/ergodis/bin/ergodis-tools-d2b1940
+C=~/.cache/ergodis/bin/ergodis-tools-e0e7331
+nix develop ~/src/ergodis --command python3 $B/bench.py --binary $T --control $C \
+    --rounds 5 --cpu 5 --stages scan,parse,admit,lower,stratify --events $E \
+    --out $B/performance-v7-sparse-d2b1940.json
+nix develop ~/src/ergodis --command python3 $B/bench.py --binary $T --control $C \
+    --rounds 5 --cpu 5 --cohorts datalog --stages scan,parse,admit,lower,stratify \
+    --events $E --out $B/performance-v7-sparse-datalog-d2b1940.json
+for c in stratified columns aggregate; do
+  nix develop ~/src/ergodis --command python3 $B/bench.py --binary $T --control $C \
+      --rounds 5 --cpu 5 --cohorts $c --definitions 128 \
+      --stages scan,parse,admit,lower,stratify --events $E \
+      --out $B/performance-v7-sparse-$c-d2b1940.json
+done
+
+# The reach table. One process each, no certificates, no checkers.
+R=~/.cache/ergodis/c1192/work
+for a in "--program closure 4096 sparse" "--program closure 8192 sparse" \
+         "--program closure 2048 dense" "--program samegen 8192 sparse" \
+         "--program samegen 16384 sparse" "--program closure 4096 blocks" \
+         "--program closure 16384 blocks" "--program closure 65536 blocks" \
+         "--program mutual 4096 blocks" "--program mutual 8192 blocks"; do
+  choom -n 1000 -- $CAND --evaluator demand --evaluate-only $a 1 $R
+done
+for a in "--program closure 65536 blocks" "--program mutual 65536 blocks"; do
+  choom -n 1000 -- $CAND --evaluator demand --evaluate-only $a 1 $R --max-rows 1100000
+done
+choom -n 1000 -- $CAND --evaluator demand --evaluate-only --program cycle 4096 blocks 1 $R --max-rows 100000
+choom -n 1000 -- $CAND --evaluator demand --evaluate-only --program cycle 65536 blocks 1 $R --max-rows 1100000
+# The old ceiling, on the control: Budget from admission, before any evaluation.
+choom -n 1000 -- $CTL --evaluator demand --program closure 65536 sparse 1 $R
+
+# The boundary table. Each pair is the largest --definitions that runs and the
+# first that is refused; the tool prints the budget, the number and the limit.
+TOOL=~/.cache/ergodis/bin/ergodis-tools-d2b1940
+F="--max-rows 16777216 --values 262144"
+for n in 2047 2048; do choom -n 1000 -- $TOOL rel-lower --cohort stratified --definitions $n --max-tuples 0 $F; done
+for n in 2046 2047; do choom -n 1000 -- $TOOL rel-lower --cohort columns    --definitions $n --max-tuples 0 $F; done
+for n in 161 162;   do choom -n 1000 -- $TOOL rel-lower --cohort columns3   --definitions $n --max-tuples 0 $F; done
+for n in 2046 2047; do choom -n 1000 -- $TOOL rel-lower --cohort aggregate  --definitions $n --max-tuples 0 $F; done
+
+# The kernel-scoped profile, both arms and after C1188.
+for arm in e0e7331 d2b1940 b7921a0; do
+  taskset -c 5 perf record -q -e instructions:u -F 4000 \
+      -o ~/.cache/ergodis/perf-c1192/closure-dense-$arm.data -- \
+      ~/.cache/ergodis/bin/closure_ballpark-$arm --evaluator demand --program closure \
+      --certificates 512 dense 20 $R
+  perf report -q -i ~/.cache/ergodis/perf-c1192/closure-dense-$arm.data \
+      --no-children --percent-limit 0.1 --sort symbol
+done
+```
+
+Inputs are deterministic: the C1182 xorshift64 generators seeded by the domain (closure
+`0x9E3779B97F4A7C15 ^ N`, same generation `0x2545F4914F6CDD1D ^ N`) and the `blocks` density, which
+uses no random stream at all.
+
+## What this task left under `~/.cache/ergodis/`
+
+`bin/closure_ballpark-e0e7331` and `bin/ergodis-tools-e0e7331` are the two controls, retained from a
+clean tree before the first source change. `bin/closure_ballpark-d2b1940` and
+`bin/ergodis-tools-d2b1940` are the candidate arms every figure above except C1188's was measured
+on, and `bin/closure_ballpark-b7921a0` is the arm after C1188 — **the control the next A/B should
+use**. `bin/closure_ballpark-1dfc6ed` is the superseded candidate whose A/B was re-run at `d2b1940`;
+`bin/ergodis-tools-4bcbc10` likewise. `bin/c1188probe-d2b1940` is a probe built from a dirty tree
+before C1188 was committed, and nothing cites it; it is byte-identical to
+`closure_ballpark-b7921a0`, measured sha256 `08b488430c2ffd1f3443d22364756eb85b018282d961108b2d8010a3507063d3`.
+
+Under `perf-c1192/` (572 KB): the three kernel-scoped profiles. Under `c1192/` (5.1 MB): the A/B
+work directories, the fact files the reach probes emitted, and the `perf stat` outputs the receipts'
+enabled fractions were read from.
+
+`../ergodis-dev/scripts/cache-gc.sh` was run in its listing mode and nothing was deleted. It scanned
+44 entries and showed eight as unreferenced and old enough to remove, none of them this task's: the
+largest are `worktrees` at 105 MB, `split` at 31 MB and `representation-attribution` at 16 MB, all
+from other lanes. This task's `perf-c1192` and `c1192` are held as younger than two days, and every
+binary this report names shows as referenced. Deletion is the user's call.
+
+## The control for the next A/B
+
+`~/.cache/ergodis/bin/closure_ballpark-b7921a0`, measured sha256
+`08b488430c2ffd1f3443d22364756eb85b018282d961108b2d8010a3507063d3`, retained from a clean tree at
+`ergodis-private` `b7921a0` with core `ergodis` `24e399e` under rustc 1.95.0 (59807616e 2026-04-14).
+For the frontend and the stratified backend, `~/.cache/ergodis/bin/ergodis-tools-d2b1940`, measured
+sha256 `f6b5234dfe5b9e2286b101e85ca7020386be2ad4bc4531bbd5b8654f4dea7646` — **which does not carry
+C1188**, because no `ergodis-tools` was retained after it. A backend A/B should retain one first.
+
+## Vibe check
+
+Good, and the reach moved further than the card's own framing expected — but not where the card
+looked. The two admission ceilings are gone as refusals and survive as policy ceilings at their old
+values, so a program that ran before makes the same choices and the direct path is measurably
+**faster** rather than merely unmoved: 0.907 to 0.982 of the control's instructions, and 0.81 to
+0.88 once C1188's tuple copy goes too. A binary relation is no longer capped at a domain of 32,768
+whatever its size; `closure` over 65,536 values with a million tuples runs in 221 ms and 239 MB, and
+the control refuses that program at admission before it looks at a single fact.
+
+The correction worth carrying forward is that `MAX_INDEX_KEYS` was never what bound the closure and
+same-generation families — their join masks name one column — so the card's and the programme
+review's "every binary relation is capped at a domain of 4,096" is true only of a two-column mask.
+What bound them was the membership bitmap, and behind it the row capacity, which is still what stops
+them: both families derive a quadratic number of tuples, so neither can reach N = 16,384 under any
+index change. The reach this buys is a large domain with a small relation, and the task had to add a
+cohort to have one.
+
+The crossover came out as three answers rather than one. Only the dynamic join index has a crossover
+(density 48, in cycles, because it is the one structure rebuilt before every evaluation); the
+membership bitmap and the input relation's counting-sorted index are faster at every density their
+ceilings allow, by 1.2 to 2.4 times, so for those the ceiling decides alone and that is a measured
+decision. Instructions favour the direct kind everywhere, which makes this the one place in this lane
+a cycle ratio is load bearing, and the report says so rather than quietly reporting the metric that
+agrees.
+
+Two blemishes. There is no Soufflé row on the new sizes, which the card asked for and which is one
+`compare.py` invocation away. And finding a test that discriminates the sparse bucket's key
+comparison took three attempts: the hash is close to injective on every natural key range, so two
+carefully designed collision cohorts passed with the comparison deleted, and what works is forcing
+the table to a single slot.
