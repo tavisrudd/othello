@@ -5192,8 +5192,17 @@
       "last": 1197,
       "purpose": "C1170 follow-up: frontend micro-optimization candidates priced in the C1170 reports",
       "sequence": 577
+    },
+    {
+      "count": 1,
+      "first": 1198,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1198,
+      "purpose": "C1192 successor: demand workspace sized from rows with zero-sentinel tables and lazy page commit",
+      "sequence": 578
     }
   ],
-  "next_id": 1198,
+  "next_id": 1199,
   "schema": "codex-task-id-allocations-v1"
 }

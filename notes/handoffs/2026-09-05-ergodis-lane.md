@@ -8,7 +8,7 @@ correction trails live in dated reports and the append-only
 
 **Date**: 2026-09-16
 **Mode**: intent-based.
-**Status**: ACTIVE. Immediate engineering frontier is C1190 (Rel lowering; milestones a, b, per-column domains, c and the C1191 direct constructor done and audited; successors C1192–C1196 queued, C1192 in progress; C1170 frontend closed 2026-09-16 with C1197 queued later; C1189 oracle closed); the
+**Status**: ACTIVE. Immediate engineering frontier is C1190 (Rel lowering; milestones a, b, per-column domains, c and the C1191 direct constructor done and audited; C1192 sparse index and C1188 done and audited; C1193–C1196 and C1198 queued; C1170 frontend closed 2026-09-16 with C1197 queued later; C1189 oracle closed); the
 rule-contract programme C1172–C1177 and the Datalog evaluation tasks C1179/C1182–C1186 are closed. C1143, C1130, C1016,
 C1017, C1061 and C985 remain in progress. C1062 and C1070 await Tavis's close call.
 
@@ -299,9 +299,28 @@ loss is minor faults once the old `Fact` allocations stop pinning the heap (arms
 trim threshold); `--max-rows 16777216` alone reserves about 1.6 GB of eager row store on an
 arity-three cohort. Control for the next frontend A/B: `ergodis-tools-e0e7331` (rustc 1.95.0; the
 repair commit was not re-measured).
+**C1192 sparse join index and C1188 done and audited** (`../2026-09-16-c1192-sparse-join-index-report.md`,
+core `84ed62c` … `6ab0dd5`, `24e399e` (C1188), `460ca32`; private `25cf4ed` … `3ed2043`, `c3eda9a`; Opus,
+audit `../2026-09-16-c1192-sparse-join-index-audit.md`: every value re-derives, no code defect, two
+measurement records and prose repaired). Both direct-addressed structures (join index, membership
+test) have a sparse kind chosen once at preparation; the dynamic index crosses over at density 48
+(cycle-decided, with counted cache events: sparse issues 0.36–0.38 of direct's references and L1
+misses), the bitmap and input CSR stay direct wherever they fit. `MAX_UNIVERSE`/`MAX_INDEX_KEYS`
+are policy ceilings now; refusals are row capacity and `MAX_WORKSPACE_BYTES`. Closure at
+N = 65,536 over a 2^32 universe runs (221 ms, 239 MB) where admission refused it; quadratic
+closures are bound by the 2^24 row capacity. Direct path 0.907–0.982 instructions; C1188's
+`memmove` removal 0.893–0.895 instructions on all eight cohorts. No Rel cohort is stopped by an
+addressing bound (`columns3` 255 → 483, `aggregate` 1,412 → 2,046). **Soufflé 2.5 on closure/blocks
+at 4,096/16,384/65,536: 0.98/0.81/0.95 of compiled with a sized row bound, 3.24/1.56/1.25 at the
+default bound** — the eager workspace reservation and `fill(NONE)` at capacity, queued as **C1198**
+(`../2026-09-16-c1198-workspace-sized-from-rows.md`), now ahead of C1195. Parity digest moved to
+`349333d4…` (lowering pass edited; parity holds at 243 cases). Controls for the next A/B:
+`closure_ballpark-b7921a0` (derivation loop) and `ergodis-tools-f12e27b` (frontend/backend), rustc
+1.95.0. Open for Tavis: the public `Policy::{Direct,Sparse,SparseIndexes,SparseMembership}` knobs on a
+core type (keep public or feature-gate); cache-gc lists eight old unreferenced entries (largest
+`datalog-comparison` 281 MB) — deletion is Tavis's call.
 **Programme review and next steps (2026-09-16)**: `../2026-09-16-ergodis-datalog-programme-review.md`
-ranks the gaps against the programme goal and allocates, in EV order: **C1192** sparse join index
-with exact crossover (removes the `MAX_INDEX_KEYS` domain ceiling; `../2026-09-16-c1192-sparse-join-index.md`),
+ranks the gaps against the programme goal and allocates, in EV order: **C1192** (done, above),
 **C1193** bodies of more than two atoms (`../2026-09-16-c1193-nary-bodies.md`, after C1192),
 **C1194** min-plus carrier and term arithmetic through the lowering (`../2026-09-16-c1194-min-plus-lowering.md`),
 **C1195** end-to-end benchmark suite from Rel source against Soufflé
