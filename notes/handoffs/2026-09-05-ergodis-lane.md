@@ -265,8 +265,26 @@ punctuation), so the direct constructor into the evaluator's prepared form that 
 worth about 10× on the same bound and is the recommended next lever after milestone (c). `Negative`
 atoms in the core `Rule` stay the recorded fallback. Lowering stage +4.5 % on positive sources, +2.3 %
 with negation, partly unattributed. Control for the next frontend A/B: `ergodis-tools-606136e`
-(rustc 1.95.0). **Milestone (c), aggregation at layer boundaries, in progress**
-(`../2026-09-15-c1190-milestone-c.md`). Ergodis retains lowering, rules, joins and execution; no external
+(rustc 1.95.0).
+**Milestone (c) done and audited** (`../2026-09-15-c1190-milestone-c.md`, private `79e9c52` …
+`4554a52`, Opus; audit `../2026-09-15-c1190-milestone-c-audit.md`, every record, corpus, boundary
+and A/B reproduces; eight findings repaired, two in code: synthesized `ag{n}`/`cf{n}` names now take
+the `nc{n}` collision guard, and the reference evaluator refuses a non-integer aggregated column
+where the lowering does, with a near-miss shape deciding it). `count`/`min`/`max`/`sum` are computed
+at layer boundaries into digest-checked, independently rebuildable records; comparisons are
+materialized filter relations (the contract has no filter atom); an ordering comparison on a
+non-integer is false, not refused, so `<` and `>=` do not partition a mixed column (recorded
+reading); min-plus carrier selection is structurally deferred, since the fragment has no
+term-level arithmetic. Parity 243 cases at `f0e2b581…`; scan/parse/admit unity within 11 ppm;
+reserved workspace byte-identical. Cost shape: constructs that reduce a closure (aggregates) are
+free, constructs that need a product over one (negation, comparison) hit the ~22,000-fact
+encoding ceiling. Control for the next frontend A/B: `ergodis-tools-b7c624d` (rustc 1.95.0).
+**Next, unallocated, in EV order**: the direct constructor from the relational IR into the demand
+evaluator's prepared form (removes the encoding ceiling for every product-shaped construct, no
+contract change; aggregate-result relations were designed for it, see the milestone (c) report);
+the kernel-scoped profile of `lower::run` closing the two unattributed lowering-stage swings
+(74 % of the per-column increase, the recurring `comment-string` thin-LTO swing); then the
+coverage rows the reports list (`exists(x in D: F)`, `not (F and G)`, term-level arithmetic). Ergodis retains lowering, rules, joins and execution; no external
 evaluator or backend is adopted. Tree-sitter and a PLT Redex model remain deferred.
 
 ### Datalog evaluation — C1179, C1182 and C1183 closed
