@@ -8,7 +8,7 @@ correction trails live in dated reports and the append-only
 
 **Date**: 2026-09-15
 **Mode**: intent-based.
-**Status**: ACTIVE. Immediate engineering frontier is C1190 (Rel lowering, milestone b next; C1170 frontend and C1189 oracle closed); the
+**Status**: ACTIVE. Immediate engineering frontier is C1190 (Rel lowering, milestones a and b done; C1170 frontend and C1189 oracle closed); the
 rule-contract programme C1172–C1177 and the Datalog evaluation tasks C1179/C1182–C1186 are closed. C1143, C1130, C1016,
 C1017, C1061 and C985 remain in progress. C1062 and C1070 await Tavis's close call.
 
@@ -240,8 +240,22 @@ programs lower and the in-fragment divergence class is empty. Lowering-stage A/B
 binarized rules changed order; the canonical parity hash did not move, because no parity case has a
 body where the tiebreak decides. Control for the next frontend A/B: `ergodis-tools-c67e8d5`
 (rustc 1.95.0).
-Next: milestone (b). Ergodis retains lowering, rules, joins and execution; no external evaluator or
-backend is adopted. Tree-sitter and a PLT Redex model remain deferred.
+**Milestone (b) done** (`../2026-09-15-c1190-milestone-b.md`, private `4b058ae` … `73dd56b`, Opus,
+vetted): stratified negation and `forall` through per-layer projection with complement facts, one
+contract `Program` and certificate per layer, complement records independently rebuilt and
+digest-checked; the reference evaluator computes the stratified fixed point and the differential
+covers 600 negation programs with zero disagreements (two deliberate mutations confirm the corpora
+discriminate); parity 226 cases at `91b007eb…`; allocation gate over all seven exits; scan/parse/admit
+unchanged against `ergodis-tools-c67e8d5`. Three recorded deviations: layers (negation boundaries)
+rather than Tarjan strata are the programs, `ergodis-rules` is now a real dependency of the private
+crate for the shared driver `src/rel_stratified.rs`, and `forall` introduces a witness relation.
+**The ADR 0004 size question has its number**: the complement is quadratic in the dictionary and the
+binding bound is the core's `MAX_BYTES` on the layer program, so the route affords one negated binary
+relation over about 150 dictionary entries (arity 3 about 28). Decision for Tavis: per-column domains
+next (the step the ADR left between), or `Negative` atoms in the core `Rule`. Control for the next
+frontend A/B: `ergodis-tools-ebecae2` (rustc 1.95.0). Next after that decision: milestone (c),
+aggregation at layer boundaries. Ergodis retains lowering, rules, joins and execution; no external
+evaluator or backend is adopted. Tree-sitter and a PLT Redex model remain deferred.
 
 ### Datalog evaluation — C1179, C1182 and C1183 closed
 
