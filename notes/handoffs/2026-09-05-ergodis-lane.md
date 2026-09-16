@@ -253,9 +253,20 @@ crate for the shared driver `src/rel_stratified.rs`, and `forall` introduces a w
 binding bound is the core's `MAX_BYTES` on the layer program, so the route affords one negated binary
 relation over about 150 dictionary entries (arity 3 about 28). **Tavis's decision (2026-09-15):
 per-column domains** in the value dictionary and the complement construction (the step the ADR left
-between), in progress as `../2026-09-15-c1190-per-column-domains.md`; `Negative` atoms in the core
-`Rule` stay the recorded fallback. Control for the next frontend A/B: `ergodis-tools-ebecae2`
-(rustc 1.95.0). Then milestone (c), aggregation at layer boundaries. Ergodis retains lowering, rules, joins and execution; no external
+between), **done** (`../2026-09-15-c1190-per-column-domains.md`, private `3895dbc` … `3c0992f`, Opus)
+and audited (`../2026-09-15-c1190-per-column-domains-audit.md`: every number reproduces, A/B within
+parts per million, eleven reporting defects being repaired). The complement is built over the values
+each argument of the negative literal can take (constants, binding columns of the same rule's
+positive literals); the column-type sub-range is recorded but deliberately not a filter, since an
+entity-typed column reached by an integer binding shows filtering is unsound. Boundary at arity two
+moves from a 153-entry dictionary to 302 with disjoint columns, arity three from 28 to 84; the
+~22,000-fact ceiling itself is the JSON encoding (96 % of a complement fact is relation name and
+punctuation), so the direct constructor into the evaluator's prepared form that ADR 0004 names is
+worth about 10× on the same bound and is the recommended next lever after milestone (c). `Negative`
+atoms in the core `Rule` stay the recorded fallback. Lowering stage +4.5 % on positive sources, +2.3 %
+with negation, partly unattributed. Control for the next frontend A/B: `ergodis-tools-606136e`
+(rustc 1.95.0). **Milestone (c), aggregation at layer boundaries, in progress**
+(`../2026-09-15-c1190-milestone-c.md`). Ergodis retains lowering, rules, joins and execution; no external
 evaluator or backend is adopted. Tree-sitter and a PLT Redex model remain deferred.
 
 ### Datalog evaluation — C1179, C1182 and C1183 closed
