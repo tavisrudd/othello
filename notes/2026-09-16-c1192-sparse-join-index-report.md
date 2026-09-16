@@ -556,3 +556,39 @@ one place in this lane where a cycle ratio is load-bearing**, with the qualifica
 A/A nulls in these runs are within 2 parts per 10,000 of unity — much tighter than the
 control-against-candidate run's, because both arms are the same binary — so the 0.974 to 1.051 band
 that brackets the crossover is separated from unity by more than the noise floor.
+
+## Profile
+
+Kernel-scoped: `perf record -e instructions:u -F 4000` pinned to CPU 5 on
+`closure_ballpark --evaluator demand --program closure --certificates 512 dense 20`, a harness mode
+that evaluates twenty times and generates the two certificates and nothing else — no checker, no
+serialization, no output file — so the evaluator's symbols are better than 98 per cent of the
+profile. Both arms have that mode, which is why it is the one profiled rather than the kernel-only
+mode this task adds, which the control does not have. `perf.data` under
+`~/.cache/ergodis/perf-c1192/`.
+
+| Symbol | control `e0e7331` | candidate `d2b1940` |
+| --- | ---: | ---: |
+| `ergodis_rules::demand::Demand::evaluate_into` | 81.53 % | 76.55 % |
+| `__memmove_avx512_unaligned_erms` | 17.29 % | 22.14 % |
+| `ergodis_rules::demand::Demand::certificate` | 0.67 % | 0.73 % |
+| `ergodis_rules::demand::Demand::index_rows` | 0.25 % | 0.30 % |
+
+Nothing else clears a tenth of a per cent on either arm. `Demand::read`, `Demand::emit`,
+`Demand::join` and `Demand::run` do not appear because they are all inlined into `evaluate_into`,
+which is the whole monomorphized derivation loop.
+
+**Out-of-line calls inside the loop, listed as the playbook requires: there is exactly one, and it
+is the same one on both arms.** `__memmove_avx512_unaligned_erms` is the runtime-length
+`copy_from_slice` that `Demand::read` uses to lift a tuple out of a row store and `Demand::emit`
+uses to write one back — a copy of `arity` words, two of them here. No allocator symbol, no
+formatting, no panic path, no trait-object dispatch and no hash-table symbol appears in either
+profile.
+
+Its **share** rises from 17.3 to 22.1 per cent, and that is the arithmetic of a smaller denominator
+rather than a larger numerator: the measured stage is 4.545 G instructions on the candidate against
+5.013 G on the control, so 22.14 per cent of the candidate is about 1.006 G and 17.29 per cent of the
+control is about 0.867 G — which, as the playbook warns, is a pair of estimates from shares and not a
+measurement. What the two profiles do establish is that the loop's only remaining out-of-line call is
+the tuple copy, and that it is now the largest single thing left in it. **That is C1188's target, and
+it is taken in the next section.**
