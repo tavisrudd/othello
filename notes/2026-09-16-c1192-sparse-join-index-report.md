@@ -161,7 +161,7 @@ Both re-execute themselves inside `nix develop` of the core checkout, so the too
 | `othello` | `028fd47` | the independent verification audit, `2026-09-16-c1192-sparse-join-index-audit.md` |
 | `ergodis-private` | `cbe9f64` | the parity manifest refreshed after the lowering edits; the canonical digest moves to `349333d4…` |
 | `ergodis-private` | `3ed2043` | the cache-event receipt on the crossover pair |
-| `othello` | `3c3474b`…HEAD | the audit's thirteen-item repair list applied |
+| `othello` | `45bd8c5` | the audit's repair list applied, and the status line moved to done and audited |
 
 ## Fermi predictions, written before any code
 
