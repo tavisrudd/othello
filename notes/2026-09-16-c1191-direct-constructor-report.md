@@ -491,7 +491,145 @@ is here rather than buried in a commit message.
 
 ## Mystery ledger
 
-(to be filled)
+1. **Settled: what the encoding was costing this route, and it was two orders of magnitude on the
+   ceiling rather than the one the Fermi predicted.** Every product-shaped construct used to stop at
+   about 22,000 materialized facts in one layer; the measured ceiling is now 4,194,304, and the
+   largest dictionary at arity two goes from 153 to 2,047 on `stratified` and from 302 to 4,092 on
+   `columns`. The per-column closeout priced this lever at "roughly 10× on the dictionary, to about
+   1,000 at arity two"; it is ×13.4 and ×13.5, so the estimate was right in order and about twice
+   conservative. Every figure replays from a committed revision by the replay block below, on
+   committed cohorts, with no generated source anywhere — which is the defect the milestone (c) audit
+   recorded against that milestone's own deepest probe. *Nothing about this item is open.*
+
+2. **Settled, and it is the more useful half: four cohorts are now stopped by three different bounds,
+   and only one of them is about materialization.** `columns3` and `aggregate` stop at the core's
+   `MAX_INDEX_KEYS`, the demand evaluator's direct-addressed join index at `domain^arity` against
+   2^24. `stratified` and `columns` stop at `MAX_LAYER_TUPLES`, this route's own declared budget.
+   Under the tool's defaults, two cohorts stop earlier still at capacities the operator asked for —
+   the evaluator's row bound and the lowering workspace's fact pool. Before this task one bound
+   decided the reach of every construct on every cohort and it was an encoding. **The route's limits
+   are now where the evaluation is**, which is what one wants from a limit.
+
+3. **Settled, and it settles somebody else's open question: milestone (c)'s Fermi prediction 3 was
+   right.** That prediction said `MAX_INDEX_KEYS` would be the bound that binds for aggregation, at a
+   post-extension domain of 4,096 at arity two, and it was scored wrong because the lowering
+   workspace's fact pool fired 47 keys earlier. With the fact pool raised the `aggregate` cohort runs
+   to a post-extension dictionary of **exactly 4,096** and is refused at 4,097 on `MAX_INDEX_KEYS`,
+   16,793,604 against 16,777,216. The prediction was right about the bound and wrong only about what
+   stood in front of it. My own Fermi for that cohort predicted `MAX_FILTER` at a key set of about
+   2,048 and was wrong for the same reason it was wrong then: the aggregate extends the dictionary by
+   about 2.9 entries per key, so the addressing bound arrives first.
+
+4. **Open: nothing bounds a layer's memory, and at the new boundary that is gigabytes.** Peak
+   resident set is 1.39 GB on `stratified` at a dictionary of 2,047 and 2.73 GB on `columns` at
+   4,092. The encoding bound was incidentally a memory bound — a mebibyte of JSON cannot describe
+   many tuples — and removing it removed that too. `MAX_LAYER_TUPLES` counts tuples, but a tuple's
+   real cost is the evaluator's workspace row plus its five witness columns plus both checkers'
+   stores, which is far more than the four bytes per value the bound counts. *Evidence gap*: a
+   measured bytes-per-materialized-tuple figure across the four cohorts at two dictionary sizes, and
+   a decision about whether the layer bound should be expressed in bytes. Neither is done here.
+
+5. **Open, inherited, and one step less mysterious: the `comment-string` cohort's +0.23 per cent from
+   milestone (c).** That cohort is refused by the relation budget and executes none of the changed
+   code, and this task's harness commit — which adds a whole stage to the same binary — moves its
+   lowering stage by **eight instructions on 1.89 million, a ratio of 1.00000 to five places**. So
+   the thin-LTO layout swing is not something every commit to this binary produces; it was one build
+   pair. *Evidence gap*: unchanged, the kernel-scoped `perf record -e instructions:u` profile of
+   `lower::run` bucketed by address range in the two milestone (c) binaries, which is now overdue on
+   three reports.
+
+6. **Open: this route has no independent audit of the constructor's correctness beyond its own
+   corpora.** The differential found zero disagreements on the first run of every corpus, which for
+   this change is weak evidence by construction: the prepared path builds the same structures from
+   the same information, so a corpus that exercises the construction cannot distinguish two
+   constructions that agree. The deliberate mutations below are what shows the gates discriminate.
+   *Evidence gap*: the independent read-only audit the task card asks for, which is not in this
+   report and which the next step names.
+
+## Replay commands
+
+Run from `~/src/ergodis-private`. Every gate and every measurement was run under
+`nix develop ~/src/ergodis`, whose devShell asserts its rustc equals the `rust-toolchain.toml` pin,
+so the gates and the measurements describe one build.
+
+```sh
+# Gates, private.
+nix develop ~/src/ergodis --command cargo test -p ergodis-private \
+    --test rel_lowering --test rel_frontend --test rel_frontend_portability \
+    --test rel_reference_eval -j 8
+nix develop ~/src/ergodis --command cargo clippy -p ergodis-private -p ergodis-tools \
+    --lib --bins --tests -j 8 -- -D warnings
+nix develop ~/src/ergodis --command cargo fmt -p ergodis-private -p ergodis-tools -- --check
+
+# Gates, core.
+cd ~/src/ergodis
+nix develop . --command cargo test --all-features -j 8
+nix develop . --command cargo clippy --all-targets --all-features -j 8 -- -D warnings
+nix develop . --command cargo fmt --all -- --check
+cd ~/src/ergodis-private
+
+# The committed independent Python oracle, and the native/WASM parity replay.
+python3 tests/support/rel_closure_oracle.py --check tests/support/rel-closure-expected.json
+nix develop ~/src/ergodis --command python3 analysis/rel-frontend/portability.py \
+    --output analysis/rel-frontend/portability-v1.json
+
+# The corpus census the differential prints rather than asserts in full.
+nix develop ~/src/ergodis --command cargo test -p ergodis-private \
+    --test rel_reference_eval -j 8 -- --nocapture --test-threads 1
+
+# The boundary table, with the tool's committed defaults. Each pair is the
+# largest --definitions that runs and the first that is refused; the tool prints
+# the budget, the number found and the limit for every refusal.
+for n in 1024 1025; do choom -n 1000 -- nix develop ~/src/ergodis --command \
+    cargo run --release -p ergodis-tools -- \
+    rel-lower --cohort stratified --definitions $n --max-tuples 0; done
+for n in 910 911;   do … --cohort columns   --definitions $n --max-tuples 0; done
+for n in 85 86;     do … --cohort columns3  --definitions $n --max-tuples 0; done
+for n in 1365 1366; do … --cohort aggregate --definitions $n --max-tuples 0; done
+
+# The same four with the lowering workspace and the evaluator's row store raised,
+# which is what shows which bound belongs to the route rather than to the
+# workspace the operator asked for. Both flags are the committed tool's.
+R="--max-rows 16777216 --values 262144"
+for n in 2047 2048; do … --cohort stratified --definitions $n --max-tuples 0 $R; done
+for n in 2046 2047; do … --cohort columns    --definitions $n --max-tuples 0 $R; done
+for n in 85 86;     do … --cohort columns3   --definitions $n --max-tuples 0 $R; done
+for n in 1412 1413; do … --cohort aggregate  --definitions $n --max-tuples 0 $R; done
+
+# The A/B. Each arm is retained once, from a checkout at its own revision: the
+# script retains whatever the tree carries and names the binary for it, so one
+# invocation cannot produce both.
+git checkout 3778763 && ../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools
+git checkout 8191ab7 && ../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools
+E=instructions,cycles,branches,branch-misses,page-faults,minor-faults
+CONTROL=~/.cache/ergodis/bin/ergodis-tools-3778763
+CANDIDATE=~/.cache/ergodis/bin/ergodis-tools-8191ab7
+B=analysis/rel-frontend
+# The five default cohorts and datalog at 512 definitions.
+nix develop ~/src/ergodis --command python3 $B/bench.py \
+    --binary "$CANDIDATE" --control "$CONTROL" --rounds 5 --cpu 5 \
+    --stages scan,parse,admit,lower,stratify --events $E \
+    --out $B/performance-v6-prepared-8191ab7.json
+nix develop ~/src/ergodis --command python3 $B/bench.py \
+    --binary "$CANDIDATE" --control "$CONTROL" --rounds 5 --cpu 5 --cohorts datalog \
+    --stages scan,parse,admit,lower,stratify --events $E \
+    --out $B/performance-v6-prepared-datalog-8191ab7.json
+# The three backend cohorts at 128 definitions, which is where both arms
+# complete: at 512 the control is refused by the byte bound and the candidate is
+# not, and two arms doing different work have no ratio.
+for c in stratified columns aggregate; do
+  nix develop ~/src/ergodis --command python3 $B/bench.py \
+      --binary "$CANDIDATE" --control "$CONTROL" --rounds 5 --cpu 5 --cohorts $c \
+      --definitions 128 --stages scan,parse,admit,lower,stratify --events $E \
+      --out $B/performance-v6-prepared-$c-8191ab7.json
+done
+# The harness commit's own parity A/B, on the stages that already existed.
+nix develop ~/src/ergodis --command python3 $B/bench.py \
+    --binary ~/.cache/ergodis/bin/ergodis-tools-3778763 \
+    --control ~/.cache/ergodis/bin/ergodis-tools-b7c624d --rounds 5 --cpu 5 \
+    --stages scan,parse,admit,lower --events $E \
+    --out $B/performance-v5-harness-3778763.json
+```
 
 ## What this task left under `~/.cache/ergodis/`
 
