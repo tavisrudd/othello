@@ -389,6 +389,30 @@ about *addressing and capacity* — how large an index the evaluator direct-addr
 workspace was asked for, how many facts a lowering pool holds — and only one about materialization.
 That is a route whose limits are where the evaluation actually is.
 
+### The A/B: the five cohorts that never reach the backend
+
+Candidate `8191ab7` over control `3778763`, instructions, five interleaved rounds, CPU 5, 512
+definitions. **A/A instruction nulls** 1.0000013, 1.0000002, 0.9999989, 1.0000008 and 1.0000018 —
+all within two parts per million of unity. **Counter enabled fraction 100.00 per cent on every
+event**, recorded rather than inferred. **Load 2.02 to 2.36** over the rounds. Receipt
+`analysis/rel-frontend/performance-v6-prepared-8191ab7.json`.
+
+| Cohort | `scan` | `parse` | `admit` | `lower` | `stratify` − `lower`, candidate | control |
+| ----------------- | -------: | -------: | -------: | -------: | ------: | ------: |
+| `ascii`           | 0.999997 | 0.999999 | 0.999998 | 1.000000 | 1 | −1 |
+| `unicode`         | 1.000000 | 0.999999 | 1.000001 | 1.000001 | −1 | 1 |
+| `comment-string`  | 1.000022 | 1.000014 | 1.000006 | 1.000003 | 1 | −2 |
+| `malformed-early` | 1.000000 | 0.999997 | 0.999998 | 0.999991 | 2 | −4 |
+| `malformed-late`  | 0.999994 | 0.999999 | 1.000000 | 1.000000 | −3 | −3 |
+
+**Scan, parse, admission and the lowering stage are unity to within twenty-two parts per million**,
+which is the level of the nulls, so the front end did not move. All five cohorts are refused before
+the backend — three by the lowering and two by the parse — so their `stratify` stage is a null by
+construction, and it measures ±4 instructions on both arms, which is what a stage that runs nothing
+should measure. That is also the check that the new stage is a real stage rather than a stub: on a
+cohort that reaches the backend it is millions of instructions, and on a cohort that does not it is
+three.
+
 ### Exactness
 
 | Gate | Outcome |
@@ -633,7 +657,16 @@ nix develop ~/src/ergodis --command python3 $B/bench.py \
 
 ## What this task left under `~/.cache/ergodis/`
 
-(to be filled)
+`bin/ergodis-tools-3778763` and `bin/ergodis-tools-8191ab7`, each with its `.sha256` sidecar and its
+`MANIFEST.tsv` row: the harness arm, which is this task's control, and the candidate, which is
+**the control the next backend A/B should use**. Beside them, `ergodis-tools-b7c624d`, which milestone
+(c) left and which the harness A/B measured against, and `ergodis-tools-b1ce519` and
+`ergodis-tools-606136e` from the two milestones before that. Under `c1191/`: the three A/B driver
+logs and the parity replay's receipt, none of which anything cites — the parity figure in this report
+is reproduced by the committed `analysis/rel-frontend/portability-v1.json` and by the replay command,
+and the A/B figures by the committed receipts. Under `perf-c1191/`: the kernel-scoped profiles.
+`target/ergodis-private` and `target/ergodis` are the two shared build trees, which are not this
+task's to remove. Deletion is the user's call.
 
 ## `ej`/`tt` closeout
 
