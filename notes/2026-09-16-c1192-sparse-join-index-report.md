@@ -640,3 +640,109 @@ inside it.
 Compounding the two changes, the derivation loop on these cohorts is at 0.81 to 0.88 of the control's
 instructions — `0.90665 × 0.89473 = 0.8113` on dense closure at 512 — with identical rows, identical
 work counts and identical certificates.
+
+## Exactness
+
+| Gate | Outcome |
+| --- | --- |
+| Core `cargo test --all-features` at `24e399e` | 80 test binaries, zero failures, including the new `demand_sparse` suite and the constructor and derivation allocation regressions |
+| Private `cargo test -p ergodis-private -p ergodis-tools` at `b7921a0` | 42 test binaries, zero failures; this drives `rel_lowering`, `rel_frontend`, `rel_frontend_portability` and `rel_reference_eval` (the C1189 differential), all of which pass |
+| C1189 differential | **zero disagreements** over the committed fixtures, the recorded rejection surface, the Addendum A equations, the surface-construct table and the seeded corpora, at their unchanged seeds |
+| Clippy, both repositories, `--all-targets --all-features -D warnings` | no diagnostics |
+| `cargo fmt --check`, both repositories | clean |
+| `SHA256SUMS` regenerated with every source change | `tests/evidence_manifest.rs` passes, public lint clean on every commit |
+| Closure SHA-256 across A/B arms, four backend cohorts | identical: `dffdcd35…`, `3f5c4cddcd…`, `ec562d2c3f…`, `5c455ad47f…` — the same four C1191 recorded |
+| Output SHA-256 across A/B arms, eight closure/same-generation/`blocks`/`mutual` cohorts | identical on every cohort of every A/B; `ab.py` fails a run rather than summarizing it when they differ, and none did |
+| Derived, probe and candidate counts across arms | identical on every cohort of every A/B |
+| Certificate agreement between the two addressing kinds | **byte-identical**, asserted on the fixtures, the generated closure family at two row bounds, and every program of the property corpus |
+| Zero allocations in the derivation loop | 100 repeated evaluations of `same_generation.json` under the counting allocator, **under each of `Policy::Auto`, `Policy::Direct` and `Policy::Sparse`**: 0 |
+| Deliberate mutations | deleting either key-column comparison in `Demand::join` derives tuples outside the least model and fails `demand_sparse`; recorded in that file's doc comments as load bearing |
+
+**What the corpus does and does not establish, stated as weak evidence.** The two addressing kinds
+answer the same query, so a corpus that exercises the query can only see them agreeing; the
+byte-identical certificate is a stronger statement than a set comparison but it is still an
+agreement. The load-bearing evidence that the gates discriminate is the two deliberate mutations,
+and finding a case that exercised them took three attempts, which is recorded under deviations
+because the first two attempts are the instructive part: the multiply-shift hash is close to
+injective on the key ranges every other cohort uses, so their buckets hold one key and never reach
+the comparison at all.
+
+## Disposition
+
+**Kept**, by the forward commits in the table above; nothing is reverted. Two changes, measured
+separately:
+
+1. **The sparse addressing kind and the monomorphized loop** (`ergodis` `84ed62c`, `d0a0ef3`,
+   `6ab0dd5`): the direct path is 0.907 to 0.982 of the control's instructions where it is still
+   selected, the reach moves from "a binary relation is capped at a domain of 32,768" to "the
+   largest admitted domain, at any size the rows allow", and two of the four Rel-route cohorts move
+   their boundary.
+2. **The tuple copy** (`ergodis` `24e399e`, C1188): 0.893 to 0.895 of the instructions on every
+   cohort, 0.71 to 0.92 of the cycles, and the loop's last out-of-line call is gone.
+
+Compounded, the derivation loop is at 0.81 to 0.88 of the control on the existing cohorts.
+
+## Recorded deviations
+
+1. **The row bound moved into the plan**, which the card did not ask for. `Demand::new_bounded` and
+   `from_prepared_bounded` take it, `workspace()` replaces `workspace_bounded`, and a workspace of
+   one plan is refused by another. The policy reads the rows a structure can hold, so the bound
+   cannot be a property of the workspace if the selection is to be a preparation-time decision.
+2. **`workspace()` returns `Result`.** The card asks for the replacement bounds to be "reachable
+   through the same `Error` values"; a reservation the machine cannot back is one of them, and an
+   infallible constructor cannot report it. Every caller in both repositories is migrated.
+3. **`MAX_UNIVERSE` was removed as well as `MAX_INDEX_KEYS`.** The card names only the index. On the
+   closure and same-generation families the index bound was never what bound — their join masks have
+   population count one — so removing it alone would have moved nothing there. `datalog::universe`
+   saturates, because `domain^arity` at the largest admitted domain and arity is exactly `2^64`.
+4. **The membership test grew a second kind too.** The card asks for "a second index kind". The
+   presence bitmap is the other direct-addressed structure, it is what `MAX_UNIVERSE` bounded, and
+   it is the one the reach cohorts need; it is built on the same table and selected by the same
+   policy.
+5. **The policy has one measured density, not two.** The first shape had a density rule for each
+   structure. Measurement removed two of them: the bitmap and the input relation's counting-sorted
+   index are faster at every density their ceilings allow, so for those the ceiling decides alone.
+6. **`Policy` has five variants, and the first shape of two of them was wrong.** `SparseIndexes`
+   originally left the other structure to the policy, which at exactly the densities that matter
+   chooses sparse too; the comparison then moved both structures and could attribute nothing. Each
+   now forces both kinds, one sparse and one direct.
+7. **C1188 was taken**, in its own commit and with its own A/B, because the profile showed it as the
+   loop's only remaining out-of-line call and the loop was open. Its queue row is not archived here.
+8. **Two harness cohorts and one edge generator were added**, which the card did not ask for: the
+   `blocks` density, the `mutual` program and the `cycle` program. Without them neither the reach
+   claim nor the index crossover has a cohort — the generated closure and same-generation families
+   cannot reach a large domain at all, for the reasons the reach table gives.
+9. **`analysis/datalog-comparison/ab.py` is new.** C1184's and C1186's A/Bs on these families were
+   run by an uncommitted loop, so those receipts cannot be replayed from a revision. The driver is
+   committed before the source change it measures.
+10. **The `--evaluate-only` harness mode is new**, and the control does not have it, so the
+    control-against-candidate A/B runs both arms in the full mode instead. Everything outside the
+    derivation loop runs once there whatever the repeat count, so the two-point difference is still
+    the loop's cost; the kernel-only mode is what the candidate-against-candidate comparisons and the
+    profile use.
+
+## Remaining gaps
+
+1. **No Soufflé comparison on the new sizes.** The card asks for one through the existing harness if
+   it runs in reasonable time. `compare.py` takes an arbitrary density, so `closure:blocks:65536` is
+   one invocation away and Soufflé 2.5 is in the store; it was not run. *Evidence gap*: the
+   product-path claim on the large-domain cohorts has no external engine beside it, so the reach is
+   established against this evaluator's own earlier refusal and not against Soufflé.
+2. **The native/WASM parity replay was not re-run**, only the portability test inside the private
+   suite, which passes. C1191's argument that the parity corpus compares the lowered relational IR
+   and is structurally downstream of anything an evaluator does still holds, but the hash is not
+   re-recorded here.
+3. **Nothing is measured above a membership density of 2,048 or an index density of 256**, because
+   the ceilings and the cohort shapes stop there. The membership conclusion — no crossover inside
+   the ceiling — is therefore about the reachable range and not about the structure in general.
+4. **The sparse table is sized from the caller's row bound, not from the rows.** A caller that
+   over-declares pays for it twice: in reservation, and in the `fill(NONE)` before every evaluation,
+   which is 64 MiB at a bound of `2^24`. The crossover tables show it as a 1.35 to 2.05 spread on one
+   program. A table that grew once at the first round boundary would fix it and would break the
+   allocation-free rule; a table sized from the previous evaluation's row count would not.
+5. **Peak resident set at the new boundary is gigabytes**, unchanged from C1191's remaining gap 4 and
+   now with a second cause: 3.14 GB on `columns3` at a dictionary of 483. The eager row reservation
+   is most of it, and `cycle` at 21 MB against 539 MB on the same program with a sized bound is the
+   measurement of that.
+6. **`MAX_WORKSPACE_BYTES` is a number chosen, not measured**: `2^34`. It is a refusal that no cohort
+   here reaches, and its only test constructs a program to exceed it.
