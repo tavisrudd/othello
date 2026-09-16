@@ -240,8 +240,65 @@ direct array the policy chose because it was small.
    ceiling.** Rejected: it moves the reach by whatever factor the ceiling is raised and leaves the
    memory unbounded by the rows, which is what makes a relation of a hundred thousand values
    impossible whatever its size.
-5. **Narrowing the addressing bound to a relation's per-column domains**, which C1191's closeout
+5. **A `Policy` with one forced kind and the other left to the rule.** Built and then corrected in
+   the same task, which is recorded because the first shape was wrong in a way that would have
+   produced an unattributable measurement: `SparseIndexes` originally left the membership test to the
+   policy, and at exactly the densities where an index crossover matters the policy chooses a sparse
+   membership too, so the comparison moved both structures. Each variant now forces both kinds, one
+   sparse and one direct, so `Direct`, `Sparse` and the two of them are the four corners and every
+   pair differs in one structure.
+6. **Narrowing the addressing bound to a relation's per-column domains**, which C1191's closeout
    named as the obvious next lever. Not built and now largely moot: a bound computed from
    `∏ᵢ |Dᵢ|` rather than `domain^arity` would have made the direct array smaller, and the sparse
    kind makes it unnecessary for reach. It remains a candidate for choosing direct more often, which
    is a speed question rather than a reach one.
+
+## Method
+
+### The harness the A/B needed, and why it is committed
+
+The closure and same-generation A/Bs of C1184 and C1186 were run by an ad-hoc loop whose output was
+kept as a `.tsv`; the driver was never committed, so those receipts cannot be replayed from a
+revision. This task's first private commit after the source change is
+`analysis/datalog-comparison/ab.py`, a driver in the shape the playbook prescribes: two arms that
+may differ by revision, by arguments or both; rounds that alternate arm order; an A/A null per
+cohort; the non-multiplexing event set
+`instructions,cycles,branches,branch-misses,page-faults,minor-faults` with the enabled fraction
+recorded per measurement rather than inferred; two-point differencing between `repeats` and
+`2 · repeats` derivation-loop iterations, which removes process startup, admission and preparation
+from every per-iteration figure; one pinned core; and the load average over the run. Every raw
+sample is streamed to a `.jsonl` sidecar as it completes and `--resummarize` rebuilds the receipt
+from it without measuring — added after a summary defect (a two-point fault-count difference of
+zero, divided) cost a complete twelve-minute run.
+
+Both arms print their derived, probe and candidate counts, and in the kernel-scoped mode a SHA-256
+over the output relation's rows; a cohort whose arms disagree on any of them is reported as a
+failure and is not summarized.
+
+### Two harness modes, and which arm can use which
+
+`closure_ballpark --evaluate-only` is the kernel-scoped mode this task adds: read the generator,
+prepare once, then enter the derivation loop `repeats` times, with no certificate, no checker, no
+serialization and no output file. It is what the kernel-scoped profile runs and what a
+candidate-against-candidate comparison uses.
+
+The retained control predates that mode, so the **control-against-candidate** A/B runs both arms in
+the harness's full mode instead. Everything outside the derivation loop — admission, preparation,
+certificate emission, both independent checkers, the representation sizing — runs exactly once there
+whatever the repeat count, so the two-point difference is still the derivation loop's own cost and
+nothing else. The fixed part is paid twice per arm per round and cancels.
+
+### Which cohorts answer which question
+
+| Cohort | What it is | What it measures |
+| --- | --- | --- |
+| `closure`, `samegen`, sparse and dense | the C1182 generators | the direct path, which must not move |
+| `closure` at the `blocks` density | the complete digraph inside each block of sixteen nodes | a relation whose tuple universe is `domain²` and whose size is linear in the domain: the membership crossover, and the reach a bitmap cannot have |
+| `mutual` at `blocks` | `sym(x,y) :- edge(x,y), edge(y,x).` | a **static** join index keyed on `domain²`, which the retired `MAX_INDEX_KEYS` refused above a domain of 4,096 |
+| `cycle` at `blocks` | the closure, then `back(x,y) :- path(x,y), path(y,x).` | the same index over a relation that **grows**: the hashed chain rather than the sorted array |
+| `stratified`, `columns`, `columns3`, `aggregate` | the C1191 boundary cohorts through `rel-lower` | the reach of the Rel route, and which bound decides it now |
+
+The two densities a policy reads are the same number for an arity-two relation with a full-mask
+index — the index's key space and the membership universe are both `domain²`, and both are divided
+by the same row capacity — so the crossover sweep varies the caller's row bound at a fixed domain
+and forces one structure's kind at a time.
