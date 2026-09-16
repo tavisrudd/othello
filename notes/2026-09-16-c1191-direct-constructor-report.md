@@ -713,8 +713,9 @@ is here rather than buried in a commit message.
    right.** That prediction said `MAX_INDEX_KEYS` would be the bound that binds for aggregation, at a
    post-extension domain of 4,096 at arity two, and it was scored wrong because the lowering
    workspace's fact pool fired 47 keys earlier. With the fact pool raised the `aggregate` cohort runs
-   to a post-extension dictionary of **exactly 4,096** and is refused at 4,097 on `MAX_INDEX_KEYS`,
-   16,793,604 against 16,777,216. The prediction was right about the bound and wrong only about what
+   to a post-extension dictionary of **exactly 4,096**, which is `4096² = 2^24`, and the next key set
+   is refused on `MAX_INDEX_KEYS` at 16,793,604 against 16,777,216 — the square of the dictionary of
+   4,098 that key set produces. The prediction was right about the bound and wrong only about what
    stood in front of it. My own Fermi for that cohort predicted `MAX_FILTER` at a key set of about
    2,048 and was wrong for the same reason it was wrong then: the aggregate extends the dictionary by
    about 2.9 entries per key, so the addressing bound arrives first.
