@@ -381,3 +381,53 @@ select the direct kind throughout.
 **The closure SHA-256 is identical across arms on every one of the four backend cohorts**, over
 every relation's certified rows: `dffdcd35…`, `3f5c4cdd…`, `ec562d2c…` and `5c455ad4…`, the same
 four digests C1191 recorded. Both independent checkers verified on both arms.
+
+### Reach: the closure and same-generation families
+
+Every row is the candidate `closure_ballpark-1dfc6ed` in `--evaluate-only` mode under
+`choom -n 1000`, one process, default row bound unless stated. Peak resident set is the process
+high-water mark the harness reads from `/proc/self/status`.
+
+| Program | density | N | facts | derived | membership | peak RSS | outcome |
+| --- | --- | ---: | ---: | ---: | --- | ---: | --- |
+| `closure` | sparse | 4,096 | 12,288 | 15,679,566 | bitmap, universe 2^24 | 532 MB | runs |
+| `closure` | sparse | 8,192 | 24,576 | — | bitmap, universe 2^26 | — | **`Budget`: the row capacity, 2^24** |
+| `closure` | dense | 2,048 | 1,048,576 | 4,194,304 | bitmap, universe 2^22 | 303 MB | runs |
+| `samegen` | sparse | 8,192 | 8,191 | 15,787,097 | bitmap, universe 2^26 | 1.07 GB | runs |
+| `samegen` | sparse | 16,384 | 16,383 | — | bitmap, universe 2^28 | — | **`Budget`: the row capacity, 2^24** |
+| `closure` | blocks | 4,096 | 61,440 | 65,536 | bitmap, universe 2^24 | 539 MB | runs |
+| `closure` | blocks | 16,384 | 245,760 | 262,144 | bitmap, universe 2^28 | 586 MB | runs |
+| `closure` | blocks | 65,536 | 983,040 | 1,048,576 | **sparse**, universe 2^32 | 798 MB | runs; the control refuses this program at **admission** |
+| `closure` | blocks | 65,536, row bound 1.1 M | 983,040 | 1,048,576 | sparse | **239 MB** | runs |
+| `mutual` | blocks | 4,096 | 61,440 | 61,440 | index sparse, key space 2^24 | 464 MB | runs |
+| `mutual` | blocks | 8,192 | 122,880 | 122,880 | index sparse, key space 2^26 | 482 MB | runs; **above the retired `MAX_INDEX_KEYS`** |
+| `mutual` | blocks | 65,536, row bound 1.1 M | 983,040 | 983,040 | index sparse, key space 2^32 | 239 MB | runs |
+| `cycle` | blocks | 4,096, row bound 100 K | 61,440 | 131,072 | index sparse, key space 2^24, table 131,072 slots | **21 MB** | runs |
+| `cycle` | blocks | 65,536, row bound 1.1 M | 983,040 | 2,097,152 | index sparse, key space 2^32, table 2^21 slots | 257 MB | runs |
+
+**The old ceiling, measured on the control.** `closure_ballpark-e0e7331` on `closure` sparse at
+N = 65,536 returns `Budget` **from admission**, before any evaluation: 65,536² = 2^32 against
+`MAX_UNIVERSE`'s 2^30. That is the refusal the card exists to remove, and it does not depend on the
+program's size in any way — the same domain with sixteen edges was refused identically.
+
+**What binds now on the old families, and it is not addressing.** Both generated families are
+stopped by `MAX_ROWS = 2^24`, the row capacity of one derived relation. `closure` sparse derives
+0.93 N² tuples, so it reaches N = 4,096 (15.68 M rows) and is refused at 8,192; `samegen` sparse
+derives 0.115 N² and reaches N = 8,192 (15.79 M rows, of which 8.08 M are the output relation) and is
+refused at 16,384. Fermi prediction 1 said exactly this, including that the card's request for
+closure and same generation at N = 16,384 and 65,536 is **unreachable on those generators for a
+reason that has nothing to do with the index** — their closures do not fit in any workspace this
+evaluator will reserve. The prediction was right about the mechanism and right about `MAX_ROWS`.
+
+**The reach the change actually buys is a large domain with a small relation**, which is what the
+`blocks` cohorts measure: at N = 65,536 the tuple universe is 2^32 and the relation holds a million
+tuples. The control cannot admit that program; the candidate evaluates it in 221 ms with a resident
+set of 239 MB when the caller sizes the row bound, and both independent checkers verify the
+certificates in the full harness mode.
+
+**A caller's row bound is now a performance decision as well as a limit.** `cycle` at N = 4,096
+takes 21 MB with a row bound of 100,000 and the same program reserves 539 MB with the default bound
+of 2^24, because every sparse table is sized from the capacity rather than from the rows derived and
+every witness column is reserved eagerly. That is the same eager-reservation effect C1191 recorded
+as its remaining gap 4, seen from the other side: it is now the dominant term in peak memory on a
+cohort whose relation is small.
