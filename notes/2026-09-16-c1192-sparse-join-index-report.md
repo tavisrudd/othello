@@ -107,6 +107,15 @@ Both re-execute themselves inside `nix develop` of the core checkout, so the too
 | `ergodis-private` | `6bfe187` | `analysis/datalog-comparison/ab.py`, a committed interleaved A/B driver for the derivation loop |
 | `ergodis` | `d0a0ef3` | `Policy::SparseIndexes` and `Policy::SparseMembership`, so a crossover measurement moves one structure at a time |
 | `ergodis-private` | `f2804c4` | the `cycle` cohort and the two one-structure policies on the command line |
+| `ergodis-private` | `1dfc6ed` | `ab.py` streams every raw sample and rebuilds a receipt from them |
+| `ergodis-private` | `4bcbc10` | `ab.py` reads the enabled fraction from the right `perf stat` field |
+| `ergodis` | `a1c6767` | each one-structure policy forces both kinds, so the four corners differ in one structure |
+| `ergodis` | `6ab0dd5` | the policy set from the measurement: one crossover, two ceilings, no other density rule |
+| `ergodis-private` | `d2b1940` | `ab.py --sweep`: one receipt per crossover rather than one per point |
+| `ergodis` | `24e399e` | **C1188**: the tuple copy out of the derivation loop, as element loops over a bounded array |
+| `ergodis-private` | `b7921a0` | re-pin the core at the C1188 removal, so the arm after it has a name |
+| `ergodis-private` | `8881837` | the receipts at the kept revisions |
+| `othello` | `0ef05ec`…`9a3ce47` | this report, written incrementally in twelve commits |
 
 ## Fermi predictions, written before any code
 
