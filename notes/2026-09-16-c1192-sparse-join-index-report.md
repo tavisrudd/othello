@@ -302,3 +302,52 @@ The two densities a policy reads are the same number for an arity-two relation w
 index — the index's key space and the membership universe are both `domain²`, and both are divided
 by the same row capacity — so the crossover sweep varies the caller's row bound at a fixed domain
 and forces one structure's kind at a time.
+
+## Results
+
+### The direct path, where it is still selected
+
+Control `closure_ballpark-e0e7331` against candidate `closure_ballpark-1dfc6ed`, five interleaved
+rounds, CPU 5, repeat counts 3 and 6 with two-point differencing, the six-event set at **100.00 per
+cent enabled on every event over 180 measurements**, load 2.47 to 3.38. Receipt
+`analysis/datalog-comparison/ab-2026-09-16-c1192-direct.json` with its raw sidecar. On every one of
+these cohorts the candidate's plan selects the **direct** kind for every join index and a
+**bitmap** for every membership test, which the receipt records per cohort — so this is the direct
+path compared with itself across the change, not a representation comparison.
+
+| Cohort | derived | instructions per evaluation, control | candidate | instruction ratio [lo, hi] | A/A null | cycles | branches | peak RSS, control / candidate KiB |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `closure` sparse 256 | 62,979 | 45.25 M | 43.11 M | **0.95274** [0.95272, 0.95276] | 1.0000013 | 1.0187 | 1.0402 | 18,652 / 18,692 |
+| `closure` sparse 1024 | 979,983 | 703.1 M | 669.7 M | **0.95251** [0.95251, 0.95252] | 0.9999994 | 1.0272 | 1.0402 | 239,924 / 237,904 |
+| `closure` dense 256 | 65,536 | 636.8 M | 578.5 M | **0.90848** [0.90847, 0.90848] | 1.0000021 | 0.9448 | 1.0359 | 23,888 / 23,976 |
+| `closure` dense 512 | 262,144 | 5.013 G | 4.545 G | **0.90665** [0.90665, 0.90665] | 1.0000000 | 0.9321 | 1.0358 | 89,284 / 88,124 |
+| `samegen` sparse 1024 | 258,691 | 109.8 M | 107.8 M | **0.98200** [0.98200, 0.98201] | 1.0000027 | 1.0254 | 1.0213 | 123,696 / 123,788 |
+| `samegen` dense 512 | 507,425 | 284.5 M | 273.6 M | **0.96163** [0.96162, 0.96163] | 1.0000002 | 0.9930 | 1.0166 | 112,216 / 111,352 |
+
+**The direct path did not merely hold; it is between 1.8 and 9.3 per cent cheaper in instructions**,
+on every cohort, with A/A nulls inside three parts per million and paired intervals narrower than a
+hundredth of a per cent. Fermi prediction 3 said "unchanged to within the nulls, and perhaps 0 to
+2 per cent from hoisting the run-constant branch"; the measurement is up to five times that, and the
+mechanism is the same one, larger than priced: the old loop tested `index.offsets.is_empty()` once
+per **delta row** and then, inside the bucket walk, carried both shapes' code, while the new loop is
+monomorphized on the index kind and on the head relation's membership kind and dispatched once per
+step. The saving is largest where the bucket walk is longest — dense closure, 33.6 M candidates
+against 328 K probes, is 9.3 per cent — and smallest where a step yields about one row per probe —
+same generation sparse, 261 K candidates against 261 K probes, is 1.8 per cent. That ordering is the
+check on the mechanism.
+
+**Branches are up 2 to 4 per cent on every cohort while instructions are down.** Not a defect and
+worth stating: the removed per-row test was a comparison whose result fed a branch the compiler had
+already hoisted into a *predicated* form; what replaced it is a shorter loop body with a slightly
+higher branch density. Branch misses are unchanged to within their own noise (0.987 to 1.007, with
+nulls at 0.996 to 1.013), so the extra branches are predicted.
+
+**Cycles do not follow instructions on sparse closure**, 1.019 and 1.027 against instruction ratios
+of 0.953, while on dense closure they agree in direction and beat them (0.945 and 0.932). The cycle
+intervals are wide (the sparse-closure interval spans 0.963 to 1.096) and the cycle A/A nulls are
+1.012 and 1.010, an order of magnitude looser than the instruction nulls, so on a loaded box the
+sparse-closure cycle figure is not separated from unity. What can be said with the counters this run
+carries: instructions fell everywhere, branch misses did not move, and peak resident set is within
+1 per cent on every cohort. The in-process evaluation medians agree with the cycle picture — dense
+closure 230.7 ms against 245.8 ms, sparse closure 46.2 ms against 46.1 ms — so the wall win is on the
+cohorts where the bucket walk dominates and the rest is a wash.
