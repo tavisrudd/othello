@@ -299,15 +299,19 @@ loss is minor faults once the old `Fact` allocations stop pinning the heap (arms
 trim threshold); `--max-rows 16777216` alone reserves about 1.6 GB of eager row store on an
 arity-three cohort. Control for the next frontend A/B: `ergodis-tools-e0e7331` (rustc 1.95.0; the
 repair commit was not re-measured).
-**Next, unallocated, in EV order**: narrowing the core's addressing bound (`MAX_INDEX_KEYS`,
-checked as `dictionary^arity`) to per-column domains, where the per-column and C1191 work compound
-(core change); a memory model for a layer and whether `MAX_LAYER_TUPLES` should be a byte bound,
-with the eager row reservation as an input; the kernel-scoped profile of `lower::run` closing the
-two unattributed lowering-stage swings (74 % of the per-column increase, the recurring
-`comment-string` thin-LTO swing); then the coverage rows the reports list (`exists(x in D: F)`,
-`not (F and G)`, term-level arithmetic) and the `Prepared` name clash in `ergodis_rules`. Ergodis
-retains lowering, rules, joins and execution; no external evaluator or backend is adopted.
-Tree-sitter and a PLT Redex model remain deferred.
+**Programme review and next steps (2026-09-16)**: `../2026-09-16-ergodis-datalog-programme-review.md`
+ranks the gaps against the programme goal and allocates, in EV order: **C1192** sparse join index
+with exact crossover (removes the `MAX_INDEX_KEYS` domain ceiling; `../2026-09-16-c1192-sparse-join-index.md`),
+**C1193** bodies of more than two atoms (`../2026-09-16-c1193-nary-bodies.md`, after C1192),
+**C1194** min-plus carrier and term arithmetic through the lowering (`../2026-09-16-c1194-min-plus-lowering.md`),
+**C1195** end-to-end benchmark suite from Rel source against Soufflé
+(`../2026-09-16-c1195-end-to-end-benchmark-suite.md`, after C1192; min-plus rows after C1194),
+**C1196** rank-run and round-block certificate encoding (`../2026-09-16-c1196-certificate-encoding.md`).
+Still unallocated: a memory model for a layer (`MAX_LAYER_TUPLES` as a byte bound, eager row
+reservation as input); the kernel-scoped profile of `lower::run` closing the two unattributed
+lowering-stage swings; the coverage rows (`exists(x in D: F)`, `not (F and G)`); the `Prepared`
+name clash in `ergodis_rules`. Ergodis retains lowering, rules, joins and execution; no external
+evaluator or backend is adopted. Tree-sitter and a PLT Redex model remain deferred.
 
 ### Datalog evaluation — C1179, C1182 and C1183 closed
 

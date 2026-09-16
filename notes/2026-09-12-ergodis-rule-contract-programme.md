@@ -2,7 +2,8 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-12
-**Status**: ACTIVE programme map; tasks allocated as listed, two still unallocated.
+**Status**: ACTIVE programme map; every step allocated as of 2026-09-16 (review and ranking:
+`2026-09-16-ergodis-datalog-programme-review.md`).
 
 ## Goal
 
@@ -50,8 +51,8 @@ the verifier code in `2026-09-12-c1152-certificate-spike.md`). Discovery-track e
 | Frontend prototype (queued) | C1170 | versioned coverage contract and owned parser/diagnostic performance prototype; `2026-09-12-c1170-owned-rel-frontend.md` | mechanism core, harness private |
 | 3 (complete) | C1161 | recursive plan queries as least fixpoints with the N-step bound and semi-naive incremental recomputation | core runtime |
 | 3b (complete) | C1167 | source-bound incremental proof replay, early leastness, conversion and live chained oracle witnesses; `2026-09-12-c1167-incremental-proof-checking.md` | Lean authority + private measurements |
-| 4 | unallocated | join engine: worst-case-optimal joins (Generic Join / Free Join) as the rule-body operator | core |
-| 5 | unallocated | benchmark suite per `2026-09-12-datalog-benchmark-suites.md`: TC and SG (Boolean), SSSP and CC (min-plus), MLM over recursive trees (lifted reals, no cross-engine baseline exists), TC over the counting semiring, exact cover vs CP-SAT, and lineage-driven minimum-fault search over Molly's `ack-deliv` protocol (minimum hitting set of the proof-tree hypergraph with an exclusion certificate; capability row, no published speed baseline; `2026-09-12-alvaro-datalog-reading.md`); local comparators Soufflé and egglog; RecStep, BigDatalog, DDlog, Umbra, VLog, RDFox, Rel citation-only (VFLog table is the only fully versioned one; FlowLog is broadest but unversioned; Rel has no published numbers); protocol as in `2026-09-11-ergodis-external-benchmark-programme.md`; reshaped by Macready's named workload | harness private, results in `ergodis-evidence` |
+| 4 | C1192, C1193 (queued 2026-09-16) | join engine: sparse join index with exact crossover (C1192), then bodies of more than two atoms by generic/Free Join (C1193); review `2026-09-16-ergodis-datalog-programme-review.md` | core |
+| 5 | C1195 (queued 2026-09-16, after C1192; min-plus rows after C1194) | benchmark suite per `2026-09-12-datalog-benchmark-suites.md`: TC and SG (Boolean), SSSP and CC (min-plus), MLM over recursive trees (lifted reals, no cross-engine baseline exists), TC over the counting semiring, exact cover vs CP-SAT, and lineage-driven minimum-fault search over Molly's `ack-deliv` protocol (minimum hitting set of the proof-tree hypergraph with an exclusion certificate; capability row, no published speed baseline; `2026-09-12-alvaro-datalog-reading.md`); local comparators Soufflé and egglog; RecStep, BigDatalog, DDlog, Umbra, VLog, RDFox, Rel citation-only (VFLog table is the only fully versioned one; FlowLog is broadest but unversioned; Rel has no published numbers); protocol as in `2026-09-11-ergodis-external-benchmark-programme.md`; reshaped by Macready's named workload | harness private, results in `ergodis-evidence` |
 | 6 (complete) | C1162 | FGH-square discharge of leaf lowering by counterexample-guided synthesis on the C1091 fixtures; mechanism core, each discharged family private | core + private |
 | 6b (complete) | C1166 | kernel-checked finite privacy certificate import, physical-world semantics, arbitrary append traces and fifteen-state minimality; `2026-09-12-c1166-privacy-lowering-reflection.md` | generic Lean support + private instance |
 | 7 (complete) | C1158 | acting-subgroup measurement on the two-transfer census; if it pays, a generic group-action / canonical-form trait in core so the contract can carry a symmetry declaration | private task crate, then core |
