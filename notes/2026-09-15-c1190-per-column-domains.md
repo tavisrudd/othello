@@ -976,7 +976,9 @@ manifest rows — the first candidate, which the report cites for the placement 
 candidate, which is the control the next frontend A/B should use. No profile data: this milestone's
 result is read from counted complement facts and program bytes rather than from a symbol profile,
 and the one profile the mystery ledger asks for was not taken. Both binaries are named by this
-report, so `scripts/cache-gc.sh` will show them as referenced. Deletion is the user's call.
+report, so `scripts/cache-gc.sh` will show them as referenced. Also `c1190/`, 24 KiB of two throwaway
+driver scripts that loop `rel-lower` over the series and bisect the boundary; the replay commands
+above run the tool directly and name no script, so nothing cites them. Deletion is the user's call.
 
 ## Vibe check
 
