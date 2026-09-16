@@ -2,8 +2,9 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-16
-**Status**: IN PROGRESS. Written incrementally from the start of the task, so a crash leaves a
-partial record rather than none.
+**Status**: COMPLETE except for the independent read-only audit, which an author cannot write for
+their own change and which the next steps name. Written incrementally from the start of the task, so
+a crash would have left a partial record rather than none.
 
 Task card: `2026-09-16-c1191-direct-constructor.md`. Decision record: private
 `docs/adr/0004-rel-lowering-ir.md`, whose "direct constructor into the demand evaluator's prepared
