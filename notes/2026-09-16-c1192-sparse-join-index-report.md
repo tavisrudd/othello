@@ -592,3 +592,51 @@ control is about 0.867 G — which, as the playbook warns, is a pair of estimate
 measurement. What the two profiles do establish is that the loop's only remaining out-of-line call is
 the tuple copy, and that it is now the largest single thing left in it. **That is C1188's target, and
 it is taken in the next section.**
+
+### C1188 taken: the tuple copy, removed and measured
+
+The card's scope note allowed the queued C1188 work to be taken if it fell out of the derivation
+loop naturally. It did: the profile above shows one out-of-line call, the loop was already open, and
+the change is two element loops. It is a separate commit, `ergodis` `24e399e`, and it is measured
+separately against the revision before it.
+
+Fermi, written from the profile before the change: the call is a `copy_from_slice` over two words,
+so nearly all of its cost is the call itself — argument setup, the call and return, and libc's own
+length dispatch — and the profile put it at 22.1 per cent of the loop. **I predicted 10 to 18 per
+cent off the loop's instructions**, uniform across cohorts because the copy is per tuple read and
+per tuple written and every cohort does both.
+
+A/B between `closure_ballpark-d2b1940` and `closure_ballpark-b7921a0`, the same workspace with only
+that commit between them, five interleaved rounds, CPU 5, `--evaluate-only`:
+
+| Cohort | derived | instruction ratio [lo, hi] | A/A null | cycle ratio |
+| --- | ---: | ---: | ---: | ---: |
+| `closure` sparse 256 | 62,979 | **0.89459** [0.89459, 0.89460] | 1.0000078 | 0.7904 |
+| `closure` sparse 1,024 | 979,983 | **0.89458** [0.89458, 0.89459] | 1.0000008 | 0.7715 |
+| `closure` dense 256 | 65,536 | **0.89473** [0.89472, 0.89473] | 0.9999963 | 0.7100 |
+| `closure` dense 512 | 262,144 | **0.89473** [0.89473, 0.89473] | 1.0000001 | 0.7065 |
+| `samegen` sparse 1,024 | 258,691 | **0.89392** [0.89391, 0.89392] | 0.9999989 | 0.7653 |
+| `samegen` dense 512 | 507,425 | **0.89431** [0.89431, 0.89431] | 1.0000013 | 0.7879 |
+| `closure` blocks 16,384 | 262,144 | **0.89486** [0.89484, 0.89489] | 0.9999937 | 0.7190 |
+| `mutual` blocks 4,096 | 61,440 | **0.89308** [0.89291, 0.89326] | 0.9999883 | 0.9220 |
+
+**10.5 per cent fewer instructions on every cohort, and 8 to 29 per cent fewer cycles**, with the
+instruction ratios agreeing to four decimal places across eight cohorts that differ by two orders of
+magnitude in size and by which structures they use. That uniformity is the evidence that this is a
+per-tuple cost and not a cohort effect, and it is what the Fermi predicted; the figure landed at the
+low end of the 10 to 18 per cent band.
+
+The cycle win is much larger than the instruction win — 0.71 on dense closure — which says the
+removed call was also costing a pipeline stall, not only instructions. `mutual` is the exception at
+0.92 cycles, and its shape explains it: one non-recursive rule whose join yields one row per probe,
+so the loop is dominated by the index probe rather than by the tuple copies.
+
+Profile after, same command and same scope as the table above: `evaluate_into` **98.36 per cent**,
+`__memmove_avx512_unaligned_erms` **0.11 per cent**, `certificate` 0.90, `index_rows` 0.33. **The
+derivation loop now has no out-of-line call at any threshold this profile resolves**; the memmove
+residue is the workspace reset before the loop and the certificate's cold pass, neither of which is
+inside it.
+
+Compounding the two changes, the derivation loop on these cohorts is at 0.81 to 0.88 of the control's
+instructions — `0.90665 × 0.89473 = 0.8113` on dense closure at 512 — with identical rows, identical
+work counts and identical certificates.
