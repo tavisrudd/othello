@@ -330,27 +330,27 @@ the canonical JSON of one layer's program against the core's `MAX_BYTES` of 1,04
 | `stratified` |     2 |                153 |        23,182 complement |
 | `columns`    |     2 |                302 |        22,577 complement |
 | `columns3`   |     3 |                 84 |        21,938 complement |
-| `aggregate`  |     2 |      213 (key set) |            22,578 filter |
+| `aggregate`  |     2 |  618 (key set 213) |            22,578 filter |
 
 **After**, with the tool's committed defaults (`--max-rows 1048576`, `--values 4096`):
 
-| Cohort       |        Largest dictionary |              Factor | Materialized facts there | First refused, and the bound                                                  |
-| ------------ | ------------------------: | ------------------: | -----------------------: | ----------------------------------------------------------------------------- |
-| `stratified` |                 **1,024** |                ×6.7 |     1,047,043 complement | 1,025: the demand evaluator's **row capacity**, 2^20, at layer 1              |
-| `columns`    |                 **1,820** |                ×6.0 |       826,738 complement | dictionary 1,822: the lowering workspace's **fact pool**, 4,097 against 4,096 |
-| `columns3`   |                   **255** |               ×3.04 |       614,082 complement | 258: the core's **`MAX_INDEX_KEYS`**, 17,173,512 against 16,777,216           |
-| `aggregate`  | **3,959** (key set 1,365) | ×6.4 on the key set |           930,930 filter | key set 1,366: the lowering workspace's **fact pool**, 4,097 against 4,096    |
+| Cohort       |        Largest dictionary | Factor | Materialized facts there | First refused, and the bound                                                  |
+| ------------ | ------------------------: | -----: | -----------------------: | ----------------------------------------------------------------------------- |
+| `stratified` |                 **1,024** |   ×6.7 |     1,047,043 complement | 1,025: the demand evaluator's **row capacity**, 2^20, at layer 1              |
+| `columns`    |                 **1,820** |   ×6.0 |       826,738 complement | dictionary 1,822: the lowering workspace's **fact pool**, 4,097 against 4,096 |
+| `columns3`   |                   **255** |  ×3.04 |       614,082 complement | 258: the core's **`MAX_INDEX_KEYS`**, 17,173,512 against 16,777,216           |
+| `aggregate`  | **3,959** (key set 1,365) |   ×6.4 |           930,930 filter | key set 1,366: the lowering workspace's **fact pool**, 4,097 against 4,096    |
 
 **And with the workspace raised** (`--max-rows 16777216 --values 262144`, both flags of the committed
 tool, so these replay from this revision too), which is what shows which bound belongs to the *route*
 rather than to the workspace the operator asked for:
 
-| Cohort       |        Largest dictionary |  Factor over before | Materialized facts there | Peak RSS | First refused, and the bound                                       |
-| ------------ | ------------------------: | ------------------: | -----------------------: | -------: | ------------------------------------------------------------------ |
-| `stratified` |                 **2,047** |               ×13.4 |     4,187,141 complement |  1.39 GB | 2,048: **`Budget::LayerTuples`**, 4,197,376 against 4,194,304      |
-| `columns`    |                 **4,092** |               ×13.5 |     4,183,050 complement |  2.73 GB | 4,094: **`Budget::LayerTuples`**, 4,195,326 against 4,194,304      |
-| `columns3`   |                   **255** |               ×3.04 |       614,082 complement |   564 MB | 258: **`MAX_INDEX_KEYS`**, unchanged by the workspace              |
-| `aggregate`  | **4,096** (key set 1,412) | ×6.6 on the key set |           996,166 filter |  1.86 GB | key set 1,413: **`MAX_INDEX_KEYS`**, 16,793,604 against 16,777,216 |
+| Cohort       |        Largest dictionary | Factor over before | Materialized facts there | Peak RSS | First refused, and the bound                                       |
+| ------------ | ------------------------: | -----------------: | -----------------------: | -------: | ------------------------------------------------------------------ |
+| `stratified` |                 **2,047** |              ×13.4 |     4,187,141 complement |  1.39 GB | 2,048: **`Budget::LayerTuples`**, 4,197,376 against 4,194,304      |
+| `columns`    |                 **4,092** |              ×13.5 |     4,183,050 complement |  2.73 GB | 4,094: **`Budget::LayerTuples`**, 4,195,326 against 4,194,304      |
+| `columns3`   |                   **255** |              ×3.04 |       614,082 complement |   564 MB | 258: **`MAX_INDEX_KEYS`**, unchanged by the workspace              |
+| `aggregate`  | **4,096** (key set 1,412) |               ×6.6 |           996,166 filter |  1.86 GB | key set 1,413: **`MAX_INDEX_KEYS`**, 16,793,604 against 16,777,216 |
 
 **The number that transfers is the fact ceiling, and it moved by about two orders of magnitude.**
 Every product-shaped construct on this route used to stop at about 22,000 materialized facts in one
