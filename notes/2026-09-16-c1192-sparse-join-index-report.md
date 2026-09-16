@@ -2,23 +2,32 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-16
-**Status**: BUILT, GATED AND MEASURED; two measurements the card asked for were not taken. Written
-incrementally from the start of the task, so a crash leaves a partial record rather than none.
+**Status**: COMPLETE. Built, gated and measured, with every measurement the card asked for taken.
+Written incrementally from the start of the task, so a crash leaves a partial record rather than
+none.
 
-## Handoff state
+## Status
 
-**Done and gated.** The demand evaluator has a sparse addressing kind beside the direct one for both
-of its direct-addressed structures — the join index and the membership test — chosen once at
+**Done, gated and measured.** The demand evaluator has a sparse addressing kind beside the direct one
+for both of its direct-addressed structures — the join index and the membership test — chosen once at
 preparation by a measured policy, with the derivation loop monomorphized on the choice. The two
 admission ceilings that refused programs (`MAX_UNIVERSE` 2^30, `MAX_INDEX_KEYS` 2^24) survive at
 their old values as policy ceilings, so a program the evaluator accepted before makes the same
 choices. The replacement refusals are the row capacity and `MAX_WORKSPACE_BYTES`, through
 `Error::Budget`. The mirrors of both ceilings are gone from the private lowering close and the
-stratified backend. C1188's tuple `memmove` is removed from the loop in its own commit. Core: 80 test
-binaries, zero failures, clippy and fmt clean, `SHA256SUMS` current. Private: 42 test binaries, zero
-failures, including the C1189 differential at zero disagreements.
+stratified backend. C1188's tuple `memmove` is removed from the loop in its own commit.
 
-**Measured, with receipts** (all under `~/src/ergodis-private/`):
+**The gates.** Core: 80 test binaries, zero failures; clippy and `cargo fmt` clean; `SHA256SUMS`
+current. Private: 42 test binaries, zero failures, including the C1189 differential at zero
+disagreements. The certificate is byte-identical between the two addressing kinds on the fixtures,
+the generated closure family at two row bounds and every program of the property corpus; the
+derivation loop allocates zero under each of `Policy::Auto`, `Policy::Direct` and `Policy::Sparse`;
+and the two deliberate mutations both fail the suite. The full gate table is under **Exactness**
+below. Against Soufflé 2.5 the derived relation agrees as a tuple set on all six new cases, and the
+four Rel-route closure digests are unchanged from C1191 on both the `d2b1940` and the `f12e27b`
+backend runs.
+
+**Every receipt** (paths under `~/src/ergodis-private/` unless stated):
 
 | What | Receipt |
 | --- | --- |
@@ -26,47 +35,42 @@ failures, including the C1189 differential at zero disagreements.
 | C1188's tuple copy, eight cohorts | `analysis/datalog-comparison/ab-2026-09-16-c1188-memmove.json` |
 | the crossover, membership, eleven density points | `analysis/datalog-comparison/ab-2026-09-16-c1192-crossover-membership{,-high}.json` |
 | the crossover, join index, eleven density points | `analysis/datalog-comparison/ab-2026-09-16-c1192-crossover-index{,-high}.json` |
-| the frontend and the stratified backend, nine cohorts | `analysis/rel-frontend/performance-v7-sparse{,-datalog,-stratified,-columns,-aggregate}-d2b1940.json` |
+| the supplementary cache-event run, four cohorts | `analysis/datalog-comparison/ab-2026-09-16-c1192-cache{,-cycle}.json` |
+| Soufflé 2.5, three sizes, default row bound | `analysis/datalog-comparison/results-2026-09-16-blocks.json` |
+| Soufflé 2.5, the same three sizes, row bound 1.1 M | `analysis/datalog-comparison/results-2026-09-16-blocks-bounded.json` |
+| the frontend and the stratified backend before C1188, nine cohorts | `analysis/rel-frontend/performance-v7-sparse{,-datalog,-stratified,-columns,-aggregate}-d2b1940.json` |
+| the four backend cohorts after C1188 | `analysis/rel-frontend/performance-v8-c1188-{datalog,stratified,columns,aggregate}-f12e27b.json` |
 | the kernel-scoped profiles, three arms | `~/.cache/ergodis/perf-c1192/closure-dense-{e0e7331,d2b1940,b7921a0}.data` |
 
-The reach and boundary tables were taken by single invocations of the committed tools and are
-reproduced by the replay block at the end; they have no receipt file of their own.
+Every `ab.py` receipt has a `.jsonl` sidecar of its raw samples beside it, and `--resummarize`
+rebuilds it without measuring. The reach and boundary tables were taken by single invocations of the
+committed tools and are reproduced by the replay block at the end; they have no receipt file of their
+own.
 
 **Nothing is half-built.** Every source change is committed in both repositories; `git status` is
 clean in `ergodis`, `ergodis-private` and `othello`.
 
-**Retained binaries**, all through `../ergodis-dev/scripts/retain-bin.sh` inside `nix develop` of the
-core checkout, rustc 1.95.0 (59807616e 2026-04-14):
+**Every retained control**, all through `../ergodis-dev/scripts/retain-bin.sh` inside `nix develop` of
+the core checkout, from a clean tree, rustc 1.95.0 (59807616e 2026-04-14):
 
 | Name | Role |
 | --- | --- |
 | `closure_ballpark-e0e7331` | control, retained before the first source change |
-| `ergodis-tools-e0e7331` | control, frontend and stratified backend |
+| `ergodis-tools-e0e7331` | control, frontend and stratified backend, both backend runs |
 | `closure_ballpark-1dfc6ed` | superseded candidate; its A/B was re-run at `d2b1940` |
 | `ergodis-tools-4bcbc10` | superseded candidate; likewise |
-| `closure_ballpark-d2b1940` | the candidate every figure except C1188's was measured on |
-| `ergodis-tools-d2b1940` | the frontend and backend candidate; **does not carry C1188** |
-| `closure_ballpark-b7921a0` | after C1188 — **the control the next A/B should use** |
+| `closure_ballpark-d2b1940` | the candidate every figure except C1188's and the Soufflé rows was measured on |
+| `ergodis-tools-d2b1940` | the frontend and backend candidate before C1188 |
+| `closure_ballpark-b7921a0` | after C1188; the Soufflé and reach arm, and **the control the next derivation-loop A/B should use** |
+| `ergodis-tools-f12e27b` | after C1188; **the control the next frontend or backend A/B should use** |
 | `c1188probe-d2b1940` | a probe from a dirty tree, cited by nothing, byte-identical to `b7921a0` |
 
-**The next three concrete steps.**
-
-1. **Run the Soufflé row the card asked for and this task did not take.** One invocation:
-   `nix shell nixpkgs#souffle nixpkgs#gcc nixpkgs#gnumake nixpkgs#time -c python3
-   analysis/datalog-comparison/compare.py --bin ~/.cache/ergodis/bin/closure_ballpark-b7921a0
-   --work $(mktemp -d -p ~/.cache/ergodis/c1192) --out
-   analysis/datalog-comparison/results-2026-09-16-blocks.json --rounds 5 --cpu 5
-   --sizes closure:blocks:4096,16384,65536`. `compare.py` takes an arbitrary density and `tc.dl` is
-   the same program, so nothing needs writing; Soufflé 2.5 is in the store. That closes remaining
-   gap 1, which is the only thing the card asked for that has no number.
-2. **Retain an `ergodis-tools` after C1188 and re-run the four backend cohorts**, so the stratified
-   backend's figures describe the shape the tree carries. The current backend receipts are at
-   `d2b1940`, one commit before the tuple copy was removed, and the loop they measure is the one
-   C1188 changed by 10.5 per cent.
-3. **Decompose the sparse membership probe's flat 20 to 26 per cent instruction cost** — mystery
-   ledger item 6 — into the hash, the chain walk and the tuple comparison, in the playbook's sizing
-   shape. It is the one open question that could change the policy, because a sparse membership test
-   that was not structurally 20 per cent behind would have a crossover where today it has none.
+**What is left, and it is not this task's.** Three evidence gaps remain open and are listed under
+**Remaining gaps** with their owners: the sparse membership probe's flat 20 to 26 per cent
+instruction cost is undecomposed (mystery ledger item 6, the one open question that could change the
+policy); nothing bounds a layer's memory and every table is sized from the caller's bound rather
+than from the rows (item 7, inherited from C1191 and now measured from two sides); and the
+front-end mechanism behind C1188's cycle win is narrowed but not named (item 8).
 
 
 Task card: `2026-09-16-c1192-sparse-join-index.md`. Predecessors: `2026-09-13-c1182-demand-driven-datalog.md`
@@ -85,6 +89,7 @@ is the retain recipe at the named revision.
 | --- | --- | --- | --- | --- | --- | --- |
 | control, closure/same-generation harness | `ergodis-private` | `e0e7331` | no | `closure_ballpark-e0e7331` | 1.95.0 (59807616e 2026-04-14) | `c1c3aecce4a888c01a0fab20ec860e18d0c504b38132ad1ab852f8d87fdbe10f` |
 | control, frontend and stratified backend | `ergodis-private` | `e0e7331` | no | `ergodis-tools-e0e7331` | 1.95.0 (59807616e 2026-04-14) | `e58752d20e1856353a9787ed50d31b158daf8b87aaef26ca4e0c55c28882dbbb` |
+| candidate after C1188, frontend and stratified backend | `ergodis-private` | `f12e27b` | no | `ergodis-tools-f12e27b` | 1.95.0 (59807616e 2026-04-14) | `1d5d5f89957c72793d5a0ece5fbbd38f12d953c218c6803844029e37325468af` |
 
 Retain recipes, from `~/src/ergodis-private`:
 
@@ -115,7 +120,12 @@ Both re-execute themselves inside `nix develop` of the core checkout, so the too
 | `ergodis` | `24e399e` | **C1188**: the tuple copy out of the derivation loop, as element loops over a bounded array |
 | `ergodis-private` | `b7921a0` | re-pin the core at the C1188 removal, so the arm after it has a name |
 | `ergodis-private` | `8881837` | the receipts at the kept revisions |
+| `ergodis-private` | `8f27cb1` | `compare.py --harness-args`, and the Soufflé comparison on the `blocks` cohorts under both row bounds |
+| `ergodis-private` | `f12e27b` | `ab.py --events`, so the playbook's supplementary cache set gets its own run |
+| `ergodis-private` | `b46572e` | the four backend cohorts re-measured at `ergodis-tools-f12e27b` |
+| `ergodis-private` | `8d9c5bd` | the cache-event receipts |
 | `othello` | `0ef05ec`…`9a3ce47` | this report, written incrementally in twelve commits |
+| `othello` | `9a3ce47`…HEAD | the Soufflé, post-C1188 backend and cache-event sections, and this report's close |
 
 ## Fermi predictions, written before any code
 
@@ -223,9 +233,9 @@ chain yields that does not match the key must be rejected before it counts. Thir
 overflowing once `domain^arity` is no longer bounded: at domain 65,536 and arity four that is
 exactly 2^64, so every universe computation has to saturate rather than wrap.
 
-## Status
+## What the change is
 
-Built and gated; measurement in progress. The demand evaluator's two
+Built, gated and measured. The demand evaluator's two
 direct-addressed structures — the join index over `domain^popcount(mask)` and the membership
 bitmap over `domain^arity` — each have a second shape sized from the rows, chosen once at
 preparation. The two admission ceilings that refused programs are now policy ceilings that choose a
@@ -456,6 +466,39 @@ select the direct kind throughout.
 every relation's certified rows: `dffdcd35…`, `3f5c4cdd…`, `ec562d2c…` and `5c455ad4…`, the same
 four digests C1191 recorded. Both independent checkers verified on both arms.
 
+#### The same four cohorts after C1188
+
+The table above is measured at `ergodis-tools-d2b1940`, which is one commit before the tuple copy
+left the derivation loop, so it describes a shape the tree no longer carries. `ergodis-tools-f12e27b`
+is retained from a clean tree at `ergodis-private` `f12e27b` with core `ergodis` `24e399e`, under the
+same rustc 1.95.0 (59807616e 2026-04-14), and the four cohorts that reach the backend are re-run
+against the same control `ergodis-tools-e0e7331`: five interleaved rounds, CPU 5, the same
+non-multiplexing event set at **100.00 per cent enabled on every event over 1,430 measurements**,
+load 2.79 to 5.91, two-point differencing. Receipts
+`analysis/rel-frontend/performance-v8-c1188-{datalog,stratified,columns,aggregate}-f12e27b.json`.
+
+| Cohort | `scan` | `parse` | `admit` | `lower` | `stratify` − `lower`, instructions | at `d2b1940` | cycles | peak RSS, candidate / control KiB |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `datalog` (512 definitions) | 0.999968 | 0.999996 | 1.000000 | 0.998876 | **0.95739** | 0.99516 | 0.9670 | 127,196 / 127,228 |
+| `stratified` (128) | 0.999944 | 0.999982 | 1.000004 | 0.999454 | **0.98131** | 0.99433 | 0.9983 | 11,384 / 11,292 |
+| `columns` (128) | 0.999989 | 0.999991 | 0.999998 | 0.999557 | **0.98134** | 0.99432 | 0.9902 | 16,720 / 16,524 |
+| `aggregate` (128) | 0.999852 | 0.999994 | 0.999991 | 0.999536 | **0.98427** | 0.99499 | 0.9856 | 21,080 / 20,868 |
+
+**The four closure digests are unchanged**, candidate against control and against C1191:
+`5c455ad4…`, `dffdcd35…`, `3f5c4cdd…` and `ec562d2c…`. Scan, parse and admission stay at unity to
+within 150 parts per million and lowering at 0.9989 to 0.9996, the same figures as the `d2b1940`
+run, so the front end still does not move.
+
+**The backend stage is 1.6 to 4.3 per cent cheaper than the control once C1188 is in, against 0.4
+to 0.6 per cent before it**, and the gain is ordered by how much of the stage is the derivation
+loop. `datalog` at 512 definitions, whose layers are the largest, takes 4.3 per cent; the three
+128-definition cohorts, whose stage also builds complements, filters and aggregates around a small
+evaluation, take 1.6 to 1.9. **None of them approaches the 10.5 per cent the closure family showed
+for the same commit**, which is the measurement that says the tuple copy is a derivation-loop cost
+and that the Rel route's backend stage is mostly not the derivation loop. That is a useful negative
+for whatever takes the layer memory model next: the thing to attack on this route is
+materialization, not the loop.
+
 ### Reach: the closure and same-generation families
 
 Every row is the candidate `closure_ballpark-1dfc6ed` in `--evaluate-only` mode under
@@ -542,6 +585,74 @@ compared `dictionary^arity` for every indexed relation, while the evaluator inde
 dictionary. On `columns3` that is 258³ against 258², so **part of this cohort's ×1.89 is the removal
 of a mirror that was stricter than the thing it mirrored**, and the report says so rather than
 crediting it all to the sparse index.
+
+### Against Soufflé on the new sizes
+
+The candidate `closure_ballpark-b7921a0` against Soufflé 2.5 (32-bit word, from the nix store,
+`souffle-2.5`), both the compiled binary (built with `nixpkgs#gcc`) and the interpreter, both `-j1`,
+five interleaved rounds per size with rotated start order on CPU 5. "Ergodis" and each Soufflé arm
+are whole processes: read the fact file, evaluate, write the derived relation. Wall is a monotonic
+clock around the wrapped process tree; instructions and task clock come from `perf stat`; peak
+resident set from GNU `time`. The three sizes are `closure` at the `blocks` density — the cohort the
+reach table uses — at N = 4,096, 16,384 and 65,536; `mutual` and `cycle` have no Soufflé row because
+`compare.py` carries only the two programs `tc.dl` and `sg.dl`, and neither is those. Receipts
+`analysis/datalog-comparison/results-2026-09-16-blocks.json` and `-blocks-bounded.json`.
+
+**Exactness first: on all six cases the Ergodis derived relation equals the compiled Soufflé output
+as a tuple set, and the interpreter's output equals the compiled binary's.** The certificate is
+emitted and independently checked in the warm pass of every case.
+
+The row bound is the caller's, and it is the whole story of the two tables. The first run leaves it
+at the harness default of `2^24`; the second passes `--max-rows 1100000`, sized once for the largest
+of the three cohorts and used unchanged for all of them.
+
+| N | facts | output | row bound | Ergodis s | compiled s | interp s | vs compiled [lo, hi] | vs interp | task clock vs compiled | instructions M, e/c/i | peak RSS MB, e/c/i |
+| ---: | ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |
+| 4,096 | 61,440 | 65,536 | `2^24` | 0.1973 | 0.0572 | 0.0805 | **3.244** [2.960, 3.556] | 2.251 | 3.797 | 400 / 423 / 801 | 527 / 6 / 10 |
+| 16,384 | 245,760 | 262,144 | `2^24` | 0.2686 | 0.1712 | 0.2506 | **1.558** [1.539, 1.577] | 1.071 | 1.620 | 1,565 / 1,717 / 3,145 | 587 / 12 / 16 |
+| 65,536 | 983,040 | 1,048,576 | `2^24` | 0.7830 | 0.6636 | 0.9466 | **1.254** [1.081, 1.455] | 0.871 | 1.194 | 6,654 / 7,079 / 12,741 | 805 / 36 / 40 |
+| 4,096 | 61,440 | 65,536 | 1.1 M | 0.0651 | 0.0601 | 0.1059 | **0.984** [0.866, 1.118] | 0.659 | 0.901 | 386 / 423 / 801 | 48 / 6 / 10 |
+| 16,384 | 245,760 | 262,144 | 1.1 M | 0.1399 | 0.1727 | 0.2488 | **0.814** [0.790, 0.838] | 0.564 | 0.794 | 1,551 / 1,717 / 3,145 | 108 / 12 / 16 |
+| 65,536 | 983,040 | 1,048,576 | 1.1 M | 0.6153 | 0.6480 | 0.9487 | **0.950** [0.933, 0.968] | 0.646 | 0.941 | 6,714 / 7,079 / 12,741 | 246 / 36 / 40 |
+
+**Instruction counts are within 12 per cent of compiled Soufflé's on every size and both bounds, and
+the wall ratio moves by a factor of three between the two bounds without them moving at all.** That
+separates the two effects cleanly, and the harness's own phase decomposition names the one that
+moves — preparation, which is where the workspace is reserved and every table is written with
+`fill(NONE)`:
+
+| N | row bound | prepare ms | evaluate ms | read ms | write ms | whole process ms |
+| ---: | --- | ---: | ---: | ---: | ---: | ---: |
+| 4,096 | `2^24` | **123.2** | 5.7 | 2.8 | 1.1 | 132.8 |
+| 4,096 | 1.1 M | **21.3** | 5.7 | 2.7 | 1.0 | 30.7 |
+| 16,384 | `2^24` | **178.2** | 23.4 | 10.9 | 3.9 | 216.5 |
+| 16,384 | 1.1 M | **76.2** | 23.3 | 10.9 | 4.1 | 114.5 |
+| 65,536 | `2^24` | **408.7** | 236.4 | 45.3 | 15.0 | 705.4 |
+| 65,536 | 1.1 M | **280.0** | 223.5 | 45.4 | 14.6 | 563.5 |
+
+**Evaluation is the same to within a few per cent under both bounds; preparation is 1.5 to 5.8 times
+larger under the default one, and at N = 4,096 it is 93 per cent of the whole process.** That is
+remaining gap 4 measured against an external engine rather than against this evaluator's own
+arms: a caller who declares `2^24` rows for a relation that holds 65,536 pays 102 ms of reservation
+and 479 MB of resident set for nothing, and the same program with a bound sized for its output runs
+at 0.98 of compiled Soufflé and 0.66 of the interpreter. **The product-path reading is that the
+sparse addressing kind reaches these sizes at an evaluation cost competitive with Soufflé, and that
+what stands between the default invocation and that figure is the row bound, not the addressing.**
+
+This is a much narrower advantage than C1182 measured on the generated closure family, where Ergodis
+was 0.11 to 0.20 of compiled Soufflé, and the reason is the cohort rather than the change: `blocks`
+is a closure that is already closed, so every derivation is a probe that finds an existing tuple and
+neither engine does any real fixpoint work. Its 16.7 M candidates at N = 65,536 are all rejected.
+C1182's advantage came from cases where the derived relation is far larger than the input, and this
+cohort was built to have a large domain and a small relation, which is the opposite shape.
+
+Peak resident set remains the standing weakness: 48 to 246 MB against Soufflé's 6 to 36 MB with the
+bound sized, and 527 to 805 MB with it at the default. Ergodis also emits and verifies a certificate
+(1.3 to 24.0 MB, 0.7 to 10.0 ms to check), which Soufflé does not.
+
+**The measured claim is confined to one positive two-atom Boolean rule with an equality join — the
+transitive closure of `tc.dl` — on the `blocks` family at three domains, single-threaded; no engine
+claim beyond that rule class is made.**
 
 ### The crossover, measured
 
@@ -714,6 +825,44 @@ Compounding the two changes, the derivation loop on these cohorts is at 0.81 to 
 instructions — `0.90665 × 0.89473 = 0.8113` on dense closure at 512 — with identical rows, identical
 work counts and identical certificates.
 
+### The supplementary cache-event run
+
+The cache counters do not fit beside the two branch counters on this PMU, so the playbook gives them
+their own run with their own A/A null; `ab.py` gained an `--events` flag for it, with the default set
+unchanged. The arms are the same C1188 pair, `closure_ballpark-d2b1940` against
+`closure_ballpark-b7921a0`, five interleaved rounds, CPU 5, `--evaluate-only`, two-point
+differencing, `cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses` at **100.00 per
+cent enabled over 120 measurements**, load 2.46 to 4.98. Receipts
+`analysis/datalog-comparison/ab-2026-09-16-c1192-cache{,-cycle}.json` with their sidecars.
+
+Three of the four cohorts are ones where the policy selects a sparse structure, which the receipt
+records per cohort, and the fourth is direct throughout:
+
+| Cohort | what is sparse there | L1 loads per evaluation, memmove → elements | L1 load ratio [lo, hi] | A/A null | L1 miss ratio | A/A null | `cache-misses` ratio | A/A null |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `closure` blocks 65,536 | membership, universe `2^32`, 16.8 M slots | 1.285 G → 1.072 G | **0.8343** [0.8291, 0.8395] | 1.0031 | 0.9882 | 1.0006 | 0.9819 | 0.9820 |
+| `mutual` blocks 8,192 | static join index, key space `2^26`, 122,880 slots | 22.20 M → 19.45 M | **0.8762** [0.8627, 0.8900] | 1.0021 | 1.0194 | 1.0681 | 1.3919 | 1.0704 |
+| `cycle` blocks 4,096, bound 262,144 | dynamic join index, key space `2^24`, 262,144 slots | 82.62 M → 68.95 M | **0.8344** [0.8153, 0.8540] | 0.9984 | 1.0821 | 1.0192 | 1.1909 | 1.0699 |
+| `closure` dense 512 | nothing — direct index, bitmap membership | 1.992 G → 1.653 G | **0.8300** [0.8289, 0.8310] | 1.0006 | 0.9999 | 1.0001 | 1.2574 | 1.9146 |
+
+**Only the L1 data-load counter is readable here, and it is readable very well.** Its A/A nulls are
+within three parts per thousand of unity on all four cohorts, and it says the tuple copy was issuing
+**16.6 to 17.0 per cent of every L1 data load the derivation loop made** on three of them and 12.4
+per cent on `mutual`, whose loop is one probe per row rather than a bucket walk. That is the same
+ordering the instruction ratios have, and it is a direct count of the thing removed: a two-word
+`copy_from_slice` per tuple read and per tuple written.
+
+**The miss counters are not readable and are reported as such.** `cache-misses` carries A/A nulls of
+1.07, 1.07 and 1.91, and `cache-references` 1.09 and 1.13; the playbook's rule is that a null away
+from unity means the candidate is not read for that event, and two-point differencing of counters
+this small is exactly the case it warns about. What can be said is the negative that the readable
+half supports: **`L1-dcache-load-misses` is flat — 0.9999 to 1.0821 against nulls of 1.0001 to
+1.0681 — while the loads themselves fall by a sixth.** The removed call therefore did not change
+what memory the loop touches, only how many loads it issues to touch it. It also fixes which cohorts
+the sparse kinds were selected on: `closure` blocks at 65,536 runs a sparse membership over a `2^32`
+universe, `mutual` at 8,192 a sparse static index over a `2^26` key space, and `cycle` at a row bound
+of 262,144 a sparse dynamic index, all with direct structures beside them for the arity-one masks.
+
 ## Exactness
 
 | Gate | Outcome |
@@ -725,6 +874,8 @@ work counts and identical certificates.
 | `cargo fmt --check`, both repositories | clean |
 | `SHA256SUMS` regenerated with every source change | `tests/evidence_manifest.rs` passes, public lint clean on every commit |
 | Closure SHA-256 across A/B arms, four backend cohorts | identical: `dffdcd35…`, `3f5c4cddcd…`, `ec562d2c3f…`, `5c455ad47f…` — the same four C1191 recorded |
+| The same four digests at `ergodis-tools-f12e27b`, after C1188 | identical again, candidate against control and against C1191 |
+| Tuple-set agreement with Soufflé 2.5, `closure` blocks at N = 4,096, 16,384 and 65,536, under two row bounds | agrees on all six cases; the Soufflé interpreter's output also equals the compiled binary's on all six |
 | Output SHA-256 across A/B arms, eight closure/same-generation/`blocks`/`mutual` cohorts | identical on every cohort of every A/B; `ab.py` fails a run rather than summarizing it when they differ, and none did |
 | Derived, probe and candidate counts across arms | identical on every cohort of every A/B |
 | Certificate agreement between the two addressing kinds | **byte-identical**, asserted on the fixtures, the generated closure family at two row bounds, and every program of the property corpus |
@@ -793,14 +944,21 @@ Compounded, the derivation loop is at 0.81 to 0.88 of the control on the existin
     derivation loop runs once there whatever the repeat count, so the two-point difference is still
     the loop's cost; the kernel-only mode is what the candidate-against-candidate comparisons and the
     profile use.
+11. **Two committed drivers gained one flag each**, both with their old behaviour as the default:
+    `compare.py --harness-args`, which appends to the Ergodis arm only so the fact file and both
+    Soufflé arms stay byte-identical across two row bounds, and `ab.py --events`, so the playbook's
+    supplementary cache set can be run without a second driver. The first Soufflé run was taken
+    before its flag existed; the flag's default reproduces it exactly.
 
 ## Remaining gaps
 
-1. **No Soufflé comparison on the new sizes.** The card asks for one through the existing harness if
-   it runs in reasonable time. `compare.py` takes an arbitrary density, so `closure:blocks:65536` is
-   one invocation away and Soufflé 2.5 is in the store; it was not run. *Evidence gap*: the
-   product-path claim on the large-domain cohorts has no external engine beside it, so the reach is
-   established against this evaluator's own earlier refusal and not against Soufflé.
+1. **Closed. The Soufflé comparison on the new sizes was run**, on `closure` at the `blocks` density
+   at N = 4,096, 16,384 and 65,536, under both the default row bound and a bound sized for the
+   cohort; the derived relation agrees with compiled Soufflé as a tuple set on all six cases. What
+   remains is narrower and is named here rather than dropped: **`mutual` and `cycle` have no Soufflé
+   row**, because `compare.py` carries only `tc.dl` and `sg.dl` and neither is those programs, so
+   the two cohorts that exercise a sparse *join index* are compared only against this evaluator's
+   own arms. Writing the two `.dl` files is small; nothing depends on it today.
 2. **The native/WASM parity replay was not re-run**, only the portability test inside the private
    suite, which passes. C1191's argument that the parity corpus compares the lowered relational IR
    and is structurally downstream of anything an evaluator does still holds, but the hash is not
@@ -811,8 +969,12 @@ Compounded, the derivation loop is at 0.81 to 0.88 of the control on the existin
 4. **The sparse table is sized from the caller's row bound, not from the rows.** A caller that
    over-declares pays for it twice: in reservation, and in the `fill(NONE)` before every evaluation,
    which is 64 MiB at a bound of `2^24`. The crossover tables show it as a 1.35 to 2.05 spread on one
-   program. A table that grew once at the first round boundary would fix it and would break the
-   allocation-free rule; a table sized from the previous evaluation's row count would not.
+   program, and the Soufflé table now prices it in whole-process wall: 3.24 times compiled Soufflé at
+   the default bound against 0.98 with the bound sized, with evaluation unchanged between them and
+   preparation falling from 123.2 ms to 21.3 ms. A table that grew once at the first round boundary
+   would fix it and would break the allocation-free rule; a table sized from the previous
+   evaluation's row count would not. **This is now the largest single product-path defect the lane
+   has measured**, and it belongs with the layer memory model rather than with addressing.
 5. **Peak resident set at the new boundary is gigabytes**, unchanged from C1191's remaining gap 4 and
    now with a second cause: 3.14 GB on `columns3` at a dictionary of 483. The eager row reservation
    is most of it, and `cycle` at 21 MB against 539 MB on the same program with a sized bound is the
@@ -891,12 +1053,42 @@ Compounded, the derivation loop is at 0.81 to 0.88 of the control on the existin
    be expressed in bytes; and now also whether a workspace should size its tables from the previous
    evaluation's row count.
 
-8. **Open and small: the C1188 cycle win is much larger than its instruction win** — 0.71 cycles
-   against 0.89 instructions on dense closure — which says the removed call was costing a stall and
-   not only instructions. The obvious candidate is the call/return pair sitting between a load of the
-   row store and the dependent branch, but no cache-event run was taken. *Evidence gap*: the
-   supplementary counter run (`cache-references,cache-misses,L1-dcache-loads,
-   L1-dcache-load-misses`) with its own null, which this task did not run for any arm.
+8. **Half settled by the cache run, and the half it settled is a negative: C1188's cycle win is not
+   a memory-hierarchy effect.** The supplementary run was taken — four cohorts, three of them with a
+   sparse structure selected and one direct — and the readable counter says the tuple copy was
+   issuing 12.4 to 17.0 per cent of the loop's L1 data loads, with A/A nulls inside three parts per
+   thousand. `L1-dcache-load-misses` is flat over the same change (0.9999 to 1.0821 against nulls of
+   1.0001 to 1.0681), so the loop touches the same memory and merely issues fewer loads to touch it;
+   the miss and reference counters carry nulls of 1.07 to 1.91 and are not read at all, which is the
+   playbook's own rule applied against its own suggestion. *Still open, and now narrower*: the extra
+   cycles are not misses, so what remains as the candidate is the front end — the call and return, the
+   argument setup and libc's runtime length dispatch — and naming it needs front-end stall counters
+   (`stalled-cycles-frontend` or the equivalent issue-slot events), not the cache set. Nobody has run
+   those, and nothing in this lane currently turns on the answer.
+
+9. **Settled, and it reorders what to attack next on the Rel route: the stratified backend's stage
+   is mostly not the derivation loop.** C1188 takes 10.5 per cent off the derivation loop on every
+   closure and same-generation cohort, uniformly to four decimal places, and takes 4.3 per cent off
+   the backend stage on `datalog` at 512 definitions and only 1.6 to 1.9 per cent on the three
+   128-definition cohorts. The gap is the rest of the stage — complement construction, filters,
+   aggregates and layer materialization — which is also what the boundary table says stops all four
+   cohorts (`MAX_LAYER_TUPLES` and `MAX_COMPLEMENT`, both materialization budgets) and what the peak
+   resident sets of 1.39 to 3.14 GB say costs the memory. *Nothing about this item is open*; it is a
+   direction, and it points at item 7 rather than at the loop.
+
+10. **Settled, and it is the one figure that changes what a caller should do: against Soufflé the
+    whole-process ratio on the new sizes is decided by the row bound, not by the addressing.** The
+    same binary on the same cohort is 3.24 times compiled Soufflé at the harness's default bound of
+    `2^24` and 0.98 times it with a bound of 1.1 M sized for the cohort, while its instruction count
+    moves by 3.5 per cent and its evaluation time not at all. At N = 4,096 preparation is 93 per cent
+    of the default-bound process. The surprise worth recording is the direction: before the run the
+    expectation from C1182 was a large Ergodis advantage (0.11 to 0.20 of compiled Soufflé there),
+    and on `blocks` it is 0.81 to 0.98 even with the bound sized. That is the cohort and not a
+    regression — `blocks` is a closure that is already closed, so all 16.7 M candidates at
+    N = 65,536 are rejected and neither engine does fixpoint work — but it is the measurement that
+    says this evaluator's advantage lives in cases where the derived relation is much larger than
+    the input, which is precisely the shape the reach cohorts were built *not* to have.
+    *Nothing about this item is open.*
 
 No discovery-track entry: everything found was inside what the task was looking for, with one
 exception already folded into item 4 above rather than logged, because it is a property of this
@@ -930,6 +1122,7 @@ git checkout e0e7331 && ../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis
 git checkout d2b1940 && ../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release
 git checkout d2b1940 && ../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools
 git checkout b7921a0 && ../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release
+git checkout f12e27b && ../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools
 
 A=analysis/datalog-comparison
 CTL=~/.cache/ergodis/bin/closure_ballpark-e0e7331
@@ -972,6 +1165,30 @@ nix develop ~/src/ergodis --command python3 $A/ab.py --a $CAND --a-name direct -
     --sweep "--max-rows 65536;--max-rows 131072;--max-rows 524288" \
     --work ~/.cache/ergodis/c1192/sweep-work --out $A/ab-2026-09-16-c1192-crossover-index-high.json
 
+# The supplementary cache-event run, across C1188. Three cohorts where the
+# policy selects a sparse structure and one where it selects none.
+CE=cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $CAND --a-name memmove \
+    --b $C1188 --b-name elements --mode evaluate --rounds 5 --cpu 5 --repeats 3 \
+    --cohorts closure:blocks:65536,mutual:blocks:8192,closure:dense:512 --events $CE \
+    --work ~/.cache/ergodis/c1192/cache-work --out $A/ab-2026-09-16-c1192-cache.json
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $CAND --a-name memmove \
+    --b $C1188 --b-name elements --mode evaluate --rounds 5 --cpu 5 --repeats 3 \
+    --cohorts cycle:blocks:4096 --sweep "--max-rows 262144" --events $CE \
+    --work ~/.cache/ergodis/c1192/cache-work --out $A/ab-2026-09-16-c1192-cache-cycle.json
+
+# Soufflé 2.5, compiled and interpreted, both -j1, on the blocks cohorts. The
+# second run differs only in the row bound the caller declares, which the flag
+# appends to the Ergodis arm alone, so the fact file and both Soufflé arms are
+# byte-identical between the two.
+S="nix shell nixpkgs#souffle nixpkgs#gcc nixpkgs#gnumake nixpkgs#time -c"
+$S python3 $A/compare.py --bin $C1188 --work ~/.cache/ergodis/c1192/souffle-work \
+    --out $A/results-2026-09-16-blocks.json --rounds 5 --cpu 5 \
+    --sizes closure:blocks:4096,16384,65536
+$S python3 $A/compare.py --bin $C1188 --work ~/.cache/ergodis/c1192/souffle-work-bounded \
+    --out $A/results-2026-09-16-blocks-bounded.json --rounds 5 --cpu 5 \
+    --harness-args "--max-rows 1100000" --sizes closure:blocks:4096,16384,65536
+
 # The frontend and the stratified backend.
 E=instructions,cycles,branches,branch-misses,page-faults,minor-faults
 B=analysis/rel-frontend
@@ -988,6 +1205,18 @@ for c in stratified columns aggregate; do
       --rounds 5 --cpu 5 --cohorts $c --definitions 128 \
       --stages scan,parse,admit,lower,stratify --events $E \
       --out $B/performance-v7-sparse-$c-d2b1940.json
+done
+
+# The same four backend cohorts after C1188, against the same control.
+T8=~/.cache/ergodis/bin/ergodis-tools-f12e27b
+nix develop ~/src/ergodis --command python3 $B/bench.py --binary $T8 --control $C \
+    --rounds 5 --cpu 5 --cohorts datalog --stages scan,parse,admit,lower,stratify \
+    --events $E --out $B/performance-v8-c1188-datalog-f12e27b.json
+for c in stratified columns aggregate; do
+  nix develop ~/src/ergodis --command python3 $B/bench.py --binary $T8 --control $C \
+      --rounds 5 --cpu 5 --cohorts $c --definitions 128 \
+      --stages scan,parse,admit,lower,stratify --events $E \
+      --out $B/performance-v8-c1188-$c-f12e27b.json
 done
 
 # The reach table. One process each, no certificates, no checkers.
@@ -1042,24 +1271,37 @@ use**. `bin/closure_ballpark-1dfc6ed` is the superseded candidate whose A/B was 
 before C1188 was committed, and nothing cites it; it is byte-identical to
 `closure_ballpark-b7921a0`, measured sha256 `08b488430c2ffd1f3443d22364756eb85b018282d961108b2d8010a3507063d3`.
 
-Under `perf-c1192/` (572 KB): the three kernel-scoped profiles. Under `c1192/` (5.1 MB): the A/B
-work directories, the fact files the reach probes emitted, and the `perf stat` outputs the receipts'
-enabled fractions were read from.
+`bin/ergodis-tools-f12e27b` is the frontend and backend arm after C1188 — **the control the next
+frontend or backend A/B should use**.
 
-`../ergodis-dev/scripts/cache-gc.sh` was run in its listing mode and nothing was deleted. It scanned
-44 entries and showed eight as unreferenced and old enough to remove, none of them this task's: the
-largest are `worktrees` at 105 MB, `split` at 31 MB and `representation-attribution` at 16 MB, all
-from other lanes. This task's `perf-c1192` and `c1192` are held as younger than two days, and every
-binary this report names shows as referenced. Deletion is the user's call.
+Under `perf-c1192/` (572 KB): the three kernel-scoped profiles. Under `c1192/` (19 MB): the A/B work
+directories (`ab-work`, `sweep-work`, `cache-work`, `events-smoke`), the two Soufflé work trees
+(`souffle-work` and `souffle-work-bounded`, 6.3 MB each — the generated fact files, the compiled
+`tc.dl` and `sg.dl` binaries and every system's output CSV), the fact files the reach probes emitted
+under `work`, the four run logs, and the `perf stat` outputs the receipts' enabled fractions were
+read from.
+
+`../ergodis-dev/scripts/cache-gc.sh` was run in its listing mode at task close and nothing was
+deleted. It scanned 44 entries and showed eight as unreferenced and old enough to remove, none of
+them this task's: the largest are `datalog-comparison` at 281 MB, `module-loading` at 124 MB,
+`worktrees` at 105 MB and `application-workspace` at 21 MB, all from other lanes or earlier tasks.
+This task's `c1192` shows as referenced and `perf-c1192` as younger than two days, and every binary
+this report names shows as referenced through `bin/MANIFEST.tsv`. Deletion is the user's call.
 
 ## The control for the next A/B
 
-`~/.cache/ergodis/bin/closure_ballpark-b7921a0`, measured sha256
+For the derivation loop, `~/.cache/ergodis/bin/closure_ballpark-b7921a0`, measured sha256
 `08b488430c2ffd1f3443d22364756eb85b018282d961108b2d8010a3507063d3`, retained from a clean tree at
 `ergodis-private` `b7921a0` with core `ergodis` `24e399e` under rustc 1.95.0 (59807616e 2026-04-14).
-For the frontend and the stratified backend, `~/.cache/ergodis/bin/ergodis-tools-d2b1940`, measured
-sha256 `f6b5234dfe5b9e2286b101e85ca7020386be2ad4bc4531bbd5b8654f4dea7646` — **which does not carry
-C1188**, because no `ergodis-tools` was retained after it. A backend A/B should retain one first.
+
+For the frontend and the stratified backend, `~/.cache/ergodis/bin/ergodis-tools-f12e27b`, measured
+sha256 `1d5d5f89957c72793d5a0ece5fbbd38f12d953c218c6803844029e37325468af`, retained from a clean tree
+at `ergodis-private` `f12e27b` with the same core revision and the same rustc. It supersedes
+`ergodis-tools-d2b1940` (`f6b5234dfe5b9e2286b101e85ca7020386be2ad4bc4531bbd5b8654f4dea7646`), which
+does not carry C1188; `d2b1940` is kept only because the first backend table is measured on it.
+
+Both are retained at the shape the tree carries. The next A/B in this lane needs no fresh retain
+unless the toolchain pin moves.
 
 ## Vibe check
 
@@ -1087,8 +1329,17 @@ decision. Instructions favour the direct kind everywhere, which makes this the o
 a cycle ratio is load bearing, and the report says so rather than quietly reporting the metric that
 agrees.
 
-Two blemishes. There is no Soufflé row on the new sizes, which the card asked for and which is one
-`compare.py` invocation away. And finding a test that discriminates the sparse bucket's key
-comparison took three attempts: the hash is close to injective on every natural key range, so two
-carefully designed collision cohorts passed with the comparison deleted, and what works is forcing
-the table to a single slot.
+The Soufflé rows are now taken, and they are the sharpest thing in the report: on the new sizes the
+whole-process ratio is 3.24 times compiled Soufflé at the harness's default row bound and 0.98 with
+the bound sized for the cohort, with evaluation identical between them and preparation falling from
+123.2 ms to 21.3 ms. The eager reservation, not the addressing, is what a caller feels, and that is
+now the lane's largest measured product-path defect. The cache-event run adds a clean negative:
+C1188 removes a sixth of the loop's L1 data loads with the miss counts flat, so its outsized cycle
+win is a front-end effect and not a memory one. The post-C1188 backend re-run says the same thing
+from the other end — the tuple copy is worth 10.5 per cent of the derivation loop and only 1.6 to
+4.3 per cent of the Rel route's backend stage, because that stage is mostly materialization.
+
+One blemish remains, and it is about testing rather than about the change: finding a test that
+discriminates the sparse bucket's key comparison took three attempts, because the hash is close to
+injective on every natural key range, so two carefully designed collision cohorts passed with the
+comparison deleted, and what works is forcing the table to a single slot.
