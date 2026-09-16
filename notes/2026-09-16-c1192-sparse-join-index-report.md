@@ -2,8 +2,72 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-16
-**Status**: IN PROGRESS. Written incrementally from the start of the task, so a crash leaves a
-partial record rather than none.
+**Status**: BUILT, GATED AND MEASURED; two measurements the card asked for were not taken. Written
+incrementally from the start of the task, so a crash leaves a partial record rather than none.
+
+## Handoff state
+
+**Done and gated.** The demand evaluator has a sparse addressing kind beside the direct one for both
+of its direct-addressed structures — the join index and the membership test — chosen once at
+preparation by a measured policy, with the derivation loop monomorphized on the choice. The two
+admission ceilings that refused programs (`MAX_UNIVERSE` 2^30, `MAX_INDEX_KEYS` 2^24) survive at
+their old values as policy ceilings, so a program the evaluator accepted before makes the same
+choices. The replacement refusals are the row capacity and `MAX_WORKSPACE_BYTES`, through
+`Error::Budget`. The mirrors of both ceilings are gone from the private lowering close and the
+stratified backend. C1188's tuple `memmove` is removed from the loop in its own commit. Core: 80 test
+binaries, zero failures, clippy and fmt clean, `SHA256SUMS` current. Private: 42 test binaries, zero
+failures, including the C1189 differential at zero disagreements.
+
+**Measured, with receipts** (all under `~/src/ergodis-private/`):
+
+| What | Receipt |
+| --- | --- |
+| the direct path, control against candidate, six cohorts | `analysis/datalog-comparison/ab-2026-09-16-c1192-direct.json` |
+| C1188's tuple copy, eight cohorts | `analysis/datalog-comparison/ab-2026-09-16-c1188-memmove.json` |
+| the crossover, membership, eleven density points | `analysis/datalog-comparison/ab-2026-09-16-c1192-crossover-membership{,-high}.json` |
+| the crossover, join index, eleven density points | `analysis/datalog-comparison/ab-2026-09-16-c1192-crossover-index{,-high}.json` |
+| the frontend and the stratified backend, nine cohorts | `analysis/rel-frontend/performance-v7-sparse{,-datalog,-stratified,-columns,-aggregate}-d2b1940.json` |
+| the kernel-scoped profiles, three arms | `~/.cache/ergodis/perf-c1192/closure-dense-{e0e7331,d2b1940,b7921a0}.data` |
+
+The reach and boundary tables were taken by single invocations of the committed tools and are
+reproduced by the replay block at the end; they have no receipt file of their own.
+
+**Nothing is half-built.** Every source change is committed in both repositories; `git status` is
+clean in `ergodis`, `ergodis-private` and `othello`.
+
+**Retained binaries**, all through `../ergodis-dev/scripts/retain-bin.sh` inside `nix develop` of the
+core checkout, rustc 1.95.0 (59807616e 2026-04-14):
+
+| Name | Role |
+| --- | --- |
+| `closure_ballpark-e0e7331` | control, retained before the first source change |
+| `ergodis-tools-e0e7331` | control, frontend and stratified backend |
+| `closure_ballpark-1dfc6ed` | superseded candidate; its A/B was re-run at `d2b1940` |
+| `ergodis-tools-4bcbc10` | superseded candidate; likewise |
+| `closure_ballpark-d2b1940` | the candidate every figure except C1188's was measured on |
+| `ergodis-tools-d2b1940` | the frontend and backend candidate; **does not carry C1188** |
+| `closure_ballpark-b7921a0` | after C1188 — **the control the next A/B should use** |
+| `c1188probe-d2b1940` | a probe from a dirty tree, cited by nothing, byte-identical to `b7921a0` |
+
+**The next three concrete steps.**
+
+1. **Run the Soufflé row the card asked for and this task did not take.** One invocation:
+   `nix shell nixpkgs#souffle nixpkgs#gcc nixpkgs#gnumake nixpkgs#time -c python3
+   analysis/datalog-comparison/compare.py --bin ~/.cache/ergodis/bin/closure_ballpark-b7921a0
+   --work $(mktemp -d -p ~/.cache/ergodis/c1192) --out
+   analysis/datalog-comparison/results-2026-09-16-blocks.json --rounds 5 --cpu 5
+   --sizes closure:blocks:4096,16384,65536`. `compare.py` takes an arbitrary density and `tc.dl` is
+   the same program, so nothing needs writing; Soufflé 2.5 is in the store. That closes remaining
+   gap 1, which is the only thing the card asked for that has no number.
+2. **Retain an `ergodis-tools` after C1188 and re-run the four backend cohorts**, so the stratified
+   backend's figures describe the shape the tree carries. The current backend receipts are at
+   `d2b1940`, one commit before the tuple copy was removed, and the loop they measure is the one
+   C1188 changed by 10.5 per cent.
+3. **Decompose the sparse membership probe's flat 20 to 26 per cent instruction cost** — mystery
+   ledger item 6 — into the hash, the chain walk and the tuple comparison, in the playbook's sizing
+   shape. It is the one open question that could change the policy, because a sparse membership test
+   that was not structurally 20 per cent behind would have a crossover where today it has none.
+
 
 Task card: `2026-09-16-c1192-sparse-join-index.md`. Predecessors: `2026-09-13-c1182-demand-driven-datalog.md`
 (the evaluator and the recorded "exact crossover unmeasured"), `2026-09-13-c1184-direct-checker.md`
