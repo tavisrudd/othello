@@ -37,7 +37,12 @@ Both re-execute themselves inside `nix develop` of the core checkout, so the too
 
 | Repository | Commit | What |
 | --- | --- | --- |
-| `othello` | | this report's skeleton and the Fermi predictions, written before any code |
+| `othello` | `0ef05ec` | this report's skeleton and the Fermi predictions, written before any code |
+| `ergodis` | `84ed62c` | the sparse addressing kind, the policy, the monomorphized derivation loop, the saturating universe, the workspace byte ceiling, and the agreement and mutation tests |
+| `ergodis-private` | `25cf4ed` | the two mirrored refusals removed from the lowering close and the stratified backend; `rel_stratified` on the bounded constructor; `closure_ballpark` gains `--max-rows`, `--index`, `--evaluate-only`, the `blocks` density and the `mutual` program |
+| `ergodis-private` | `6bfe187` | `analysis/datalog-comparison/ab.py`, a committed interleaved A/B driver for the derivation loop |
+| `ergodis` | `d0a0ef3` | `Policy::SparseIndexes` and `Policy::SparseMembership`, so a crossover measurement moves one structure at a time |
+| `ergodis-private` | `f2804c4` | the `cycle` cohort and the two one-structure policies on the command line |
 
 ## Fermi predictions, written before any code
 
@@ -147,4 +152,96 @@ exactly 2^64, so every universe computation has to saturate rather than wrap.
 
 ## Status
 
-Not yet built.
+Built and gated; measurement in progress. The demand evaluator's two
+direct-addressed structures — the join index over `domain^popcount(mask)` and the membership
+bitmap over `domain^arity` — each have a second shape sized from the rows, chosen once at
+preparation. The two admission ceilings that refused programs are now policy ceilings that choose a
+representation, so a binary relation is no longer capped at a domain of 32,768 nor a ternary one at
+1,024, and a relation of arity four over the largest admitted domain — `2^64` tuples — is a program
+the evaluator accepts. Certificates are unchanged in meaning and, on every cohort measured,
+unchanged byte for byte between the two kinds.
+
+## Design, and the shapes not built
+
+### One kind for each structure, chosen once
+
+```text
+                    direct                          sparse
+join index,         CSR: offsets[domain^k + 1],     sorted distinct keys with the same
+input relation      rows grouped by key             contiguous buckets, binary probe
+join index,         head[domain^k], next[rows],     head[next_pow2(rows)], next[rows],
+derived relation    chained by row                  multiply-shift hash, chained by row
+membership          one bit per domain^arity        head[next_pow2(rows)], next[rows],
+                                                    compare the tuple per row
+```
+
+Three properties make this a representation change and not a semantic one.
+
+**A sparse bucket holds more than one key, and the join step compares them.** A direct bucket is
+addressed by the key, so every row it yields matches by construction and the evaluator never
+compares a key column. A hash bucket yields whatever collides with it, so the join step compares
+each key column — a constant, or a variable the delta atom bound — against the row. A row rejected
+there produces no candidate, exactly as an equality check on a repeated variable does, so the work
+counts of the two kinds are equal and an A/B between them is a comparison at equal work.
+
+**The rows of one key come out in the same order.** A counting-sorted bucket and a sorted bucket
+are both ascending by row; a direct chain and a hash chain are both descending, because both prepend
+and rows are appended in increasing order. Filtering a hash chain to one key leaves a subsequence of
+the direct chain's order. So the derivation order is identical and **the certificate is identical
+byte for byte**, which is a stronger statement than a set comparison and is what the tests assert.
+
+**The kind is resolved once.** `Policy` decides at preparation and the derivation loop is
+monomorphized on the result through a const generic, dispatched once per step at entry. The
+pre-existing shape was worse than that: `if index.offsets.is_empty()` was tested inside the
+per-delta-row loop on a value constant for the whole step.
+
+### The row bound moved into the plan
+
+The policy reads the rows a structure can hold, and for a derived relation that is
+`min(domain^arity, row_bound)` — a number the caller supplies. It cannot therefore be a property of
+the workspace, as `workspace_bounded(max_rows)` made it. `Demand::new_bounded` and
+`from_prepared_bounded` take the bound and the policy; `workspace()` is the only workspace
+constructor; and a workspace built for one plan is refused by another, because the bound is part of
+the shape check. This is a recorded deviation: the card did not ask for it, and it is what makes the
+selection a preparation-time decision rather than a per-evaluation one.
+
+### What replaced the two refusals
+
+`MAX_UNIVERSE` and `MAX_INDEX_KEYS` kept their values and became `MAX_DIRECT_UNIVERSE` and
+`MAX_DIRECT_KEYS`, above which the policy chooses sparse rather than refusing. A program the
+evaluator accepted before therefore makes exactly the same choices, which is the strongest available
+form of "the direct path does not move".
+
+The refusals that replace them are the row capacity, `MAX_ROWS = 2^24` per relation, and
+`MAX_WORKSPACE_BYTES = 2^34`, both through `Error::Budget`, with `Demand::workspace_bytes()`
+reporting the figure that is checked. Removing the two ceilings **lowers** the worst-case workspace
+rather than raising it: a relation used to cost `domain^arity / 8` bytes of bitmap and an index
+`4 · domain^popcount` bytes whatever their row counts, and every structure is now `O(rows)` except a
+direct array the policy chose because it was small.
+
+### Shapes considered and not built
+
+1. **Open addressing with the key stored in the bucket**, a sixteen-byte record per slot. Rejected:
+   the chain through a `next` column indexed by row costs four bytes per slot and four per row, which
+   is the same shape the direct chain already has, so the two kinds share their workspace sizing and
+   the sparse one is never more than about three times the rows in bytes. Storing the key would have
+   removed the per-row comparison and added eight bytes per slot; the comparison reads a tuple the
+   join step loads anyway.
+2. **A hash chain for an input relation too.** Rejected: a counting-sorted CSR gives an input
+   relation contiguous buckets, which is a measured property of the existing direct path (C1182), and
+   the sorted-key array keeps that shape exactly — the join step's inner loop is the same slice walk
+   and only the bucket lookup differs. A hash chain would have changed the inner loop for every
+   static index.
+3. **A membership structure separate from the row store.** Not built: the sparse membership test
+   chains through a `next` column and compares against the row store, so it holds no tuples of its
+   own. A separate open-addressed set of packed keys would be eight bytes per slot and would hold a
+   second copy of every key.
+4. **Refusing a program whose direct array would be large, as before, and simply raising the
+   ceiling.** Rejected: it moves the reach by whatever factor the ceiling is raised and leaves the
+   memory unbounded by the rows, which is what makes a relation of a hundred thousand values
+   impossible whatever its size.
+5. **Narrowing the addressing bound to a relation's per-column domains**, which C1191's closeout
+   named as the obvious next lever. Not built and now largely moot: a bound computed from
+   `∏ᵢ |Dᵢ|` rather than `domain^arity` would have made the direct array smaller, and the sparse
+   kind makes it unnecessary for reach. It remains a candidate for choosing direct more often, which
+   is a speed question rather than a reach one.
