@@ -351,3 +351,33 @@ carries: instructions fell everywhere, branch misses did not move, and peak resi
 1 per cent on every cohort. The in-process evaluation medians agree with the cycle picture — dense
 closure 230.7 ms against 245.8 ms, sparse closure 46.2 ms against 46.1 ms — so the wall win is on the
 cohorts where the bucket walk dominates and the rest is a wash.
+
+### The frontend and the stratified backend
+
+Control `ergodis-tools-e0e7331` against candidate `ergodis-tools-4bcbc10`, five interleaved rounds,
+CPU 5, the same event set at **100.00 per cent enabled over 1,625 measurements**, load 1.31 to 2.67.
+Receipts `analysis/rel-frontend/performance-v7-sparse-4bcbc10.json` and its four per-cohort
+siblings.
+
+| Cohort | `scan` | `parse` | `admit` | `lower` | `stratify` − `lower`, instructions | cycles | peak RSS, candidate / control KiB |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `ascii` | 1.000002 | 1.000000 | 1.000000 | 1.000000 | −1 against 2 | — | 6,464 / 6,412 |
+| `unicode` | 1.000000 | 1.000000 | 1.000000 | 1.000000 | −1 against 1 | — | 6,464 / 6,412 |
+| `comment-string` | 0.999962 | 0.999981 | 0.999985 | 1.000000 | −3 against 1 | — | 6,092 / 6,044 |
+| `malformed-early` | 1.000002 | 0.999991 | 0.999999 | 1.000002 | −1 against 3 | — | 5,976 / 5,944 |
+| `malformed-late` | 1.000005 | 1.000000 | 0.999999 | 1.000000 | −3 against 2 | — | 6,300 / 6,268 |
+| `datalog` (512 definitions) | 0.999982 | 0.999991 | 1.000000 | 0.998875 | **0.99538** (1.6726 G against 1.6803 G) | 1.0226 | 126,532 / 127,240 |
+| `stratified` (128) | 1.000005 | 0.999967 | 1.000008 | 0.999461 | **0.99442** (167.24 M against 168.18 M) | 0.9915 | 11,436 / 11,420 |
+| `columns` (128) | 0.999976 | 1.000002 | 1.000003 | 0.999548 | **0.99443** (167.72 M against 168.66 M) | 0.9916 | 16,784 / 16,652 |
+| `aggregate` (128) | 0.999989 | 0.999976 | 1.000011 | 0.999530 | **0.99513** (58.78 M against 59.06 M) | 0.9812 | 21,052 / 21,052 |
+
+**Scan, parse, admission and lowering are unity to within thirty-eight parts per million on every
+cohort**, so the front end did not move; the five cohorts that never reach the backend measure ±3
+instructions on a stage that runs nothing, which is what a real stage should measure there. The
+backend stage is 0.4 to 0.6 per cent cheaper on the four that do reach it, from the same
+monomorphization the closure family shows at a larger scale, and the plans on these cohorts still
+select the direct kind throughout.
+
+**The closure SHA-256 is identical across arms on every one of the four backend cohorts**, over
+every relation's certified rows: `dffdcd35…`, `3f5c4cdd…`, `ec562d2c…` and `5c455ad4…`, the same
+four digests C1191 recorded. Both independent checkers verified on both arms.
