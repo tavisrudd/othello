@@ -542,7 +542,8 @@ allocator's consolidation and free work is gone with the per-fact allocations; a
 6.34 M to 0.92 M, because the control hashes 748,012 bytes of JSON three times and the candidate
 hashes a 133 KB tuple payload once. **The whole prepared boundary — `Demand::prepare`,
 `admit_prepared`, the streaming encoder and the tuple sort — is about 7.8 M instructions**, against
-about 110 M for the four serializations, three admissions and their allocator traffic. At 16,897
+about 120 M for the four serializations, three admissions, the owned `Fact` per tuple and the
+allocator traffic they generate. At 16,897
 materialized facts over three layers that is a recorded per-unit budget of about **460 instructions
 per materialized fact** for the prepared boundary, against about 6,500 for the wire one.
 
