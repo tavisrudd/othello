@@ -177,15 +177,157 @@ comment, a `Drop`, and a measured benefit or it does not ship.
 
 ## What the change is
 
-*Pending.*
+The demand evaluator's workspace reserves address space from the caller's row bound and commits
+memory from the rows a program actually derives. Three things together do that, and a fourth was
+forced by the first.
+
+1. **Every workspace table is an anonymous `MAP_NORESERVE` mapping**, through one owned type,
+   `crates/rules/src/pages.rs`. Reservation is one `mmap` whose cost does not depend on the length,
+   and the kernel supplies a zero page on first write.
+2. **Zero is the empty sentinel.** Bucket heads, chain links and membership heads hold `row + 1` and
+   end at zero, so a page the kernel has never committed already reads as an empty table and
+   preparation writes no `NONE` over it.
+3. **The reset between evaluations walks the rows the previous one wrote**, not the capacity, unless
+   the table is small enough that one linear pass over it cannot commit more memory per row than the
+   row store already does.
+4. **Each reservation's contents start at a rotating cache-line offset.** This was not in the plan;
+   it is a repair for a 9 per cent cycle regression the first three created, and the mechanism is in
+   the mystery ledger.
+
+Beside them, the counting sort that builds a direct CSR index now uses the offsets array as its own
+cursor rather than a second array of the same size, which was 64 MiB of preparation memory on a key
+space of 2^24.
+
+Nothing observable changed: the rows, the work counts, the certificates, both checkers' verdicts and
+the closure digests are what C1192 produced, on every cohort and every fixture.
 
 ## Design, and the shapes not built
 
-*Pending.*
+### `Pages<T>`: one owned mapping, and the only `unsafe` in the crate
+
+```text
+                 before                              after
+reservation      vec![0u32; capacity]                mmap(PROT_READ|PROT_WRITE,
+                 -> alloc_zeroed -> calloc                MAP_PRIVATE|ANONYMOUS|NORESERVE)
+commit           every page, by calloc's memset      the pages a write touches
+release          free                                munmap, in Drop
+empty table      fill(NONE) over the capacity        a page that was never written
+reset            fill(NONE) over the capacity        the slots the rows used
+```
+
+`Pages<T>` derefs to `[T]`, so every caller reads and writes it as an ordinary slice and the
+derivation loop's code is unchanged by it. `T` is constrained by a private `unsafe trait ZeroValid`,
+implemented for `u32` and `u64`, whose contract is that the all-zero bit pattern is a valid value —
+which is what makes a fresh mapping a valid slice. There is one `SAFETY` note per unsafe operation,
+a `Drop` that unmaps, and no interior pointer handed out. WebAssembly and any non-Unix target build
+an `alloc_zeroed` backing instead, which is correct and simply does not have the lazy-commit
+property; `libc` is a `[target.'cfg(unix)'.dependencies]` entry, so those targets never see it, and
+it is already a dependency of the core's root crate and of `crates/repository-native`, so the tree
+gains no new external crate.
+
+### The allocation gate had a hole the moment the workspace stopped using `Vec`
+
+A counting global allocator sees allocations. It does not see `mmap`. Moving the workspace to
+mappings would therefore have made the existing zero-allocation regression pass vacuously for any
+future reservation made inside the loop. `Pages` counts its reservations in one relaxed atomic on a
+path that runs once per structure at construction, `ergodis_rules::reservations()` exposes the
+count, and the regression asserts it is unchanged across a hundred evaluations **under each of the
+five `Policy` variants** rather than the three C1192 covered.
+
+### Resetting by the rows, and the one constant that decides which way
+
+Between evaluations three structures must return to empty: a relation's membership bitmap, a
+relation's membership hash heads, and a join index's bucket heads. Walking the rows the previous
+evaluation wrote clears exactly the words those rows touched and can commit nothing they have not;
+a linear fill is cheaper in instructions but commits every page of the table. `RESET_FILL_BYTES_PER_ROW`
+is the rule and it is 32: a fill is admitted only where the table costs at most thirty-two bytes per
+row of the previous evaluation, which is a little more than the twenty-eight bytes of tuple and
+witness columns a derived row already commits, so a fill can never be the term that decides a
+workspace's resident set.
+
+The rule reads the **rows the last evaluation wrote**, not the capacity, and that is the whole point:
+at the default row bound the capacity is 2^24 whatever the program derives. A fresh workspace's row
+count is zero, so the first evaluation's reset touches nothing at all.
+
+Two details make the walk exact. It runs **before** any relation's row count is reset, because the
+rows it reads are the previous evaluation's. And clearing a whole bitmap word rather than one bit is
+exact, because every bit set in that word was set by a row the same walk visits.
+
+### Shapes considered and not built
+
+1. **`MADV_HUGEPAGE` on the large tables**, which the card asks for. **Measured and rejected.** A
+   huge page commits two mebibytes on first touch, which is the opposite of what this task is for.
+   With the hint on every reservation of 2 MiB or more: `cycle` at the `blocks` density and
+   N = 4,096 went from 38,516 KiB resident to 67,992, and `closure` at `blocks` and N = 4,096 from
+   18,820 to 30,356 — **60 to 77 per cent more resident memory** — while evaluation moved by −4 to
+   +3 per cent, inside the noise of a three-repeat median. `closure` dense at N = 512, whose tables
+   are small, was a wash on both. The capability stays in `Pages::advise_huge` for a caller with a
+   densely filled column and a measured reason; nothing calls it.
+2. **`MADV_DONTNEED` as the reset** — "re-map the region", which the card offers as the alternative
+   to a high-water walk. Not built. It is O(1) in user instructions and returns the memory to the
+   kernel, but it decommits pages the *next* evaluation immediately refaults: on `cycle` at the
+   default bound the index head holds about 4,096 committed pages, so every evaluation after the
+   first would pay about 3 ms of fault handling on a 9 ms evaluation. It is the right shape for a
+   workspace that is reset and then left idle, and the wrong one for a workspace evaluated
+   repeatedly, which is what both the harness and a server do.
+3. **Sizing the tables from the previous evaluation's row count**, which C1192's remaining gap 4
+   named as the alternative to growing them. Not built and now unnecessary: the reservation is the
+   thing that was expensive, and a reservation that costs nothing until touched does not need to be
+   resized. It would also make a workspace's shape depend on its history, which `shape()` exists to
+   forbid.
+4. **A resumable mid-round budget exit**, which the card puts out of scope and asks to be recorded if
+   capacity-from-the-program leaves a gap. It does leave one, and the gap is recorded under
+   **Remaining gaps**: item 4 of the card wants a derived relation's capacity to come from the
+   per-column domain product, which needs the C1191 closing pass that has not been written, so the
+   capacity is still `min(domain^arity, row_bound)`. That no longer costs memory, but it still
+   decides the row-capacity refusal.
+5. **Applying `Pages` to the checkers' direct-addressed stores** in `crates/verify/src/datalog_store.rs`,
+   which have exactly the same `calloc` behaviour over `domain^arity` entries. Not built, and the
+   reason is a binding rather than a measurement: `ergodis_verify::implementation_identity()` hashes
+   the checker source files, so a new module there moves a digest that certificates bind to. It is
+   named under **Remaining gaps** with that constraint attached.
+6. **Staggering by a page rather than a cache line.** Not built: sixty-four cache-line offsets
+   already cover the page, and a page-granular stagger would cost a page per table for no further
+   separation.
 
 ## Method
 
-*Pending.*
+### The harness, and the two modes a measurement uses
+
+`analysis/datalog-comparison/ab.py`, the committed interleaved driver C1192 wrote, unchanged: two
+arms that may differ by revision or arguments, rounds that alternate arm order, an A/A null per
+cohort, the non-multiplexing event set
+`instructions,cycles,branches,branch-misses,page-faults,minor-faults` with the enabled fraction
+recorded per measurement, two-point differencing between `repeats` and `2 · repeats` evaluations so
+process startup, admission and preparation leave every per-iteration figure, one pinned core, and
+the load average over the run. Cache and TLB events get their own runs with their own nulls, because
+they do not fit beside the two branch counters on this PMU.
+
+**Both arms have `--evaluate-only` this time**, which C1192's control did not, so every derivation-loop
+A/B here is taken in the kernel-scoped mode rather than in the full harness mode. Each arm prints its
+derived, probe and candidate counts and a SHA-256 over the output relation's rows, and `ab.py`
+refuses to summarize a cohort whose arms disagree on any of them.
+
+### The cold-start stage, and why it is simpler than C1170's
+
+`closure_ballpark --cold` is new: every iteration reserves a **fresh** workspace, evaluates once into
+it, and drops it. C1170 had to pin `mallopt(M_MMAP_THRESHOLD, …)` below its pool sizes to make the
+equivalent stage cold, because glibc raises its threshold after the first large free and thereafter
+recycles pages the kernel has already backed. A workspace of anonymous mappings is unmapped at the
+drop, so **each iteration is cold without any allocator tuning** — which is itself a consequence of
+the change under test. The stage is read from its fault count and its wall time, never from
+instructions: `perf_event_paranoid` is 2 on this host, so `perf` counts user-mode events only and
+page-fault handling is kernel time.
+
+### Which cohorts answer which question
+
+| Cohort | What it measures |
+| --- | --- |
+| `closure` and `samegen`, sparse and dense | the direct path, which must not move: small universes, small tables, no reservation to speak of |
+| `closure` at `blocks`, N = 4,096 to 65,536 | a large tuple universe with a small relation — the shape the reservation used to cost 500 MB for |
+| `mutual` at `blocks` | a **static** direct CSR index over a 2^24 key space, whose offsets array is preparation memory rather than workspace memory |
+| `cycle` at `blocks` | a **growing** relation's direct chain head over a 2^24 key space, reset before every evaluation: the largest single table in the lane |
+| `stratified`, `columns`, `columns3`, `aggregate` | the C1191 boundary cohorts through `rel-lower`, where the peak resident set was gigabytes |
 
 ## Results
 
