@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-31-work-summary.md`](2026-07-31-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-09-13**, with quiet stretches Jun 28–30, Jul 27, and Aug 16–17.
+Activity spans **2026-06-14 → 2026-09-17**, with quiet stretches Jun 28–30, Jul 27, and Aug 16–17.
 This is the *chronological* view; the scope report is the *state* view.
 
 ## Content split between the two documents — binding rule
@@ -1535,6 +1535,31 @@ campaign's sibling task had just rediscovered.
   certificate results are now closed records; demand-path ABI selectors, the binary certificate
   format, n-ary rules, incremental demand updates and evaluator-selection policy remain separate
   successors.
+
+## Week 19 — Sep 16–17 · Ergodis crosses the workspace-memory boundary
+
+- **Sep 16 — sparse addressing is made policy, then audited.** C1192 added direct and sparse
+  addressing kinds for both the join index and membership test, selected once during preparation by
+  a measured crossover policy. The old universe/index-key ceilings remain policy ceilings, while
+  row capacity and the workspace-byte budget become the refusal boundaries. The derivation loop
+  allocates zero under all policy variants and preserves certificate/output parity. Its independent
+  audit re-derived 1,394 A/B values, all boundary points, Soufflé comparisons and mutation gates;
+  it found no code defect, repaired two measurement records and closed the task as done and audited.
+
+- **Sep 16–17 — row-sized lazy commitment changes the economic result.** C1198 first profiled the
+  retained control and established that `calloc`'s zeroing, rather than the explicit sentinel fill,
+  caused the eager commit. The implementation reserves address space from the caller's row bound
+  and commits pages from actual derived rows. Across six memory cohorts peak resident set fell
+  3.1–29.6x and derivation-loop instructions 1.6–1.8%; on `blocks` closure at `N=4096`, default
+  row-bound whole-process time against compiled Soufflé moved from 3.244x to 0.852x, with 527 MB
+  to 18 MB peak resident set and 123.2 ms to 14.8 ms preparation. Core/private tests, native/WASM
+  parity, zero-allocation gates and deliberate mutations passed. The result is bounded to the
+  admitted positive two-atom Boolean rule language and measured workloads; independent audit is
+  the next gate.
+
+- **Queue boundary.** C1192 and C1198 are closed records, with C1192 independently audited and
+  C1198 awaiting its separate audit. The next policy and frontend successors remain distinct from
+  these measurements; no general Datalog-engine or unrestricted workspace claim is made.
 
 ---
 

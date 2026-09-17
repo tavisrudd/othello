@@ -1,6 +1,6 @@
 # Portfolio results summary snapshot
 
-**Date:** 2026-09-13
+**Date:** 2026-09-17
 
 A self-contained summary of the major results of an ongoing programme in
 finite geometry, coding theory, and combinatorial game theory. It is written
@@ -69,6 +69,17 @@ measurements identify rank-run round blocks as the useful next binary encoding:
 yet part of the core wire format. Native and WASM conformance, manifest generation,
 and the public documentation/export guards are green; no public release has been
 made.
+
+**Update, 2026-09-16–17.** Ergodis's demand evaluator now chooses between direct and sparse
+addressing for its join index and membership test by a measured preparation-time policy, while
+preserving exact output and zero-allocation derivation. An independent audit re-derived 1,394 A/B
+values and found no code defect. A follow-on workspace change reserves address space from the
+caller's row bound and commits memory from derived rows: peak resident set falls by 3.1--29.6x
+on six memory cohorts, and the derivation loop is 1.6--1.8% cheaper in instructions. On the
+`blocks` closure at `N=4096`, the whole-process ratio against compiled Soufflé moves from 3.244 to
+0.852 at the default row bound, with peak resident set from 527 MB to 18 MB and preparation from
+123.2 ms to 14.8 ms. These are bounded comparisons for the admitted positive two-atom Boolean
+rule language and tested workloads; C1198's result is gated but not yet independently audited.
 
 **How to read the length.** Sections are not sized in proportion to the
 mathematics they contain. Each one carries its scope boundaries, its priority

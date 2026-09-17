@@ -18,7 +18,7 @@ games, backed by:
   theory's quotient theorems into a general tool, has since been extracted into its own repository
   behind a tested publication guard, and is being prepared for release under a dual licence.
 
-### Current additions through 2026-09-13
+### Current additions through 2026-09-17
 
 The arcs programme now has a 37-page, warning-free and reproducible manuscript,
 *Secant defects with prescribed holes: arcs, caps, and matching designs*. Its
@@ -72,6 +72,16 @@ bitmap improve large sparse checking, while measurements identify rank-run round
 blocks as the next useful binary certificate encoding. That encoding is not yet in
 the core wire protocol. Native/WASM conformance, tree-derived manifests, and the
 public documentation/export guards are green; no public release has occurred.
+
+The next Ergodis performance chain is now complete. C1192 added measured direct/sparse choices
+for the join index and membership test; its independent audit re-derived 1,394 A/B values,
+boundary points, Soufflé cases and mutation gates without finding a code defect. C1198 then made
+the demand workspace reserve from the caller's row bound but commit memory only for derived rows.
+Across six memory cohorts, peak resident set fell 3.1--29.6x and derivation-loop instructions
+fell 1.6--1.8%; on `blocks` closure at `N=4096`, the default-bound whole-process ratio against
+compiled Soufflé improved from 3.244 to 0.852, with 527 MB to 18 MB peak resident set and 123.2 ms
+to 14.8 ms preparation. The result remains limited to the admitted positive two-atom Boolean
+language and measured workload family; C1198 is gated but awaits its independent audit.
 
 The open research center of gravity is the **projective cap ("Nofil") program** and its **odd
 projective-plane kernel**, with the Lean layer certifying results as they land. But the cap machinery
