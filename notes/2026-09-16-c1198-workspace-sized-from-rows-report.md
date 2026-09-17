@@ -121,7 +121,7 @@ task close.
 | `ergodis-private` | `2d368a3` | re-pin the core at the direct reset assertion |
 | `ergodis-private` | `ed99963` | re-pin the core at the measured reset boundary |
 | `ergodis-private` | `1f2fe44` | the receipts at the measured reset boundary |
-| `othello` | `9dd61b7`…`77046cb` | this report, written incrementally from before the first line of code |
+| `othello` | `9dd61b7` onward | this report, written incrementally from before the first line of code and committed at every milestone |
 
 ## Fermi predictions, written before any code
 
