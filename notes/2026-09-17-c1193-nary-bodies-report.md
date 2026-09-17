@@ -49,13 +49,23 @@ rustc equals the `rust-toolchain.toml` pin.
 | --- | --- | --- | --- | --- | --- | --- |
 | control, derivation loop | the kernel A/B | `193ebd1` | `e7116ba` | no | `closure_ballpark-193ebd1` | `a29f36177039ddc372de9b49fad5de2994063167ef9c4306e05a428ac55bfbcf` |
 | control, frontend and stratified backend | the Rel route | `193ebd1` | `e7116ba` | no | `ergodis-tools-193ebd1` | `ece06d113eefdf022c8465a950538b130e00c0ba32e4d325242cac1cf98bf01c` |
-| candidate, derivation loop | every figure below | `cb11550` | `09a5c2b` | no | `closure_ballpark-cb11550` | `2888aecb8c9e80b370b42511ea7cffbd4bfaa25be7abab4c006fda5696dd1128` |
-| candidate, frontend and stratified backend | the `datalog` rows | `cb11550` | `09a5c2b` | no | `ergodis-tools-cb11550` | `4c10145c54839a9793792b30a266c00ed0e9377d464a2c1624c63c9cf3080414` |
+| candidate, derivation loop | every figure below | `cb11550` | `09a5c2b` | **yes** (manifest) | `closure_ballpark-cb11550` | `2888aecb8c9e80b370b42511ea7cffbd4bfaa25be7abab4c006fda5696dd1128` |
+| candidate, frontend and stratified backend | the `datalog` rows | `cb11550` | `09a5c2b` | **yes** (manifest) | `ergodis-tools-cb11550` | `4c10145c54839a9793792b30a266c00ed0e9377d464a2c1624c63c9cf3080414` |
 | superseded, the first landing | the variants table's first row | `4b854ff` | `089c6d9` | no | `closure_ballpark-4b854ff` | `00f6ed444440a2c487285b493d90f7e9c79a5a0dd1d845949e20ca8f6ca01e52` |
 | superseded | cited by nothing | `e8f0e06` | `089c6d9` | no | `closure_ballpark-e8f0e06` | `4f6f54c12904cce92776209d05a404fe2a27fb25668b6450d2d15d5508f035c5` |
 
-**Both trees were clean at every retain**, and `retain-bin.sh` recorded `clean` for each. Neither
-arm carries a foreign uncommitted diff, so no ratio here is cancelling one. A foreign `cargo test`
+**Correction from the audit: the two `cb11550` arms were retained from a dirty private tree.**
+This report first said every retain recorded `clean`; `MANIFEST.tsv` records `dirty` for
+`closure_ballpark-cb11550` and `ergodis-tools-cb11550` (the four other rows are `clean`). The retain
+ran in the same second as commit `cb11550`, and the only commit after it, `26d2468`, adds nine
+receipt JSON files and no source, so the likeliest dirt is the receipts then untracked, which are
+not build inputs; but what was dirty was not recorded and cannot be recovered, and a clean-worktree
+rebuild cannot settle it because the build embeds its absolute source path (the audit's rebuild at
+`cb11550` differs from the arm by that path and by 200 bytes). So: the body-policy, cache, Rel-route
+and Soufflé figures are one binary under two arguments and cancel any dirt; the two-atom A/B and the
+variants table compare a clean control against a candidate that is not reproducible from its
+commit alone, and carry that caveat. The next retain in this lane must be from a tree whose
+`git status --short` is empty, checked before the recipe runs. A foreign `cargo test`
 from another session was running on the box during the first direct-path attempt and is visible in
 that run's load average; every figure kept below was taken at loads of 0.51 to 5.28, recorded per
 receipt, and instruction ratios decide.
@@ -100,7 +110,7 @@ was cleaned. Logged to the discovery track, because nothing about this task was 
 | `ergodis` | `09a5c2b` | the two-atom kernel pays nothing for the n-ary one: constant-index witness slots, `run_nary` out of line |
 | `ergodis-private` | `cb11550` | re-pin the core at that repair, so the measured arm has a private revision to name it |
 | `ergodis-private` | `26d2468` | the receipts |
-| `othello` | `e9650e0` … `8a813fd` | this report, written incrementally |
+| `othello` | `e9650e0` … `fb1f8bf` | this report, written incrementally; the audit's repairs follow it |
 
 ## Fermi predictions, written before any code
 
@@ -492,9 +502,10 @@ cent enabled over 180 measurements**, load 3.19 to 5.28. Receipt
 | `samegen` sparse 1,024 | 258,691 | **1.02052** [1.02052, 1.02053] | 0.9999993 | 1.0350 [1.0193, 1.0510] | 1.00158 | 1.0240 | 1.0563 | 11,580 / 11,568 |
 | `samegen` dense 512 | 507,425 | **1.02064** [1.02064, 1.02064] | 0.9999996 | 1.0133 [1.0046, 1.0221] | 0.99973 | 1.0188 | 0.9952 | 19,156 / 19,140 |
 
-Derived, probe and candidate counts identical on every cohort. **Peak resident set is lower on
-every cohort**, by 12 to 32 KiB: the interleaved premise column touches one page where two columns
-touched two.
+Derived, probe and candidate counts identical on every cohort. **Peak resident set is not a result
+here.** This run had the candidate lower by 12 to 32 KiB on every cohort; the audit's replay of the
+same two retained binaries had it higher by 4 to 32 KiB on every cohort. One to eight pages either
+way is page-placement noise, not the premise column.
 
 **The path costs 1.7 to 2.1 per cent of its instructions, and that is a loss to state plainly
 rather than round away.** The A/A nulls are inside four parts per million, so it is a measurement
@@ -563,7 +574,7 @@ body derives only the result. Instructions fall to 0.52 and 0.61, the derived-tu
 to four orders of magnitude, the round count from three to two, and peak resident memory from 192 MB
 to 71 MB and from 146 MB to 15 MB.
 
-**`path3` and `path4` are the honest middle, and they came out worse than the Fermi.** The
+**`path3` and `path4` are the middle, and they came out worse than the Fermi.** The
 intermediate there is a real relation and not a scaffold, so removing it saves the emits and not the
 joins: derived tuples fall by 25 to 31 per cent and instructions by only 4 to 7. Prediction 1 said
 0.70 to 0.85 for `path3` and 0.55 to 0.75 for `path4`; the measurement is 0.93 to 0.96. The cost
@@ -592,8 +603,9 @@ rather than read.
 ### The Rel route: the `datalog` cohort under the two policies
 
 `ergodis-tools-cb11550` against itself with `--body-policy nary` and `--body-policy binarize`, five
-rounds, CPU 5, the six-event set at 100.00 per cent enabled over 342 measurements, load 0.51 to
-1.00. Receipt `analysis/rel-frontend/performance-v10-c1193-body-policy-datalog.json`.
+rounds, `--cpu 5` on the command line (the driver's receipt carries no CPU field, so the pinning is
+stated here and not recorded there), the six-event set at 100.00 per cent enabled over 342
+measurements, load 0.51 to 1.00. Receipt `analysis/rel-frontend/performance-v10-c1193-body-policy-datalog.json`.
 
 | Stage | binarize | nary | ratio [lo, hi] |
 | --- | ---: | ---: | ---: |
@@ -827,7 +839,7 @@ are recorded above with their measurements rather than left in the tree.
 
 1. **The n-ary evaluator and both checkers** (`ergodis` `d677a8b`, `089c6d9`, `09a5c2b`): a body of
    up to four atoms is joined directly, the two-atom path costs 1.7 to 2.1 per cent of its
-   instructions and no more memory, and every derived tuple of an auxiliary relation is work the
+   instructions and no reserved memory, and every derived tuple of an auxiliary relation is work the
    evaluator no longer does.
 2. **The body policy in the lowering** (`ergodis-private` `c3135f8`): binarization is selectable,
    the binarized program is the measured control for the same source, and the differential decides
@@ -1195,8 +1207,10 @@ and no path is left uncommitted in any of the three repositories.
 | `~/src/ergodis-private` | `26d2468` | `193ebd1` … `26d2468` (five commits) |
 | `~/src/othello` | this report's last commit | `4cd81ef` … here |
 
-**Retained controls for the next A/B in this lane**, both from clean trees at `ergodis-private`
-`cb11550` with core `ergodis` `09a5c2b`, rustc 1.95.0 (59807616e 2026-04-14), release, no features:
+**Retained controls for the next A/B in this lane**, both at `ergodis-private` `cb11550` with core
+`ergodis` `09a5c2b`, rustc 1.95.0 (59807616e 2026-04-14), release, no features, **both flagged
+`dirty` in the manifest** (see the Arms correction; a successor may prefer to re-retain at
+`26d2468`, which is source-identical to `cb11550`, from a checked-clean tree):
 
 - derivation loop: `~/.cache/ergodis/bin/closure_ballpark-cb11550`, measured sha256
   `2888aecb8c9e80b370b42511ea7cffbd4bfaa25be7abab4c006fda5696dd1128`;
@@ -1245,7 +1259,7 @@ Good, and the headline is bigger than the card asked for on one family and small
 A three-atom body with a scaffold intermediate — the triangle — costs **0.52 of the instructions**,
 derives forty-eight tuples where the binarized chain derives thirty-seven thousand, and peaks at
 71 MB instead of 192; against compiled Soufflé the gap halves from 4.39 to 1.92. The two path
-families are the honest middle at 0.93 to 0.96, worse than the Fermi, and the reason is the one
+families are the middle at 0.93 to 0.96, worse than the Fermi, and the reason is the one
 prediction that held: the n-ary join is not cheaper per unit, so the whole win is the emits.
 
 One blemish, stated rather than rounded away. The two-atom path costs **1.7 to 2.1 per cent** of its
