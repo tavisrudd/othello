@@ -2,8 +2,20 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-17
-**Status**: IN PROGRESS. Written incrementally from the start of the task, so a crash leaves a
-partial record rather than none. The Fermi predictions below were written before any code.
+**Status**: COMPLETE. Written incrementally from the start of the task, so a crash would have left a
+partial record rather than none; the Fermi predictions below were written before any code.
+
+**The headline.** A rule body of up to four atoms is joined directly, with no intermediate relation:
+on the family where the intermediate dominates — a triangle, whose auxiliary must carry all three
+variables to produce a result of tens — the derivation loop is **0.52 and 0.61 of the binarized
+chain's instructions**, derives three to four orders of magnitude fewer tuples, converges in two
+rounds instead of three, peaks at 71 MB instead of 192, and halves the whole-process gap to compiled
+Soufflé from 4.39 to 1.92. On the two path families, where the intermediate is a real relation
+rather than a scaffold, it is 0.93 to 0.96 in instructions and 0.74 to 0.78 in cache misses. The
+two-atom path costs **1.7 to 2.1 per cent** of its instructions, which is stated as a loss rather
+than rounded away; the first landing cost 11.6 and both of its mechanisms were found and repaired.
+The C1189 differential decides every source under both policies with zero disagreements, and both
+independent checkers accept every n-ary certificate.
 
 Task card: `2026-09-16-c1193-nary-bodies.md`. Predecessors this builds on:
 `2026-09-16-c1192-sparse-join-index-report.md` (the index kinds the join goes through),
@@ -37,6 +49,16 @@ rustc equals the `rust-toolchain.toml` pin.
 | --- | --- | --- | --- | --- | --- | --- |
 | control, derivation loop | the kernel A/B | `193ebd1` | `e7116ba` | no | `closure_ballpark-193ebd1` | `a29f36177039ddc372de9b49fad5de2994063167ef9c4306e05a428ac55bfbcf` |
 | control, frontend and stratified backend | the Rel route | `193ebd1` | `e7116ba` | no | `ergodis-tools-193ebd1` | `ece06d113eefdf022c8465a950538b130e00c0ba32e4d325242cac1cf98bf01c` |
+| candidate, derivation loop | every figure below | `cb11550` | `09a5c2b` | no | `closure_ballpark-cb11550` | `2888aecb8c9e80b370b42511ea7cffbd4bfaa25be7abab4c006fda5696dd1128` |
+| candidate, frontend and stratified backend | the `datalog` rows | `cb11550` | `09a5c2b` | no | `ergodis-tools-cb11550` | `4c10145c54839a9793792b30a266c00ed0e9377d464a2c1624c63c9cf3080414` |
+| superseded, the first landing | the variants table's first row | `4b854ff` | `089c6d9` | no | `closure_ballpark-4b854ff` | `00f6ed444440a2c487285b493d90f7e9c79a5a0dd1d845949e20ca8f6ca01e52` |
+| superseded | cited by nothing | `e8f0e06` | `089c6d9` | no | `closure_ballpark-e8f0e06` | `4f6f54c12904cce92776209d05a404fe2a27fb25668b6450d2d15d5508f035c5` |
+
+**Both trees were clean at every retain**, and `retain-bin.sh` recorded `clean` for each. Neither
+arm carries a foreign uncommitted diff, so no ratio here is cancelling one. A foreign `cargo test`
+from another session was running on the box during the first direct-path attempt and is visible in
+that run's load average; every figure kept below was taken at loads of 0.51 to 5.28, recorded per
+receipt, and instruction ratios decide.
 
 **The derivation-loop control the handoff named is current, and the retain proves it.**
 `closure_ballpark-193ebd1` is **byte-identical** to `closure_ballpark-aa04358`
@@ -72,6 +94,13 @@ was cleaned. Logged to the discovery track, because nothing about this task was 
 | `othello` | `71b55e5` | the controls retained, and the shared-target stale-artifact finding |
 | `ergodis` | `d677a8b` | bodies of up to four atoms in the demand evaluator, and both checkers |
 | `ergodis` | `089c6d9` | the three corpus cases the mutation pass showed the suite was missing |
+| `ergodis-private` | `c3135f8` | binarization becomes a body policy; the differential decides both |
+| `ergodis-private` | `e8f0e06` | the harnesses: one binary under two arguments, work counts that may differ, the three Soufflé programs |
+| `ergodis-private` | `4b854ff` | the certificate size report reads every width from the program |
+| `ergodis` | `09a5c2b` | the two-atom kernel pays nothing for the n-ary one: constant-index witness slots, `run_nary` out of line |
+| `ergodis-private` | `cb11550` | re-pin the core at that repair, so the measured arm has a private revision to name it |
+| `ergodis-private` | `26d2468` | the receipts |
+| `othello` | `e9650e0` … `8a813fd` | this report, written incrementally |
 
 ## Fermi predictions, written before any code
 
@@ -793,28 +822,448 @@ body position is the semantics, rather than an argument that it is.
 
 ## Disposition
 
-To be written.
+**Kept**, by the forward commits in the table above; nothing is reverted, and the variants that lost
+are recorded above with their measurements rather than left in the tree.
+
+1. **The n-ary evaluator and both checkers** (`ergodis` `d677a8b`, `089c6d9`, `09a5c2b`): a body of
+   up to four atoms is joined directly, the two-atom path costs 1.7 to 2.1 per cent of its
+   instructions and no more memory, and every derived tuple of an auxiliary relation is work the
+   evaluator no longer does.
+2. **The body policy in the lowering** (`ergodis-private` `c3135f8`): binarization is selectable,
+   the binarized program is the measured control for the same source, and the differential decides
+   every source under both.
+3. **The harness and driver changes** (`ergodis-private` `e8f0e06`, `4b854ff`): one binary under two
+   arguments is the A/B, the receipt carries both arms' work counts, and the engine that motivated
+   the task has a row on the same cohorts.
+
+**The default body policy stays `Binarize`, and the measurement says the other way.** On every
+cohort whose body is longer than two atoms the n-ary policy is cheaper in instructions (0.52 to
+0.96), in rounds, in derived tuples, in peak resident set and in reserved workspace, and it halves
+the gap to compiled Soufflé on `triangle`. Three things hold the default where it is, and each is a
+condition a successor can discharge rather than an argument against the policy:
+
+- **Three prior reports' replay commands reproduce their receipts only under it.** C1190's, C1192's
+  and C1198's `lower` and `stratify` rows on the `datalog` cohort are taken with no
+  `--body-policy` flag, and flipping the default would silently change what those commands measure.
+- **The milestone (a) fixture suite is written against it.** Thirteen assertions in
+  `tests/rel_lowering.rs` name auxiliary counts, binarized-rule counts and the chain's own
+  diagnostics; under an n-ary default they would stop exercising the chain rather than fail. Pinning
+  that suite's one helper to `BodyPolicy::Binarize` is a one-line change and is what a flip should
+  carry.
+- **The native/WebAssembly canonical digest and the `datalog` lowering fingerprint would both move**
+  (`349333d4…` and `16adff1ed85f7e04` to `06aa82af43b2b958`), which is a recorded change two reports
+  cite and wants its own commit and its own regenerated manifest.
+
+So the recommendation is explicit: **flip the default to `Nary` in a change that pins the milestone
+(a) helper, regenerates the parity manifest and states the two moved digests**, and until then every
+caller that wants the better plan passes one word. C1195's benchmark suite should carry **both**
+rows rather than choose, because the pair is the result.
 
 ## The `ej` and `tt` closeout
 
-To be written.
+### Free upgrades taken, because they were in reach here
+
+**The engine that motivated the task now has a row.** C1182 recorded "Soufflé plans n-ary joins
+natively" as the gap and C1193's card quotes it; until this task the lane had no cohort on which to
+measure it, because `compare.py` carried only transitive closure and same generation. Three `.dl`
+files and three `PROGRAMS` entries later, the claim is a table: n-ary halves the triangle gap and
+improves both larger path cases, and Soufflé's tuple set agrees with this evaluator's on all six.
+That closes half of C1192's remaining gap 1, which asked for exactly this and named the missing
+`.dl` files. `mutual` and `cycle` still have none.
+
+**The `closure_ballpark` usage strings the C1192 audit found stale are current**, which was C1192's
+remaining gap 7: the module doc now names every program and every flag, and the `--index` list is
+the one the parser accepts.
+
+**The certificate size report reads every width from the program** rather than assuming two. It had
+assumed a binary arity for the premise block, the derived tuple and every ranked relation, which the
+binarized triangle breaks in three places at once; the repair is `4b854ff` and it is the only reason
+that arm has a `--certificates` figure at all.
+
+**The allocation gate's reservation counter is no longer thread-fragile.** It reads one
+process-wide atomic and a sibling test reserving a workspace inflates it; with one such gate the
+fragility was invisible and with two it fails immediately.
+
+### What is surprising, and what it opens
+
+**The static index's *build* cost is unmeasured, and `triangle` is the cohort that exposes it.** At
+N = 4,096 the third atom `edge(z,x)` is fully bound, so its index keys on both columns — a key space
+of `domain²` = 2^24, just inside `MAX_DIRECT_KEYS` — and `Policy::Auto` chooses the direct
+counting-sorted CSR, whose offsets array is 64 MiB of eagerly allocated and fully touched memory in
+the **plan**. Measured directly on the shipped binary:
+
+| `--index` | preparation | peak RSS | evaluation |
+| --- | ---: | ---: | ---: |
+| `auto` | 27.0 ms | 71,516 KiB | 0.87 ms |
+| `sparse-indexes` | **3.5 ms** | **5,904 KiB** | 2.39 ms |
+
+Preparation is thirty times the evaluation on the shipped policy, and forcing the sparse kind trades
+1.5 ms of evaluation for 23.5 ms of preparation and 65 MB. **This is what makes Ergodis 1.92 times
+compiled Soufflé on `triangle` at 4,096 while being 0.35 times it on `path4`** — and it is a policy
+gap and not an addressing one. C1192's recorded deviation 5 says the static index has no density
+rule because "the counting-sorted bucket beats a binary search at every density its ceiling allows";
+that measurement was of the **probe**, and the build was never priced. C1198 made the *workspace*
+lazy and left the plan's CSR eager. A density rule for a static index, or a `Pages` reservation for
+its offsets array, is the successor, and it is worth more on this cohort than anything in this task.
+
+**The n-ary plan needs *fewer* indexes than the binarized one, not more.** Fermi risk 2 predicted
+`k(k - 1)` distinct (relation, mask) pairs per rule against two today, and reserved workspace growing
+with it. Measured, at N = 1,024:
+
+| Program | indexes, binarized → n-ary | membership structures | reserved workspace bytes |
+| --- | --- | --- | --- |
+| `triangle` | 4 → **3** | 3 → 2 | 771,883,008 → **33,685,504** |
+| `path3` | 3 → **2** | 3 → 2 | 63,180,800 → 33,685,504 |
+| `path4` | 4 → **2** | 4 → 2 | 96,870,400 → 37,879,808 |
+
+Two things collapse the count: a chain's atoms share one variable with each neighbour, so every link
+is keyed on one column or the other and the `k(k - 1)` masks fall onto two; and each auxiliary
+relation the binarized program declares needs an index of its own. The prediction was wrong in the
+comfortable direction and the reason is worth keeping, because it is the same reason the join order
+is tight.
+
+**The candidate counter does not count what an n-ary kernel's work is proportional to.**
+`Evaluation::candidates` means "head tuples produced by a body match", so for a three-atom body it
+counts complete matches and not the partial ones each level makes — which is why `triangle`'s n-ary
+arm reads 227,342 instructions per candidate. The per-unit budget above is built from the binarized
+twin's counter instead, which is exact because the chain's rules are the n-ary body's levels; a
+`matches` counter incremented at every successful bind would make the budget self-evidencing at the
+cost of one increment per yielded row in the n-ary kernel only. Queued below rather than taken,
+because adding it now would invalidate the A/B that was just run.
+
+### Candidates to queue, no identifiers allocated
+
+1. **A density rule, or a lazy reservation, for a static join index's offsets array.** The largest
+   measured effect anywhere in this report: 27.0 ms of preparation and 65 MB against 3.5 ms and
+   6 MB on one cohort. It also decides the `triangle` row against Soufflé.
+2. **Shrink `Op` to four bytes**, which makes `Link` a 32-byte record and `Step` **one cache line**.
+   A domain value is below 65,536 and a variable index below eight, so both fit; it is a hot-record
+   change with its own A/B, and given the two rejected variants above its sign is not predictable
+   from reasoning.
+3. **An `Evaluation::matches` counter**, so an n-ary kernel's per-unit budget is instrumented rather
+   than inferred from its binarized twin.
+4. **Flip the default body policy to `Nary`**, with the three conditions under **Disposition**.
+5. **Chain a body longer than four atoms into groups of four rather than down to four.** The pass
+   stops as soon as what remains fits, so a five-atom body becomes one auxiliary plus four atoms; a
+   nine-atom body becomes five auxiliaries plus four rather than two groups. Nothing in the fragment
+   reaches it today.
+6. **`mutual` and `cycle` still have no Soufflé row**, which is what remains of C1192's gap 1.
+7. **`ab.py` still summarizes a row whose run refused**, which is C1192's gap 8, untouched.
 
 ## Mystery ledger
 
-To be written.
+**Settled.**
+
+1. **Does removing the intermediate relation pay, and where?** Yes, and the size depends entirely on
+   what fraction of the work the intermediate is. Where it is a scaffold — `triangle`, whose
+   auxiliary must carry all three variables to produce a result of tens — instructions fall to 0.52
+   and 0.61 and peak resident memory by 2.7 and 9.9 times. Where it is a real relation — `path3`,
+   `path4` — the derived-tuple count falls by a quarter to a third and instructions by only 4 to 7
+   per cent, because the joins are the same joins and only the emits are saved.
+2. **Is the n-ary join cheaper per unit than the binarized chain?** No, and Fermi prediction 3 said
+   so before the code: per body match the n-ary kernel costs 233 to 434 instructions against the
+   chain's 244 to 707, and the part of that gap which is not the emit is the chain's own index
+   rebuild. The whole of the win is doing fewer emits, not cheaper joins.
+3. **Does the link order change the answer?** No, and the evidence is a mutation rather than an
+   argument: making the order ignore what is bound changes the plan visibly — a three-atom chain
+   goes from two indexes to four, one of them a mask-of-nothing full scan — and every closure,
+   certificate and checker assertion still passes.
+4. **Does `MAX_VARIABLES` bind before `MAX_BODY`, as Fermi risk 6 predicted?** In the core, yes; in
+   the **lowering**, it never did anything of the sort, because `passes::project` numbers variables
+   before body planning and has always applied the bound to the unbinarized rule. Binarization never
+   rescued a wide body, so the two policies have the same acceptance surface on that axis and the
+   predicted population shift does not exist.
+5. **Does the index count grow quadratically in the body length?** No — it falls. See the table
+   above.
+6. **Why was the first landing 11.6 per cent slower on the two-atom path?** Two mechanisms, both
+   measured and both repaired: the witness slot written at a run-time index kept a stack array in
+   memory across the innermost function (about fourteen instructions per candidate on dense
+   closure), and inlining the four n-ary instantiations into `evaluate_into` displaced the register
+   allocation of a loop they never enter (a further 3.9 per cent).
+7. **Does the parity digest move?** No. It holds at
+   `349333d4a4cc34a8ef8b64b5f68cdd127b967ff24d538de426eba28793f652ab`, 243 cases, 530,505 canonical
+   bytes, native and WebAssembly byte-equal, and the regenerated manifest differs from the committed
+   one in exactly five fields: the three edited source hashes and the two rebuilt library hashes.
+   With the policy at two atoms `plan_bodies` emits what `binarize` emitted.
+
+**Open.**
+
+1. **Why do two changes that should be free make the two-atom kernel measurably worse?** Carrying
+   the premise width on `Step` removes an array access and a bounds check from the innermost write
+   path and costs 1.6 per cent; outlining the n-ary limits and dispatch removes code the two-atom
+   path never executes and costs 2.6 to 3.9 per cent. *Evidence so far*: the shipped configuration's
+   `evaluate_into` is 7,872 instructions against the control's 7,788, and the opcode difference from
+   the control is dominated by `lea`, `imul` and `jae` — the premise column's multiply and its
+   bounds check, replicated across the inlined `emit` sites. *Evidence gap*: a kernel-scoped
+   `perf annotate` of the three bodies bucketed into validated address ranges, and a spill count from
+   their stack traffic. *Owner*: the build-configuration and profile-guided-optimization sweep
+   C1200's discovery-track entry proposes; this is the fourth and fifth instance of that lever and
+   the first where the sign is against the change that should have been free.
+2. **How much of the two-atom path's residual 1.7 to 2.1 per cent is the premise column and how
+   much is drift?** The premise column is real executed work — one multiply and one bounds-check
+   pair per derived tuple, and a premise pair where `join` had two registers — but a per-derived-row
+   cost cannot account for 2 per cent on `closure` dense 256, which derives 65,536 rows out of
+   4,210,688 candidates. So most of it is per candidate, which points at `join` rather than `emit`.
+   *Evidence gap*: a variant that writes two separate premise columns for a body of at most two
+   atoms, which would separate the storage change from the call-shape change. *Not taken here*: it
+   would fork the hottest function in the crate for about two per cent.
+3. **Why is `triangle`'s per-match cost 296 instructions at N = 4,096 and 434 at N = 16,384 when the
+   two path families' barely move?** The likely reason is the fully bound link's index locality — a
+   probe into an index over `domain²` — but nothing measures it. *Evidence gap*: the cache-event run
+   at both `triangle` sizes rather than one. *Cheap*, one `ab.py` invocation.
+
+No discovery-track entry beyond the one already logged: everything else here was inside what the
+task was looking for.
 
 ## Remaining next steps
 
-To be written.
+1. The seven candidates under the closeout, of which the static index's build cost is the largest
+   measured effect in this report.
+2. A body of more than four atoms has no cohort. `plan_bodies` chains one down to four and
+   `demand_nary`'s corpus has none, because no source in the Rel fragment writes one today.
+3. Nothing here measures a parallel workspace, unchanged from C1198: the demand evaluator has no
+   parallel mode to measure one in.
 
 ## Replay commands
 
-To be written.
+Run from `~/src/ergodis-private` unless noted. Every gate and every measurement went through
+`nix develop ~/src/ergodis`, whose devShell asserts its rustc equals the `rust-toolchain.toml` pin,
+so the gates and the measurements describe one build. Working files under `~/.cache/ergodis/c1193/`.
+
+```sh
+# Gates, core. Outcome: exit 0, 82 `test result: ok` blocks, zero FAILED;
+# clippy and fmt clean; the two allocation regressions green.
+cd ~/src/ergodis
+nix develop . --command cargo test --all-features -j 8
+nix develop . --command cargo clippy --all-targets --all-features -j 8 -- -D warnings
+nix develop . --command cargo fmt --all -- --check
+nix develop . --command cargo test -p ergodis-rules --test allocation -j 8
+nix develop . --command python3 python/generate_evidence.py --write   # SHA256SUMS
+cd ~/src/ergodis-private
+
+# Gates, private. This drives rel_lowering, rel_frontend, rel_frontend_portability
+# and rel_reference_eval, which is the C1189 differential under both policies.
+choom -n 1000 -- nix develop ~/src/ergodis --command cargo test -p ergodis-private -p ergodis-tools -j 8
+nix develop ~/src/ergodis --command cargo clippy -p ergodis-private -p ergodis-tools \
+    --lib --bins --tests --examples -j 8 -- -D warnings
+nix develop ~/src/ergodis --command cargo fmt -p ergodis-private -p ergodis-tools -- --check
+
+# The corpus census the differential prints rather than asserts in full.
+nix develop ~/src/ergodis --command cargo test -p ergodis-private \
+    --test rel_reference_eval -j 8 -- --nocapture --test-threads 1
+
+# The native/WebAssembly parity replay, which regenerates the committed manifest.
+# Outcome: canonical digest 349333d4..., 243 cases, 530,505 canonical bytes.
+choom -n 1000 -- nix develop ~/src/ergodis --command python3 \
+    analysis/rel-frontend/portability.py --output analysis/rel-frontend/portability-v1.json
+
+# The arms. Each is retained from the tree at its own revision; the control pair
+# was retained before the first source change of the task.
+git checkout 193ebd1 && ../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release
+git checkout 193ebd1 && ../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools
+git checkout cb11550 && ../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release
+git checkout cb11550 && ../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools
+
+A=analysis/datalog-comparison; C=~/.cache/ergodis/bin; W=~/.cache/ergodis/c1193
+DIRECT=closure:sparse:256,closure:sparse:1024,closure:dense:256,closure:dense:512,samegen:sparse:1024,samegen:dense:512
+NARY=triangle:sparse:4096,triangle:sparse:16384,path3:sparse:4096,path3:sparse:16384,path4:sparse:4096
+
+# The two-atom path against the retained control. Outcome: 1.017 to 1.021 in
+# instructions with nulls inside four parts per million.
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $C/closure_ballpark-193ebd1 \
+    --a-name control-193ebd1 --b $C/closure_ballpark-cb11550 --b-name candidate-cb11550 \
+    --mode evaluate --rounds 5 --cpu 5 --repeats 3 --cohorts $DIRECT \
+    --work $W/direct-work --out $A/ab-2026-09-17-c1193-direct.json
+
+# The body policy: one binary, two arguments. Outcome: 0.523 to 0.959 in
+# instructions, output digests identical on every cohort.
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $C/closure_ballpark-cb11550 \
+    --a-name binarized --a-args "--bodies binarized" --b $C/closure_ballpark-cb11550 \
+    --b-name nary --b-args "--bodies nary" --mode evaluate --rounds 5 --cpu 5 --repeats 3 \
+    --cohorts $NARY --work-may-differ --work $W/policy-work \
+    --out $A/ab-2026-09-17-c1193-body-policy.json
+
+# The supplementary cache set, its own run and its own nulls.
+CE=cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $C/closure_ballpark-cb11550 \
+    --a-name binarized --a-args "--bodies binarized" --b $C/closure_ballpark-cb11550 \
+    --b-name nary --b-args "--bodies nary" --mode evaluate --rounds 5 --cpu 5 --repeats 3 \
+    --cohorts triangle:sparse:4096,path3:sparse:16384,path4:sparse:4096 --events $CE \
+    --work-may-differ --work $W/policy-cache-work \
+    --out $A/ab-2026-09-17-c1193-body-policy-cache.json
+
+# The Rel route on the datalog cohort, one binary under two policies.
+E=instructions,cycles,branches,branch-misses,page-faults,minor-faults
+B=analysis/rel-frontend; T=$C/ergodis-tools-cb11550
+nix develop ~/src/ergodis --command python3 $B/bench.py --binary $T \
+    --binary-args "--body-policy nary" --control $T --control-args "--body-policy binarize" \
+    --rounds 5 --cpu 5 --cohorts datalog --stages scan,parse,admit,lower,stratify --events $E \
+    --out $B/performance-v10-c1193-body-policy-datalog.json
+
+# What the lowered program becomes under each policy.
+for p in binarize nary; do
+  choom -n 1000 -- $T rel-lower --cohort datalog --definitions 512 --max-tuples 0 --body-policy $p
+done
+
+# Soufflé 2.5, compiled and interpreted, both -j1, on the three new families
+# under each body policy. Outcome: the derived relation agrees on all six cases
+# in both arms; n-ary halves the triangle gap.
+S="nix shell nixpkgs#souffle nixpkgs#gcc nixpkgs#gnumake nixpkgs#time -c"
+for p in nary binarized; do
+  $S python3 $A/compare.py --bin $C/closure_ballpark-cb11550 --work $W/souffle-$p \
+      --out $A/results-2026-09-17-c1193-$p.json --rounds 5 --cpu 5 \
+      --harness-args "--bodies $p" \
+      --sizes triangle:sparse:1024,4096 path3:sparse:1024,4096 path4:sparse:1024,4096
+done
+
+# The kernel-scoped profile, both policies, sixty iterations so the harness's
+# one-shot path is under a quarter of a per cent.
+P=~/.cache/ergodis/perf-c1193; mkdir -p $P
+for p in binarized nary; do
+  taskset -c 5 perf record -q -e instructions:u -F 4000 -o $P/path3-$p.data -- \
+      $C/closure_ballpark-cb11550 --evaluator demand --evaluate-only --bodies $p \
+      --program path3 16384 sparse 60 $W/perf-work
+  perf report -q -i $P/path3-$p.data --no-children --percent-limit 0.05 --sort symbol
+done
+
+# The static index's build cost, which is the largest unexplained figure here.
+for ix in auto sparse-indexes; do
+  choom -n 1000 -- $C/closure_ballpark-cb11550 --evaluator demand --evaluate-only \
+      --bodies nary --index $ix --program triangle 4096 sparse 3 $W/smoke
+done
+
+# The six core mutations, each against a `git archive HEAD` throwaway copy under
+# ~/.cache/ergodis/c1193/mutate with its own target directory, never against the
+# repository, each reverted with `git show HEAD:<path>`:
+#   A  Link::old = (body_position != position)      -> 6 of 10 fail, Incomplete(0)
+#   B  premises[level + 1] instead of link.position -> 3 of 10 fail, Unification(0)
+#   C  `let verify = false` in bind_link            -> 1 of 10 fails, the collision case
+#   D  the link order made body order               -> the plan changes, no closure does
+#   E  the checker's premise walk `.take(2)`        -> 4 of 10 fail
+#   F  closed_world skips a body over two atoms     -> the truncated certificate is accepted
+# And the cross-repository one, which is the differential's own: mutation A in a
+# throwaway core beside a throwaway private checkout, each with its own target
+# directory, then the Rel differential against it.
+#   -> 8 of 19 test binaries fail, the seeded 1,200-program corpus among them,
+#      and the failure is the core's own derivation checker refusing:
+#      "the core refused a lowered program: Core(Derivation(Incomplete(5)))"
+```
+
+Inputs are deterministic: the C1182 xorshift edge generator seeded by the domain, the C1189 corpus
+seeded by `0x000c_1189_0915`, and the `demand_nary` digraph `x -> (3x + 1) mod N`,
+`x -> (x² + 2) mod N`, which uses no random stream at all.
 
 ## What this task left under `~/.cache/ergodis/`
 
-To be written.
+**Four retained binaries, 35 MB.** `bin/closure_ballpark-193ebd1` and `bin/ergodis-tools-193ebd1`
+are the controls, retained from clean trees before the first source change;
+`bin/closure_ballpark-cb11550` and `bin/ergodis-tools-cb11550` are the arms every figure above is
+measured on and are **the controls the next A/B in this lane should use**.
+`bin/closure_ballpark-4b854ff` and `bin/closure_ballpark-e8f0e06` are superseded candidates whose
+A/B was re-run at `cb11550`; `bin/closure_ballpark-4b854ff` is the arm the "first landing" row of the
+variants table is measured on, and `bin/ergodis-tools-e8f0e06` is cited by nothing.
+
+**`c1193/`, 18 MB.** The three `ab.py` work directories, the `perf` work directory, the two Soufflé
+work trees (7.6 MB each — the generated fact files, the compiled `.dl` binaries and every system's
+output CSV), the smoke and probe directories, and five disassemblies and opcode histograms of
+`Demand::evaluate_into` across the control and the variants.
+
+**`perf-c1193/`, 185 KB.** The two kernel-scoped profiles.
+
+**Deleted at task close**: `c1193/mutate` and `c1193/xchain`, the `git archive` copies every
+mutation ran against, and `c1193/target`, their build directory. All are regenerable from the replay
+block. Nothing under `bin/` was deleted.
+
+`../ergodis-dev/scripts/cache-gc.sh` was run in its listing mode and **nothing was deleted; that is
+the user's call.** It scanned 52 entries and showed **18 as unreferenced and old enough to remove**,
+none of them this task's: the largest are `datalog-comparison` at 281 MB, `perf-c1170` at 162 MB,
+`module-loading` at 124 MB, `worktrees` at 105 MB (kept as younger than two days),
+`application-workspace` at 21 MB, and a tail of `perf-c1170-gaps*`, `perf-c1190`,
+`property-tests`, `rel-frontend-reference`, `rule-contract`, `rule-runtime`, `js-wasm-tests`,
+`lean-incremental-replay`, `browser-control-review` and `vet-7wV5`. This task's `c1193` and
+`perf-c1193` show as younger than two days and every binary this report names shows as referenced
+through `bin/MANIFEST.tsv`.
+
+## Resume state for the next session
+
+**The task is complete and every tree is committed.** Nothing is half-built, nothing is untracked,
+and no path is left uncommitted in any of the three repositories.
+
+| Repository | HEAD at close | Range this task added |
+| --- | --- | --- |
+| `~/src/ergodis` | `09a5c2b` | `e7116ba` … `09a5c2b` (three commits) |
+| `~/src/ergodis-private` | `26d2468` | `193ebd1` … `26d2468` (five commits) |
+| `~/src/othello` | this report's last commit | `4cd81ef` … here |
+
+**Retained controls for the next A/B in this lane**, both from clean trees at `ergodis-private`
+`cb11550` with core `ergodis` `09a5c2b`, rustc 1.95.0 (59807616e 2026-04-14), release, no features:
+
+- derivation loop: `~/.cache/ergodis/bin/closure_ballpark-cb11550`, measured sha256
+  `2888aecb8c9e80b370b42511ea7cffbd4bfaa25be7abab4c006fda5696dd1128`;
+- frontend and stratified backend: `~/.cache/ergodis/bin/ergodis-tools-cb11550`, measured sha256
+  `4c10145c54839a9793792b30a266c00ed0e9377d464a2c1624c63c9cf3080414`.
+
+They supersede `closure_ballpark-193ebd1` and `ergodis-tools-193ebd1`, which are this task's own
+controls and stay for its replay.
+
+**The one gate whose final confirmation run was still in flight at close** is the private
+`cargo test -p ergodis-private -p ergodis-tools`. It was green (42 test binaries, zero failures)
+after every source change to the library, the tools, the generator and the differential; the two
+commits after that run touch only `examples/closure_ballpark.rs`, which no test target compiles, and
+committed JSON receipts. Clippy and `cargo fmt --check` are green over the whole private workspace
+including examples, and the core's `cargo test --all-features` is green at 82 `test result: ok`
+blocks. Re-running the private suite is the first command below and is a confirmation, not a repair.
+
+**Exact commands to pick this up.**
+
+```sh
+# 1. Confirm the private suite at HEAD.
+cd ~/src/ergodis-private
+choom -n 1000 -- nix develop ~/src/ergodis --command cargo test -p ergodis-private -p ergodis-tools -j 8
+
+# 2. The lifecycle close, which this task was told not to do: archive the C1193
+#    row, delete it from the live queue, update the lane handoff and log the
+#    incidental gem, in one coherent commit, per notes/task-lifecycle-conventions.md.
+#    The discovery-track entry this task appended is already committed
+#    (notes/ergodis-discovery-track.md, 2026-09-17, the stale shared-target finding).
+
+# 3. The next lever, which is larger than this task's and is measured under
+#    "The `ej` and `tt` closeout": a density rule, or a `Pages` reservation, for
+#    a static join index's offsets array. Reproduce the figure with
+C=~/.cache/ergodis/bin; W=~/.cache/ergodis/c1193
+for ix in auto sparse-indexes; do
+  choom -n 1000 -- $C/closure_ballpark-cb11550 --evaluator demand --evaluate-only \
+      --bodies nary --index $ix --program triangle 4096 sparse 3 $W/smoke
+done
+# auto: 27.0 ms preparation, 71,516 KiB peak RSS, 0.87 ms evaluation
+# sparse-indexes: 3.5 ms preparation, 5,904 KiB peak RSS, 2.39 ms evaluation
+```
+
+**Decisions left open for Tavis**, both stated with their evidence above and neither taken here:
+the default body policy (the measurement favours `Nary`; three conditions under **Disposition** must
+be discharged with it), and whether to delete the eighteen unreferenced cache entries
+`cache-gc.sh` lists, none of which are this task's.
 
 ## Vibe check
 
-To be written.
+Good, and the headline is bigger than the card asked for on one family and smaller on the others.
+A three-atom body with a scaffold intermediate — the triangle — costs **0.52 of the instructions**,
+derives forty-eight tuples where the binarized chain derives thirty-seven thousand, and peaks at
+71 MB instead of 192; against compiled Soufflé the gap halves from 4.39 to 1.92. The two path
+families are the honest middle at 0.93 to 0.96, worse than the Fermi, and the reason is the one
+prediction that held: the n-ary join is not cheaper per unit, so the whole win is the emits.
+
+One blemish, stated rather than rounded away. The two-atom path costs **1.7 to 2.1 per cent** of its
+instructions, which is above the 0.8-to-1.7 band three earlier reports record for drift, and the
+first landing cost 11.6. Both mechanisms were found and repaired — a witness slot written at a
+run-time index, and four n-ary instantiations inlined into a function they have no business in — and
+what remains is partly real work in the premise column and partly the same unexplained lever. Two
+variants that should have been free made it **worse**, which is the fourth and fifth instance of
+that lever and the first with the sign against the obvious change; the record of them is the useful
+part.
+
+The thing worth carrying forward is not in the card at all: on `triangle` at N = 4,096 the shipped
+addressing policy spends **27 ms of preparation and 65 MB** building a direct counting-sorted index
+for a static relation, against 3.5 ms and 6 MB for the sparse kind, and that single decision is what
+puts this evaluator behind Soufflé on the one family where it should be ahead. C1192 measured the
+probe and never priced the build. That is the next lever, and it is larger than this task's.
