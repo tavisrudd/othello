@@ -580,6 +580,57 @@ The derivation loop reads a bucket head before it writes it, so about 5,160 of t
 iteration are free in memory and are not free in time. Nothing in this task turns on it; it is the
 first thing to look at for whoever wants the cold path faster.
 
+### The frontend and the stratified backend
+
+Control `ergodis-tools-f12e27b` against candidate `ergodis-tools-6078142`, five interleaved rounds,
+CPU 5, the same six-event set at **100.00 per cent enabled on every event over 1,618 measurements**
+for the nine-cohort run, load 2.53 to 6.14, two-point differencing. Receipts
+`analysis/rel-frontend/performance-v9-c1198-6078142.json` and its four per-cohort siblings.
+
+| Cohort | `scan` | `parse` | `admit` | `lower` | `stratify` − `lower`, instructions | cycles | peak RSS, control / candidate KiB |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `ascii` | 1.000003 | 1.000001 | 0.999999 | 1.000001 | — | — | — |
+| `unicode` | 1.000000 | 1.000000 | 0.999999 | 1.000000 | — | — | — |
+| `comment-string` | 1.000038 | 1.000021 | 1.000014 | 1.000001 | — | — | — |
+| `malformed-early` | 1.000003 | 1.000001 | 1.000001 | 1.000000 | — | — | — |
+| `malformed-late` | 1.000003 | 1.000001 | 1.000001 | 0.999999 | — | — | — |
+| `datalog` (512 definitions) | 1.000026 | 1.000006 | 0.999999 | 1.000000 | **0.99019** | 0.9356 | 127,204 / **33,968** |
+| `stratified` (128) | 1.000031 | 1.000000 | 1.000000 | 1.000003 | **0.99758** | 0.9972 | 11,424 / 11,612 |
+| `columns` (128) | 1.000009 | 1.000008 | 1.000002 | 0.999994 | **0.99686** | 0.9308 | 16,772 / **12,420** |
+| `aggregate` (128) | 1.000090 | 1.000015 | 0.999969 | 1.000000 | **0.98965** | 0.8305 | 21,128 / **9,720** |
+
+**Scan, parse, admission and lowering are unity to within ninety parts per million on every cohort**,
+so nothing in the front end moved — as it should not, since nothing this task touches runs there.
+The backend stage is 0.2 to 1.0 per cent cheaper in instructions and 0.83 to 1.00 in cycles.
+
+**The four closure SHA-256 digests are identical across arms and identical to the ones C1191 and
+C1192 recorded**: `5c455ad4…`, `dffdcd35…`, `3f5c4cdd…` and `ec562d2c…`. Both independent checkers
+verified on both arms.
+
+**Peak resident set on the Rel route falls by up to a factor of 3.7.** `datalog` at 512 definitions
+goes from 127,204 KiB to 33,968; `aggregate` from 21,128 to 9,720; `columns` from 16,772 to 12,420;
+`stratified` is a wash at 11,424 against 11,612, because its memory is complement materialization
+rather than the demand workspace.
+
+### The C1191 boundary cohorts
+
+Bisection over the committed `rel-lower` tool on committed cohorts with C1191's own flags
+(`--max-rows 16777216 --values 262144`), under `choom -n 1000`, on both arms. Each row is the largest
+dictionary that completes the whole chain including both independent checkers.
+
+| Cohort | largest dictionary | peak RSS, C1192 KiB | control `f12e27b` KiB | candidate KiB | factor | first refused, and the bound |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| `stratified` | 2,047 | 1,386,664 | 1,387,460 | 1,387,056 | ×1.00 | 2,048: tuples of one layer's program, 4,197,376 against 4,194,304 |
+| `columns` | 4,092 | 2,724,276 | 2,723,660 | **1,592,872** | **×1.71** | 4,094: the same bound, 4,195,326 |
+| `columns3` | 483 | 3,138,432 | 3,138,936 | **1,823,756** | **×1.72** | 486: complement facts of one negated relation, 4,251,528 |
+| `aggregate` | key set 2,046 | 2,306,496 | 2,306,776 | **987,840** | **×2.34** | key set 2,047: tuples of one layer's program, 4,196,350 |
+
+**The boundaries themselves are unchanged to the definition**, and each refusal reproduces C1192's
+budget name, found value and limit exactly. Three of the four peak resident sets fall by 1.7 to 2.3
+times; `stratified` does not move, and that is the useful negative, because its memory is the
+complement it materializes and not a workspace reservation. **`columns3` at a dictionary of 483 was
+the largest single number in C1192's report at 3.14 GB; it is 1.82 GB.**
+
 ### Page faults, by symbol, before and after
 
 `perf record -e page-faults -c 200` on one `--evaluate-only` process, `cycle` at `blocks` and
