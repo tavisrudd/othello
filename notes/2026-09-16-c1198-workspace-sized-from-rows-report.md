@@ -30,8 +30,10 @@ rustc 1.95.0 (59807616e 2026-04-14), release profile, no features.
 | control, derivation loop, same revision as the candidate's tree | `ergodis-private` | `c3eda9a` | no | `closure_ballpark-c3eda9a` | `ad4fed99b1d18ef6fd5881c510ddd3c1f5cfec397d1e37421a302b5084662333` |
 | control, frontend and backend, C1192's named one | `ergodis-private` | `f12e27b` | no | `ergodis-tools-f12e27b` | `1d5d5f89957c72793d5a0ece5fbbd38f12d953c218c6803844029e37325468af` |
 | control, frontend and backend, same revision | `ergodis-private` | `c3eda9a` | no | `ergodis-tools-c3eda9a` | `6c31e70aaa5e63bd12fdbf6e6b9b498cf2ecf0c95797fed5f7d09cc54f663055` |
-| candidate, derivation loop | `ergodis-private` | `356fce6` | `93e12cf` | no | `closure_ballpark-356fce6` | `7fcc12c1c1afb515b66ad24580c230413ffa239b11f4dc8768e82d0a4727affa` |
-| candidate, frontend and backend | `ergodis-private` | `356fce6` | `93e12cf` | no | `ergodis-tools-356fce6` | `e02bf69b4f930f452cc8f05fb57769a791be4362f0a9bba1fd69d4358e3b642c` |
+| intermediate candidate, before the stagger | `ergodis-private` | `356fce6` | `93e12cf` | no | `closure_ballpark-356fce6` | `7fcc12c1c1afb515b66ad24580c230413ffa239b11f4dc8768e82d0a4727affa` |
+| intermediate candidate, frontend and backend, before the stagger | `ergodis-private` | `356fce6` | `93e12cf` | no | `ergodis-tools-356fce6` | `e02bf69b4f930f452cc8f05fb57769a791be4362f0a9bba1fd69d4358e3b642c` |
+| candidate the frontend, backend, Soufflé, reach and cold-start figures were taken on | `ergodis-private` | `6078142` | `271d648` | no | `closure_ballpark-6078142` / `ergodis-tools-6078142` | `d4dc07ad565404a70efeb8eb905f64f39a5847f032a30c36f47588b6344c303a` / `78f0420cf5ab8f8bd277f09e0bd3e99990d370eb6c071eba8da47756185fad79` |
+| **shipped candidate, and the control the next A/B should use** | `ergodis-private` | `ed99963` | `2be1e68` | no | `closure_ballpark-ed99963` / `ergodis-tools-ed99963` | `97a59d7a5c86dacab107dce7e8fa3e931adacf755d9e58e79b50eadb64268786` / `ce90b5af67b00eec1dfe64dece3fd656d4cc00415f5f6541a4679137cf7a451e` |
 
 Retain recipes, from `~/src/ergodis-private`:
 
@@ -62,8 +64,17 @@ task close.
 | `ergodis` | `3eaaacf` | `pages::Pages`, the zero sentinel, the high-water reset, the reservation-counting allocation regression and `workspace_commit.rs` |
 | `ergodis` | `93e12cf` | the counting sort's cursor is the offsets array rather than a second copy of it |
 | `ergodis` | `271d648` | each reservation staggered by a cache line, against 4 KiB aliasing |
+| `ergodis` | `ca64c34` | the reset asserted directly, on a program whose chain indexes are walked |
+| `ergodis` | `2be1e68` | the reset's fill boundary set from the measurement |
 | `ergodis-private` | `b3994fc` | re-pin the core, so the candidate arm has a private revision to name it |
 | `ergodis-private` | `356fce6` | the lockfile entry for the target-gated `libc` |
+| `ergodis-private` | `b5f10e7` | `closure_ballpark --cold`, and the reservation and commit figures beside it |
+| `ergodis-private` | `6078142` | the A/B receipts taken before the stagger, with the cache and TLB runs that ruled out a memory-hierarchy cause |
+| `ergodis-private` | `6f898b8` | the receipts on the shipped arm: the derivation loop, the memory cohorts, the cache run, the frontend and backend, and Soufflé at both row bounds |
+| `ergodis-private` | `2d368a3` | re-pin the core at the direct reset assertion |
+| `ergodis-private` | `ed99963` | re-pin the core at the measured reset boundary |
+| `ergodis-private` | `1f2fe44` | the receipts at the measured reset boundary |
+| `othello` | `9dd61b7`…`<this commit>` | this report, written incrementally from before the first line of code |
 
 ## Fermi predictions, written before any code
 
@@ -900,11 +911,174 @@ moves evaluation inside the noise. `Pages::advise_huge` remains as a capability 
 
 ## Remaining gaps
 
-*Pending.*
+1. **The checkers now cost more memory than the evaluator, by a factor of up to eight, and they have
+   the same defect this task just fixed.** On `closure` at the `blocks` density and N = 4,096 the
+   whole Ergodis process peaks at **17,892 KiB** and the derivation checker alone peaks at
+   **138,928 KiB**; at N = 65,536 the warm pass peaks at 656,496 KiB against the evaluator's 271,800.
+   `crates/verify/src/datalog_store.rs` allocates `vec![0u32; domain^arity]` and
+   `vec![0u64; domain^arity / 64]` per relation, which is the same `calloc` that commits every page
+   before a tuple exists. It already uses zero as its absent sentinel — it is where this task's
+   deliverable 1 came from — so all it needs is the reservation. **What blocks it is a binding, not a
+   measurement**: `ergodis_verify::implementation_identity()` hashes the checker source files by
+   name, so adding a module there moves a digest that certificates bind to. *Owner*: a successor with
+   permission to move that digest, or to place `Pages` where both crates can reach it without
+   entering the identity. This is the largest single memory term the lane now has.
+2. **A hash table sized from the caller's bound still costs locality even when it costs no memory.**
+   At N = 65,536 the Soufflé ratio is 1.172 at the default row bound against 0.963 with the bound
+   sized, and the phase table puts 157 ms of it in preparation and 216 ms in evaluation. The
+   membership table there is sparse with 2^24 slots at the default bound and 2^21 at the sized one,
+   and a million rows scattered over sixteen million slots miss more than a million scattered over
+   two million. Lazy commit removes the memory cost of an over-declared bound and not the cost of
+   hashing into a table sized from it. **The two smaller sizes are now identical under both bounds,
+   phase for phase**, so this is confined to the case where the table is large in absolute terms.
+3. **The reset walk recomputes each row's key, and it does not have to.** `mutual` at N = 8,192 pays
+   6.1 per cent of its instructions for a reset that walks 122,880 rows and recomputes `key_of` for
+   each. The insertion path already loads the bucket head it is about to overwrite, so a slot that
+   was zero is a *newly touched* slot and could be appended to a compact list at no extra load; the
+   reset would then be a walk over touched slots with no key recomputation and no row read at all.
+   It costs one presized column per structure — free under lazy reservation — and a predicted branch
+   per insertion. **Not built**: it is a hot-loop change and needs its own A/B, and the cost it
+   removes is 6 per cent of one cohort. *Owner*: whoever takes the next derivation-loop task.
+4. **Deliverable 4's capacity-from-the-program is still `min(domain^arity, row_bound)`.** The
+   per-column domain product needs the C1191 closing pass, which does not exist. This no longer costs
+   memory, but it still decides the row-capacity refusal: `closure` sparse at N = 8,192 and `samegen`
+   sparse at N = 16,384 are refused by `MAX_ROWS` exactly as C1192 recorded. The alternative the card
+   asked to be named if this gap remained is **a resumable mid-round budget exit** — a round that
+   exhausts the row capacity returning a resumable state rather than `Error::Budget` — and it is
+   named here and not built.
+5. **A page read before it is written costs two minor faults and commits on the second.** The cold
+   stage takes 11,291.7 faults per iteration for 6,128 committed pages, and the extra 5,164 are reads
+   of the shared zero page, measured directly. `MADV_POPULATE_WRITE` over the pages a plan can
+   predict, or writing before reading on the bucket-head path, would remove them. Nothing here turns
+   on it; it is the first thing to look at for a faster cold start.
+6. **`MAX_WORKSPACE_BYTES` now bounds something much cheaper than it used to.** It is `2^34` and it
+   bounds a reservation that costs one `mmap` per table. What a caller actually risks is the commit,
+   and nothing bounds that. A commit ceiling would be a different mechanism — a budget checked as
+   pages are touched — and is not designed here.
+7. **The stagger costs up to one page per table of address space and that is not in
+   `workspace_bytes()`.** The figure `MAX_WORKSPACE_BYTES` checks is the logical length; the actual
+   reservation is that plus at most 4,032 bytes per table. On any plan the ceiling can refuse, the
+   difference is far below the ceiling's own granularity, but the two numbers are not the same number
+   and the code says so in one place and not the other.
+8. **Nothing here measures a parallel workspace.** `Pages` is `Send` and `Sync` where `T` is, and
+   worker workspaces are per worker, so nothing about the change is shared; but no parallel A/B was
+   run, because the demand evaluator has no parallel mode to run one in.
 
 ## Mystery ledger
 
-*Pending.*
+1. **Settled, and it corrects the card's stated mechanism before any code was written: the eager
+   commit was `calloc`, not the `fill(NONE)`.** The card says "zero-filled `calloc` pages are already
+   committed lazily by the kernel; the explicit `NONE` fill and the eager sizing are what defeat
+   that." Three probes on the retained control say otherwise. A 1,145,061,376-byte workspace took
+   283,893 page faults and a 1,131,196 KiB resident set, and **98.45 per cent of those faults are
+   attributed to `__memset_avx512_unaligned_erms`**. `mutual`, which has no dynamic join index and
+   therefore executes no `fill(NONE)` on any bucket head at all, still committed 539,380 KiB against
+   a 460,800 KiB reservation. Pinning `MALLOC_MMAP_THRESHOLD_` changed nothing. glibc's `calloc`
+   skips its `memset` only for a chunk it mapped itself, and by the time the workspace is built the
+   arena's top chunk satisfies 64 MiB and 128 MiB requests without mapping. Fermi prediction 0 said
+   deliverable 3 would carry nearly all of the result and that deliverables 1 and 2 alone would move
+   peak resident set by under ten per cent; the measurement agrees, and the ordering in the card is
+   reversed. *Nothing about this item is open.*
+
+2. **Settled, and it is the one that would have sunk the change: page-aligned reservations alias each
+   other at 4 KiB, and no cache or TLB counter shows it.** Moving the workspace off the heap made
+   `closure` dense at N = 256 and N = 512 **9 per cent slower in cycles while executing 0.8 per cent
+   fewer instructions**, against cycle A/A nulls of 1.0019 and 0.9999 that make both rows readable.
+   The elimination was done with counters and not with guesses: the supplementary cache run put
+   `L1-dcache-loads` at 1.019 to 1.024 and `L1-dcache-load-misses` at 0.908 to 0.989 with nulls
+   inside three parts per thousand — **more loads, no more misses** — and a TLB run put
+   `ls_l1_d_tlb_miss.all` at 1.014 to 1.086 on absolute counts of three thousand to four hundred
+   thousand per evaluation, far too small to buy 9 per cent of cycles. What is left is the load-store
+   unit: every anonymous mapping starts on a page boundary, so a row column and a membership table
+   had identical low twelve address bits at the same row index, and a load whose page offset matches
+   a pending store's is held for a false dependency even when the two addresses are megabytes apart.
+   The allocator's chunk headers used to scatter those offsets by accident. Offsetting each
+   reservation's contents by a rotating multiple of sixty-four bytes fixes it, and the isolating A/B
+   — a probe build differing in that one expression, same driver, same tree — shows **exactly zero
+   instruction change to five decimal places on four cohorts and 0.697 of the cycles on `closure`
+   dense at N = 256** with a cycle null of 0.9915. *Nothing about this item is open, and the lesson is
+   general: a change that only moves where memory sits can cost a tenth of the loop, and the counter
+   that would show it is not in the playbook's supplementary set.*
+
+3. **Settled, and it re-teaches C1170's lesson with a control this time: an untimed harness mode
+   moved the kernel by 0.8 per cent.** The two candidate arms differ by the stagger and by
+   `closure_ballpark --cold`, which never runs in an A/B; the derivation loop's instruction ratio
+   moved from 0.990 to 0.983 between them. The stagger probe accounts for none of it — 1.00000 on
+   four cohorts — so the harness did, through ThinLTO's module summary. The direction is favourable
+   and the result does not depend on it, since both arms beat the control; but a report that quoted
+   only the later figure would be quoting a driver effect as a kernel effect. *Nothing about this
+   item is open.*
+
+4. **Settled the hard way, and it is a warning about what a corpus can see: the test that had to
+   exist could not be an integration test.** Deleting the join indexes' reset passed every test in
+   `workspace_commit.rs` and then made `allocation.rs` spin for nine minutes without terminating. Two
+   structural reasons, both worth carrying. A stale bucket head holds the previous evaluation's last
+   row for a slot, so reinserting that row makes `next[row]` point at the row itself and the chain is
+   self-referential: the symptom of a reset that clears too little is **non-termination, never a wrong
+   answer**, so a suite that only evaluates twice hangs rather than failing. And a closure program
+   never exercises it at all, because its chain index is consulted only by the step whose delta atom
+   is the input relation, where `MODE_FULL`'s limit is zero in the first round and the step is
+   skipped. The gate that works asserts the tables directly after calling the two reset paths, on a
+   same-generation recursion, and fails in milliseconds by name under either mutation. *Nothing about
+   this item is open; the lesson is the same shape as C1192's item 4 — a test that hopes for the
+   symptom is not a test.*
+
+5. **Settled, and it withdraws a claim this report made in an earlier revision: the reset's fill
+   boundary is load bearing, and 32 was the wrong value.** The constant was set by reasoning and the
+   code said "every cohort measured sits two or more orders of magnitude from this boundary". Five
+   structures sit between 0.5 and 2.1 times it and two more at 4 and 16. Measured at 64 against 32 on
+   the four cohorts that bind: **0.903 and 0.986 of the instructions on the two that cross, with peak
+   resident set moving by 56 and 28 KiB, which is nothing.** The mechanism is the part worth keeping:
+   a table whose bytes are within a small factor of its rows has already had most of its pages
+   committed by those rows, so a fill writes pages that are resident either way and the choice is
+   purely an instruction-count one there. *Nothing about this item is open.*
+
+6. **Settled, and it is a number that does not divide the way it should: 11,291.7 faults per
+   iteration for 6,128 committed pages.** A read of an untouched anonymous page costs a minor fault
+   and commits nothing, because the kernel maps the shared zero page; the write that follows costs a
+   second fault and commits. Measured directly with a 32 MiB anonymous mapping on this host: a read
+   pass over 8,192 pages took **8,196 faults and zero resident kilobytes**, and the write pass that
+   followed took **8,192 faults and 32,768 KiB**. The derivation loop reads a bucket head before it
+   writes it, so about 5,164 of the faults per iteration are free in memory and not in time. *Nothing
+   about this item is open; what to do about it is remaining gap 5.*
+
+7. **Settled, and it is the measured negative the card asked for the opposite of: `MADV_HUGEPAGE`
+   loses.** With the hint on every reservation of two mebibytes or more, `cycle` at `blocks` and
+   N = 4,096 went from 38,516 KiB resident to 67,992 and `closure` at `blocks` and N = 4,096 from
+   18,820 to 30,356 — 60 to 77 per cent more memory — while evaluation moved by −4 to +3 per cent,
+   inside the noise of a three-repeat median. A huge page commits two mebibytes on first touch, which
+   is the opposite of what a lazily committed workspace is for. *Nothing about this item is open.*
+
+8. **Open: the two smaller Soufflé sizes converged under the two row bounds and the largest did
+   not.** At N = 4,096 and 16,384 the default-bound and sized-bound columns are identical phase for
+   phase; at N = 65,536 the default bound still costs 157 ms of preparation and 216 ms of evaluation,
+   and the whole-process ratio is 1.172 against 0.963. The explanation on offer is locality — a
+   membership table of 2^24 slots against 2^21 for the same million rows — and it is an explanation
+   and not a measurement. *Evidence gap*: the same cohort with the table's slot count varied
+   independently of the row bound, with cache and TLB counters, which needs a selector the evaluator
+   does not have. It is the same shape as remaining gap 2 and the same owner.
+
+9. **Open, and it is the new largest memory term: the checkers.** The evaluator's whole process is
+   17,892 KiB on `closure` blocks at N = 4,096 and the derivation checker peaks at 138,928 KiB — the
+   checker is now **7.8 times** the thing it checks. `datalog_store.rs` has the same `calloc`
+   behaviour over `domain^arity` entries and already uses zero as its absent sentinel, so the
+   remedy is the one this task just built. *Evidence gap*: none on the cause; the blocker is that
+   `implementation_identity()` hashes the checker sources, so the fix moves a digest certificates
+   bind to. Recorded as remaining gap 1 with that constraint.
+
+10. **Settled, and it is the figure a caller feels: the row bound has stopped being a memory
+    decision.** `cycle` at N = 4,096 cost 1,131,440 KiB at the default bound and 23,872 with a bound
+    of 100,000 in C1192, a factor of 47. It now costs 38,260 at the default bound and 22,352 sized, a
+    factor of 1.7; `closure` at `blocks` and N = 65,536 is 264,312 against 244,672, a factor of 1.08.
+    Against compiled Soufflé the default-bound whole-process ratio at N = 4,096 went from **3.244 to
+    0.852** with peak resident set from 527 MB to 18 MB, and preparation from 123.2 ms to 14.8 ms.
+    The surprise worth recording is that the default bound now **beats** the hand-sized bound C1192
+    had to use, because the sized bound still committed everything it reserved. *Nothing about this
+    item is open.*
+
+No discovery-track entry. Everything found was inside what the task was looking for, with one
+exception folded into item 6 rather than logged, because the read-then-write fault pair is a property
+of this workspace's own access pattern and not an incidental observation about anything else.
 
 ## Replay commands
 
