@@ -5201,8 +5201,17 @@
       "last": 1198,
       "purpose": "C1192 successor: demand workspace sized from rows with zero-sentinel tables and lazy page commit",
       "sequence": 578
+    },
+    {
+      "count": 1,
+      "first": 1199,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1199,
+      "purpose": "C1198 independent read-only audit of the lazy workspace report",
+      "sequence": 579
     }
   ],
-  "next_id": 1199,
+  "next_id": 1200,
   "schema": "codex-task-id-allocations-v1"
 }
