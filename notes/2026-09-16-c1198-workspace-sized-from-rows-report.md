@@ -611,7 +611,46 @@ as a counted profile rather than as an assertion.
 
 ## Recorded deviations
 
-*Pending.*
+1. **The reservations are staggered by a cache line**, which the card did not ask for and which no
+   part of the design anticipated. It is a repair for a 9 per cent cycle regression the first three
+   deliverables created; the mechanism, the counters that ruled out the alternatives and the isolated
+   measurement are in mystery ledger item 2. Without it the change is a memory win and a wall-time
+   loss on the dense cohorts, so it is not optional.
+2. **`MADV_HUGEPAGE` is implemented and not used.** The card asks for it on large tables. Measured
+   with the hint on every reservation of two mebibytes or more, it costs 60 to 77 per cent more
+   resident memory on the two cohorts this task exists for and moves evaluation inside the noise, so
+   it is a measured negative rather than an omission. `Pages::advise_huge` is kept for a caller with
+   a densely filled column and a reason; nothing calls it.
+3. **The counting sort's cursor is gone**, which the card did not ask for. `Demand::csr` held two
+   arrays of `domain^popcount(mask) + 1` entries — 128 MiB at a key space of 2^24 — and one of them
+   existed only for the placement pass. This is preparation memory rather than workspace memory, and
+   after the reservation change it was the largest remaining term on `mutual`, which is why it was
+   taken here: that cohort went from 144,616 KiB to 82,804.
+4. **The allocation regression grew a second counter and three more policies.** A counting global
+   allocator cannot see an `mmap`, so moving the workspace to mappings would have made the existing
+   gate pass vacuously. `ergodis_rules::reservations()` is a public counter incremented once per
+   reservation, and the regression asserts it is unchanged across the loop under each of the five
+   `Policy` variants rather than the three C1192 covered — which is the card's "every `Policy`".
+5. **`closure_ballpark` gained a `--cold` mode**, which the card implies rather than states. It is
+   the C1170 cold-start stage adapted: a fresh workspace per iteration, its own minor-fault count
+   from `/proc/self/stat`, the reserved bytes and the committed kilobytes. Adding it moved the
+   derivation loop's instruction ratio by 0.8 per cent through ThinLTO although it is untimed and
+   never runs in an A/B; that is recorded above with the probe that separates it from the stagger.
+6. **Two controls were retained rather than one.** The card names `closure_ballpark-b7921a0` and
+   `ergodis-tools-f12e27b`; the tree has moved three commits past both, one of which edits the
+   harness driver. Both were retained and both A/Bs run; they agree to five decimal places, so the
+   card's controls are sound and the report quotes them.
+7. **A third table is cleared by a linear fill and not by the rows**, which reads against the card's
+   "never by capacity". The rule is `RESET_FILL_BYTES_PER_ROW`: a fill is admitted only where the
+   table costs at most thirty-two bytes per row the previous evaluation wrote, so it can never
+   commit materially more than the row store already has. The card's intent — that the reset must
+   not be sized from the caller's bound — holds exactly, because the rule reads the rows and not the
+   capacity.
+8. **Deliverable 4 is unchanged code.** "Capacity from the program where a bound exists" already
+   described the evaluator: an input relation's capacity is its fact count and a derived relation's
+   is `min(domain^arity, row_bound)`. The per-column domain product needs the C1191 closing pass,
+   which does not exist. Nothing was written for item 4, and what it would still buy is recorded
+   under **Remaining gaps**.
 
 ## Remaining gaps
 
