@@ -46,7 +46,7 @@ deliberate mutations both fail, by name, in milliseconds.
 | Soufflé 2.5, three sizes, default row bound | `analysis/datalog-comparison/results-2026-09-16-c1198-blocks.json` |
 | Soufflé 2.5, the same three sizes, row bound 1.1 M | `analysis/datalog-comparison/results-2026-09-16-c1198-blocks-bounded.json` |
 | the native/WebAssembly parity manifest, replayed unchanged | `analysis/rel-frontend/portability-v1.json` |
-| the stagger and reset-constant probes | `~/.cache/ergodis/c1198/ab-{stagger,reset-constant}.json` |
+| the stagger and reset-constant probes | `~/.cache/ergodis/c1198/ab-{stagger-probe,reset-constant}.json` |
 | the page-fault and kernel-scoped profiles, both arms | `~/.cache/ergodis/perf-c1198/` |
 
 Every `ab.py` receipt has a `.jsonl` sidecar of its raw samples beside it, and `--resummarize`
@@ -79,7 +79,7 @@ rustc 1.95.0 (59807616e 2026-04-14), release profile, no features.
 | control, frontend and backend, same revision | `ergodis-private` | `c3eda9a` | no | `ergodis-tools-c3eda9a` | `6c31e70aaa5e63bd12fdbf6e6b9b498cf2ecf0c95797fed5f7d09cc54f663055` |
 | intermediate candidate, before the stagger | `ergodis-private` | `356fce6` | `93e12cf` | no | `closure_ballpark-356fce6` | `7fcc12c1c1afb515b66ad24580c230413ffa239b11f4dc8768e82d0a4727affa` |
 | intermediate candidate, frontend and backend, before the stagger | `ergodis-private` | `356fce6` | `93e12cf` | no | `ergodis-tools-356fce6` | `e02bf69b4f930f452cc8f05fb57769a791be4362f0a9bba1fd69d4358e3b642c` |
-| candidate the frontend, backend, Soufflé, reach and cold-start figures were taken on | `ergodis-private` | `6078142` | `271d648` | no | `closure_ballpark-6078142` / `ergodis-tools-6078142` | `d4dc07ad565404a70efeb8eb905f64f39a5847f032a30c36f47588b6344c303a` / `78f0420cf5ab8f8bd277f09e0bd3e99990d370eb6c071eba8da47756185fad79` |
+| candidate the frontend, backend, Soufflé, reach, boundary, cold-start and profile figures were taken on; carries `RESET_FILL_BYTES_PER_ROW` at 32, two core commits before the shipped arm | `ergodis-private` | `6078142` | `271d648` | no | `closure_ballpark-6078142` / `ergodis-tools-6078142` | `d4dc07ad565404a70efeb8eb905f64f39a5847f032a30c36f47588b6344c303a` / `78f0420cf5ab8f8bd277f09e0bd3e99990d370eb6c071eba8da47756185fad79` |
 | **shipped candidate, and the control the next A/B should use** | `ergodis-private` | `ed99963` | `2be1e68` | no | `closure_ballpark-ed99963` / `ergodis-tools-ed99963` | `97a59d7a5c86dacab107dce7e8fa3e931adacf755d9e58e79b50eadb64268786` / `ce90b5af67b00eec1dfe64dece3fd656d4cc00415f5f6541a4679137cf7a451e` |
 
 Retain recipes, from `~/src/ergodis-private`:
@@ -98,6 +98,15 @@ summary, so a control one driver edit away from the candidate is a confound rath
 Both were therefore retained and the same A/B run against each. **They agree to five decimal places
 on every cohort's instruction ratio**, so the usage-string commit moved nothing here and the card's
 named control is sound; the table below reports the `b7921a0` figures, which are the card's.
+
+**Two candidate arms carry the figures, and the sections below name which.** The derivation-loop,
+memory-cohort and cache A/Bs are on the shipped arm `ed99963`. The frontend and backend run, the
+Soufflé comparison, the reach, boundary and cold-start tables and both `perf` profiles are on
+`6078142`, retained before `ca64c34` (the reset assertion, test-only) and `2be1e68` (the fill boundary
+from 32 to 64). The boundary change moves nothing on any cohort except the four it binds on, where it
+was measured in isolation: peak resident set within 60 KiB, and instructions 0.986 on `closure` at
+`blocks` and N = 65,536, so the Soufflé rows at that size are about 1.4 per cent above the shipped
+arm in instructions and the other figures transfer unchanged.
 
 **No foreign uncommitted file was present in either repository at any point.** `git status` was clean
 in `ergodis`, `ergodis-private` and `othello` before the first source change, at each retain, and at
@@ -298,10 +307,14 @@ Between evaluations three structures must return to empty: a relation's membersh
 relation's membership hash heads, and a join index's bucket heads. Walking the rows the previous
 evaluation wrote clears exactly the words those rows touched and can commit nothing they have not;
 a linear fill is cheaper in instructions but commits every page of the table. `RESET_FILL_BYTES_PER_ROW`
-is the rule and it is 32: a fill is admitted only where the table costs at most thirty-two bytes per
-row of the previous evaluation, which is a little more than the twenty-eight bytes of tuple and
-witness columns a derived row already commits, so a fill can never be the term that decides a
-workspace's resident set.
+is the rule and it ships at 64: a fill is admitted only where the table costs at most sixty-four bytes
+per row of the previous evaluation. It was first set at 32 by reasoning — a little more than the
+twenty-eight bytes of tuple and witness columns a derived row already commits, so a fill could never
+be the term that decides a workspace's resident set — and then measured against 64 on the cohorts
+that sit near the boundary; 64 takes up to ten per cent off their instructions for no measurable
+memory, because a table within a small factor of its rows already has most of its pages committed by
+those rows. The measurement is under **The reset's fill boundary, measured** and the reasoning that
+made it necessary is mystery ledger item 5.
 
 The rule reads the **rows the last evaluation wrote**, not the capacity, and that is the whole point:
 at the default row bound the capacity is 2^24 whatever the program derives. A fresh workspace's row
@@ -439,9 +452,9 @@ sentinel and the high-water reset but **not** the cache-line stagger. Receipts
 Control `closure_ballpark-b7921a0` against candidate `closure_ballpark-356fce6`, five interleaved
 rounds, CPU 5, repeat counts 3 and 6 with two-point differencing, `--evaluate-only`, the six-event
 set at **100.00 per cent enabled on every event over 180 measurements**, load 2.04 to 2.30. Receipt
-`analysis/datalog-comparison/ab-2026-09-16-c1198-direct-b7921a0.json` with its raw sidecar; the same
-A/B against `closure_ballpark-c3eda9a` is
-`ab-2026-09-16-c1198-direct.json`. These are the six cohorts C1192 used to show that its direct path
+`analysis/datalog-comparison/ab-2026-09-16-c1198-prestagger-direct-b7921a0.json` with its raw
+sidecar; the same A/B against `closure_ballpark-c3eda9a` is
+`ab-2026-09-16-c1198-prestagger-direct.json`. These are the six cohorts C1192 used to show that its direct path
 did not move, and the policy selects a direct kind for every index and a bitmap for every membership
 test on all of them.
 
@@ -595,7 +608,7 @@ from the control, which is what a change that only moved where the tables sit sh
 
 ### Reach and resident set at the default row bound
 
-Every row is the shipped arm `closure_ballpark-6078142` in `--evaluate-only` mode under
+Every row is the candidate arm `closure_ballpark-6078142` in `--evaluate-only` mode under
 `choom -n 1000`, one process, one evaluation, default row bound unless stated. "Reserved" is
 `Demand::workspace_bytes()`, the figure `MAX_WORKSPACE_BYTES` bounds; "peak RSS" is the process
 high-water mark from `/proc/self/status` in KiB, which is the commit figure. The C1192 column is that
@@ -635,7 +648,7 @@ shape for it to have.
 
 ### Cold start: the reservation, the commit, and the proof that each iteration is cold
 
-`closure_ballpark --cold` on the shipped arm, `cycle` at the `blocks` density and N = 4,096, pinned
+`closure_ballpark --cold` on the candidate arm `closure_ballpark-6078142`, `cycle` at the `blocks` density and N = 4,096, pinned
 to CPU 5 under `choom -n 1000`, at three repeat counts. Each iteration reserves a fresh workspace,
 evaluates once, and drops it.
 
@@ -734,7 +747,7 @@ the largest single number in C1192's report at 3.14 GB; it is 1.82 GB.**
 
 ### Against Soufflé at the default row bound
 
-The shipped arm `closure_ballpark-6078142` against Soufflé 2.5 (32-bit word, from the nix store at
+The candidate arm `closure_ballpark-6078142` against Soufflé 2.5 (32-bit word, from the nix store at
 `/nix/store/7f17fq5wcg19x5s4f7kh3pvknl8zfa55-souffle-2.5`), both the compiled binary and the
 interpreter, both `-j1`, five interleaved rounds per size with rotated start order on CPU 5 —
 C1192's method exactly, through the same committed `compare.py`. "Ergodis" and each Soufflé arm are
@@ -798,7 +811,7 @@ N = 4,096, pinned to CPU 5. `perf.data` under `~/.cache/ergodis/perf-c1198/`.
 | Arm | Top symbols above one per cent |
 | --- | --- |
 | control `closure_ballpark-b7921a0` | `__memset_avx512_unaligned_erms` **98.45 %**, nothing else above 0.5 % |
-| shipped `closure_ballpark-6078142` | `Demand::index_rows` 53.16 %, `Demand::evaluate_into` 18.99 %, `Map::fold` 7.59 %, `hashbrown::RawTable::reserve_rehash` 5.06 %, `__memmove_avx512_unaligned_erms` 3.80 %, `_int_malloc` 2.53 %, `__memset_avx512_unaligned_erms` **1.27 %**, `main` 1.27 %, `push_decimal` 1.27 %, `datalog::admit` 1.27 % |
+| candidate `closure_ballpark-6078142` | `Demand::index_rows` 53.16 %, `Demand::evaluate_into` 18.99 %, `Map::fold` 7.59 %, `hashbrown::RawTable::reserve_rehash` 5.06 %, `__memmove_avx512_unaligned_erms` 3.80 %, `_int_malloc` 2.53 %, `__memset_avx512_unaligned_erms` **1.27 %**, `main` 1.27 %, `push_decimal` 1.27 %, `datalog::admit` 1.27 % |
 
 **The whole fault profile changed owner.** On the control, the process's 283,893 page faults are
 `calloc` zeroing a workspace nobody has written to yet. On the candidate its 15,733 faults belong to
@@ -815,7 +828,7 @@ mode that evaluates twenty times and generates the two certificates and nothing 
 no serialization, no output file — which both arms have. `perf.data` under
 `~/.cache/ergodis/perf-c1198/`.
 
-| Symbol | control `b7921a0` | shipped `6078142` |
+| Symbol | control `b7921a0` | candidate `6078142` |
 | --- | ---: | ---: |
 | `ergodis_rules::demand::Demand::evaluate_into` | 98.34 % | 98.30 % |
 | `ergodis_rules::demand::Demand::certificate` | 0.85 % | 0.82 % |
@@ -835,19 +848,25 @@ The profile that did change is the page-fault one, two sections above: the contr
 `calloc` zeroing a workspace nobody has written to, and the candidate's belong to the code that
 writes rows.
 
-**The derivation loop's compiled body is byte-identical between the retained arm and the tree's final
-revision.** The core moved once more after `closure_ballpark-6078142` was retained — `ca64c34` adds
-the reset assertion and its test program and changes no other code — and a release rebuild of the
-example at that revision differs from the retained binary in 236,456 bytes of symbol layout while
-`Demand::evaluate_into` disassembles to **the same 7,702 instructions, line for line**. Every A/B
-figure above therefore describes the kernel the tree carries.
+**The derivation loop's compiled body differs between `closure_ballpark-6078142` and the shipped
+arm in exactly the constant that moved.** The core moved twice after `6078142` was retained.
+`ca64c34` adds the reset assertion and its test program and changes no other code; a release rebuild
+at that revision differs from the retained binary in 236,456 bytes of symbol layout while
+`Demand::evaluate_into` disassembles to the same 7,702 instructions, line for line. `2be1e68` sets
+`RESET_FILL_BYTES_PER_ROW` from 32 to 64, and the reset rule is inlined into `evaluate_into`: on
+the shipped arm `closure_ballpark-ed99963` the function is again 7,702 instructions and the
+disassembly differs in **three instructions, each a `shl $0x5` that became `shl $0x6`** (the
+`32 × rows` product), with every other instruction identical. The direct-path, memory-cohort and
+cache A/Bs were taken on the shipped arm; the figures taken on `6078142` describe a kernel that
+differs from the shipped one only in that multiplier, whose effect is measured under **The reset's
+fill boundary, measured**.
 
 ## Exactness
 
 | Gate | Outcome |
 | --- | --- |
-| Core `cargo test --all-features` at `ca64c34` | **81 test binaries, zero failures**, including the new `workspace_commit` suite, the two new in-module reset tests, and the `pages` reservation tests |
-| Private `cargo test -p ergodis-private -p ergodis-tools` | **42 test binaries, zero failures**, the same count C1192 recorded; this drives `rel_lowering`, `rel_frontend`, `rel_frontend_portability` and `rel_reference_eval` |
+| Core `cargo test --all-features` at `ca64c34`, and again at the shipped `2be1e68` (2026-09-17, review pass) | **81 test binaries, zero failures** both times, including the new `workspace_commit` suite, the two new in-module reset tests, and the `pages` reservation tests |
+| Private `cargo test -p ergodis-private -p ergodis-tools` at `ed99963` | **42 test binaries, zero failures**, the same count C1192 recorded; this drives `rel_lowering`, `rel_frontend`, `rel_frontend_portability` and `rel_reference_eval` |
 | C1189 differential (`rel_reference_eval`) | passes with **zero disagreements** at its unchanged seeds |
 | Clippy, both repositories, `--all-targets --all-features -D warnings` | no diagnostics |
 | `cargo fmt --check`, both repositories | clean |
@@ -1265,7 +1284,9 @@ for c in stratified columns aggregate; do
 done
 
 # The C1191 boundary cohorts: the largest dictionary that runs and the first
-# that is refused, on both arms.
+# that is refused, on both arms. --definitions counts definitions; the table's
+# "dictionary" is definitions × columns (2 for columns and aggregate, 3 for
+# columns3), which is how 2,046 reads as 4,092 and 161 as 483.
 F="--max-rows 16777216 --values 262144"
 for n in 2047 2048; do choom -n 1000 -- $T rel-lower --cohort stratified --definitions $n --max-tuples 0 $F; done
 for n in 2046 2047; do choom -n 1000 -- $T rel-lower --cohort columns    --definitions $n --max-tuples 0 $F; done

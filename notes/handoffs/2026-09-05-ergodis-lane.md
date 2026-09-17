@@ -6,9 +6,9 @@
 correction trails live in dated reports and the append-only
 [`2026-09-05-ergodis-lane-archive.md`](2026-09-05-ergodis-lane-archive.md).
 
-**Date**: 2026-09-16
+**Date**: 2026-09-17
 **Mode**: intent-based.
-**Status**: ACTIVE. Immediate engineering frontier is C1190 (Rel lowering; milestones a, b, per-column domains, c and the C1191 direct constructor done and audited; C1192 sparse index and C1188 done and audited; C1193–C1196 and C1198 queued; C1170 frontend closed 2026-09-16 with C1197 queued later; C1189 oracle closed); the
+**Status**: ACTIVE. Immediate engineering frontier is C1190 (Rel lowering; milestones a, b, per-column domains, c and the C1191 direct constructor done and audited; C1192 sparse index and C1188 done and audited; C1198 lazy workspace done 2026-09-17, audit pending; C1193–C1196 queued; C1170 frontend closed 2026-09-16 with C1197 queued later; C1189 oracle closed); the
 rule-contract programme C1172–C1177 and the Datalog evaluation tasks C1179/C1182–C1186 are closed. C1143, C1130, C1016,
 C1017, C1061 and C985 remain in progress. C1062 and C1070 await Tavis's close call.
 
@@ -312,19 +312,17 @@ closures are bound by the 2^24 row capacity. Direct path 0.907–0.982 instructi
 `memmove` removal 0.893–0.895 instructions on all eight cohorts. No Rel cohort is stopped by an
 addressing bound (`columns3` 255 → 483, `aggregate` 1,412 → 2,046). **Soufflé 2.5 on closure/blocks
 at 4,096/16,384/65,536: 0.98/0.81/0.95 of compiled with a sized row bound, 3.24/1.56/1.25 at the
-default bound** — the eager workspace reservation and `fill(NONE)` at capacity, queued as **C1198**
-(`../2026-09-16-c1198-workspace-sized-from-rows.md`), now ahead of C1195. Parity digest moved to
-`349333d4…` (lowering pass edited; parity holds at 243 cases). Controls for the next A/B:
-`closure_ballpark-b7921a0` (derivation loop) and `ergodis-tools-f12e27b` (frontend/backend), rustc
-1.95.0. Open for Tavis: the public `Policy::{Direct,Sparse,SparseIndexes,SparseMembership}` knobs on a
+default bound** — the eager workspace reservation, closed by C1198 below. Parity digest moved to
+`349333d4…` (lowering pass edited; parity holds at 243 cases). Controls for the next A/B: superseded by C1198's, below. Open for Tavis: the public `Policy::{Direct,Sparse,SparseIndexes,SparseMembership}` knobs on a
 core type (keep public or feature-gate); cache-gc lists eight old unreferenced entries (largest
 `datalog-comparison` 281 MB) — deletion is Tavis's call.
+**C1198 lazy workspace done 2026-09-17, not yet audited** (`../2026-09-16-c1198-workspace-sized-from-rows-report.md`; core `3eaaacf` … `2be1e68`; private `b3994fc` … `1f2fe44`; Opus). Every workspace table is an anonymous `MAP_NORESERVE` mapping with zero as the empty sentinel, reset by the rows the previous evaluation wrote; the eager commit was `calloc`'s memset, not the `fill(NONE)` the card named. Peak RSS ×3.1–29.6 lower at the default row bound; the row bound is no longer a memory decision (`cycle` 4,096: 47× the sized bound → 1.7×). Soufflé 2.5 on closure/blocks at the **default** bound 0.852/0.819/1.172 (was 3.24/1.56/1.25), so C1195's default-bound rows are now meaningful. Direct path 0.982–0.984 instructions. Controls for the next A/B: `closure_ballpark-ed99963` (derivation loop) and `ergodis-tools-ed99963` (frontend/backend), rustc 1.95.0, both from clean trees; a driver edit to `closure_ballpark` needs its own retain (ThinLTO moved the kernel 0.8 % through an untimed mode). Open frontiers, unallocated: an independent read-only audit of C1198; the checkers' `crates/verify/src/datalog_store.rs` has the same `calloc` commit and is now up to 7.8× the evaluator's memory, blocked on `implementation_identity()` hashing the checker sources; the N = 65,536 default-bound residual is hash-table locality, not memory (report remaining gap 2); the reset walk could track touched slots instead of recomputing keys (gap 3). `MADV_HUGEPAGE` measured and rejected. cache-gc still lists 15 old unreferenced entries; deletion is Tavis's call.
 **Programme review and next steps (2026-09-16)**: `../2026-09-16-ergodis-datalog-programme-review.md`
 ranks the gaps against the programme goal and allocates, in EV order: **C1192** (done, above),
 **C1193** bodies of more than two atoms (`../2026-09-16-c1193-nary-bodies.md`, after C1192),
 **C1194** min-plus carrier and term arithmetic through the lowering (`../2026-09-16-c1194-min-plus-lowering.md`),
 **C1195** end-to-end benchmark suite from Rel source against Soufflé
-(`../2026-09-16-c1195-end-to-end-benchmark-suite.md`, after C1192; min-plus rows after C1194),
+(`../2026-09-16-c1195-end-to-end-benchmark-suite.md`, after C1192 and C1198; min-plus rows after C1194),
 **C1196** rank-run and round-block certificate encoding (`../2026-09-16-c1196-certificate-encoding.md`).
 Still unallocated: a memory model for a layer (`MAX_LAYER_TUPLES` as a byte bound, eager row
 reservation as input); the kernel-scoped profile of `lower::run` closing the two unattributed

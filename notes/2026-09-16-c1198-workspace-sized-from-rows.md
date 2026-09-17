@@ -2,7 +2,10 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-16
-**Status**: QUEUED. C1192 successor; the report names this "the largest single product-path
+**Status**: DONE 2026-09-17, not yet independently audited. Report:
+`2026-09-16-c1198-workspace-sized-from-rows-report.md`. The stated mechanism below was wrong: the
+eager commit was `calloc`'s memset, not the `fill(NONE)`; the report's mystery ledger item 1 has the
+probes. Was a C1192 successor; the report named this "the largest single product-path
 defect the lane has" (mystery ledger item 7, remaining gap 4). Independent of C1193–C1196; C1195's
 default-bound rows are meaningless until it lands.
 
