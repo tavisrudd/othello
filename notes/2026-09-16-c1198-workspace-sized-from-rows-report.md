@@ -121,7 +121,7 @@ task close.
 | `ergodis-private` | `2d368a3` | re-pin the core at the direct reset assertion |
 | `ergodis-private` | `ed99963` | re-pin the core at the measured reset boundary |
 | `ergodis-private` | `1f2fe44` | the receipts at the measured reset boundary |
-| `othello` | `9dd61b7`…`<this commit>` | this report, written incrementally from before the first line of code |
+| `othello` | `9dd61b7`…`77046cb` | this report, written incrementally from before the first line of code |
 
 ## Fermi predictions, written before any code
 
@@ -890,6 +890,25 @@ after they are rebuilt. Under mutation A it fails in milliseconds with
 `Auto index 0 kind 3 keeps a bucket head`; under mutation B with
 `Auto relation 2 keeps a membership bit`. That test is the load-bearing gate on this task's
 correctness, and it exists because the first version of the corpus did not discriminate.
+
+## What the Fermi got right and wrong
+
+| Prediction | Measured | Verdict |
+| --- | --- | --- |
+| 0. The commit is `calloc`, not the `fill(NONE)`; deliverable 3 carries nearly all of the result | 98.45 per cent of the control's faults in `memset`, and a cohort with no `fill(NONE)` at all still fully committed | **Right**, and it reverses the card |
+| 1. Preparation at the default bound falls by 15 to 40 times, to 3 to 8 ms, landing at or below C1192's sized-bound 21.3 ms | 123.2 ms → **14.8 ms**, a factor of 8.3, below the sized bound as predicted but above the predicted band | **Direction right, size wrong**: the band priced only the faults and forgot that preparation also admits 61,440 facts, which is most of the 14.8 ms |
+| 2. `cycle` at N = 4,096 lands between 15,000 and 40,000 KiB at the default bound, within a small factor of the sized bound | **38,260 KiB** against 22,352 sized, a factor of 1.7 | **Right**, at the top of the band |
+| 3. +0.5 to +1.5 per cent instructions on chain cohorts, unity elsewhere | **−1.6 to −1.8 per cent everywhere**, and the memory cohorts are −2.5 to +6.1 | **Wrong in sign**: the unbias does cost an instruction per yielded row, and the `fill(NONE)` it replaced cost more |
+| 3b. The reset walk must be conditional or it regresses the direct-path cohorts | It is conditional, and the constant is load bearing on five structures | **Right**, and the constant then had to be measured rather than reasoned |
+| 4. The default-bound Soufflé column matches the sized column on all three sizes, at 0.80 to 1.00, 0.75 to 0.90 and 0.90 to 1.00 | **0.852, 0.819, 1.172** | **Right on two of three**; the largest size does not converge, and the reason is locality rather than commit |
+| 5a. The reset walk's exactness is the first risk | It was: the gate that catches a wrong reset had to be rewritten after the first one did not discriminate | **Right** |
+| 5b. `MADV_HUGEPAGE` fights the whole point and will be measured off | 60 to 77 per cent more resident memory, evaluation inside the noise, shipped off | **Right** |
+| 5c. The WebAssembly fallback must be a compiled path | It is, and it is checked by an explicit `wasm32-unknown-unknown` build | **Right** |
+
+The one prediction that was wrong in sign is the interesting one, and the cost model behind it was
+wrong in the way the playbook warns about: it priced the instruction the unbias adds to a chain step
+and did not price the `fill(NONE)` the zero sentinel removes from every evaluation, which is the
+larger term on every cohort measured.
 
 ## Disposition
 
