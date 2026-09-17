@@ -281,3 +281,39 @@ and could recover the 9 per cent by design rather than by accident.
 **Evidence level**: opcode histograms and `ab.py` receipts (`analysis/datalog-comparison/ab-2026-09-17-c1200-*.json`)
 in the private workspace; the mechanism (a removed spill on a dependency chain) is a lead, not a
 measurement — a kernel-scoped `perf annotate` of both stagger arms is the gap. No C-ID allocated.
+
+## 2026-09-17 — a removed worktree's artifacts break a clean-tree build through the shared target directory (C1193)
+
+**Provenance**: C1193's first retain, `bash ../ergodis-dev/scripts/retain-bin.sh . closure_ballpark
+--example --profile release` from `~/src/ergodis-private` at private `193ebd1` with core `e7116ba`,
+both trees clean; log at
+`/tmp/claude-run-quiet/20260917-122244-bash-retain-bin.sh-closure_ballpark-example-profile-release/stderr.log`.
+**Was I looking for this?**: no — the command was the task's mandatory control retain, and it was
+expected to be a build.
+
+**Observation.** The build failed with eleven type errors of the shape "expected
+`ergodis_verify::rule_contract::Program`, found `Program` … there are multiple different versions of
+crate `ergodis_verify` in the dependency graph", one of them attributed to
+`~/.cache/ergodis/worktrees/c1200-stagger/ergodis/crates/verify/src/rule_contract.rs`. That
+directory does not exist: C1200 removed both of its probe worktrees at its close. The dependency
+graph is clean — `cargo tree -d -e normal --workspace` reports one `ergodis-verify`, at
+`/home/tavis/src/ergodis/crates/verify`. The stale state is in the shared target directory
+`~/.cache/ergodis/target/ergodis-private`, which the worktree build wrote into because a worktree of
+`ergodis-private` inherits that repository's `.cargo/config.toml`; an `rmeta` compiled from the
+worktree's core occupies the filename cargo expects for the current tree's unit, and its mtime makes
+the fingerprint look fresh. One `touch` over the core's `crates/**/*.rs` invalidated the
+fingerprints and the retain then reproduced `closure_ballpark-aa04358` byte for byte, so nothing
+about the artifact was wrong — only which one cargo picked.
+
+**Why it may matter**: a detached-worktree probe is now this lane's standard way to isolate one
+commit of a path dependency (C1200 built two), and each one silently seeds the shared target
+directory with units that can be selected by a later clean-tree build of the same workspace. The
+failure mode is a *compile error* at a revision that compiles, which reads as a broken tree rather
+than as build debris, and a successor who reaches for `cargo clean` to fix it violates the
+playbook's rule against cleaning a target another session may be using. Two cheap remedies: have a
+worktree probe write to its own `.cargo/config.toml` target directory, as C1200's mutation copies
+already did for the mutation tree but not for the worktrees; or record in the playbook that the
+repair is a `touch` over the path dependency's sources.
+**Evidence level**: the failing log, the clean `cargo tree -d`, and the byte-identical rebuild after
+the touch. Not root-caused to cargo's fingerprint algorithm; the selection mechanism above is a
+reading of the diagnostic, not a measurement of cargo. No C-ID allocated.

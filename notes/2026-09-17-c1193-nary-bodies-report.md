@@ -20,8 +20,49 @@ Repositories: `~/src/ergodis` (core), `~/src/ergodis-private` (lowering, drivers
 
 ## Arms
 
-To be filled in as each is retained. Every hash is recorded **as measured**, never cited: the thing
-to run is the retain recipe at the named revision.
+Every hash is recorded **as measured**, never cited: the thing to run is the retain recipe at the
+named revision. Both controls were retained from clean trees **before the first source change of
+this task**, at private `193ebd1` with core `e7116ba`, rustc 1.95.0 (59807616e 2026-04-14), release
+profile, no features. Retain recipes, from `~/src/ergodis-private`:
+
+```sh
+../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release
+../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools
+```
+
+Both re-execute themselves inside `nix develop` of the core checkout, whose devShell asserts its
+rustc equals the `rust-toolchain.toml` pin.
+
+| Arm | Role | Private | Core | Dirty | Retained name | Measured sha256 |
+| --- | --- | --- | --- | --- | --- | --- |
+| control, derivation loop | the kernel A/B | `193ebd1` | `e7116ba` | no | `closure_ballpark-193ebd1` | `a29f36177039ddc372de9b49fad5de2994063167ef9c4306e05a428ac55bfbcf` |
+| control, frontend and stratified backend | the Rel route | `193ebd1` | `e7116ba` | no | `ergodis-tools-193ebd1` | `ece06d113eefdf022c8465a950538b130e00c0ba32e4d325242cac1cf98bf01c` |
+
+**The derivation-loop control the handoff named is current, and the retain proves it.**
+`closure_ballpark-193ebd1` is **byte-identical** to `closure_ballpark-aa04358`
+(`a29f3617…c55bfbcf`), so the private receipts commit `193ebd1` is not a build input of that example
+and the C1200 control is the control at private HEAD. The frontend control had to be re-retained, as
+the task's own framing anticipated: `ergodis-tools-ed99963` was built against core `2be1e68`, and
+core `e7116ba` changed the kernel it calls, so `ergodis-tools-193ebd1`
+(`ece06d11…f98bf01c`) supersedes it.
+
+### One thing the first retain found, before any source change
+
+**The C1200 stagger probe left artifacts in the shared target directory that break a clean-tree
+build of the private workspace.** The first retain attempt failed with eleven type errors of the
+form "there are multiple different versions of crate `ergodis_verify` in the dependency graph",
+naming `/home/tavis/.cache/ergodis/worktrees/c1200-stagger/ergodis/crates/verify/src/rule_contract.rs`
+as one of them — a path that no longer exists, because C1200 removed both worktrees at its close.
+The dependency graph itself is clean: `cargo tree -d -e normal --workspace` shows exactly one
+`ergodis-verify`, at `/home/tavis/src/ergodis/crates/verify`. What was stale was the shared target
+directory `~/.cache/ergodis/target/ergodis-private`, which the worktree build wrote into because the
+worktree inherited the private repository's `.cargo/config.toml`; an `rmeta` built from the worktree
+sat at the filename cargo expected for the current tree's unit and its mtime made the fingerprint
+look fresh. This is exactly the stale-rlib failure the playbook names for concurrent checkouts
+sharing a target directory. Repaired the way the playbook prescribes — **rebuild, never clean**: one
+`touch` over the core's `crates/**/*.rs` invalidated the fingerprints, and the retain then succeeded
+and reproduced `closure_ballpark-aa04358` byte for byte. No file was deleted and no target directory
+was cleaned. Logged to the discovery track, because nothing about this task was looking for it.
 
 ## Commits
 
