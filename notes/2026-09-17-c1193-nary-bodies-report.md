@@ -1206,28 +1206,23 @@ and no path is left uncommitted in any of the three repositories.
 They supersede `closure_ballpark-193ebd1` and `ergodis-tools-193ebd1`, which are this task's own
 controls and stay for its replay.
 
-**The one gate whose final confirmation run was still in flight at close** is the private
-`cargo test -p ergodis-private -p ergodis-tools`. It was green (42 test binaries, zero failures)
-after every source change to the library, the tools, the generator and the differential; the two
-commits after that run touch only `examples/closure_ballpark.rs`, which no test target compiles, and
-committed JSON receipts. Clippy and `cargo fmt --check` are green over the whole private workspace
-including examples, and the core's `cargo test --all-features` is green at 82 `test result: ok`
-blocks. Re-running the private suite is the first command below and is a confirmation, not a repair.
+**Every gate is green at the committed heads.** The private
+`cargo test -p ergodis-private -p ergodis-tools` was re-run at `26d2468` and reports **42 test
+binaries, zero failures**; the core's `cargo test --all-features` at `09a5c2b` reports **82
+`test result: ok` blocks, zero failures**; clippy with `-D warnings` and `cargo fmt --check` are
+clean over both workspaces including examples; `SHA256SUMS` is current; and the native/WebAssembly
+parity manifest is regenerated with its canonical digest unmoved.
 
 **Exact commands to pick this up.**
 
 ```sh
-# 1. Confirm the private suite at HEAD.
-cd ~/src/ergodis-private
-choom -n 1000 -- nix develop ~/src/ergodis --command cargo test -p ergodis-private -p ergodis-tools -j 8
-
-# 2. The lifecycle close, which this task was told not to do: archive the C1193
+# 1. The lifecycle close, which this task was told not to do: archive the C1193
 #    row, delete it from the live queue, update the lane handoff and log the
 #    incidental gem, in one coherent commit, per notes/task-lifecycle-conventions.md.
 #    The discovery-track entry this task appended is already committed
 #    (notes/ergodis-discovery-track.md, 2026-09-17, the stale shared-target finding).
 
-# 3. The next lever, which is larger than this task's and is measured under
+# 2. The next lever, which is larger than this task's and is measured under
 #    "The `ej` and `tt` closeout": a density rule, or a `Pages` reservation, for
 #    a static join index's offsets array. Reproduce the figure with
 C=~/.cache/ergodis/bin; W=~/.cache/ergodis/c1193
