@@ -1,14 +1,61 @@
 # C1198 — the demand workspace sized from rows: zero sentinels, high-water reset, lazy page commit
 
 **Lane**: `ergodis`
-**Date**: 2026-09-16
-**Status**: IN PROGRESS. Skeleton and Fermi predictions written before any code, as the playbook
-requires. Every section below is filled as its milestone completes, so a crash leaves a partial
-record rather than none.
+**Date**: 2026-09-16 (closed 2026-09-17)
+**Status**: DONE AND GATED. Built, gated and measured, with every measurement the card asked for
+taken, and with an `ej` and `tt` closeout pass whose findings are applied. Written incrementally
+from before the first line of code, so a crash would have left a partial record rather than none.
+**Not yet independently audited**; the card asks for a read-only audit and that is a separate task.
 
 ## Status
 
-In progress.
+**Done, gated and measured.** The demand evaluator's workspace reserves address space from the
+caller's row bound and commits memory from the rows a program derives. **Peak resident set falls by
+a factor of 3.1 to 29.6 at the default row bound** on the six memory cohorts, by 1.7 to 2.3 on three
+of the four C1191 boundary cohorts, and by 3.7 on the Rel route's largest; **the derivation loop is
+1.6 to 1.8 per cent cheaper in instructions** on the six cohorts C1192 used to show that its direct
+path did not move. Against compiled Soufflé 2.5 on `closure` at the `blocks` density and N = 4,096,
+the whole-process ratio at the harness's **default** row bound goes from C1192's **3.244 to 0.852** —
+better than the 0.984 C1192 reached only by hand-sizing the bound — with peak resident set from
+527 MB to 18 MB and preparation from 123.2 ms to 14.8 ms.
+
+**The card's stated mechanism was wrong and the probes said so before any code.** The eager commit
+was not the explicit `fill(NONE)`; it was `calloc` memsetting a workspace nobody had written to,
+which a page-fault profile of the retained control attributes at 98.45 per cent. That reverses the
+card's ordering of its own deliverables and is mystery ledger item 1.
+
+**The gates.** Core: 81 test binaries, zero failures; clippy and `cargo fmt` clean; `SHA256SUMS`
+current; `ergodis-rules` builds for `wasm32-unknown-unknown`, so the non-Unix fallback is a compiled
+path. Private: 42 test binaries, zero failures, including the C1189 differential at zero
+disagreements. The four Rel-route closure digests are unchanged from C1191 and C1192; the
+native/WebAssembly parity manifest regenerates **identical in every field**, canonical digest
+`349333d4…` unmoved; the output digest is identical across arms on every cohort of every A/B; the
+derivation loop allocates zero and reserves zero under each of the five `Policy` variants; and two
+deliberate mutations both fail, by name, in milliseconds.
+
+**Every receipt** (paths under `~/src/ergodis-private/` unless stated):
+
+| What | Receipt |
+| --- | --- |
+| the direct path, shipped arm, six cohorts | `analysis/datalog-comparison/ab-2026-09-17-c1198-direct-final.json` |
+| the memory cohorts, shipped arm, six cohorts | `analysis/datalog-comparison/ab-2026-09-17-c1198-memory-final.json` |
+| the same two, on the arm one commit earlier | `analysis/datalog-comparison/ab-2026-09-16-c1198-{direct,memory}-shipped.json` |
+| the supplementary cache run, shipped arm | `analysis/datalog-comparison/ab-2026-09-16-c1198-cache-shipped.json` |
+| the arm before the stagger, and the cache and TLB runs that diagnosed it | `analysis/datalog-comparison/ab-2026-09-16-c1198-prestagger-{direct,direct-b7921a0,memory,cache,tlb}.json` |
+| the frontend and the stratified backend, five runs | `analysis/rel-frontend/performance-v9-c1198-{,datalog-,stratified-,columns-,aggregate-}6078142.json` |
+| Soufflé 2.5, three sizes, default row bound | `analysis/datalog-comparison/results-2026-09-16-c1198-blocks.json` |
+| Soufflé 2.5, the same three sizes, row bound 1.1 M | `analysis/datalog-comparison/results-2026-09-16-c1198-blocks-bounded.json` |
+| the native/WebAssembly parity manifest, replayed unchanged | `analysis/rel-frontend/portability-v1.json` |
+| the stagger and reset-constant probes | `~/.cache/ergodis/c1198/ab-{stagger,reset-constant}.json` |
+| the page-fault and kernel-scoped profiles, both arms | `~/.cache/ergodis/perf-c1198/` |
+
+Every `ab.py` receipt has a `.jsonl` sidecar of its raw samples beside it, and `--resummarize`
+rebuilds it without measuring. The reach, boundary and cold-start tables were taken by single
+invocations of the committed tools and are reproduced by the replay block at the end.
+
+**Nothing is half-built.** Every source change is committed in both repositories; `git status` is
+clean in `ergodis`, `ergodis-private` and `othello`, and was clean before the first source change and
+at every retain.
 
 Task card: `2026-09-16-c1198-workspace-sized-from-rows.md`. Predecessors:
 `2026-09-16-c1192-sparse-join-index-report.md` (the sparse addressing kinds, the policy, the
@@ -1082,16 +1129,233 @@ of this workspace's own access pattern and not an incidental observation about a
 
 ## Replay commands
 
-*Pending.*
+Run from `~/src/ergodis-private` unless stated. Every gate and every measurement was run under
+`nix develop ~/src/ergodis`, whose devShell asserts its rustc equals the `rust-toolchain.toml` pin,
+so the gates and the measurements describe one build.
+
+```sh
+# Gates, core.
+cd ~/src/ergodis
+nix develop . --command cargo test --all-features -j 8
+nix develop . --command cargo clippy --all-targets --all-features -j 8 -- -D warnings
+nix develop . --command cargo fmt --all -- --check
+# The WebAssembly fallback is a compiled path, not a comment.
+nix develop . --command nix shell nixpkgs#lld --command \
+    cargo build -p ergodis-rules --target wasm32-unknown-unknown --release -j 8
+cd ~/src/ergodis-private
+
+# Gates, private. This drives rel_lowering, rel_frontend, rel_frontend_portability
+# and rel_reference_eval, which is the C1189 differential.
+choom -n 1000 -- nix develop ~/src/ergodis --command cargo test -p ergodis-private -p ergodis-tools -j 8
+nix develop ~/src/ergodis --command cargo clippy -p ergodis-private -p ergodis-tools \
+    --lib --bins --tests --examples -j 8 -- -D warnings
+nix develop ~/src/ergodis --command cargo fmt -p ergodis-private -p ergodis-tools -- --check
+
+# The arms. Each is retained from a checkout at its own revision.
+git checkout c3eda9a && ../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release
+git checkout c3eda9a && ../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools
+git checkout 356fce6 && ../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release
+git checkout 6078142 && ../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release
+git checkout 6078142 && ../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools
+git checkout ed99963 && ../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release
+git checkout ed99963 && ../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools
+
+A=analysis/datalog-comparison
+CTL=~/.cache/ergodis/bin/closure_ballpark-b7921a0       # the card's control
+CTL2=~/.cache/ergodis/bin/closure_ballpark-c3eda9a      # same revision as the candidate's tree
+CAND=~/.cache/ergodis/bin/closure_ballpark-ed99963      # the shipped arm
+W=~/.cache/ergodis/c1198
+DIRECT=closure:sparse:256,closure:sparse:1024,closure:dense:256,closure:dense:512,samegen:sparse:1024,samegen:dense:512
+MEMORY=closure:blocks:4096,closure:blocks:16384,closure:blocks:65536,mutual:blocks:4096,mutual:blocks:8192,cycle:blocks:4096
+
+# The direct path, where the tables are small. Run against both controls; they
+# agree to five decimal places, which is what says the card's control is sound.
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $CTL --a-name control \
+    --b $CAND --b-name candidate --mode evaluate --rounds 5 --cpu 5 --repeats 3 \
+    --cohorts $DIRECT --work $W/ab-work --out $A/ab-2026-09-17-c1198-direct-final.json
+
+# The cohorts the reservation was costing, at the default row bound.
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $CTL --a-name control \
+    --b $CAND --b-name candidate --mode evaluate --rounds 5 --cpu 5 --repeats 3 \
+    --cohorts $MEMORY --work $W/ab-work --out $A/ab-2026-09-17-c1198-memory-final.json
+
+# The supplementary cache set, and the TLB set that ruled out a TLB cause.
+CE=cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses
+TE=ls_l1_d_tlb_miss.all,ls_l1_d_tlb_miss.all_l2_miss,dtlb-loads,dtlb-load-misses
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $CTL --a-name control \
+    --b $CAND --b-name candidate --mode evaluate --rounds 5 --cpu 5 --repeats 3 \
+    --cohorts closure:dense:512,closure:blocks:4096,samegen:dense:512 --events $CE \
+    --work $W/cache-work --out $A/ab-2026-09-16-c1198-cache-shipped.json
+
+# The reach and resident-set table. One process, one evaluation, no certificates.
+R=$W/reach-work
+for a in "closure 4096 sparse" "closure 8192 sparse" "closure 2048 dense" \
+         "samegen 8192 sparse" "samegen 16384 sparse" "closure 4096 blocks" \
+         "closure 16384 blocks" "closure 65536 blocks" "mutual 4096 blocks" \
+         "mutual 8192 blocks" "cycle 4096 blocks"; do
+  choom -n 1000 -- $CAND --evaluator demand --evaluate-only --program $a 1 $R
+done
+for a in "closure 65536 blocks" "mutual 65536 blocks" "cycle 65536 blocks"; do
+  choom -n 1000 -- $CAND --evaluator demand --evaluate-only --program $a 1 $R --max-rows 1100000
+done
+choom -n 1000 -- $CAND --evaluator demand --evaluate-only --program cycle 4096 blocks 1 $R --max-rows 100000
+
+# The cold-start stage, three repeat counts for the two-point difference. The
+# stage is read from its fault count and its wall time, never from instructions.
+for n in 10 20 40; do
+  choom -n 1000 -- taskset -c 5 perf stat -e page-faults,minor-faults \
+      $CAND --evaluator demand --evaluate-only --cold --program cycle 4096 blocks $n $R
+done
+
+# Page faults by symbol, both arms: where the commit comes from.
+for arm in b7921a0 ed99963; do
+  taskset -c 5 perf record -q -e page-faults -c 200 \
+      -o ~/.cache/ergodis/perf-c1198/cycle-faults-$arm.data -- \
+      ~/.cache/ergodis/bin/closure_ballpark-$arm --evaluator demand --evaluate-only \
+      --program cycle 4096 blocks 1 $R
+  perf report -q -i ~/.cache/ergodis/perf-c1198/cycle-faults-$arm.data \
+      --no-children --percent-limit 1 --sort symbol
+done
+
+# The kernel-scoped instruction profile, both arms.
+for arm in b7921a0 ed99963; do
+  taskset -c 5 perf record -q -e instructions:u -F 4000 \
+      -o ~/.cache/ergodis/perf-c1198/closure-dense-$arm.data -- \
+      ~/.cache/ergodis/bin/closure_ballpark-$arm --evaluator demand --program closure \
+      --certificates 512 dense 20 $R
+  perf report -q -i ~/.cache/ergodis/perf-c1198/closure-dense-$arm.data \
+      --no-children --percent-limit 0.004 --sort symbol
+done
+
+# The frontend and the stratified backend.
+E=instructions,cycles,branches,branch-misses,page-faults,minor-faults
+B=analysis/rel-frontend
+T=~/.cache/ergodis/bin/ergodis-tools-6078142
+C=~/.cache/ergodis/bin/ergodis-tools-f12e27b
+nix develop ~/src/ergodis --command python3 $B/bench.py --binary $T --control $C \
+    --rounds 5 --cpu 5 --stages scan,parse,admit,lower,stratify --events $E \
+    --out $B/performance-v9-c1198-6078142.json
+nix develop ~/src/ergodis --command python3 $B/bench.py --binary $T --control $C \
+    --rounds 5 --cpu 5 --cohorts datalog --stages scan,parse,admit,lower,stratify \
+    --events $E --out $B/performance-v9-c1198-datalog-6078142.json
+for c in stratified columns aggregate; do
+  nix develop ~/src/ergodis --command python3 $B/bench.py --binary $T --control $C \
+      --rounds 5 --cpu 5 --cohorts $c --definitions 128 \
+      --stages scan,parse,admit,lower,stratify --events $E \
+      --out $B/performance-v9-c1198-$c-6078142.json
+done
+
+# The C1191 boundary cohorts: the largest dictionary that runs and the first
+# that is refused, on both arms.
+F="--max-rows 16777216 --values 262144"
+for n in 2047 2048; do choom -n 1000 -- $T rel-lower --cohort stratified --definitions $n --max-tuples 0 $F; done
+for n in 2046 2047; do choom -n 1000 -- $T rel-lower --cohort columns    --definitions $n --max-tuples 0 $F; done
+for n in 161 162;   do choom -n 1000 -- $T rel-lower --cohort columns3   --definitions $n --max-tuples 0 $F; done
+for n in 2046 2047; do choom -n 1000 -- $T rel-lower --cohort aggregate  --definitions $n --max-tuples 0 $F; done
+
+# Soufflé 2.5, compiled and interpreted, both -j1, on the blocks cohorts. The
+# second run differs only in the row bound the caller declares.
+S="nix shell nixpkgs#souffle nixpkgs#gcc nixpkgs#gnumake nixpkgs#time -c"
+$S python3 $A/compare.py --bin ~/.cache/ergodis/bin/closure_ballpark-6078142 \
+    --work $W/souffle-work --out $A/results-2026-09-16-c1198-blocks.json \
+    --rounds 5 --cpu 5 --sizes closure:blocks:4096,16384,65536
+$S python3 $A/compare.py --bin ~/.cache/ergodis/bin/closure_ballpark-6078142 \
+    --work $W/souffle-work-bounded --out $A/results-2026-09-16-c1198-blocks-bounded.json \
+    --rounds 5 --cpu 5 --harness-args "--max-rows 1100000" --sizes closure:blocks:4096,16384,65536
+
+# The native/WebAssembly parity replay, which regenerates the committed manifest.
+choom -n 1000 -- nix develop ~/src/ergodis --command python3 \
+    analysis/rel-frontend/portability.py --output analysis/rel-frontend/portability-v1.json
+```
+
+Inputs are deterministic: the C1182 xorshift64 generators seeded by the domain and the `blocks`
+density, which uses no random stream at all.
 
 ## What this task left under `~/.cache/ergodis/`
 
-*Pending.*
+**Retained binaries.** `bin/closure_ballpark-c3eda9a` and `bin/ergodis-tools-c3eda9a` are the
+same-revision controls, retained from clean trees before the first source change, and they exist to
+show that the card's controls are sound. `bin/closure_ballpark-356fce6` and
+`bin/ergodis-tools-356fce6` are the arm before the stagger; the first is what the 4 KiB aliasing
+measurement is taken on and the second is cited by nothing. `bin/closure_ballpark-6078142` and
+`bin/ergodis-tools-6078142` are the arm the frontend, backend, Soufflé, reach, boundary and
+cold-start figures were taken on. `bin/closure_ballpark-ed99963` and `bin/ergodis-tools-ed99963` are
+the shipped arm and **the control the next A/B should use**.
+
+**Two probe builds, each from a tree dirty in one expression and cited by one paragraph**:
+`bin/c1198-nostagger-probe`, measured sha256
+`551ae2e657adfe7d551e6a654c723f0c3016a9c0c921bf5487be5e3dc787a9d9`, which isolates the stagger; and
+`bin/c1198-reset64-probe`, `0a7096a979e65485166b390044d50c60eab501d8edcff713983820b60a6e50de`, which
+set the reset boundary. Neither is a retained control and neither carries a manifest row.
+
+**Under `perf-c1198/` (317 KB):** the two page-fault profiles and the two kernel-scoped instruction
+profiles. **Under `c1198/` (16 MB):** the A/B work directories (`ab-work`, `cache-work`), the reach
+probes' fact files (`reach-work`, `probe`), the two Soufflé work trees (`souffle-work` and
+`souffle-work-bounded`), the stagger and reset-constant probe receipts, the parity replay's
+regenerated manifest, the private test log, and the two batch scripts the measurement runs used.
+
+`../ergodis-dev/scripts/cache-gc.sh` was run in its listing mode at task close and **nothing was
+deleted**. It scanned 47 entries and showed 15 as unreferenced and old enough to remove, none of them
+this task's: the largest are `datalog-comparison` at 281 MB, `perf-c1170` at 162 MB, `module-loading`
+at 124 MB, `worktrees` at 105 MB and `application-workspace` at 21 MB, all from other lanes or
+earlier tasks. This task's `c1198` and `perf-c1198` both show as kept. Deletion is the user's call.
 
 ## The control for the next A/B
 
-*Pending.*
+For the derivation loop, `~/.cache/ergodis/bin/closure_ballpark-ed99963`, measured sha256
+`97a59d7a5c86dacab107dce7e8fa3e931adacf755d9e58e79b50eadb64268786`, retained from a **clean** tree at
+`ergodis-private` `ed99963` with core `ergodis` `2be1e68` under rustc 1.95.0 (59807616e 2026-04-14),
+release profile, no features, through
+`../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release`.
+
+For the frontend and the stratified backend, `~/.cache/ergodis/bin/ergodis-tools-ed99963`, measured
+sha256 `ce90b5af67b00eec1dfe64dece3fd656d4cc00415f5f6541a4679137cf7a451e`, retained from the same
+clean tree through `../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools`.
+
+Both are at the shape the tree carries, and unlike C1192's pair both were retained from a clean tree
+with no foreign uncommitted file in either repository. The next A/B in this lane needs no fresh
+retain unless the toolchain pin moves. **One caution for whoever runs it**: `closure_ballpark` is the
+harness *and* the arm, so adding an untimed mode to it moves the kernel's instruction count through
+ThinLTO — this task measured that at 0.8 per cent — and a driver edit therefore needs its own retain
+and its own control, not a comparison against an older one.
 
 ## Vibe check
 
-*Pending.*
+Very good, and the result is larger than the card's own framing expected because the card's stated
+mechanism was wrong. The eager commit was never the `fill(NONE)`; it was `calloc` memsetting a
+workspace nobody had written to, which a page-fault profile attributes at 98.45 per cent before a
+line of code was changed. Reserving each table as an anonymous `MAP_NORESERVE` mapping, making zero
+the empty sentinel and resetting by the rows rather than the capacity takes peak resident set down by
+a factor of 3.1 to 29.6 at the default row bound, and the derivation loop is 1.6 to 1.8 per cent
+*cheaper* in instructions rather than merely unmoved. The caller's row bound has stopped being a
+memory decision: `cycle` at N = 4,096 was 47 times its sized-bound footprint and is now 1.7 times it.
+
+The sharpest number is the Soufflé one. On the cohort C1192 measured at **3.244 times compiled
+Soufflé at the default row bound**, this evaluator is now **0.852** — better than the 0.984 C1192
+could only reach by hand-sizing the bound — with peak resident set from 527 MB to 18 MB and
+preparation from 123.2 ms to 14.8 ms. At the two smaller sizes the default-bound and sized-bound
+columns are identical phase for phase. At N = 65,536 they are not, and the residual is locality
+rather than memory: a hash table sized from an over-declared bound still costs misses even when its
+pages cost nothing. That is the one part of C1192's remaining gap 4 this does not close.
+
+Two things nearly went wrong and both are worth carrying. The first three deliverables together made
+dense closure **9 per cent slower in cycles while executing fewer instructions**, and neither the
+cache set nor the TLB set showed it, because the cause was 4 KiB aliasing between page-aligned
+mappings — the allocator's chunk headers had been scattering those offsets by accident for years. A
+rotating cache-line stagger fixes it at exactly zero instruction cost. The second is a testing
+failure: deleting the index reset passed every integration test and then hung for nine minutes,
+because a reset that clears too little produces non-termination rather than a wrong answer, and
+because a closure program never walks the chain index at all. The gate that catches it asserts the
+tables directly and had to be written after the fact.
+
+Two constants in this report are measured rather than reasoned, and one of them started out
+reasoned and wrong. `RESET_FILL_BYTES_PER_ROW` was set at 32 with a code comment claiming no cohort
+was near the boundary; five structures sit within a factor of two of it, and measuring 64 against 32
+took 9.7 per cent off one cohort's instructions for no memory at all. `MADV_HUGEPAGE`, which the card
+asked for, costs 60 to 77 per cent more resident memory and is shipped off.
+
+What the task leaves is a clean successor and a large one: **the checkers now cost more memory than
+the evaluator by a factor of up to eight**, and `datalog_store.rs` has the same `calloc` defect and
+already uses the same zero sentinel. The only thing in the way is that
+`implementation_identity()` hashes the checker sources, so the fix moves a digest certificates bind
+to — a decision rather than a measurement.
