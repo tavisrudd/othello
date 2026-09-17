@@ -66,7 +66,12 @@ was cleaned. Logged to the discovery track, because nothing about this task was 
 
 ## Commits
 
-To be filled in as each lands.
+| Repository | Commit | What |
+| --- | --- | --- |
+| `othello` | `e9650e0` | this report's skeleton and the Fermi predictions, written before any code |
+| `othello` | `71b55e5` | the controls retained, and the shared-target stale-artifact finding |
+| `ergodis` | `d677a8b` | bodies of up to four atoms in the demand evaluator, and both checkers |
+| `ergodis` | `089c6d9` | the three corpus cases the mutation pass showed the suite was missing |
 
 ## Fermi predictions, written before any code
 
@@ -205,7 +210,135 @@ the deviation with the instantiation count that made it.
 
 ## Design, and the shapes not built
 
-To be written as the design lands.
+### What a body of `k` atoms compiles to
+
+```text
+rule           h :- a_1, a_2, …, a_k
+steps          one per body position p: the delta atom is a_p
+links          the other k - 1 atoms, in the plan's chosen join order
+what a link may join
+               body position < p   the rows derived before this round's delta
+               body position > p   every row the link's index holds
+```
+
+A combination of premises with at least one delta member appears in exactly the
+step whose `p` is its **first** delta position, so the `k` steps cover each
+combination once and only once. That argument is the whole of the semi-naive
+correctness for an n-ary body and it is the generalization of the two-atom
+`Δa ⋈ (full_b ∪ Δb)` / `full_a ⋈ Δb` pair, which is its `k = 2` case.
+
+Three properties make this a join-plan change rather than a semantic one.
+
+**The link order is a join order and nothing else.** Which rows a link may join
+is decided by its atom's **body position** relative to the delta atom's, which
+the link record carries; the order the links are visited in is chosen
+separately, greedily, by how many key columns are already bound. So permuting a
+rule's body changes the plan and not the closure — which is asserted directly,
+and is also what a deliberate mutation of the ordering function demonstrates
+(see **Exactness**).
+
+**One derivation still names one rule and one premise per body atom, in body
+order.** The premise block of a derivation is
+`derivation::premise_stride(body) = max(2, body)` references wide, so a
+certificate of a one- or two-atom rule is byte for byte what it was — a one-atom
+rule has always written a zero into its unused second slot — and a longer body
+simply occupies more slots. The premise list is therefore variable-stride and is
+read by walking the rules rather than by indexing, which is the one change to
+the certificate format and is a widening rather than a break.
+
+**The two-atom kernel reads the fields it always read.** A step with one link
+keeps that link inline in the `Step` record, in the `other_ops`, `other`,
+`index`, `mode` and `kind` fields it has always had, and the fully monomorphized
+`run::<KIND, BITMAP>` kernel is unchanged. A step with two or three links leaves
+those fields `NONE` and reads its links from a pool. The cost is 32 bytes per
+n-ary step of unused inline ops, in storage the record had as padding anyway;
+the benefit is that no existing cohort changes kernel.
+
+### The records
+
+| Record | Stride | Alignment | What changed |
+| --- | ---: | ---: | --- |
+| `Step` | 128 | 4 | **unchanged**; `swapped` became `position` (the delta atom's body position, which is also its premise slot) and the freed padding took `links` and `link_count` |
+| `Link` | 64 | 64 | new: one non-delta atom's ops, relation, index, addressing kind, arity, body position and whether it is before the delta |
+| `Op` | 8 | 4 | unchanged |
+
+`Link` is a cache-line record because a step reads its whole plan in
+`link_count` line fetches once at entry and then reads compact indices only. It
+is 64 bytes for 44 bytes of payload because `Op` is eight; shrinking `Op` to
+four — a domain value fits `u16` and a variable index `u8` — would make `Link` a
+32-byte record and `Step` **one cache line**, and is a hot-record change with its
+own A/B that this task does not take. It is a queue candidate below.
+
+The witness columns changed shape. `left_of` and `right_of`, one `u32` column
+each, become one interleaved `premises` column whose stride is the head
+relation's own `premise_width`: the longest body of any rule heading it. A
+relation derived by rules of at most two atoms therefore reserves the two words
+it always reserved, `Demand::workspace_bytes()` is unchanged to the byte for
+every such plan, and a witness write touches one cache line instead of one per
+premise.
+
+### The join the links run, and the join that was not built
+
+What landed is a **left-deep nested index join** over the links: each link
+computes its key from the constants and the variables bound before it, probes
+the C1192 index on exactly those columns, and walks the bucket, descending on an
+explicit presized frame stack of at most `MAX_BODY - 1` levels. No intermediate
+relation is declared and nothing is materialized between levels.
+
+**Free Join was not built, and the reason is the index, not the idea.** Free
+Join's leapfrog step pays when several atoms constrain the same *unbound*
+variable and the intersection of their buckets is far smaller than any one
+bucket. The shipped index answers "the rows whose masked columns equal this
+key": a counting-sorted CSR or a chained hash over the packed key of a column
+mask. Leapfrog needs, per attribute order, a trie whose level `i` is sorted on
+attribute `i` and supports `seek` — a second indexing structure with its own
+build, its own reset at every round boundary for a relation that grows, its own
+crossover policy and its own memory. C1192's own measurement says a dynamic
+index's **reset traffic** is what decides its representation, so a per-round trie
+build is exactly the cost that structure was chosen to avoid. Against that, on
+every cohort this lane can reach the binding order leaves at most one atom with
+an unbound key column and the atoms after it are bucket walks on a distinct
+variable or fully bound membership probes, so there is nothing to intersect.
+
+Two things that follow, and are recorded rather than assumed. The plan the
+greedy order produces on a chain is already tight: a three-atom chain over one
+binary relation needs **two** indexes, not the `k(k - 1) = 6` the shape allows,
+because every link is keyed on one column or the other. And a body one of whose
+atoms shares no variable with any other does need a mask-of-nothing index, which
+is a single bucket holding the whole relation — a full scan, correct and slow —
+and the plan reports it rather than refusing.
+
+### Shapes considered and not built
+
+1. **Free Join / leapfrog triejoin**, as above: priced by its trie build, with
+   no cohort in this lane where it can pay. The measurement that would overturn
+   this is a cyclic body whose binding order cannot fully bind any atom after the
+   first; no such cohort exists here today and that is named as the gap.
+2. **Monomorphizing the kernel on each level's addressing kind.** Four kinds at
+   up to three levels is `4^3 = 64` instantiations, doubled by the head's
+   membership kind: 128 copies of the kernel. Rejected. Each link's kind is
+   threaded as a plain field resolved once at preparation, which is the escape
+   the playbook itself names for when a const generic cannot reach the site. The
+   kernel *is* monomorphized on the two run constants a const generic can reach:
+   the body length (three or four) and the head's membership kind, four
+   instantiations. **Recorded deviation**, with its per-row cost measured below.
+3. **Keeping `left_of` and `right_of` and adding two more columns.** Rejected:
+   it raises `workspace_bytes()` for every program including two-atom ones, so
+   the reservation of a plan that has not changed would change.
+4. **A fixed premise stride of `MAX_BODY` in the certificate.** Rejected: it
+   changes every existing certificate's bytes to buy a constant stride the
+   checker does not need, since the checker holds the rule and therefore the
+   body length.
+5. **Raising the grounded path's bound to match.** Not possible and not wanted: a
+   `ProductRule` is a binary product in the carrier — one output, one left input,
+   one right input — so a three-atom body has no grounded form. `ground` refuses
+   what `datalog::admit` admits, over one wire format and one source identity,
+   and that boundary is a test.
+6. **A join order computed in the core from measured statistics.** Out of scope
+   by the card. The greedy here is the same variable-sharing heuristic the Rel
+   lowering's `order_positives` applies, computed over the atoms a step has left
+   to place; the lowering's order still decides the body order the core receives
+   and therefore breaks the core's ties.
 
 ## Method
 
@@ -221,7 +354,76 @@ To be written.
 
 ## Exactness
 
-To be written.
+### The core gates
+
+| Gate | Outcome |
+| --- | --- |
+| `cargo test --all-features` at `ergodis` `089c6d9` | exit 0, **82 `test result: ok` blocks, zero `FAILED`** — the 81 C1200 recorded plus the new `demand_nary` binary |
+| `cargo clippy --all-targets --all-features -- -D warnings` | exit 0, no diagnostics |
+| `cargo fmt --all -- --check` | exit 0 |
+| `SHA256SUMS` | regenerated by `python3 python/generate_evidence.py --write` in the same commit as every source change; `tests/evidence_manifest.rs` passes and the public lint is clean |
+| `cargo test -p ergodis-rules --test allocation` | 5 tests green, including the new `repeated_n_ary_evaluation_has_no_allocation`: a hundred entries into the n-ary loop under every addressing policy, **zero allocations and zero reservations** |
+| The naive oracle, on eight n-ary programs under five policies | every relation's tuple set equal, with both checkers accepting and both replays holding the same tuple sets rather than the same counts |
+| The hand-binarized twin of each of the eight | equal on every relation the source names, and the twin derives strictly more tuples |
+| Repeated evaluation into one workspace | same work counts, same rows and the **same certificate** on four consecutive evaluations, under every policy |
+
+The oracle is the load-bearing part and it is worth saying what it is. It
+enumerates every assignment of a rule's variables over the finite domain and
+tests each body atom for membership, iterating whole passes until one adds
+nothing. It has no index, no delta, no join order, no addressing policy and no
+body-length bound, and it reads the wire `Program` rather than the admitted
+form. So an agreement is evidence about the evaluator and not about one
+implementation compared with itself — and in particular it is evidence about the
+semi-naive decomposition, which is the part of an n-ary body that can silently
+derive *too little* and which no self-comparison can see.
+
+### The deliberate mutations, and what each one cost
+
+Every mutation ran against a `git archive HEAD` throwaway copy under
+`~/.cache/ergodis/c1193/mutate/` with its own target directory, never against
+the repository. Each was applied with the Edit tool and reverted by restoring
+the file from `git show HEAD:<path>`.
+
+| # | The mutation | Tests failing, of ten | What caught it |
+| --- | --- | ---: | --- |
+| A | `Link::old` set for **every** link, so an atom after the delta may see only the older rows | 6 | the independent derivation checker: `Incomplete(0)` — the closed-world pass finds a body match whose head was never derived |
+| B | the witness slot written by **link order** instead of body position | 3 | the derivation checker: `Unification(0)` — the premise tuple does not unify with the atom it is named against |
+| C | the sparse bucket's key comparison removed from `bind_link` | 1 | only `a_colliding_bucket_is_verified_inside_an_n_ary_join`, the constructed single-slot case |
+| D | the link **order** made body order, ignoring what is bound | 1 | only the plan-shape assertion; **every closure test passes** |
+| E | the checker's premise walk truncated to two atoms | 4 | `every_premise_slot_of_an_n_ary_derivation_is_load_bearing`: "premise slot 2 is not load bearing" |
+| F | the checker's closed-world pass skips a body longer than two atoms | 1 | the truncated-certificate assertion: "a certificate missing its last derivation was accepted" |
+
+**Three of these changed what the suite is, and that is the useful part.**
+
+Mutation C passed the whole suite on the first attempt, which is C1192's lesson
+arriving again: the multiply-shift hash is close to injective on the key ranges
+every natural cohort uses, so no sparse bucket ever holds two keys and the
+comparison the sparse kind needs is never exercised. The repair is the same one
+C1192 found — construct the collision rather than hope for it — and here that is
+a plan whose row bound is one, so every derived relation holds at most one row
+and every hash table has exactly one slot. The new case covers both a constant
+key column and one bound by an earlier atom, inside a three-atom body, and
+deleting the comparison now fails it.
+
+Mutation B failed only one test on the first attempt, and the reason is a fact
+about the corpus worth recording: on a chain the greedy join order **agrees with
+body order at every delta position**, because the candidates tie on bound key
+columns and on free variables and the tiebreak is body order. So a witness
+written by link order is indistinguishable from one written by body position on
+every case the corpus had. The repair is a body whose written order is not the
+order the plan joins it in, and with it three tests catch the mutation.
+
+Mutation F had nothing to fail against at all: every certificate the corpus
+produces is complete, so a closed-world pass that silently skips n-ary rules
+accepts all of them. The repair is an assertion that a certificate **missing its
+last derivation** is rejected, which only the closed-world pass can do.
+
+**Mutation D is a negative control and it is the one to read carefully.** Making
+the link order ignore what is bound changes the plan visibly — the three-atom
+chain goes from two indexes to four, one of them a mask-of-nothing full scan —
+and **every closure, certificate and checker assertion still passes**. That is
+direct evidence for the design claim that the link order is a join order and the
+body position is the semantics, rather than an argument that it is.
 
 ## Disposition
 
