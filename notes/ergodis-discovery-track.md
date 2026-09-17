@@ -255,3 +255,29 @@ admission for the linear sweep every lowering pays before its first declaration.
 **Evidence level**: scaling runs on three cohorts against the retained `41553c9` binary, two-point
 differenced and pinned, plus the failing span and the source of `build::declare` and
 `build::declare_modules`. No C-ID allocated.
+
+## 2026-09-17 — the derivation loop recompiles under semantically irrelevant source changes (C1200)
+
+**Provenance**: C1200 repair pass, `notes/2026-09-17-c1200-c1198-repair-pass.md`, opcode
+histograms of `Demand::evaluate_into` across `closure_ballpark-356fce6`, `c1198-stagger-probe`,
+`c1198-nostagger-probe`, `closure_ballpark-6078142` and `closure_ballpark-aa04358` under
+`~/.cache/ergodis/c1200/`. **Was I looking for this?**: no — the task was isolating the stagger's
+credit for the 9 per cent dense-closure cycle regression; the lever it exposes is not the repair.
+
+**Observation.** Three source changes that do not touch the derivation loop have each recompiled
+it: C1170's untimed bench-driver dump path (scanner +1.7 per cent of instructions), the C1198
+stagger commit in `pages.rs` (7,741 → 7,701 instructions, 0.9917 in instructions, 0.913 in cycles
+on dense closure), and C1200's one `u32` field on `DemandWorkspace` (7,701 → 7,788, 1.0067–1.0085
+in instructions). The two stagger-commit bodies differ by 40 instructions with no new opcode, 27 of
+them `mov`, which is the signature of register allocation over a `lto = "thin"`,
+`codegen-units = 1` workspace rather than a different algorithm.
+
+**Why it may matter**: the lane spends tasks on kernel changes worth one to six per cent while an
+unexamined build configuration moves the same kernel by comparable amounts in either direction. A
+deliberate sweep — profile-guided optimization on the retained cohorts, `codegen-units`, inline
+thresholds, an LLVM inliner-argument sweep — each measured against a retained control on the six
+direct-path cohorts, would turn a confound that has now hit three reports into a measured lever,
+and could recover the 9 per cent by design rather than by accident.
+**Evidence level**: opcode histograms and `ab.py` receipts (`analysis/datalog-comparison/ab-2026-09-17-c1200-*.json`)
+in the private workspace; the mechanism (a removed spill on a dependency chain) is a lead, not a
+measurement — a kernel-scoped `perf annotate` of both stagger arms is the gap. No C-ID allocated.

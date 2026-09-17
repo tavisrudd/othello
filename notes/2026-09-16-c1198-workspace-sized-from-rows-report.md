@@ -2,10 +2,14 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-16 (closed 2026-09-17)
-**Status**: DONE AND GATED. Built, gated and measured, with every measurement the card asked for
-taken, and with an `ej` and `tt` closeout pass whose findings are applied. Written incrementally
-from before the first line of code, so a crash would have left a partial record rather than none.
-**Not yet independently audited**; the card asks for a read-only audit and that is a separate task.
+**Status**: DONE, GATED, AUDITED AND REPAIRED. Built, gated and measured, with every measurement the
+card asked for taken, and with an `ej` and `tt` closeout pass whose findings are applied. Written
+incrementally from before the first line of code, so a crash would have left a partial record rather
+than none. Independently audited by C1199 (`2026-09-17-c1199-c1198-audit.md`), which reproduced every
+recorded value and found one code defect and one wrong result; both are repaired by C1200
+(`2026-09-17-c1200-c1198-repair-pass.md`), whose thirteen record and code repairs are applied here.
+**The one claim this report got wrong is the cache-line stagger's mechanism**, and the corrected
+account is in recorded deviation 1 and mystery ledger item 2.
 
 ## Status
 
@@ -18,6 +22,10 @@ path did not move. Against compiled Soufflé 2.5 on `closure` at the `blocks` de
 the whole-process ratio at the harness's **default** row bound goes from C1192's **3.244 to 0.852** —
 better than the 0.984 C1192 reached only by hand-sizing the bound — with peak resident set from
 527 MB to 18 MB and preparation from 123.2 ms to 14.8 ms.
+
+The instruction figure is the arm this task shipped, `ed99963`. C1200's repair for the domain defect
+gives back 0.67 to 0.85 per cent of it, so against C1192's control the core the tree now carries
+stands at 0.991 to 0.996 on those six cohorts; the memory result is untouched.
 
 **The card's stated mechanism was wrong and the probes said so before any code.** The eager commit
 was not the explicit `fill(NONE)`; it was `calloc` memsetting a workspace nobody had written to,
@@ -39,8 +47,8 @@ deliberate mutations both fail, by name, in milliseconds.
 | --- | --- |
 | the direct path, shipped arm, six cohorts | `analysis/datalog-comparison/ab-2026-09-17-c1198-direct-final.json` |
 | the memory cohorts, shipped arm, six cohorts | `analysis/datalog-comparison/ab-2026-09-17-c1198-memory-final.json` |
-| the same two, on the arm one commit earlier | `analysis/datalog-comparison/ab-2026-09-16-c1198-{direct,memory}-shipped.json` |
-| the supplementary cache run, shipped arm | `analysis/datalog-comparison/ab-2026-09-16-c1198-cache-shipped.json` |
+| the same two, on `6078142`, two core commits and three private commits earlier | `analysis/datalog-comparison/ab-2026-09-16-c1198-{direct,memory}-shipped.json` |
+| the supplementary cache run, on `6078142` | `analysis/datalog-comparison/ab-2026-09-16-c1198-cache-shipped.json` |
 | the arm before the stagger, and the cache and TLB runs that diagnosed it | `analysis/datalog-comparison/ab-2026-09-16-c1198-prestagger-{direct,direct-b7921a0,memory,cache,tlb}.json` |
 | the frontend and the stratified backend, five runs | `analysis/rel-frontend/performance-v9-c1198-{,datalog-,stratified-,columns-,aggregate-}6078142.json` |
 | Soufflé 2.5, three sizes, default row bound | `analysis/datalog-comparison/results-2026-09-16-c1198-blocks.json` |
@@ -48,6 +56,8 @@ deliberate mutations both fail, by name, in milliseconds.
 | the native/WebAssembly parity manifest, replayed unchanged | `analysis/rel-frontend/portability-v1.json` |
 | the stagger and reset-constant probes | `~/.cache/ergodis/c1198/ab-{stagger-probe,reset-constant}.json` |
 | the page-fault and kernel-scoped profiles, both arms | `~/.cache/ergodis/perf-c1198/` |
+| **the stagger commit isolated, and the store-to-load-forward counters** (C1200) | `analysis/datalog-comparison/ab-2026-09-17-c1200-{stagger-isolated,stlf-stagger,stlf-nostagger}.json` |
+| the locality run at N = 65,536 under the two row bounds (C1199) | `~/.cache/ergodis/c1199-audit/ab-locality.json` |
 
 Every `ab.py` receipt has a `.jsonl` sidecar of its raw samples beside it, and `--resummarize`
 rebuilds it without measuring. The reach, boundary and cold-start tables were taken by single
@@ -99,8 +109,9 @@ Both were therefore retained and the same A/B run against each. **They agree to 
 on every cohort's instruction ratio**, so the usage-string commit moved nothing here and the card's
 named control is sound; the table below reports the `b7921a0` figures, which are the card's.
 
-**Two candidate arms carry the figures, and the sections below name which.** The derivation-loop,
-memory-cohort and cache A/Bs are on the shipped arm `ed99963`. The frontend and backend run, the
+**Two candidate arms carry the figures, and the sections below name which.** The derivation-loop and
+memory-cohort A/Bs are on the shipped arm `ed99963`; the supplementary cache A/B and the stagger
+probe are on `6078142`, which is what their receipts record. The frontend and backend run, the
 Soufflé comparison, the reach, boundary and cold-start tables and both `perf` profiles are on
 `6078142`, retained before `ca64c34` (the reset assertion, test-only) and `2be1e68` (the fill boundary
 from 32 to 64). The boundary change moves nothing on any cohort except the four it binds on, where it
@@ -111,6 +122,25 @@ arm in instructions and the other figures transfer unchanged.
 **No foreign uncommitted file was present in either repository at any point.** `git status` was clean
 in `ergodis`, `ergodis-private` and `othello` before the first source change, at each retain, and at
 task close.
+
+**One arm was added after the fact, by C1200, and it is the one that isolates the stagger.**
+`~/.cache/ergodis/bin/c1198-stagger-probe`, measured sha256
+`b4bf4c4514a5f0a93032bd89c21b85b9ee52a927c4bac30f6d7cca479f609a09`, is private `356fce6` with the
+core at `271d648` — that is, the arm before the stagger with the stagger commit applied and nothing
+else, which is the comparison this report needed and did not build. It was built from two detached
+worktrees under `~/.cache/ergodis/worktrees/c1200-stagger/` and carries no manifest row, as the two
+probes below do not. C1200 also checked that the worktree build path does not move the compiled
+kernel: the same worktree pair at core `93e12cf` rebuilds `closure_ballpark-356fce6`'s
+`Demand::evaluate_into` with an identical opcode histogram at 7,741 instructions.
+
+**Two core commits were added after this task closed**, by the C1200 repair pass: core `e7116ba`
+(the workspace records its program's domain, and the two missing gates) with private `aa04358`
+re-pinning it, retained as `closure_ballpark-aa04358`, measured sha256
+`a29f36177039ddc372de9b49fad5de2994063167ef9c4306e05a428ac55bfbcf`. That repair is not free: it
+recompiles the kernel from 7,701 to 7,788 instructions and costs 0.67 to 0.85 per cent of the
+derivation loop's instructions on the six direct-path cohorts
+(`analysis/datalog-comparison/ab-2026-09-17-c1200-direct-repairs.json`). **The control for the next
+A/B in this lane is therefore `closure_ballpark-aa04358` and not `closure_ballpark-ed99963`.**
 
 ## Commits
 
@@ -131,6 +161,9 @@ task close.
 | `ergodis-private` | `ed99963` | re-pin the core at the measured reset boundary |
 | `ergodis-private` | `1f2fe44` | the receipts at the measured reset boundary |
 | `othello` | `9dd61b7` onward | this report, written incrementally from before the first line of code and committed at every milestone |
+| `ergodis` | `e7116ba` | **C1200**: the domain is part of the workspace shape, and the two gates the C1199 audit found missing |
+| `ergodis-private` | `aa04358` | **C1200**: re-pin the core at the repairs |
+| `ergodis-private` | `193ebd1` | **C1200**: the stagger commit isolated, and the repairs A/B against the shipped arm |
 
 ## Fermi predictions, written before any code
 
@@ -257,9 +290,11 @@ forced by the first.
 3. **The reset between evaluations walks the rows the previous one wrote**, not the capacity, unless
    the table is small enough that one linear pass over it cannot commit more memory per row than the
    row store already does.
-4. **Each reservation's contents start at a rotating cache-line offset.** This was not in the plan;
-   it is a repair for a 9 per cent cycle regression the first three created, and the mechanism is in
-   the mystery ledger.
+4. **Each reservation's contents start at a rotating cache-line offset.** This was not in the plan.
+   The commit that introduced it does repair a 9 per cent cycle regression the first three created —
+   `ergodis` `271d648` is worth 0.913 of the cycles of `closure` dense at N = 256 and N = 512 — but
+   the offset it computes is not what does the repairing, and the mechanism this report first gave
+   is not established. Mystery ledger item 2 carries the corrected account.
 
 Beside them, the counting sort that builds a direct CSR index now uses the offsets array as its own
 cursor rather than a second array of the same size, which was 64 MiB of preparation memory on a key
@@ -286,7 +321,18 @@ reset            fill(NONE) over the capacity        the slots the rows used
 derivation loop's code is unchanged by it. `T` is constrained by a private `unsafe trait ZeroValid`,
 implemented for `u32` and `u64`, whose contract is that the all-zero bit pattern is a valid value —
 which is what makes a fresh mapping a valid slice. There is one `SAFETY` note per unsafe operation,
-a `Drop` that unmaps, and no interior pointer handed out. WebAssembly and any non-Unix target build
+a `Drop` that unmaps, and no interior pointer handed out.
+
+**One of those notes claimed more than the code provides, and it now says what it means.**
+`Pages::zeroed`'s comment asserted that `reserve` returns storage "aligned to at least a cache
+line". The Unix backing does — `mmap` returns page-aligned memory — but the portable backing is
+handed `align_of::<T>()` and returns exactly that. There is no bug either way, because the stagger
+is a multiple of sixty-four and sixty-four is a multiple of both element alignments, so the offset
+pointer is aligned for `T` on both paths. The comment (`ergodis` `e7116ba`) now states what each
+backing provides and draws the conclusion from the premise that holds. The alternative repair,
+passing 64 to `reserve` on both paths, was rejected: it would change the portable backing's `Layout`
+— the shape this change is measured against, and the shape the reservation is released with — to
+buy an alignment nothing needs. WebAssembly and any non-Unix target build
 an `alloc_zeroed` backing instead, which is correct and simply does not have the lazy-commit
 property; `libc` is a `[target.'cfg(unix)'.dependencies]` entry, so those targets never see it, and
 it is already a dependency of the core's root crate and of `crates/repository-native`, so the tree
@@ -320,9 +366,18 @@ The rule reads the **rows the last evaluation wrote**, not the capacity, and tha
 at the default row bound the capacity is 2^24 whatever the program derives. A fresh workspace's row
 count is zero, so the first evaluation's reset touches nothing at all.
 
-Two details make the walk exact. It runs **before** any relation's row count is reset, because the
-rows it reads are the previous evaluation's. And clearing a whole bitmap word rather than one bit is
-exact, because every bit set in that word was set by a row the same walk visits.
+Three details make the walk exact. It runs **before** any relation's row count is reset, because the
+rows it reads are the previous evaluation's. Clearing a whole bitmap word rather than one bit is
+exact, because every bit set in that word was set by a row the same walk visits. And the walk is
+exact **given the same domain**, which is the premise it needs and the one this task originally left
+unenforced: the walk recomputes each row's key with the current plan's domain, so a workspace handed
+between two same-shape programs over different domains would be cleared at the wrong slots. The
+C1199 audit found that `shape()` compared the row bound, the counts and every capacity and not the
+domain, and measured the consequence on pristine shipped code — a chain closure over domain 4,096,
+a matching closure over 2,048, then the first again into one workspace, and the third evaluation
+does not terminate. `DemandWorkspace` now records the domain and **`shape()` enforces it**
+(`ergodis` `e7116ba`), so that case is an ordinary `Error::Source` refusal and the premise is
+checked rather than assumed.
 
 ### Shapes considered and not built
 
@@ -486,33 +541,62 @@ sequence, plus the zero sentinel's cheaper `test` against `cmp` in each chain wa
 
 **The two dense-closure rows are a 9 per cent cycle regression with instructions down 0.8 per cent,
 against cycle A/A nulls of 1.0019 and 0.9999 that make them readable.** That is what sent the task
-looking for a mechanism, and the mechanism — 4 KiB aliasing between page-aligned mappings — is in
-mystery ledger item 2 with the counters that ruled out the alternatives.
+looking for a mechanism. The candidate it settled on — 4 KiB aliasing between page-aligned
+mappings — is the one part of this report that did not survive its audit; mystery ledger item 2
+carries the counters that ruled out the alternatives, the measurement that rules this one out too,
+and what is left open.
 
-**The stagger's effect is isolated, and it is entirely in cycles.** A probe binary built from the
-shipped tree with the stagger multiplied out (`~/.cache/ergodis/bin/c1198-nostagger-probe`, measured
-sha256 `551ae2e657adfe7d551e6a654c723f0c3016a9c0c921bf5487be5e3dc787a9d9`, a scratch build from a
-tree dirty in exactly that one line, cited by nothing but this paragraph) against the shipped arm,
-five interleaved rounds, CPU 5, receipt `~/.cache/ergodis/c1198/ab-stagger-probe.json`:
+**The isolation this section first reported was the wrong comparison, and the corrected one is
+below.** The first attempt compared a probe built from the `6078142` tree with the stagger
+multiplied out (`~/.cache/ergodis/bin/c1198-nostagger-probe`, measured sha256
+`551ae2e657adfe7d551e6a654c723f0c3016a9c0c921bf5487be5e3dc787a9d9`, a scratch build from a tree
+dirty in exactly that one line) against **`6078142`**, not against the arm before the stagger. Both
+of those binaries are already past the regression, so the comparison could not see it; and its own
+intervals say as much. Receipt `~/.cache/ergodis/c1198/ab-stagger-probe.json`, five interleaved
+rounds, CPU 5, 120 measurements, load 3.98 to 4.30:
 
-| Cohort | instruction ratio | A/A null | cycle ratio | cycle null |
+| Cohort | instruction ratio | A/A null | cycle ratio [lo, hi] | cycle null |
 | --- | ---: | ---: | ---: | ---: |
-| `closure` dense 256 | **1.00000** [0.99999, 1.00000] | 1.0000023 | **0.6972** | 0.9915 |
-| `closure` dense 512 | **1.00000** [1.00000, 1.00000] | 1.0000003 | 0.9228 | 0.8456 |
-| `samegen` dense 512 | **1.00000** [1.00000, 1.00000] | 0.9999994 | 1.0052 | 0.9737 |
-| `closure` blocks 4,096 | **1.00000** [0.99996, 1.00003] | 0.9999939 | 0.9986 | 0.9924 |
+| `closure` dense 256 | **1.00000** [0.99999, 1.00000] | 1.0000023 | 0.6972 **[0.2678, 1.8153]** | 0.9915 |
+| `closure` dense 512 | **1.00000** [1.00000, 1.00000] | 1.0000003 | 0.9228 [0.6937, 1.2275] | 0.8456 |
+| `samegen` dense 512 | **1.00000** [1.00000, 1.00000] | 0.9999994 | 1.0052 [0.9884, 1.0223] | 0.9737 |
+| `closure` blocks 4,096 | **1.00000** [0.99996, 1.00003] | 0.9999939 | 0.9986 [0.9712, 1.0268] | 0.9924 |
 
-**The stagger changes the derivation loop's instruction count by nothing at all, to five decimal
-places on four cohorts**, which is what a change that runs once per reservation at construction
-should do, and it takes **30 per cent off the cycles of `closure` dense at N = 256** with a cycle null
-of 0.9915. The dense-512 row's cycle null is 0.8456 and is not read.
+**The instruction column is sound and the cycle column settles nothing.** The rotating offset
+changes the derivation loop's instruction count by nothing at all, to five decimal places on four
+cohorts, which is what a change that runs once per reservation at construction should do. The 0.6972
+on `closure` dense at N = 256 was quoted in an earlier revision of this report as "30 per cent off
+the cycles"; **its own 95 per cent interval is [0.2678, 1.8153], which contains unity**, and the
+companion dense-512 row's cycle A/A null of 0.8456 makes that row unreadable by this report's own
+rule. Neither dense cohort supplies readable cycle evidence here. The C1199 audit reran the same
+pair on a quiet box and measured the rotating offset's effect at **0.996 [0.978, 1.014]** on dense
+256 and **0.996 [0.984, 1.008]** on dense 512, both intervals containing unity.
 
-**What the stagger does not explain is the other 0.8 per cent of instructions**, and what did is the
-harness. The two candidate arms differ by the stagger *and* by
-`closure_ballpark`'s new `--cold` mode, which is untimed and never runs in an A/B; the instruction
-ratio moved from 0.990 to 0.983 between them, and the probe above shows the stagger contributed none
-of it. That is the playbook's own C1170 lesson reproducing exactly — a driver-only edit moves an
-untouched kernel through ThinLTO's module summary — this time with a control that separates the two.
+**The comparison that does isolate the stagger is C1200's, and it changes the conclusion.**
+`c1198-stagger-probe` is private `356fce6` with core `271d648` — the pre-stagger arm with the
+stagger commit applied and nothing else — measured against `closure_ballpark-356fce6`, five
+interleaved rounds, CPU 5, 60 measurements at 100.00 per cent enabled, load 1.27 to 1.44. Receipt
+`analysis/datalog-comparison/ab-2026-09-17-c1200-stagger-isolated.json`.
+
+| Cohort | instruction ratio [lo, hi] | A/A null | cycle ratio [lo, hi] | cycle A/A null |
+| --- | ---: | ---: | ---: | ---: |
+| `closure` dense 256 | **0.99167** [0.99167, 0.99168] | 1.0000013 | **0.91303** [0.88841, 0.93832] | 1.00097 |
+| `closure` dense 512 | **0.99160** [0.99160, 0.99160] | 1.0000008 | **0.91306** [0.90502, 0.92116] | 1.00142 |
+
+**The stagger commit removes the regression** — 8.7 per cent of the cycles of both dense-closure
+cohorts, against cycle A/A nulls inside 0.15 per cent of unity, so both rows are readable — **and
+the rotating offset is not what removes it.** `c1198-nostagger-probe`, whose offset is multiplied
+out to zero, measured against the same `356fce6` control gives the same answer: cycles 0.90617
+[0.87774, 0.93551] and 0.90422 [0.89360, 0.91496] with nulls of 0.9988 and 0.9986, and instructions
+0.99167 and 0.99160 to five decimal places. What the two probes share is the compiled body, not the
+offset; the mechanism is in mystery ledger item 2.
+
+**And the other 0.8 per cent of instructions is the stagger commit's too, not the harness's.** The
+two candidate arms differ by the stagger commit *and* by `closure_ballpark`'s `--cold` mode, and an
+earlier revision of this report attributed the move from 0.990 to 0.983 to the untimed driver mode
+through ThinLTO. The arithmetic says otherwise: 0.98335 / 0.99161 is **0.99167**, which is exactly
+what the stagger commit measures against `356fce6` on a probe that contains no driver edit at all.
+The `--cold` mode contributes 1.00000. Mystery ledger item 3 carries the corrected attribution.
 
 ### The cohorts the reservation was costing, at the default row bound
 
@@ -522,12 +606,12 @@ interleaved rounds, CPU 5, the six-event set at 100.00 per cent over 180 measure
 
 | Cohort | derived | instruction ratio | A/A null | cycle ratio | cycle null | peak RSS, control / candidate KiB | factor |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `closure` blocks 4,096 | 65,536 | 0.98501 | 1.0000160 | **0.9885** | 1.0113 | 539,388 / **18,356** | **×29.4** |
-| `closure` blocks 16,384 | 262,144 | 0.99970 | 0.9999970 | 0.7186 | 0.8606 | 599,896 / **83,892** | **×7.2** |
-| `closure` blocks 65,536 | 1,048,576 | 1.01659 | 0.9999940 | 0.7622 | 0.9435 | 817,064 / **264,380** | **×3.1** |
-| `mutual` blocks 4,096 | 61,440 | 0.97546 | 1.0000730 | 0.8766 | 0.9182 | 539,400 / **82,896** | **×6.5** |
-| `mutual` blocks 8,192 | 122,880 | 1.06050 | 1.0000640 | **0.9902** | 1.0165 | 493,276 / **37,908** | **×13.0** |
-| `cycle` blocks 4,096 | 131,072 | 0.99055 | 1.0000060 | **0.8179** | 1.0213 | 1,131,304 / **38,260** | **×29.6** |
+| `closure` blocks 4,096 | 65,536 | 0.98501 | 1.0000162 | **0.9885** | 1.0113 | 539,388 / **18,356** | **×29.4** |
+| `closure` blocks 16,384 | 262,144 | 0.99970 | 0.9999975 | 0.7186 | 0.8606 | 599,896 / **83,892** | **×7.2** |
+| `closure` blocks 65,536 | 1,048,576 | 1.01659 | 0.9999938 | 0.7622 | 0.9435 | 817,064 / **264,380** | **×3.1** |
+| `mutual` blocks 4,096 | 61,440 | 0.97546 | 1.0000734 | 0.8766 | 0.9182 | 539,400 / **82,896** | **×6.5** |
+| `mutual` blocks 8,192 | 122,880 | 1.06050 | 1.0000642 | **0.9902** | 1.0165 | 493,276 / **37,908** | **×13.0** |
+| `cycle` blocks 4,096 | 131,072 | 0.99055 | 1.0000064 | **0.8179** | 1.0213 | 1,131,304 / **38,260** | **×29.6** |
 
 Output digests identical across arms on every cohort.
 
@@ -574,10 +658,10 @@ paragraph and superseded by the shipped arm).
 
 | Cohort | 64 over 32, instructions | A/A null | cycles | peak RSS at 32 / at 64, KiB |
 | --- | ---: | ---: | ---: | ---: |
-| `mutual` blocks 4,096 | **0.90318** | 1.0001340 | 0.9882 | 82,908 / 82,852 |
-| `closure` blocks 65,536 | **0.98569** | 1.0000020 | 0.9833 | 264,396 / 264,368 |
-| `mutual` blocks 8,192 | 0.99998 | 0.9999770 | 0.9216 | 37,920 / 37,888 |
-| `closure` blocks 16,384 | 1.00001 | 1.0000010 | 1.0016 | 83,908 / 83,880 |
+| `mutual` blocks 4,096 | **0.90318** | 1.0001341 | 0.9882 | 82,908 / 82,852 |
+| `closure` blocks 65,536 | **0.98569** | 1.0000024 | 0.9833 | 264,396 / 264,368 |
+| `mutual` blocks 8,192 | 0.99998 | 0.9999766 | 0.9216 | 37,920 / 37,888 |
+| `closure` blocks 16,384 | 1.00001 | 1.0000012 | 1.0016 | 83,908 / 83,880 |
 
 **Sixty-four is strictly better on the cohorts where it binds and costs nothing in memory**, so it is
 what ships. The two cohorts that cross the boundary take 0.903 and 0.986 of the instructions and
@@ -587,10 +671,11 @@ its rows has already had most of its pages committed by those rows**, so the fil
 are resident either way. The two structures four and sixteen times out walk under both values and do
 not move, which is the control this comparison needs.
 
-### Cache events on the cohorts the stagger repaired
+### Cache events on the cohorts the stagger commit repaired
 
-Supplementary run, the playbook's cache set with its own nulls: five interleaved rounds, CPU 5,
-`--evaluate-only`, 100.00 per cent enabled, load 3.17 to 3.39. Receipt
+Supplementary run on candidate `closure_ballpark-6078142` against control `closure_ballpark-b7921a0`,
+the playbook's cache set with its own nulls: five interleaved rounds, CPU 5, `--evaluate-only`,
+100.00 per cent enabled, load 3.17 to 3.39. Receipt
 `analysis/datalog-comparison/ab-2026-09-16-c1198-cache-shipped.json`.
 
 | Cohort | `L1-dcache-loads` | A/A null | `L1-dcache-load-misses` | A/A null |
@@ -603,8 +688,10 @@ Supplementary run, the playbook's cache set with its own nulls: five interleaved
 same way.** Loads are unity to within one per cent with nulls inside five parts per thousand, and
 misses are inside their own nulls on every row. `cache-references` and `cache-misses` carry nulls of
 0.53 to 3.27 on these cohorts and are not read at all. The value of this table is the negative it
-supplies for the mystery ledger: after the stagger, nothing about the loop's memory behaviour differs
-from the control, which is what a change that only moved where the tables sit should show.
+supplies for the mystery ledger: after the stagger commit, nothing about the loop's memory behaviour
+differs from the control. That was read at the time as confirmation that the change only moved where
+the tables sit; the measurements in mystery ledger item 2 say the change also moved what the loop is
+compiled to, and this table does not distinguish the two.
 
 ### Reach and resident set at the default row bound
 
@@ -810,8 +897,15 @@ N = 4,096, pinned to CPU 5. `perf.data` under `~/.cache/ergodis/perf-c1198/`.
 
 | Arm | Top symbols above one per cent |
 | --- | --- |
-| control `closure_ballpark-b7921a0` | `__memset_avx512_unaligned_erms` **98.45 %**, nothing else above 0.5 % |
-| candidate `closure_ballpark-6078142` | `Demand::index_rows` 53.16 %, `Demand::evaluate_into` 18.99 %, `Map::fold` 7.59 %, `hashbrown::RawTable::reserve_rehash` 5.06 %, `__memmove_avx512_unaligned_erms` 3.80 %, `_int_malloc` 2.53 %, `__memset_avx512_unaligned_erms` **1.27 %**, `main` 1.27 %, `push_decimal` 1.27 %, `datalog::admit` 1.27 % |
+| control `closure_ballpark-b7921a0`, from `cycle-faults.data` | `__memset_avx512_unaligned_erms` **98.45 %**, nothing else above 0.5 % |
+| candidate `closure_ballpark-356fce6`, from `cycle-faults-candidate.data` | `Demand::index_rows` 53.16 %, `Demand::evaluate_into` 18.99 %, `Map::fold` 7.59 %, `hashbrown::RawTable::reserve_rehash` 5.06 %, `__memmove_avx512_unaligned_erms` 3.80 %, `_int_malloc` 2.53 %, `__memset_avx512_unaligned_erms` **1.27 %**, `main` 1.27 %, `push_decimal` 1.27 %, `datalog::admit` 1.27 %, `ergodis_verify::rule_contract::parse_rules::atom` 1.27 %, `serde_json::ser::format_escaped_str` 1.27 % |
+
+The candidate row is `356fce6` and an earlier revision of this report labelled it `6078142`: the
+`perf` header of `~/.cache/ergodis/perf-c1198/cycle-faults-candidate.data` records the command as
+`closure_ballpark-356fce6`, which is the arm the percentages above are faithful to. The conclusion
+is unaffected, because `356fce6` already carries all three deliverables and the table is about where
+the faults come from. The last two symbols are the twelve-symbol listing completed: an earlier
+revision printed ten of the twelve above the one-per-cent cut.
 
 **The whole fault profile changed owner.** On the control, the process's 283,893 page faults are
 `calloc` zeroing a workspace nobody has written to yet. On the candidate its 15,733 faults belong to
@@ -852,20 +946,33 @@ writes rows.
 arm in exactly the constant that moved.** The core moved twice after `6078142` was retained.
 `ca64c34` adds the reset assertion and its test program and changes no other code; a release rebuild
 at that revision differs from the retained binary in 236,456 bytes of symbol layout while
-`Demand::evaluate_into` disassembles to the same 7,702 instructions, line for line. `2be1e68` sets
-`RESET_FILL_BYTES_PER_ROW` from 32 to 64, and the reset rule is inlined into `evaluate_into`: on
-the shipped arm `closure_ballpark-ed99963` the function is again 7,702 instructions and the
+`Demand::evaluate_into` disassembles to the same **7,701** instructions, line for line. `2be1e68`
+sets `RESET_FILL_BYTES_PER_ROW` from 32 to 64, and the reset rule is inlined into `evaluate_into`:
+on the shipped arm `closure_ballpark-ed99963` the function is again 7,701 instructions and the
 disassembly differs in **three instructions, each a `shl $0x5` that became `shl $0x6`** (the
-`32 × rows` product), with every other instruction identical. The direct-path, memory-cohort and
-cache A/Bs were taken on the shipped arm; the figures taken on `6078142` describe a kernel that
-differs from the shipped one only in that multiplier, whose effect is measured under **The reset's
-fill boundary, measured**.
+`32 × rows` product), with every other instruction identical. (7,701 by `objdump -d
+--no-show-raw-insn`; an earlier revision of this report said 7,702, a counting convention rather
+than a different body.) The direct-path and memory-cohort A/Bs were taken on the shipped arm and the
+cache A/B on `6078142`; the figures taken on `6078142` describe a kernel that differs from the
+shipped one only in that multiplier, whose effect is measured under **The reset's fill boundary,
+measured**.
+
+**The core has moved once more since, and that move does change the kernel.** `e7116ba` adds the
+domain to the workspace's shape, and `Demand::evaluate_into` recompiles from 7,701 instructions to
+**7,788** with the body rewritten, at a measured cost of 0.67 to 0.85 per cent of the derivation
+loop's instructions on the six direct-path cohorts. The comparison itself runs once per evaluation
+and cannot be that; the measured difference on `closure` sparse at N = 256 is 255,531 instructions
+per evaluation over 62,979 derived tuples, four per row. See the C1200 report and mystery ledger
+item 11.
 
 ## Exactness
 
 | Gate | Outcome |
 | --- | --- |
-| Core `cargo test --all-features` at `ca64c34`, and again at the shipped `2be1e68` (2026-09-17, review pass) | **81 test binaries, zero failures** both times, including the new `workspace_commit` suite, the two new in-module reset tests, and the `pages` reservation tests |
+| Core `cargo test --all-features` at `ca64c34`, at the shipped `2be1e68` (2026-09-17, review pass), and at C1200's `e7116ba` | **81 test binaries, zero failures** all three times, including the `workspace_commit` suite, the two in-module reset tests, and the `pages` reservation tests |
+| **The domain is part of the shape** (C1200, `e7116ba`) | `a_same_shape_program_over_a_different_domain_is_refused_rather_than_evaluated`: a plan over domain 2,048 is refused with `Error::Source` on a workspace reserved over 4,096, the two plans reserve identical workspace bytes, and the refusal leaves the first plan's own evaluation unchanged. With the comparison removed it fails by name in 0.38 s; before the repair the same sequence did not terminate, past a 60-second cap |
+| **The fill-versus-walk rule is bound by a test** (C1200, `e7116ba`) | `a_bucket_head_large_against_its_rows_is_never_returned_to_empty_by_a_fill`, on a cohort whose bucket head is 2^24 slots over 209 rows: the shipped rule commits **180,224 bytes** on the first evaluation and **zero** on the second, the inverted rule commits **71,409,664**, and the threshold is a quarter of the head. Inverting the rule passed every test in the crate before this |
+| **The stagger offset in `Drop` is bound by a test** (C1200, `e7116ba`) | `a_dropped_reservation_releases_the_whole_mapping_and_not_the_staggered_slice`: 200 reservations of 256 MiB move `VmSize` by **0 KiB** on the shipped `Drop` and by **55,980,192 KiB** when `Drop` releases `ptr` rather than `base`. That mutation passed every test in the crate before this, and it leaks because `munmap` on an address that is not page aligned fails with `EINVAL` |
 | Private `cargo test -p ergodis-private -p ergodis-tools` at `ed99963` | **42 test binaries, zero failures**, the same count C1192 recorded; this drives `rel_lowering`, `rel_frontend`, `rel_frontend_portability` and `rel_reference_eval` |
 | C1189 differential (`rel_reference_eval`) | passes with **zero disagreements** at its unchanged seeds |
 | Clippy, both repositories, `--all-targets --all-features -D warnings` | no diagnostics |
@@ -940,9 +1047,15 @@ larger term on every cohort measured.
    changed.
 2. **The counting sort's cursor** (`ergodis` `93e12cf`): `mutual` at the `blocks` density and
    N = 4,096 went from 144,616 KiB to 82,804.
-3. **The cache-line stagger** (`ergodis` `271d648`): zero instruction change, 30 per cent off the
-   cycles of `closure` dense at N = 256, and it is what makes the change a wall-time win rather than
-   a wall-time loss on the dense cohorts.
+3. **The cache-line stagger commit** (`ergodis` `271d648`): **0.913 of the cycles** of `closure`
+   dense at N = 256 and N = 512 against the arm before it, with cycle A/A nulls inside 0.15 per cent
+   of unity, and 0.99167 and 0.99160 of the instructions. It is what makes the change a wall-time
+   win rather than a wall-time loss on the dense cohorts. **What does the repairing is not the
+   rotating offset**: a probe whose offset is multiplied out to zero gives the same 0.906 and 0.904
+   against the same control. An earlier revision of this report credited the offset with "30 per
+   cent off the cycles", from a point estimate of 0.6972 whose own interval is [0.2678, 1.8153];
+   the offset's measured effect is 0.996 [0.978, 1.014] and 0.996 [0.984, 1.008], both containing
+   unity. Mystery ledger item 2.
 4. **The direct reset assertion** (`ergodis` `ca64c34`): no measured effect, and the derivation
    loop's disassembly is unchanged; it is the gate that makes the first change's correctness
    checkable in milliseconds instead of by a hang.
@@ -954,10 +1067,15 @@ moves evaluation inside the noise. `Pages::advise_huge` remains as a capability 
 ## Recorded deviations
 
 1. **The reservations are staggered by a cache line**, which the card did not ask for and which no
-   part of the design anticipated. It is a repair for a 9 per cent cycle regression the first three
-   deliverables created; the mechanism, the counters that ruled out the alternatives and the isolated
-   measurement are in mystery ledger item 2. Without it the change is a memory win and a wall-time
-   loss on the dense cohorts, so it is not optional.
+   part of the design anticipated. The commit is a repair for a 9 per cent cycle regression the
+   first three deliverables created, and without it the change is a memory win and a wall-time loss
+   on the dense cohorts, so it is not optional: `ergodis` `271d648` measures 0.913 of the cycles of
+   `closure` dense at N = 256 and at N = 512 against the arm before it, with readable nulls
+   (`analysis/datalog-comparison/ab-2026-09-17-c1200-stagger-isolated.json`). **The mechanism this
+   report first gave for it is wrong.** The rotating offset is not what repairs the regression — a
+   probe with the offset multiplied out to zero repairs it just as completely — so the 4 KiB
+   aliasing story is an explanation the measurement does not support. What the two probes share is
+   the compiled body. Mystery ledger item 2 carries the corrected account and the open part.
 2. **`MADV_HUGEPAGE` is implemented and not used.** The card asks for it on large tables. Measured
    with the hint on every reservation of two mebibytes or more, it costs 60 to 77 per cent more
    resident memory on the two cohorts this task exists for and moves evaluation inside the noise, so
@@ -984,10 +1102,14 @@ moves evaluation inside the noise. `Pages::advise_huge` remains as a capability 
    card's controls are sound and the report quotes them.
 7. **A third table is cleared by a linear fill and not by the rows**, which reads against the card's
    "never by capacity". The rule is `RESET_FILL_BYTES_PER_ROW`: a fill is admitted only where the
-   table costs at most thirty-two bytes per row the previous evaluation wrote, so it can never
-   commit materially more than the row store already has. The card's intent — that the reset must
-   not be sized from the caller's bound — holds exactly, because the rule reads the rows and not the
-   capacity.
+   table costs at most **sixty-four** bytes per row the previous evaluation wrote — the shipped
+   value, measured against 32 under **The reset's fill boundary, measured** — so it can never commit
+   materially more than the row store already has. The card's intent, that the reset must not be
+   sized from the caller's bound, holds exactly, because the rule reads the rows and not the
+   capacity. The constant's own doc comment states the structure count the measurement found: seven
+   structures between a quarter and eight times the shipped boundary, five of them within a factor
+   of two of it, which is the same table as the one under **The reset's fill boundary, measured**
+   read against 64 rather than 32.
 8. **Deliverable 4 is unchanged code.** "Capacity from the program where a bound exists" already
    described the evaluator: an input relation's capacity is its fact count and a derived relation's
    is `min(domain^arity, row_bound)`. The per-column domain product needs the C1191 closing pass,
@@ -1065,34 +1187,72 @@ moves evaluation inside the noise. `Pages::advise_huge` remains as a capability 
    peak resident set by under ten per cent; the measurement agrees, and the ordering in the card is
    reversed. *Nothing about this item is open.*
 
-2. **Settled, and it is the one that would have sunk the change: page-aligned reservations alias each
-   other at 4 KiB, and no cache or TLB counter shows it.** Moving the workspace off the heap made
-   `closure` dense at N = 256 and N = 512 **9 per cent slower in cycles while executing 0.8 per cent
-   fewer instructions**, against cycle A/A nulls of 1.0019 and 0.9999 that make both rows readable.
-   The elimination was done with counters and not with guesses: the supplementary cache run put
-   `L1-dcache-loads` at 1.019 to 1.024 and `L1-dcache-load-misses` at 0.908 to 0.989 with nulls
-   inside three parts per thousand — **more loads, no more misses** — and a TLB run put
-   `ls_l1_d_tlb_miss.all` at 1.014 to 1.086 on absolute counts of three thousand to four hundred
-   thousand per evaluation, far too small to buy 9 per cent of cycles. What is left is the load-store
-   unit: every anonymous mapping starts on a page boundary, so a row column and a membership table
-   had identical low twelve address bits at the same row index, and a load whose page offset matches
-   a pending store's is held for a false dependency even when the two addresses are megabytes apart.
-   The allocator's chunk headers used to scatter those offsets by accident. Offsetting each
-   reservation's contents by a rotating multiple of sixty-four bytes fixes it, and the isolating A/B
-   — a probe build differing in that one expression, same driver, same tree — shows **exactly zero
-   instruction change to five decimal places on four cohorts and 0.697 of the cycles on `closure`
-   dense at N = 256** with a cycle null of 0.9915. *Nothing about this item is open, and the lesson is
-   general: a change that only moves where memory sits can cost a tenth of the loop, and the counter
-   that would show it is not in the playbook's supplementary set.*
+2. **Reopened by the C1199 audit and half settled by C1200: the stagger commit repairs the 9 per
+   cent cycle regression, the rotating offset does not, and the mechanism is not what this report
+   first said.** The regression is real. Moving the workspace off the heap made `closure` dense at
+   N = 256 and N = 512 **9 per cent slower in cycles while executing 0.8 per cent fewer
+   instructions**, against cycle A/A nulls of 1.0019 and 0.9999 that make both rows readable, and
+   C1199 reproduced it at 1.087 [1.070, 1.105] and 1.092 [1.081, 1.103] against the C1192 control.
 
-3. **Settled, and it re-teaches C1170's lesson with a control this time: an untimed harness mode
-   moved the kernel by 0.8 per cent.** The two candidate arms differ by the stagger and by
-   `closure_ballpark --cold`, which never runs in an A/B; the derivation loop's instruction ratio
-   moved from 0.990 to 0.983 between them. The stagger probe accounts for none of it — 1.00000 on
-   four cohorts — so the harness did, through ThinLTO's module summary. The direction is favourable
-   and the result does not depend on it, since both arms beat the control; but a report that quoted
-   only the later figure would be quoting a driver effect as a kernel effect. *Nothing about this
-   item is open.*
+   *What was eliminated, and holds.* The supplementary cache run put `L1-dcache-loads` at 1.019 to
+   **1.028** — the three cohorts are 1.01924, 1.02401 and 1.02837 — and `L1-dcache-load-misses` at
+   0.908 to 0.989, with nulls inside **five** parts per thousand (the largest is 1.0050582), so more
+   loads and no more misses; and a TLB run put `ls_l1_d_tlb_miss.all` at 1.014 to 1.086 on absolute
+   counts of three thousand to four hundred thousand per evaluation, far too small to buy 9 per cent
+   of cycles.
+
+   *What this report concluded from that, and what is wrong with it.* The conclusion was the
+   load-store unit: every anonymous mapping starts on a page boundary, so a row column and a
+   membership table have identical low twelve address bits at the same row index, and a load whose
+   page offset matches a pending store's is held for a false dependency even when the two addresses
+   are megabytes apart. The isolating A/B offered for it compared a probe with the offset multiplied
+   out against `6078142` — two binaries that are **both already past the regression** — and reported
+   0.697 of the cycles on `closure` dense at N = 256 from a point estimate whose own interval is
+   [0.2678, 1.8153] beside a companion row with a cycle null of 0.8456. That comparison supplies no
+   readable cycle evidence on either dense cohort, and C1199's rerun of it puts the offset's effect
+   at 0.996 [0.978, 1.014] and 0.996 [0.984, 1.008].
+
+   *What C1200 measured instead.* `c1198-stagger-probe` is the pre-stagger arm with the stagger
+   commit applied and nothing else. Against `closure_ballpark-356fce6` it is **0.91303 [0.88841,
+   0.93832]** and **0.91306 [0.90502, 0.92116]** in cycles with nulls of 1.00097 and 1.00142, and
+   0.99167 and 0.99160 in instructions. So the commit is the repair. But `c1198-nostagger-probe`,
+   whose offset is multiplied out to zero, measured against the **same** control gives 0.90617 and
+   0.90422 in cycles and the same 0.99167 and 0.99160 in instructions — so the offset is not what
+   repairs it. What the two probes share is the compiled body: `Demand::evaluate_into` is 7,741
+   instructions without the stagger commit and 7,701 with it, and the stagger probe, the no-stagger
+   probe and `6078142` have identical opcode histograms.
+
+   *And the counter that would show the stated mechanism exists and runs against it.* An earlier
+   revision of this item said "the counter that would show it is not in the playbook's supplementary
+   set". It is on this PMU: `ls_bad_status2.stli_other` (store-to-load-forward conflicts) and
+   `ls_stlf` (successful forwards), both AMD Zen core events, both at 100.00 per cent enabled. On
+   both probe pairs against `356fce6`, `ls_stlf` moves by at most 1.2 per cent; the conflict counter
+   is unreadable on three of four rows, and on `closure` dense 512 the **faster** arm carries 1.39
+   and 2.53 times as many conflicts, on absolute counts of 1.35 × 10^5 to 1.54 × 10^6 against
+   6.8 × 10^7 to 5.8 × 10^8 cycles. Receipts
+   `analysis/datalog-comparison/ab-2026-09-17-c1200-stlf-{stagger,nostagger}.json`.
+
+   *Open*: why a source change to a module the derivation loop never calls recompiles that loop into
+   a body that is 0.8 per cent cheaper in instructions and 9 per cent cheaper in cycles. *Evidence
+   gap*: the instruction-level account of the two bodies — the histograms differ, so the difference
+   is not scheduling alone — and a kernel-scoped `perf annotate` of both arms on `closure` dense at
+   N = 256 bucketed into named address ranges, which would say where the cycles went. *Settled*: the
+   commit is the repair, the offset is not the mechanism, and the offset is kept on its zero-cost
+   merits rather than on a benefit.
+
+3. **Withdrawn and replaced by C1200: the 0.8 per cent of instructions is the stagger commit's, not
+   the untimed harness mode's.** An earlier revision of this item read the move in the derivation
+   loop's instruction ratio from 0.990 to 0.983 as C1170's lesson repeating — a driver-only edit
+   moving an untouched kernel through ThinLTO's module summary — because the stagger probe showed
+   1.00000 on four cohorts and the two candidate arms differ by the stagger *and* by
+   `closure_ballpark --cold`. **The probe that showed 1.00000 compares two binaries that both carry
+   the stagger commit**, so it could only ever have shown the rotating offset's contribution, which
+   is indeed nothing. Measured directly on a probe with the stagger commit and no driver edit, the
+   commit is worth **0.99167 and 0.99160** of the instructions on the two dense cohorts; and
+   0.98335 / 0.99161, the two arms' own ratios against the same control in this report, is 0.99167.
+   The `--cold` mode therefore contributes 1.00000 and the lesson this item drew does not apply
+   here. *Nothing about the attribution is open; what is open is item 2's mechanism, which is the
+   same question.*
 
 4. **Settled the hard way, and it is a warning about what a corpus can see: the test that had to
    exist could not be an integration test.** Deleting the join indexes' reset passed every test in
@@ -1111,7 +1271,9 @@ moves evaluation inside the noise. `Pages::advise_huge` remains as a capability 
 5. **Settled, and it withdraws a claim this report made in an earlier revision: the reset's fill
    boundary is load bearing, and 32 was the wrong value.** The constant was set by reasoning and the
    code said "every cohort measured sits two or more orders of magnitude from this boundary". Five
-   structures sit between 0.5 and 2.1 times it and two more at 4 and 16. Measured at 64 against 32 on
+   structures sit between 0.5 and 2.1 times 32 and two more at 4 and 16 — that is, seven between a
+   quarter and eight times the shipped 64, five of them within a factor of two of it, which is what
+   the constant's doc comment now says. Measured at 64 against 32 on
    the four cohorts that bind: **0.903 and 0.986 of the instructions on the two that cross, with peak
    resident set moving by 56 and 28 KiB, which is nothing.** The mechanism is the part worth keeping:
    a table whose bytes are within a small factor of its rows has already had most of its pages
@@ -1134,14 +1296,44 @@ moves evaluation inside the noise. `Pages::advise_huge` remains as a capability 
    inside the noise of a three-repeat median. A huge page commits two mebibytes on first touch, which
    is the opposite of what a lazily committed workspace is for. *Nothing about this item is open.*
 
-8. **Open: the two smaller Soufflé sizes converged under the two row bounds and the largest did
-   not.** At N = 4,096 and 16,384 the default-bound and sized-bound columns are identical phase for
-   phase; at N = 65,536 the default bound still costs 157 ms of preparation and 216 ms of evaluation,
-   and the whole-process ratio is 1.172 against 0.963. The explanation on offer is locality — a
-   membership table of 2^24 slots against 2^21 for the same million rows — and it is an explanation
-   and not a measurement. *Evidence gap*: the same cohort with the table's slot count varied
-   independently of the row bound, with cache and TLB counters, which needs a selector the evaluator
-   does not have. It is the same shape as remaining gap 2 and the same owner.
+8. **Open, and the first counted evidence now runs against the explanation: the two smaller Soufflé
+   sizes converged under the two row bounds and the largest did not.** At N = 4,096 and 16,384 the
+   default-bound and sized-bound columns are identical phase for phase; at N = 65,536 the default
+   bound still costs 157 ms of preparation and 216 ms of evaluation, and the whole-process ratio is
+   1.172 against 0.963. The explanation on offer is locality — a membership table of 2^24 slots
+   against 2^21 for the same million rows.
+
+   *The structural half is measured and holds.* The receipts' own addressing blocks put **both** join
+   indexes at 65,536 direct slots under **both** bounds, so the sparse membership table at 16,777,216
+   slots against 2,097,152 is the only structure whose shape changes between them and there is no
+   index confound. *And commit is excluded by arithmetic.* The two arms differ by 19,304 KiB of peak
+   resident set, 4,826 pages, which at C1170's measured 734 ns per faulted page is **3.5 ms against a
+   373 ms residual**, a factor of 106.
+
+   *The mechanism half is not measured, and the counters point the other way.* C1199 ran the
+   playbook's supplementary cache set on `closure:blocks:65536` with one binary under the two bounds,
+   three rounds, CPU 5, identical output digest, 1,048,576 rows derived on both arms
+   (`~/.cache/ergodis/c1199-audit/ab-locality.json`), sized bound over default bound:
+
+   | Event | default bound, per evaluation | sized bound | ratio | A/A null |
+   | --- | ---: | ---: | ---: | ---: |
+   | `cache-references` | 1.313e7 | 1.726e7 | **1.3151** [1.2819, 1.3492] | 1.0103 |
+   | `cache-misses` | 4.222e6 | 6.401e6 | **1.5160** [1.4895, 1.5429] | 0.9954 |
+   | `L1-dcache-loads` | 1.114e9 | 1.203e9 | 1.0795 [1.0768, 1.0822] | 0.9995 |
+   | `L1-dcache-load-misses` | 5.911e6 | 8.112e6 | **1.3722** [1.3580, 1.3866] | 1.0000 |
+
+   The **sized** bound — the faster one — issues 32 per cent more cache references, 52 per cent more
+   cache misses and 37 per cent more L1 load misses per evaluation, with every A/A null inside one
+   per cent. **The caveat that keeps this from being a refutation is real**: `--evaluate-only` reuses
+   one warm workspace and its two-point difference measures the steady-state loop, while the phase
+   table's 216 ms is one cold evaluation, so the two regimes are not the same measurement. What the
+   table removes is the intuition the explanation rested on.
+
+   *Evidence gap*: the same cohort with the table's slot count varied independently of the row bound,
+   with cache and TLB counters, which needs a selector the evaluator does not have. A cheaper
+   intermediate available today is the cold single-evaluation regime instrumented directly: `perf
+   stat` the `--process` arm under both bounds with the cache set, which attributes the 216 ms rather
+   than the steady-state loop. It is the same shape as remaining gap 2 and the same owner.
 
 9. **Open, and it is the new largest memory term: the checkers.** The evaluator's whole process is
    17,892 KiB on `closure` blocks at N = 4,096 and the derivation checker peaks at 138,928 KiB — the
@@ -1160,6 +1352,36 @@ moves evaluation inside the noise. `Pages::advise_huge` remains as a capability 
     The surprise worth recording is that the default bound now **beats** the hand-sized bound C1192
     had to use, because the sized bound still committed everything it reserved. *Nothing about this
     item is open.*
+
+11. **Open, added by C1200: the repair for the domain defect costs 0.67 to 0.85 per cent of the
+    derivation loop's instructions, and the comparison is not what costs it.** Recording the domain
+    in `DemandWorkspace` and comparing it in `shape()` recompiles `Demand::evaluate_into` from 7,701
+    instructions to 7,788 and measures 1.00673 to 1.00854 against `closure_ballpark-ed99963` on the
+    six direct-path cohorts, with A/A nulls inside three parts per million
+    (`analysis/datalog-comparison/ab-2026-09-17-c1200-direct-repairs.json`). The check runs once per
+    `evaluate_into` and compares one `u32`; the measured difference on `closure` sparse at N = 256 is
+    255,531 instructions per evaluation over 62,979 derived tuples, four per row, so it is the body
+    and not the check. One variant was tried and rejected: `#[inline(never)]` on `shape` gives 7,916
+    instructions, worse than either. *Evidence gap*: the same one as item 2 — what about a field
+    added to a cold record recompiles the hot loop, and where in the body the four instructions per
+    row sit. A kernel-scoped `perf annotate` of both arms, bucketed into named address ranges, is the
+    measurement. *Owner*: whoever takes the next derivation-loop task; a correctness gate is not
+    revertible for an instruction count.
+
+12. **Settled by C1200, and it is the defect the C1199 audit found in shipped code:
+    `shape()` accepted a workspace whose reset would not terminate.** `shape()` compared the row
+    bound, the relation and index counts, every capacity, arity, bitmap choice and table length, and
+    `DemandWorkspace` recorded the row bound and not the domain — while the high-water reset
+    recomputes every row's key with the current plan's domain. Before this task the reset was a
+    `fill(NONE)` over the capacity and was domain-independent, so the omission cost nothing; the
+    high-water walk is what made it decide which slots are cleared. Two same-shape programs over
+    domains 4,096 and 2,048 sharing one workspace were accepted, evaluated correctly twice, and did
+    not terminate on the third call, because a stale bucket head makes `next[row]` point at the row
+    itself. No shipped caller reaches it — the harness and `rel_stratified::evaluate` build a
+    workspace per program and per layer — so this was a hole in a safety net rather than a wrong
+    shipped result, but `shape()` exists to reject an incompatible workspace and it accepted one that
+    hangs the evaluator. Repaired in `ergodis` `e7116ba` and bound by a test. *Nothing about this item
+    is open; its cost is item 11.*
 
 No discovery-track entry. Everything found was inside what the task was looking for, with one
 exception folded into item 6 rather than logged, because the read-then-write fault pair is a property
@@ -1217,11 +1439,13 @@ nix develop ~/src/ergodis --command python3 $A/ab.py --a $CTL --a-name control \
     --b $CAND --b-name candidate --mode evaluate --rounds 5 --cpu 5 --repeats 3 \
     --cohorts $MEMORY --work $W/ab-work --out $A/ab-2026-09-17-c1198-memory-final.json
 
-# The supplementary cache set, and the TLB set that ruled out a TLB cause.
+# The supplementary cache set, and the TLB set that ruled out a TLB cause. The
+# candidate arm here is 6078142, which is what the receipt records.
 CE=cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses
 TE=ls_l1_d_tlb_miss.all,ls_l1_d_tlb_miss.all_l2_miss,dtlb-loads,dtlb-load-misses
+CAND6=~/.cache/ergodis/bin/closure_ballpark-6078142
 nix develop ~/src/ergodis --command python3 $A/ab.py --a $CTL --a-name control \
-    --b $CAND --b-name candidate --mode evaluate --rounds 5 --cpu 5 --repeats 3 \
+    --b $CAND6 --b-name candidate --mode evaluate --rounds 5 --cpu 5 --repeats 3 \
     --cohorts closure:dense:512,closure:blocks:4096,samegen:dense:512 --events $CE \
     --work $W/cache-work --out $A/ab-2026-09-16-c1198-cache-shipped.json
 
@@ -1245,23 +1469,24 @@ for n in 10 20 40; do
       $CAND --evaluator demand --evaluate-only --cold --program cycle 4096 blocks $n $R
 done
 
-# Page faults by symbol, both arms: where the commit comes from.
-for arm in b7921a0 ed99963; do
-  taskset -c 5 perf record -q -e page-faults -c 200 \
-      -o ~/.cache/ergodis/perf-c1198/cycle-faults-$arm.data -- \
-      ~/.cache/ergodis/bin/closure_ballpark-$arm --evaluator demand --evaluate-only \
+# Page faults by symbol, both arms: where the commit comes from. The arms are
+# b7921a0 and 356fce6, and the two files are named as they are on disk.
+P=~/.cache/ergodis/perf-c1198
+for pair in "b7921a0 cycle-faults" "356fce6 cycle-faults-candidate"; do
+  set -- $pair
+  taskset -c 5 perf record -q -e page-faults -c 200 -o $P/$2.data -- \
+      ~/.cache/ergodis/bin/closure_ballpark-$1 --evaluator demand --evaluate-only \
       --program cycle 4096 blocks 1 $R
-  perf report -q -i ~/.cache/ergodis/perf-c1198/cycle-faults-$arm.data \
-      --no-children --percent-limit 1 --sort symbol
+  perf report -q -i $P/$2.data --no-children --percent-limit 1 --sort symbol
 done
 
-# The kernel-scoped instruction profile, both arms.
-for arm in b7921a0 ed99963; do
+# The kernel-scoped instruction profile, both arms: b7921a0 and 6078142.
+for arm in b7921a0 6078142; do
   taskset -c 5 perf record -q -e instructions:u -F 4000 \
-      -o ~/.cache/ergodis/perf-c1198/closure-dense-$arm.data -- \
+      -o $P/closure-dense-$arm.data -- \
       ~/.cache/ergodis/bin/closure_ballpark-$arm --evaluator demand --program closure \
       --certificates 512 dense 20 $R
-  perf report -q -i ~/.cache/ergodis/perf-c1198/closure-dense-$arm.data \
+  perf report -q -i $P/closure-dense-$arm.data \
       --no-children --percent-limit 0.004 --sort symbol
 done
 
@@ -1306,6 +1531,45 @@ $S python3 $A/compare.py --bin ~/.cache/ergodis/bin/closure_ballpark-6078142 \
 # The native/WebAssembly parity replay, which regenerates the committed manifest.
 choom -n 1000 -- nix develop ~/src/ergodis --command python3 \
     analysis/rel-frontend/portability.py --output analysis/rel-frontend/portability-v1.json
+
+# C1200: the probe that isolates the stagger commit. Two sibling detached
+# worktrees, because the private crate pins the core by path; copied by hand,
+# because retain-bin.sh would name it by the private revision 356fce6.
+D=~/.cache/ergodis/worktrees/c1200-stagger
+git -C ~/src/ergodis worktree add --detach $D/ergodis 271d648
+git -C ~/src/ergodis-private worktree add --detach $D/ergodis-private 356fce6
+(cd $D/ergodis-private && nix develop ~/src/ergodis --command \
+    cargo build --example closure_ballpark --release -j 8)
+cp ~/.cache/ergodis/target/ergodis-private/release/examples/closure_ballpark \
+   ~/.cache/ergodis/bin/c1198-stagger-probe
+
+# C1200: the stagger commit isolated, and the store-to-load-forward counters on
+# both probe pairs against the arm before the stagger.
+SE=ls_bad_status2.stli_other,ls_stlf,cycles,instructions
+P=~/.cache/ergodis/bin/closure_ballpark-356fce6
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $P --a-name prestagger-356fce6 \
+    --b ~/.cache/ergodis/bin/c1198-stagger-probe --b-name stagger-probe \
+    --mode evaluate --rounds 5 --cpu 5 --repeats 3 \
+    --cohorts closure:dense:256,closure:dense:512 \
+    --work ~/.cache/ergodis/c1200/stagger-work \
+    --out $A/ab-2026-09-17-c1200-stagger-isolated.json
+for pair in "c1198-stagger-probe stagger-probe stlf-stagger" \
+            "c1198-nostagger-probe nostagger-probe stlf-nostagger"; do
+  set -- $pair
+  nix develop ~/src/ergodis --command python3 $A/ab.py --a $P --a-name prestagger-356fce6 \
+      --b ~/.cache/ergodis/bin/$1 --b-name $2 --mode evaluate --rounds 5 --cpu 5 \
+      --repeats 3 --cohorts closure:dense:256,closure:dense:512 --events $SE \
+      --work ~/.cache/ergodis/c1200/$3-work --out $A/ab-2026-09-17-c1200-$3.json
+done
+
+# C1200: the kernel body across the stagger commit, by opcode histogram. The
+# stagger probe, the no-stagger probe and 6078142 are identical; 356fce6 is not.
+for b in closure_ballpark-356fce6 c1198-stagger-probe c1198-nostagger-probe \
+         closure_ballpark-6078142; do
+  objdump -d --no-show-raw-insn ~/.cache/ergodis/bin/$b \
+    | awk '/evaluate_into.*>:/{f=1;next} /^$/{if(f)exit} f{sub(/^[ \t]*[0-9a-f]+:[ \t]*/,"");print $1}' \
+    | sort | uniq -c | sort -rn > ~/.cache/ergodis/c1200/hist-$b.txt
+done
 ```
 
 Inputs are deterministic: the C1182 xorshift64 generators seeded by the domain and the `blocks`
@@ -1316,17 +1580,23 @@ density, which uses no random stream at all.
 **Retained binaries.** `bin/closure_ballpark-c3eda9a` and `bin/ergodis-tools-c3eda9a` are the
 same-revision controls, retained from clean trees before the first source change, and they exist to
 show that the card's controls are sound. `bin/closure_ballpark-356fce6` and
-`bin/ergodis-tools-356fce6` are the arm before the stagger; the first is what the 4 KiB aliasing
-measurement is taken on and the second is cited by nothing. `bin/closure_ballpark-6078142` and
+`bin/ergodis-tools-356fce6` are the arm before the stagger; the first is the control every stagger
+measurement is taken against and the second is cited by nothing. `bin/closure_ballpark-6078142` and
 `bin/ergodis-tools-6078142` are the arm the frontend, backend, Soufflé, reach, boundary and
 cold-start figures were taken on. `bin/closure_ballpark-ed99963` and `bin/ergodis-tools-ed99963` are
-the shipped arm and **the control the next A/B should use**.
+the arm this task shipped. `bin/closure_ballpark-aa04358` is the arm after C1200's repairs and is
+**the control the next A/B should use**.
 
-**Two probe builds, each from a tree dirty in one expression and cited by one paragraph**:
+**Three probe builds, none of them a retained control and none carrying a manifest row**:
 `bin/c1198-nostagger-probe`, measured sha256
-`551ae2e657adfe7d551e6a654c723f0c3016a9c0c921bf5487be5e3dc787a9d9`, which isolates the stagger; and
-`bin/c1198-reset64-probe`, `0a7096a979e65485166b390044d50c60eab501d8edcff713983820b60a6e50de`, which
-set the reset boundary. Neither is a retained control and neither carries a manifest row.
+`551ae2e657adfe7d551e6a654c723f0c3016a9c0c921bf5487be5e3dc787a9d9`, the `6078142` tree with the
+rotating offset multiplied out; `bin/c1198-reset64-probe`,
+`0a7096a979e65485166b390044d50c60eab501d8edcff713983820b60a6e50de`, which set the reset boundary;
+and C1200's `bin/c1198-stagger-probe`,
+`b4bf4c4514a5f0a93032bd89c21b85b9ee52a927c4bac30f6d7cca479f609a09`, the pre-stagger arm with the
+stagger commit applied and nothing else, which is the pair that isolates it. The first two are
+scratch builds from trees dirty in one expression; the third is built from two detached worktrees
+under `worktrees/c1200-stagger/`, which were removed at C1200's close.
 
 **Under `perf-c1198/` (317 KB):** the two page-fault profiles and the two kernel-scoped instruction
 profiles. **Under `c1198/` (16 MB):** the A/B work directories (`ab-work`, `cache-work`), the reach
@@ -1342,22 +1612,28 @@ earlier tasks. This task's `c1198` and `perf-c1198` both show as kept. Deletion 
 
 ## The control for the next A/B
 
-For the derivation loop, `~/.cache/ergodis/bin/closure_ballpark-ed99963`, measured sha256
-`97a59d7a5c86dacab107dce7e8fa3e931adacf755d9e58e79b50eadb64268786`, retained from a **clean** tree at
-`ergodis-private` `ed99963` with core `ergodis` `2be1e68` under rustc 1.95.0 (59807616e 2026-04-14),
+For the derivation loop, **`~/.cache/ergodis/bin/closure_ballpark-aa04358`**, measured sha256
+`a29f36177039ddc372de9b49fad5de2994063167ef9c4306e05a428ac55bfbcf`, retained from a **clean** tree at
+`ergodis-private` `aa04358` with core `ergodis` `e7116ba` under rustc 1.95.0 (59807616e 2026-04-14),
 release profile, no features, through
-`../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release`.
+`../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release`. This is the
+arm after C1200's repairs; `closure_ballpark-ed99963`, measured sha256
+`97a59d7a5c86dacab107dce7e8fa3e931adacf755d9e58e79b50eadb64268786`, is the arm this task shipped and
+is one core commit behind it.
 
 For the frontend and the stratified backend, `~/.cache/ergodis/bin/ergodis-tools-ed99963`, measured
-sha256 `ce90b5af67b00eec1dfe64dece3fd656d4cc00415f5f6541a4679137cf7a451e`, retained from the same
-clean tree through `../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools`.
+sha256 `ce90b5af67b00eec1dfe64dece3fd656d4cc00415f5f6541a4679137cf7a451e`, retained from the
+`ed99963` clean tree through `../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools`. C1200
+did not re-retain it; a task that measures the Rel route should, because `e7116ba` changes the
+kernel that route calls.
 
-Both are at the shape the tree carries, and unlike C1192's pair both were retained from a clean tree
-with no foreign uncommitted file in either repository. The next A/B in this lane needs no fresh
-retain unless the toolchain pin moves. **One caution for whoever runs it**: `closure_ballpark` is the
-harness *and* the arm, so adding an untimed mode to it moves the kernel's instruction count through
-ThinLTO — this task measured that at 0.8 per cent — and a driver edit therefore needs its own retain
-and its own control, not a comparison against an older one.
+All of them are at the shape their tree carried, and unlike C1192's pair all were retained from a
+clean tree with no foreign uncommitted file in either repository. **One caution for whoever runs the
+next A/B**, and it is the opposite of the one an earlier revision of this report gave: a source
+change anywhere in the core's module graph can recompile `Demand::evaluate_into` wholesale and move
+it by most of a per cent, which this lane has now measured three times — the stagger commit at
+0.9917, the domain field at 1.0085, and C1170's driver edit at 1.017 on the scanner. A change that
+"cannot touch the loop" still needs its own retain and its own control.
 
 ## Vibe check
 
@@ -1380,13 +1656,25 @@ pages cost nothing. That is the one part of C1192's remaining gap 4 this does no
 
 Two things nearly went wrong and both are worth carrying. The first three deliverables together made
 dense closure **9 per cent slower in cycles while executing fewer instructions**, and neither the
-cache set nor the TLB set showed it, because the cause was 4 KiB aliasing between page-aligned
-mappings — the allocator's chunk headers had been scattering those offsets by accident for years. A
-rotating cache-line stagger fixes it at exactly zero instruction cost. The second is a testing
-failure: deleting the index reset passed every integration test and then hung for nine minutes,
-because a reset that clears too little produces non-termination rather than a wrong answer, and
-because a closure program never walks the chain index at all. The gate that catches it asserts the
-tables directly and had to be written after the fact.
+cache set nor the TLB set showed it. The commit that repairs it is the cache-line stagger —
+measured at 0.913 of the cycles on both dense cohorts against the arm before it, with readable
+nulls — but **the mechanism this report first gave for it is wrong, and the audit that found that is
+the reason to read this paragraph twice.** The rotating offset is not what repairs the regression: a
+probe with the offset multiplied out to zero repairs it just as completely, and the two probes
+differ only in the offset while sharing a compiled body that the stagger commit rewrote from 7,741
+instructions to 7,701. The store-to-load-forward counters the 4 KiB-aliasing story predicts do exist
+on this PMU, and they say the faster arm has *more* conflicts. What removes the 9 per cent is a
+recompilation, and why a recompilation is worth 9 per cent of cycles is open.
+
+The second is a testing failure, and the audit found a third of the same kind. Deleting the index
+reset passed every integration test and then hung for nine minutes, because a reset that clears too
+little produces non-termination rather than a wrong answer, and because a closure program never
+walks the chain index at all; the gate that catches it asserts the tables directly and had to be
+written after the fact. What the C1199 audit then showed is that two more of this task's load-bearing
+decisions were bound by nothing — inverting the fill-versus-walk rule and leaking every staggered
+reservation both passed the whole crate — and that `shape()` accepted a workspace whose reset would
+not terminate. All three now have a test, and the third one's repair costs 0.8 per cent of the
+derivation loop's instructions, which is the same unexplained recompilation effect again.
 
 Two constants in this report are measured rather than reasoned, and one of them started out
 reasoned and wrong. `RESET_FILL_BYTES_PER_ROW` was set at 32 with a code comment claiming no cohort
