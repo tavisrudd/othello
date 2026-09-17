@@ -5219,8 +5219,17 @@
       "last": 1200,
       "purpose": "C1198 repair pass from the C1199 audit: shape() domain check, two missing gates, stagger attribution and record repairs",
       "sequence": 580
+    },
+    {
+      "count": 1,
+      "first": 1201,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1201,
+      "purpose": "static join index build cost: density/size rule or lazy offsets reservation (C1193 closeout finding)",
+      "sequence": 581
     }
   ],
-  "next_id": 1201,
+  "next_id": 1202,
   "schema": "codex-task-id-allocations-v1"
 }
