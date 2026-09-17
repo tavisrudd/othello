@@ -5210,8 +5210,17 @@
       "last": 1199,
       "purpose": "C1198 independent read-only audit of the lazy workspace report",
       "sequence": 579
+    },
+    {
+      "count": 1,
+      "first": 1200,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1200,
+      "purpose": "C1198 repair pass from the C1199 audit: shape() domain check, two missing gates, stagger attribution and record repairs",
+      "sequence": 580
     }
   ],
-  "next_id": 1200,
+  "next_id": 1201,
   "schema": "codex-task-id-allocations-v1"
 }
