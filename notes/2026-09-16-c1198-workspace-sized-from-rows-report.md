@@ -333,6 +333,45 @@ page-fault handling is kernel time.
 
 ### The direct path, where the tables are small
 
+Control `closure_ballpark-b7921a0` against the shipped candidate `closure_ballpark-6078142`, five
+interleaved rounds, CPU 5, repeat counts 3 and 6 with two-point differencing, `--evaluate-only`, the
+six-event set at **100.00 per cent enabled on every event over 180 measurements**, load 3.02 to 4.94.
+Receipt `analysis/datalog-comparison/ab-2026-09-16-c1198-direct-shipped.json` with its raw sidecar.
+These are the six cohorts C1192 used to show that its direct path did not move, and the policy
+selects a direct kind for every index and a bitmap for every membership test on all of them.
+
+| Cohort | derived | instruction ratio [lo, hi] | A/A null | cycle ratio | cycle null | peak RSS, control / candidate KiB |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `closure` sparse 256 | 62,979 | **0.98371** [0.98371, 0.98372] | 1.0000018 | 0.9806 | 1.0044 | 5,052 / 5,064 |
+| `closure` sparse 1,024 | 979,983 | **0.98365** [0.98365, 0.98365] | 1.0000005 | 0.9915 | 1.0732 | 36,400 / 34,416 |
+| `closure` dense 256 | 65,536 | **0.98335** [0.98335, 0.98335] | 1.0000031 | 0.9805 | 0.9973 | 7,592 / 7,660 |
+| `closure` dense 512 | 262,144 | **0.98327** [0.98327, 0.98328] | 0.9999994 | 0.9589 | 0.9081 | 21,808 / 22,416 |
+| `samegen` sparse 1,024 | 258,691 | **0.98246** [0.98245, 0.98247] | 1.0000027 | 0.9462 | 1.0076 | 68,916 / 11,580 |
+| `samegen` dense 512 | 507,425 | **0.98300** [0.98300, 0.98300] | 1.0000012 | 1.1611 | 1.2003 | 19,520 / 19,156 |
+
+**The derivation loop is 1.6 to 1.8 per cent cheaper in instructions on every one of them**, with
+A/A nulls inside four parts per million, paired intervals narrower than a hundredth of a per cent,
+and the output SHA-256 identical across arms on every cohort. Branches are unity to within two parts
+in ten thousand and branch misses are inside their own nulls, so the control flow did not move; the
+saving is the `fill(NONE)` that no longer runs and the zero sentinel's cheaper chain test.
+
+**Two of the six cycle ratios are not readable and are reported as such.** `closure` dense 512
+carries a cycle A/A null of 0.9081 and `samegen` dense 512 one of 1.2003, both far enough from unity
+that the playbook's rule says the candidate is not read for that event on those rows. The four that
+are readable sit at 0.946 to 0.991 against nulls of 0.997 to 1.008.
+
+**Peak resident set falls where there was anything to fall.** `samegen` sparse at N = 1,024 is
+68,916 KiB against 11,580, a factor of 5.9, because its derived relation's universe is 2^20 and its
+row capacity at the default bound is 2^20; the other five cohorts have small universes and small
+capacities and move by a few per cent either way.
+
+### The same cohorts before the stagger, and what the stagger cost and bought
+
+The A/B above was first taken on `closure_ballpark-356fce6`, the arm that carries `Pages`, the zero
+sentinel and the high-water reset but **not** the cache-line stagger. Receipts
+`ab-2026-09-16-c1198-prestagger-direct-b7921a0.json` (against the card's control) and
+`ab-2026-09-16-c1198-prestagger-direct.json` (against `closure_ballpark-c3eda9a`).
+
 Control `closure_ballpark-b7921a0` against candidate `closure_ballpark-356fce6`, five interleaved
 rounds, CPU 5, repeat counts 3 and 6 with two-point differencing, `--evaluate-only`, the six-event
 set at **100.00 per cent enabled on every event over 180 measurements**, load 2.04 to 2.30. Receipt
@@ -359,44 +398,204 @@ the saving is the removed `fill(NONE)` over each table, which the small-table co
 per evaluation on the control and which the candidate's `fill(0)` pays as a shorter instruction
 sequence, plus the zero sentinel's cheaper `test` against `cmp` in each chain walk.
 
-**These cycle ratios are the pre-stagger measurement and they are the reason the stagger exists.**
-The two dense-closure rows at 1.087 and 1.089, against cycle nulls of 1.002 and 1.000, are a real
-9 per cent regression with instructions *down* 0.8 per cent; **that arm is `356fce6`, which does not
-carry `271d648`.** The repair and its evidence are in the mystery ledger; the shipped arm's figures
-are in the section after next.
+| Cohort | instruction ratio | A/A null | cycle ratio | cycle null |
+| --- | ---: | ---: | ---: | ---: |
+| `closure` sparse 256 | 0.99026 | 0.9999926 | 1.0140 | 1.0161 |
+| `closure` sparse 1,024 | 0.99020 | 1.0000008 | 1.0109 | 1.0037 |
+| `closure` dense 256 | 0.99161 | 0.9999997 | **1.0870** | 1.0019 |
+| `closure` dense 512 | 0.99160 | 0.9999998 | **1.0894** | 0.9999 |
+| `samegen` sparse 1,024 | 0.98918 | 1.0000026 | 1.0806 | 1.0462 |
+| `samegen` dense 512 | 0.98976 | 0.9999986 | 0.9979 | 0.9928 |
+
+**The two dense-closure rows are a 9 per cent cycle regression with instructions down 0.8 per cent,
+against cycle A/A nulls of 1.0019 and 0.9999 that make them readable.** That is what sent the task
+looking for a mechanism, and the mechanism — 4 KiB aliasing between page-aligned mappings — is in
+mystery ledger item 2 with the counters that ruled out the alternatives.
+
+**The stagger's effect is isolated, and it is entirely in cycles.** A probe binary built from the
+shipped tree with the stagger multiplied out (`~/.cache/ergodis/bin/c1198-nostagger-probe`, measured
+sha256 `551ae2e657adfe7d551e6a654c723f0c3016a9c0c921bf5487be5e3dc787a9d9`, a scratch build from a
+tree dirty in exactly that one line, cited by nothing but this paragraph) against the shipped arm,
+five interleaved rounds, CPU 5, receipt `~/.cache/ergodis/c1198/ab-stagger-probe.json`:
+
+| Cohort | instruction ratio | A/A null | cycle ratio | cycle null |
+| --- | ---: | ---: | ---: | ---: |
+| `closure` dense 256 | **1.00000** [0.99999, 1.00000] | 1.0000023 | **0.6972** | 0.9915 |
+| `closure` dense 512 | **1.00000** [1.00000, 1.00000] | 1.0000003 | 0.9228 | 0.8456 |
+| `samegen` dense 512 | **1.00000** [1.00000, 1.00000] | 0.9999994 | 1.0052 | 0.9737 |
+| `closure` blocks 4,096 | **1.00000** [0.99996, 1.00003] | 0.9999939 | 0.9986 | 0.9924 |
+
+**The stagger changes the derivation loop's instruction count by nothing at all, to five decimal
+places on four cohorts**, which is what a change that runs once per reservation at construction
+should do, and it takes **30 per cent off the cycles of `closure` dense at N = 256** with a cycle null
+of 0.9915. The dense-512 row's cycle null is 0.8456 and is not read.
+
+**What the stagger does not explain is the other 0.8 per cent of instructions**, and what did is the
+harness. The two candidate arms differ by the stagger *and* by
+`closure_ballpark`'s new `--cold` mode, which is untimed and never runs in an A/B; the instruction
+ratio moved from 0.990 to 0.983 between them, and the probe above shows the stagger contributed none
+of it. That is the playbook's own C1170 lesson reproducing exactly — a driver-only edit moves an
+untouched kernel through ThinLTO's module summary — this time with a control that separates the two.
 
 ### The cohorts the reservation was costing, at the default row bound
 
-Same control, same candidate, same protocol; five interleaved rounds, CPU 5, the six-event set at
-100.00 per cent over 180 measurements, load 1.90 to 2.09. Receipt
-`analysis/datalog-comparison/ab-2026-09-16-c1198-memory.json`.
+Control `closure_ballpark-b7921a0` against the shipped candidate `closure_ballpark-6078142`, five
+interleaved rounds, CPU 5, the six-event set at 100.00 per cent over 180 measurements, load 3.17 to
+4.77. Receipt `analysis/datalog-comparison/ab-2026-09-16-c1198-memory-shipped.json`.
 
 | Cohort | derived | instruction ratio | A/A null | cycle ratio | cycle null | peak RSS, control / candidate KiB | factor |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `closure` blocks 4,096 | 65,536 | 0.99294 | 1.0000125 | 1.0896 | 1.0174 | 539,388 / **18,464** | **×29.2** |
-| `closure` blocks 16,384 | 262,144 | 1.00759 | 0.9999991 | 0.9770 | 1.0038 | 599,896 / **83,852** | **×7.2** |
-| `closure` blocks 65,536 | 1,048,576 | 1.03729 | 0.9999983 | 1.0282 | 0.9874 | 817,064 / **264,340** | **×3.1** |
-| `mutual` blocks 4,096 | 61,440 | 1.08625 | 1.0000135 | 1.0179 | 1.0118 | 539,400 / **82,868** | **×6.5** |
-| `mutual` blocks 8,192 | 122,880 | 1.05625 | 0.9999999 | 0.9669 | 0.9886 | 493,276 / **37,880** | **×13.0** |
-| `cycle` blocks 4,096 | 131,072 | 1.00068 | 1.0000000 | **0.8384** | 1.0085 | 1,131,304 / **38,192** | **×29.6** |
+| `closure` blocks 4,096 | 65,536 | 0.98502 | 1.0000220 | **0.9083** | 1.0060 | 539,388 / **18,356** | **×29.4** |
+| `closure` blocks 16,384 | 262,144 | 0.99970 | 0.9999970 | 0.7259 | 0.8343 | 599,896 / **83,892** | **×7.2** |
+| `closure` blocks 65,536 | 1,048,576 | 1.03136 | 1.0000010 | 0.8698 | 0.8593 | 817,064 / **264,380** | **×3.1** |
+| `mutual` blocks 4,096 | 61,440 | 1.08010 | 1.0000760 | 0.9040 | 0.8681 | 539,400 / **82,896** | **×6.5** |
+| `mutual` blocks 8,192 | 122,880 | 1.06055 | 1.0000240 | 0.9838 | 0.9974 | 493,276 / **37,908** | **×13.0** |
+| `cycle` blocks 4,096 | 131,072 | 0.99054 | 0.9999820 | **0.7691** | 1.0125 | 1,131,304 / **38,260** | **×29.6** |
 
 Output digests identical across arms on every cohort.
 
-**Peak resident set falls by a factor of 3.1 to 29.6 at the default row bound**, which is the
-result the task exists for. `cycle` at N = 4,096 is the program C1192 measured at a factor of 47
-between the default bound and a hand-sized one: it now costs **38,192 KiB at the default bound**
-against the 23,872 KiB C1192 needed a bound of 100,000 rows to reach, so the caller's bound has
-stopped being a memory decision.
+**Peak resident set falls by a factor of 3.1 to 29.6 at the default row bound**, which is the result
+the task exists for. `cycle` at N = 4,096 is the program C1192 measured at a factor of 47 between the
+default bound and a hand-sized one: it now costs **38,260 KiB at the default bound** against the
+23,872 KiB C1192 needed a row bound of 100,000 to reach. The caller's bound has stopped being a
+memory decision.
 
 **The instruction column is where the high-water reset shows, and it is ordered by exactly what the
-design predicts.** `cycle` is at unity (1.00068) because its 2^24-slot chain head is far too large
-for a fill, so the control memsets 64 MiB per evaluation and the candidate walks 131,072 rows — and
-its **cycle ratio is 0.838**, a 16 per cent saving, because that memset was the evaluation's largest
-memory traffic. `mutual` at N = 4,096 is the opposite corner: its evaluation is 1.2 ms, its
-membership bitmap is 2 MiB against 61,440 rows, and walking those rows costs **8.6 per cent** of a
-very short evaluation while buying 456 MiB of resident memory. `closure` at `blocks` and N = 65,536
-pays 3.7 per cent for the same reason at a larger scale. Those are the trade working as designed,
-and the cycle ratios say the wall cost is smaller than the instruction cost in every case.
+design predicts.** `cycle` is the case where the control memsets a 64 MiB chain head before every
+evaluation and the candidate walks 131,072 rows instead: instructions are 0.991 and **cycles are
+0.769**, a 23 per cent saving, because that memset was the evaluation's largest memory traffic.
+`mutual` at N = 4,096 is the opposite corner — a 1.2 ms evaluation, a 2 MiB membership bitmap and
+61,440 rows to walk — and it pays **8.0 per cent more instructions** while buying 446 MiB of
+resident memory; its cycle ratio is 0.904, so the wall cost of those instructions is negative.
+`closure` at `blocks` and N = 65,536 pays 3.1 per cent for the same reason at a larger scale.
+
+**Three of the six cycle nulls sit between 0.834 and 0.868 and those rows are not read for cycles.**
+The three that are readable — `closure` blocks 4,096 at 0.908 against a null of 1.006, `mutual` at
+8,192 at 0.984 against 0.997, and `cycle` at 0.769 against 1.013 — all favour the candidate.
+
+### Cache events on the cohorts the stagger repaired
+
+Supplementary run, the playbook's cache set with its own nulls: five interleaved rounds, CPU 5,
+`--evaluate-only`, 100.00 per cent enabled, load 3.17 to 3.39. Receipt
+`analysis/datalog-comparison/ab-2026-09-16-c1198-cache-shipped.json`.
+
+| Cohort | `L1-dcache-loads` | A/A null | `L1-dcache-load-misses` | A/A null |
+| --- | ---: | ---: | ---: | ---: |
+| `closure` dense 512 | 1.0000 | 0.9987 | 0.9919 | 1.0011 |
+| `closure` blocks 4,096 | 0.9971 | 0.9954 | 1.0128 | 1.0332 |
+| `samegen` dense 512 | 1.0105 | 0.9995 | 0.9743 | 1.0082 |
+
+**Only the L1 data-load counter is readable, and it says the loop touches the same memory in the
+same way.** Loads are unity to within one per cent with nulls inside five parts per thousand, and
+misses are inside their own nulls on every row. `cache-references` and `cache-misses` carry nulls of
+0.53 to 3.27 on these cohorts and are not read at all. The value of this table is the negative it
+supplies for the mystery ledger: after the stagger, nothing about the loop's memory behaviour differs
+from the control, which is what a change that only moved where the tables sit should show.
+
+### Reach and resident set at the default row bound
+
+Every row is the shipped arm `closure_ballpark-6078142` in `--evaluate-only` mode under
+`choom -n 1000`, one process, one evaluation, default row bound unless stated. "Reserved" is
+`Demand::workspace_bytes()`, the figure `MAX_WORKSPACE_BYTES` bounds; "peak RSS" is the process
+high-water mark from `/proc/self/status` in KiB, which is the commit figure. The C1192 column is that
+report's own reach table, measured on `closure_ballpark-b7921a0`.
+
+| Program | density | N | derived | reserved, bytes | peak RSS KiB, C1192 | peak RSS KiB, now | factor |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `closure` | sparse | 4,096 | 15,679,566 | 538,984,448 | 532,124 | 497,832 | ×1.07 |
+| `closure` | sparse | 8,192 | — | — | `Budget`, row capacity | `Budget`, row capacity | — |
+| `closure` | dense | 2,048 | 4,194,304 | 134,750,208 | 302,868 | 302,704 | ×1.00 |
+| `samegen` | sparse | 8,192 | 15,787,097 | 1,090,584,576 | 1,070,124 | **514,904** | **×2.08** |
+| `samegen` | sparse | 16,384 | — | — | `Budget`, row capacity | `Budget`, row capacity | — |
+| `closure` | blocks | 4,096 | 65,536 | 538,984,448 | 539,524 | **18,216** | **×29.6** |
+| `closure` | blocks | 16,384 | 262,144 | 570,490,880 | 600,004 | **83,792** | **×7.2** |
+| `closure` | blocks | 65,536 | 1,048,576 | 671,350,784 | 817,192 | **264,312** | **×3.1** |
+| `closure` | blocks | 65,536, bound 1.1 M | 1,048,576 | 48,250,752 | 244,872 | 244,672 | ×1.00 |
+| `mutual` | blocks | 4,096 | 61,440 | 471,859,200 | 539,448 | **82,804** | **×6.5** |
+| `mutual` | blocks | 8,192 | 122,880 | 478,150,656 | 493,348 | **37,888** | **×13.0** |
+| `mutual` | blocks | 65,536, bound 1.1 M | 983,040 | 43,588,608 | 244,988 | 244,900 | ×1.00 |
+| `cycle` | blocks | 4,096 | 131,072 | 1,145,061,376 | 1,131,440 | **38,288** | **×29.6** |
+| `cycle` | blocks | 4,096, bound 100 K | 131,072 | 11,134,976 | 23,872 | 22,352 | ×1.07 |
+| `cycle` | blocks | 65,536, bound 1.1 M | 2,097,152 | 104,627,968 | 262,864 | 260,384 | ×1.01 |
+
+**The acceptance bullet the card states is met and the margin is the interesting part.** At the
+default row bound `cycle` at N = 4,096 is now **38,288 KiB against the sized bound's 22,352**, a
+factor of **1.7** where C1192 measured 47; `closure` at `blocks` and N = 65,536 is **264,312 against
+244,672**, a factor of **1.08**. The residual is the bucket-head and bitmap pages the larger
+capacity's hash spreads a fixed number of rows over, which is exactly what should remain.
+
+**Three rows barely move and each says something.** `closure` sparse at N = 4,096 and `closure` dense
+at N = 2,048 derive 15.7 M and 4.2 M tuples, so they genuinely need most of what they reserve — the
+change cannot help a program that uses its workspace. `samegen` sparse at N = 8,192 halves, from
+1,070,124 KiB to 514,904, because its derived relation's universe caps the capacity at the rows it
+really needs while its *other* relations do not. **What the change buys is confined to the gap
+between the bound and the rows, and where there is no gap there is no saving.** That is the correct
+shape for it to have.
+
+### Cold start: the reservation, the commit, and the proof that each iteration is cold
+
+`closure_ballpark --cold` on the shipped arm, `cycle` at the `blocks` density and N = 4,096, pinned
+to CPU 5 under `choom -n 1000`, at three repeat counts. Each iteration reserves a fresh workspace,
+evaluates once, and drops it.
+
+| Repeats | `perf` page faults, whole process | this process's own minor faults | per iteration, own | per iteration, two-point | committed, KiB | reserved, KiB |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 10 | 117,379 | 112,918 | 11,291.80 | — | 24,436 | 1,118,224 |
+| 20 | 230,298 | 225,833 | 11,291.65 | 11,291.5 (10 → 20) | 24,508 | 1,118,224 |
+| 40 | 456,133 | 451,667 | 11,291.68 | 11,291.7 (20 → 40) | 24,512 | 1,118,224 |
+
+**The three parts of C1170's coldness proof, each met.**
+
+1. **Faults per iteration are constant and the count scales exactly.** 11,291.7 per iteration at
+   every repeat count, and the two-point differences reproduce it to a part in a hundred thousand,
+   so there is no reuse of pages the kernel has already backed.
+2. **`/proc/self/stat` agrees with `perf`.** The process's own minor-fault counter and `perf`'s
+   page-fault counter differ by a constant 4,461 to 4,466 — process startup, which the repeat count
+   does not change — and their per-iteration slopes agree to five digits.
+3. **There is no touch loop in the disassembly, and there is no zeroing call either.** In the
+   control, `__rust_alloc_zeroed` is called from the two `Map::fold` symbols that are the workspace's
+   `collect`; in the shipped arm those two call sites are gone and the remaining `alloc_zeroed` sites
+   are `Demand::prepare` (the CSR offsets array, which the prefix sum writes densely anyway),
+   `Demand::certificate` (a cold pass) and structures the checkers build. `Pages::zeroed` is
+   fifty-two instructions with exactly one call in it, `mmap@GLIBC_2.2.5`, and no store loop, `rep
+   stos` or vector store.
+
+**C1170 needed `mallopt(M_MMAP_THRESHOLD, …)` to make its stage cold and this one does not**, because
+a workspace of anonymous mappings is unmapped at the drop rather than returned to an allocator that
+recycles it. The cold stage is simpler than the one it copies, and that simplification is a
+consequence of the change under test.
+
+**The reservation is 45.6 times the commit**: 1,118,224 KiB reserved against 24,436 to 24,512 KiB
+committed, on a program whose caller asked for a row bound of 2^24 and which derives 131,072 tuples.
+That is deliverable 5 in one line — `MAX_WORKSPACE_BYTES` bounds the first number, and the second is
+what the machine pays.
+
+**The two numbers do not divide the way one expects, and the reason is worth recording.** 11,291.7
+faults per iteration against 6,128 committed pages is 1.84 faults per committed page, not one. A
+**read** of an untouched anonymous page costs a minor fault and commits nothing, because the kernel
+maps the shared zero page; the later **write** costs a second fault and commits. Measured directly on
+this host with a 32 MiB anonymous mapping: a read pass over 8,192 pages took 8,196 minor faults and
+**zero** resident kilobytes, and the write pass that followed took 8,192 more faults and 32,768 KiB.
+The derivation loop reads a bucket head before it writes it, so about 5,160 of the 11,292 faults per
+iteration are free in memory and are not free in time. Nothing in this task turns on it; it is the
+first thing to look at for whoever wants the cold path faster.
+
+### Page faults, by symbol, before and after
+
+`perf record -e page-faults -c 200` on one `--evaluate-only` process, `cycle` at `blocks` and
+N = 4,096, pinned to CPU 5. `perf.data` under `~/.cache/ergodis/perf-c1198/`.
+
+| Arm | Top symbols above one per cent |
+| --- | --- |
+| control `closure_ballpark-b7921a0` | `__memset_avx512_unaligned_erms` **98.45 %**, nothing else above 0.5 % |
+| shipped `closure_ballpark-6078142` | `Demand::index_rows` 53.16 %, `Demand::evaluate_into` 18.99 %, `Map::fold` 7.59 %, `hashbrown::RawTable::reserve_rehash` 5.06 %, `__memmove_avx512_unaligned_erms` 3.80 %, `_int_malloc` 2.53 %, `__memset_avx512_unaligned_erms` **1.27 %**, `main` 1.27 %, `push_decimal` 1.27 %, `datalog::admit` 1.27 % |
+
+**The whole fault profile changed owner.** On the control, the process's 283,893 page faults are
+`calloc` zeroing a workspace nobody has written to yet. On the candidate its 15,733 faults belong to
+the code that actually writes rows, and the residue attributed to `memset` is 1.27 per cent of a
+count eighteen times smaller — the `fill(0)` on the tables the reset rule keeps linear, plus
+admission. That is the acceptance bullet "no `memset` in preparation above the touched pages", read
+as a counted profile rather than as an assertion.
 
 ## Profile
 
