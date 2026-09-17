@@ -340,17 +340,383 @@ and the plan reports it rather than refusing.
    to place; the lowering's order still decides the body order the core receives
    and therefore breaks the core's ties.
 
+## The lowering's body policy, and what it is for
+
+Binarization becomes `BodyPolicy::{Binarize, Nary}` on the lowering, threaded
+through `Workspace::lower_with`, `rel_lowering`, `rel_stratified`, the
+`rel-lower` operator tool and the `rel-frontend-bench` driver as a
+`--body-policy binarize|nary` flag whose default is the shipped policy, so every
+existing invocation and every committed receipt replays unchanged.
+
+The policy decides exactly one number: how many body atoms a rule may keep. The
+pass that was `binarize` is now `plan_bodies`, and it chains a body longer than
+that through the same auxiliaries, the same `order_body` join order and the same
+`live` suffix masks — under `Nary` the chain simply stops when what remains
+fits, at four atoms rather than at two. With `keep` two the pass is
+byte-for-byte the shape milestone (a) shipped, which is what the unchanged
+native/WebAssembly parity digest below says.
+
+**One thing the plumbing found, and it corrects a Fermi prediction.** The
+variables budget is enforced in `passes::project`, which runs **before** body
+planning, so it has always applied to the *unbinarized* rule: a three-atom body
+with nine distinct variables was refused under binarization too, and
+binarization never rescued a wide body. Fermi prediction 6 expected the variable
+budget to be the largest population shift between the two policies and it is not
+a shift at all. What can still differ is a budget the auxiliaries themselves
+consume — the relation count, the rule count and an auxiliary's own arity — so
+the n-ary policy can only ever accept **more** programs, which is what the
+corpus census asserts.
+
 ## Method
 
-To be written.
+### The harness and the two arms
+
+The derivation-loop A/B is `analysis/datalog-comparison/ab.py`, the committed
+interleaved driver C1192 wrote, in the shape the playbook prescribes: rounds
+that alternate arm order, an A/A null per cohort, the non-multiplexing event set
+`instructions,cycles,branches,branch-misses,page-faults,minor-faults` with the
+enabled fraction recorded per measurement, two-point differencing between
+`repeats` and `2 · repeats` evaluations so that process startup, admission and
+preparation leave every per-iteration figure, one pinned core, and the load
+average over the run. Cache events get their own run with their own nulls.
+
+**The two arms of this task's central comparison are one binary under two
+arguments**, not two revisions: the same `closure_ballpark` runs
+`--bodies binarized` and `--bodies nary` on one source family. That is what
+makes the comparison a body-policy comparison and not a program comparison, and
+it removes the recompile drift that has confounded three reports in this lane
+from the central figure entirely — both arms are the same compiled kernel.
+
+It also required one change to the driver, which is a recorded deviation. `ab.py`
+refused to summarize a cohort whose arms disagree on derived, probe, candidate
+or round counts — the right check for two revisions of one program and the wrong
+one for two programs with one closure, which is exactly what a binarized body
+and its n-ary twin are. `--work-may-differ` narrows the agreement check to the
+output relation's tuple count, its SHA-256 and the failure code, all of which
+must still agree, and the receipt now carries **both** arms' work counts rather
+than one. The derived-tuple ratio the card asks for is that pair.
+
+### Which cohorts answer which question
+
+| Cohort | What it is | What it measures |
+| --- | --- | --- |
+| `triangle` at `sparse` | `tri(x,y) :- edge(x,y), edge(y,z), edge(z,x).` against `aux(x,y,z) :- edge(x,y), edge(y,z).` and `tri(x,y) :- aux(x,y,z), edge(z,x).` | the family where the intermediate dominates: an arity-three auxiliary of about `9N` tuples against a result of tens |
+| `path3` at `sparse` | `p3(x,w) :- edge(x,y), edge(y,z), edge(z,w).` against its two-rule chain | the family where the intermediate is real work but not the whole of it |
+| `path4` at `sparse` | the four-atom chain against two auxiliaries | the same one level deeper, and the only cohort that enters the four-atom kernel |
+| `closure`, `samegen`, sparse and dense | the C1182 generators, unchanged | **the two-atom path, which must not move**, against the retained control |
+| the `datalog` cohort through `rel-frontend-bench` | a Rel source with a three-atom body every sixty-fourth definition | the lowering and the stratified backend under the two policies, on a real source rather than a hand-written program |
+
+The two-atom cohorts are measured against the **retained control**
+`closure_ballpark-193ebd1`, because there the question is whether this task's
+changes to `Step`, the premise columns and the dispatch moved the shipped
+kernel; the body-policy cohorts are measured candidate against candidate,
+because there the question is about the source.
+
+## What the differential says, before any timing
+
+The C1189 harness now decides **every** source under both body policies and
+compares each with the same reference evaluator. Zero disagreements, and the
+corpus that establishes it is wider than it was: the in-fragment generator draws
+its body length from one to four rather than one to three, and the harness gates
+the mix it actually wrote.
+
+| Corpus | Programs | Outcome under both policies |
+| --- | ---: | --- |
+| the eight committed milestone (a) fixtures | 8 | accepted, closures equal to the committed Python oracle's |
+| the milestone (a) audit's further programs | 6 | as recorded |
+| the recorded rejection surface | as recorded | each with its semantic class, **identical under both policies** |
+| the Addendum A equations | 35 | each decided twice, same outcome |
+| the surface-construct table | as recorded | same outcome |
+| the seeded in-fragment generator | 1,200 | **all accepted under both policies**, no divergence, no semantic rejection |
+| the seeded near-miss generator | 400 | as recorded |
+| the name-resolution templates | 120 | all accepted |
+
+**The generated corpus's body-length mix, counted on what the generator wrote
+and gated against a floor:** 732 bodies of one atom, 1,516 of two, **1,329 of
+three and 1,134 of four**. Before this task the generator drew one to three and
+the fourth atom arrived only when a wide head forced it; a corpus that drifted
+back to two-atom bodies would agree trivially under both policies, which is what
+the floor of 200 per length is against.
+
+**A semantic rejection is the same under both policies and the harness asserts
+it**; a *budget* refusal is allowed to differ, because the binarized program
+declares auxiliary relations the n-ary one does not and can therefore exhaust a
+relation, rule or arity bound the n-ary one never reaches. On this corpus it
+does not differ: both policies accept all 1,200 generated programs and diverge
+on nothing.
 
 ## Results
 
-To be written.
+### The two-atom path, against the retained control
+
+Control `closure_ballpark-193ebd1` against candidate `closure_ballpark-cb11550`, five interleaved
+rounds, CPU 5, repeat counts 3 and 6 with two-point differencing, the six-event set at **100.00 per
+cent enabled over 180 measurements**, load 3.19 to 5.28. Receipt
+`analysis/datalog-comparison/ab-2026-09-17-c1193-direct.json` with its raw sidecar.
+
+| Cohort | derived | instructions [lo, hi] | A/A null | cycles [lo, hi] | cycle null | branches | branch misses | peak RSS control / candidate KiB |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `closure` sparse 256 | 62,979 | **1.02128** [1.02127, 1.02129] | 1.0000043 | 1.0214 [1.0155, 1.0274] | 0.97561 | 1.0147 | 1.0069 | 5,088 / 5,056 |
+| `closure` sparse 1,024 | 979,983 | **1.02143** [1.02143, 1.02143] | 1.0000000 | 1.0123 [0.9966, 1.0283] | 0.99544 | 1.0149 | 0.9859 | 34,424 / 34,408 |
+| `closure` dense 256 | 65,536 | **1.01699** [1.01698, 1.01699] | 1.0000012 | 1.0548 [1.0328, 1.0774] | 0.99965 | 1.0009 | 1.0041 | 7,660 / 7,644 |
+| `closure` dense 512 | 262,144 | **1.01696** [1.01696, 1.01697] | 1.0000001 | 1.0472 [1.0333, 1.0613] | 1.00002 | 1.0005 | 1.0007 | 22,416 / 22,400 |
+| `samegen` sparse 1,024 | 258,691 | **1.02052** [1.02052, 1.02053] | 0.9999993 | 1.0350 [1.0193, 1.0510] | 1.00158 | 1.0240 | 1.0563 | 11,580 / 11,568 |
+| `samegen` dense 512 | 507,425 | **1.02064** [1.02064, 1.02064] | 0.9999996 | 1.0133 [1.0046, 1.0221] | 0.99973 | 1.0188 | 0.9952 | 19,156 / 19,140 |
+
+Derived, probe and candidate counts identical on every cohort. **Peak resident set is lower on
+every cohort**, by 12 to 32 KiB: the interleaved premise column touches one page where two columns
+touched two.
+
+**The path costs 1.7 to 2.1 per cent of its instructions, and that is a loss to state plainly
+rather than round away.** The A/A nulls are inside four parts per million, so it is a measurement
+and not noise. `Demand::evaluate_into` is **7,872 instructions against the control's 7,788**, a
+1.1 per cent larger body, which is the band three earlier reports in this lane record for source
+changes the loop does not execute (C1170's bench-driver dump path, C1198's stagger commit, C1200's
+workspace field: 0.8 to 1.7 per cent). Two of this task's changes are executed by that path, so
+some of the 2 per cent is real work and not drift: the witness write moved into one interleaved
+column, which costs a multiply and one bounds-check pair per **derived** tuple where two columns
+cost two indexed stores, and `join` builds a premise pair where it built two registers.
+
+### The record of accepted and rejected variants
+
+Every row is the same quick two-point probe against `closure_ballpark-193ebd1`, pinned to CPU 5,
+repeats 3 and 6, instructions only; the shipped row is confirmed by the full interleaved A/B above,
+which reproduces its `closure` dense 256 figure to five decimal places.
+
+| Variant | `closure` dense 256 | `closure` sparse 1,024 | `samegen` sparse 1,024 | `evaluate_into` |
+| --- | ---: | ---: | ---: | ---: |
+| the first landing: witness slot at `premises[step.position]`, `run_nary` inlined | 1.11551 | — | — | 12,624 |
+| constant-index witness slots, `run_nary` still inlined | 1.05854 | — | — | 12,855 |
+| **shipped**: constant-index slots, `run_nary` out of line | **1.01699** | **1.02143** | **1.02053** | **7,872** |
+| shipped plus the premise width carried on `Step` | 1.03370 | 1.03467 | 1.03280 | — |
+| shipped plus the n-ary limits and dispatch outlined too | 1.04315 | 1.05614 | 1.06007 | 7,946 |
+
+**The two rejected variants are the instructive half.** Carrying the head's premise width on the
+`Step` record — one byte in storage the record already had, removing an array access and its bounds
+check from the innermost write path — makes the loop **1.6 per cent worse**. Outlining the n-ary
+limits and dispatch as well as the kernel, which shrinks `evaluate_into` by nothing the two-atom
+path executes, makes it **2.6 to 3.9 per cent worse**. Neither changes a line the two-atom cohorts
+run. They are two more instances of the lever C1200 named and put on the discovery track, now with
+the sign against the change that should have been free, and they are the reason the shipped
+configuration is the one measurement chose rather than the one reasoning would have.
+
+Passing the premise pair by value rather than by reference was also tried and is **exactly
+identical** to five decimal places on all three cohorts, so the by-value form is kept for being the
+simpler one and not for being faster.
+
+### The body policy, on the families the card names
+
+One binary, `closure_ballpark-cb11550`, under two arguments: `--bodies binarized` against
+`--bodies nary`. Five interleaved rounds, CPU 5, repeats 3 and 6, the six-event set at **100.00 per
+cent enabled over 150 measurements**, load 1.77 to 1.99, `--work-may-differ`. Receipt
+`analysis/datalog-comparison/ab-2026-09-17-c1193-body-policy.json`.
+
+**The output relation's SHA-256 and its tuple count are identical on every cohort**; the driver
+fails the run rather than summarizing it otherwise, and it reported no failure.
+
+| Cohort | output tuples | derived, binarized → n-ary | rounds | instructions [lo, hi] | A/A null | cycles [lo, hi] | cycle null | peak RSS KiB |
+| --- | ---: | --- | --- | ---: | ---: | ---: | ---: | --- |
+| `triangle` sparse 4,096 | 48 | 36,912 → **48** | 3 → 2 | **0.52263** [0.52260, 0.52266] | 0.9999698 | 0.3972 [0.2048, 0.7703] | 0.88328 | 192,232 → 71,492 |
+| `triangle` sparse 16,384 | 15 | 147,471 → **15** | 3 → 2 | **0.61324** [0.61320, 0.61329] | 0.9999939 | 0.4053 [0.3727, 0.4407] | 1.06066 | 149,952 → 15,140 |
+| `path3` sparse 4,096 | 110,213 | 147,053 → 110,213 | 3 → 2 | **0.95927** [0.95920, 0.95934] | 1.0000454 | 0.9330 [0.9006, 0.9666] | 0.99880 | 14,084 → 11,260 |
+| `path3` sparse 16,384 | 441,937 | 589,360 → 441,937 | 3 → 2 | **0.93405** [0.93403, 0.93408] | 1.0000145 | 0.8266 [0.8040, 0.8498] | 1.01593 | 94,272 → 58,524 |
+| `path4` sparse 4,096 | 327,629 | 474,682 → 327,629 | 4 → 2 | **0.94849** [0.94849, 0.94850] | 1.0000026 | 0.9634 [0.8801, 1.0545] | 1.01902 | 25,560 → 19,344 |
+
+The `triangle` cycle rows are **not readable** and are printed with their nulls to say so: the A/A
+null is 0.883 at 4,096 and 1.061 at 16,384, both far outside the noise floor the playbook requires
+before a cycle ratio may be read. The instruction rows on those cohorts are readable, with nulls
+inside three parts per hundred thousand.
+
+**The headline is `triangle`, and it is the shape the card predicted.** The binarized chain must
+carry all three variables through its auxiliary — the last atom needs `z` and the head needs `x`
+and `y` — so it derives about `9N` intermediate tuples to produce a result of tens, and the n-ary
+body derives only the result. Instructions fall to 0.52 and 0.61, the derived-tuple count by three
+to four orders of magnitude, the round count from three to two, and peak resident memory from 192 MB
+to 71 MB and from 146 MB to 15 MB.
+
+**`path3` and `path4` are the honest middle, and they came out worse than the Fermi.** The
+intermediate there is a real relation and not a scaffold, so removing it saves the emits and not the
+joins: derived tuples fall by 25 to 31 per cent and instructions by only 4 to 7. Prediction 1 said
+0.70 to 0.85 for `path3` and 0.55 to 0.75 for `path4`; the measurement is 0.93 to 0.96. The cost
+model was wrong in exactly the direction prediction 3 warned of — the n-ary join is not cheaper per
+unit than the binarized chain's — and the correction is in the per-unit table below.
+
+### The supplementary cache-event run
+
+Same two arms, the playbook's cache set with its own run and its own nulls, five rounds, CPU 5,
+**100.00 per cent enabled on every event**, load 0.90 to 0.98. Receipt
+`analysis/datalog-comparison/ab-2026-09-17-c1193-body-policy-cache.json`.
+
+| Cohort | L1 d-cache loads | its null | L1 load misses | its null | cache references | its null | cache misses | its null |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `triangle` sparse 4,096 | 0.5655 | 0.9912 | **0.2761** | 1.0054 | 0.2619 | 0.9761 | 0.2020 | 1.0006 |
+| `path3` sparse 16,384 | 0.9745 | 1.0038 | **0.7798** | 0.9924 | 0.7592 | 0.9876 | 0.7399 | 1.0241 |
+| `path4` sparse 4,096 | 0.9665 | 1.0019 | **0.7435** | 1.0011 | 0.6883 | 1.0159 | 0.4866 | 0.9303 |
+
+**This is the second result and it is larger than the instruction ratio says.** On `path3` and
+`path4` the loop issues 97 per cent of the loads it issued and **misses 74 to 78 per cent** of what
+it missed: not writing the intermediate relation removes memory traffic out of proportion to
+instructions, which is why the cycle ratio on `path3` at 16,384 is 0.827 against an instruction
+ratio of 0.934. The `path4` cache-miss row carries a null of 0.930 and is reported with that caveat
+rather than read.
+
+### The Rel route: the `datalog` cohort under the two policies
+
+`ergodis-tools-cb11550` against itself with `--body-policy nary` and `--body-policy binarize`, five
+rounds, CPU 5, the six-event set at 100.00 per cent enabled over 342 measurements, load 0.51 to
+1.00. Receipt `analysis/rel-frontend/performance-v10-c1193-body-policy-datalog.json`.
+
+| Stage | binarize | nary | ratio [lo, hi] |
+| --- | ---: | ---: | ---: |
+| `scan`, `parse`, `admit` | — | — | 1.00000 to within one part per hundred thousand |
+| `lower` | 5,704,353 | 5,677,200 | 0.99524 [0.99524, 0.99524] |
+| `lower` − `admit`, the lowering alone | 1,353,567 | 1,326,412 | **0.97994** |
+| `stratify` | 1,694,944,191 | 1,683,686,087 | 0.99336 [0.99336, 0.99336] |
+| `stratify` − `lower`, the backend alone | 1,689,239,838 | 1,678,008,887 | **0.99335** |
+
+And what the lowered program itself becomes, from `rel-lower --cohort datalog --definitions 512`
+under each policy, both verified:
+
+| | relations | auxiliaries | rules | binarized rules | literals | canonical fingerprint |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| `binarize` | 14 | 8 | 96 | 8 | 272 | `16adff1ed85f7e04` |
+| `nary` | **6** | **0** | **88** | 0 | 256 | `06aa82af43b2b958` |
+
+The lowering is 2.0 per cent cheaper because it builds eight fewer relations and eight fewer
+synthetic rules; the backend — projection, evaluation, certification and both independent checkers
+over every layer — is 0.66 per cent cheaper. That is small and it is what this cohort can offer:
+eight of its ninety-six rules have three atoms, and C1192's mystery ledger item 9 already recorded
+that this stage is mostly materialization rather than the derivation loop.
+
+### Against Soufflé 2.5, which is the engine that motivated the task
+
+The three families now have `.dl` programs and a `compare.py` row each, so the comparison the card's
+"Why" section rests on — that Soufflé plans an n-ary join natively and this path did not — is a
+measurement rather than a citation. Whole-process wall, five interleaved rounds, CPU 5, compiled
+Soufflé with `-j1`, and the derived relation compared as a tuple set on every case. Receipts
+`analysis/datalog-comparison/results-2026-09-17-c1193-{binarized,nary}.json`.
+
+| Program | N | output | binarized, wall over compiled Soufflé | n-ary, wall over compiled Soufflé | peak RSS binarized → n-ary → Soufflé, KiB |
+| --- | ---: | ---: | ---: | ---: | --- |
+| `triangle` | 1,024 | 48 | 1.486 [1.181, 1.870] | **1.167** [0.873, 1.559] | 24,340 → 7,772 → 4,832 |
+| `triangle` | 4,096 | 48 | 4.394 [4.058, 4.757] | **1.918** [1.806, 2.038] | 191,548 → 70,820 → 4,932 |
+| `path3` | 1,024 | 27,303 | 0.804 [0.790, 0.818] | 0.877 [0.666, 1.156] | 5,068 → 4,768 → 5,044 |
+| `path3` | 4,096 | 110,213 | 0.690 [0.512, 0.931] | **0.569** [0.528, 0.614] | 14,328 → 11,440 → 5,984 |
+| `path4` | 1,024 | 78,955 | 0.557 [0.433, 0.716] | 0.612 [0.481, 0.780] | 7,952 → 7,184 → 5,696 |
+| `path4` | 4,096 | 327,629 | 0.373 [0.366, 0.381] | **0.349** [0.338, 0.361] | 25,856 → 19,532 → 9,112 |
+
+Soufflé's tuple set agrees with this evaluator's on all six cases, and its interpreter agrees with
+its compiled binary on all six. The n-ary policy **halves the triangle gap**, from 4.39 times
+compiled Soufflé to 1.92, and improves both larger path cases; the two `1,024` path rows are the
+only ones where it is behind, and there the whole process is about twenty milliseconds of which the
+evaluation is one or two, so the ratio is reading process startup.
+
+### The per-unit cost of the new kernel
+
+The n-ary join has no retained control, so the playbook's rule for a new kernel applies: it is
+accepted with a recorded per-unit cost budget, its kernel-scoped profile, and its zero-allocation
+and call-free evidence.
+
+The unit is a **body match at any depth** — a row a link yielded that bound successfully, complete
+or partial. That count is not instrumented, and it does not need to be: the binarized twin's rules
+correspond one to one to the n-ary body's levels, so its `candidates` counter **is** the n-ary
+kernel's match count on the same cohort. (The n-ary kernel's own `candidates` counts complete body
+matches only, which is what that counter has always meant and is not the unit its work is
+proportional to; a `matches` counter would make the budget self-evidencing and is a candidate below.)
+
+| Cohort | matches | n-ary instructions per match | n-ary ns per match | binarized instructions per match |
+| --- | ---: | ---: | ---: | ---: |
+| `triangle` sparse 4,096 | 36,912 | 295.6 | 32.1 | 565.7 |
+| `triangle` sparse 16,384 | 147,471 | 433.7 | 55.8 | 707.1 |
+| `path3` sparse 4,096 | 147,384 | 233.5 | 12.8 | 243.4 |
+| `path3` sparse 16,384 | 589,725 | 259.4 | 36.8 | 277.7 |
+| `path4` sparse 4,096 | 478,023 | 233.2 | 13.1 | 245.9 |
+
+**233 to 434 instructions and 13 to 56 nanoseconds per body match** is the budget the next change to
+this kernel is measured against. The spread is the cohort and not the kernel: `triangle`'s second
+link is a fully bound membership probe into an index over `domain²`, whose locality is the worst of
+the five, and its per-match cost rises with `N` while the two path families' barely do.
+
+## Recorded deviations
+
+1. **`ab.py` gained `--work-may-differ` and its receipt carries both arms' work
+   counts.** The driver refused to summarize a cohort whose arms disagree on
+   derived, probe, candidate or round counts, which is the right check for two
+   revisions of one program and the wrong one for a binarized body against its
+   n-ary twin — two programs with one closure. The output relation's count, its
+   SHA-256 and the failure code must still agree under the flag. **A consequence
+   to state:** `row["derived"]` and its three siblings are now a mapping of arm
+   name to count rather than one scalar, so re-summarizing an older receipt with
+   this driver produces the new shape. The committed receipts themselves are
+   untouched, and an audit that re-derives from the `.jsonl` sidecars — which is
+   how C1200's audit did it — reads the raw samples and not the summary.
+2. **`bench.py` gained `--binary-args` and `--control-args`.** An arm is now a
+   binary and the extra arguments it is run with, which is the shape `ab.py`
+   already had; both default to empty, so an existing invocation is unchanged.
+3. **The `closure_ballpark` harness gained three programs and one flag**, which
+   the card did not ask for. Without `triangle`, `path3` and `path4` there is no
+   cohort whose body is longer than two atoms, and without `--bodies` the two
+   arms of the central comparison would be two binaries rather than one binary
+   under two arguments.
+4. **The body policy is a lowering option, not a `Limits` field.** `Limits` is a
+   capacity structure and a policy is not a capacity, so it is an argument to
+   `Workspace::lower_with` and is threaded through the passes rather than stored.
+5. **Under `BodyPolicy::Nary` a body of more than four atoms is still chained,
+   down to four.** The same pass, the same auxiliaries and the same join order;
+   only the stopping point moves. A grouping that chained five atoms into two
+   groups of three would be a different policy and is not built.
+6. **The allocation gate's reservation counter needed a lock.**
+   `ergodis_rules::reservations()` is one process-wide atomic, so a sibling test
+   reserving a workspace on another thread inflates it; before this task there
+   was exactly one gate reading it and the fragility was invisible. Both gates
+   now take a mutex. The allocation counter itself is thread-local and needs
+   none.
+7. **`rule_contract::parse_rules` now admits up to `datalog::MAX_BODY` atoms.**
+   The textual form admits what the wire format admits and each consumer applies
+   its own bound; `ground` still refuses a body of more than two, which a test
+   asserts on a program `parse_rules` accepts.
 
 ## Profile
 
-To be written.
+`perf record -e instructions:u -F 4000`, pinned to CPU 5, on `closure_ballpark-cb11550` in its
+`--evaluate-only` mode — read the generator, prepare once, then the derivation loop and nothing
+else — over `path3` at the sparse density and N = 16,384 with sixty iterations, so the one-shot
+output path is under a quarter of a per cent. Profile data under
+`~/.cache/ergodis/perf-c1193/path3-{binarized,nary}.data`.
+
+| Symbol | binarized | n-ary |
+| --- | ---: | ---: |
+| `Demand::run_nary` | — | **88.58 %** |
+| `Demand::evaluate_into` | **93.91 %** | 9.40 % |
+| `Demand::index_rows` | 4.22 % | below 0.05 % |
+| everything else above 0.05 % | 1.05 % | 0.99 % |
+
+The derivation loop is 98.13 per cent of the binarized profile and 97.98 per cent of the n-ary one.
+Everything else is the harness's own one-shot path — `serde_json`, `sha2`, `itoa`,
+`__memmove_avx512_unaligned_erms`, `_int_malloc`, `hashbrown` — each below a quarter of a per cent
+and none of it inside a loop. **`index_rows` falls out of the n-ary profile**, and that is where
+part of the saving went: 4.22 per cent of the binarized profile is the auxiliary relation's chain
+index being rebuilt at every round boundary, and the n-ary program has no auxiliary to index.
+
+**Every out-of-line call inside the kernels, read from the disassembly rather than from the
+profile's resolution**, which is the playbook's own rule for this claim. `Demand::run_nary`, 1,407
+instructions per instantiation, calls **nothing but `panic_bounds_check` and `slice_index_fail`** —
+panic paths on the cold side of a branch, never taken. No libc symbol, no allocator, no formatting,
+no trait-object dispatch. `Demand::evaluate_into`, 7,872 instructions, calls `index_rows` twice, the
+four `run_nary` instantiations once each, the same two panic helpers, and **`memset@GLIBC` twice**:
+those two are the reset's fill path, which C1198 measured and bounded by
+`RESET_FILL_BYTES_PER_ROW`, and they sit before the round loop rather than inside it.
+
+**Layout.** `Link` is `#[repr(C, align(64))]` with
+`const _: () = assert!(size_of::<Link>() == 64 && align_of::<Link>() == 64)`; `Step` keeps its
+asserted 128-byte stride and align 4 unchanged, and `Op` its 8-byte stride. Nothing else the loop
+reads is a record.
+
+**Allocation.** `repeated_n_ary_evaluation_has_no_allocation` enters the real loop a hundred times
+after setup, on a program with a two-atom recursion, a three-atom triangle and a four-atom chain,
+under every one of the five addressing policies, and observes **zero allocations and zero
+reservations**, with both n-ary relations asserted non-empty so the kernel is known to have been
+entered. The pre-existing derivation-loop gate is unchanged and green.
 
 ## Exactness
 
@@ -429,6 +795,10 @@ body position is the semantics, rather than an argument that it is.
 
 To be written.
 
+## The `ej` and `tt` closeout
+
+To be written.
+
 ## Mystery ledger
 
 To be written.
@@ -437,6 +807,14 @@ To be written.
 
 To be written.
 
+## Replay commands
+
+To be written.
+
 ## What this task left under `~/.cache/ergodis/`
+
+To be written.
+
+## Vibe check
 
 To be written.
