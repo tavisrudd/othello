@@ -333,32 +333,38 @@ page-fault handling is kernel time.
 
 ### The direct path, where the tables are small
 
-Control `closure_ballpark-b7921a0` against the shipped candidate `closure_ballpark-6078142`, five
+Control `closure_ballpark-b7921a0` against the shipped candidate `closure_ballpark-ed99963`, five
 interleaved rounds, CPU 5, repeat counts 3 and 6 with two-point differencing, `--evaluate-only`, the
-six-event set at **100.00 per cent enabled on every event over 180 measurements**, load 3.02 to 4.94.
-Receipt `analysis/datalog-comparison/ab-2026-09-16-c1198-direct-shipped.json` with its raw sidecar.
+six-event set at **100.00 per cent enabled on every event over 180 measurements**, load 6.93 to 9.76.
+Receipt `analysis/datalog-comparison/ab-2026-09-17-c1198-direct-final.json` with its raw sidecar.
 These are the six cohorts C1192 used to show that its direct path did not move, and the policy
 selects a direct kind for every index and a bitmap for every membership test on all of them.
 
 | Cohort | derived | instruction ratio [lo, hi] | A/A null | cycle ratio | cycle null | peak RSS, control / candidate KiB |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| `closure` sparse 256 | 62,979 | **0.98371** [0.98371, 0.98372] | 1.0000018 | 0.9806 | 1.0044 | 5,052 / 5,064 |
-| `closure` sparse 1,024 | 979,983 | **0.98365** [0.98365, 0.98365] | 1.0000005 | 0.9915 | 1.0732 | 36,400 / 34,416 |
-| `closure` dense 256 | 65,536 | **0.98335** [0.98335, 0.98335] | 1.0000031 | 0.9805 | 0.9973 | 7,592 / 7,660 |
-| `closure` dense 512 | 262,144 | **0.98327** [0.98327, 0.98328] | 0.9999994 | 0.9589 | 0.9081 | 21,808 / 22,416 |
-| `samegen` sparse 1,024 | 258,691 | **0.98246** [0.98245, 0.98247] | 1.0000027 | 0.9462 | 1.0076 | 68,916 / 11,580 |
-| `samegen` dense 512 | 507,425 | **0.98300** [0.98300, 0.98300] | 1.0000012 | 1.1611 | 1.2003 | 19,520 / 19,156 |
+| `closure` sparse 256 | 62,979 | **0.98371** [0.98370, 0.98372] | 0.9999944 | 0.9833 | 0.9979 | 5,052 / 5,064 |
+| `closure` sparse 1,024 | 979,983 | **0.98365** [0.98365, 0.98365] | 1.0000004 | 0.9887 | 1.0006 | 36,400 / 34,416 |
+| `closure` dense 256 | 65,536 | **0.98335** [0.98334, 0.98335] | 0.9999958 | 0.9873 | 1.1650 | 7,592 / 7,660 |
+| `closure` dense 512 | 262,144 | **0.98327** [0.98327, 0.98327] | 0.9999998 | 0.9353 | 0.8494 | 21,808 / 22,416 |
+| `samegen` sparse 1,024 | 258,691 | **0.98246** [0.98245, 0.98246] | 1.0000027 | 1.0134 | 1.0684 | 68,916 / 11,580 |
+| `samegen` dense 512 | 507,425 | **0.98300** [0.98300, 0.98300] | 1.0000011 | 0.9479 | 0.9925 | 19,520 / 19,156 |
 
 **The derivation loop is 1.6 to 1.8 per cent cheaper in instructions on every one of them**, with
-A/A nulls inside four parts per million, paired intervals narrower than a hundredth of a per cent,
+A/A nulls inside six parts per million, paired intervals narrower than a hundredth of a per cent,
 and the output SHA-256 identical across arms on every cohort. Branches are unity to within two parts
 in ten thousand and branch misses are inside their own nulls, so the control flow did not move; the
 saving is the `fill(NONE)` that no longer runs and the zero sentinel's cheaper chain test.
 
-**Two of the six cycle ratios are not readable and are reported as such.** `closure` dense 512
-carries a cycle A/A null of 0.9081 and `samegen` dense 512 one of 1.2003, both far enough from unity
-that the playbook's rule says the candidate is not read for that event on those rows. The four that
-are readable sit at 0.946 to 0.991 against nulls of 0.997 to 1.008.
+**Every one of those six instruction ratios reproduces to five decimal places** against the same A/B
+taken on `closure_ballpark-6078142` an hour earlier at a different box load
+(`ab-2026-09-16-c1198-direct-shipped.json`, load 3.02 to 4.94), which is the between-run check C1192's
+audit found missing for its cycle figures.
+
+**Three of the six cycle ratios are not readable and are reported as such.** `closure` dense 512
+carries a cycle A/A null of 0.8494, `closure` dense 256 one of 1.1650 and `samegen` sparse 1,024 one
+of 1.0684, all far enough from unity that the playbook's rule says the candidate is not read for that
+event on those rows — the box carried a load of seven to ten during this run. The three that are
+readable sit at 0.948 to 0.989 against nulls of 0.993 to 1.001.
 
 **Peak resident set falls where there was anything to fall.** `samegen` sparse at N = 1,024 is
 68,916 KiB against 11,580, a factor of 5.9, because its derived relation's universe is 2^20 and its
@@ -439,18 +445,18 @@ untouched kernel through ThinLTO's module summary — this time with a control t
 
 ### The cohorts the reservation was costing, at the default row bound
 
-Control `closure_ballpark-b7921a0` against the shipped candidate `closure_ballpark-6078142`, five
-interleaved rounds, CPU 5, the six-event set at 100.00 per cent over 180 measurements, load 3.17 to
-4.77. Receipt `analysis/datalog-comparison/ab-2026-09-16-c1198-memory-shipped.json`.
+Control `closure_ballpark-b7921a0` against the shipped candidate `closure_ballpark-ed99963`, five
+interleaved rounds, CPU 5, the six-event set at 100.00 per cent over 180 measurements, load 4.31 to
+5.98. Receipt `analysis/datalog-comparison/ab-2026-09-17-c1198-memory-final.json`.
 
 | Cohort | derived | instruction ratio | A/A null | cycle ratio | cycle null | peak RSS, control / candidate KiB | factor |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `closure` blocks 4,096 | 65,536 | 0.98502 | 1.0000220 | **0.9083** | 1.0060 | 539,388 / **18,356** | **×29.4** |
-| `closure` blocks 16,384 | 262,144 | 0.99970 | 0.9999970 | 0.7259 | 0.8343 | 599,896 / **83,892** | **×7.2** |
-| `closure` blocks 65,536 | 1,048,576 | 1.03136 | 1.0000010 | 0.8698 | 0.8593 | 817,064 / **264,380** | **×3.1** |
-| `mutual` blocks 4,096 | 61,440 | 1.08010 | 1.0000760 | 0.9040 | 0.8681 | 539,400 / **82,896** | **×6.5** |
-| `mutual` blocks 8,192 | 122,880 | 1.06055 | 1.0000240 | 0.9838 | 0.9974 | 493,276 / **37,908** | **×13.0** |
-| `cycle` blocks 4,096 | 131,072 | 0.99054 | 0.9999820 | **0.7691** | 1.0125 | 1,131,304 / **38,260** | **×29.6** |
+| `closure` blocks 4,096 | 65,536 | 0.98501 | 1.0000160 | **0.9885** | 1.0113 | 539,388 / **18,356** | **×29.4** |
+| `closure` blocks 16,384 | 262,144 | 0.99970 | 0.9999970 | 0.7186 | 0.8606 | 599,896 / **83,892** | **×7.2** |
+| `closure` blocks 65,536 | 1,048,576 | 1.01659 | 0.9999940 | 0.7622 | 0.9435 | 817,064 / **264,380** | **×3.1** |
+| `mutual` blocks 4,096 | 61,440 | 0.97546 | 1.0000730 | 0.8766 | 0.9182 | 539,400 / **82,896** | **×6.5** |
+| `mutual` blocks 8,192 | 122,880 | 1.06050 | 1.0000640 | **0.9902** | 1.0165 | 493,276 / **37,908** | **×13.0** |
+| `cycle` blocks 4,096 | 131,072 | 0.99055 | 1.0000060 | **0.8179** | 1.0213 | 1,131,304 / **38,260** | **×29.6** |
 
 Output digests identical across arms on every cohort.
 
@@ -460,18 +466,55 @@ default bound and a hand-sized one: it now costs **38,260 KiB at the default bou
 23,872 KiB C1192 needed a row bound of 100,000 to reach. The caller's bound has stopped being a
 memory decision.
 
-**The instruction column is where the high-water reset shows, and it is ordered by exactly what the
-design predicts.** `cycle` is the case where the control memsets a 64 MiB chain head before every
-evaluation and the candidate walks 131,072 rows instead: instructions are 0.991 and **cycles are
-0.769**, a 23 per cent saving, because that memset was the evaluation's largest memory traffic.
-`mutual` at N = 4,096 is the opposite corner — a 1.2 ms evaluation, a 2 MiB membership bitmap and
-61,440 rows to walk — and it pays **8.0 per cent more instructions** while buying 446 MiB of
-resident memory; its cycle ratio is 0.904, so the wall cost of those instructions is negative.
-`closure` at `blocks` and N = 65,536 pays 3.1 per cent for the same reason at a larger scale.
+**Five of the six cohorts are at or below unity in instructions and all six are at or below unity in
+cycles.** `cycle` is the case where the control memsets a 64 MiB chain head before every evaluation
+and the candidate walks 131,072 rows instead: instructions 0.991 and **cycles 0.818** against a
+readable null of 1.021, an 18 per cent saving, because that memset was the evaluation's largest
+memory traffic. The one cohort that pays is `mutual` at N = 8,192, at **6.1 per cent more
+instructions**, because its 8 MiB membership bitmap is 2.1 times its rows' worth of bytes and the
+reset therefore walks 122,880 rows rather than filling; its cycle ratio is 0.990 against a null of
+1.017, so the wall cost of those instructions is nil, and what it buys is 445 MiB of resident memory.
 
-**Three of the six cycle nulls sit between 0.834 and 0.868 and those rows are not read for cycles.**
-The three that are readable — `closure` blocks 4,096 at 0.908 against a null of 1.006, `mutual` at
-8,192 at 0.984 against 0.997, and `cycle` at 0.769 against 1.013 — all favour the candidate.
+**Two of the six cycle nulls sit at 0.861 and 0.944 and those rows are not read for cycles.** The
+four that are readable — `closure` blocks 4,096 at 0.989, `mutual` at 8,192 at 0.990, `cycle` at
+0.818 and `mutual` at 4,096 at 0.877 against a null of 0.918 — all favour the candidate.
+
+### The reset's fill boundary, measured
+
+`RESET_FILL_BYTES_PER_ROW` decides whether a table is returned to empty by one linear pass or by
+walking the rows that wrote it, and it was set at 32 by reasoning — the row store commits twenty-eight
+bytes per derived row, so a fill admitted only below that cannot be the term that decides a
+workspace's resident set. **That reasoning was right about the bound and wrong about where the
+cohorts sit.** Computing `table bytes / (32 × rows)` for every structure of every measured cohort:
+
+| Regime | Structures |
+| --- | --- |
+| far below the boundary, 0.0001 to 0.016 | every structure of all six direct-path cohorts |
+| at or near it, 0.5 to 2.1 | `closure` blocks 4,096's bitmap (1.00), `cycle` blocks 4,096's two bitmaps (0.50), `mutual` blocks 4,096's bitmap (1.07), `closure` blocks 65,536's membership heads (2.00), `mutual` blocks 8,192's bitmap (2.13) |
+| far above it, 4 to 16 | `closure` blocks 16,384's bitmap (4.0), `cycle` blocks 4,096's chain head (16.0) |
+
+So the constant is load bearing on five structures, and the claim that it was not had to be
+withdrawn. It was then measured: the same binary at 32 against 64, five interleaved rounds, CPU 5,
+on the four cohorts near the boundary
+(`~/.cache/ergodis/c1198/ab-reset-constant.json`; the 64 arm is a probe build from a tree dirty in
+exactly that one constant, `~/.cache/ergodis/bin/c1198-reset64-probe`, measured sha256
+`0a7096a979e65485166b390044d50c60eab501d8edcff713983820b60a6e50de`, cited by nothing but this
+paragraph and superseded by the shipped arm).
+
+| Cohort | 64 over 32, instructions | A/A null | cycles | peak RSS at 32 / at 64, KiB |
+| --- | ---: | ---: | ---: | ---: |
+| `mutual` blocks 4,096 | **0.90318** | 1.0001340 | 0.9882 | 82,908 / 82,852 |
+| `closure` blocks 65,536 | **0.98569** | 1.0000020 | 0.9833 | 264,396 / 264,368 |
+| `mutual` blocks 8,192 | 0.99998 | 0.9999770 | 0.9216 | 37,920 / 37,888 |
+| `closure` blocks 16,384 | 1.00001 | 1.0000010 | 1.0016 | 83,908 / 83,880 |
+
+**Sixty-four is strictly better on the cohorts where it binds and costs nothing in memory**, so it is
+what ships. The two cohorts that cross the boundary take 0.903 and 0.986 of the instructions and
+their peak resident sets move by 56 and 28 KiB — that is, by nothing. The reason the fill is free
+there is worth stating because it is not obvious: **a table whose bytes are within a small factor of
+its rows has already had most of its pages committed by those rows**, so the fill writes pages that
+are resident either way. The two structures four and sixteen times out walk under both values and do
+not move, which is the control this comparison needs.
 
 ### Cache events on the cohorts the stagger repaired
 
