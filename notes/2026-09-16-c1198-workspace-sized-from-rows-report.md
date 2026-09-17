@@ -331,7 +331,72 @@ page-fault handling is kernel time.
 
 ## Results
 
-*Pending.*
+### The direct path, where the tables are small
+
+Control `closure_ballpark-b7921a0` against candidate `closure_ballpark-356fce6`, five interleaved
+rounds, CPU 5, repeat counts 3 and 6 with two-point differencing, `--evaluate-only`, the six-event
+set at **100.00 per cent enabled on every event over 180 measurements**, load 2.04 to 2.30. Receipt
+`analysis/datalog-comparison/ab-2026-09-16-c1198-direct-b7921a0.json` with its raw sidecar; the same
+A/B against `closure_ballpark-c3eda9a` is
+`ab-2026-09-16-c1198-direct.json`. These are the six cohorts C1192 used to show that its direct path
+did not move, and the policy selects a direct kind for every index and a bitmap for every membership
+test on all of them.
+
+| Cohort | derived | instruction ratio [lo, hi] | A/A null | cycle ratio | cycle null | peak RSS, control / candidate KiB |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `closure` sparse 256 | 62,979 | **0.99026** [0.99025, 0.99027] | 0.9999926 | 1.0140 | 1.0161 | 5,052 / 5,088 |
+| `closure` sparse 1,024 | 979,983 | **0.99020** [0.99020, 0.99020] | 1.0000008 | 1.0109 | 1.0037 | 36,400 / 34,416 |
+| `closure` dense 256 | 65,536 | **0.99161** [0.99161, 0.99161] | 0.9999997 | 1.0870 | 1.0019 | 7,592 / 7,624 |
+| `closure` dense 512 | 262,144 | **0.99160** [0.99160, 0.99161] | 0.9999998 | 1.0894 | 0.9999 | 21,808 / 22,380 |
+| `samegen` sparse 1,024 | 258,691 | **0.98918** [0.98917, 0.98919] | 1.0000026 | 1.0806 | 1.0462 | 68,916 / 11,532 |
+| `samegen` dense 512 | 507,425 | **0.98976** [0.98976, 0.98976] | 0.9999986 | 0.9979 | 0.9928 | 19,520 / 19,140 |
+
+**The derivation loop is 0.8 to 1.1 per cent cheaper in instructions on every one of them**, with
+A/A nulls inside three parts per million, paired intervals narrower than a hundredth of a per cent,
+and the output SHA-256 identical across arms on every cohort. Branches are unity to within two parts
+in ten thousand and branch misses within their own nulls, so nothing about the control flow moved;
+the saving is the removed `fill(NONE)` over each table, which the small-table cohorts still pay once
+per evaluation on the control and which the candidate's `fill(0)` pays as a shorter instruction
+sequence, plus the zero sentinel's cheaper `test` against `cmp` in each chain walk.
+
+**These cycle ratios are the pre-stagger measurement and they are the reason the stagger exists.**
+The two dense-closure rows at 1.087 and 1.089, against cycle nulls of 1.002 and 1.000, are a real
+9 per cent regression with instructions *down* 0.8 per cent; **that arm is `356fce6`, which does not
+carry `271d648`.** The repair and its evidence are in the mystery ledger; the shipped arm's figures
+are in the section after next.
+
+### The cohorts the reservation was costing, at the default row bound
+
+Same control, same candidate, same protocol; five interleaved rounds, CPU 5, the six-event set at
+100.00 per cent over 180 measurements, load 1.90 to 2.09. Receipt
+`analysis/datalog-comparison/ab-2026-09-16-c1198-memory.json`.
+
+| Cohort | derived | instruction ratio | A/A null | cycle ratio | cycle null | peak RSS, control / candidate KiB | factor |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `closure` blocks 4,096 | 65,536 | 0.99294 | 1.0000125 | 1.0896 | 1.0174 | 539,388 / **18,464** | **×29.2** |
+| `closure` blocks 16,384 | 262,144 | 1.00759 | 0.9999991 | 0.9770 | 1.0038 | 599,896 / **83,852** | **×7.2** |
+| `closure` blocks 65,536 | 1,048,576 | 1.03729 | 0.9999983 | 1.0282 | 0.9874 | 817,064 / **264,340** | **×3.1** |
+| `mutual` blocks 4,096 | 61,440 | 1.08625 | 1.0000135 | 1.0179 | 1.0118 | 539,400 / **82,868** | **×6.5** |
+| `mutual` blocks 8,192 | 122,880 | 1.05625 | 0.9999999 | 0.9669 | 0.9886 | 493,276 / **37,880** | **×13.0** |
+| `cycle` blocks 4,096 | 131,072 | 1.00068 | 1.0000000 | **0.8384** | 1.0085 | 1,131,304 / **38,192** | **×29.6** |
+
+Output digests identical across arms on every cohort.
+
+**Peak resident set falls by a factor of 3.1 to 29.6 at the default row bound**, which is the
+result the task exists for. `cycle` at N = 4,096 is the program C1192 measured at a factor of 47
+between the default bound and a hand-sized one: it now costs **38,192 KiB at the default bound**
+against the 23,872 KiB C1192 needed a bound of 100,000 rows to reach, so the caller's bound has
+stopped being a memory decision.
+
+**The instruction column is where the high-water reset shows, and it is ordered by exactly what the
+design predicts.** `cycle` is at unity (1.00068) because its 2^24-slot chain head is far too large
+for a fill, so the control memsets 64 MiB per evaluation and the candidate walks 131,072 rows — and
+its **cycle ratio is 0.838**, a 16 per cent saving, because that memset was the evaluation's largest
+memory traffic. `mutual` at N = 4,096 is the opposite corner: its evaluation is 1.2 ms, its
+membership bitmap is 2 MiB against 61,440 rows, and walking those rows costs **8.6 per cent** of a
+very short evaluation while buying 456 MiB of resident memory. `closure` at `blocks` and N = 65,536
+pays 3.7 per cent for the same reason at a larger scale. Those are the trade working as designed,
+and the cycle ratios say the wall cost is smaller than the instruction cost in every case.
 
 ## Profile
 
