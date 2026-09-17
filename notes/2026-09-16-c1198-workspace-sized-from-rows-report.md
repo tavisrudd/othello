@@ -631,6 +631,64 @@ times; `stratified` does not move, and that is the useful negative, because its 
 complement it materializes and not a workspace reservation. **`columns3` at a dictionary of 483 was
 the largest single number in C1192's report at 3.14 GB; it is 1.82 GB.**
 
+### Against Soufflé at the default row bound
+
+The shipped arm `closure_ballpark-6078142` against Soufflé 2.5 (32-bit word, from the nix store at
+`/nix/store/7f17fq5wcg19x5s4f7kh3pvknl8zfa55-souffle-2.5`), both the compiled binary and the
+interpreter, both `-j1`, five interleaved rounds per size with rotated start order on CPU 5 —
+C1192's method exactly, through the same committed `compare.py`. "Ergodis" and each Soufflé arm are
+whole processes: read the fact file, evaluate, write the derived relation. Receipts
+`analysis/datalog-comparison/results-2026-09-16-c1198-blocks.json` and `-blocks-bounded.json`.
+
+**Exactness first: on all six cases the Ergodis derived relation equals the compiled Soufflé output
+as a tuple set, and the interpreter's output equals the compiled binary's.** The certificate is
+emitted and independently checked in the warm pass of every case.
+
+| N | output | row bound | Ergodis s | compiled s | interp s | vs compiled [lo, hi] | C1192's | vs interp | instructions M, e/c/i | peak RSS MB, e/c/i | C1192's e |
+| ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | ---: |
+| 4,096 | 65,536 | `2^24` | 0.0544 | 0.0615 | 0.1068 | **0.852** [0.737, 0.985] | 3.244 | 0.568 | 382 / 423 / 801 | **18** / 6 / 11 | 527 |
+| 16,384 | 262,144 | `2^24` | 0.1334 | 0.1688 | 0.2455 | **0.819** [0.765, 0.875] | 1.558 | 0.562 | 1,539 / 1,717 / 3,145 | **84** / 12 / 17 | 587 |
+| 65,536 | 1,048,576 | `2^24` | 1.0422 | 0.9521 | 1.1019 | **1.172** [0.948, 1.449] | 1.254 | 0.821 | 6,676 / 7,079 / 12,741 | **265** / 36 / 40 | 805 |
+| 4,096 | 65,536 | 1.1 M | 0.0490 | 0.0563 | 0.1016 | 0.829 [0.735, 0.935] | 0.984 | 0.541 | 382 / 423 / 801 | 18 / 6 / 11 | 48 |
+| 16,384 | 262,144 | 1.1 M | 0.1385 | 0.1721 | 0.2480 | 0.812 [0.783, 0.842] | 0.814 | 0.564 | 1,539 / 1,717 / 3,145 | 84 / 12 / 17 | 108 |
+| 65,536 | 1,048,576 | 1.1 M | 0.6221 | 0.6437 | 0.9407 | 0.963 [0.941, 0.986] | 0.950 | 0.652 | 6,760 / 7,079 / 12,741 | 247 / 36 / 40 | 246 |
+
+**At the two smaller sizes the default-bound column now matches the sized-bound column, which is
+exactly the expectation the card set.** 0.852 against 0.829 at N = 4,096 and 0.819 against 0.812 at
+16,384, each inside the other's interval — where C1192 measured 3.244 against 0.984 and 1.558 against
+0.814. **The default-bound ratio at N = 4,096 improved by a factor of 3.8 and its peak resident set
+by a factor of 29**, from 527 MB to 18 MB, which is now three times compiled Soufflé's rather than
+eighty-eight times. Ergodis is also **within 10 per cent of compiled Soufflé's instruction count at
+every size and bound**, and the counts are the same to three digits under the two bounds, so
+nothing about the work changed.
+
+**At N = 65,536 the two columns have not converged, and the reason is not memory.** The default bound
+gives 1.172 against the sized bound's 0.963, with the intervals barely touching. The phase
+decomposition says where it sits:
+
+| N | row bound | prepare ms | evaluate ms | read ms | write ms | whole process ms | peak RSS KiB |
+| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4,096 | `2^24` | 14.8 | 6.5 | 2.7 | 1.1 | 25.0 | 17,892 |
+| 4,096 | 1.1 M | 14.8 | 6.5 | 2.7 | 1.1 | 25.0 | 17,888 |
+| 16,384 | `2^24` | 63.4 | 33.5 | 10.9 | 3.6 | 111.4 | 86,036 |
+| 16,384 | 1.1 M | 64.0 | 34.6 | 10.8 | 3.8 | 113.2 | 86,164 |
+| 65,536 | `2^24` | 434.2 | 446.8 | 103.4 | 22.2 | 1,006.6 | 271,800 |
+| 65,536 | 1.1 M | 276.9 | 231.1 | 45.2 | 15.0 | 568.2 | 252,496 |
+
+**The two smaller sizes are now identical under the two bounds, phase for phase**, which is the clean
+form of the result: at N = 4,096 preparation was 123.2 ms at the default bound and 21.3 ms at the
+sized one in C1192, and it is 14.8 ms under both here. At N = 65,536 the bound still costs 157 ms of
+preparation and 216 ms of evaluation. That residual is **locality, not commit**: at the default bound
+that program's membership table is sparse with 2^24 slots and at the sized bound with 2^21, and a
+million rows scattered over sixteen million slots miss more than a million rows scattered over two
+million. Lazy commit removes the memory cost of an over-declared bound; it does not remove the cost
+of hashing into a table sized from it. That is the one part of remaining gap 4 this task does not
+close, and it is recorded as such.
+
+**Peak resident set is no longer the standing weakness it was.** 18 to 265 MB at the default bound
+against Soufflé's 6 to 40 MB, where C1192 measured 527 to 805 MB. The gap that remains is the
+certificate and the row stores of a relation that really holds a million tuples, not a reservation.
+
 ### Page faults, by symbol, before and after
 
 `perf record -e page-faults -c 200` on one `--evaluate-only` process, `cycle` at `blocks` and
@@ -650,15 +708,109 @@ as a counted profile rather than as an assertion.
 
 ## Profile
 
-*Pending.*
+Kernel-scoped: `perf record -e instructions:u -F 4000` pinned to CPU 5 on
+`closure_ballpark --evaluator demand --program closure --certificates 512 dense 20`, the harness
+mode that evaluates twenty times and generates the two certificates and nothing else — no checker,
+no serialization, no output file — which both arms have. `perf.data` under
+`~/.cache/ergodis/perf-c1198/`.
+
+| Symbol | control `b7921a0` | shipped `6078142` |
+| --- | ---: | ---: |
+| `ergodis_rules::demand::Demand::evaluate_into` | 98.34 % | 98.30 % |
+| `ergodis_rules::demand::Demand::certificate` | 0.85 % | 0.82 % |
+| `ergodis_rules::demand::Demand::index_rows` | 0.34 % | 0.34 % |
+| `__memmove_avx512_unaligned_erms` | 0.14 % | 0.20 % |
+
+**The two profiles are the same profile**, which is the correct outcome for a change that moves where
+the workspace lives rather than what the loop does. **No out-of-line call appears inside the
+derivation loop on either arm**, and that is a statement about the loop and not only about the
+profile: below a 0.005 per cent cut both arms show `_int_malloc`, `cfree`, `hashbrown` and
+`format_escaped_str`, all of them admission and certificate serialization outside it, and the
+`memmove` residue is the workspace reset before the loop and the certificate's cold pass. **No
+`memset` symbol appears on either arm at any cut on this cohort**, because its tables are small
+enough that the reset rule keeps them linear and the fill is a few hundred bytes.
+
+The profile that did change is the page-fault one, two sections above: the control's faults are
+`calloc` zeroing a workspace nobody has written to, and the candidate's belong to the code that
+writes rows.
+
+**The derivation loop's compiled body is byte-identical between the retained arm and the tree's final
+revision.** The core moved once more after `closure_ballpark-6078142` was retained — `ca64c34` adds
+the reset assertion and its test program and changes no other code — and a release rebuild of the
+example at that revision differs from the retained binary in 236,456 bytes of symbol layout while
+`Demand::evaluate_into` disassembles to **the same 7,702 instructions, line for line**. Every A/B
+figure above therefore describes the kernel the tree carries.
 
 ## Exactness
 
-*Pending.*
+| Gate | Outcome |
+| --- | --- |
+| Core `cargo test --all-features` at `ca64c34` | **81 test binaries, zero failures**, including the new `workspace_commit` suite, the two new in-module reset tests, and the `pages` reservation tests |
+| Private `cargo test -p ergodis-private -p ergodis-tools` | **42 test binaries, zero failures**, the same count C1192 recorded; this drives `rel_lowering`, `rel_frontend`, `rel_frontend_portability` and `rel_reference_eval` |
+| C1189 differential (`rel_reference_eval`) | passes with **zero disagreements** at its unchanged seeds |
+| Clippy, both repositories, `--all-targets --all-features -D warnings` | no diagnostics |
+| `cargo fmt --check`, both repositories | clean |
+| `SHA256SUMS` regenerated with every source change | `tests/evidence_manifest.rs` passes, public lint clean on every commit |
+| WebAssembly build | `cargo build -p ergodis-rules --target wasm32-unknown-unknown --release` succeeds, so the `alloc_zeroed` fallback is a compiled path; `libc` is target-gated and never enters that tree |
+| Native/WebAssembly parity replay | regenerated from the committed gate command and **identical to the committed `analysis/rel-frontend/portability-v1.json` in every field**, canonical digest `349333d4…` unchanged: 243 cases, 530,505 canonical bytes, native and WebAssembly byte-equal. This task edits no lowering pass, which is what that corpus canonicalizes |
+| Output SHA-256 across A/B arms | identical on **every cohort of every A/B**: six direct-path cohorts, six memory cohorts, three cache cohorts, four stagger-probe cohorts. `ab.py` exits non-zero rather than reporting success when arms disagree, and none did |
+| Derived, probe and candidate counts across arms | identical on every cohort of every A/B |
+| Closure SHA-256, four Rel-route backend cohorts | identical across arms and identical to C1191's and C1192's: `5c455ad4…`, `dffdcd35…`, `3f5c4cdd…`, `ec562d2c…`; both independent checkers verified on both arms |
+| C1191 boundary cohorts | all four still verify with both checkers at their largest dictionary, and each first refusal reproduces C1192's budget name, found value and limit exactly |
+| Tuple-set agreement with Soufflé 2.5, three sizes under two row bounds | agrees on all six cases; the interpreter's output equals the compiled binary's on all six |
+| Certificate agreement between the addressing kinds | **byte-identical**, unchanged: `demand_sparse` asserts it on the fixtures, the generated closure family at two row bounds and the property corpus, under `Auto`, `Direct` and `Sparse` |
+| Repeated evaluation into one workspace | rows, work counts and certificate bytes identical across four evaluations at a row bound of 2^24, under **every** `Policy`; and a workspace a larger program filled gives what a fresh one gives for a smaller program of the same shape |
+| Zero allocations **and zero reservations** in the derivation loop | 100 repeated evaluations of `same_generation.json` under the counting allocator, **under each of the five `Policy` variants**: 0 allocations and `reservations()` unchanged |
+| The commit ratio, asserted rather than only measured | `a_default_bound_workspace_commits_a_small_fraction_of_what_it_reserves` builds a plan reserving over 400 MB for a program deriving 2,016 tuples and asserts the resident-set delta is under a twentieth of it, and that a second evaluation commits under a twentieth more |
+| Deliberate mutations | both caught, by name, and the interesting part is *where* — see below |
+
+**The deliberate mutations, and the test that had to be written because of them.** Two mutations were
+applied to a working tree and reverted: **A**, the join indexes' bucket heads are not cleared; **B**,
+the membership tables are not cleared.
+
+- Mutation **B** fails `workspace_commit`'s three tests and the two in-module tests immediately.
+- Mutation **A** passed every integration test in `workspace_commit.rs` and then made
+  `crates/rules/tests/allocation.rs` **spin for nine minutes without terminating**, which is how it
+  was found.
+
+Both facts are structural and worth stating. A stale bucket head holds the previous evaluation's
+**last** row for a slot, so when that row is reinserted `next[row]` is made to point at the row
+itself and the chain becomes self-referential; the next walk of it does not terminate. A suite that
+only evaluates twice therefore hangs rather than failing, which is a far weaker signal than an
+assertion. And `workspace_commit.rs`'s closure cohorts could not see it at all, for a reason that is
+about the evaluator rather than about the test: **a closure program's chain index is consulted only
+by the step whose delta atom is the input relation, and that step's `MODE_FULL` limit is zero in the
+first round, so the step is skipped and the chain is never walked.**
+
+The repair is `the_reset_returns_every_table_to_empty_under_every_policy`, an in-module test that
+calls the two reset paths on a workspace a previous evaluation filled and asserts every bucket head,
+membership head and membership bit is zero, on a same-generation recursion whose chains are walked
+after they are rebuilt. Under mutation A it fails in milliseconds with
+`Auto index 0 kind 3 keeps a bucket head`; under mutation B with
+`Auto relation 2 keeps a membership bit`. That test is the load-bearing gate on this task's
+correctness, and it exists because the first version of the corpus did not discriminate.
 
 ## Disposition
 
-*Pending.*
+**Kept**, by the forward commits in the table above; nothing is reverted. Four changes, measured:
+
+1. **The lazily committed workspace** (`ergodis` `3eaaacf`): peak resident set falls by a factor of
+   3.1 to 29.6 at the default row bound on the memory cohorts, by 1.7 to 2.3 on three of the four
+   C1191 boundary cohorts, and by 3.7 on the Rel route's `datalog` cohort; the derivation loop is
+   1.6 to 1.8 per cent cheaper in instructions on the six cohorts where nothing about the tables
+   changed.
+2. **The counting sort's cursor** (`ergodis` `93e12cf`): `mutual` at the `blocks` density and
+   N = 4,096 went from 144,616 KiB to 82,804.
+3. **The cache-line stagger** (`ergodis` `271d648`): zero instruction change, 30 per cent off the
+   cycles of `closure` dense at N = 256, and it is what makes the change a wall-time win rather than
+   a wall-time loss on the dense cohorts.
+4. **The direct reset assertion** (`ergodis` `ca64c34`): no measured effect, and the derivation
+   loop's disassembly is unchanged; it is the gate that makes the first change's correctness
+   checkable in milliseconds instead of by a hang.
+
+**One variant was measured and rejected**: `MADV_HUGEPAGE` on every reservation of two mebibytes or
+more, which costs 60 to 77 per cent more resident memory on the cohorts this task exists for and
+moves evaluation inside the noise. `Pages::advise_huge` remains as a capability with no caller.
 
 ## Recorded deviations
 
