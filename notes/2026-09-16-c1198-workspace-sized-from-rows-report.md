@@ -19,18 +19,51 @@ Repositories: `~/src/ergodis` (core) and `~/src/ergodis-private` (harnesses and 
 
 ## Arms
 
-Filled in as each is retained. Every hash is recorded **as measured**, never cited: the thing to run
-is the retain recipe at the named revision.
+Every hash is recorded **as measured**, never cited: the thing to run is the retain recipe at the
+named revision. Every arm was retained from a **clean** tree in both repositories, through
+`../ergodis-dev/scripts/retain-bin.sh` inside `nix develop` of the core checkout, under
+rustc 1.95.0 (59807616e 2026-04-14), release profile, no features.
 
-| Arm | Repository | Revision | Dirty | Retained name | rustc | Measured sha256 |
+| Arm | Repository | Revision | Core | Dirty | Retained name | Measured sha256 |
 | --- | --- | --- | --- | --- | --- | --- |
-| *pending* | | | | | | |
+| control, derivation loop, C1192's named one | `ergodis-private` | `b7921a0` | `24e399e` | manifest says dirty | `closure_ballpark-b7921a0` | `08b488430c2ffd1f3443d22364756eb85b018282d961108b2d8010a3507063d3` |
+| control, derivation loop, same revision as the candidate's tree | `ergodis-private` | `c3eda9a` | no | `closure_ballpark-c3eda9a` | `ad4fed99b1d18ef6fd5881c510ddd3c1f5cfec397d1e37421a302b5084662333` |
+| control, frontend and backend, C1192's named one | `ergodis-private` | `f12e27b` | no | `ergodis-tools-f12e27b` | `1d5d5f89957c72793d5a0ece5fbbd38f12d953c218c6803844029e37325468af` |
+| control, frontend and backend, same revision | `ergodis-private` | `c3eda9a` | no | `ergodis-tools-c3eda9a` | `6c31e70aaa5e63bd12fdbf6e6b9b498cf2ecf0c95797fed5f7d09cc54f663055` |
+| candidate, derivation loop | `ergodis-private` | `356fce6` | `93e12cf` | no | `closure_ballpark-356fce6` | `7fcc12c1c1afb515b66ad24580c230413ffa239b11f4dc8768e82d0a4727affa` |
+| candidate, frontend and backend | `ergodis-private` | `356fce6` | `93e12cf` | no | `ergodis-tools-356fce6` | `e02bf69b4f930f452cc8f05fb57769a791be4362f0a9bba1fd69d4358e3b642c` |
+
+Retain recipes, from `~/src/ergodis-private`:
+
+```sh
+../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release
+../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools
+```
+
+**Two controls rather than one, and the second is what makes the first trustworthy.** The card names
+`closure_ballpark-b7921a0` and `ergodis-tools-f12e27b`, which C1192 left as the controls for the next
+A/B. The tree has moved past both since: `cbe9f64`, `3ed2043` and `c3eda9a` are receipts and usage
+strings, and `c3eda9a` edits `examples/closure_ballpark.rs` itself. The playbook's own lesson from
+C1170 is that a driver-only edit moved an untouched kernel by 1.7 per cent through ThinLTO's module
+summary, so a control one driver edit away from the candidate is a confound rather than a control.
+Both were therefore retained and the same A/B run against each. **They agree to five decimal places
+on every cohort's instruction ratio**, so the usage-string commit moved nothing here and the card's
+named control is sound; the table below reports the `b7921a0` figures, which are the card's.
+
+**No foreign uncommitted file was present in either repository at any point.** `git status` was clean
+in `ergodis`, `ergodis-private` and `othello` before the first source change, at each retain, and at
+task close.
 
 ## Commits
 
 | Repository | Commit | What |
 | --- | --- | --- |
-| `othello` | *pending* | this report's skeleton and the Fermi predictions, written before any code |
+| `othello` | `9dd61b7` | this report's skeleton and the Fermi predictions, written before any code |
+| `ergodis` | `3eaaacf` | `pages::Pages`, the zero sentinel, the high-water reset, the reservation-counting allocation regression and `workspace_commit.rs` |
+| `ergodis` | `93e12cf` | the counting sort's cursor is the offsets array rather than a second copy of it |
+| `ergodis` | `271d648` | each reservation staggered by a cache line, against 4 KiB aliasing |
+| `ergodis-private` | `b3994fc` | re-pin the core, so the candidate arm has a private revision to name it |
+| `ergodis-private` | `356fce6` | the lockfile entry for the target-gated `libc` |
 
 ## Fermi predictions, written before any code
 
