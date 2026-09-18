@@ -469,3 +469,149 @@ the measured 58 GB/s warm store bandwidth, and at **nothing at all in the shippe
 because after the density rule no index anywhere near 2^24 keys is direct and a small array's
 `calloc` is served warm from the arena. Recorded as priced and not worth its `unsafe` surface at the
 key spaces the rule now admits.
+
+## Results
+
+Every figure below is the retained control `closure_ballpark-3c8499d` against the retained candidate
+`closure_ballpark-8c04b7a`, both from trees whose `git status --short` was empty and both recorded
+`clean` in `MANIFEST.tsv`. The event set is
+`instructions,cycles,branches,branch-misses,page-faults,minor-faults` at **100.00 per cent enabled**
+in every run. Pinned to core 5, under `choom -n 1000`, rounds alternating the arm order, load average
+1.4 to 1.6 during the per-stage runs and 1.9 to 4.6 during the A/B runs, recorded per receipt.
+
+### The derivation loop on the thirteen cohorts whose kind does not change
+
+Five rounds, three then six repeats, two-point differenced, with an A/A null per cohort.
+
+| Cohort | instructions, candidate ÷ control | interval | A/A null | cycles | derived |
+| --- | ---: | --- | ---: | ---: | --- |
+| `closure:sparse:256` | 1.00000 | [0.99999, 1.00001] | 1.0000026 | 1.00729 | 62,979 = 62,979 |
+| `closure:sparse:1024` | 1.00000 | [1.00000, 1.00000] | 0.9999990 | 0.99945 | 979,983 = 979,983 |
+| `closure:dense:256` | 1.00000 | [0.99999, 1.00001] | 1.0000007 | 0.99800 | 65,536 = 65,536 |
+| `closure:dense:512` | 1.00000 | [1.00000, 1.00000] | 1.0000003 | 0.99082 | 262,144 = 262,144 |
+| `samegen:sparse:1024` | 1.00000 | [0.99999, 1.00000] | 1.0000007 | 1.01403 | 258,691 = 258,691 |
+| `samegen:dense:512` | 1.00000 | [1.00000, 1.00000] | 1.0000008 | 1.00066 | 507,425 = 507,425 |
+| `closure:blocks:4096` | 1.00001 | [0.99995, 1.00006] | 1.0000029 | 0.99021 | 65,536 = 65,536 |
+| `closure:blocks:16384` | 0.99999 | [0.99997, 1.00001] | 0.9999936 | 1.01739 | 262,144 = 262,144 |
+| `cycle:blocks:4096` | 1.00001 | [0.99998, 1.00005] | 1.0000086 | 0.97880 | 131,072 = 131,072 |
+| `triangle:sparse:16384` | 1.00003 | [0.99994, 1.00011] | 1.0000068 | 1.00419 | 15 = 15 |
+| `path3:sparse:4096` | 1.00001 | [0.99999, 1.00003] | 0.9999777 | 0.99944 | 110,213 = 110,213 |
+| `path3:sparse:16384` | 1.00002 | [1.00000, 1.00003] | 1.0000029 | 0.98795 | 441,937 = 441,937 |
+| `path4:sparse:4096` | 1.00000 | [0.99997, 1.00003] | 0.9999982 | 1.02269 | 327,629 = 327,629 |
+
+**The acceptance criterion is met with room: every instruction ratio is 1.00000 to 1.00003 and every
+A/A null is within 2.3 parts per hundred thousand of unity, so the ratios sit inside the nulls'
+own scatter.** That is what it should be — the plan these cohorts build is byte-identical between the
+arms, so the measurement is a check on the protocol as much as on the change, and the nulls being as
+tight as the ratios is the evidence that it is one.
+
+### The derivation loop on the two cohorts whose kind changes
+
+| Cohort | instructions | interval | A/A null | cycles | derived |
+| --- | ---: | --- | ---: | ---: | --- |
+| `triangle:sparse:4096` | 1.41212 | [1.41200, 1.41224] | 1.0000977 | 1.48717 | 48 = 48 |
+| `mutual:blocks:4096` | 1.44701 | [1.44630, 1.44771] | 1.0000267 | 2.04451 | 61,440 = 61,440 |
+
+**This is the cost the rule pays, stated as a loss and not rounded away**: where the kind changes the
+derivation loop costs 1.41 and 1.45 times the instructions, and 1.49 and 2.04 times the cycles.
+`mutual:blocks:4096` at a density of 273 reads 1.447 in instructions and 2.045 in cycles against
+C1192's independently measured 1.39 and 2.1 to 2.4 for the same two kinds at the same density — the
+two agree, which is a cross-validation of both measurements and of the claim that the probe
+difference is a property of the representation rather than of either task's harness.
+
+### The stages the rule is about: preparation, resident memory, and one whole evaluation
+
+Seven rounds, nine in-process evaluations for the loop figure, alternating arm order. Preparation and
+resident memory are read from **wall time, the resident high-water mark and the minor-fault count**;
+the whole-process arm reads the facts, prepares, evaluates **once** and writes the output CSV.
+
+| Cohort | kinds | stage | control | candidate | ratio |
+| --- | :---: | --- | ---: | ---: | ---: |
+| `triangle:sparse:1024` | `ddd` → `dsd` | preparation | 2.4814 ms | 0.7556 ms | **0.305** |
+| | | preparation, minor faults | 1,510 | 485 | 0.321 |
+| | | peak RSS | 7,904 KiB | 3,804 KiB | 0.481 |
+| | | derivation loop | 0.1777 ms | 0.4021 ms | 2.263 |
+| | | whole process | 3.3402 ms | 1.7777 ms | **0.532** |
+| `triangle:sparse:4096` | `ddd` → `dsd` | preparation | 30.9834 ms | 2.9138 ms | **0.094** |
+| | | preparation, minor faults | 17,459 | 1,074 | 0.062 |
+| | | peak RSS | 71,528 KiB | 5,988 KiB | **0.084** |
+| | | derivation loop | 1.2990 ms | 2.0206 ms | 1.556 |
+| | | whole process | 36.5502 ms | 7.0477 ms | **0.193** |
+| | | whole process, peak RSS | 70,840 KiB | 5,640 KiB | 0.080 |
+| `triangle:sparse:16384` | `dsd` → `dsd` | preparation | 9.3207 ms | 9.2650 ms | 0.994 |
+| | | preparation, minor faults | 3,753 | 3,753 | **1.000** |
+| | | peak RSS | 15,116 KiB | 15,116 KiB | **1.000** |
+| | | derivation loop | 8.2418 ms | 8.2061 ms | 0.996 |
+| | | whole process | 23.0207 ms | 22.9279 ms | 0.996 |
+| `mutual:blocks:4096` | `d` → `s` | preparation | 33.8304 ms | 11.6743 ms | **0.345** |
+| | | preparation, minor faults | 22,438 | 6,340 | 0.283 |
+| | | peak RSS | 82,936 KiB | 18,544 KiB | **0.224** |
+| | | derivation loop | 1.1611 ms | 2.3737 ms | 2.044 |
+| | | whole process | 43.7490 ms | 22.3740 ms | **0.511** |
+| | | whole process, peak RSS | 82,724 KiB | 19,100 KiB | 0.231 |
+| `mutual:blocks:8192` | `s` → `s` | preparation | 25.1647 ms | 25.0102 ms | 0.994 |
+| | | preparation, minor faults | 14,666 | 14,666 | **1.000** |
+| | | peak RSS | 37,948 KiB | 37,948 KiB | **1.000** |
+| | | derivation loop | 5.0092 ms | 5.0221 ms | 1.003 |
+| | | whole process | 47.6243 ms | 47.1862 ms | 0.991 |
+
+**The two cohorts whose kind is unchanged are exact nulls where a null can be exact**: the minor-fault
+count and the peak resident set are *identical to the byte* on `triangle:sparse:16384` and
+`mutual:blocks:8192`, and the wall figures agree within 0.9 per cent. A fault count that matches
+exactly is a stronger statement than a wall ratio, because it says the two arms committed the same
+pages, so the plan they built has the same footprint.
+
+**On the two that change, the whole process is 5.2 and 2.0 times faster and holds an eighth to a
+quarter of the memory**, and the derivation loop is 1.6 and 2.0 times slower. That is the trade, and
+the whole-process column is the one the rule optimizes because it is the one-evaluation regime.
+
+### The Soufflé row
+
+`compare.py` against Soufflé 2.5, compiled and interpreted, both `-j1`, whole process to whole
+process with equal read, prepare, evaluate and write boundaries, five rounds pinned to core 5, run
+on both arms in the same session minutes apart. The derived relation agrees on every case in every
+system (`agree: true` throughout).
+
+| Cohort | kind change | Ergodis, control | Ergodis, candidate | compiled Soufflé | ratio, control | ratio, candidate |
+| --- | :---: | ---: | ---: | ---: | ---: | ---: |
+| `triangle:sparse:1024` | `ddd` → `dsd` | 21.76 ms | 19.39 ms | 20.7 ms | 1.086 | **1.059** |
+| `triangle:sparse:4096` | `ddd` → `dsd` | 57.35 ms | 27.04 ms | 29.2–29.5 ms | 1.903 | **0.896** |
+| `triangle:sparse:16384` | none | 54.69 ms | 54.34 ms | 68.2–69.1 ms | 0.828 | 0.768 |
+
+**The headline result. `triangle` at 4,096 crosses from 1.90 times compiled Soufflé to 0.896 — from
+behind to ahead — and the control arm reproduces C1193's recorded 1.92 to within a per cent**, which
+is what makes the comparison a measurement of this change rather than of two sessions. The C1193
+report called this "the one family where it should be ahead"; it now is.
+
+The 16,384 row is a cohort whose kind does not change, and its two Ergodis figures agree to 0.6 per
+cent (54.69 against 54.34 ms). Its *ratio* differs by 7 per cent because Soufflé's own time moved
+between the two sessions (68.2 against 69.1 ms), which is a reminder that an external ratio carries
+the external system's variance and the internal figure is the one to read.
+
+## Disposition
+
+**Kept**, at core `676f513` with private `879f3ed`, both parts:
+
+- `DIRECT_STATIC_DENSITY = 64`, the measured one-evaluation crossover's conservative end, applied in
+  `Policy::index_direct`'s `Auto` branch alone. `Direct`, `Sparse`, `SparseIndexes` and
+  `SparseMembership` keep their meanings, and the two ceilings still bind under every policy.
+- `Index::csr`'s staggered counting-sort cursor, which removes the `keys`-entry `memmove` with the
+  probe expression unchanged, worth 0.910 of the direct build at the ceiling.
+
+**Reverted: nothing.** No variant of either part measured as a wash or a loss, so there is no
+forward revert to record. The two shapes that were *not built* are priced above with their reasons,
+and one of them — the page-skipping prefix sum — is recorded as impossible in this encoding rather
+than as untried.
+
+**The one acceptance criterion this task does not meet, stated plainly.** The card asks for
+`triangle` at 4,096 and 16,384 under `Policy::Auto` to have "preparation and peak RSS at or near the
+sparse row, evaluation at or near the direct row". Preparation and peak RSS are at the sparse row:
+0.094 and 0.084 at 4,096, and unmoved at 16,384 where they already were. **Evaluation is not at the
+direct row and cannot be**: the measurement refuted the assumption the criterion rests on, because
+the direct kind's probe is faster at every density measured, so a policy choosing between the two
+existing static kinds buys preparation by spending evaluation. The derivation loop costs 1.56 times
+the direct arm at 4,096, and the whole process — preparation and one evaluation together, which is
+what the criterion is ultimately about — is 0.193. Meeting the criterion as written needs a third
+static representation, and the two candidates for it are priced above, with mask demotion the
+cheaper. This is reported as an unmet criterion with its measured cause rather than reinterpreted to
+fit.
