@@ -335,9 +335,28 @@ The two non-zero results are justified and expected:
 | `4375b70` | benchmarks, hall: name the resident-set marker for the project and state why the deficiency sweep is outlined |
 | `a759757` | publication: run the content rules on every branch for the files that ship |
 | `2cd3370` | publication: refuse process narration in source comments |
+| `96aee9b` | rules: state the static and growing index rules in their own units |
 
-Range `d56f748..2cd3370`. Each commit passed `cargo fmt --check` and compiled, and every
+Range `d56f748..96aee9b`. Each commit passed `cargo fmt --check` and compiled, and every
 commit that touched a hashed tree regenerated `SHA256SUMS` in the same commit.
+
+Review correction (`96aee9b`). `Policy::index_direct`'s docstring closed by calling
+`DIRECT_INDEX_DENSITY` "the larger of the two because a static build is amortized over
+the plan's evaluations and a dynamic one is not". That was wrong twice: the two
+constants are in different units — key space per estimated lookup against key space per
+row of capacity — so neither is larger than the other, and the amortization claim
+contradicts `DIRECT_INDEX_DENSITY`'s own docstring, which states that an index over a
+growing relation pays no build at preparation and trades the direct head array's
+committed pages and address translation against the sparse probe. The docstring now
+says only that the growing index is filled from each round's delta, builds nothing at
+preparation, and is governed by `DIRECT_INDEX_DENSITY`, whose docstring states that
+trade, and that the two constants are not comparable. The matching comment in
+`crates/rules/tests/demand_sparse.rs` carried the same stale mechanism ("a static index
+is built once and amortized over the plan's evaluations while a dynamic one is rebuilt
+every evaluation") and now says that only a static index has a preparation build, which
+is why its rule is in different units. Comment text only; `cargo fmt --check`,
+`cargo check --all-targets --all-features`, `cargo test --all-features` and the content
+lint all pass, and `SHA256SUMS` was regenerated in the same commit.
 
 ## What remains
 
