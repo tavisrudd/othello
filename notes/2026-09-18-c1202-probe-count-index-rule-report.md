@@ -364,6 +364,131 @@ acceptance bullet asks for: **the per-link probe counter costs the production de
 nothing**, and the eighteen A/A nulls, all within 6.2 parts per hundred thousand of unity, say the
 protocol is sound.
 
+### Piece 2: mask demotion, and the crossover that decides it
+
+**The built shape is cheaper than the card's, and it changes no kernel line.** The card priced
+demotion as a new op kind the key fold skips plus `join::<VERIFY = true, _>` instantiated for the
+CSR arm. The plan already carries both halves of that pair: `OP_KEY` is folded into the packed key
+and compared against the matched row only under the verify flag, and `OP_CHECK` is skipped by the
+fold and compared unconditionally by `Demand::join` and `Demand::bind_link`. So demoting a bound
+column is `OP_KEY → OP_CHECK` plus one mask bit, entirely inside plan construction. No new op kind,
+no new addressing kind, no new instantiation of either kernel, no new storage, and every cohort
+whose plan does not demote executes byte-identical code. The `VERIFY = true` instantiation the card
+asked for is **not built**, and this is why: it would have added two monomorphizations of an
+`inline(always)` kernel to `evaluate_into`, which is the shape C1193 measured at 3.9 per cent on
+cohorts that never enter the new code.
+
+**The surviving key is a prefix, which makes the demoted index free more often than not.**
+`triangle`'s third atom `edge(z,x)` demotes to a key on column zero, which is the mask
+`edge(x,y)`'s index already carries, so the plan drops from three indexes to two and the demoted
+atom's index costs nothing at all to build.
+
+**The crossover, measured.** The `blocks<N>` density added to the driver puts `N` nodes in each
+complete block, so the out-degree is `N − 1` and that is exactly the average bucket a demoted index
+holds. `Policy::AutoUndemoted` is `Auto` with demotion alone switched off, so both sides run on one
+binary and differ in that one decision — the same reason `SparseIndexes` and `SparseMembership`
+exist. Retained arm `closure_ballpark-d037e2a`, three rounds of five repeats, receipt
+`sweep-2026-09-18-c1202-demotion-triangle.json`, `triangle` at domain 4,096:
+
+| density | bucket `b` | facts | lookups into the demoted link | undemoted preparation | undemoted evaluation | demoted preparation | demoted evaluation | undemoted ÷ demoted, preparation + one evaluation |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `blocks4` | 3 | 12,288 | 49,152 | 2.906 ms | 2.253 ms | 2.912 ms | 1.394 ms | **1.1983** |
+| `blocks6` | 5 | 20,472 | 122,808 | 5.098 | 6.796 | 5.294 | 4.987 | **1.1570** |
+| `blocks8` | 7 | 28,672 | 229,376 | 5.342 | 8.966 | 5.502 | 8.655 | **1.0106** |
+| `blocks10` | 9 | 36,840 | 368,280 | 7.252 | 14.604 | 7.292 | 16.183 | **0.9310** |
+| `blocks12` | 11 | 45,024 | 540,192 | 8.472 | 21.089 | 8.271 | 27.628 | **0.8234** |
+| `blocks14` | 13 | 53,200 | 744,464 | 9.682 | 29.173 | 9.527 | 44.262 | **0.7223** |
+| `blocks16` | 15 | 61,440 | 983,040 | 12.268 | 38.191 | 12.209 | 66.961 | **0.6373** |
+
+The same sweep on `mutual`, receipt `sweep-2026-09-18-c1202-demotion-mutual.json`, whose two-atom
+step probes the index once per fact rather than once per two-path:
+
+| density | bucket `b` | facts | lookups | undemoted evaluation | demoted evaluation | undemoted ÷ demoted, preparation + one evaluation |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `blocks4` | 3 | 12,288 | 12,288 | 0.631 ms | 0.387 ms | **1.0924** |
+| `blocks8` | 7 | 28,672 | 28,672 | 1.523 | 1.310 | **1.0073** |
+| `blocks12` | 11 | 45,024 | 45,024 | 2.446 | 2.579 | **0.9839** |
+| `blocks16` | 15 | 61,440 | 61,440 | 2.359 | 3.431 | **0.9196** |
+| `blocks24` | 23 | 94,080 | 94,080 | 3.801 | 3.958 | 0.9713 |
+| `blocks32` | 31 | 126,976 | 126,976 | 5.205 | 5.390 | 0.9757 |
+
+**`DEMOTE_BUCKET_ROWS` is set to 7**, the largest bucket at which demotion is measured ahead on both
+families. The `triangle` sweep brackets the crossover between a bucket of 7 (1.0106) and 9 (0.9310)
+and linear interpolation puts it at about 7.3; the `mutual` sweep brackets it between 7 (1.0073)
+and 11 (0.9839).
+
+**The last two `mutual` rows are this sweep's null and they are not tight.** At buckets of 23 and 31
+the guard already refuses demotion, so both arms build the identical plan on the identical binary,
+and they read 0.9713 and 0.9757 rather than unity. Three rounds alternate the arm order 2:1, which
+biases the arm that runs first in a majority of rounds; the crossover rows are read against that
+null, and the 1.0073 at a bucket of 7 is 3.4 per cent above it while the 0.9839 at 11 is 1.0 per
+cent above it. **On the null-corrected reading `mutual`'s crossover is past a bucket of 11**, so 7
+is conservative for that family. An even round count fixes the protocol and is a queued candidate.
+
+**Why this constant is a bucket size while the index rule is not a density.** Demotion is only
+reached when the undemoted mask would be held sorted, so the comparison is one probe against one
+probe: `rows / distinct` row reads out of a contiguous bucket against a binary search over the
+distinct keys plus one row read. **The probe count cancels**, which is exactly what did not happen
+in C1201's density. And the build difference — a sort of the rows against a counting sort over the
+demoted key space — sits inside the noise of preparation on this family: the two arms' preparation
+agrees to 0.5 per cent at every point of the `triangle` sweep. So what is left is a bound on the
+bucket, and the constant closes the cost model: at 4,096 distinct keys the search is about twelve
+dependent steps, the crossover is between 7 and 9 row reads, so **a binary-search step costs about
+0.6 of a row read on this host**. That also says the constant should grow with `log2(distinct)`
+rather than being flat, which is an open item.
+
+### Piece 3: the rule on estimated probes
+
+`DIRECT_STATIC_DENSITY = 64` is replaced by `DIRECT_STATIC_PROBES = 23`, applied as
+`key_space <= DIRECT_STATIC_PROBES · estimated_probes` in `Policy::Auto`'s static branch.
+`DIRECT_INDEX_DENSITY = 48` keeps the growing branch.
+
+**The estimate.** For each join index, summed over every step and every link that uses it: the delta
+relation's row count times the product of the average fan-out of each **earlier** link in that
+step's join order, with the fan-out estimated as `rows / min(key_space, rows)` and a step that can
+never run contributing nothing. Nothing can decide an index's kind until every step is known, so
+`Demand::prepare` now builds index **shapes** and then makes three passes over them: estimate the
+probes, demote the masks the estimate says will not be addressed directly, re-slot and estimate
+again, then materialize. Demotion never moves a probe count — a row a demoted bucket yields and the
+join rejects produces no descent — which is what lets the first estimate decide the demotion without
+a fixed point.
+
+**The dead-step rule is part of the estimate and it matters by a factor of three.** A step whose
+delta relation never grows can only run in the first round, and in the first round every relation's
+`delta_lo` is zero, so a body atom **before** the delta atom bounds it to no rows and
+`evaluate_into` skips it. `triangle` has three steps and `mutual` two; one of each ever runs. An
+estimate that counted them all would be three and two times too large and would put every ratio on
+the wrong side of the constant.
+
+**The estimate against the measured counter**, on the cohorts whose static index the rule decides:
+
+| Cohort | index | key space | estimated probes | measured lookups | `key_space` ÷ probes | rule | C1201's measured right answer |
+| --- | --- | ---: | ---: | ---: | ---: | :---: | --- |
+| `triangle:sparse:4096` | `edge` on both columns | 16,777,216 | 36,864 | 36,864 | 455.1 | demote | — |
+| `triangle:blocks:4096` | `edge` on both columns | 16,777,216 | 921,600 | 921,600 | 18.2 | **direct** | direct, 0.932 |
+| `mutual:blocks:4096` | `edge` on both columns | 16,777,216 | 61,440 | 61,440 | 273.1 | **sparse** | sparse, 2.49 |
+
+**The estimate is exact on every cohort the rule decides**, which closes C1201's mystery item 4, and
+`triangle:blocks:4096` and `mutual:blocks:4096` — the pair with the same key space, the same rows
+and the same density and opposite right answers — get opposite kinds from one constant, which is the
+card's first acceptance bullet.
+
+**Where the estimate is not exact, and in which direction.** A step whose delta relation grows has
+no row count at plan time, so the estimate uses that relation's capacity, which at the default row
+bound is 2^24. On `closure:blocks:16384` that reads 16,777,216 against a measured 262,144, a
+sixty-four-fold overestimate; it biases such an index towards direct, which is the cheap-probe and
+expensive-build side, and no cohort in the set is decided by it — every static index reached from a
+growing delta has a key space of `domain` against `domain` or `3 · domain` rows and is direct under
+any rule. It is in the mystery ledger as the estimate's one known weakness.
+
+**A side effect worth naming: an index no live step probes is now held sparsely.** `triangle`'s and
+`path4`'s plans each hold an index that only dead steps reference; its estimated probes are zero, so
+the rule gives it the cheapest build. That is the right answer for an index nothing reads, and it
+changes preparation and resident memory on those cohorts without touching a loop instruction. The
+better answer — not building it at all — is a queued candidate rather than taken here, because the
+plan would then hold an index whose arrays are empty and whose safety rests on the dead-step
+argument being right rather than on the bounds check.
+
 ## Mystery ledger
 
 To be filled in at the closeout.
