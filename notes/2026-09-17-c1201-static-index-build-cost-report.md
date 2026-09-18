@@ -995,10 +995,12 @@ candidate arms every figure above is measured on and are **the controls the next
 should use**. All four are recorded `clean` in `bin/MANIFEST.tsv`, and the `ergodis-tools` pair is
 retained for the lane's Rel route rather than used by this report, which touches no frontend path.
 
-**`c1201/`, 16 MB.** The seven `static_index_*` and `ab.py` work directories, and the two Soufflé
-work trees at 2.1 MB each (the generated fact files, the compiled `.dl` binaries and every system's
-output CSV). Nothing was deleted at task close; everything here is regenerable from the replay
-block.
+**`c1201/`, 16 MB.** Every `static_index_*` and `ab.py` work directory (`ab-work`, `ab-changed`,
+`census`, `stages`, `stages-auto`, `stages-direct`, `sweep`, `sweep-shipped`, `sweep-blocks`), the
+`probe` and `smoke` directories from reproducing the baseline, and the two Soufflé work trees at
+2.1 MB each — the generated fact files, the compiled `.dl` binaries and every system's output CSV,
+which is most of the 16 MB. Nothing was deleted at task close; everything here is regenerable from
+the replay block.
 
 **No `perf-c1201/`.** This task took no `perf record` profile: its two stages are a preparation cost
 read from wall time and faults, and a derivation loop whose A/B `ab.py` already instruments with
