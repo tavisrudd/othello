@@ -2,8 +2,8 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-18
-**Status**: QUEUED (Tavis, 2026-09-18: to be run in a fresh session). Read-only review; no code
-change.
+**Status**: DONE 2026-09-18. Read-only review; no code change. Report:
+`notes/2026-09-18-c1204-datalog-rel-architecture-review-report.md`.
 
 ## Goal
 
