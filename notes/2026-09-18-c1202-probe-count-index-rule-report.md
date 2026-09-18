@@ -852,9 +852,18 @@ Re-running `compare.py` on the kept arm is the cheapest remaining external datum
    *Evidence gap*: none needed — an even round count fixes it, and the per-stage run that followed
    used six rounds. The crossover rows are read against that null in the text above.
 
+6. **`K` is fitted at 23 and derived at 20.6 from this task's own coefficients.** The `ej` closeout
+   above prices one key of direct build at 1.17 ns and one probe's saving at 24.1 ns on
+   `triangle:blocks:4096`, which predicts the constant within 12 per cent on the conservative side.
+   *Evidence gap*: no cohort in the set distinguishes 20 from 23, and both coefficients are
+   properties of this host's memory system rather than of the workload. *Owner*: the successor that
+   replaces both constants with one cost function.
+
 No genuine mystery is being manufactured. Items 1 and 4 are measurements nobody has taken, item 2 is
 a constant fitted at one point with the model that says where to fit it next, item 3 is a stated
-weakness with its direction, and item 5 is a protocol defect with its fix.
+weakness with its direction, item 5 is a protocol defect with its fix, and item 6 is a constant
+whose derivation now exists and whose fitted and derived values differ by less than the cohort set
+can see.
 
 ## Candidates to queue, no identifiers allocated
 
