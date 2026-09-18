@@ -987,6 +987,32 @@ Inputs are deterministic: the C1182 xorshift edge generator seeded by the domain
 and `dense` densities, and the `blocks` and `blocks<N>` densities' complete digraph inside each
 consecutive block, which uses no random stream at all.
 
+## What this task left under `~/.cache/ergodis/`
+
+**Seven retained binaries.** `bin/closure_ballpark-ab6be13` and `bin/ergodis-tools-ab6be13` are this
+task's controls; `bin/closure_ballpark-83bff0a`, `-8d43d4e`, `-d037e2a`, `-1e539fe` and `-5217cdb`
+are the five candidate arms every figure above is measured on, and `closure_ballpark-5217cdb` is
+**the control the next A/B in this lane should use**. All seven are recorded `clean` in
+`bin/MANIFEST.tsv` except `closure_ballpark-df2f5f4` and `closure_ballpark-531f19b`, which are two
+retains taken with an untracked receipt file present, are flagged `dirty`, are **not used by any
+figure**, and whose hashes are identical to the clean retains at the next revision — which is itself
+the evidence that the untracked receipts did not reach the binary.
+
+**`c1202/`, 22 MB.** The work directories of every run above: `ab-counter`, `ab-counter-const`,
+`ab-rule`, `ab-rule2`, `census`, `demote-sweep`, `smoke`, `stages-rule` and `stages-rule2`.
+Everything here regenerates from the replay block.
+
+**No `perf-c1202/`.** This task took no `perf record` profile: every measurement is a `perf stat`
+A/B through `ab.py` or a wall-time and fault-count stage through `static_index_stages.py`.
+
+`../ergodis-dev/scripts/cache-gc.sh` was run in its listing mode and **nothing was deleted; that is
+Tavis's call.** It scanned 39 entries and reports **zero unreferenced and old enough to remove** —
+every entry is either named by an evidence file or younger than two days, this task's `c1202` among
+the latter. The largest entries it lists are `c1143` at 260 MB, `certdist`, `c1018` at 108 MB,
+`worktrees` at 105 MB, `c985`, `c1016` at 51 MB, `split`, `bb756` at 28 MB, `c1202` at 22 MB and
+`c1192` at 20 MB. `bin/` itself is **706 MB** across the whole manifest, which is where the growth
+in this cache now is.
+
 ## Vibe check
 
 Very good, and the part that is best was not on the card. Mask demotion turned out to need **no
