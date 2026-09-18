@@ -366,7 +366,8 @@ predicted band of [0.97, 1.04] holds everywhere except the two highest-density p
 domain, where collisions in a table at load factor 0.5 and 1.0 add verification work.
 
 **So a crossover exists on the two smallest block sizes and nowhere else.** On `blocks2` it is
-between a density of **64 and 128**, on `blocks4` between **170.7 and 256**, and on `blocks8`,
+at a density of about **128** (0.9986 here and 1.0018 in the reproduction run, unity within the
+between-run drift; the direct kind is ahead at 64 and behind at 256), on `blocks4` between **170.7 and 256**, and on `blocks8`,
 `blocks16` and `blocks32` there is none up to the highest density each can reach — 512, 256 and 128 —
 with the direct kind ahead by 1.5 to 3.5 per cent throughout.
 
