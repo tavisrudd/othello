@@ -1011,7 +1011,8 @@ Re-running `compare.py` on the kept arm is the cheapest remaining external datum
    `triangle:blocks:4096`, which predicts the constant within 12 per cent on the conservative side.
    *Evidence gap*: no cohort in the set distinguishes 20 from 23, and both coefficients are
    properties of this host's memory system rather than of the workload. *Owner*: the successor that
-   replaces both constants with one cost function.
+   replaces both constants with one cost function. **Decided (Tavis, 2026-09-18): keep 23**, so
+   `triangle:blocks:4096` keeps the direct kind at its 4.4× peak RSS.
 
 No genuine mystery is being manufactured. Item 1 is a measurement nobody has taken, item 2 is a
 constant fitted at one point with the model that says where to fit it next, item 3 is a stated
