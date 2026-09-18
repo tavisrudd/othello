@@ -390,3 +390,82 @@ binary search. So the new rule takes away, on that cohort, exactly the win C1192
 the trade the crossover decides and it has to be measured on the cohort itself rather than inferred
 from the `triangle` sweep, because `mutual`'s evaluation is much longer and so amortizes more of the
 build.
+
+## The shapes considered, and the two that are not built
+
+The sweep's refutation of Fermi prediction 2 reshapes this list, so it is worth being exact about
+what each shape can and cannot deliver. The **direct** kind wins the probe at every density measured
+and loses the build above about 69; the **sparse** kind is the mirror. A policy that chooses between
+them is therefore choosing which one to give up, and the card's acceptance line asks for both. Two
+further shapes can have both, and neither is built here.
+
+### Not built: a plan-owned open-addressed hash over the distinct keys
+
+The shape the measurement points at. A power-of-two table over the distinct keys, each slot holding
+the key and its bucket's start and length in the plan's existing row array, so the bucket is
+contiguous and ascending exactly as the two existing static kinds' buckets are. Occupancy needs no
+sentinel key: every bucket the build inserts is non-empty by construction, so a length of zero *is*
+the empty slot, which matters because a key space can saturate at `u64::MAX` and no key value is
+reserved.
+
+**Priced.** The build is `rows` insertions into about `2 · distinct_keys` slots — roughly
+`3 · rows` random writes into `16 · distinct_keys` bytes, which is 288 KiB and about 0.1 ms at
+`triangle` 4,096 against 2.9 ms for the sorted kind's `rows log rows` sort and 28 ms for the direct
+kind's key-space passes. The probe is one multiply-shift, one L2-resident load and one key
+comparison, about 25 cycles against the sorted kind's roughly 80 for a 13.6-iteration dependent
+binary search. So it is predicted to be the cheapest build **and** the cheapest probe of the three,
+and it is the only shape measured or priced here that satisfies the card's acceptance line as
+written.
+
+**Why it is not built.** It is a **fifth addressing kind**, and although its inner loop is the
+static loop `next_row` already runs — so it is not a new kernel in the sense of a new derivation
+loop — it needs its own arm in `Index::bucket`, two more `run::<KIND, BITMAP>` monomorphizations,
+its own `is_static` and `next_row` membership, a `Policy` with three static outcomes rather than
+two, a third value in the private driver's `addressing` report, and its own corpus pass in
+`demand_sparse`. Two of those are the exact shapes C1193 measured as codegen hazards: adding
+instantiations of a generic kernel moved an untouched loop by 2.6 to 3.9 per cent there, and a
+driver-only change moved the scanner by 1.7 per cent under ThinLTO. **A fifth index kind is an
+architecture choice, and the card hedges it explicitly** ("only if that is genuinely 'no new kernel';
+otherwise mention it as not built and priced"), so it is priced and queued rather than taken inside
+this task.
+
+### Not built: demoting the index's mask and verifying the rest per row
+
+The cheaper of the two, and it was not on the card's list. The `triangle`'s third atom is fully
+bound, so the plan asks for an index keyed on **both** of `edge`'s columns — a key space of
+`domain²`. Nothing forces that. An index keyed on column 0 alone has a key space of `domain`, 48 KiB
+of offsets at N = 4,096, a build in microseconds, and a probe that is one load; its buckets then
+average three rows where one matches, and the other two are rejected by comparing the remaining key
+column against the row — which is **exactly what `join::<VERIFY = true, _>` already does** for the
+hashed kind, whose buckets may also hold rows of other keys.
+
+**Priced.** Two extra row reads and two extra comparisons per probe, 36,864 probes at `triangle`
+4,096, so about 74,000 extra row reads against 28 ms of preparation and 65 MB saved — and unlike the
+hash it needs no new storage and no new kind at all.
+
+**Why it is not built.** The key fold in `Index::bucket` and in `run` walks every `OP_CONST` and
+`OP_KEY` op, so a demoted mask needs a way to say "this column is bound but is not part of the key":
+either a new op kind that the fold skips and `VERIFY` compares, or a mask-aware fold. Either is a
+change to the innermost key computation of both kernels and it needs `join::<true, _>` instantiated
+for the CSR arm, so it moves the instruction count of every cohort. It also interacts with the join
+order, which the card puts out of scope. **Queued, and it is the first thing to try**, because it is
+strictly less machinery than a fifth kind and gets the same two wins.
+
+### Not built, and impossible in this encoding: the page-skipping prefix sum
+
+Settled under Fermi prediction 4 above, and the argument stands after measurement: an untouched page
+of a lazily reserved offsets array reads as zeros, and zeros break the monotonicity that
+`offsets[key] .. offsets[key + 1]` depends on, giving either a slice panic or a spurious bucket of
+every row before the gap, at each boundary between a written and an unwritten page. Dilating the
+written set moves the boundary without removing it. The encoding that *can* absorb an untouched
+page is a `(start, length)` or packed `(start, end)` pair per key, and that is a change to the probe
+arm's arithmetic. Not an omission — a property of the encoding.
+
+### Not built: a lazy `Pages` reservation for the offsets array, without skipping
+
+This one survives the argument above, because the scan still writes every page and the array stays
+monotone; all it removes is `calloc`'s explicit `memset`. **Priced at about 3 ms at 2^24 keys** from
+the measured 58 GB/s warm store bandwidth, and at **nothing at all in the shipped configuration**,
+because after the density rule no index anywhere near 2^24 keys is direct and a small array's
+`calloc` is served warm from the arena. Recorded as priced and not worth its `unsafe` surface at the
+key spaces the rule now admits.
