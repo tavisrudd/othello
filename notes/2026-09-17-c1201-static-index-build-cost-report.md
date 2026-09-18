@@ -2,8 +2,24 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-17
-**Status**: IN PROGRESS. Written incrementally from the start of the task; the Fermi predictions
+**Status**: COMPLETE, except the audit, which the card makes a separate task. Written incrementally
+from the start, so a crash would have left a partial record rather than none; the Fermi predictions
 below were written and committed **before any code change**.
+
+**The headline.** A join index over a relation that never grows now has a measured density rule as
+well as a ceiling, and the counting sort no longer shifts its result. On `triangle` at N = 4,096,
+where the fully bound third atom keys on both columns for a key space of 2^24, preparation falls to
+**0.094**, peak resident memory to **0.084** (71.5 MB to 5.9 MB), and the whole process —
+read, prepare, evaluate once, write — to **0.193**; against compiled Soufflé the same cohort crosses
+from **1.90 to 0.896**, from behind to ahead, with the control arm reproducing C1193's recorded 1.92.
+Thirteen cohorts whose chosen kind does not change read **1.00000 to 1.00003** in derivation-loop
+instructions against A/A nulls inside 2.3 parts per hundred thousand, and two whose kinds do not
+change have identical fault counts and resident sets to the byte. Where the kind does change the
+derivation loop costs **1.41 and 1.45 times** the instructions, which is stated as a loss because
+Fermi prediction 2 was wrong: the direct probe wins at every density, right up to the ceiling. The
+closeout then found that a density is a **proxy** — two cohorts with the same key space, the same
+rows and the same density have opposite right answers — and that `key_space <= 23 · probes` predicts
+all three families from one constant, which names the successor.
 
 Task card: the C1201 row allocated at the C1193 closeout (`e0441b3ed`). Predecessors:
 `2026-09-16-c1192-sparse-join-index-report.md` (the four addressing kinds and its deviation 5, which
@@ -37,6 +53,16 @@ rustc equals the `rust-toolchain.toml` pin.
 | --- | --- | --- | --- | --- | --- | --- |
 | control, derivation loop | the kernel A/B | `3c8499d` | `09a5c2b` | no | `closure_ballpark-3c8499d` | `7f10dbc575abf84b0c72744163c6edf4fa5952b603f03395e18d89da02ef737b` |
 | control, frontend and stratified backend | the Rel route | `3c8499d` | `09a5c2b` | no | `ergodis-tools-3c8499d` | `eee4551ee11e6a74d0940f1e854fd88963e2ad366ee9c22779f4edf86b19bd54` |
+| candidate, derivation loop | every figure below | `8c04b7a` | `676f513` | no | `closure_ballpark-8c04b7a` | `c2b2533e1f82a7964c50462dabba7f7c9d82081a30ff86188e2bd191dc039fbc` |
+| candidate, frontend and stratified backend | the lane's next control | `8c04b7a` | `676f513` | no | `ergodis-tools-8c04b7a` | `a2be41efb8a24fdd8ae4661ce66bf47cf349438b042de2b7d3bc990105d7d702` |
+
+The candidate's private revision `8c04b7a` is an **empty commit** whose message re-pins the core, in
+the shape C1193's `cb11550` used: this change is entirely in the core, and a retained arm is named by
+its own repository's revision, so the private revision has to move for the arm to have a name. The
+private repository's own source is identical at `3c8499d` and `8c04b7a`, which is what makes the two
+`closure_ballpark` arms differ in the core change and nothing else. One scratch build of the example
+was used to locate the crossover bracket before the constant was chosen; it is labelled as a probe
+wherever it appears and no kept figure is measured on it.
 
 `MANIFEST.tsv` records `clean` for both rows, and `git status --short` was empty in
 `~/src/ergodis-private` and in `~/src/ergodis` immediately before each recipe ran. The C1193 report
@@ -51,7 +77,12 @@ Candidate arms are added to this table as they are retained.
 
 | Repository | Commit | What |
 | --- | --- | --- |
-| `othello` | (this commit) | the report skeleton, the reproduced baseline and the Fermi predictions, written before any code |
+| `othello` | `0e6e252` | the report skeleton, the reproduced baseline and the Fermi predictions, written before any code |
+| `ergodis` | `676f513` | `DIRECT_STATIC_DENSITY`, the staggered counting-sort cursor, the crossover's test, and `SHA256SUMS` |
+| `ergodis-private` | `8c04b7a` | the empty re-pin that names the measured arm |
+| `ergodis-private` | `879f3ed` | the two measurement stages and the receipts |
+| `ergodis-private` | `684b0e5` | the closeout's sweep at an independent row count |
+| `othello` | `869270f` … here | this report, written incrementally at each milestone |
 
 ## What the shipped policy does, reproduced
 
@@ -716,3 +747,331 @@ whole evaluation while **saving 36 to 64 MB of resident memory** at the top of t
 it replaces had no bounded error at all — it was 5.2 times slower end to end on
 `triangle:sparse:4096` and held 65 MB for a relation of 12,288 rows. Choosing the conservative end
 of a proxy over an unbuilt cost model is the decision, and this is the measurement that prices it.
+
+## Mystery ledger
+
+### Settled
+
+1. **Where does the static index's 27.8 ms of extra preparation sit?** In memory traffic over the key
+   space, not in work over the rows. Fermi prediction 1 decomposed it into five passes over a 64 MiB
+   array and predicted 26 ms against 27.8 measured, closing to 7 per cent, and the stagger's measured
+   2.18 ms confirms the one pass it removed.
+2. **Does the direct kind's probe hold up at the ceiling, where its offsets array is far larger than
+   cache?** Yes, and this refutes Fermi prediction 2. The direct probe is ahead by 1.5 to 2.3 times
+   at every density from 10.7 to 1,365, so C1192's deviation 5 was right about the probe over the
+   whole range and the two static kinds are a strict trade rather than one dominating.
+3. **What is the crossover for one evaluation, and is a density the right thing to measure?** The
+   crossover on the `sparse`-density `triangle` is bracketed between a density of 64 and 74.7. **A
+   density is not the right thing to measure**: the same program at the `blocks` density has the
+   direct kind ahead from 68 to 273, and `mutual:blocks:4096` and `triangle:blocks:4096` have
+   identical key space, rows and density with opposite answers. The cause is the probe count, and
+   `key_space <= 23 · probes` predicts all three families from one constant fitted on one of them.
+4. **Can a lazily reserved offsets array skip untouched pages in its prefix sum?** No, not with this
+   probe. Zeros in an untouched page break the monotonicity that `offsets[key]..offsets[key+1]`
+   depends on, giving a slice panic on one side of a page boundary and a spurious bucket of every
+   prior row on the other; dilating the written set moves the boundary without removing it. The
+   encoding that absorbs an untouched page is a `(start, length)` pair per key, which is a probe
+   change. Settled by argument, before any code, and the argument is in prediction 4.
+5. **Does the `keys`-entry shift have to exist?** No. Staggering the counting cursor one entry to the
+   right leaves the array in the shape the probe reads with no further pass, for four extra bytes and
+   with the probe expression textually unchanged: 0.910 of the direct build at the ceiling, with the
+   fault count identical to the unit and the instruction ratio at 0.985.
+6. **Do the two kinds still agree on everything observable?** Yes, and on more than the suite
+   asserts: the output digest, the derived count, the probe count and the candidate count are equal
+   between the arms on all seventeen cohorts, the two whose kind changes included, asserted per
+   cohort by the harness rather than inspected. The core suite's `demand_sparse` runs the whole
+   corpus a second time under `Policy::Sparse` and compares certificate **bytes**, and it passes.
+7. **Was the C1193 audit's retain complaint fixable?** Yes. Both controls and both candidates here
+   were retained from trees whose `git status --short` was empty, checked before each recipe ran, and
+   all four rows read `clean` in `MANIFEST.tsv`.
+8. **Was the 400 KiB resident-set gap in the first shift measurement the change?** No. It was the
+   scratch probe binary. Re-run on the two retained executables, the resident set is identical to the
+   byte at every domain.
+
+### Open
+
+1. **What is the per-fact 164-to-283 ns of preparation, and why does it vary by 1.7 times across
+   cohorts?** After this change every cohort's preparation is proportional to the input fact count at
+   that rate, and it is now the leading term — 50 ms on `closure:blocks:16384`. *Evidence so far*:
+   seventeen cohorts spanning 768 to 245,760 facts, all inside that band, with no visible dependence
+   on the program family or the index kinds; the candidates for the cost are `Admitted`'s fact list,
+   the per-relation row store built by `extend_from_slice`, and the `fact_of` projection. *Evidence
+   gap*: a kernel-scoped profile of `Demand::new_bounded` on a fact-heavy cohort with no index of any
+   size, and a per-fact instruction count from two fact counts at one domain. *Owner*: a successor
+   task; this is where preparation now is.
+2. **Where exactly does the direct probe's advantage come from at 2^24 keys?** A random load into a
+   64 MiB array should miss the last level and cost more than a 13.6-iteration binary search over
+   96 KiB, and it does not — it is 1.5 to 2.3 times cheaper. *Evidence so far*: the ratio holds from
+   a density of 10.7 to 1,365 and the instruction ratio (1.41 to 1.45 against the sparse arm) is
+   smaller than the cycle ratio (1.49 to 2.04), so part of it is instructions and part is the
+   dependent-load chain of the search. *Evidence gap*: the supplementary cache-event run
+   (`cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses`) with its own null, on
+   `triangle:sparse:4096` under both forced policies — one invocation, and C1193's open item 3 asked
+   for the same run for a different reason. *Cheap.*
+3. **Is `K` ≈ 23 stable, or is it itself workload-dependent?** It was fitted at one crossover and
+   checked against two cohorts on the correct side of it, which is a consistency check and not a
+   measurement of the constant. *Evidence gap*: a crossover located directly in a family whose probe
+   count per row differs again from 3 and 15 — `path3` or `path4` with a fully bound final atom, or
+   the `blocks` triangle above the ceiling, which `MAX_DIRECT_KEYS` currently puts out of reach.
+   *Owner*: the probe-count policy task, which needs the constant anyway.
+4. **Would the probe-count estimate the plan can compute agree with the true probe count?** The
+   estimate would multiply each level's average fan-out, which is exact for the first level and an
+   independence assumption after that. *Evidence gap*: the estimate computed beside the kernel's
+   actual per-link probe counter, over the whole cohort set — and there is no per-link probe counter
+   today, only the one top-level `probes`. That counter is the first piece of work the successor
+   needs.
+5. **`DIRECT_INDEX_DENSITY` = 48 for growing indexes was measured the same way and may have the same
+   defect.** A dynamic index's build is also proportional to its key space and its saving to its
+   probe count, so the same proxy-versus-cause argument applies to it. *Evidence so far*: nothing
+   measured here; every growing index in the cohort set sits at a density below 1.0, four orders
+   inside the constant, so no cohort exercises it. *Evidence gap*: C1192's sweep re-run at two
+   workloads with the same density and different probe counts per row, which is the shape that
+   settled the static case. *Owner*: the same successor, because one cost model would replace both
+   constants.
+
+No genuine mystery is being manufactured: items 1, 2 and 4 are concrete measurements nobody has
+taken, item 3 is a constant fitted at one point, and item 5 is an argument by analogy that is
+explicitly unmeasured.
+
+## Candidates to queue, no identifiers allocated
+
+1. **Rule the index choice on an estimated probe count instead of a density.** The largest measured
+   effect available: it is the only rule shape that gets `mutual:blocks:4096` and
+   `triangle:blocks:4096` both right, and it would replace `DIRECT_STATIC_DENSITY` and probably
+   `DIRECT_INDEX_DENSITY` with one constant on `key_space / probes`. Needs a per-link probe counter
+   first (candidate 2).
+2. **A per-link probe counter in `Evaluation`.** One increment per bucket lookup, which the loop
+   already branches on. It is the instrument candidate 1 needs, it would make this report's probe
+   figures measured rather than derived from the graph's degree, and it is the missing half of
+   C1193's queued `matches` counter.
+3. **Demote a fully bound atom's index mask and verify the remaining key columns per row.** Priced
+   above under the shapes not built: it is the cheapest shape that gets both the cheap build and the
+   O(1) probe, needs no new storage and no new kind, and would let the `triangle`'s third atom index
+   one column for 48 KiB instead of two for 64 MiB. It needs an op kind the key fold skips and
+   `join::<true, _>` instantiated for the CSR arm, so it is a kernel change with its own A/B.
+4. **A plan-owned open-addressed hash over the distinct keys**, the card's candidate (c), priced
+   above. A fifth addressing kind; strictly more machinery than candidate 3 for the same two wins.
+5. **Preparation's per-fact cost**, which this task made the leading term everywhere. Open item 1.
+6. **The supplementary cache-event run on `triangle:sparse:4096` under both forced policies**, which
+   closes open item 2 here and C1193's open item 3 in one invocation.
+7. **`triangle` and `mutual` at the `blocks` density have no cohort in `ab.py`'s list**, and they are
+   the two that discriminate the rule shapes. Worth adding to the standing cohort set.
+8. **A `Pages` reservation for the plan's offsets array**, priced at about 3 ms at 2^24 keys and at
+   nothing in the shipped configuration. Recorded so it is not rediscovered as an omission.
+
+## Replay commands
+
+Run from `~/src/ergodis-private` unless noted. Every gate and every measurement went through
+`nix develop ~/src/ergodis`, whose devShell asserts its rustc equals the `rust-toolchain.toml` pin,
+so the gates and the measurements describe one build. Working files under `~/.cache/ergodis/c1201/`.
+
+```sh
+# Gates, core, at 676f513. Outcome: exit 0, 82 `test result: ok` blocks, zero
+# FAILED; clippy and fmt clean; the allocation regressions green.
+cd ~/src/ergodis
+nix develop . --command cargo test --all-features --no-fail-fast -j 8
+nix develop . --command cargo clippy --all-targets --all-features -j 8 -- -D warnings
+nix develop . --command cargo fmt --all -- --check
+nix develop . --command cargo test -p ergodis-rules --test allocation -j 8
+nix develop . --command python3 python/generate_evidence.py --write   # SHA256SUMS
+cd ~/src/ergodis-private
+
+# Gates, private. This drives rel_lowering, rel_frontend, rel_frontend_portability
+# and rel_reference_eval, which is the C1189 differential under both policies.
+# Outcome: 42 test binaries, zero failures.
+choom -n 1000 -- nix develop ~/src/ergodis --command cargo test \
+    -p ergodis-private -p ergodis-tools --no-fail-fast -j 8
+nix develop ~/src/ergodis --command cargo clippy -p ergodis-private -p ergodis-tools \
+    --lib --bins --tests --examples -j 8 -- -D warnings
+nix develop ~/src/ergodis --command cargo fmt -p ergodis-private -p ergodis-tools -- --check
+nix shell nixpkgs#ruff -c ruff check analysis/datalog-comparison/static_index_*.py
+
+# The crossover test in the core suite, which brackets DIRECT_STATIC_DENSITY from
+# the constant itself and so survives a change to its value.
+nix develop ~/src/ergodis --command cargo test -p ergodis-rules --test demand_sparse -j 8 \
+    -- the_policy_chooses_from_the_key_space_and_the_rows
+
+# The arms, each retained with the tree at its own revision and `git status
+# --short` empty, checked before the recipe ran; the control pair before the
+# first source change of the task. The recipe is idempotent: at the same
+# revision it reports the existing retained copy and exits zero.
+../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example         # private 3c8499d, core 09a5c2b
+../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools            # private 3c8499d, core 09a5c2b
+../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example         # private 8c04b7a, core 676f513
+../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools            # private 8c04b7a, core 676f513
+
+A=analysis/datalog-comparison; C=~/.cache/ergodis/bin; W=~/.cache/ergodis/c1201
+UNCH=closure:sparse:256,closure:sparse:1024,closure:dense:256,closure:dense:512,samegen:sparse:1024,samegen:dense:512,closure:blocks:4096,closure:blocks:16384,cycle:blocks:4096,triangle:sparse:16384,path3:sparse:4096,path3:sparse:16384,path4:sparse:4096
+ALL=$UNCH,mutual:blocks:4096,mutual:blocks:8192,triangle:sparse:4096
+
+# The derivation loop on the cohorts whose kind does not change. Outcome:
+# 1.00000 to 1.00003 in instructions, nulls within 2.3e-5.
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $C/closure_ballpark-3c8499d \
+    --a-name control-3c8499d --b $C/closure_ballpark-8c04b7a --b-name candidate-8c04b7a \
+    --mode evaluate --rounds 5 --cpu 5 --repeats 3 --cohorts $UNCH \
+    --work $W/ab-work --out $A/ab-2026-09-17-c1201-unchanged-kinds.json
+
+# The two cohorts whose kind changes. Outcome: 1.412 and 1.447 in instructions.
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $C/closure_ballpark-3c8499d \
+    --a-name control-3c8499d --b $C/closure_ballpark-8c04b7a --b-name candidate-8c04b7a \
+    --mode evaluate --rounds 5 --cpu 5 --repeats 3 \
+    --cohorts triangle:sparse:4096,mutual:blocks:4096 \
+    --work $W/ab-changed --out $A/ab-2026-09-17-c1201-changed-kinds.json
+
+# Preparation, peak RSS and one whole evaluation. Outcome: 0.094 preparation,
+# 0.084 peak RSS and 0.193 whole process on triangle:sparse:4096; exact nulls on
+# the two cohorts whose kinds are unchanged.
+nix develop ~/src/ergodis --command python3 $A/static_index_stages.py \
+    --a $C/closure_ballpark-3c8499d --a-name control-3c8499d \
+    --b $C/closure_ballpark-8c04b7a --b-name candidate-8c04b7a \
+    --work $W/stages-auto --index auto --rounds 7 --repeats 9 \
+    --cohorts triangle:sparse:1024,triangle:sparse:4096,triangle:sparse:16384,mutual:blocks:4096,mutual:blocks:8192 \
+    --out $A/stages-2026-09-17-c1201-auto.json
+
+# The build repair alone, both arms forced to the same kinds. Outcome: 0.910 of
+# the direct build at the ceiling, fault counts and resident sets identical.
+nix develop ~/src/ergodis --command python3 $A/static_index_stages.py \
+    --a $C/closure_ballpark-3c8499d --a-name control-3c8499d \
+    --b $C/closure_ballpark-8c04b7a --b-name candidate-8c04b7a \
+    --work $W/stages-direct --index direct --rounds 7 --repeats 9 \
+    --cohorts triangle:sparse:512,triangle:sparse:1024,triangle:sparse:2048,triangle:sparse:4096 \
+    --out $A/stages-2026-09-17-c1201-shift-direct.json
+
+# The kind census over all seventeen cohorts, which asserts digest and work
+# equality and is not a timing run. Outcome: exactly two cohorts change.
+nix develop ~/src/ergodis --command python3 $A/static_index_stages.py \
+    --a $C/closure_ballpark-3c8499d --a-name control-3c8499d \
+    --b $C/closure_ballpark-8c04b7a --b-name candidate-8c04b7a \
+    --work $W/census --index auto --rounds 1 --repeats 1 --cohorts $ALL \
+    --out $A/stages-2026-09-17-c1201-kind-census.json
+
+# The crossover sweep at the shipped constant. Outcome: one-evaluation ratio
+# 1.038 at a density of 74.7 rising to 6.16 at 1,365.
+nix develop ~/src/ergodis --command python3 $A/static_index_sweep.py \
+    --bin $C/closure_ballpark-8c04b7a --work $W/sweep-shipped --rounds 5 --repeats 15 \
+    --domains 224,256,320,384,512,1024,2048,4096 \
+    --out $A/sweep-2026-09-17-c1201-shipped-constant.json
+
+# The same sweep at an independent row count, which refutes a pure density rule.
+# Outcome: the direct kind ahead end to end at every density from 68 to 273.
+nix develop ~/src/ergodis --command python3 $A/static_index_sweep.py \
+    --bin $C/closure_ballpark-8c04b7a --work $W/sweep-blocks --program triangle \
+    --density blocks --rounds 5 --repeats 9 --domains 1024,1280,1536,1792,2048,2560 \
+    --out $A/sweep-2026-09-17-c1201-blocks-rows.json
+nix develop ~/src/ergodis --command python3 $A/static_index_sweep.py \
+    --bin $C/closure_ballpark-8c04b7a --work $W/sweep-blocks --program triangle \
+    --density blocks --rounds 5 --repeats 5 --domains 3072,4096 \
+    --out $A/sweep-2026-09-17-c1201-blocks-ceiling.json
+
+# Soufflé 2.5, compiled and interpreted, both -j1, whole process to whole
+# process. Outcome: triangle at 4,096 crosses from 1.903 to 0.896.
+S="nix shell nixpkgs#souffle nixpkgs#gcc nixpkgs#gnumake nixpkgs#time -c"
+for arm in 3c8499d:control 8c04b7a:candidate; do
+  rev=${arm%%:*}; name=${arm##*:}
+  $S python3 $A/compare.py --bin $C/closure_ballpark-$rev --work $W/souffle-$name \
+      --out $A/results-2026-09-17-c1201-$name.json --rounds 5 --cpu 5 \
+      --sizes triangle:sparse:1024,4096,16384
+done
+```
+
+**The one measurement that does not replay from a shipped binary.** The sweep's points *below* a
+density of 64 — the lower half of the crossover bracket, densities 32 to 64 — need
+`DIRECT_STATIC_DENSITY` temporarily lowered (it was 4 while the bracket was located), because at the
+shipped value both arms of `static_index_sweep.py` choose the same kinds there and the script
+correctly reports no swept index. Those rows came from a probe build of the example at the same core
+source as `676f513` with only that constant differing; the points at and above 74.7, which is the
+upper end of the bracket and the side the constant is set from, replay directly on
+`closure_ballpark-8c04b7a` and are the table above.
+
+Inputs are deterministic: the C1182 xorshift edge generator seeded by the domain for the `sparse`
+and `dense` densities, and the `blocks` density's complete digraph inside each consecutive block of
+sixteen nodes, which uses no random stream at all.
+
+## What this task left under `~/.cache/ergodis/`
+
+**Four retained binaries, 34 MB.** `bin/closure_ballpark-3c8499d` and `bin/ergodis-tools-3c8499d`
+are this task's controls; `bin/closure_ballpark-8c04b7a` and `bin/ergodis-tools-8c04b7a` are the
+candidate arms every figure above is measured on and are **the controls the next A/B in this lane
+should use**. All four are recorded `clean` in `bin/MANIFEST.tsv`, and the `ergodis-tools` pair is
+retained for the lane's Rel route rather than used by this report, which touches no frontend path.
+
+**`c1201/`, 16 MB.** The seven `static_index_*` and `ab.py` work directories, and the two Soufflé
+work trees at 2.1 MB each (the generated fact files, the compiled `.dl` binaries and every system's
+output CSV). Nothing was deleted at task close; everything here is regenerable from the replay
+block.
+
+**No `perf-c1201/`.** This task took no `perf record` profile: its two stages are a preparation cost
+read from wall time and faults, and a derivation loop whose A/B `ab.py` already instruments with
+`perf stat`. The kernel-scoped profile open item 2 asks for is a cache-event `perf stat` run, not a
+`perf record`, and it is queued rather than taken.
+
+`../ergodis-dev/scripts/cache-gc.sh` was run in its listing mode and **nothing was deleted; that is
+the user's call.** It scanned 37 entries and reports **zero unreferenced and old enough to remove** —
+every entry is either referenced by an evidence file or younger than two days, this task's `c1201`
+among the latter. The largest entries it lists are `certdist` at 270 MB, `worktrees` at 105 MB,
+`c985` at 104 MB, `split` at 31 MB, `c1192` at 20 MB, `c1193`, `c1198`, `representation-attribution`
+and `c1201` at 16 MB each, and `corpora` at 13 MB. The eighteen entries C1193's close listed as
+unreferenced are no longer so, which is what a referenced-entry scan should do once the reports that
+name them are committed.
+
+## Resume state for the next session
+
+**The task's own work is complete and every tree is committed.** Nothing is half-built and no path
+is untracked in any of the three repositories. The **audit is a separate later task** and was not
+run here, as the card says.
+
+| Repository | HEAD at close | Range this task added |
+| --- | --- | --- |
+| `~/src/ergodis` | `676f513` | `09a5c2b` … `676f513` (one commit) |
+| `~/src/ergodis-private` | `684b0e5` | `3c8499d` … `684b0e5` (three commits) |
+| `~/src/othello` | this report's last commit | `8863a56` … here |
+
+**Retained controls for the next A/B in this lane**, both at `ergodis-private` `8c04b7a` with core
+`ergodis` `676f513`, rustc 1.95.0 (59807616e 2026-04-14), release, no features, **both `clean` in
+the manifest**:
+
+- derivation loop: `~/.cache/ergodis/bin/closure_ballpark-8c04b7a`, measured sha256
+  `c2b2533e1f82a7964c50462dabba7f7c9d82081a30ff86188e2bd191dc039fbc`;
+- frontend and stratified backend: `~/.cache/ergodis/bin/ergodis-tools-8c04b7a`, measured sha256
+  `a2be41efb8a24fdd8ae4661ce66bf47cf349438b042de2b7d3bc990105d7d702`.
+
+They supersede `closure_ballpark-cb11550` and `ergodis-tools-cb11550`, which C1193 named and which
+are flagged `dirty`, and `closure_ballpark-3c8499d` / `ergodis-tools-3c8499d`, which are this task's
+controls and stay for its replay.
+
+**Left undone, deliberately:** the lifecycle close for C1201 (archive the row, delete it from the
+live queue, update the lane handoff), which belongs to whoever closes the task; the audit, which the
+card makes a separate task; and the eight queued candidates, none of which has an identifier.
+
+**Decisions left open for Tavis**, both stated with their evidence above and neither taken here:
+whether `DIRECT_STATIC_DENSITY` should stay at 64 or move now that the closeout shows a density is a
+proxy for the probe count (the recommendation is that it stays, and that the successor replaces the
+rule's *shape* rather than its constant), and which of the three shapes not built — the probe-count
+cost model, mask demotion, or a fifth hashed static kind — is worth allocating first (the
+recommendation is mask demotion, as the cheapest that gets both wins, with the per-link probe counter
+allocated alongside it because every one of the three needs it).
+
+## Vibe check
+
+Good, and the headline is the one the C1193 closeout predicted would be the largest lever in the
+lane. On `triangle` at 4,096 preparation drops to **0.094**, peak resident memory to **0.084**, the
+whole process to **0.193**, and the comparison against compiled Soufflé crosses from **1.903 to
+0.896** — from behind to ahead on the one family where this evaluator should be ahead, with the
+control arm reproducing C1193's recorded 1.92 so the crossing is this change and not two sessions.
+Thirteen cohorts are unmoved to within three parts per hundred thousand, two cohorts whose kinds do
+not change have fault counts and resident sets identical to the byte, and the build also got a free
+7 to 9 per cent from removing a pass nobody had questioned.
+
+One thing is a real loss and is stated as one: where the kind changes, the derivation loop costs
+**1.41 and 1.45 times** the instructions, because Fermi prediction 2 was wrong and the direct probe
+wins at every density, right up to the ceiling. So the card's acceptance line — preparation at the
+sparse row *and* evaluation at the direct row — **is not met and cannot be by any choice between the
+two existing static kinds**, which is a finding rather than a shortfall; it needs a third
+representation, and two are priced.
+
+The most interesting result is not in the card at all. `mutual:blocks:4096` and
+`triangle:blocks:4096` have the same key space, the same row count and the same density, and the
+right answer is **opposite** on them, because one probes the index fifteen times more often. So the
+density rule this task shipped is a proxy, `key_space <= 23 · probes` predicts all three families
+from one constant, and the plan has what it needs to estimate the probes. That is the next lever and
+it subsumes both of the policy's density constants.
