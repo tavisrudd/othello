@@ -2,8 +2,25 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-18
-**Status**: IN PROGRESS. Written incrementally from the start; the Fermi predictions below were
-written and committed **before the first sweep**, and before any source change in any repository.
+**Status**: COMPLETE. Written incrementally from the start, so a crash would have left a partial
+record rather than none; the Fermi predictions below were written and committed **before the first
+sweep**, and before any source change in any repository.
+
+**The headline.** The crossover `DIRECT_INDEX_DENSITY = 48` was set from **no longer exists on the
+cohort it was set from**: on that cohort, under that instrument, the direct kind is now ahead by 19
+to 21 per cent in cycles at every density the ceilings allow, where it was behind by 1.6 to 2.6 per
+cent before the lazy workspace removed the per-evaluation fill. Where a crossover does still exist —
+the two smallest block sizes at domain 4,096 — it is at a density of about **128 to 256** rather than
+48, it **moves with the block size and the domain and not with the density**, and the counted events
+say the mechanism is now the **L1 data TLB** rather than memory traffic: the TLB-miss ratio between
+the two kinds crosses unity exactly where the cycle ratio does and no cache counter does. The finding
+that decides the disposition was not on the card: every ratio this lane has ever measured for this
+index is a **warm-loop** ratio, and on the **first** evaluation — the shape the driver, the
+differential and the Rel route all run — the direct kind costs **2.4 to 3.0 times** the sparse kind's
+time and **2.1 times** its peak resident memory, with a break-even of 11 to 182 evaluations. So the
+one-evaluation regime crosses at a density of 4 to 16 and the repeated-evaluation regime at 128 or
+never, **the shipped constant sits between them**, and no single density is right in both. The
+constant is **unchanged**; its docstring is repaired to state what it actually trades.
 
 Task card: `notes/2026-09-18-c1203-growing-index-crossover.md`. Predecessors:
 `notes/2026-09-18-c1202-probe-count-index-rule-report.md` (the growing index at one density and four
@@ -61,6 +78,8 @@ Candidate arms are added to this table as they are retained.
 | `othello` | `88b9f94e7` | the replication, the confound-free density sweep, the counted mechanism, memory, the fill-versus-walk regime and the first-evaluation stage |
 | `ergodis` | `ae3a043` | `DIRECT_INDEX_DENSITY`'s docstring records what the constant actually trades |
 | `ergodis` | `4a706f6`, `ergodis-private` `e7d560d` | the source-comment clean-up required by the rule recorded under **Source comments** below |
+| `ergodis` | `d56f748` | the committed-page bound stated in terms of the packed key's leading runs |
+| `ergodis-private` | `1500dc2` | the reproduction receipt and the one-evaluation crossover receipts |
 | `othello` | this report | written incrementally at each milestone |
 
 ## Source comments: the rule this task was corrected against
@@ -647,7 +666,7 @@ to move this constant**, because moving it cannot express the finding.
 | Reproduced by an independent re-run hours apart or under a different load, with drift stated | **Done under a different load** — 8.93 to 11.02 against 0.44 to 0.82 — with drift at most 1.1 percentage points and no sign change at any of twelve points. The cycles ratios do not survive that load and are said not to. |
 | If the constant changes, the full validation battery | **Not applicable**: it does not change. |
 | If the constant does not change, say so with the measurement that keeps it | **Done** under **Disposition**. |
-| Gates | **Done**: core `cargo test --all-features` (exit 0, 82 `test result: ok` blocks, zero `FAILED`), clippy `-D warnings` clean, `cargo fmt --check` clean, the allocation regression green under every policy, `generate_evidence.py --write` in the same commit as the source change, `ruff` clean on all four harness scripts, private `cargo fmt --check` clean, and the private workspace test suite. |
+| Gates | **Done**: core `cargo test --all-features` (exit 0, 82 `test result: ok` blocks, zero `FAILED`), clippy `-D warnings` clean, `cargo fmt --check` clean, the allocation regression green under every policy, `generate_evidence.py --write` in the same commit as the source change, `ruff` clean on all four harness scripts, private `cargo fmt --check` clean, and the private workspace test suite (exit 0, 42 `test result: ok` blocks, zero `FAILED`), which is where the frontend, lowering, portability and reference-evaluation differentials run. |
 
 ## The `ej` and `tt` closeout
 
@@ -958,8 +977,8 @@ which is still where the growth in this cache is.
 
 | Repository | HEAD at close | Range this task added |
 | --- | --- | --- |
-| `~/src/ergodis` | `4a706f6` | `ca0609f` … `4a706f6` (two commits, both documentation) |
-| `~/src/ergodis-private` | `e7d560d` | `b47ade4` … `e7d560d` (six commits) |
+| `~/src/ergodis` | `d56f748` | `ca0609f` … `d56f748`, all documentation: no policy line, constant or public item changed |
+| `~/src/ergodis-private` | `1500dc2` | `b47ade4` … `1500dc2`, the four harness changes and the receipts |
 | `~/src/othello` | this report's last commit | `cb43481e0` … here |
 
 Nothing is half-built and no path is untracked in any of the three repositories.
