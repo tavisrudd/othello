@@ -648,6 +648,72 @@ fully bound mask and gets the direct kind from the probe rule. **`mutual:blocks:
 bullet — and the measured lookups say why: 61,440 against 921,600 into indexes of the same key
 space over relations of the same size.
 
+### `DIRECT_INDEX_DENSITY = 48`: does the growing index carry the same defect?
+
+C1201's mystery item 5 asked whether the growing index's density is a proxy in the way the static
+one was, and the card asks for the answer by measurement. The per-link counter makes the question
+sharp for the first time, and then a `--max-rows` bracket answers it.
+
+**The two rules already disagree on a cohort in the standing set.** `cycle:blocks:4096`'s index on
+both of `path`'s columns has a key space of 2^24 over a relation whose capacity is 2^24, a density
+of exactly 1.0 that keeps it direct under `DIRECT_INDEX_DENSITY`, and the counter reads **69,632
+lookups**, so its key space per probe is **241** — which the static constant of 23 would send sparse.
+
+**The instrument.** `--max-rows` moves the growing relation's capacity and therefore its density
+without touching anything else the plan decides: the static `edge` index's key space is 4,096
+against 61,440 facts and is direct under any rule and either bound, `path`'s membership is a bitmap
+over the universe and does not read the bound, and C1198 made every workspace column a lazy
+reservation, so an untouched page of a larger reservation costs nothing. At `--max-rows 400000` the
+density is 41.9 and the index is direct; at 300000 it is 55.9 and the index is sparse. The
+`blocks<N>` density then moves the probes into that index while holding the density fixed, which is
+exactly C1201's "two workloads with equal density and different probes" shape:
+
+| cohort | derived | lookups into the growing index | key space ÷ probes | kinds at `--max-rows 400000` | at 300000 |
+| --- | ---: | ---: | ---: | :---: | :---: |
+| `cycle:blocks4:4096` | 32,768 | 20,480 | 819 | `ddd` | `dds` |
+| `cycle:blocks8:4096` | 65,536 | 36,864 | 455 | `ddd` | `dds` |
+| `cycle:blocks16:4096` | 131,072 | 69,632 | 241 | `ddd` | `dds` |
+| `cycle:blocks32:4096` | 262,144 | 135,168 | 124 | `ddd` | `dds` |
+
+The derived counts and the lookup counts are identical between the two bounds at every block size,
+so the two arms do the same work and differ in that one index's kind.
+
+**The measurement**, five rounds of three and six repeats, two-point differenced, event set at
+100.00 per cent enabled, load average 3.99 to 4.09, receipt
+`ab-2026-09-18-c1202-growing-index.json`. The ratios are **sparse ÷ direct**, so above unity means
+the direct kind is right. A growing index is rebuilt every round *inside* `evaluate_into`, so the
+derivation loop is the stage its build and its probe both live in.
+
+| Cohort | key space ÷ probes | instructions | interval | A/A null | cycles | wall, direct | wall, sparse |
+| --- | ---: | ---: | --- | ---: | ---: | ---: | ---: |
+| `cycle:blocks4:4096` | 819 | 1.02971 | [1.02964, 1.02977] | 0.9999425 | **1.11647** | 1.0006 ms | 1.0765 ms |
+| `cycle:blocks8:4096` | 455 | 0.99042 | [0.99033, 0.99052] | 1.0000498 | **1.06437** | 2.5173 | 2.7122 |
+| `cycle:blocks16:4096` | 241 | 0.99348 | [0.99346, 0.99349] | 1.0000117 | **1.04589** | 7.9396 | 8.3668 |
+| `cycle:blocks32:4096` | 124 | 0.99736 | [0.99735, 0.99738] | 1.0000062 | **1.12292** | 25.573 | 28.523 |
+
+**The answer: `DIRECT_INDEX_DENSITY = 48` does not carry the same defect, and one constant does not
+replace both.** The direct kind is right at **every** point, from 124 to 819 keys per probe — a
+6.6-fold range of probes at one fixed density — by 4.6 to 12.3 per cent in cycles and 5.4 to 11.5
+per cent in wall time. That is exactly the test that broke the static density: there, holding the
+density fixed and moving the probes flipped the right answer between `mutual:blocks:4096` and
+`triangle:blocks:4096`. Here it does not flip at all. **A static rule at `K = 23` applied to this
+index would send it sparse at all four points and would be wrong at all four**, so the two rules are
+about different costs and the growing branch keeps its density.
+
+**The mechanism, and it is in the code rather than inferred.** A static index's build is one pass
+per key over the whole key space, once per plan. A growing index's per-round cost is its **reset**,
+and C1198's `RESET_FILL_BYTES_PER_ROW` rule already makes that proportional to the rows rather than
+to the key space: a table whose bytes exceed that multiple of the rows written is cleared by walking
+those rows, and one within it is cleared by a fill whose pages those rows have already committed.
+So the quantity a growing index's direct shape trades against its probe saving is the **rows**, not
+the key space, and a density is the right variable for it. The two constants measure two different
+things and the report keeps them apart.
+
+**What this does not settle.** The comparison brackets the *kind*, not the crossover: both arms sit
+at a density of 41.9 against 55.9, and the growing crossover itself is C1192's measurement and is
+not re-located here. What is settled is the proxy question the card asked — whether the right answer
+at a fixed density depends on the probe count — and it does not.
+
 ### The instructive negative: the rule before the rows floor
 
 The first landing of the probe rule (core `42470ad`, arm `closure_ballpark-1e539fe`) had two
@@ -681,7 +747,7 @@ in the tables above and below.
 | 2, `mutual:blocks:4096`: evaluation 2.5 to 3.6 ms, winning end to end | **Level right, sign wrong.** Demoted evaluation measured 3.43 ms, inside the range, but the undemoted sorted arm measured 2.36 ms rather than the 3.26 the prediction assumed, so demotion loses at 0.920. |
 | 3, the measured counter leaves `K ≈ 23` unmoved | **Right, exactly**: 36,864, 921,600 and 61,440 lookups, which are `rows × 3`, `rows × 15` and `rows`. |
 | 4, the plan's estimate agrees with the counter on every cohort the rule decides | **Right**, and its one weakness came out where predicted, on a step whose delta relation grows. |
-| 5, the two density constants do not merge | **Not settled.** The measurement was not taken; what the counter did buy is that the question is now sharp — `cycle:blocks:4096`'s growing index reads 241 keys per probe against a density of 1.0, so the two rules give it opposite answers. Mystery item 4. |
+| 5, the two density constants do not merge | **Right, and now measured.** Holding the growing index's density fixed and moving its probes 6.6-fold leaves the direct kind ahead at every point, by 4.6 to 12.3 per cent in cycles — the test that flipped the static answer does not flip this one. The mechanism the prediction gave was rounds; the mechanism the code gives is C1198's reset rule, which already makes a growing index's per-round cost proportional to its rows. |
 
 ## Disposition
 
@@ -695,7 +761,9 @@ in the tables above and below.
   is measured against.
 - **`DIRECT_STATIC_PROBES = 23`** replacing `DIRECT_STATIC_DENSITY = 64`, applied as
   `key_space <= K · estimated_probes` floored by the relation's rows, with the estimate computed by
-  `Demand::estimate_probes` over the steps that can run.
+  `Demand::estimate_probes` over the steps that can run. **`DIRECT_INDEX_DENSITY = 48` is kept**,
+  and kept with a measurement rather than by omission: the growing index's right answer does not
+  move with its probe count.
 - **The `blocks<N>` density** and the three fields C1201's audit asked of `static_index_stages.py`,
   plus `--arms`, `--densities` and `--count-probes` on the two measurement scripts.
 
@@ -718,6 +786,7 @@ both join sites; and not building an index no live step probes at all.
 | Every cohort in the C1201 table: digest, derived, probe and candidate counts equal; certificates accepted by both checkers; C1189 differential zero disagreements under both body policies; parity digest reported | **Met.** The eighteen-cohort census asserts the four equalities per cohort and raises otherwise; it ran to completion. The core suite's `demand_sparse` runs the whole corpus a second time under `Policy::Sparse` **and** a third under `Policy::AutoUndemoted` and compares certificate **bytes**, so the demoted and undemoted plans are held to byte equality, and both independent checkers accept in every representation. The private suite's `rel_reference_eval` is the C1189 differential under both body policies and passes. **The parity digest is unmoved**: every cohort's `output_sha256` is equal between the arms, which the A/B and the census both assert. |
 | Direct-path cohorts whose kind does not change: instructions within the A/A null or the loss stated as a loss | **Met.** Fifteen cohorts read 0.99985 to 1.00002 against A/A nulls within 2.7 parts per hundred thousand. Their plans are byte-identical, which is what the `OP_CHECK` encoding buys. |
 | The per-link probe counter's own cost on the two-atom kernel measured and stated | **Met, and it changed the design.** Carried unconditionally it cost 1.47 per cent of `mutual:blocks:4096`'s instructions and 1.46 per cent of `closure:sparse:256`'s, at about seven to nine instructions per lookup rather than the one predicted, so it is monomorphized; the production path then measures 0.99167 and 0.99185 on those two cohorts. |
+| `DIRECT_INDEX_DENSITY = 48` answered by measurement (C1201 mystery item 5) | **Met, and the answer is that one constant does not replace both.** `--max-rows` brackets the growing index's kind at a fixed density and `blocks<N>` moves its probes 6.6-fold; the direct kind is ahead at all four points by 4.6 to 12.3 per cent in cycles, so the test that flipped the static answer does not flip this one and a static rule at 23 would be wrong at every point. 48 stays, with C1198's reset rule as the mechanism. |
 | Gates | **Met.** `cargo test --all-features` at 82 `test result: ok` blocks and zero `FAILED`, clippy `-D warnings` clean, `cargo fmt --check` clean, the allocation regression green under all five policies with the n-ary kernel included, `generate_evidence.py --write` in the same commits, and the private workspace's suite, clippy, fmt and `ruff` as in the replay block. |
 
 ## The `ej` and `tt` closeout
@@ -828,6 +897,15 @@ Re-running `compare.py` on the kept arm is the cheapest remaining external datum
    each waiting on the last — with one load and three independent row reads. This is the case the
    playbook names when it says a change that reduces instructions but lengthens dependent loads is a
    regression, read the other way round.
+7. **Does `DIRECT_INDEX_DENSITY = 48` carry the same defect as the density it replaced?** No, and
+   this is the card's own question answered by measurement. Holding the growing index's density
+   fixed and moving its probes from 124 to 819 keys per probe leaves the direct kind ahead at every
+   point, by 4.6 to 12.3 per cent in cycles and 5.4 to 11.5 per cent in wall time — the test that
+   flipped the static answer between two cohorts of equal density does not flip this one, and a
+   static rule at `K = 23` would be wrong at all four points. The mechanism is in the code: C1198's
+   reset rule already makes a growing index's per-round cost proportional to its rows rather than to
+   its key space, so a density is the right variable for it. **One constant does not replace both**,
+   and 48 stays with evidence rather than with an argument by analogy.
 
 ### Open
 
@@ -851,40 +929,33 @@ Re-running `compare.py` on the kept arm is the cheapest remaining external datum
    overestimate. It biases such an index towards direct, the cheap-probe and expensive-build side,
    and no cohort in the set is decided by it. *Evidence gap*: a cohort where a growing delta feeds a
    **static** index with a large key space, which none of the seven programs builds.
-4. **`DIRECT_INDEX_DENSITY = 48` for growing indexes: the two rules disagree on a real cohort and
-   the disagreement is now measurable.** `cycle:blocks:4096`'s growing index on both of `path`'s
-   columns has a key space of 2^24 and a capacity of 2^24, a density of 1.0 that keeps it direct,
-   and the per-link counter reads **69,632 lookups**, so `key_space / probes` is **241** — which the
-   static constant of 23 would send sparse. *Evidence so far*: the counter, and nothing measured
-   about which answer is right. *Evidence gap*: `cycle:blocks:4096` with that one index forced each
-   way at equal work, which C1192's `--max-rows` sweep is the instrument for. *Owner*: a successor;
-   the question is now sharp, which it was not before the counter.
-5. **The demotion sweep's null is 0.97, not 1.00.** Three rounds alternate the arm order 2:1, so the
+4. **The demotion sweep's null is 0.97, not 1.00.** Three rounds alternate the arm order 2:1, so the
    arm that runs first in the majority of rounds is favoured; the two `mutual` rows where the guard
    already refuses demotion build identical plans on one binary and still read 0.9713 and 0.9757.
    *Evidence gap*: none needed — an even round count fixes it, and the per-stage run that followed
    used six rounds. The crossover rows are read against that null in the text above.
 
-6. **`K` is fitted at 23 and derived at 20.6 from this task's own coefficients.** The `ej` closeout
+5. **`K` is fitted at 23 and derived at 20.6 from this task's own coefficients.** The `ej` closeout
    above prices one key of direct build at 1.17 ns and one probe's saving at 24.1 ns on
    `triangle:blocks:4096`, which predicts the constant within 12 per cent on the conservative side.
    *Evidence gap*: no cohort in the set distinguishes 20 from 23, and both coefficients are
    properties of this host's memory system rather than of the workload. *Owner*: the successor that
    replaces both constants with one cost function.
 
-No genuine mystery is being manufactured. Items 1 and 4 are measurements nobody has taken, item 2 is
-a constant fitted at one point with the model that says where to fit it next, item 3 is a stated
-weakness with its direction, item 5 is a protocol defect with its fix, and item 6 is a constant
+No genuine mystery is being manufactured. Item 1 is a measurement nobody has taken, item 2 is a
+constant fitted at one point with the model that says where to fit it next, item 3 is a stated
+weakness with its direction, item 4 is a protocol defect with its fix, and item 5 is a constant
 whose derivation now exists and whose fitted and derived values differ by less than the cohort set
 can see.
 
 ## Candidates to queue, no identifiers allocated
 
-1. **Settle `DIRECT_INDEX_DENSITY`.** Open item 4: the static and growing rules give opposite answers
-   on `cycle:blocks:4096`'s growing index and one measurement decides whether one constant replaces
-   both. The per-link counter, which this task built, is what makes the question askable.
-2. **Fit `DEMOTE_BUCKET_ROWS` as a function of `log2(distinct)`.** Open item 2, two sweep
+1. **Fit `DEMOTE_BUCKET_ROWS` as a function of `log2(distinct)`.** Open item 2, two sweep
    invocations on a retained arm.
+2. **Locate the growing index's own crossover on the kept arm.** The measurement above brackets the
+   *kind* at one density and settles that the probe count is not its variable; C1192 located the
+   crossover itself at 48 and nothing here re-located it. The `--max-rows` bracket and the
+   `blocks<N>` density are the instruments and both are now committed.
 3. **Do not build an index no live step probes.** The rule now gives it the cheapest build; not
    building it at all is cheaper still. Held back because the plan would then hold an index whose
    arrays are empty and whose safety rests on the dead-step argument rather than on a bounds check.
