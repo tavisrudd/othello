@@ -707,6 +707,80 @@ both join sites; and not building an index no live step probes at all.
 | The per-link probe counter's own cost on the two-atom kernel measured and stated | **Met, and it changed the design.** Carried unconditionally it cost 1.47 per cent of `mutual:blocks:4096`'s instructions and 1.46 per cent of `closure:sparse:256`'s, at about seven to nine instructions per lookup rather than the one predicted, so it is monomorphized; the production path then measures 0.99167 and 0.99185 on those two cohorts. |
 | Gates | **Met.** `cargo test --all-features` at 82 `test result: ok` blocks and zero `FAILED`, clippy `-D warnings` clean, `cargo fmt --check` clean, the allocation regression green under all five policies with the n-ary kernel included, `generate_evidence.py --write` in the same commits, and the private workspace's suite, clippy, fmt and `ruff` as in the replay block. |
 
+## The `ej` and `tt` closeout
+
+Run after the acceptance gate passed. Three things came out of it, and the second is the one that
+changes what a successor should build.
+
+### `K = 23` is derivable from this task's own per-unit costs, and comes out at 20.6
+
+C1201 fitted the constant at one located crossover and could not check it against anything. The
+per-stage receipt has both coefficients now, on `triangle:blocks:4096`, which is the cohort whose
+fully bound index the rule decides:
+
+- the direct kind's **extra build** is 32.0062 − 12.3466 = **19.66 ms** over 16,777,216 keys, so
+  **1.17 ns per key**;
+- its **probe saving** is 38.2938 − 16.0982 = **22.20 ms** over 921,600 lookups into that index, so
+  **24.1 ns per probe**.
+
+`K` is the ratio of one probe's saving to one key's build cost, so the measured coefficients predict
+**20.6 keys per probe**, against the 23 the constant carries. **The two agree to 12 per cent, and
+the prediction is the conservative side.** Nothing in the cohort set distinguishes 20 from 23 —
+`triangle:blocks:4096` sits at 18.2 and `mutual:blocks:4096` at 273.1 — so the constant is left at
+23 and the derivation is recorded rather than acted on. It also says where the constant would move:
+the build coefficient is streaming stores and first-touch faults over the key space and the probe
+saving is a dependent binary search, so `K` is a property of this host's memory system and not of
+the workload, which is the first thing worth checking on another machine.
+
+### The demotion guard and the index rule are the same comparison written twice
+
+The `tt` observation, and it reshapes the successor. The policy is now choosing among **three**
+representations for one atom — direct on the full mask, sorted on the full mask, and direct on a
+demoted mask — with **two thresholds fitted independently**, one in keys per probe and one in rows
+per bucket. Both are the same inequality, `build + probes × probe_cost`, evaluated on a different
+pair: the probe count cancels in the demotion comparison because both sides pay one probe each and
+their builds are within noise, and it does not cancel in the index comparison because one side's
+build scales with the key space. **Neither constant is a property of its own decision; both are
+faces of one cost function with three per-unit coefficients** — a key of direct build, a row read,
+and a binary-search step — and this task measured all three (1.17 ns, and the ratio 0.6 between the
+last two). A successor that enumerates the candidate `(mask, kind)` pairs for an atom and prices
+them from those three coefficients would replace both constants, would extend to the fifth hashed
+kind without a fourth constant, and would answer the growing-index question in the same frame.
+
+### The plan now has a cardinality estimator, and it should be named as one
+
+`Demand::estimate_probes` is the textbook independence-assumption join-size estimate: the delta rows
+times the product of each earlier level's average fan-out. Its known failure mode is correlated
+attributes, and this cohort set does not exercise it — the `blocks` generator is maximally
+correlated *within* a block and the estimate is still exact, because every key of the mask is
+present and the fan-out is uniform. **So "exact on every cohort" is a statement about these
+generators and not about the estimator**, and that is worth saying before the estimate is trusted
+for anything larger. The two places it is already known to be loose are in the mystery ledger: a
+growing delta relation, where it uses the row bound, and a mask whose keys are concentrated, where
+`min(key_space, rows)` overestimates the distinct keys. The demotion guard deliberately does **not**
+use the estimate for exactly that reason and measures the distinct count instead.
+
+### Cheap adjacent items, taken and not taken
+
+Taken, because they fell out of runs already being made: `triangle:blocks:4096` is now in the
+standing eighteen-cohort set of `ab.py`'s runs and of the census (C1201 candidate 7, with `mutual`
+at `blocks` already there); `static_index_stages.py` emits the load average, the CPU and each arm's
+binary hash (C1201 candidate 9 and audit defect 4), and `static_index_sweep.py` gained `--arms`,
+`--densities` and `--count-probes` with its existing defaults unchanged so C1201's receipts still
+replay.
+
+Not taken, with the reason: the supplementary cache-event run on `triangle:sparse:4096` under both
+forced policies (C1201 candidate 6 and open item 2, C1193 open item 3). It did not fall out of any
+run made here, and this task's cycle ratios are already explained by a dependent-load argument the
+cache events would test rather than decide. It stays queued.
+
+**One projection, labelled as a projection and not a measurement.** C1201's receipted Soufflé row
+has `triangle:sparse:4096` at **0.896** of compiled Soufflé on the arm this task's control descends
+from, and this task's whole process on that cohort is **0.887** of that control. The arithmetic
+gives about **0.79**, but the two figures are from different sessions and Soufflé's own time moved
+by 1.3 per cent between C1201's two sessions, so this is an estimate to check rather than a result.
+Re-running `compare.py` on the kept arm is the cheapest remaining external datum in the lane.
+
 ## Mystery ledger
 
 ### Settled
