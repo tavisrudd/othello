@@ -218,3 +218,276 @@ arms at every point. Bulk output under `~/.cache/ergodis/c1203/`.
 the resident high-water mark are read from **wall time, the minor-fault count and `VmHWM`**, and the
 derivation loop is read from instructions and cycles. Each table below says which metric it is read
 from.
+
+Two figures are reported for the derivation loop at every point and they are read differently. The
+**cycles ratio** is `perf stat`'s, two-point differenced, with its 95 per cent interval and its A/A
+null; on this box its A/A null runs to about one per cent and in two places to three, so it is a
+band. The **evaluation median** is the driver's own `Instant` over its repeated derivation loop,
+taken as the median over rounds of the per-round median of `2 · repeats` evaluations; it is not
+differenced and not counted by perf, and on this run it reproduces to **0.1 to 0.2 per cent** on the
+internal replicates described below. The two agree in sign and in magnitude everywhere, and where
+the cycles interval is too wide to read, the evaluation median is what the bracket is read from.
+
+**The sweep carries its own replicate.** `table_slots` rounds the caller's row bound up to a power of
+two, so the pairs of bounds 349,525/262,144, 196,608/131,072, 98,304/65,536, 49,152/32,768 and
+24,576/16,384 give the sparse arm **the same table** at two different densities. Each such pair is an
+independent repetition of one measurement taken at a different time in the run, and the pairs agree
+to 0.1 to 0.2 per cent in the evaluation median throughout. That is this run's own reproducibility
+figure, and it is also the first evidence that the variable is the table and not the density.
+
+## Result 1: on the cohort the constant was set from, the crossover is gone
+
+`cycle` at the `blocks` density and N = 4,096 is C1192's cohort — `blocks` is sixteen nodes per
+block — and `Policy::Direct` against `Policy::SparseIndexes` at a swept row bound is C1192's
+instrument, confound and all. Re-run on the current kernel: eight rounds, repeats 5 and 10, CPU 5
+under `choom -n 1000`, event set at 100.00 per cent enabled, load average 0.67 to 0.74, receipt
+`analysis/datalog-comparison/ab-2026-09-18-c1203-c1192-replication.json`. Ratios are **sparse ÷
+direct**, so above unity means the direct kind is right.
+
+| density | C1192 cycles | this run, cycles | interval | A/A null | this run, evaluation median | corrected by the `closure` subtraction |
+| ---: | ---: | ---: | --- | ---: | ---: | ---: |
+| 1 | 1.5000 | 1.5194 | [1.419, 1.619] | 0.99811 | 1.4768 | 1.351 |
+| 4 | 1.2285 | 1.4673 | [1.399, 1.535] | 1.00293 | 1.4327 | 1.314 |
+| 16 | 1.0665 | 1.3239 | [1.305, 1.343] | 0.99706 | 1.3324 | 1.150 |
+| 32 | 1.0508 | 1.2086 | [1.180, 1.237] | 1.00189 | 1.2163 | 1.048 |
+| 64 | **0.9842** | **1.1942** | [1.175, 1.213] | 0.99414 | 1.1928 | 1.046 |
+| 128 | **0.9911** | **1.1914** | [1.175, 1.208] | 0.99271 | 1.1919 | 1.039 |
+| 256 | **0.9743** | **1.2026** | [1.188, 1.217] | 1.00856 | 1.1954 | 1.051 |
+
+**The lowest-density end reproduces and the crossover end does not.** At a density of 1 the two runs
+agree to 1.3 per cent, which is the check that this is the same instrument on the same machine; from
+a density of 32 upward the direct kind is now ahead by 19 to 21 per cent where C1192 measured it
+behind by 1.6 to 2.6 per cent. **The bracket C1192 located between 32 and 64, and set
+`DIRECT_INDEX_DENSITY = 48` inside, does not exist on this kernel.** After the subtraction that
+removes the two indexes the forced policy also flips, the index under test is still ahead by 3.9 to
+5.1 per cent at every density from 32 to 256, so the disappearance is not an artefact of C1192's
+isolation defect.
+
+That is the card's outcome 2 **for this cohort**: no crossover below the feasibility ceilings. The
+highest density measured is 256, and what stops the sweep there is the cohort's own derived rows —
+`cycle:blocks:4096` derives 65,536 rows into each of `path` and `back`, and a row bound below that is
+`Error::Budget`.
+
+## Result 2: the confound-free sweep, and where a crossover does and does not exist
+
+Below a row bound of 349,526 the shipped rule already sends the index under test sparse, so
+`--index auto` and `--index direct` differ in **that index alone** at every bound in this sweep: the
+static `edge` index is direct under both (`DIRECT_STATIC_PROBES` floors it by the rows, and it has
+12,288 to 131,072 facts against a key space of 4,096), and `path` on column 1 is direct under both
+(key space 4,096 against a capacity of at least 4,096). The kinds are `ddd` against `dds` at every
+point and the receipts record them. This is C1202's instrument with the bound swept instead of
+bracketed, and it needs no subtraction.
+
+Eight rounds, alternating arm order, an A/A null per point, CPU 5 under `choom -n 1000`, event set at
+100.00 per cent enabled, load average 0.44 to 0.82. Receipts
+`analysis/datalog-comparison/ab-2026-09-18-c1203-auto-blocks<N>-<domain>.json`. Ratios are **sparse ÷
+direct**; the evaluation-median column is the one the bracket is read from.
+
+### Domain 4,096, five block sizes
+
+| density | `blocks2` | `blocks4` | `blocks8` | `blocks16` | `blocks32` |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 48 | 1.0476 | 1.0657 | 1.0927 | 1.0557 | 1.0363 |
+| 64 | 1.0422 | 1.0263 | 1.0342 | 1.0301 | 1.0231 |
+| 85.3 | — | 1.0235 | 1.0289 | 1.0334 | 1.0207 |
+| 128 | 0.9986 | 1.0073 | 1.0324 | 1.0171 | 1.0239 |
+| 170.7 | — | 1.0074 | 1.0312 | 1.0212 | — |
+| 256 | **0.9569** | **0.9846** | 1.0175 | 1.0312 | — |
+| 341.3 | — | **0.9823** | 1.0153 | — | — |
+| 512 | **0.9487** | **0.9673** | 1.0235 | — | — |
+| 682.7 | — | **0.9680** | — | — | — |
+| 1,024 | **0.9463** | **0.9790** | — | — | — |
+| 2,048 | **0.9767** | — | — | — | — |
+
+Evaluation medians, sparse ÷ direct. A dash is a density the cohort cannot reach: the top of each
+column is set by the cohort's derived rows, and the gaps at 85.3, 170.7, 341.3 and 682.7 are bounds
+not measured on the larger cohorts to keep their runs short. The direct arm's own evaluation median
+is **flat across the whole sweep** — 0.9992 to 1.0081 ms on `blocks4` over a twenty-one-fold range of
+row bound, 7.9466 to 7.9986 ms on `blocks16` — which is what the mechanism predicts and is the
+control this table needs: the row bound does not reach the direct kind at all.
+
+The cycles ratios agree in sign at every point and are in the receipts with their intervals and
+nulls; on `blocks4` they read 1.0719, 1.0363, 1.0235, 0.9991, 1.0059, 0.9703, 0.9747, 0.9781, 0.9754
+and 0.9909 against A/A nulls of 0.991 to 1.039. The instruction ratios stay in **[0.9877, 1.0536]**
+across every cohort and domain, with A/A nulls inside 2 parts in 10^5, so Fermi prediction 2's
+predicted band of [0.97, 1.04] holds everywhere except the two highest-density points of the smallest
+domain, where collisions in a table at load factor 0.5 and 1.0 add verification work.
+
+**So a crossover exists on the two smallest block sizes and nowhere else.** On `blocks2` it is
+between a density of **64 and 128**, on `blocks4` between **170.7 and 256**, and on `blocks8`,
+`blocks16` and `blocks32` there is none up to the highest density each can reach — 512, 256 and 128 —
+with the direct kind ahead by 1.5 to 3.5 per cent throughout.
+
+### Two more domains
+
+| density | `blocks4`, domain 2,048 | `blocks4`, domain 1,024 |
+| ---: | ---: | ---: |
+| 48 | 0.9979 | 1.0457 |
+| 64 | 0.9817 | 1.0463 |
+| 85.3 | 0.9843 | — |
+| 128 | 0.9764 | 1.0996 |
+| 170.7 | 0.9756 | — |
+| 256 | 1.0127 | 1.0950 |
+| 341.3 | 1.0142 | — |
+| 512 | 1.0184 | — |
+
+**Domain 2,048 crosses in the other direction**: the sparse kind is ahead by 1.6 to 2.4 per cent from
+a density of 48 to 171 and behind by 1.3 to 1.8 per cent from 256 up, so its crossing at 171 to 256
+has the opposite sign to `blocks4`'s at domain 4,096. **Domain 1,024 does not cross at all** and the
+direct kind's margin *grows* with density, from 4.6 to 10.0 per cent. Fermi prediction 6 said the
+crossover density would not move materially between domains 4,096 and 2,048 because both footprints
+scale with the domain; that is **wrong**, and wrong in a way that is itself the result: the direct
+arm's footprint scales with the domain in **pages**, and the page is a fixed 4 KiB, so halving the
+domain halves the direct arm's page count without halving anything on the sparse side.
+
+## Result 3: the mechanism, counted
+
+C1192 named the mechanism with counted cache events: the direct shape's `fill(NONE)` over 2^24 words
+per evaluation, which made the sparse arm issue 36 per cent of the direct arm's last-level cache
+references. C1198 removed that fill. The supplementary runs here say the mechanism is now a different
+one, and they are two separate runs with their own A/A nulls, six rounds each, repeats 9 and 18,
+100.00 per cent enabled, load 0.67 to 0.74. Receipts
+`ab-2026-09-18-c1203-tlb-blocks4-4096.json` and `ab-2026-09-18-c1203-cache-blocks4-4096.json`, both
+on `cycle:blocks4:4096`, ratios sparse ÷ direct.
+
+| density | cycles | `ls_l1_d_tlb_miss.all` | its A/A null | `ls_l1_d_tlb_miss.all_l2_miss` | its null | `L1-dcache-loads` | `L1-dcache-load-misses` | `cache-references` |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 48 | 1.0733 | **2.0939** | 1.0002 | 0.0487 | 1.0178 | 1.0126 | 1.0902 | 1.0511 |
+| 128 | 1.0132 | **1.0250** | 0.9996 | 0.0047 | 1.0032 | 1.0213 | 0.9914 | 0.9215 |
+| 256 | 0.9981 | **0.3573** | 0.9996 | 0.0423 | 1.0102 | 1.0163 | 0.9408 | 0.8676 |
+| 512 | 0.9865 | **0.2194** | 1.0015 | 0.0226 | 0.9821 | 1.0189 | 0.9418 | 0.9229 |
+| 1,024 | 0.9720 | **0.1738** | 1.0013 | 0.0036 | 1.0110 | 1.0318 | 0.9459 | 0.9227 |
+
+**The L1 data-TLB miss ratio crosses unity between a density of 128 and 256, which is where the
+cycles ratio crosses unity, and no other counter does.** At the low-density end the sparse arm misses
+the L1 data TLB twice as often as the direct arm; at the high-density end it misses it a fifth as
+often, and the cycles follow. The L1 data-cache loads are 1.3 to 3.2 per cent higher on the sparse
+arm at every point, exactly as C1192 found and for the same reason — the hash, the chain and the
+key-column verification — and the L1 load misses and last-level references move by less than the
+TLB counter does and in the same direction as the cycles only where the TLB counter already explains
+them. `cache-misses` carries A/A nulls of 0.89 to 1.20 on these points and is not read.
+
+**The mechanism in one sentence.** The `blocks<N>` edge set makes `path`'s keys clustered by
+construction — `key = x · domain + y` with both in one block of `N` consecutive nodes, so each of the
+`domain` distinct leading values owns one run of `4N` consecutive bytes — and a direct-addressed head
+array therefore touches `domain` **pages** however large its reservation, while the multiply-shift
+hash of the sparse shape scatters those same keys over its whole table and touches
+`min(4 · slots, 4,096 · rows)` bytes. The comparison is between `domain` pages entered `3N + 1` times
+each and `slots` random slots in a table of `4 · slots` bytes, and the crossing is where the second
+stops costing more address translations than the first. That is why the answer moves with the block
+size and with the domain and **not with the density**: the density enters only through `slots`.
+
+Fermi prediction 1 predicted a footprint mechanism and a crossing between densities 128 and 512 on
+`blocks4`; the crossing is between 128 and 256 by cycles and between 171 and 256 by the evaluation
+median, so the range was right. The prediction named the cache as the resource and the measurement
+says it is the TLB, which is the sharper answer and the one the counted events supply.
+
+## Result 4: the fill-versus-walk regime, located exactly
+
+`clear_indexes` fills a table when `4 · slots <= 64 · rows`, the rows being the previous evaluation's.
+The direct arm's head array is 2^24 slots against at most 131,072 rows, so it is four hundred times
+the boundary and **walks at every point of every sweep here** — which is precisely the mechanism
+C1192 measured being gone. The sparse arm's table is `table_slots(bound)`, so it walks while
+`table_slots(bound) > 16 · rows` and fills below:
+
+| cohort | previous evaluation's rows | fill admitted while `slots <=` | walks at these densities | fills at these densities |
+| --- | ---: | ---: | --- | --- |
+| `blocks2:4096` | 8,192 | 131,072 | 48, 64 | 128 and above |
+| `blocks4:4096` | 16,384 | 262,144 | 48 | 64 and above |
+| `blocks8:4096` | 32,768 | 524,288 | none | all |
+| `blocks16:4096` | 65,536 | 1,048,576 | none | all |
+| `blocks32:4096` | 131,072 | 2,097,152 | none | all |
+| `blocks4:2048` | 8,192 | 131,072 | none | all |
+| `blocks4:1024` | 4,096 | 65,536 | none | all |
+
+**The switch sits at the low-density end and the crossover does not.** On `blocks4` the single
+largest step in the sweep is the one across the switch — 1.0657 at density 48, where the sparse arm
+walks 16,384 scattered stores, against 1.0263 at 64, where it fills 1 MiB — and on `blocks2` the same
+step is 1.0422 to 0.9986. Both crossovers are three or more points above the switch and sit entirely
+inside the fill regime, so the two regimes are separable and neither crossover is a fill-versus-walk
+artefact. Fermi prediction 3 located the switch correctly on `blocks4` and put its size at "under 2
+per cent"; measured it is **3.8 per cent** on `blocks4` and 4.2 on `blocks2`, so the prediction was
+right about where and low by about a factor of two about how much.
+
+## Result 5: memory, beside every ratio
+
+Peak resident set, `VmHWM`, from the same receipts. The direct arm's figure does not move with the
+row bound at all, and the sparse arm's tracks its table.
+
+| cohort | peak RSS, direct | peak RSS, sparse at density 48 | at 256 | at 1,024 | direct − sparse, high density |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `blocks2:4096` | 25,064 KiB | 10,732 | 8,940 | 8,748 | **+16,316 KiB** |
+| `blocks4:4096` | 27,360 | 13,028 | 11,236 | 11,044 | **+16,316** |
+| `blocks8:4096` | 31,756 | 17,424 | 15,632 | — | **+16,124** |
+| `blocks16:4096` | 38,284 | 23,952 | 22,160 | — | **+16,124** |
+| `blocks32:4096` | 52,428 | 38,096 | — | — | **+15,356** at density 128 |
+| `blocks4:2048` | 14,220 | 6,544 | 6,096 | — | **+8,124** |
+| `blocks4:1024` | 8,348 | 4,384 | 4,272 | — | **+4,076** |
+
+**The direct kind's resident cost is one page per distinct leading key value, and that is `domain`
+pages**: 16 MiB at domain 4,096, 8 MiB at 2,048, 4 MiB at 1,024, independent of the block size and of
+the row bound, against a reservation of `4 · keys` bytes — 64 MiB at domain 4,096 — that stays
+address space. Fermi prediction 4 predicted exactly this closed form and the 16 MiB figure, and
+predicted that the memory column crosses near a density of 4 while the time column crosses far above
+it; the memory part is confirmed to the kilobyte and the crossing densities are 4 and 171 to 256, so
+the band in which the constant is a genuine time-against-memory decision is the one the prediction
+named. At the density where the shipped constant actually decides, the direct kind costs **2.1 times
+the peak resident set** of the sparse kind on `blocks4` and buys 6.6 per cent of the warm loop.
+
+## Result 6: the first evaluation, and what it does to the whole decision
+
+Everything above is a **warm** figure. `ab.py`'s two-point differencing removes process startup,
+preparation and the first evaluation from every per-iteration ratio by construction, so C1192's
+bracket, C1202's table and results 1 to 5 above are all statements about a derivation loop entered
+repeatedly on one workspace. The card asks for the other stage, and it inverts the decision.
+
+`static_index_sweep.py` at `--repeats 1` times exactly one evaluation of a fresh workspace;
+at `--repeats 9` the same figure is the median of nine. Six rounds, alternating arm order, CPU 5 under
+`choom -n 1000`. Receipts `sweep-2026-09-18-c1203-stages-blocks<N>-repeats<1|9>.json`. Wall time and
+`VmHWM`, which is what a first-touch stage is read from; the minor-fault counts are below.
+
+| cohort | density | first evaluation, direct | first evaluation, sparse | ratio | warm, direct | warm, sparse | ratio |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `blocks4:4096` | 48 | 9.880 ms | 4.203 ms | **0.425** | 1.0079 ms | 1.0786 ms | 1.070 |
+| `blocks4:4096` | 128 | 9.974 | 3.872 | **0.388** | 1.0089 | 1.0424 | 1.033 |
+| `blocks4:4096` | 256 | 9.791 | 3.696 | **0.378** | 1.0045 | 1.0019 | 0.997 |
+| `blocks4:4096` | 512 | 9.616 | 3.278 | **0.341** | 1.0057 | 0.9735 | 0.968 |
+| `blocks4:4096` | 1,024 | 7.425 | 2.441 | **0.329** | 1.0069 | 0.9833 | 0.977 |
+| `blocks16:4096` | 48 | 15.308 | 11.139 | **0.728** | 8.0077 | 8.3749 | 1.046 |
+| `blocks16:4096` | 128 | 15.292 | 10.700 | **0.700** | 8.0430 | 8.2210 | 1.022 |
+| `blocks16:4096` | 256 | 15.248 | 10.662 | **0.699** | 8.0702 | 8.3443 | 1.034 |
+
+**The first evaluation of a direct-addressed growing index costs 2.4 to 3.0 times the sparse kind's
+on `blocks4` and 1.4 times on `blocks16`**, and the absolute premium — 4.2 to 6.3 ms on `blocks4`,
+4.2 to 4.6 ms on `blocks16` — is the first touch of those `domain` pages. Against a warm saving of
+0.03 to 0.37 ms per evaluation, the break-even is:
+
+| cohort | density | direct's extra first evaluation | direct's warm saving per evaluation | evaluations to repay |
+| --- | ---: | ---: | ---: | ---: |
+| `blocks4:4096` | 48 | 5.677 ms | 0.0707 ms | **80** |
+| `blocks4:4096` | 128 | 6.102 | 0.0335 | **182** |
+| `blocks4:4096` | 256 | 6.095 | −0.0026 | never |
+| `blocks4:4096` | 512 | 6.338 | −0.0322 | never |
+| `blocks16:4096` | 48 | 4.169 | 0.3672 | **11.4** |
+| `blocks16:4096` | 128 | 4.592 | 0.1780 | **25.8** |
+| `blocks16:4096` | 256 | 4.586 | 0.2741 | **16.7** |
+
+**The whole process is the one-evaluation shape, and the sparse kind wins it everywhere.** The
+driver's `--process` mode reads the facts, prepares, evaluates once and writes the CSV; at the row
+bound where the shipped constant actually decides — 349,525, a density of 48 — six rounds on one
+binary under the two policies give, from
+`analysis/datalog-comparison/stages-2026-09-18-c1203-process-density48.json`:
+
+| cohort | whole process, direct | whole process, sparse | ratio | process peak RSS, direct | sparse | minor faults, direct | sparse |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `cycle:blocks2:4096` | 8.676 ms | 4.051 ms | **0.467** | 24,732 KiB | 10,400 | 10,912 | 3,746 |
+| `cycle:blocks4:4096` | 15.218 | 9.309 | **0.612** | 26,728 | 12,396 | 11,505 | 4,339 |
+| `cycle:blocks16:4096` | 34.383 | 30.225 | **0.879** | 38,116 | 23,784 | 15,895 | 8,729 |
+| `cycle:blocks32:4096` | 74.309 | 70.269 | **0.946** | 53,452 | 39,120 | 21,409 | 14,243 |
+
+Preparation is unmoved between the arms — 2.743 against 2.751 ms on `blocks4`, 24.985 against 24.971
+on `blocks32` — because a growing index builds nothing at preparation; the whole of the difference is
+the first evaluation's first touch, and the minor-fault column counts it: 7,166 more faults on
+`blocks4`, which is the 4,096 pages of the head array plus the pages the sparse arm's own table does
+not need.
+
