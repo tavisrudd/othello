@@ -670,6 +670,19 @@ evidence rather than edited out. The receipt is
 Both repairs are in core `9edc07b`, and the figures above are the pre-floor arm's; the kept arm's are
 in the tables above and below.
 
+### How the Fermi predictions came out
+
+| Prediction | Outcome |
+| --- | --- |
+| 1, the counter's own cost: one instruction per lookup in the two-atom kernel and three in the n-ary one, so 0.21 and 0.96 per cent | **Wrong by about eight times.** Measured 1.47 and 2.55 per cent, at seven to ten and a half instructions per lookup, and the branch counts moved with them. The cost model failed in the way the playbook says to treat as a cost-model failure: the shape changed — the counter is monomorphized — rather than the constant being shaved. |
+| 2, mask demotion needs no kernel change and `OP_CHECK` is the encoding | **Right**, and all three consequences held: unchanged cohorts are byte-identical, the work counters are invariant, and the demoted mask collides with an index the plan already holds. |
+| 2, `triangle:sparse:4096`: evaluation 0.60 to 0.70 against `auto` and 0.95 to 1.10 against forced direct | **Right on the first and better than the range on the second**: 0.604 against `auto`, and 1.2130 ms against C1201's forced-direct 1.2990 ms, which is 0.934. |
+| 2, `triangle:blocks:4096`: evaluation 35 to 48 ms demoted, winning end to end at 47 to 60 ms | **Wrong.** Demoted evaluation measured **66.96 ms** and demotion loses end to end at 0.637. The extra row reads cost about **3.5 ns** each rather than the one to two nanoseconds assumed — a bucket of fifteen rows in a 480 KiB row array is not a sequential read. This is the prediction the demotion guard exists because of. |
+| 2, `mutual:blocks:4096`: evaluation 2.5 to 3.6 ms, winning end to end | **Level right, sign wrong.** Demoted evaluation measured 3.43 ms, inside the range, but the undemoted sorted arm measured 2.36 ms rather than the 3.26 the prediction assumed, so demotion loses at 0.920. |
+| 3, the measured counter leaves `K ≈ 23` unmoved | **Right, exactly**: 36,864, 921,600 and 61,440 lookups, which are `rows × 3`, `rows × 15` and `rows`. |
+| 4, the plan's estimate agrees with the counter on every cohort the rule decides | **Right**, and its one weakness came out where predicted, on a step whose delta relation grows. |
+| 5, the two density constants do not merge | **Not settled.** The measurement was not taken; what the counter did buy is that the question is now sharp — `cycle:blocks:4096`'s growing index reads 241 keys per probe against a density of 1.0, so the two rules give it opposite answers. Mystery item 4. |
+
 ## Disposition
 
 **Kept**, at core `9edc07b` with private `5217cdb`, four parts:
