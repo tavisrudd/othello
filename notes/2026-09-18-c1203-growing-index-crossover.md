@@ -2,7 +2,8 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-18
-**Status**: IN PROGRESS (Opus, reviewed by the main agent). C1202 successor; allocated on Tavis's
+**Status**: DONE 2026-09-18 (Opus, reviewed by the main agent); report
+`2026-09-18-c1203-growing-index-crossover-report.md`. C1202 successor; allocated on Tavis's
 call from C1202 report candidate 2 ("Locate the growing index's own crossover on the kept arm").
 
 ## Goal

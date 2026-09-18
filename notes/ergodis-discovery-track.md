@@ -350,3 +350,32 @@ nobody controls.
 (open ledger item 1, queued candidate 4); no disassembly diff or kernel-scoped profile of the two
 instantiations yet. No C-ID allocated; the build-configuration and PGO sweep proposed on 2026-09-17
 is the natural owner.
+
+## 2026-09-18 — the sparse index kind retires fewer instructions than the direct kind although its probe does more work (C1203)
+
+**Observation**: in C1203's confound-free sweep (one binary, `--index direct` against `--index auto`,
+only the large growing index changing kind) the sparse ÷ direct instruction ratio is 0.987 to 1.001
+on most points, with A/A nulls inside two parts in 10^5. The sparse probe adds a hash, a chain load
+and a key-column verification to the direct probe's single load, so at equal lookups it should cost
+more. The task was locating a cycles crossover; the instruction sign was incidental.
+**Why it may matter**: C1192 measured the same comparison at 1.046–1.065 before the lazy workspace,
+so either the direct path gained instructions (the row-walking reset recomputes keys) or the sparse
+path lost them. If the direct reset walk is the cause it is the "track touched slots instead of
+recomputing keys" gap the C1198 report already names, now with a size.
+**Evidence level**: receipts `ab-2026-09-18-c1203-auto-blocks*.json` in the private
+`analysis/datalog-comparison/`; report `2026-09-18-c1203-growing-index-crossover-report.md` open
+ledger item 2. No disassembly of the two probe paths or of the reset walk. No C-ID allocated.
+
+## 2026-09-18 — a first-touch page of the direct head array costs about 1.4 µs, not the few hundred nanoseconds of a minor fault (C1203)
+
+**Observation**: the direct growing index's extra first evaluation is 4.2–6.3 ms for about 4,096
+extra pages (7,166 extra minor faults on `cycle:blocks4:4096`), so each page costs 0.8–1.4 µs
+against the playbook's "few hundred nanoseconds" per minor fault on this host.
+**Why it may matter**: the playbook's figure prices every cold-start Fermi in the lane. Candidates
+are page-table construction across a sparsely touched 64 MiB reservation (one page per 16 KiB run
+means one new page-table page per 2 MiB touched far more often than a dense touch) and the TLB cost
+of the first pass. If the sparse-touch pattern is the cause, the cost is a property of the direct
+array's layout and a denser key packing would remove it.
+**Evidence level**: `sweep-2026-09-18-c1203-stages-blocks*-repeats1.json` and
+`stages-2026-09-18-c1203-process-density48.json`; report open ledger item 3. No stage varies the
+reservation size at a fixed page count. No C-ID allocated.
