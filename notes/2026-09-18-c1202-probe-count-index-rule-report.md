@@ -986,3 +986,27 @@ nix develop ~/src/ergodis --command python3 $A/static_index_stages.py \
 Inputs are deterministic: the C1182 xorshift edge generator seeded by the domain for the `sparse`
 and `dense` densities, and the `blocks` and `blocks<N>` densities' complete digraph inside each
 consecutive block, which uses no random stream at all.
+
+## Vibe check
+
+Very good, and the part that is best was not on the card. Mask demotion turned out to need **no
+kernel change at all** — `OP_KEY → OP_CHECK` and one mask bit, because the plan already carried both
+halves of the pair the card was going to build — so fifteen cohorts are inside their A/A nulls by
+construction and `triangle` at 4,096 meets the acceptance line C1201 measured as unreachable between
+the two existing static kinds: the loop at **0.604** and the whole process at **0.887** with
+preparation and resident memory unmoved. `triangle:sparse:16384` was a free 2.1× on the loop that
+nobody asked for. The probe-count rule does what C1201 said it would: `mutual:blocks:4096` and
+`triangle:blocks:4096` get opposite kinds from one constant, and the counter says why — 61,440
+lookups against 921,600.
+
+Two things are stated as costs rather than rounded away. The demoted cohorts retire **1.26 to 1.30
+times the instructions** while running in half the cycles, because the change trades a dependent
+binary search for independent row reads; the playbook's "instructions decide" rule is about changes
+that do the same work in fewer steps, and this is not one. And `triangle:blocks:4096` buys a 0.420
+loop with **4.4 times the peak resident memory** and a whole process of 0.965 — a large win only for
+a plan evaluated more than once, which the rule is deliberately not written for.
+
+The uncomfortable result is the one in the mystery ledger: monomorphizing the counter made
+seventeen of eighteen cohorts **0.4 to 1.6 per cent cheaper** than a control executing the same
+operations. That is a codegen term this lane is not controlling, it is the same size as the effects
+the lane chases, and it deserves a look before the next sub-per-cent claim.
