@@ -332,3 +332,21 @@ built by `extend_from_slice`, and the `fact_of` projection.
 **Evidence level**: the per-stage receipts of `2026-09-17-c1201-static-index-build-cost-report.md`
 (open ledger item 1, queued candidate 5); no kernel-scoped profile of `Demand::new_bounded` yet, and
 no two-fact-count differencing at one domain. No C-ID allocated.
+
+## 2026-09-18 — a generic step loop is 0.4–1.6 % cheaper than the same loop without the const parameter (C1202)
+
+**Observation**: after C1202 monomorphized the per-link probe counter on a `COUNT` const,
+`evaluate_into` dispatches to `evaluate_counting::<false>`, which executes exactly the operations of
+the previous `evaluate_into`. Seventeen of eighteen cohorts read 0.4 to 1.6 per cent fewer
+instructions against the retained control, every A/A null within 6.2 parts per hundred thousand,
+work counters equal. The task was measuring the counter's cost, not its absence, so this is
+incidental.
+**Why it may matter**: it is the same family as the 2026-09-17 entry above (the loop recompiles
+under semantically irrelevant changes), now with the sign reversed and a mechanism candidate: making
+the step loop generic changed inlining or register allocation. If it can be understood it is a free
+one per cent for every cohort; if not, sub-per-cent results in this lane carry a codegen term
+nobody controls.
+**Evidence level**: the eighteen-cohort A/B in `2026-09-18-c1202-probe-count-index-rule-report.md`
+(open ledger item 1, queued candidate 4); no disassembly diff or kernel-scoped profile of the two
+instantiations yet. No C-ID allocated; the build-configuration and PGO sweep proposed on 2026-09-17
+is the natural owner.
