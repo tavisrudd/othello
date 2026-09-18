@@ -2,9 +2,11 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-18
-**Status**: COMPLETE. Written incrementally from the start, so a crash would have left a partial
-record rather than none, and the Fermi predictions below were written and committed **before any
-code change**.
+**Status**: COMPLETE, and repaired against its audit. Written incrementally from the start, so a
+crash would have left a partial record rather than none, and the Fermi predictions below were
+written and committed **before any code change**. The audit is
+`notes/2026-09-18-c1202-probe-count-index-rule-audit.md`; its sixteen defects are all applied here
+and listed in **Audit repairs applied** at the end.
 
 **The headline.** A fully bound atom no longer keys on every column it binds, and the index policy
 no longer rules on a density. On `triangle` at N = 4,096 the derivation loop falls to **0.604** and
@@ -14,11 +16,11 @@ acceptance line C1201 measured as unreachable and reported as unmet; at 16,384 t
 same key space, the same rows and the same density as `mutual:blocks:4096` and the opposite right
 answer — the loop falls to **0.420**, and one constant on `key_space / probes` now gives those two
 cohorts opposite kinds. Fifteen cohorts whose kinds do not change read **0.99985 to 1.00002** in
-derivation-loop instructions against A/A nulls inside 2.7 parts per hundred thousand, because mask
+derivation-loop instructions against A/A nulls inside 6.2 parts per hundred thousand, because mask
 demotion turned out to need **no kernel change at all**. The per-link probe counter that all of this
 rests on measured the probe figures C1201 had to derive, and confirmed them exactly; carried
-unconditionally it cost 0.11 to 2.55 per cent of the loop, so it is monomorphized and the production
-path carries none of it.
+unconditionally it cost 0.067 to 2.554 per cent of the loop, so it is monomorphized and the
+production path carries none of it.
 
 Task card: `notes/2026-09-18-c1202-probe-count-index-rule.md`. Predecessor:
 `notes/2026-09-17-c1201-static-index-build-cost-report.md` and its audit
@@ -44,6 +46,14 @@ Retain recipes, from `~/src/ergodis-private`:
 Both re-execute themselves inside `nix develop` of the core checkout, whose devShell asserts its
 rustc equals the `rust-toolchain.toml` pin. rustc 1.95.0 (59807616e 2026-04-14), release profile, no
 features, on every row.
+
+**The Core column is recorded from the session, not from `MANIFEST.tsv`.** `retain-bin.sh` records
+only the revision of the crate directory it builds, so the manifest carries the private revision and
+nothing about the core checkout each binary was compiled against. The two empty re-pin commits
+(`1e539fe`, `531f19b`) are the intended substitute and one of them does not name the core revision
+it pins. Every Core entry below is therefore this session's record of the checkout at retain time
+rather than a figure a later reader can recover from the manifest; making `retain-bin.sh` record the
+core checkout's revision beside the crate's is the repair, and it is not made here.
 
 | Arm | Role | Private | Core | Dirty | Retained name | Measured sha256 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -84,7 +94,8 @@ Candidate arms are added to this table as they are retained.
 | `ergodis-private` | `1e539fe`, `531f19b` | the two empty re-pins that name the arms |
 | `ergodis-private` | `e372dd1`, `5217cdb` | the pre-floor receipts |
 | `ergodis-private` | `010e500`, `fe18961`, `dc318c0`, `b47ade4` | the kept arm's receipts, the two scripts' docstrings, and the growing-index measurement |
-| `othello` | this report | written incrementally at each milestone |
+| `ergodis` | `ca0609f` | the audit's code repairs: the counter's measured range in two docstrings, and `Policy::AutoUndemoted` in the allocation gate |
+| `othello` | this report | written incrementally at each milestone, and repaired against its audit |
 
 ## The baseline this task starts from, reproduced
 
@@ -112,7 +123,9 @@ seven rounds against these five-repeat single-round figures), which is the check
 measures the same machine C1201 measured.
 
 **Per-evaluation instruction counts**, two-point differenced between `repeats` and `2 · repeats` on
-the same control, which is what the Fermi predictions below are fractions of:
+the same control, which is what the Fermi predictions below are fractions of. **No receipt**, for the
+same reason as the baseline table above: these are hand runs taken before this task's measurement
+stages existed, and the three figures are unreceipted.
 
 | Cohort | kernel | repeats | instructions per evaluation |
 | --- | --- | ---: | ---: |
@@ -286,7 +299,12 @@ round into a growing index.
 `~/src/ergodis-dev/PERFORMANCE.md` and `~/src/ergodis-dev/performance-playbook.md`, both read in
 full before any edit. Event set `instructions,cycles,branches,branch-misses,page-faults,minor-faults`
 at 100 per cent enabled, cache events in their own run. Rounds alternate arm order with an A/A null
-per cohort. Pinned to core 5 under `choom -n 1000`. Keep or revert by commit. Bulk output under
+per cohort. **Every run is pinned to core 5; `choom -n 1000` wraps the binary in the stage and sweep
+runs only.** `static_index_stages.py` and `static_index_sweep.py` build
+`perf stat … taskset -c <cpu> choom -n 1000 -- <binary>`, while `ab.py` builds
+`perf stat … taskset -c <cpu> <binary>` and has never carried `choom` — so the two piece-1 A/Bs, the
+floored derivation loop and the growing-index run are pinned but not OOM-deprioritized. Adding
+`choom` to `ab.py` is a queued repair. Keep or revert by commit. Bulk output under
 `~/.cache/ergodis/c1202/`.
 
 ## Results
@@ -294,15 +312,23 @@ per cohort. Pinned to core 5 under `choom -n 1000`. Keep or revert by commit. Bu
 ### Piece 1: the per-link probe counter
 
 **What it counts and what it read.** One increment per bucket lookup at one body-atom link, in
-total as `Evaluation::lookups` and split by index as `Demand::index_lookups`. Measured on the
-eighteen-cohort set through the driver's new `--count-probes`:
+total as `Evaluation::lookups` and split by index as `Demand::index_lookups`. Read through the
+driver's new `--count-probes`. **The per-index split below is the undemoted control's plan**
+(`closure_ballpark-8d43d4e`), which is the right arm for a table about what the counter measures on
+the shape C1201 left behind; under the kept arm `triangle:sparse:4096`'s split is `49,152 · 0`
+rather than `12,288 · 36,864 · 0`, because its two indexes collapse to one. The five cohorts that
+are in the standing set are read out of the census receipt `stages-2026-09-18-c1202-kind-census.json`;
+`closure:sparse:4096` is **not** in `$ALL` and its row is **unreceipted** — a hand run made while
+the counter was being read, which no receipt of this task contains. It is kept because the shape of
+its counts is the point (a two-atom step whose lookups track its top-level probes) and marked so no
+later reader takes it for a measurement on the record.
 
 | Cohort | kernel | top-level `probes` | bucket lookups | per index |
 | --- | --- | ---: | ---: | --- |
 | `triangle:sparse:4096` | n-ary | 12,288 | 49,152 | 12,288 · **36,864** · 0 |
 | `triangle:blocks:4096` | n-ary | 61,440 | 983,040 | 61,440 · **921,600** · 0 |
 | `mutual:blocks:4096` | two-atom | 61,440 | 61,440 | **61,440** |
-| `closure:sparse:4096` | two-atom | 15,691,854 | 15,679,566 | 15,679,566 · 0 |
+| `closure:sparse:4096` (unreceipted) | two-atom | 15,691,854 | 15,679,566 | 15,679,566 · 0 |
 | `cycle:blocks:4096` | two-atom | 196,608 | 135,168 | 65,536 · 0 · **69,632** |
 | `path4:sparse:4096` | n-ary | 12,288 | 159,744 | 159,744 · 0 |
 
@@ -329,18 +355,21 @@ increment per level in the n-ary one — the A/B against the retained control re
 | `path4:sparse:4096` | 1.00114 | [1.00112, 1.00117] | 1.0000026 | 0.80 |
 
 Receipt `ab-2026-09-18-c1202-probe-counter.json`, five rounds of three and six repeats, event set at
-100.00 per cent enabled, load average 2.17 to 2.33 recorded by the receipt. The full set ranges
-**1.00114 to 1.02554** in instructions.
+100.00 per cent enabled, load average 2.17 to 2.33 recorded by the receipt. Over the eighteen
+cohorts the set ranges **1.00067 to 1.02554** in instructions — 0.067 per cent on
+`closure:dense:512`, which is the second row above, to 2.554 per cent on `triangle:sparse:4096`.
 
 **This refutes Fermi prediction 1, and the refutation is the useful part.** The prediction was one
 instruction per lookup in the two-atom kernel and three in the n-ary one. The measurement is
 **seven to ten and a half instructions per lookup** on six of the seven cohorts and **0.80** on the
-seventh, and the branch counts moved by the same fraction as the instruction counts — which an
-unconditional register increment cannot do. So the cost is not the counter's arithmetic. It scales
-with lookups because the increment sits beside the four-op key fold that runs once per lookup, and
-about eight instructions is what that fold costs: the counter displaced the fold's code rather than
-adding to it. `path4:sparse:4096` shows the same change costing almost nothing in the `BODY = 4`
-monomorphization, which is the tell that this is register allocation and inlining rather than work.
+seventh, and the branch counts moved further than the instruction counts did: branches by 1.4 to 4.0
+per cent against instructions' 0.067 to 2.6 — which an unconditional register increment cannot do at
+all, since it adds no branch. So the cost is not the counter's arithmetic. It scales with lookups
+because the increment sits beside the four-op key fold that runs once per lookup, and about eight
+instructions is what that fold costs: the counter displaced the fold's code rather than adding to it.
+`path4:sparse:4096` shows the same change costing almost nothing **in instructions** in the
+`BODY = 4` monomorphization — 0.114 per cent — while its branches still moved 1.378 per cent, which
+is the tell that this is register allocation and inlining rather than work.
 **The cost model was wrong in the way the playbook says to treat as a cost-model failure rather than
 as something to shave**, so the shape changed instead of the constant.
 
@@ -415,17 +444,20 @@ complete block, so the out-degree is `N − 1` and that is exactly the average b
 holds. `Policy::AutoUndemoted` is `Auto` with demotion alone switched off, so both sides run on one
 binary and differ in that one decision — the same reason `SparseIndexes` and `SparseMembership`
 exist. Retained arm `closure_ballpark-d037e2a`, three rounds of five repeats, receipt
-`sweep-2026-09-18-c1202-demotion-triangle.json`, `triangle` at domain 4,096:
+`sweep-2026-09-18-c1202-demotion-triangle.json`, `triangle` at domain 4,096. The lookup column is
+the receipt's `index_lookups[1]` for the undemoted arm — the demoted link's own bucket lookups, not
+the plan's total across all links, which is larger (49,152 rather than 36,864 at `blocks4`, 983,040
+rather than 921,600 at `blocks16`):
 
 | density | bucket `b` | facts | lookups into the demoted link | undemoted preparation | undemoted evaluation | demoted preparation | demoted evaluation | undemoted ÷ demoted, preparation + one evaluation |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `blocks4` | 3 | 12,288 | 49,152 | 2.906 ms | 2.253 ms | 2.912 ms | 1.394 ms | **1.1983** |
-| `blocks6` | 5 | 20,472 | 122,808 | 5.098 | 6.796 | 5.294 | 4.987 | **1.1570** |
-| `blocks8` | 7 | 28,672 | 229,376 | 5.342 | 8.966 | 5.502 | 8.655 | **1.0106** |
-| `blocks10` | 9 | 36,840 | 368,280 | 7.252 | 14.604 | 7.292 | 16.183 | **0.9310** |
-| `blocks12` | 11 | 45,024 | 540,192 | 8.472 | 21.089 | 8.271 | 27.628 | **0.8234** |
-| `blocks14` | 13 | 53,200 | 744,464 | 9.682 | 29.173 | 9.527 | 44.262 | **0.7223** |
-| `blocks16` | 15 | 61,440 | 983,040 | 12.268 | 38.191 | 12.209 | 66.961 | **0.6373** |
+| `blocks4` | 3 | 12,288 | 36,864 | 2.906 ms | 2.253 ms | 2.912 ms | 1.394 ms | **1.1983** |
+| `blocks6` | 5 | 20,472 | 102,336 | 5.098 | 6.796 | 5.294 | 4.987 | **1.1570** |
+| `blocks8` | 7 | 28,672 | 200,704 | 5.342 | 8.966 | 5.502 | 8.655 | **1.0106** |
+| `blocks10` | 9 | 36,840 | 331,440 | 7.252 | 14.604 | 7.292 | 16.183 | **0.9310** |
+| `blocks12` | 11 | 45,024 | 495,168 | 8.472 | 21.089 | 8.271 | 27.628 | **0.8234** |
+| `blocks14` | 13 | 53,200 | 691,264 | 9.682 | 29.173 | 9.527 | 44.262 | **0.7223** |
+| `blocks16` | 15 | 61,440 | 921,600 | 12.268 | 38.191 | 12.209 | 66.961 | **0.6373** |
 
 The same sweep on `mutual`, receipt `sweep-2026-09-18-c1202-demotion-mutual.json`, whose two-atom
 step probes the index once per fact rather than once per two-path:
@@ -457,12 +489,16 @@ reached when the undemoted mask would be held sorted, so the comparison is one p
 probe: `rows / distinct` row reads out of a contiguous bucket against a binary search over the
 distinct keys plus one row read. **The probe count cancels**, which is exactly what did not happen
 in C1201's density. And the build difference — a sort of the rows against a counting sort over the
-demoted key space — sits inside the noise of preparation on this family: the two arms' preparation
-agrees to 0.5 per cent at every point of the `triangle` sweep. So what is left is a bound on the
-bucket, and the constant closes the cost model: at 4,096 distinct keys the search is about twelve
-dependent steps, the crossover is between 7 and 9 row reads, so **a binary-search step costs about
-0.6 of a row read on this host**. That also says the constant should grow with `log2(distinct)`
-rather than being flat, which is an open item.
+demoted key space — sits inside the noise of preparation on this family: across the seven points of
+the `triangle` sweep the demoted-over-undemoted preparation ratio runs 0.976 to 1.038, so the two
+arms **agree to within 4 per cent with the sign alternating**, which is noise rather than a build
+cost. So what is left is a bound on the bucket, and the constant closes the cost model. The index
+demotion replaces is keyed on **both** columns, so its distinct count is the row count — 12,288 at
+`blocks4` rising to 61,440 at `blocks16`, not the domain's 4,096 — and its probe is therefore a
+binary search of fourteen to sixteen dependent steps. The crossover is between 7 and 9 row reads, so
+**a binary-search step costs about 0.5 of a row read on this host**. That also says the constant
+should grow with `log2(distinct)` rather than being flat, which is an open item, and the correction
+sharpens it: the distinct count that matters moves with the rows, not with the domain.
 
 ### Piece 3: the rule on estimated probes
 
@@ -547,7 +583,12 @@ candidate count is equal between the arms on all eighteen cohorts; the receipt r
 | **`triangle:blocks:4096`** | `dsd` → `ddd` | **yes** | **0.71717** | [0.71716, 0.71718] | 0.9999951 | **0.43392** |
 
 **Fifteen cohorts whose chosen kinds do not change read 0.99985 to 1.00002**, against A/A nulls
-within 2.7 parts per hundred thousand, so they sit inside the nulls' own scatter. Their plans are
+within **6.2 parts per hundred thousand**, so they sit inside the nulls' own scatter. The bound is
+set by `mutual:blocks:4096`, whose null is 0.9999383; the worst of the other fourteen is
+`cycle:blocks:4096` at 1.0000269. That matters for one reading: `mutual:blocks:4096`'s 0.99985 is
+1.5 parts per ten thousand from unity against its own 6.2-parts-per-hundred-thousand null, so it is
+about **two** of its own nulls wide rather than five, which is still inside the scatter but is not
+the margin a 2.7 bound would imply. Their plans are
 byte-identical between the arms, which is what mask demotion's `OP_KEY → OP_CHECK` encoding buys:
 there is no kernel change for an unchanged cohort to pay for.
 
@@ -569,8 +610,9 @@ of 18.2 and gives the fully bound index the direct kind that the density rule of
 
 ### The stages the two policy changes are about: preparation, resident memory, and one evaluation
 
-Six rounds so the arm order alternates evenly, nine in-process evaluations for the loop figure,
-load average 2.29 recorded by the receipt `stages-2026-09-18-c1202-probe-rule-floored.json`.
+Six rounds so the arm order alternates evenly, nine in-process evaluations for the loop figure. The
+receipt `stages-2026-09-18-c1202-probe-rule-floored.json` records the load average **per cohort**,
+and over the seven it runs 2.27 to 2.33; the 2.29 is `triangle:sparse:4096`'s, the headline row.
 Preparation and resident memory are read from **wall time, the resident high-water mark and the
 minor-fault count**, because `perf_event_paranoid` is 2 on this host and a build's cost is
 `calloc`'s zeroing, first-touch faults and streaming stores. The whole-process arm reads the facts,
@@ -580,9 +622,9 @@ prepares, evaluates **once** and writes the output CSV.
 | --- | :---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | `triangle:sparse:1024` | `dsd` → `dd` | 0.7580 ms | 0.7595 | 1.002 | 486 → 487 | 3,816 KiB | 3,808 | 0.998 | 0.4118 ms | 0.2935 | **0.713** | 1.803 ms | 1.661 | **0.921** |
 | `triangle:sparse:4096` | `dsd` → `dd` | 2.9309 | 2.8615 | 0.976 | 1,075 → 1,076 | 6,000 | 5,992 | 0.999 | 2.0092 | 1.2130 | **0.604** | 6.910 | 6.130 | **0.887** |
-| `triangle:sparse:16384` | `dsd` → `dd` | 9.3217 | 8.9750 | 0.963 | 3,754 → 3,530 | 15,112 | 15,104 | 1.000 | 8.2767 | 3.8777 | **0.469** | 22.994 | 18.174 | **0.790** |
+| `triangle:sparse:16384` | `dsd` → `dd` | 9.3217 | 8.9750 | 0.963 | 3,754 → 3,530 | 15,112 | 15,104 | 0.999 | 8.2767 | 3.8777 | **0.469** | 22.994 | 18.174 | **0.790** |
 | `triangle:blocks:4096` | `dsd` → `ddd` | 12.3466 | 32.0062 | **2.592** | 6,466 → 22,500 | 19,052 | 83,180 | **4.366** | 38.2938 | 16.0982 | **0.420** | 59.471 | 57.395 | **0.965** |
-| `mutual:blocks:4096` | `s` → `s` | 11.7176 | 11.7706 | 1.004 | 6,341 → 6,342 | 18,560 | 18,552 | 1.000 | 2.3464 | 2.3501 | 1.002 | 22.390 | 22.599 | 1.009 |
+| `mutual:blocks:4096` | `s` → `s` | 11.7176 | 11.7706 | 1.005 | 6,341 → 6,342 | 18,560 | 18,552 | 1.000 | 2.3464 | 2.3501 | 1.002 | 22.390 | 22.599 | 1.009 |
 | `mutual:blocks:8192` | `s` → `s` | 24.9826 | 25.3047 | 1.013 | 14,667 → 14,668 | 37,964 | 37,956 | 1.000 | 5.0712 | 5.0019 | 0.986 | 47.396 | 47.725 | 1.007 |
 | `path4:sparse:4096` | `dd` → `dd` | 2.0745 | 2.0759 | 1.001 | 4,891 → 4,892 | 19,396 | 19,388 | 1.000 | 6.1517 | 6.0212 | 0.979 | 17.855 | 17.696 | 0.991 |
 
@@ -679,6 +721,14 @@ exactly C1201's "two workloads with equal density and different probes" shape:
 The derived counts and the lookup counts are identical between the two bounds at every block size,
 so the two arms do the same work and differ in that one index's kind.
 
+**Three of the four lookup counts carry no receipt.** `ab.py` records no lookup counter, so only
+`cycle:blocks16:4096`'s 69,632 is receipted — through the census's `cycle:blocks:4096` row — and the
+20,480, 36,864 and 135,168 at `blocks4`, `blocks8` and `blocks32` were read by hand from
+`--count-probes` runs on the same binary and are not in any receipt of this task. All four satisfy
+`derived / 2 + domain` exactly, and the keys-per-probe column is the arithmetic on them, so the
+figures are consistent; they are simply unreceipted, and adding `--count-probes` to `ab.py` is the
+repair that would put them on the record.
+
 **The measurement**, five rounds of three and six repeats, two-point differenced, event set at
 100.00 per cent enabled, load average 3.99 to 4.09, receipt
 `ab-2026-09-18-c1202-growing-index.json`. The ratios are **sparse ÷ direct**, so above unity means
@@ -724,15 +774,29 @@ evidence rather than edited out. The receipt is
 
 1. **An index no live step probes was sent to the kind with the larger build.** Its estimated probes
    are zero, so `key_space <= K · probes` is false at any key space and the rule chose sorted — which
-   allocates and sorts one `(u64, u32)` pair per row. On `triangle:blocks:4096` that cost **2.8 ms**
-   of preparation for a structure nothing reads, and it turned the cohort the rule was built for from
-   a win into a wash: the whole process read **0.990** rather than the 0.93 C1201's sweep predicted.
-   The repair is a floor, and it needs no new constant: the direct array is one `u32` per key against
-   the sorted kind's twelve bytes per row, and its counting sort is linear against a sort, so direct
-   is the cheaper build whenever `key_space <= rows` whatever the probes.
+   allocates and sorts one `(u64, u32)` pair per row. The cost is the difference between the two
+   per-stage receipts' candidate preparations, which are directly comparable because their shared
+   control agrees between them to 0.01 per cent (12.3481 ms in
+   `stages-2026-09-18-c1202-probe-rule-prefloor.json` against 12.3466 in
+   `stages-2026-09-18-c1202-probe-rule-floored.json`): on `triangle:blocks:4096`, 33.7107 against
+   32.0062, or **1.71 ms** of preparation for a structure nothing reads. It turned the cohort the
+   rule was built for from a win into a wash: the whole process read **0.990** rather than the 0.93
+   C1201's sweep predicted. **The defect was broader than that one cohort.** The same cross-run
+   comparison prices it at **0.106, 0.531, 1.575 and 0.318 ms** on `triangle:sparse:1024`, `:4096`,
+   `:16384` and `path4:sparse:4096`, because those cohorts' second index went sorted too — `ds`
+   before the floor against the kept arm's `dd`. The repair is a floor, and it needs no new constant:
+   the direct array is one `u32` per key against the sorted kind's twelve bytes per row, and its
+   counting sort is linear against a sort, so direct is the cheaper build whenever
+   `key_space <= rows` whatever the probes.
 2. **The demotion guard's pass over the rows ran once per link rather than once per
    `(relation, mask)`.** `triangle` asks the same question of `edge` at three steps, so it paid three
-   times: **0.50 ms** of preparation on `triangle:sparse:4096`, against a 2.90 ms baseline.
+   times. The figure the report can stand behind is the **total** of both defects on
+   `triangle:sparse:4096`: the pre-floor candidate against its own control in that run is
+   3.3924 − 2.8966 = **0.50 ms** of preparation, against a 2.90 ms baseline. **That total is not
+   separated between the two defects by any receipt.** The cross-run comparison above already prices
+   the dead index held sorted at 0.53 ms on this same cohort, which is the whole of it within the
+   run-to-run scatter, so the 0.50 ms is an upper bound on the guard's own share rather than a
+   measurement of it. Both repairs landed in one commit and no arm isolates them.
 
 Both repairs are in core `9edc07b`, and the figures above are the pre-floor arm's; the kept arm's are
 in the tables above and below.
@@ -741,7 +805,7 @@ in the tables above and below.
 
 | Prediction | Outcome |
 | --- | --- |
-| 1, the counter's own cost: one instruction per lookup in the two-atom kernel and three in the n-ary one, so 0.21 and 0.96 per cent | **Wrong by about eight times.** Measured 1.47 and 2.55 per cent, at seven to ten and a half instructions per lookup, and the branch counts moved with them. The cost model failed in the way the playbook says to treat as a cost-model failure: the shape changed — the counter is monomorphized — rather than the constant being shaved. |
+| 1, the counter's own cost: one instruction per lookup in the two-atom kernel and three in the n-ary one, so 0.21 and 0.96 per cent | **Wrong by about eight times.** Measured 1.47 and 2.55 per cent, at seven to ten and a half instructions per lookup, and the branch counts moved further still — 1.4 to 4.0 per cent against instructions' 0.067 to 2.6. The cost model failed in the way the playbook says to treat as a cost-model failure: the shape changed — the counter is monomorphized — rather than the constant being shaved. |
 | 2, mask demotion needs no kernel change and `OP_CHECK` is the encoding | **Right**, and all three consequences held: unchanged cohorts are byte-identical, the work counters are invariant, and the demoted mask collides with an index the plan already holds. |
 | 2, `triangle:sparse:4096`: evaluation 0.60 to 0.70 against `auto` and 0.95 to 1.10 against forced direct | **Right on the first and better than the range on the second**: 0.604 against `auto`, and 1.2130 ms against C1201's forced-direct 1.2990 ms, which is 0.934. |
 | 2, `triangle:blocks:4096`: evaluation 35 to 48 ms demoted, winning end to end at 47 to 60 ms | **Wrong.** Demoted evaluation measured **66.96 ms** and demotion loses end to end at 0.637. The extra row reads cost about **3.5 ns** each rather than the one to two nanoseconds assumed — a bucket of fifteen rows in a 480 KiB row array is not a sequential read. This is the prediction the demotion guard exists because of. |
@@ -785,10 +849,10 @@ both join sites; and not building an index no live step probes at all.
 | `mutual:blocks:4096` and `triangle:blocks:4096` both get the right kind under `Policy::Auto` | **Met.** The measured lookups are 61,440 and 921,600 into indexes of the same key space over relations of the same size, so `key_space / probes` is 273.1 and 18.2 and one constant of 23 gives them opposite kinds. `mutual` stays sparse and is a null on every stage; `triangle:blocks:4096` takes the direct kind and reads 0.420 of the derivation loop and 0.965 of the whole process. |
 | `triangle:sparse:4096` and `triangle:blocks:4096` under the demoted mask: preparation near C1201's sparse figure, derivation loop at or near the direct row | **Met on `triangle:sparse:4096`, and not met on `triangle:blocks:4096`, which is a measured decision rather than a shortfall.** On `triangle:sparse:4096` preparation is 0.976 and peak resident memory 0.999 of the already-sparse control, and the derivation loop is 1.2130 ms against C1201's forced-direct 1.2990 ms on the same cohort — below the direct row, not merely near it. `triangle:blocks:4096` does not demote: its bucket would be fifteen rows and the crossover is measured between seven and nine, so demotion there costs 0.637 of preparation plus one evaluation. The probe rule takes that cohort instead. |
 | Every cohort in the C1201 table: digest, derived, probe and candidate counts equal; certificates accepted by both checkers; C1189 differential zero disagreements under both body policies; parity digest reported | **Met.** The eighteen-cohort census asserts the four equalities per cohort and raises otherwise; it ran to completion. The core suite's `demand_sparse` runs the whole corpus a second time under `Policy::Sparse` **and** a third under `Policy::AutoUndemoted` and compares certificate **bytes**, so the demoted and undemoted plans are held to byte equality, and both independent checkers accept in every representation. The private suite's `rel_reference_eval` is the C1189 differential under both body policies and passes. **The parity digest is unmoved**: every cohort's `output_sha256` is equal between the arms, which the A/B and the census both assert. |
-| Direct-path cohorts whose kind does not change: instructions within the A/A null or the loss stated as a loss | **Met.** Fifteen cohorts read 0.99985 to 1.00002 against A/A nulls within 2.7 parts per hundred thousand. Their plans are byte-identical, which is what the `OP_CHECK` encoding buys. |
+| Direct-path cohorts whose kind does not change: instructions within the A/A null or the loss stated as a loss | **Met.** Fifteen cohorts read 0.99985 to 1.00002 against A/A nulls within 6.2 parts per hundred thousand, the bound set by `mutual:blocks:4096`'s own null of 0.9999383; that cohort's 0.99985 is about two of its own nulls from unity. Their plans are byte-identical, which is what the `OP_CHECK` encoding buys. |
 | The per-link probe counter's own cost on the two-atom kernel measured and stated | **Met, and it changed the design.** Carried unconditionally it cost 1.47 per cent of `mutual:blocks:4096`'s instructions and 1.46 per cent of `closure:sparse:256`'s, at about seven to nine instructions per lookup rather than the one predicted, so it is monomorphized; the production path then measures 0.99167 and 0.99185 on those two cohorts. |
 | `DIRECT_INDEX_DENSITY = 48` answered by measurement (C1201 mystery item 5) | **Met, and the answer is that one constant does not replace both.** `--max-rows` brackets the growing index's kind at a fixed density and `blocks<N>` moves its probes 6.6-fold; the direct kind is ahead at all four points by 4.6 to 12.3 per cent in cycles, so the test that flipped the static answer does not flip this one and a static rule at 23 would be wrong at every point. 48 stays, with C1198's reset rule as the mechanism. |
-| Gates | **Met.** `cargo test --all-features` at 82 `test result: ok` blocks and zero `FAILED`, clippy `-D warnings` clean, `cargo fmt --check` clean, the allocation regression green under all five policies with the n-ary kernel included, `generate_evidence.py --write` in the same commits, and the private workspace's suite, clippy, fmt and `ruff` as in the replay block. |
+| Gates | **Met.** `cargo test --all-features` at 82 `test result: ok` blocks and zero `FAILED`, clippy `-D warnings` clean, `cargo fmt --check` clean, the allocation regression green with the n-ary kernel included — at `9edc07b` under **five of the six** policies, because `Policy::AutoUndemoted` was added to the corpus test but not to `allocation.rs`; the repair pass added it to both of that file's policy lists at core `ca0609f` and the gate stays green (5 passed) — `generate_evidence.py --write` in the same commits, and the private workspace's suite, clippy, fmt and `ruff` as in the replay block. |
 
 ## The `ej` and `tt` closeout
 
@@ -825,7 +889,7 @@ pair: the probe count cancels in the demotion comparison because both sides pay 
 their builds are within noise, and it does not cancel in the index comparison because one side's
 build scales with the key space. **Neither constant is a property of its own decision; both are
 faces of one cost function with three per-unit coefficients** — a key of direct build, a row read,
-and a binary-search step — and this task measured all three (1.17 ns, and the ratio 0.6 between the
+and a binary-search step — and this task measured all three (1.17 ns, and the ratio 0.5 between the
 last two). A successor that enumerates the candidate `(mask, kind)` pairs for an atom and prices
 them from those three coefficients would replace both constants, would extend to the fifth hashed
 kind without a fourth constant, and would answer the growing-index question in the same frame.
@@ -879,20 +943,26 @@ Re-running `compare.py` on the kept arm is the cheapest remaining external datum
    rows. The counter reads the top-level `probes` at the fact count rather than three times it, and
    the plan's estimate now encodes the same rule.
 3. **What does an unconditional per-link probe counter cost?** About **eight instructions per
-   lookup**, not the one the increment is, and the branch counts move by the same fraction — so it is
-   a codegen effect on the four-op key fold beside it rather than the counter's arithmetic. Fermi
+   lookup**, not the one the increment is, and the branch counts move further than the instructions
+   do — 1.4 to 4.0 per cent against 0.067 to 2.6 — where an unconditional register increment adds no
+   branch at all. So it is a codegen effect on the four-op key fold beside it rather than the
+   counter's arithmetic. Fermi
    prediction 1 was wrong by a factor of eight and the shape changed rather than the constant: the
    counter is monomorphized and the production instantiation carries neither it nor its register.
 4. **Can a fully bound atom demote its index mask without a kernel change?** Yes, and the card's
    shape was not the cheapest. `OP_KEY` is folded into the key and compared only under the verify
    flag; `OP_CHECK` is skipped by the fold and compared unconditionally. Demotion is `OP_KEY →
    OP_CHECK` plus one mask bit, so no new op kind, no new addressing kind, no new instantiation and
-   no new storage, and eleven cohorts measured inside their A/A nulls because their plans are
+   no new storage, and fifteen cohorts measured inside their A/A nulls because their plans are
    byte-identical.
 5. **Where is the demotion crossover?** Between an average bucket of 7 and 9 rows on `triangle` and
    between 7 and 11 on `mutual`, measured on one binary under `Auto` against `AutoUndemoted`. The
-   cost model closes on it: at 4,096 distinct keys the sorted probe is about twelve dependent search
-   steps, so a search step costs about **0.6 of a row read** on this host.
+   cost model closes on it, once the distinct count is taken from the right index: the mask demotion
+   replaces is keyed on **both** columns and holds one key per row, so the sorted probe searches
+   12,288 to 61,440 distinct keys — fourteen to sixteen dependent steps, not the twelve that 4,096
+   would give — and a search step costs about **0.5 of a row read** on this host. The correction
+   strengthens the `log2(distinct)` conclusion in open item 2, because the distinct count that
+   matters grows with the rows rather than sitting at the domain.
 6. **Why does the demoted arm retire 1.26 to 1.30 times the instructions and run in half the
    cycles?** Because it replaces a serially dependent binary search — thirteen or fourteen loads
    each waiting on the last — with one load and three independent row reads. This is the case the
@@ -982,8 +1052,9 @@ Working files under `~/.cache/ergodis/c1202/`.
 
 ```sh
 # Gates, core, at 9edc07b. Outcome: exit 0, 82 `test result: ok` blocks, zero
-# FAILED; clippy and fmt clean; the allocation regression green under all five
-# policies, the n-ary kernel included.
+# FAILED; clippy and fmt clean; the allocation regression green under five of
+# the six policies, the n-ary kernel included. At ca0609f the sixth,
+# Policy::AutoUndemoted, is in that gate too and it stays green.
 cd ~/src/ergodis
 nix develop . --command cargo test --all-features --no-fail-fast -j 12
 nix develop . --command cargo clippy --all-targets --all-features -j 12 -- -D warnings
@@ -1014,7 +1085,7 @@ nix shell nixpkgs#ruff -c ruff check analysis/datalog-comparison/static_index_*.
 A=analysis/datalog-comparison; C=~/.cache/ergodis/bin; W=~/.cache/ergodis/c1202
 ALL=closure:sparse:256,closure:sparse:1024,closure:dense:256,closure:dense:512,samegen:sparse:1024,samegen:dense:512,closure:blocks:4096,closure:blocks:16384,cycle:blocks:4096,triangle:sparse:16384,path3:sparse:4096,path3:sparse:16384,path4:sparse:4096,path4:sparse:16384,mutual:blocks:4096,mutual:blocks:8192,triangle:sparse:4096,triangle:blocks:4096
 
-# Piece 1, the counter carried unconditionally. Outcome: 1.00114 to 1.02554.
+# Piece 1, the counter carried unconditionally. Outcome: 1.00067 to 1.02554.
 nix develop ~/src/ergodis --command python3 $A/ab.py --a $C/closure_ballpark-ab6be13 \
     --a-name control-ab6be13 --b $C/closure_ballpark-83bff0a --b-name counter-83bff0a \
     --mode evaluate --rounds 5 --cpu 5 --repeats 3 --cohorts $ALL \
@@ -1115,7 +1186,7 @@ in any of the three repositories.
 
 | Repository | HEAD at close | Range this task added |
 | --- | --- | --- |
-| `~/src/ergodis` | `9edc07b` | `5c9d1b3` … `9edc07b` (six commits) |
+| `~/src/ergodis` | `9edc07b`, then `ca0609f` after the audit repairs | `5c9d1b3` … `9edc07b` (six commits), plus `ca0609f` |
 | `~/src/ergodis-private` | `b47ade4` | `ab6be13` … `b47ade4` (fifteen commits) |
 | `~/src/othello` | this report's last commit | `f19c82c35` … here |
 
@@ -1139,8 +1210,12 @@ because the rule is written for one evaluation and a plan evaluated twice is alr
 the memory is the largest single cost this task adds and the constant that decides it (23 fitted,
 20.6 derived) is close enough to the cohort's 18.2 that moving it to 20 would flip the cohort with
 no other effect on the set. Second, which of the open items to allocate first — the recommendation
-is the growing-index constant (`DIRECT_INDEX_DENSITY`, mystery item 4), because the per-link counter
-has made it a one-measurement question and it is the last density in the policy.
+is **queued candidate 2, locating the growing index's own crossover on the kept arm**, because the
+per-link counter has made it a one-measurement question and `DIRECT_INDEX_DENSITY` is the last
+density in the policy. What this task settled about that constant is **settled** ledger item 7 —
+that its right answer does not move with the probe count — and what it left is the crossover itself;
+open item 4 is the demotion sweep's 0.97 null, which is a protocol defect with a known fix and not
+this recommendation.
 
 ## Vibe check
 
@@ -1165,3 +1240,36 @@ The uncomfortable result is the one in the mystery ledger: monomorphizing the co
 seventeen of eighteen cohorts **0.4 to 1.6 per cent cheaper** than a control executing the same
 operations. That is a codegen term this lane is not controlling, it is the same size as the effects
 the lane chases, and it deserves a look before the next sub-per-cent claim.
+
+## Audit repairs applied
+
+`notes/2026-09-18-c1202-probe-count-index-rule-audit.md` vetted this report with repairs and listed
+sixteen defects, none of them a code defect. All sixteen are applied above; the two that changed a
+printed conclusion are 2 and 13. The core change is committed at `ergodis` `ca0609f`, which is the
+only revision this pass added to any repository.
+
+| Defect | What changed |
+| ---: | --- |
+| 1 | The piece-1 lookup table's `closure:sparse:4096` row is marked **unreceipted**: that cohort is not in `$ALL` and no receipt of this task contains it. The caption no longer introduces the table as the eighteen-cohort set and names the census receipt as the source of the five rows that are in it. Nothing was re-measured for it. |
+| 2 | The `triangle` demotion sweep's lookup column now prints the receipt's `index_lookups[1]` — the demoted link's own lookups, 36,864 rising to 921,600 — instead of the plan's total across all links, and a caption states the distinction with both figures at the two ends. |
+| 3 | "The two arms' preparation agrees to 0.5 per cent at every point" is replaced by the receipt's actual span: 0.976 to 1.038, so within 4 per cent with the sign alternating. The conclusion it supports — the build difference is inside preparation's noise on this family — is unchanged, because an alternating sign is noise. |
+| 4 | The dead-index negative's preparation cost is now the cross-run difference between the two per-stage receipts, both named, whose shared control agrees to 0.01 per cent: 33.7107 against 32.0062, so **1.71 ms** rather than 2.8. The four further cohorts the defect also cost (0.106, 0.531, 1.575 and 0.318 ms) are added. |
+| 5 | The A/A null bound for the fifteen unchanged cohorts is 6.2 parts per hundred thousand, not 2.7, in all three places it is quoted: the headline, the derivation-loop section and the acceptance table. `mutual:blocks:4096` sets the bound and its 0.99985 is about two of its own nulls from unity, which is now stated. |
+| 6 | The unconditional counter's range is 0.067 to 2.554 per cent over eighteen cohorts, in the headline, the piece-1 text and the replay block. The same figure and a "seventeen-cohort set" were in the shipped `evaluate_counted_into` docstring in `crates/rules/src/demand.rs`, and in the `Evaluation::lookups` field docstring two hundred lines above it; both are corrected at `ca0609f`. |
+| 7 | "The branch counts moved by the same fraction as the instruction counts" is replaced by both ranges — branches 1.4 to 4.0 per cent against instructions' 0.067 to 2.6 — in the piece-1 text, the Fermi outcome table and settled ledger item 3. `path4:sparse:4096`'s "almost nothing" is now marked as an instruction-only statement, 0.114 per cent against 1.378 in branches. The inference is stronger with the true figures. |
+| 8 | The growing-index table now says that three of its four lookup counts are unreceipted hand reads, because `ab.py` records no lookup counter, and that only `cycle:blocks16:4096`'s 69,632 is receipted through the census. No count was invented and none was changed. |
+| 9 | The Method section now says which runs `choom -n 1000` wraps: the stage and sweep scripts, not `ab.py`, which has never carried it. The core-5 pin is true of every run. |
+| 10 | The per-stage table's `triangle:sparse:16384` peak-RSS ratio reads 0.999 and `mutual:blocks:4096`'s preparation ratio 1.005; the load average is stated as a per-cohort field running 2.27 to 2.33, with 2.29 named as the headline cohort's; and the per-evaluation instruction table now carries the same **No receipt** statement the baseline table above it does. |
+| 11 | The arms table says the Core column is recorded from the session rather than from `MANIFEST.tsv`, which carries only the private revision, and names the re-pin commit that does not identify the core revision it pins. |
+| 12 | Settled ledger item 4 says fifteen cohorts inside their A/A nulls, matching every other passage. |
+| 13 | The demotion cost model takes its distinct count from the index being replaced, which is keyed on both columns and holds one key per row: 12,288 to 61,440 distinct keys, fourteen to sixteen dependent search steps, and a search step at about **0.5** of a row read rather than 0.6. Changed in the piece-2 closing paragraph, settled ledger item 5 and the `ej` closeout's three coefficients. The `log2(distinct)` conclusion is unchanged and the correction strengthens it. |
+| 14 | The closing recommendation names queued candidate 2 — locating the growing index's own crossover on the kept arm — and settled item 7, rather than "mystery item 4", which is the demotion sweep's null. |
+| 15 | The acceptance table and the replay block say five of the six policies at `9edc07b`. `Policy::AutoUndemoted` is added to both policy lists in `crates/rules/tests/allocation.rs` at `ca0609f`; `cargo test -p ergodis-rules --test allocation` is green, 5 passed, and clippy `-D warnings`, `cargo fmt --check` and `generate_evidence.py --write` were re-run with it. |
+| 16 | The piece-1 lookup table's caption names the arm its per-index split belongs to — the undemoted control `closure_ballpark-8d43d4e` — and gives the kept arm's split for `triangle:sparse:4096` (`49,152 · 0`) beside it. |
+
+**Not done, and why.** Three of the audit's repairs offer a measurement this pass deliberately did
+not take, so the figures are marked rather than manufactured: re-running `closure:sparse:4096` with
+`--count-probes` into a receipt (defect 1), adding `--count-probes` to `ab.py` so the growing-index
+lookups are receipted (defect 8), and adding `choom` to `ab.py` (defect 9). Defect 11's other branch
+— having `retain-bin.sh` record the core checkout's revision beside the crate's — is a change to
+`~/src/ergodis-dev` and is left to whoever owns that script.
