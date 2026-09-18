@@ -228,3 +228,107 @@ its repeats, `compare.py` measures a whole process that evaluates once, and the 
 evaluates each of its 1,200 programs once. A plan that is evaluated thousands of times would want a
 larger `D_static`, and the measurement below reports the crossover as a function of the evaluation
 count so that a future policy with a caller-supplied hint has the curve to read.
+
+## The crossover, measured
+
+### Method
+
+The sweep is **three points on one binary**, which is what the forced policies exist for. With
+`DIRECT_STATIC_DENSITY` temporarily set to 4, `--index auto` on the n-ary `triangle` gives *direct,
+sparse, direct* and `--index direct` gives *direct, direct, direct*, so the two arms differ in
+**exactly one index's kind** — the fully bound third atom's, whose key space is `domain²` against
+`3 · domain` rows. Sweeping the domain therefore sweeps that one index's density, and every other
+structure in the plan, every work count and the output digest are identical between the arms (the
+sweep asserts the digest, the derived count and the probe count per point and refuses otherwise).
+Rounds alternate the arm order. Pinned to core 5 with `taskset -c 5`, under `choom -n 1000`.
+
+Preparation and peak RSS are read from **wall time and the resident high-water mark**, not from
+instruction counts: `perf_event_paranoid` is 2 on this host, so `perf` counts user-mode events only,
+and the dominant parts of a direct build are `calloc`'s zeroing, the minor faults of first touch and
+streaming stores. Evaluation is the median of the driver's own repeated derivation loop.
+
+### The sweep
+
+Coarse pass, three rounds of nine repeats, load average 5.9 to 7.8 (recorded; wall ratios widen with
+load, which is why the crossover is bracketed rather than quoted to a digit):
+
+| domain | facts | density of the big index | prep, all direct | prep, big sparse | RSS, all direct | RSS, big sparse | eval, all direct | eval, big sparse | eval ratio | evaluations to break even |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 32 | 96 | 10.7 | 0.0588 ms | 0.0574 ms | 3,340 KiB | 3,336 KiB | 0.0059 ms | 0.0100 ms | 0.59 | 0.3 |
+| 64 | 192 | 21.3 | 0.0769 | 0.0765 | 3,368 | 3,360 | 0.0106 | 0.0203 | 0.52 | 0.0 |
+| 128 | 384 | 42.7 | 0.1374 | 0.1215 | 3,452 | 3,404 | 0.0200 | 0.0423 | 0.47 | 0.7 |
+| 256 | 768 | 85.3 | 0.2864 | 0.2136 | 3,720 | 3,504 | 0.0408 | 0.0907 | 0.45 | 1.5 |
+| 512 | 1,536 | 170.7 | 0.7476 | 0.3849 | 4,644 | 3,692 | 0.0822 | 0.1865 | 0.44 | 3.5 |
+| 1,024 | 3,072 | 341.3 | 2.4838 | 0.7492 | 8,232 | 4,132 | 0.1820 | 0.4108 | 0.44 | 7.6 |
+| 2,048 | 6,144 | 682.7 | 8.5259 | 1.4919 | 21,284 | 4,896 | 0.5052 | 0.8980 | 0.56 | 17.9 |
+| 4,096 | 12,288 | 1,365.3 | 29.3571 | 2.8990 | 71,856 | 6,316 | 1.3258 | 2.0437 | 0.65 | 36.9 |
+
+Fine pass across the crossover, five rounds of fifteen repeats, load average 5.6 to 5.9:
+
+| domain | facts | density | Δ preparation (direct − sparse) | Δ evaluation (sparse − direct) | evaluations to break even | preparation + one evaluation, direct ÷ sparse |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 96 | 288 | 32.0 | +0.0034 ms | +0.0165 ms | 0.2 | 0.907 |
+| 128 | 384 | 42.7 | +0.0118 | +0.0231 | 0.5 | 0.934 |
+| 160 | 480 | 53.3 | +0.0171 | +0.0272 | 0.6 | 0.953 |
+| 192 | 576 | **64.0** | +0.0288 | +0.0369 | 0.8 | **0.968** |
+| 224 | 672 | **74.7** | +0.0546 | +0.0431 | 1.3 | **1.042** |
+| 256 | 768 | 85.3 | +0.0729 | +0.0511 | 1.4 | 1.071 |
+| 320 | 960 | 106.7 | +0.1161 | +0.0602 | 1.9 | 1.144 |
+| 384 | 1,152 | 128.0 | +0.1807 | +0.0786 | 2.3 | 1.228 |
+
+**The one-evaluation crossover is bracketed between a density of 64 and 74.7**, where the
+preparation-plus-one-evaluation ratio crosses unity and the break-even evaluation count crosses one.
+Linear interpolation puts it at about 69. `DIRECT_STATIC_DENSITY` is set to **64**, the conservative
+end of the bracket, and deliberately so: above the crossover the direct build's cost grows with the
+key space without bound (28 ms and 65 MB at a density of 1,365), while below it the sparse choice
+gives up a bounded fraction of one evaluation.
+
+### The Fermi prediction this refutes, and it is the important one
+
+**Prediction 2 said the direct probe into a 64 MiB offsets array would be no better than a binary
+search over an L2-resident key array, and plausibly worse. It is wrong, and not marginally: the
+direct probe is ahead at every density measured, by a factor of 1.5 to 2.3.** The eval-ratio column
+is 0.44 to 0.65 from a density of 10.7 to 1,365, so C1192's deviation 5 was right about the probe
+even at the ceiling — the counting-sorted bucket beats the binary search over the whole range, and
+the 64 MiB array's cache behaviour never turns the comparison over.
+
+That changes what this task is and what it can deliver. **The static index's whole problem is its
+build, and the two existing static kinds are a strict trade rather than a dominance**: the direct
+kind is faster to probe everywhere and slower to build above a density of about 69. A rule can
+therefore buy preparation and resident memory only by *giving up* evaluation, and the card's
+acceptance line — preparation and peak RSS at the sparse row **and** evaluation at the direct row —
+**cannot be met by any choice between these two kinds**. It needs a third representation that is
+cheap to build and O(1) to probe, which is the card's own candidate (c), priced below and not built.
+This is stated as an unmet acceptance criterion rather than reinterpreted.
+
+### The build repair (prediction 3), measured alone
+
+Interleaved seven rounds, both arms at `--index direct` so the kinds are identical, control
+`closure_ballpark-3c8499d` against the staggered-cursor candidate, event set
+`instructions,cycles,branches,branch-misses,page-faults,minor-faults` at **100.00 per cent enabled**,
+load average 2.7 to 3.4:
+
+| domain | keys | preparation, control | preparation, candidate | ratio | minor faults, both | fault ratio | instruction ratio |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 512 | 262,144 | 0.7979 ms | 0.7756 ms | 0.972 | 527 | 1.000 | 0.999 |
+| 1,024 | 1,048,576 | 2.5174 | 2.3873 | 0.948 | 1,442 | 1.000 | 0.993 |
+| 2,048 | 4,194,304 | 8.5771 | 8.1536 | 0.951 | 4,716 | 1.000 | 0.984 |
+| 4,096 | 16,777,216 | 30.3048 | 28.1225 | **0.928** | 17,391 | 1.000 | 0.973 |
+
+Removing the `keys`-entry `memmove` takes **7.2 per cent off the direct build at the ceiling** and
+about 5 per cent from a quarter of the way down. The fault count is identical to the unit, which is
+the check that the change is a pass removal and not a change of footprint, and the user-mode
+instruction ratio moves the same way (0.973), which is the check that the removed pass was real
+executed work and not only memory traffic.
+
+**Fermi prediction 3 was right about the mechanism and wrong about the size, by a factor of three**:
+it predicted 6.4 ms at 2^24 keys from 128 MiB of traffic at 20 GB/s and measured 2.18 ms, which is
+58 GB/s. The 20 GB/s figure came from C1198's *cold-start* stage, where every store also takes a
+minor fault; a warm `memmove` over an already-resident 64 MiB array on this host runs at nearly three
+times that. The cost model is corrected here rather than the measurement being explained away: warm
+streaming traffic on this host is about 58 GB/s and cold first-touch traffic is about 20.
+
+One bookkeeping note on that table: the candidate's peak RSS reads 400 KiB above the control's at
+**every** domain, including 512, where the offsets array is 1 MiB and the change adds four bytes. A
+constant offset at every size is the two binaries differing, not the change; it is confirmed against
+the retained candidate below.
