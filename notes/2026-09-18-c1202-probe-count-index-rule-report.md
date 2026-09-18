@@ -83,6 +83,7 @@ Candidate arms are added to this table as they are retained.
 | `ergodis` | `9edc07b` | the rule is floored by the rows, and the demotion pass is paid once per `(relation, mask)` |
 | `ergodis-private` | `1e539fe`, `531f19b` | the two empty re-pins that name the arms |
 | `ergodis-private` | `e372dd1`, `5217cdb` | the pre-floor receipts |
+| `ergodis-private` | `010e500`, `fe18961`, `dc318c0`, `b47ade4` | the kept arm's receipts, the two scripts' docstrings, and the growing-index measurement |
 | `othello` | this report | written incrementally at each milestone |
 
 ## The baseline this task starts from, reproduced
@@ -1049,6 +1050,15 @@ nix develop ~/src/ergodis --command python3 $A/ab.py --a $C/closure_ballpark-8d4
     --mode evaluate --rounds 5 --cpu 5 --repeats 3 --cohorts $ALL \
     --work $W/ab-rule2 --out $A/ab-2026-09-18-c1202-probe-rule-floored.json
 
+# The growing index at one density and four probe counts, which is the test
+# that broke the static density. Outcome: the direct kind ahead at every point.
+nix develop ~/src/ergodis --command python3 $A/ab.py \
+    --a $C/closure_ballpark-5217cdb --a-args '--max-rows 400000' --a-name growing-direct \
+    --b $C/closure_ballpark-5217cdb --b-args '--max-rows 300000' --b-name growing-sparse \
+    --mode evaluate --rounds 5 --cpu 5 --repeats 3 \
+    --cohorts cycle:blocks4:4096,cycle:blocks8:4096,cycle:blocks16:4096,cycle:blocks32:4096 \
+    --work $W/ab-growing --out $A/ab-2026-09-18-c1202-growing-index.json
+
 # Preparation, peak RSS and one whole evaluation, six rounds so the arm order
 # alternates evenly, with the per-link counter recorded per cohort.
 nix develop ~/src/ergodis --command python3 $A/static_index_stages.py \
@@ -1083,7 +1093,8 @@ figure**, and whose hashes are identical to the clean retains at the next revisi
 the evidence that the untracked receipts did not reach the binary.
 
 **`c1202/`, 22 MB.** The work directories of every run above: `ab-counter`, `ab-counter-const`,
-`ab-rule`, `ab-rule2`, `census`, `demote-sweep`, `smoke`, `stages-rule` and `stages-rule2`.
+`ab-rule`, `ab-rule2`, `ab-growing`, `census`, `demote-sweep`, `smoke`, `stages-rule` and
+`stages-rule2`.
 Everything here regenerates from the replay block.
 
 **No `perf-c1202/`.** This task took no `perf record` profile: every measurement is a `perf stat`
@@ -1104,8 +1115,8 @@ in any of the three repositories.
 
 | Repository | HEAD at close | Range this task added |
 | --- | --- | --- |
-| `~/src/ergodis` | `9edc07b` | `5c9d1b3` … `9edc07b` (five commits) |
-| `~/src/ergodis-private` | the last receipt commit | `ab6be13` … here |
+| `~/src/ergodis` | `9edc07b` | `5c9d1b3` … `9edc07b` (six commits) |
+| `~/src/ergodis-private` | `b47ade4` | `ab6be13` … `b47ade4` (fifteen commits) |
 | `~/src/othello` | this report's last commit | `f19c82c35` … here |
 
 **Retained controls for the next A/B in this lane**, at `ergodis-private` `5217cdb` with core
