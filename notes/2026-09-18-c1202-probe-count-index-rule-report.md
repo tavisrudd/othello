@@ -1026,6 +1026,40 @@ the latter. The largest entries it lists are `c1143` at 260 MB, `certdist`, `c10
 `c1192` at 20 MB. `bin/` itself is **706 MB** across the whole manifest, which is where the growth
 in this cache now is.
 
+## Resume state for the next session
+
+**The task is complete and every tree is committed.** Nothing is half-built and no path is untracked
+in any of the three repositories.
+
+| Repository | HEAD at close | Range this task added |
+| --- | --- | --- |
+| `~/src/ergodis` | `9edc07b` | `5c9d1b3` … `9edc07b` (five commits) |
+| `~/src/ergodis-private` | the last receipt commit | `ab6be13` … here |
+| `~/src/othello` | this report's last commit | `f19c82c35` … here |
+
+**Retained controls for the next A/B in this lane**, at `ergodis-private` `5217cdb` with core
+`ergodis` `9edc07b`, rustc 1.95.0 (59807616e 2026-04-14), release, no features, `clean` in the
+manifest:
+
+- derivation loop: `~/.cache/ergodis/bin/closure_ballpark-5217cdb`, measured sha256
+  `616bd0cdbb68a4b567be6846b479a06ee6796ec244cb2437ec9e87e6dae356d3`;
+- frontend and stratified backend: `~/.cache/ergodis/bin/ergodis-tools-ab6be13`, measured sha256
+  `d6495328d7aa8d6e675d31d6622365a9312cf108e28a78f6ed4084a73b12dc69`, which this task did not move
+  and which supersedes `ergodis-tools-8c04b7a`.
+
+**Left undone, deliberately:** the lifecycle close for C1202, which belongs to whoever closes the
+task, and the eight queued candidates, none of which has an identifier.
+
+**Decisions left open for Tavis**, both stated with their evidence above and neither taken here.
+First, whether `triangle:blocks:4096`'s direct kind is worth **4.4 times the peak resident memory**
+for a whole process of 0.965 and a derivation loop of 0.420 — the recommendation is that it is,
+because the rule is written for one evaluation and a plan evaluated twice is already well ahead, but
+the memory is the largest single cost this task adds and the constant that decides it (23 fitted,
+20.6 derived) is close enough to the cohort's 18.2 that moving it to 20 would flip the cohort with
+no other effect on the set. Second, which of the open items to allocate first — the recommendation
+is the growing-index constant (`DIRECT_INDEX_DENSITY`, mystery item 4), because the per-link counter
+has made it a one-measurement question and it is the last density in the policy.
+
 ## Vibe check
 
 Very good, and the part that is best was not on the card. Mask demotion turned out to need **no
