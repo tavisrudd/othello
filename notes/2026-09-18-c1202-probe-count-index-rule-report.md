@@ -34,6 +34,8 @@ features, on every row.
 | --- | --- | --- | --- | --- | --- | --- |
 | control, derivation loop | the kernel A/B for piece 1 | `ab6be13` | `5c9d1b3` | no | `closure_ballpark-ab6be13` | `c9089cf046d495cd0150899208c22d9c5380aeb92b2bf80398ef2174efb43077` |
 | control, frontend and stratified backend | the Rel route | `ab6be13` | `5c9d1b3` | no | `ergodis-tools-ab6be13` | `d6495328d7aa8d6e675d31d6622365a9312cf108e28a78f6ed4084a73b12dc69` |
+| candidate, piece 1 carried unconditionally | the counter's own cost | `83bff0a` | `2904489` | no | `closure_ballpark-83bff0a` | `c238685a743c4d1a8915f8d3fc1dd01f05bff19d1ce6ccc76f87fc28508fabb8` |
+| candidate, piece 1 monomorphized | the kept shape, and piece 2's control | `8d43d4e` | `2dbb356` | no | `closure_ballpark-8d43d4e` | `cd3d1726f602ba7154cf8ea960f709c0b79351ed7ed6433f74eadbf261c25935` |
 
 C1201 named `closure_ballpark-8c04b7a` and `ergodis-tools-8c04b7a` as this lane's next controls.
 Both trees have since moved — core `676f513` → `5c9d1b3` (a doc comment and `SHA256SUMS`) and
@@ -49,7 +51,13 @@ Candidate arms are added to this table as they are retained.
 
 | Repository | Commit | What |
 | --- | --- | --- |
-| `othello` | (this one) | the report skeleton, the reproduced baseline and the Fermi predictions, written before any code |
+| `othello` | `f19c82c35` | the report skeleton, the reproduced baseline and the Fermi predictions, written before any code |
+| `ergodis` | `2904489` | the per-link probe counter, carried unconditionally |
+| `ergodis-private` | `83bff0a` | the driver reports it |
+| `ergodis` | `2dbb356` | the counter is monomorphized on a `COUNT` const and `evaluate_into` dispatches to the uncounted instantiation |
+| `ergodis-private` | `df2f5f4` | `--count-probes`, one extra counted evaluation outside the timed loop |
+| `ergodis-private` | `8d43d4e`, `42d1852` | the two receipts |
+| `othello` | this report | written incrementally at each milestone |
 
 ## The baseline this task starts from, reproduced
 
@@ -256,7 +264,105 @@ per cohort. Pinned to core 5 under `choom -n 1000`. Keep or revert by commit. Bu
 
 ## Results
 
-To be filled in as each piece lands.
+### Piece 1: the per-link probe counter
+
+**What it counts and what it read.** One increment per bucket lookup at one body-atom link, in
+total as `Evaluation::lookups` and split by index as `Demand::index_lookups`. Measured on the
+eighteen-cohort set through the driver's new `--count-probes`:
+
+| Cohort | kernel | top-level `probes` | bucket lookups | per index |
+| --- | --- | ---: | ---: | --- |
+| `triangle:sparse:4096` | n-ary | 12,288 | 49,152 | 12,288 · **36,864** · 0 |
+| `triangle:blocks:4096` | n-ary | 61,440 | 983,040 | 61,440 · **921,600** · 0 |
+| `mutual:blocks:4096` | two-atom | 61,440 | 61,440 | **61,440** |
+| `closure:sparse:4096` | two-atom | 15,691,854 | 15,679,566 | 15,679,566 · 0 |
+| `cycle:blocks:4096` | two-atom | 196,608 | 135,168 | 65,536 · 0 · **69,632** |
+| `path4:sparse:4096` | n-ary | 12,288 | 159,744 | 159,744 · 0 |
+
+**Fermi prediction 3 holds, and C1201's derived probe figures were right.** The fully bound index
+of `triangle:sparse:4096` is probed 36,864 times, which is `rows × 3`, and of
+`triangle:blocks:4096` 921,600 times, which is `rows × 15`; `mutual:blocks:4096`'s is probed 61,440
+times, which is `rows`. Those are exactly the three numbers C1201's cost model derived from the
+generators' out-degree, so `key_space / probes` is 1,365.3, 18.2 and 273.1 as it reported, and the
+fitted `K ≈ 23` is unchanged by the measurement. The counter turns the derivation into an
+observation, and it did not move it.
+
+**The counter's own cost, which is the reason it is an instrument and not a resident counter.**
+Carried unconditionally — one `u64` increment in the two-atom kernel and one `[u64; MAX_BODY]`
+increment per level in the n-ary one — the A/B against the retained control read:
+
+| Cohort | instructions, unconditional counter ÷ control | interval | A/A null | Δ instructions per lookup |
+| --- | ---: | --- | ---: | ---: |
+| `closure:sparse:256` | 1.01461 | [1.01460, 1.01462] | 1.0000021 | 9.05 |
+| `closure:dense:512` | 1.00067 | [1.00067, 1.00067] | 1.0000000 | 10.49 |
+| `samegen:sparse:1024` | 1.02279 | [1.02278, 1.02279] | 0.9999998 | 8.52 |
+| `cycle:blocks:4096` | 1.00792 | [1.00789, 1.00794] | 0.9999948 | 10.08 |
+| `mutual:blocks:4096` | 1.01470 | [1.01454, 1.01487] | 0.9999398 | 7.00 |
+| `triangle:sparse:4096` | 1.02554 | [1.02539, 1.02570] | 1.0000581 | 8.01 |
+| `path4:sparse:4096` | 1.00114 | [1.00112, 1.00117] | 1.0000026 | 0.80 |
+
+Receipt `ab-2026-09-18-c1202-probe-counter.json`, five rounds of three and six repeats, event set at
+100.00 per cent enabled, load average 2.17 to 2.33 recorded by the receipt. The full set ranges
+**1.00114 to 1.02554** in instructions.
+
+**This refutes Fermi prediction 1, and the refutation is the useful part.** The prediction was one
+instruction per lookup in the two-atom kernel and three in the n-ary one. The measurement is
+**seven to ten and a half instructions per lookup** on six of the seven cohorts and **0.80** on the
+seventh, and the branch counts moved by the same fraction as the instruction counts — which an
+unconditional register increment cannot do. So the cost is not the counter's arithmetic. It scales
+with lookups because the increment sits beside the four-op key fold that runs once per lookup, and
+about eight instructions is what that fold costs: the counter displaced the fold's code rather than
+adding to it. `path4:sparse:4096` shows the same change costing almost nothing in the `BODY = 4`
+monomorphization, which is the tell that this is register allocation and inlining rather than work.
+**The cost model was wrong in the way the playbook says to treat as a cost-model failure rather than
+as something to shave**, so the shape changed instead of the constant.
+
+**The kept shape: the counter is monomorphized.** `Demand::run` and `Demand::run_nary` take a
+`COUNT` const, `evaluate_into` dispatches to the uncounted instantiation, and
+`evaluate_counted_into` is the instrumented twin. That is `PERFORMANCE.md`'s third invariant
+applied to instrumentation, and the card's own hedge. The driver's `--count-probes` runs **one
+extra counted evaluation outside the timed loop**, so the loop every harness times is the
+production one and two-point differencing removes the extra evaluation from every per-iteration
+figure.
+
+**The production path against the control**, receipt
+`ab-2026-09-18-c1202-probe-counter-const.json`, five rounds of three and six repeats, event set at
+100.00 per cent enabled, load average 2.71 to 4.49:
+
+| Cohort | instructions, candidate ÷ control | interval | A/A null | cycles |
+| --- | ---: | --- | ---: | ---: |
+| `closure:sparse:256` | 0.99185 | [0.99184, 0.99187] | 1.0000013 | 0.99074 |
+| `closure:sparse:1024` | 0.99190 | [0.99190, 0.99191] | 0.9999996 | 0.98835 |
+| `closure:dense:256` | 0.98399 | [0.98399, 0.98400] | 0.9999960 | 0.97007 |
+| `closure:dense:512` | 0.98367 | [0.98367, 0.98367] | 1.0000003 | 0.97430 |
+| `samegen:sparse:1024` | 1.00122 | [1.00122, 1.00122] | 0.9999992 | 1.00587 |
+| `samegen:dense:512` | 0.99877 | [0.99877, 0.99877] | 1.0000003 | 1.01752 |
+| `closure:blocks:4096` | 0.98571 | [0.98569, 0.98574] | 1.0000058 | 1.07854 |
+| `closure:blocks:16384` | 0.98504 | [0.98501, 0.98506] | 0.9999931 | 1.09054 |
+| `cycle:blocks:4096` | 0.98466 | [0.98463, 0.98469] | 0.9999813 | 1.07228 |
+| `triangle:sparse:16384` | 0.99693 | [0.99685, 0.99701] | 0.9999930 | 1.00773 |
+| `path3:sparse:4096` | 0.99107 | [0.99098, 0.99116] | 0.9999892 | 0.99546 |
+| `path3:sparse:16384` | 0.98618 | [0.98616, 0.98620] | 1.0000159 | 1.03786 |
+| `path4:sparse:4096` | 0.99969 | [0.99968, 0.99970] | 0.9999950 | 1.08346 |
+| `path4:sparse:16384` | 0.99975 | [0.99974, 0.99976] | 0.9999942 | 1.00581 |
+| `mutual:blocks:4096` | 0.99167 | [0.99145, 0.99189] | 1.0000022 | 1.03423 |
+| `mutual:blocks:8192` | 0.98854 | [0.98841, 0.98866] | 1.0000624 | 1.02640 |
+| `triangle:sparse:4096` | 0.99679 | [0.99670, 0.99688] | 1.0000101 | 0.97449 |
+| `triangle:blocks:4096` | 0.99431 | [0.99430, 0.99432] | 0.9999990 | 1.00280 |
+
+Every output digest, derived count, probe count and candidate count is equal between the arms on all
+eighteen cohorts; the receipt records no failures.
+
+**Seventeen of the eighteen cohorts come out cheaper than the control, by 0.03 to 1.63 per cent, and
+that is not a win this change designed.** The production instantiation executes the same operations
+the control did — the counter, its register and the reconciliation are all absent — so a ratio of
+0.984 is a **codegen effect of making the step loop generic**, of the same family and the same size
+as the two C1193 measured (2.6 to 3.9 per cent from adding instantiations of a generic kernel, 1.7
+per cent from a driver-only change under ThinLTO). It is recorded as an unexplained gain rather than
+claimed, and it goes in the mystery ledger. What the table does establish is the thing the
+acceptance bullet asks for: **the per-link probe counter costs the production derivation loop
+nothing**, and the eighteen A/A nulls, all within 6.2 parts per hundred thousand of unity, say the
+protocol is sound.
 
 ## Mystery ledger
 
