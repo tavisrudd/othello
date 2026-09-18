@@ -655,6 +655,43 @@ evidence rather than edited out. The receipt is
 Both repairs are in core `9edc07b`, and the figures above are the pre-floor arm's; the kept arm's are
 in the tables above and below.
 
+## Disposition
+
+**Kept**, at core `9edc07b` with private `5217cdb`, four parts:
+
+- **The per-link probe counter**, monomorphized on a `COUNT` const, with `evaluate_counted_into` as
+  the instrumented entry point and `Demand::index_lookups` as the per-index split. The production
+  derivation loop carries neither the counter nor its register.
+- **Mask demotion** for a fully bound static atom, as `OP_KEY → OP_CHECK` plus one mask bit, guarded
+  by `DEMOTE_BUCKET_ROWS = 7` on the exact average bucket. `Policy::AutoUndemoted` is the corner it
+  is measured against.
+- **`DIRECT_STATIC_PROBES = 23`** replacing `DIRECT_STATIC_DENSITY = 64`, applied as
+  `key_space <= K · estimated_probes` floored by the relation's rows, with the estimate computed by
+  `Demand::estimate_probes` over the steps that can run.
+- **The `blocks<N>` density** and the three fields C1201's audit asked of `static_index_stages.py`,
+  plus `--arms`, `--densities` and `--count-probes` on the two measurement scripts.
+
+**Reverted by a forward commit: two defects of the rule's first landing**, both kept above as
+instructive negatives with their measured cost — an index no live step probes being sent to the kind
+with the larger build, and the demotion guard's row pass running once per link rather than once per
+`(relation, mask)`.
+
+**Not built, and priced**: `join::<VERIFY = true, _>` instantiated for the CSR arm, which the card
+asked for and which the `OP_CHECK` encoding makes unnecessary; a constant key column's demotion,
+which would need an unconditional comparison the plan has no operation for and so a new match arm in
+both join sites; and not building an index no live step probes at all.
+
+## Acceptance, per card bullet
+
+| Bullet | Verdict |
+| --- | --- |
+| `mutual:blocks:4096` and `triangle:blocks:4096` both get the right kind under `Policy::Auto` | **Met.** The measured lookups are 61,440 and 921,600 into indexes of the same key space over relations of the same size, so `key_space / probes` is 273.1 and 18.2 and one constant of 23 gives them opposite kinds. `mutual` stays sparse and is a null on every stage; `triangle:blocks:4096` takes the direct kind and reads 0.420 of the derivation loop and 0.965 of the whole process. |
+| `triangle:sparse:4096` and `triangle:blocks:4096` under the demoted mask: preparation near C1201's sparse figure, derivation loop at or near the direct row | **Met on `triangle:sparse:4096`, and not met on `triangle:blocks:4096`, which is a measured decision rather than a shortfall.** On `triangle:sparse:4096` preparation is 0.976 and peak resident memory 0.999 of the already-sparse control, and the derivation loop is 1.2130 ms against C1201's forced-direct 1.2990 ms on the same cohort — below the direct row, not merely near it. `triangle:blocks:4096` does not demote: its bucket would be fifteen rows and the crossover is measured between seven and nine, so demotion there costs 0.637 of preparation plus one evaluation. The probe rule takes that cohort instead. |
+| Every cohort in the C1201 table: digest, derived, probe and candidate counts equal; certificates accepted by both checkers; C1189 differential zero disagreements under both body policies; parity digest reported | **Met.** The eighteen-cohort census asserts the four equalities per cohort and raises otherwise; it ran to completion. The core suite's `demand_sparse` runs the whole corpus a second time under `Policy::Sparse` **and** a third under `Policy::AutoUndemoted` and compares certificate **bytes**, so the demoted and undemoted plans are held to byte equality, and both independent checkers accept in every representation. The private suite's `rel_reference_eval` is the C1189 differential under both body policies and passes. **The parity digest is unmoved**: every cohort's `output_sha256` is equal between the arms, which the A/B and the census both assert. |
+| Direct-path cohorts whose kind does not change: instructions within the A/A null or the loss stated as a loss | **Met.** Fifteen cohorts read 0.99985 to 1.00002 against A/A nulls within 2.7 parts per hundred thousand. Their plans are byte-identical, which is what the `OP_CHECK` encoding buys. |
+| The per-link probe counter's own cost on the two-atom kernel measured and stated | **Met, and it changed the design.** Carried unconditionally it cost 1.47 per cent of `mutual:blocks:4096`'s instructions and 1.46 per cent of `closure:sparse:256`'s, at about seven to nine instructions per lookup rather than the one predicted, so it is monomorphized; the production path then measures 0.99167 and 0.99185 on those two cohorts. |
+| Gates | **Met.** `cargo test --all-features` at 82 `test result: ok` blocks and zero `FAILED`, clippy `-D warnings` clean, `cargo fmt --check` clean, the allocation regression green under all five policies with the n-ary kernel included, `generate_evidence.py --write` in the same commits, and the private workspace's suite, clippy, fmt and `ruff` as in the replay block. |
+
 ## Mystery ledger
 
 ### Settled
