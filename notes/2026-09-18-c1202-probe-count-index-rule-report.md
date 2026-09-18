@@ -35,7 +35,10 @@ features, on every row.
 | control, derivation loop | the kernel A/B for piece 1 | `ab6be13` | `5c9d1b3` | no | `closure_ballpark-ab6be13` | `c9089cf046d495cd0150899208c22d9c5380aeb92b2bf80398ef2174efb43077` |
 | control, frontend and stratified backend | the Rel route | `ab6be13` | `5c9d1b3` | no | `ergodis-tools-ab6be13` | `d6495328d7aa8d6e675d31d6622365a9312cf108e28a78f6ed4084a73b12dc69` |
 | candidate, piece 1 carried unconditionally | the counter's own cost | `83bff0a` | `2904489` | no | `closure_ballpark-83bff0a` | `c238685a743c4d1a8915f8d3fc1dd01f05bff19d1ce6ccc76f87fc28508fabb8` |
-| candidate, piece 1 monomorphized | the kept shape, and piece 2's control | `8d43d4e` | `2dbb356` | no | `closure_ballpark-8d43d4e` | `cd3d1726f602ba7154cf8ea960f709c0b79351ed7ed6433f74eadbf261c25935` |
+| candidate, piece 1 monomorphized | the kept shape, and the control for pieces 2 and 3 | `8d43d4e` | `2dbb356` | no | `closure_ballpark-8d43d4e` | `cd3d1726f602ba7154cf8ea960f709c0b79351ed7ed6433f74eadbf261c25935` |
+| the demotion sweep's one binary | `Auto` against `AutoUndemoted` | `d037e2a` | `12c7995` | no | `closure_ballpark-d037e2a` | `8865b9b9b3024e23f6e7c8e8faf130e9b60bc66e2761bf8506170eba6ba22fb0` |
+| candidate, pieces 2 and 3, before the rows floor | the instructive negative | `1e539fe` | `42470ad` | no | `closure_ballpark-1e539fe` | `7b4be0fe2d69575a004515fc1ba0f627f57b23f94e4e06cf6e54dafa579a59e4` |
+| candidate, pieces 2 and 3, kept | every figure below | `5217cdb` | `9edc07b` | no | `closure_ballpark-5217cdb` | `616bd0cdbb68a4b567be6846b479a06ee6796ec244cb2437ec9e87e6dae356d3` |
 
 C1201 named `closure_ballpark-8c04b7a` and `ergodis-tools-8c04b7a` as this lane's next controls.
 Both trees have since moved — core `676f513` → `5c9d1b3` (a doc comment and `SHA256SUMS`) and
@@ -56,7 +59,15 @@ Candidate arms are added to this table as they are retained.
 | `ergodis-private` | `83bff0a` | the driver reports it |
 | `ergodis` | `2dbb356` | the counter is monomorphized on a `COUNT` const and `evaluate_into` dispatches to the uncounted instantiation |
 | `ergodis-private` | `df2f5f4` | `--count-probes`, one extra counted evaluation outside the timed loop |
-| `ergodis-private` | `8d43d4e`, `42d1852` | the two receipts |
+| `ergodis-private` | `8d43d4e`, `42d1852` | the two piece-1 receipts |
+| `ergodis` | `30f5c43` | mask demotion: `OP_KEY → OP_CHECK` and one mask bit, no kernel line changed |
+| `ergodis-private` | `e9e23c8` | the `blocks<N>` density, and the stages script's load, CPU, arm hashes and `--count-probes` |
+| `ergodis` | `12c7995` | `Policy::AutoUndemoted`, the measurement corner for the demotion decision |
+| `ergodis-private` | `d037e2a`, `d37f448` | `--index auto-undemoted`, the sweep script's `--arms` and `--densities`, and the two demotion sweeps |
+| `ergodis` | `42470ad` | `DIRECT_STATIC_PROBES` replaces `DIRECT_STATIC_DENSITY`, and preparation's three passes |
+| `ergodis` | `9edc07b` | the rule is floored by the rows, and the demotion pass is paid once per `(relation, mask)` |
+| `ergodis-private` | `1e539fe`, `531f19b` | the two empty re-pins that name the arms |
+| `ergodis-private` | `e372dd1`, `5217cdb` | the pre-floor receipts |
 | `othello` | this report | written incrementally at each milestone |
 
 ## The baseline this task starts from, reproduced
@@ -488,6 +499,63 @@ changes preparation and resident memory on those cohorts without touching a loop
 better answer — not building it at all — is a queued candidate rather than taken here, because the
 plan would then hold an index whose arrays are empty and whose safety rests on the dead-step
 argument being right rather than on the bounds check.
+
+### The derivation loop under pieces 2 and 3 together
+
+Control `closure_ballpark-8d43d4e` — the shipped density rule with the counter already
+monomorphized, so this A/B isolates the two policy changes — against candidate
+`closure_ballpark-1e539fe`. Five rounds of three and six repeats, two-point differenced, event set
+at 100.00 per cent enabled, load average 2.16 to 2.51 recorded by the receipt
+`ab-2026-09-18-c1202-probe-rule.json`. Every output digest, derived count, probe count and candidate
+count is equal between the arms on all eighteen cohorts; the receipt records no failures.
+
+| Cohort | kinds, control → candidate | changed | instructions | interval | A/A null | cycles |
+| --- | :---: | :---: | ---: | --- | ---: | ---: |
+| `closure:sparse:256` | `dd` → `dd` | no | 1.00000 | [0.99999, 1.00001] | 1.0000003 | 1.00899 |
+| `closure:sparse:1024` | `dd` → `dd` | no | 1.00000 | [1.00000, 1.00000] | 0.9999999 | 1.01528 |
+| `closure:dense:256` | `dd` → `dd` | no | 1.00000 | [0.99999, 1.00000] | 1.0000000 | 1.01794 |
+| `closure:dense:512` | `dd` → `dd` | no | 1.00000 | [1.00000, 1.00000] | 1.0000009 | 0.99927 |
+| `samegen:sparse:1024` | `ddd` → `ddd` | no | 1.00000 | [0.99999, 1.00001] | 1.0000022 | 1.02398 |
+| `samegen:dense:512` | `ddd` → `ddd` | no | 1.00000 | [1.00000, 1.00000] | 0.9999993 | 0.97973 |
+| `closure:blocks:4096` | `dd` → `dd` | no | 1.00000 | [0.99998, 1.00003] | 1.0000224 | 1.01103 |
+| `closure:blocks:16384` | `dd` → `dd` | no | 1.00000 | [0.99998, 1.00002] | 0.9999980 | 1.14047 |
+| `cycle:blocks:4096` | `ddd` → `ddd` | no | 1.00000 | [0.99996, 1.00003] | 0.9999914 | 0.98901 |
+| `mutual:blocks:4096` | `s` → `s` | no | 1.00005 | [0.99978, 1.00033] | 0.9999668 | 1.03370 |
+| `mutual:blocks:8192` | `s` → `s` | no | 0.99994 | [0.99988, 1.00000] | 0.9999431 | 0.94510 |
+| `path3:sparse:4096` | `dd` → `ds` | yes | 1.00002 | [0.99998, 1.00006] | 1.0000295 | 0.99475 |
+| `path3:sparse:16384` | `dd` → `ds` | yes | 1.00001 | [0.99997, 1.00004] | 0.9999870 | 0.99817 |
+| `path4:sparse:4096` | `dd` → `ds` | yes | 1.00000 | [0.99999, 1.00001] | 0.9999934 | 1.01644 |
+| `path4:sparse:16384` | `dd` → `ds` | yes | 1.00000 | [0.99999, 1.00001] | 0.9999983 | 1.01369 |
+| **`triangle:sparse:4096`** | `dsd` → `ds` | **yes** | **1.30438** | [1.30422, 1.30455] | 0.9999490 | **0.60014** |
+| **`triangle:sparse:16384`** | `dsd` → `ds` | **yes** | **1.25667** | [1.25660, 1.25675] | 1.0000102 | **0.50038** |
+| **`triangle:blocks:4096`** | `dsd` → `dds` | **yes** | **0.71717** | [0.71716, 0.71718] | 1.0000109 | **0.43135** |
+
+**Eleven cohorts whose chosen kinds do not change read 0.99994 to 1.00005**, against A/A nulls
+within 3.3 parts per hundred thousand, so they sit inside the nulls' own scatter. Their plans are
+byte-identical between the arms, which is what mask demotion's `OP_KEY → OP_CHECK` encoding buys:
+there is no kernel change for an unchanged cohort to pay for.
+
+**Four more change kinds without changing a loop instruction**, and that is the check on the
+never-probed index. `path3` and `path4` each hold an index that only dead steps reference; the
+estimate gives it zero probes and the rule gives it the cheapest build, so its kind moves from
+direct to sparse while the derivation loop reads 1.00000 to 1.00002. An index nothing probes costs
+the loop nothing, measured rather than argued.
+
+**The three cohorts that change a probed index are the result, and on two of them the instruction
+count goes the wrong way while the cycles halve.** That is not a contradiction and the mechanism is
+specific: mask demotion replaces a **dependent binary search** over 12,288 or 49,152 distinct
+`u64` keys — about thirteen or fourteen serially dependent loads, each waiting on the last — with
+**one load into a 16 KiB offsets array and three independent row reads**. The candidate retires 1.30
+times the instructions on `triangle:sparse:4096` and runs it in 0.600 of the cycles; on
+`triangle:sparse:16384` it is 1.257 times the instructions in 0.500 of the cycles. The playbook's
+rule that instruction counts decide is a rule about changes that do the same work in fewer steps;
+this is a representation change, and it is the case the playbook names when it says a change that
+reduces instructions but lengthens dependent loads is a regression — read the other way round.
+**The wall-clock medians agree with the cycles and are the figures the stage table below carries.**
+
+`triangle:blocks:4096` is the cohort the probe-count rule was built for and it wins on both:
+**0.717 of the instructions and 0.431 of the cycles**, because the rule reads `key_space / probes`
+of 18.2 and gives the fully bound index the direct kind that the density rule of 273 refused it.
 
 ## Mystery ledger
 
