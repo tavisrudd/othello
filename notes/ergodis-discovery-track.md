@@ -317,3 +317,18 @@ repair is a `touch` over the path dependency's sources.
 **Evidence level**: the failing log, the clean `cargo tree -d`, and the byte-identical rebuild after
 the touch. Not root-caused to cargo's fingerprint algorithm; the selection mechanism above is a
 reading of the diagnostic, not a measurement of cargo. No C-ID allocated.
+
+## 2026-09-17 — preparation is admission-bound at a per-fact rate on every cohort once the index build is priced (C1201)
+
+**Observation**: after C1201's static density rule, `Demand` preparation on all seventeen `ab.py`
+cohorts (768 to 245,760 input facts) sits at 164 to 283 ns per input fact, with no visible dependence
+on the program family or on the index kinds chosen; the two former outliers (1,956 and 549 ns per
+fact, both index builds) now read 177 and 191. The task was measuring the index build, not
+admission, so this is incidental.
+**Why it may matter**: preparation is now the leading term everywhere (about 50 ms on
+`closure:blocks:16384`), and it is proportional to a quantity the plan already knows. The 1.7× spread
+across cohorts is unexplained; the candidates are `Admitted`'s fact list, the per-relation row store
+built by `extend_from_slice`, and the `fact_of` projection.
+**Evidence level**: the per-stage receipts of `2026-09-17-c1201-static-index-build-cost-report.md`
+(open ledger item 1, queued candidate 5); no kernel-scoped profile of `Demand::new_bounded` yet, and
+no two-fact-count differencing at one domain. No C-ID allocated.
