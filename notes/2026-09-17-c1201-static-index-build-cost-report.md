@@ -2,24 +2,29 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-17
-**Status**: COMPLETE, except the audit, which the card makes a separate task. Written incrementally
-from the start, so a crash would have left a partial record rather than none; the Fermi predictions
-below were written and committed **before any code change**.
+**Status**: COMPLETE, audited, and repaired. Written incrementally from the start, so a crash would
+have left a partial record rather than none; the Fermi predictions below were written and committed
+**before any code change**. The audit
+(`2026-09-17-c1201-static-index-build-cost-audit.md`) returned **VETTED WITH REPAIRS, no code
+defect**, and its nine repairs are applied — see **Audit repairs applied**. Three tables were taken
+on an unretained probe build and are now labelled as such, with the retained candidate's committed
+receipt printed beside them; the build repair turned out better than the original table said.
 
 **The headline.** A join index over a relation that never grows now has a measured density rule as
 well as a ceiling, and the counting sort no longer shifts its result. On `triangle` at N = 4,096,
 where the fully bound third atom keys on both columns for a key space of 2^24, preparation falls to
-**0.094**, peak resident memory to **0.084** (71.5 MB to 5.9 MB), and the whole process —
-read, prepare, evaluate once, write — to **0.193**; against compiled Soufflé the same cohort crosses
-from **1.90 to 0.896**, from behind to ahead, with the control arm reproducing C1193's recorded 1.92.
-Thirteen cohorts whose chosen kind does not change read **1.00000 to 1.00003** in derivation-loop
-instructions against A/A nulls inside 2.3 parts per hundred thousand, and two whose kinds do not
-change have identical fault counts and resident sets to the byte. Where the kind does change the
-derivation loop costs **1.41 and 1.45 times** the instructions, which is stated as a loss because
-Fermi prediction 2 was wrong: the direct probe wins at every density, right up to the ceiling. The
-closeout then found that a density is a **proxy** — two cohorts with the same key space, the same
-rows and the same density have opposite right answers — and that `key_space <= 23 · probes` predicts
-all three families from one constant, which names the successor.
+**0.094**, peak resident memory to **0.084** (71,528 KiB to 5,988 KiB, so 69.9 MiB to 5.8 MiB), and
+the whole process — read, prepare, evaluate once, write — to **0.193**; against compiled Soufflé the
+same cohort crosses from **1.90 to 0.896**, from behind to ahead, with the control arm reproducing
+C1193's recorded 1.92. Thirteen cohorts whose chosen kind does not change read **0.99999 to
+1.00003** in derivation-loop instructions against A/A nulls inside 2.3 parts per hundred thousand,
+and on two whose kinds do not change the fault counts and resident sets came out identical. Where the
+kind does change the derivation loop costs **1.41 and 1.45 times** the instructions, which is stated
+as a loss because Fermi prediction 2 was wrong: the direct probe wins at every density, right up to
+the ceiling. The closeout then found that a density is a **proxy** — two cohorts with the same key
+space, the same rows and the same density have opposite right answers — and bracketed the threshold
+on `key_space / probes` between 18.2 and 273, consistent with one constant near 23, which names the
+successor.
 
 Task card: the C1201 row allocated at the C1193 closeout (`e0441b3ed`). Predecessors:
 `2026-09-16-c1192-sparse-join-index-report.md` (the four addressing kinds and its deviation 5, which
@@ -60,9 +65,18 @@ The candidate's private revision `8c04b7a` is an **empty commit** whose message 
 the shape C1193's `cb11550` used: this change is entirely in the core, and a retained arm is named by
 its own repository's revision, so the private revision has to move for the arm to have a name. The
 private repository's own source is identical at `3c8499d` and `8c04b7a`, which is what makes the two
-`closure_ballpark` arms differ in the core change and nothing else. One scratch build of the example
-was used to locate the crossover bracket before the constant was chosen; it is labelled as a probe
-wherever it appears and no kept figure is measured on it.
+`closure_ballpark` arms differ in the core change and nothing else.
+
+**A third, unretained build appears in this report and must be named.** Locating the crossover
+bracket needed `DIRECT_STATIC_DENSITY` set below the densities being swept, so a scratch build of the
+example was made from the core source of `676f513` with only that constant differing (set to 4). It
+is **not** a retained arm, it carries **no receipt**, and **two of this report's tables are measured
+on it**: the coarse and fine crossover sweeps under "The sweep". Both are labelled there, and the
+same sweep on the retained candidate — every density the shipped constant lets it reach — is printed
+from its committed receipt in the subsection that follows them. An earlier revision of this report
+said no kept figure was measured on the probe build; that was wrong, and the audit
+(`2026-09-17-c1201-static-index-build-cost-audit.md`, defects 1 and 2) found it. Every headline
+figure, every A/B ratio, the per-stage tables and the Soufflé rows are on the two retained arms.
 
 `MANIFEST.tsv` records `clean` for both rows, and `git status --short` was empty in
 `~/src/ergodis-private` and in `~/src/ergodis` immediately before each recipe ran. The C1193 report
@@ -82,7 +96,9 @@ Candidate arms are added to this table as they are retained.
 | `ergodis-private` | `8c04b7a` | the empty re-pin that names the measured arm |
 | `ergodis-private` | `879f3ed` | the two measurement stages and the receipts |
 | `ergodis-private` | `684b0e5` | the closeout's sweep at an independent row count |
-| `othello` | `869270f` … here | this report, written incrementally at each milestone |
+| `ergodis` | `5c9d1b3` | audit repair: the constant's docstring quotes the receipted figures (doc comment only, no re-measurement) |
+| `ergodis-private` | `ab6be13` | audit repair: `compare.py` captures Soufflé's version rather than its banner's separator |
+| `othello` | `869270f` … here | this report, written incrementally at each milestone, and the audit repairs |
 
 ## What the shipped policy does, reproduced
 
@@ -93,7 +109,22 @@ counting-sorted bucket beat a binary search over the distinct keys at every dens
 allows. That measurement was of the **probe**. Nothing priced the **build**.
 
 Reproduced on the retained control `closure_ballpark-3c8499d`, pinned to core 5, three then nine
-repeats, `triangle` under the n-ary body policy:
+repeats, `triangle` under the n-ary body policy. **This table has no receipt**: it predates the two
+measurement stages this task committed and was taken by hand to reproduce the card's figures before
+any code. It replays with
+
+```sh
+C=~/.cache/ergodis/bin; W=~/.cache/ergodis/c1201
+for ix in auto sparse-indexes; do for n in 4096 16384; do
+  taskset -c 5 choom -n 1000 -- $C/closure_ballpark-3c8499d --evaluator demand \
+      --evaluate-only --bodies nary --index $ix --program triangle $n sparse 9 $W/smoke
+done; done
+```
+
+and the numbers stand on two independent reproductions: the C1201 audit re-ran the `auto` rows on the
+retained control and read 30.57 ms against 31.15, 71,508 KiB exactly and 1.265 ms against 1.289 at
+4,096, and 12.63 against 12.92 ms, 15,212 against 15,256 KiB and 10.40 against 11.529 ms at 16,384;
+the C1193 audit independently reproduced the `sparse-indexes` rows.
 
 | Program | `--index` | index kinds chosen | preparation | peak RSS | evaluation (median of 9) |
 | --- | --- | --- | ---: | ---: | ---: |
@@ -127,8 +158,9 @@ median on a pinned core.
 ## Fermi predictions, written before any code
 
 Written from the compiled shape of `crates/rules/src/demand.rs` at core `09a5c2b`, the measured
-31.15/3.38 ms preparation split above, and this host's memory coefficients (about 20 GB/s of
-streaming store bandwidth and about 400 ns for one minor fault, both from C1198's cold-start stage).
+31.15/3.38 ms preparation split above, and this host's memory coefficients (about 20 GiB/s of
+streaming store bandwidth and about 400 ns for one minor fault, both from C1198's cold-start stage —
+and the 20 GiB/s turns out to be the cold figure, corrected under prediction 3's result).
 
 ### Prediction 1: where the 27.8 ms of extra preparation sits
 
@@ -160,7 +192,7 @@ between about 4 and 1,000 gives the mixed choice: the two small indexes direct, 
 
 **Predicted for `triangle` 4,096 under the rule**: preparation at the `sparse-indexes` row plus the
 two small direct builds, which are 16 KiB arrays and cost microseconds — **3.4 to 3.6 ms**, a
-**0.11** ratio. Peak RSS **5.9 MB**, a **0.082** ratio. Evaluation **between the two rows and near
+**0.11** ratio. Peak RSS **5.9 MiB**, a **0.082** ratio. Evaluation **between the two rows and near
 the direct one**: the small indexes' probes are the ones the direct kind wins, and the big index's
 direct probe is a random load into a 64 MiB array — a guaranteed last-level miss at about 80 to 200
 cycles — against a binary search over 12,288 distinct `u64` keys, 96 KiB that fits L2, at about
@@ -235,8 +267,10 @@ growing relation's capacity, with `join::<true, _>` re-verifying the key columns
 plan-held hash over distinct keys has neither the workspace arrays nor the per-row chain — it would
 hold contiguous buckets like the two static kinds — so it needs its own probe arm and its own
 `next_row` case. **Predicted, had it been built**: a build of `rows` insertions into a power-of-two
-table of `2 · distinct_keys` slots, so about `3 · rows` random writes into `24 · rows` bytes — at
-`triangle` 4,096 that is 288 KiB and about 0.1 ms, cheaper than the sorted kind's
+table of `2 · distinct_keys` slots at sixteen bytes a slot (a `u64` key, a `u32` start, a `u32`
+length), so about `3 · rows` random writes into `32 · distinct_keys` bytes — at `triangle` 4,096,
+where every one of the 12,288 rows has a distinct key, that is 384 KiB and about 0.1 ms, cheaper than
+the sorted kind's
 `rows log rows` sort, and a probe of one hash, one load and one key comparison against a table that
 fits L2. It is the shape that would beat both existing static kinds at this density. It is a fifth
 kind and a kernel change, and this task's deliverable is a representation *decision*, so it is
@@ -280,8 +314,18 @@ streaming stores. Evaluation is the median of the driver's own repeated derivati
 
 ### The sweep
 
-Coarse pass, three rounds of nine repeats, load average 5.9 to 7.8 (recorded; wall ratios widen with
-load, which is why the crossover is bracketed rather than quoted to a digit):
+**Both tables in this subsection were taken on the scratch probe build**, which is the core source of
+`676f513` with `DIRECT_STATIC_DENSITY` set to 4 so that `auto` makes the middle index sparse at every
+density, including the ones below the shipped constant where the crossover's lower end lies. Neither
+carries a receipt. They are kept because the bracket's lower end cannot be measured any other way,
+and because they are what the constant was chosen from. The **next** subsection prints the same sweep
+on the retained candidate at the shipped constant, from a committed receipt, for every density the
+shipped constant lets it reach; where the two overlap the receipt is the figure to quote and the
+differences are a different binary rather than session drift — the probe build's peak RSS sits a
+constant 328 KiB high on **both** arms at every domain.
+
+Coarse pass, three rounds of nine repeats, load average 5.9 to 7.8 noted by hand (wall ratios widen
+with load, which is one reason the crossover is bracketed rather than quoted to a digit):
 
 | domain | facts | density of the big index | prep, all direct | prep, big sparse | RSS, all direct | RSS, big sparse | eval, all direct | eval, big sparse | eval ratio | evaluations to break even |
 | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -294,7 +338,8 @@ load, which is why the crossover is bracketed rather than quoted to a digit):
 | 2,048 | 6,144 | 682.7 | 8.5259 | 1.4919 | 21,284 | 4,896 | 0.5052 | 0.8980 | 0.56 | 17.9 |
 | 4,096 | 12,288 | 1,365.3 | 29.3571 | 2.8990 | 71,856 | 6,316 | 1.3258 | 2.0437 | 0.65 | 36.9 |
 
-Fine pass across the crossover, five rounds of fifteen repeats, load average 5.6 to 5.9:
+Fine pass across the crossover, five rounds of fifteen repeats, load average 5.6 to 5.9 noted by
+hand, same probe build:
 
 | domain | facts | density | Δ preparation (direct − sparse) | Δ evaluation (sparse − direct) | evaluations to break even | preparation + one evaluation, direct ÷ sparse |
 | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -311,17 +356,47 @@ Fine pass across the crossover, five rounds of fifteen repeats, load average 5.6
 preparation-plus-one-evaluation ratio crosses unity and the break-even evaluation count crosses one.
 Linear interpolation puts it at about 69. `DIRECT_STATIC_DENSITY` is set to **64**, the conservative
 end of the bracket, and deliberately so: above the crossover the direct build's cost grows with the
-key space without bound (28 ms and 65 MB at a density of 1,365), while below it the sparse choice
-gives up a bounded fraction of one evaluation.
+key space without bound up to `MAX_DIRECT_KEYS`, where it is 27 ms and 64 MiB whatever the relation
+holds, while below the crossover the sparse choice gives up a bounded fraction of one evaluation.
+
+**The bracket's two ends have different provenance and the report should not blur them.** The lower
+end, a density of 64 at a one-evaluation ratio of 0.968, is a probe-build figure and cannot be
+measured on the shipped binary at all, because at the shipped constant both arms choose the same
+kinds there. The upper end, a density of 74.7, is measured on the retained candidate and its
+committed receipt reads **1.0382** with a break-even of **1.3 evaluations** — the next subsection.
+
+### The same sweep on the retained candidate, at the shipped constant
+
+Five rounds of fifteen repeats on `closure_ballpark-8c04b7a`, receipt
+`sweep-2026-09-17-c1201-shipped-constant.json`, load average 1.35 noted by hand. This is the table to
+quote wherever it overlaps the probe build's, and it covers every density the shipped constant lets
+the sweep reach — 74.7 upward, since at or below 64 both arms choose the same kinds.
+
+| domain | facts | density | preparation, direct | preparation, big sparse | RSS, direct | RSS, big sparse | evaluation, direct | evaluation, big sparse | eval ratio | preparation + one evaluation | break-even evaluations |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 224 | 672 | **74.7** | 0.2549 ms | 0.2019 ms | 3,320 KiB | 3,156 KiB | 0.0356 ms | 0.0779 ms | 0.4570 | **1.0382** | **1.3** |
+| 256 | 768 | 85.3 | 0.3088 | 0.2160 | 3,392 | 3,176 | 0.0407 | 0.0889 | 0.4578 | 1.1463 | 1.9 |
+| 320 | 960 | 106.7 | 0.3894 | 0.2746 | 3,568 | 3,252 | 0.0516 | 0.1118 | 0.4615 | 1.1413 | 1.9 |
+| 384 | 1,152 | 128.0 | 0.5023 | 0.3053 | 3,800 | 3,288 | 0.0608 | 0.1396 | 0.4355 | 1.2657 | 2.5 |
+| 512 | 1,536 | 170.7 | 0.7333 | 0.3872 | 4,316 | 3,364 | 0.0821 | 0.1870 | 0.4390 | 1.4201 | 3.3 |
+| 1,024 | 3,072 | 341.3 | 2.5221 | 0.7479 | 7,904 | 3,804 | 0.1718 | 0.4008 | **0.4286** | 2.3452 | 7.7 |
+| 2,048 | 6,144 | 682.7 | 8.9636 | 1.5002 | 20,956 | 4,568 | 0.4941 | 0.8927 | 0.5535 | 3.9524 | 18.7 |
+| 4,096 | 12,288 | 1,365.3 | 27.2986 | 2.7622 | 71,528 | 5,988 | 1.2565 | 1.8716 | **0.6714** | **6.1624** | 39.9 |
+
+The one-evaluation ratio rises from **1.0382 at a density of 74.7 to 6.1624 at 1,365**, and the
+direct kind's probe advantage over this range is **0.4286 to 0.6714**, so it is ahead by 1.49 to 2.33
+times at every density the receipt covers. That is the refutation of Fermi prediction 2 on receipted
+figures rather than on the probe build's, and it is the range to cite.
 
 ### The Fermi prediction this refutes, and it is the important one
 
 **Prediction 2 said the direct probe into a 64 MiB offsets array would be no better than a binary
 search over an L2-resident key array, and plausibly worse. It is wrong, and not marginally: the
-direct probe is ahead at every density measured, by a factor of 1.5 to 2.3.** The eval-ratio column
-is 0.44 to 0.65 from a density of 10.7 to 1,365, so C1192's deviation 5 was right about the probe
-even at the ceiling — the counting-sorted bucket beats the binary search over the whole range, and
-the 64 MiB array's cache behaviour never turns the comparison over.
+direct probe is ahead at every density measured, by a factor of 1.49 to 2.33.** On the retained
+candidate's receipt the eval ratio is 0.4286 to 0.6714 from a density of 74.7 to 1,365, and the probe
+build extends the same picture down to 10.7, so C1192's deviation 5 was right about the probe even at
+the ceiling — the counting-sorted bucket beats the binary search over the whole range, and the 64 MiB
+array's cache behaviour never turns the comparison over.
 
 That changes what this task is and what it can deliver. **The static index's whole problem is its
 build, and the two existing static kinds are a strict trade rather than a dominance**: the direct
@@ -335,34 +410,31 @@ This is stated as an unmet acceptance criterion rather than reinterpreted.
 ### The build repair (prediction 3), measured alone
 
 Interleaved seven rounds, both arms at `--index direct` so the kinds are identical, control
-`closure_ballpark-3c8499d` against the staggered-cursor candidate, event set
+`closure_ballpark-3c8499d` against the retained candidate `closure_ballpark-8c04b7a`, event set
 `instructions,cycles,branches,branch-misses,page-faults,minor-faults` at **100.00 per cent enabled**,
-load average 2.7 to 3.4:
+receipt `stages-2026-09-17-c1201-shift-direct.json`, load average about 1.4 noted by hand:
 
-| domain | keys | preparation, control | preparation, candidate | ratio | minor faults, both | fault ratio | instruction ratio |
-| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 512 | 262,144 | 0.7979 ms | 0.7756 ms | 0.972 | 527 | 1.000 | 0.999 |
-| 1,024 | 1,048,576 | 2.5174 | 2.3873 | 0.948 | 1,442 | 1.000 | 0.993 |
-| 2,048 | 4,194,304 | 8.5771 | 8.1536 | 0.951 | 4,716 | 1.000 | 0.984 |
-| 4,096 | 16,777,216 | 30.3048 | 28.1225 | **0.928** | 17,391 | 1.000 | 0.973 |
+| domain | keys | preparation, control | preparation, candidate | ratio | minor faults, both | fault ratio | instruction ratio | peak RSS, both |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 512 | 262,144 | 0.7759 ms | 0.7518 ms | 0.9689 | 595 | 1.000 | 0.9995 | 4,316 KiB |
+| 1,024 | 1,048,576 | 2.4265 | 2.2799 | 0.9396 | 1,510 | 1.000 | 0.9970 | 7,904 |
+| 2,048 | 4,194,304 | 8.2279 | 7.8500 | 0.9541 | 4,784 | 1.000 | 0.9925 | 20,956 |
+| 4,096 | 16,777,216 | 23.0332 | 20.9500 | **0.9096** | 17,459 | 1.000 | 0.9852 | 71,528 |
 
-Removing the `keys`-entry `memmove` takes **7.2 per cent off the direct build at the ceiling** and
-about 5 per cent from a quarter of the way down. The fault count is identical to the unit, which is
-the check that the change is a pass removal and not a change of footprint, and the user-mode
-instruction ratio moves the same way (0.973), which is the check that the removed pass was real
-executed work and not only memory traffic.
+Removing the `keys`-entry `memmove` takes **9.0 per cent off the direct build at the ceiling** and
+about 5 to 6 per cent from a quarter of the way down. The fault count is identical to the unit, which
+is the check that the change is a pass removal and not a change of footprint; the peak resident set
+is identical on both arms at every domain, which is the same check on the four extra bytes; and the
+user-mode instruction ratio moves the same way (0.9852), which is the check that the removed pass was
+real executed work and not only memory traffic.
 
 **Fermi prediction 3 was right about the mechanism and wrong about the size, by a factor of three**:
-it predicted 6.4 ms at 2^24 keys from 128 MiB of traffic at 20 GB/s and measured 2.18 ms, which is
-58 GB/s. The 20 GB/s figure came from C1198's *cold-start* stage, where every store also takes a
-minor fault; a warm `memmove` over an already-resident 64 MiB array on this host runs at nearly three
-times that. The cost model is corrected here rather than the measurement being explained away: warm
-streaming traffic on this host is about 58 GB/s and cold first-touch traffic is about 20.
-
-One bookkeeping note on that table: the candidate's peak RSS reads 400 KiB above the control's at
-**every** domain, including 512, where the offsets array is 1 MiB and the change adds four bytes. A
-constant offset at every size is the two binaries differing, not the change; it is confirmed against
-the retained candidate below.
+it predicted 6.4 ms at 2^24 keys from 128 MiB of traffic at 20 GiB/s and measured **2.083 ms**, which
+is about **61 GiB/s**. The 20 GiB/s figure came from C1198's *cold-start* stage, where every store
+also takes a minor fault; a warm `memmove` over an already-resident 64 MiB array on this host runs at
+about three times that. The cost model is corrected here rather than the measurement being explained
+away: warm streaming traffic on this host is about 61 GiB/s and cold first-touch traffic about
+20 GiB/s.
 
 ## Which cohort's choice changes, and the rule that changed it
 
@@ -464,14 +536,15 @@ this task.
 
 The cheaper of the two, and it was not on the card's list. The `triangle`'s third atom is fully
 bound, so the plan asks for an index keyed on **both** of `edge`'s columns — a key space of
-`domain²`. Nothing forces that. An index keyed on column 0 alone has a key space of `domain`, 48 KiB
-of offsets at N = 4,096, a build in microseconds, and a probe that is one load; its buckets then
+`domain²`. Nothing forces that. An index keyed on column 0 alone has a key space of `domain`, **16
+KiB** of offsets at N = 4,096 beside the 48 KiB row array it already needs, a build in microseconds,
+and a probe that is one load; its buckets then
 average three rows where one matches, and the other two are rejected by comparing the remaining key
 column against the row — which is **exactly what `join::<VERIFY = true, _>` already does** for the
 hashed kind, whose buckets may also hold rows of other keys.
 
 **Priced.** Two extra row reads and two extra comparisons per probe, 36,864 probes at `triangle`
-4,096, so about 74,000 extra row reads against 28 ms of preparation and 65 MB saved — and unlike the
+4,096, so about 74,000 extra row reads against 27 ms of preparation and 64 MiB saved — and unlike the
 hash it needs no new storage and no new kind at all.
 
 **Why it is not built.** The key fold in `Index::bucket` and in `run` walks every `OP_CONST` and
@@ -496,7 +569,7 @@ arm's arithmetic. Not an omission — a property of the encoding.
 
 This one survives the argument above, because the scan still writes every page and the array stays
 monotone; all it removes is `calloc`'s explicit `memset`. **Priced at about 3 ms at 2^24 keys** from
-the measured 58 GB/s warm store bandwidth, and at **nothing at all in the shipped configuration**,
+the measured 61 GiB/s warm store bandwidth, and at **nothing at all in the shipped configuration**,
 because after the density rule no index anywhere near 2^24 keys is direct and a small array's
 `calloc` is served warm from the arena. Recorded as priced and not worth its `unsafe` surface at the
 key spaces the rule now admits.
@@ -507,8 +580,18 @@ Every figure below is the retained control `closure_ballpark-3c8499d` against th
 `closure_ballpark-8c04b7a`, both from trees whose `git status --short` was empty and both recorded
 `clean` in `MANIFEST.tsv`. The event set is
 `instructions,cycles,branches,branch-misses,page-faults,minor-faults` at **100.00 per cent enabled**
-in every run. Pinned to core 5, under `choom -n 1000`, rounds alternating the arm order, load average
-1.4 to 1.6 during the per-stage runs and 1.9 to 4.6 during the A/B runs, recorded per receipt.
+in every run. Pinned to core 5, under `choom -n 1000`, rounds alternating the arm order.
+
+**Where the load averages come from.** The two `ab.py` receipts **record** theirs: 2.86 to 4.57 on
+the unchanged-kind run and 2.53 to 2.57 on the changed-kind run, so **2.5 to 4.6** across the A/B.
+The per-stage and sweep receipts record **no** load average, no CPU and no per-arm binary hash,
+because `static_index_stages.py` and `static_index_sweep.py` do not emit them; the figures quoted for
+those runs — about 1.4 to 1.6 for the per-stage tables, 1.35 for the sweep at the shipped constant,
+1.45 to 1.56 for the blocks sweep — were **noted by hand from `uptime` beside each run** and are not
+in the bundle. The pinning and the memory-pressure preference are code-backed in both scripts, which
+build every command as `perf stat … taskset -c <cpu> choom -n 1000 -- <binary>`; they are simply not
+in the output. Adding the three fields is queued as a candidate rather than done here, because
+changing the scripts now would leave the committed receipts describing a different program.
 
 ### The derivation loop on the thirteen cohorts whose kind does not change
 
@@ -530,7 +613,7 @@ Five rounds, three then six repeats, two-point differenced, with an A/A null per
 | `path3:sparse:16384` | 1.00002 | [1.00000, 1.00003] | 1.0000029 | 0.98795 | 441,937 = 441,937 |
 | `path4:sparse:4096` | 1.00000 | [0.99997, 1.00003] | 0.9999982 | 1.02269 | 327,629 = 327,629 |
 
-**The acceptance criterion is met with room: every instruction ratio is 1.00000 to 1.00003 and every
+**The acceptance criterion is met with room: every instruction ratio is 0.99999 to 1.00003 and every
 A/A null is within 2.3 parts per hundred thousand of unity, so the ratios sit inside the nulls'
 own scatter.** That is what it should be — the plan these cohorts build is byte-identical between the
 arms, so the measurement is a check on the protocol as much as on the change, and the nulls being as
@@ -586,19 +669,26 @@ the whole-process arm reads the facts, prepares, evaluates **once** and writes t
 | | | derivation loop | 5.0092 ms | 5.0221 ms | 1.003 |
 | | | whole process | 47.6243 ms | 47.1862 ms | 0.991 |
 
-**The two cohorts whose kind is unchanged are exact nulls where a null can be exact**: the minor-fault
-count and the peak resident set are *identical to the byte* on `triangle:sparse:16384` and
-`mutual:blocks:8192`, and the wall figures agree within 0.9 per cent. A fault count that matches
-exactly is a stronger statement than a wall ratio, because it says the two arms committed the same
-pages, so the plan they built has the same footprint.
+**The two cohorts whose kind is unchanged are nulls on every stage**: the wall figures agree within
+0.9 per cent, and in this run the minor-fault count and the peak resident set came out identical —
+3,753 against 3,753 faults and 15,116 against 15,116 KiB on `triangle:sparse:16384`, 14,666 and
+37,948 on `mutual:blocks:8192`. **Exact equality there is a property of that run, not of the arms.**
+The plan the two arms build on those cohorts is identical, so equality is the expectation; but a
+fault count is page placement, and the audit's three-round replay of `triangle:sparse:16384` reads
+**3,744 against 3,748** faults and 15,212 against 15,248 KiB. What the figures establish is that the
+two arms commit the same pages to within a few, so the plan they build has the same footprint — not
+that the counters are bit-reproducible.
 
-**On the two that change, the whole process is 5.2 and 2.0 times faster and holds an eighth to a
-quarter of the memory**, and the derivation loop is 1.6 and 2.0 times slower. That is the trade, and
-the whole-process column is the one the rule optimizes because it is the one-evaluation regime.
+**On the two that change, the whole process is 5.2 and 2.0 times faster and holds a twelfth and a
+quarter of the memory** (0.080 and 0.231 of the whole-process peak), and the derivation loop is 1.6
+and 2.0 times slower. That is the trade, and the whole-process column is the one the rule optimizes
+because it is the one-evaluation regime.
 
 ### The Soufflé row
 
-`compare.py` against Soufflé 2.5, compiled and interpreted, both `-j1`, whole process to whole
+`compare.py` against Soufflé 2.5 — the version is the session's `nix shell nixpkgs#souffle`, which
+resolves to `souffle-2.5` in the store, and **not** the receipt's `souffle_version` field, which
+captured a separator line; see the replay section — compiled and interpreted, both `-j1`, whole process to whole
 process with equal read, prepare, evaluate and write boundaries, five rounds pinned to core 5, run
 on both arms in the same session minutes apart. The derived relation agrees on every case in every
 system (`agree: true` throughout).
@@ -715,37 +805,53 @@ than the cause.
 
 **The datum that settles what the cause is.** `mutual:blocks:4096` and `triangle:blocks:4096` have
 **the same key space** (2^24), **the same row count** (61,440), **the same density** (273) and the
-same input relation, and the right answer is **opposite** on them: 0.932 for the direct kind on the
-triangle and 1.957 against it on `mutual`. Nothing a density rule can see distinguishes them. What
-distinguishes them is the **probe count**: `mutual(x,y) :- edge(x,y), edge(y,x)` probes the fully
-bound index once per edge, 61,440 times, and `tri(x,y) :- edge(x,y), edge(y,z), edge(z,x)` probes it
-once per two-path, 15 times more often at this density. Fifteen times more probes over the same
-build, and the sign flips.
+same input relation, and the right answer is **opposite** on them. The comparable quantity is
+**preparation plus one evaluation, direct over sparse**: **0.932** for the direct kind on the
+triangle, from the blocks sweep above, and **2.49** against it on `mutual`, from the seven-round
+`stages-2026-09-17-c1201-auto.json` receipt — (33.8304 + 1.1611) ÷ (11.6743 + 2.3737). The
+single-round kind census reads **2.37** for the same quantity independently, and the whole-process
+ratio is 1.955 the other way round. Nothing a density rule can see distinguishes the two cohorts.
+What distinguishes them is the **probe count**: `mutual(x,y) :- edge(x,y), edge(y,x)` probes the
+fully bound index once per edge, 61,440 times, and `tri(x,y) :- edge(x,y), edge(y,z), edge(z,x)`
+probes it once per two-path, 15 times more often at this density. Fifteen times more probes over the
+same build, and the sign flips.
 
-**The cost model that closes on all three families.** Direct pays when
-`key_space <= K · probes`, with `K` the ratio of one probe's saving to one key's build cost. Fitting
-`K` at the sparse family's crossover (domain about 208: key space 43,264 against about 1,872 probes)
-gives **`K` ≈ 23**, and that one constant predicts the other two:
+**The cost model, and exactly what was fitted.** Direct pays when `key_space <= K · probes`, with `K`
+the ratio of one probe's saving to one key's build cost. Fitting `K` at the sparse family's crossover
+(domain about 208: key space 43,264 against about 1,872 probes) gives **`K` ≈ 23**, and the other two
+cohorts are then **consistency checks that bracket the threshold rather than measurements of it** —
+they only require it to lie somewhere between 18.2 and 273:
+
+**A note on what "probes" means here, because the report uses the word for two different
+quantities.** The receipted `probes` counter is the kernel's *top-level* count and equals the input
+relation's fact count on every cohort in this report. The numbers in the table below are the *per-index*
+probe counts of the fully bound link, which nothing counts today: they are **derived from the
+generators' out-degree** — three at the `sparse` density and fifteen at `blocks`, so `rows × 3` and
+`rows × 15` — and they are three and fifteen times the receipted counter. Making them measured rather
+than derived is queued candidate 2.
 
 | Cohort | key space | probes into the swept index | `key_space / probes` | model says | measured |
 | --- | ---: | ---: | ---: | :---: | :---: |
 | `triangle:sparse`, crossover | 43,264 | ~1,872 | 23.1 | at the crossover | crossover (calibration point) |
 | `triangle:blocks:4096` | 16,777,216 | ~921,600 | 18.2 | direct, just | direct, 0.932 |
-| `mutual:blocks:4096` | 16,777,216 | 61,440 | 273 | sparse, far | sparse, 1.957 |
+| `mutual:blocks:4096` | 16,777,216 | 61,440 | 273 | sparse, far | sparse, 2.49 |
 
-A single constant on `key_space / probes` gets all three, including the pair a density rule cannot
-tell apart. **That is a closed cost model and it names the successor exactly: rule on an estimated
-probe count, not on rows.** The plan can estimate it — it has the join order, which link sits at
+A threshold on `key_space / probes` anywhere between 18.2 and 273 gets all three, including the pair
+a density rule cannot tell apart, and the value fitted at the one crossover located, 23, sits inside
+that window. **The model is not yet measured to a digit — the two checks bracket it and do not pin
+it, which is open item 3 — but its variable is settled, and that names the successor exactly: rule on
+an estimated probe count, not on rows.** The plan can estimate it — it has the join order, which link sits at
 which level, and, once the earlier static indexes are built, each one's rows over its distinct keys,
 which is the average fan-out that multiplies into the next level's probe count.
 
 **Why the shipped constant stays at 64 anyway, and what it costs.** The probe-count rule is an
 architecture change to the policy and needs its own task. Between the two constants a single
 density can take, 64 is the one whose errors are bounded: it is right on `triangle:sparse` by
-construction and right on `mutual:blocks`, and on `triangle:blocks` it costs 7 to 39 per cent of one
-whole evaluation while **saving 36 to 64 MB of resident memory** at the top of that range. The rule
-it replaces had no bounded error at all — it was 5.2 times slower end to end on
-`triangle:sparse:4096` and held 65 MB for a relation of 12,288 rows. Choosing the conservative end
+construction and right on `mutual:blocks`, and on `triangle:blocks` it costs 7 to 39 per cent of
+**preparation plus one evaluation** while **saving 36 to 64 MiB of resident memory** (36,068 and
+64,136 KiB) at the top of that range. The rule it replaces had no bounded error at all — it was 5.2
+times slower end to end on `triangle:sparse:4096` and held 64 MiB of offsets for a relation of 12,288
+rows. Choosing the conservative end
 of a proxy over an unbuilt cost model is the decision, and this is the measurement that prices it.
 
 ## Mystery ledger
@@ -754,18 +860,21 @@ of a proxy over an unbuilt cost model is the decision, and this is the measureme
 
 1. **Where does the static index's 27.8 ms of extra preparation sit?** In memory traffic over the key
    space, not in work over the rows. Fermi prediction 1 decomposed it into five passes over a 64 MiB
-   array and predicted 26 ms against 27.8 measured, closing to 7 per cent, and the stagger's measured
-   2.18 ms confirms the one pass it removed.
+   array and predicted 26 ms against 27.8 measured, closing to 7 per cent, and the stagger's
+   receipted 2.083 ms confirms the one pass it removed.
 2. **Does the direct kind's probe hold up at the ceiling, where its offsets array is far larger than
-   cache?** Yes, and this refutes Fermi prediction 2. The direct probe is ahead by 1.5 to 2.3 times
-   at every density from 10.7 to 1,365, so C1192's deviation 5 was right about the probe over the
+   cache?** Yes, and this refutes Fermi prediction 2. The direct probe is ahead by 1.49 to 2.33 times
+   over the densities the retained candidate's receipt covers, 74.7 to 1,365, with the probe build
+   extending the same picture down to 10.7. So C1192's deviation 5 was right about the probe over the
    whole range and the two static kinds are a strict trade rather than one dominating.
 3. **What is the crossover for one evaluation, and is a density the right thing to measure?** The
    crossover on the `sparse`-density `triangle` is bracketed between a density of 64 and 74.7. **A
    density is not the right thing to measure**: the same program at the `blocks` density has the
    direct kind ahead from 68 to 273, and `mutual:blocks:4096` and `triangle:blocks:4096` have
    identical key space, rows and density with opposite answers. The cause is the probe count, and
-   `key_space <= 23 · probes` predicts all three families from one constant fitted on one of them.
+   the threshold on `key_space / probes` is bracketed between 18.2 and 273 by the other two families,
+   with 23 fitted at the one crossover located; the probe counts are derived from the generators'
+   out-degree and are not the receipted top-level `probes` counter.
 4. **Can a lazily reserved offsets array skip untouched pages in its prefix sum?** No, not with this
    probe. Zeros in an untouched page break the monotonicity that `offsets[key]..offsets[key+1]`
    depends on, giving a slice panic on one side of a page boundary and a spurious bucket of every
@@ -774,8 +883,11 @@ of a proxy over an unbuilt cost model is the decision, and this is the measureme
    change. Settled by argument, before any code, and the argument is in prediction 4.
 5. **Does the `keys`-entry shift have to exist?** No. Staggering the counting cursor one entry to the
    right leaves the array in the shape the probe reads with no further pass, for four extra bytes and
-   with the probe expression textually unchanged: 0.910 of the direct build at the ceiling, with the
-   fault count identical to the unit and the instruction ratio at 0.985.
+   with the probe expression textually unchanged: **0.9096** of the direct build at the ceiling, with
+   the fault count identical to the unit, the peak resident set identical on both arms, and the
+   instruction ratio at 0.9852. The audit also checked the equality by argument and against an
+   independent transcription of both versions over 4,000 random cases and six edge cases, with zero
+   mismatches.
 6. **Do the two kinds still agree on everything observable?** Yes, and on more than the suite
    asserts: the output digest, the derived count, the probe count and the candidate count are equal
    between the arms on all seventeen cohorts, the two whose kind changes included, asserted per
@@ -847,7 +959,7 @@ explicitly unmeasured.
 3. **Demote a fully bound atom's index mask and verify the remaining key columns per row.** Priced
    above under the shapes not built: it is the cheapest shape that gets both the cheap build and the
    O(1) probe, needs no new storage and no new kind, and would let the `triangle`'s third atom index
-   one column for 48 KiB instead of two for 64 MiB. It needs an op kind the key fold skips and
+   one column for 16 KiB of offsets instead of two for 64 MiB. It needs an op kind the key fold skips and
    `join::<true, _>` instantiated for the CSR arm, so it is a kernel change with its own A/B.
 4. **A plan-owned open-addressed hash over the distinct keys**, the card's candidate (c), priced
    above. A fifth addressing kind; strictly more machinery than candidate 3 for the same two wins.
@@ -858,6 +970,16 @@ explicitly unmeasured.
    the two that discriminate the rule shapes. Worth adding to the standing cohort set.
 8. **A `Pages` reservation for the plan's offsets array**, priced at about 3 ms at 2^24 keys and at
    nothing in the shipped configuration. Recorded so it is not rediscovered as an omission.
+9. **Record the load average, the CPU and each arm's binary hash in `static_index_stages.py` and
+   `static_index_sweep.py`.** `ab.py` and `compare.py` already emit all three, and their absence is
+   why this report's per-stage and sweep load averages are noted by hand rather than receipted, which
+   the audit raised as defect 4. Not done inside this task because changing the scripts would leave
+   the committed receipts describing a different program.
+10. **A unit test on a CSR index's bucket contents.** The staggered cursor's equality with the pass it
+    replaced is bound only indirectly today, by `demand_sparse` running the whole corpus a second
+    time under `Policy::Sparse` and comparing certificate bytes — which does catch a wrong CSR. The
+    audit verified the equality by argument and by 4,000 random cases against an independent
+    transcription, and suggests one screen of direct assertion on the offsets and rows arrays.
 
 ## Replay commands
 
@@ -902,10 +1024,10 @@ nix develop ~/src/ergodis --command cargo test -p ergodis-rules --test demand_sp
 
 A=analysis/datalog-comparison; C=~/.cache/ergodis/bin; W=~/.cache/ergodis/c1201
 UNCH=closure:sparse:256,closure:sparse:1024,closure:dense:256,closure:dense:512,samegen:sparse:1024,samegen:dense:512,closure:blocks:4096,closure:blocks:16384,cycle:blocks:4096,triangle:sparse:16384,path3:sparse:4096,path3:sparse:16384,path4:sparse:4096
-ALL=$UNCH,mutual:blocks:4096,mutual:blocks:8192,triangle:sparse:4096
+ALL=$UNCH,path4:sparse:16384,mutual:blocks:4096,mutual:blocks:8192,triangle:sparse:4096
 
 # The derivation loop on the cohorts whose kind does not change. Outcome:
-# 1.00000 to 1.00003 in instructions, nulls within 2.3e-5.
+# 0.99999 to 1.00003 in instructions, nulls within 2.3e-5.
 nix develop ~/src/ergodis --command python3 $A/ab.py --a $C/closure_ballpark-3c8499d \
     --a-name control-3c8499d --b $C/closure_ballpark-8c04b7a --b-name candidate-8c04b7a \
     --mode evaluate --rounds 5 --cpu 5 --repeats 3 --cohorts $UNCH \
@@ -963,25 +1085,35 @@ nix develop ~/src/ergodis --command python3 $A/static_index_sweep.py \
     --density blocks --rounds 5 --repeats 5 --domains 3072,4096 \
     --out $A/sweep-2026-09-17-c1201-blocks-ceiling.json
 
-# Soufflé 2.5, compiled and interpreted, both -j1, whole process to whole
-# process. Outcome: triangle at 4,096 crosses from 1.903 to 0.896.
+# Soufflé, compiled and interpreted, both -j1, whole process to whole process.
+# Outcome: triangle at 4,096 crosses from 1.903 to 0.896. The work directory
+# names are the ones on disk; `souffle-ctl` is the control arm.
 S="nix shell nixpkgs#souffle nixpkgs#gcc nixpkgs#gnumake nixpkgs#time -c"
-for arm in 3c8499d:control 8c04b7a:candidate; do
-  rev=${arm%%:*}; name=${arm##*:}
-  $S python3 $A/compare.py --bin $C/closure_ballpark-$rev --work $W/souffle-$name \
+for arm in 3c8499d:ctl:control 8c04b7a:cand:candidate; do
+  rev=${arm%%:*}; dir=$(echo $arm | cut -d: -f2); name=${arm##*:}
+  $S python3 $A/compare.py --bin $C/closure_ballpark-$rev --work $W/souffle-$dir \
       --out $A/results-2026-09-17-c1201-$name.json --rounds 5 --cpu 5 \
       --sizes triangle:sparse:1024,4096,16384
 done
 ```
 
-**The one measurement that does not replay from a shipped binary.** The sweep's points *below* a
-density of 64 — the lower half of the crossover bracket, densities 32 to 64 — need
-`DIRECT_STATIC_DENSITY` temporarily lowered (it was 4 while the bracket was located), because at the
-shipped value both arms of `static_index_sweep.py` choose the same kinds there and the script
-correctly reports no swept index. Those rows came from a probe build of the example at the same core
-source as `676f513` with only that constant differing; the points at and above 74.7, which is the
-upper end of the bracket and the side the constant is set from, replay directly on
-`closure_ballpark-8c04b7a` and are the table above.
+**The crossover sweep's tables do not all replay from a retained binary.** The two tables under
+"The sweep" are the scratch probe build throughout, not only their rows below a density of 64: that
+build is the core source of `676f513` with `DIRECT_STATIC_DENSITY` set to 4, and nothing shipped
+reproduces them. The rows below a density of 64 — the crossover bracket's lower half — *cannot* be
+measured on the shipped binary at all, because there both arms of `static_index_sweep.py` choose the
+same kinds and the script correctly reports no swept index. The rows at and above 74.7 have a
+retained-binary equivalent, which is the `sweep-shipped-constant` command above and the table printed
+beside them; the two differ, and the receipted one is the one to quote. An earlier revision of this
+report claimed the probe build's own rows at and above 74.7 replay on `closure_ballpark-8c04b7a`; the
+audit found that false and it is corrected here.
+
+**The Soufflé version rests on the session, not on the receipt.** Both `results-…json` files record a
+`souffle_version` of a separator line, because `souffle --version` prints a rule of dashes first and
+`compare.py` took line one. The version behind these rows is Soufflé 2.5, from the
+`nix shell nixpkgs#souffle` above resolving to `souffle-2.5` in the store. Repaired in `compare.py`
+at private `ab6be13`, which reads the `Version:` field and falls back to the resolved store path;
+receipts written before it carry the separator.
 
 Inputs are deterministic: the C1182 xorshift edge generator seeded by the domain for the `sparse`
 and `dense` densities, and the `blocks` density's complete digraph inside each consecutive block of
@@ -1018,15 +1150,19 @@ name them are committed.
 
 ## Resume state for the next session
 
-**The task's own work is complete and every tree is committed.** Nothing is half-built and no path
-is untracked in any of the three repositories. The **audit is a separate later task** and was not
-run here, as the card says.
+**The task is complete, the audit is in, its nine repairs are applied, and every tree is
+committed.** Nothing is half-built and no path is untracked in any of the three repositories.
 
 | Repository | HEAD at close | Range this task added |
 | --- | --- | --- |
-| `~/src/ergodis` | `676f513` | `09a5c2b` … `676f513` (one commit) |
-| `~/src/ergodis-private` | `684b0e5` | `3c8499d` … `684b0e5` (three commits) |
+| `~/src/ergodis` | `5c9d1b3` | `09a5c2b` … `5c9d1b3` (two commits, the second doc-comment only) |
+| `~/src/ergodis-private` | `ab6be13` | `3c8499d` … `ab6be13` (four commits) |
 | `~/src/othello` | this report's last commit | `8863a56` … here |
+
+**The measured arms are unchanged by the repair pass.** `closure_ballpark-8c04b7a` is still the
+binary every figure is measured on, because `5c9d1b3` changes only a doc comment and `ab6be13` only
+a receipt field. A successor that wants a control at the repaired revisions can retain one; nothing
+here needs it.
 
 **Retained controls for the next A/B in this lane**, both at `ergodis-private` `8c04b7a` with core
 `ergodis` `676f513`, rustc 1.95.0 (59807616e 2026-04-14), release, no features, **both `clean` in
@@ -1042,8 +1178,8 @@ are flagged `dirty`, and `closure_ballpark-3c8499d` / `ergodis-tools-3c8499d`, w
 controls and stay for its replay.
 
 **Left undone, deliberately:** the lifecycle close for C1201 (archive the row, delete it from the
-live queue, update the lane handoff), which belongs to whoever closes the task; the audit, which the
-card makes a separate task; and the eight queued candidates, none of which has an identifier.
+live queue, update the lane handoff), which belongs to whoever closes the task, and the ten queued
+candidates, none of which has an identifier.
 
 **Decisions left open for Tavis**, both stated with their evidence above and neither taken here:
 whether `DIRECT_STATIC_DENSITY` should stay at 64 or move now that the closeout shows a density is a
@@ -1053,6 +1189,39 @@ cost model, mask demotion, or a fifth hashed static kind — is worth allocating
 recommendation is mask demotion, as the cheapest that gets both wins, with the per-link probe counter
 allocated alongside it because every one of the three needs it).
 
+## Audit repairs applied
+
+The audit `2026-09-17-c1201-static-index-build-cost-audit.md` returned **VETTED WITH REPAIRS, no code
+defect**, with nine numbered repairs. All nine are applied.
+
+| # | Repair | Applied |
+| :---: | --- | --- |
+| 1 | The build-repair table is the probe build and is superseded by `stages-…-shift-direct.json` | **Applied.** The table now prints the receipt's four rows (0.9689, 0.9396, 0.9541, 0.9096; faults 595/1,510/4,784/17,459; instruction ratios 0.9995/0.9970/0.9925/0.9852; peak resident sets identical on both arms), and the prose says **9.0 per cent** off the direct build at the ceiling rather than 7.2, and 5 to 6 per cent a quarter of the way down. The 0.910 already in the Disposition and in settled mystery item 5 was this receipt and is unchanged. The stale note about a 400 KiB resident-set gap is deleted, because it was the probe binary and the receipt shows equality. |
+| 2 | Fermi-3 arithmetic and units | **Applied.** The measured delta is **2.083 ms** at 2^24 keys, so warm streaming traffic on this host is about **61 GiB/s** and cold first-touch about **20 GiB/s**, in GiB throughout including the prediction that used the cold figure. |
+| 3 | Both sweep tables are the probe build; the closing replay claim is false | **Applied.** "The sweep" now opens by saying both its tables are the scratch probe build with no receipt and why the bracket's lower end needs it, a new subsection prints the retained candidate's own sweep from `sweep-…-shipped-constant.json` (one-evaluation ratio **1.0382** at a density of 74.7 rising to **6.1624** at 1,365, break-even **1.3** at 74.7, eval-ratio range **0.4286 to 0.6714**), the bracket is stated as 64 (probe build, 0.968) to 74.7 (retained candidate, 1.0382), the refutation of Fermi prediction 2 is requoted at 1.49 to 2.33 from the receipt, the Arms section's "no kept figure is measured on it" is replaced by a paragraph naming the probe build and the two tables on it, and the replay section's false claim is replaced by what actually replays. |
+| 4 | `mutual`'s 1.957 is untraceable | **Applied.** Replaced by **2.49**, named as preparation plus one evaluation, direct over sparse, with its arithmetic from the seven-round `stages-…-auto.json` receipt, the census's independent **2.37** noted, and the whole-process 1.955 distinguished. The cost-model table's cell is 2.49. |
+| 5 | Load averages | **Applied.** The A/B range is corrected to **2.5 to 4.6** (the receipts record 2.86–4.57 and 2.53–2.57), and the report now says the per-stage and sweep load averages were noted by hand from `uptime` because neither script emits one, while the pinning and `choom` preference are code-backed in both. Adding load average, CPU and per-arm binary hash to the two scripts is **queued candidate 9** rather than done, because changing them would leave the committed receipts describing a different program. |
+| 6 | The census replay command and the Soufflé work-directory names | **Applied.** `$ALL` gains `path4:sparse:16384`, so it is the seventeen the receipt holds, and the Soufflé loop writes `souffle-ctl` and `souffle-cand`, the directories on disk. |
+| 7 | The pre-change baseline table has no receipt and no replay command | **Applied.** It now carries its replay command, says outright that it has no receipt and predates the committed measurement stages, and cites both independent reproductions — this audit's on the `auto` rows and the C1193 audit's on the `sparse-indexes` rows. |
+| 8 | "Identical to the byte" is a property of that run | **Applied.** The claim is restated as a property of that run with the audit's three-round replay quoted (**3,744 against 3,748** faults, 15,212 against 15,248 KiB on `triangle:sparse:16384`), and what the figures do establish — the same pages committed to within a few, so the same plan footprint — is separated from bit-reproducibility. The same softening is in the headline and the vibe check. |
+| 9 | Ten prose and docstring items, and the `compare.py` capture | **Applied.** The thirteen-cohort range is **0.99999 to 1.00003** in all three places including the replay comment; mask demotion is **16 KiB of offsets** in both places, with the 48 KiB row array named separately; the not-built hash has one formula, `32 · distinct_keys` bytes, so **384 KiB** at `triangle` 4,096; the 7-to-39-per-cent figure is "of preparation plus one evaluation"; "an eighth to a quarter" is **a twelfth and a quarter**; "without bound" is "without bound up to `MAX_DIRECT_KEYS`", where the build is 27 ms and 64 MiB, in the report **and** in the shipped docstring; the docstring's 4.2 per cent is the receipted **3.8**; GiB and MiB throughout; the cost model's probe counts are labelled as derived from the generators' out-degree and distinguished from the receipted top-level `probes` counter, which they are three and fifteen times; "one constant gets all three" is softened to the bracket 18.2 to 273 that the two checks actually place, matching open item 3; and "Soufflé 2.5" is attributed to the session with the receipt's separator-line field named. The `compare.py` capture is repaired at private `ab6be13`. |
+
+**Two repairs changed code, and neither needs re-measurement.** The core commit `5c9d1b3` is
+doc-comment only — `DIRECT_STATIC_DENSITY`'s docstring, plus the regenerated `SHA256SUMS` — so the
+compiled evaluator at `676f513` and at `5c9d1b3` is the same program, every figure in this report
+still describes the retained arms, and no A/B was re-run; `cargo fmt --check` and
+`clippy -p ergodis-rules -D warnings` were run and are clean. The private commit `ab6be13` changes
+`compare.py`'s version capture, which is metadata written into the receipt and is read by nothing
+that times anything; `ruff check` is clean. The two measurement stages and every receipt are
+untouched, so every table above still describes the program that produced it.
+
+**One thing the audit found that this pass did not act on**, recorded so it is not lost: the
+staggered cursor's equality with the pass it replaced is bound only indirectly in the crate, by
+`demand_sparse` running the corpus a second time under `Policy::Sparse` and comparing certificate
+bytes. The audit verified it by argument and by 4,000 random cases plus six edge cases against an
+independent transcription of both versions, with zero mismatches. A direct unit test on the bucket
+contents is **queued candidate 10**.
+
 ## Vibe check
 
 Good, and the headline is the one the C1193 closeout predicted would be the largest lever in the
@@ -1061,8 +1230,8 @@ whole process to **0.193**, and the comparison against compiled Soufflé crosses
 0.896** — from behind to ahead on the one family where this evaluator should be ahead, with the
 control arm reproducing C1193's recorded 1.92 so the crossing is this change and not two sessions.
 Thirteen cohorts are unmoved to within three parts per hundred thousand, two cohorts whose kinds do
-not change have fault counts and resident sets identical to the byte, and the build also got a free
-7 to 9 per cent from removing a pass nobody had questioned.
+not change came out with identical fault counts and resident sets, and the build also got a free
+5 to 9 per cent from removing a pass nobody had questioned.
 
 One thing is a real loss and is stated as one: where the kind changes, the derivation loop costs
 **1.41 and 1.45 times** the instructions, because Fermi prediction 2 was wrong and the direct probe
@@ -1073,7 +1242,17 @@ representation, and two are priced.
 
 The most interesting result is not in the card at all. `mutual:blocks:4096` and
 `triangle:blocks:4096` have the same key space, the same row count and the same density, and the
-right answer is **opposite** on them, because one probes the index fifteen times more often. So the
-density rule this task shipped is a proxy, `key_space <= 23 · probes` predicts all three families
-from one constant, and the plan has what it needs to estimate the probes. That is the next lever and
-it subsumes both of the policy's density constants.
+right answer is **opposite** on them — 0.932 for the direct kind on the triangle against 2.49 on
+`mutual`, both preparation plus one evaluation — because one probes the index fifteen times more
+often. So the density rule this task shipped is a proxy; the threshold on `key_space / probes` is
+bracketed between 18.2 and 273 with 23 fitted at the one crossover located, and the plan has what it
+needs to estimate the probes. That is the next lever and it subsumes both of the policy's density
+constants.
+
+One last thing, and it is the part of this task that needed the audit. Three of the report's tables
+were taken on a scratch probe build and carry no receipt, while a committed receipt covering the same
+ground on the retained candidate existed and disagreed with them; the report then claimed no kept
+figure was on the probe build and that the sweep's upper rows replayed on the retained binary,
+neither of which was true. Every conclusion survived and the build repair turned out **better** than
+the table said, 9.0 per cent at the ceiling rather than 7.2. The record was the defect, not the
+result, and the repairs are listed below.
