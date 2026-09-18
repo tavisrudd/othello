@@ -5228,8 +5228,17 @@
       "last": 1201,
       "purpose": "static join index build cost: density/size rule or lazy offsets reservation (C1193 closeout finding)",
       "sequence": 581
+    },
+    {
+      "count": 1,
+      "first": 1202,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1202,
+      "purpose": "probe-count index rule with mask demotion and per-link probe counter (C1201 successor)",
+      "sequence": 582
     }
   ],
-  "next_id": 1202,
+  "next_id": 1203,
   "schema": "codex-task-id-allocations-v1"
 }
