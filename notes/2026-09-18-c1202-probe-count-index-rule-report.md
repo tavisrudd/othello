@@ -2,8 +2,23 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-18
-**Status**: IN PROGRESS. Written incrementally from the start, so a crash leaves a partial record
-rather than none. The Fermi predictions below were written and committed **before any code change**.
+**Status**: COMPLETE. Written incrementally from the start, so a crash would have left a partial
+record rather than none, and the Fermi predictions below were written and committed **before any
+code change**.
+
+**The headline.** A fully bound atom no longer keys on every column it binds, and the index policy
+no longer rules on a density. On `triangle` at N = 4,096 the derivation loop falls to **0.604** and
+the whole process to **0.887** with preparation and peak resident memory **unmoved**, which is the
+acceptance line C1201 measured as unreachable and reported as unmet; at 16,384 the loop falls to
+**0.469** and the whole process to **0.790**. On `triangle:blocks:4096` — the cohort that has the
+same key space, the same rows and the same density as `mutual:blocks:4096` and the opposite right
+answer — the loop falls to **0.420**, and one constant on `key_space / probes` now gives those two
+cohorts opposite kinds. Fifteen cohorts whose kinds do not change read **0.99985 to 1.00002** in
+derivation-loop instructions against A/A nulls inside 2.7 parts per hundred thousand, because mask
+demotion turned out to need **no kernel change at all**. The per-link probe counter that all of this
+rests on measured the probe figures C1201 had to derive, and confirmed them exactly; carried
+unconditionally it cost 0.11 to 2.55 per cent of the loop, so it is monomorphized and the production
+path carries none of it.
 
 Task card: `notes/2026-09-18-c1202-probe-count-index-rule.md`. Predecessor:
 `notes/2026-09-17-c1201-static-index-build-cost-report.md` and its audit
