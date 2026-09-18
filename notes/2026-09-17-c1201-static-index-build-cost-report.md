@@ -332,3 +332,61 @@ One bookkeeping note on that table: the candidate's peak RSS reads 400 KiB above
 **every** domain, including 512, where the offsets array is 1 MiB and the change adds four bytes. A
 constant offset at every size is the two binaries differing, not the change; it is confirmed against
 the retained candidate below.
+
+## Which cohort's choice changes, and the rule that changed it
+
+Every C1192 and C1193 cohort, plus both path families at both sizes, under `Policy::Auto` on the
+control and on the candidate. `S` marks a static relation and `G` a growing one; `d` and `s` are the
+direct and sparse kinds in the plan's index order. The density is the key space over the relation's
+rows, which for a static relation is its exact fact count and for a growing one is the plan's
+capacity.
+
+| Cohort | facts | control | candidate | changed | per-index key space / rows = density (kind) |
+| --- | ---: | :---: | :---: | :---: | --- |
+| `closure:sparse:256` | 768 | `dd` | `dd` | no | S 256/768 = 0.33 (d) · G 256/65,536 = 0.004 (d) |
+| `closure:sparse:1024` | 3,072 | `dd` | `dd` | no | S 1,024/3,072 = 0.33 (d) · G 1,024/1,048,576 (d) |
+| `closure:dense:256` | 16,384 | `dd` | `dd` | no | S 256/16,384 = 0.02 (d) · G (d) |
+| `closure:dense:512` | 65,536 | `dd` | `dd` | no | S 512/65,536 = 0.01 (d) · G (d) |
+| `samegen:sparse:1024` | 1,023 | `ddd` | `ddd` | no | S 1,024/1,023 = 1.0 (d) · G ×2 (d) |
+| `samegen:dense:512` | 1,021 | `ddd` | `ddd` | no | S 512/1,021 = 0.5 (d) · G ×2 (d) |
+| `closure:blocks:4096` | 61,440 | `dd` | `dd` | no | S 4,096/61,440 = 0.07 (d) · G (d) |
+| `closure:blocks:16384` | 245,760 | `dd` | `dd` | no | S 16,384/245,760 = 0.07 (d) · G (d) |
+| **`mutual:blocks:4096`** | 61,440 | `d` | `s` | **yes** | S 16,777,216/61,440 = **273.1** (d → s) |
+| `mutual:blocks:8192` | 122,880 | `s` | `s` | no | S 67,108,864/122,880 = 546.1 (s, above the ceiling already) |
+| `cycle:blocks:4096` | 61,440 | `ddd` | `ddd` | no | S 4,096/61,440 = 0.07 (d) · G 4,096/2^24 (d) · **G 2^24/2^24 = 1.0 (d)** |
+| **`triangle:sparse:4096`** | 12,288 | `ddd` | `dsd` | **yes** | S 4,096/12,288 = 0.33 (d) · S 16,777,216/12,288 = **1,365.3** (d → s) · S 0.33 (d) |
+| `triangle:sparse:16384` | 49,152 | `dsd` | `dsd` | no | S 0.33 (d) · S 268,435,456/49,152 = 5,461 (s, above the ceiling already) · S 0.33 (d) |
+| `path3:sparse:4096` | 12,288 | `dd` | `dd` | no | S 4,096/12,288 = 0.33 (d) ×2 |
+| `path3:sparse:16384` | 49,152 | `dd` | `dd` | no | S 16,384/49,152 = 0.33 (d) ×2 |
+| `path4:sparse:4096` | 12,288 | `dd` | `dd` | no | S 4,096/12,288 = 0.33 (d) ×2 |
+| `path4:sparse:16384` | 49,152 | `dd` | `dd` | no | S 16,384/49,152 = 0.33 (d) ×2 |
+
+The output digest, the derived count, the probe count and the candidate count are **equal between
+the two binaries on every one of the seventeen cohorts**, the two that change kind included, which
+is the exactness check the addressing kinds are supposed to satisfy and is asserted per cohort by the
+probe script rather than inspected.
+
+**Exactly two cohorts change, and both change for the same reason.** The fifteen that do not split
+into three groups, and each group is a separate confirmation:
+
+1. **Every growing index is unmoved**, because `DIRECT_INDEX_DENSITY` already ruled it and this
+   change does not touch that branch. `cycle:blocks:4096`'s third index is the interesting one: a
+   growing relation at key space 2^24 and capacity 2^24, density exactly 1.0, which is far inside
+   the dynamic crossover of 48 and stays direct. Fermi prediction 2 got this right.
+2. **Every static index keyed on one column is unmoved**, at densities 0.01 to 1.0, because a key
+   space of `domain` against `domain` or `3 · domain` rows is two to four orders of magnitude inside
+   a crossover of 64. This is the group that covers `closure`, `samegen`, `path3` and `path4`
+   entirely, and it is why those families' instruction ratios are within the null **by construction
+   rather than by measurement** — the plan they build is identical.
+3. **Two static indexes were already above the ceiling** and were already sparse:
+   `mutual:blocks:8192` at 2^26 and `triangle:sparse:16384` at 2^28.
+
+**Fermi prediction 2 was wrong about one cohort, and it is the cohort C1192 measured the static
+probe on.** The prediction said no C1192 or C1193 cohort could change. `mutual:blocks:4096` changes:
+its single static index is `edge` on both columns at a key space of 2^24 against 61,440 rows, a
+density of 273 — and 273 is precisely the density C1192's deviation 5 quotes when it says the
+counting-sorted bucket is worth 1.39 times the instructions and 2.1 to 2.4 times the cycles of a
+binary search. So the new rule takes away, on that cohort, exactly the win C1192 measured. That is
+the trade the crossover decides and it has to be measured on the cohort itself rather than inferred
+from the `triangle` sweep, because `mutual`'s evaluation is much longer and so amortizes more of the
+build.
