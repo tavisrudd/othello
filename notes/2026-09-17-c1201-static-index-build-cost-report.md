@@ -615,3 +615,104 @@ what the criterion is ultimately about — is 0.193. Meeting the criterion as wr
 static representation, and the two candidates for it are priced above, with mask demotion the
 cheaper. This is reported as an unmet criterion with its measured cause rather than reinterpreted to
 fit.
+
+## The `ej` and `tt` closeout
+
+Two things came out of it, both cheap, and the second is the most useful measurement in the report.
+
+### Preparation is now admission-bound on every cohort, and it was not before
+
+Free, from the kind census already run. Preparation divided by the input relation's fact count, on
+the candidate, over all seventeen cohorts:
+
+| Cohort | facts | preparation, control | preparation, candidate | candidate, ns per fact |
+| --- | ---: | ---: | ---: | ---: |
+| `closure:sparse:256` | 768 | 0.2426 ms | 0.2175 ms | 283 |
+| `closure:sparse:1024` | 3,072 | 0.7160 | 0.7060 | 230 |
+| `closure:dense:256` | 16,384 | 3.9349 | 3.4657 | 212 |
+| `closure:dense:512` | 65,536 | 11.8773 | 11.8578 | 181 |
+| `samegen:sparse:1024` | 1,023 | 0.4107 | 0.2266 | 222 |
+| `samegen:dense:512` | 1,021 | 0.2159 | 0.2116 | 207 |
+| `closure:blocks:4096` | 61,440 | 11.5505 | 14.1326 | 230 |
+| `closure:blocks:16384` | 245,760 | 50.1862 | 50.0271 | 204 |
+| `mutual:blocks:4096` | 61,440 | **33.7499** | **11.7496** | 191 |
+| `mutual:blocks:8192` | 122,880 | 24.5214 | 25.1766 | 205 |
+| `cycle:blocks:4096` | 61,440 | 11.7302 | 11.6651 | 190 |
+| `triangle:sparse:4096` | 12,288 | **24.0434** | **2.1769** | 177 |
+| `triangle:sparse:16384` | 49,152 | 9.3212 | 9.3924 | 191 |
+| `path3:sparse:4096` | 12,288 | 2.0381 | 2.0204 | 164 |
+| `path3:sparse:16384` | 49,152 | 9.1982 | 8.9255 | 182 |
+| `path4:sparse:4096` | 12,288 | 2.0503 | 2.1081 | 172 |
+| `path4:sparse:16384` | 49,152 | 8.9858 | 8.8618 | 180 |
+
+**Every cohort now sits between 164 and 283 ns per input fact, across a range of 768 to 245,760
+facts and five program families**, and the two that were outliers — `triangle:sparse:4096` at 1,956
+ns per fact and `mutual:blocks:4096` at 549 — are now 177 and 191. So the static index's build is no
+longer the leading term in preparation anywhere, and what remains is proportional to the facts:
+admission, the row store, and the fact-to-relation projection. That is a **new leading term worth its
+own task**, and it is worth about 50 ms on `closure:blocks:16384`, which is more than this task
+removed from `triangle`. It is also the figure that says this task is finished: nothing about the
+index's build is above the noise of the per-fact cost any more.
+
+(The single reading that moves the wrong way, `closure:blocks:4096` at 11.55 to 14.13 ms, is a
+cohort whose kinds do not change and whose fault count and resident set are identical between the
+arms in the census; it is one round at one repeat, taken for the kind table and not for citing, and
+the seven-round run of its sibling `mutual:blocks:8192` reads 0.994.)
+
+### The crossover is not a density, and two cohorts with the same density settle it
+
+This is the `tt` question — what is the rule's variable really? — and the measurement answers it.
+The `triangle` at the `blocks` density has 15,360 to 61,440 rows where the same program at the
+`sparse` density has 576 to 12,288, so it probes a key space of the same shape with a workload an
+order of magnitude larger. Sweeping it, five rounds, load average 1.45 to 1.56:
+
+| domain | facts | density of the swept index | preparation, direct | preparation, sparse | evaluation, direct | evaluation, sparse | preparation + one evaluation, direct ÷ sparse |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1,024 | 15,360 | 68.3 | 5.18 ms | 3.01 ms | 4.39 ms | 8.72 ms | **0.815** |
+| 1,280 | 19,200 | 85.3 | 5.95 | 3.57 | 4.94 | 11.27 | **0.734** |
+| 1,536 | 23,040 | 102.4 | 7.01 | 4.34 | 5.94 | 13.70 | **0.718** |
+| 1,792 | 26,880 | 119.5 | 8.51 | 4.76 | 6.89 | 16.03 | **0.741** |
+| 2,048 | 30,720 | 136.5 | 10.89 | 5.97 | 7.91 | 17.77 | **0.792** |
+| 2,560 | 38,400 | 170.7 | 14.68 | 7.09 | 9.86 | 23.14 | **0.812** |
+| 3,072 | 46,080 | 204.8 | 19.07 | 8.54 | 12.08 | 28.77 | **0.835** |
+| 4,096 | 61,440 | 273.1 | 30.88 | 12.11 | 16.08 | 38.29 | **0.932** |
+
+**The direct kind is ahead end to end at every density from 68 right up to the key-space ceiling at
+273, where the sparse-density family crossed at 69.** So `DIRECT_STATIC_DENSITY = 64` is the correct
+constant for one family and the wrong one for the other, and the quantity it reads is a proxy rather
+than the cause.
+
+**The datum that settles what the cause is.** `mutual:blocks:4096` and `triangle:blocks:4096` have
+**the same key space** (2^24), **the same row count** (61,440), **the same density** (273) and the
+same input relation, and the right answer is **opposite** on them: 0.932 for the direct kind on the
+triangle and 1.957 against it on `mutual`. Nothing a density rule can see distinguishes them. What
+distinguishes them is the **probe count**: `mutual(x,y) :- edge(x,y), edge(y,x)` probes the fully
+bound index once per edge, 61,440 times, and `tri(x,y) :- edge(x,y), edge(y,z), edge(z,x)` probes it
+once per two-path, 15 times more often at this density. Fifteen times more probes over the same
+build, and the sign flips.
+
+**The cost model that closes on all three families.** Direct pays when
+`key_space <= K · probes`, with `K` the ratio of one probe's saving to one key's build cost. Fitting
+`K` at the sparse family's crossover (domain about 208: key space 43,264 against about 1,872 probes)
+gives **`K` ≈ 23**, and that one constant predicts the other two:
+
+| Cohort | key space | probes into the swept index | `key_space / probes` | model says | measured |
+| --- | ---: | ---: | ---: | :---: | :---: |
+| `triangle:sparse`, crossover | 43,264 | ~1,872 | 23.1 | at the crossover | crossover (calibration point) |
+| `triangle:blocks:4096` | 16,777,216 | ~921,600 | 18.2 | direct, just | direct, 0.932 |
+| `mutual:blocks:4096` | 16,777,216 | 61,440 | 273 | sparse, far | sparse, 1.957 |
+
+A single constant on `key_space / probes` gets all three, including the pair a density rule cannot
+tell apart. **That is a closed cost model and it names the successor exactly: rule on an estimated
+probe count, not on rows.** The plan can estimate it — it has the join order, which link sits at
+which level, and, once the earlier static indexes are built, each one's rows over its distinct keys,
+which is the average fan-out that multiplies into the next level's probe count.
+
+**Why the shipped constant stays at 64 anyway, and what it costs.** The probe-count rule is an
+architecture change to the policy and needs its own task. Between the two constants a single
+density can take, 64 is the one whose errors are bounded: it is right on `triangle:sparse` by
+construction and right on `mutual:blocks`, and on `triangle:blocks` it costs 7 to 39 per cent of one
+whole evaluation while **saving 36 to 64 MB of resident memory** at the top of that range. The rule
+it replaces had no bounded error at all — it was 5.2 times slower end to end on
+`triangle:sparse:4096` and held 65 MB for a relation of 12,288 rows. Choosing the conservative end
+of a proxy over an unbuilt cost model is the decision, and this is the measurement that prices it.
