@@ -5255,8 +5255,17 @@
       "last": 1204,
       "purpose": "Architecture review of the Datalog/Rel functionality landed in ergodis and ergodis-private: high-level design, contracts, types, modularity",
       "sequence": 584
+    },
+    {
+      "count": 1,
+      "first": 1205,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1205,
+      "purpose": "transferable evidence for the Rel route (prepared-source encoding, self-standing layer records, externals validation)",
+      "sequence": 585
     }
   ],
-  "next_id": 1205,
+  "next_id": 1206,
   "schema": "codex-task-id-allocations-v1"
 }
