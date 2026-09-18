@@ -5246,8 +5246,17 @@
       "last": 1203,
       "purpose": "Re-locate the growing join index direct/sparse crossover (DIRECT_INDEX_DENSITY) on the kept C1202 arm; C1202 report candidate 2",
       "sequence": 583
+    },
+    {
+      "count": 1,
+      "first": 1204,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1204,
+      "purpose": "Architecture review of the Datalog/Rel functionality landed in ergodis and ergodis-private: high-level design, contracts, types, modularity",
+      "sequence": 584
     }
   ],
-  "next_id": 1204,
+  "next_id": 1205,
   "schema": "codex-task-id-allocations-v1"
 }
