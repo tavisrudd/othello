@@ -5273,8 +5273,17 @@
       "last": 1207,
       "purpose": "structured refusals with error context across core and the Rel driver; error reporting and error UI audit and design session",
       "sequence": 586
+    },
+    {
+      "count": 1,
+      "first": 1208,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1208,
+      "purpose": "triage of the C1204 review findings not owned by C1205-C1207",
+      "sequence": 587
     }
   ],
-  "next_id": 1208,
+  "next_id": 1209,
   "schema": "codex-task-id-allocations-v1"
 }
