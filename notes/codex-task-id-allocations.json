@@ -5264,8 +5264,17 @@
       "last": 1205,
       "purpose": "transferable evidence for the Rel route (prepared-source encoding, self-standing layer records, externals validation)",
       "sequence": 585
+    },
+    {
+      "count": 2,
+      "first": 1206,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1207,
+      "purpose": "structured refusals with error context across core and the Rel driver; error reporting and error UI audit and design session",
+      "sequence": 586
     }
   ],
-  "next_id": 1206,
+  "next_id": 1208,
   "schema": "codex-task-id-allocations-v1"
 }
