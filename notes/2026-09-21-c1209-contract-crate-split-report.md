@@ -504,3 +504,145 @@ the receipt inventory and the A/B; the card closed and archived per
    split.
 10. **Contract crate directory name.** `crates/contract` with package name `ergodis-contract`,
     matching `crates/verify`/`ergodis-verify`. *Recommend yes.*
+
+## The cut as built
+
+Core commits: `db7fec6` (the runtime boundary check, repaired before the split) and `83eec12` (the
+move, the two identities and the record). The cut is the design of the section above, with one
+correction found while building and the collision handling the mirrored module names force.
+
+### Packages after the move
+
+`ergodis-contract` (`crates/contract`) holds `lib.rs`, `weight.rs`, `composition_graph.rs`,
+`rule_contract.rs`, `support.rs`, `datalog.rs`, `derivation.rs`, `ranked.rs`.
+`ergodis-verify` holds `lib.rs`, `binary_composition.rs`, `min_plus_transition.rs`,
+`composition_graph.rs`, `finite_lowering.rs`, `grounded.rs`, `support.rs`, `datalog_store.rs`,
+`derivation.rs`, `ranked.rs`.
+
+### Move evidence, file by file
+
+From `git diff -M --find-copies-harder` and `--numstat` over `83eec12`:
+
+| File | Git verdict | Lines ± | What changed beyond the move |
+|-----------------------------------------|---------------------------------------|---------|------------------------------|
+| `crates/contract/src/weight.rs` | rename from `crates/verify/src/weight.rs`, **100% similarity** | 0 / 0 | nothing; byte-identical, `semi_naive_product` included |
+| `crates/contract/src/datalog.rs` | rename from `crates/verify/src/datalog.rs`, **100% similarity** | 0 / 0 | nothing; byte-identical, test module included |
+| `crates/contract/src/rule_contract.rs` | rename from `crates/verify/src/rule_contract.rs`, 85% similarity | 5 / 115 | the import line drops `Limits`/`VerifiedGraph`; `check_invariance` becomes `pub`; the module docstring names `ergodis_verify::grounded` as the checker; the 110-line checker block (`Verified`, `replay`, `verify`, `support_check`, `verify_support`) is removed to `crates/verify/src/grounded.rs` |
+| `crates/contract/src/support.rs` | rename from `crates/verify/src/support.rs` at a relaxed threshold, 84 lines kept | 84 / 0 new file content | module docstring rewritten to describe the record and the producer and to name `ergodis_verify::support` as the check; `Stability` dropped from the import (only `check` used it); `check`, `Rejection` and the test module left behind in verify |
+| `crates/contract/src/composition_graph.rs` | new file, three types lifted verbatim | 58 / 0 | new module docstring; `ProductRule`, `Limits` and `Error` are byte-for-byte the originals, so every variant and `#[error("…")]` string is unchanged |
+| `crates/contract/src/derivation.rs` | new file, five items lifted verbatim | 93 / 0 | new module docstring; `DERIVATION_SCHEMA`, `premise_stride`, `DerivationCertificate`, `Rejection`, `From<Rejection> for Error` and `decode_derivation_certificate` unchanged |
+| `crates/contract/src/ranked.rs` | new file, six items lifted verbatim | 60 / 0 | new module docstring; `RANKED_SCHEMA`, `RankedRelation`, `RankedCertificate`, `Rejection`, `From<Rejection> for Error` and `decode_ranked_certificate` unchanged |
+| `crates/contract/src/lib.rs` | new file | 80 / 0 | module list, `IDENTITY_DOMAIN`, `HASHED_SOURCES`, `implementation_identity`, `sources_are_complete` |
+| `crates/verify/src/grounded.rs` | new file, the checker block lifted | 126 / 0 | new module docstring; the five items are the originals with the private `Grounded` field reads replaced by the existing public accessors `inputs()`, `products()`, `source_id()` |
+| `crates/verify/src/composition_graph.rs` | in place | 5 / 54 | the three moved types deleted; two import lines; docstring sentence pointing at the contract module |
+| `crates/verify/src/support.rs` | in place | 8 / 73 | schemas, record and `derive` deleted; imports retargeted; docstring rewritten; the test module now imports `derive` from the contract |
+| `crates/verify/src/derivation.rs` | in place | 15 / 97 | record, schema, stride, refusals, `From` and decoder deleted; imports retargeted; docstring shortened to the check |
+| `crates/verify/src/ranked.rs` | in place | 13 / 64 | same shape as `derivation.rs` |
+| `crates/verify/src/datalog_store.rs` | in place | 3 / 3 | three import lines retargeted to the contract; no body change |
+| `crates/verify/src/min_plus_transition.rs` | in place | 1 / 1 | **one line**: `use crate::weight::{…}` becomes `use ergodis_contract::weight::{…}`. Not byte-identical, against the phase-1 expectation; see Invariants |
+| `crates/verify/src/finite_lowering.rs` | untouched | 0 / 0 | **byte-identical**; absent from the commit's file list |
+| `crates/verify/src/lib.rs` | in place | 64 / 17 | module list, `IDENTITY_DOMAIN` (tag `v2` to `v3`), `HASHED_SOURCES`, the identity rewritten as a fold, `sources_are_complete` |
+| `crates/verify/src/binary_composition.rs` | in place | 11 / 1 | `RECORD_SCHEMA = 2`; `VerificationRecord.contract` with its docstring; `verify` fills it from `ergodis_contract::implementation_identity()`; the minted `schema` reads the constant |
+
+### Non-move line changes outside the two packages, with reasons
+
+- `src/admission.rs`: `AdmissionReceipt.contract` and `contract_identity()`; the field copied out
+  of the record and back into it on replay; the binding comparison extended. One
+  `#[allow(clippy::large_enum_variant)]` on `AdmissionOutcome` with a comment: the added identity
+  pushed the admitted variant past the lint's threshold, and boxing it would change the public
+  type and add an allocation to a path that runs once per check. This is a lint annotation, not a
+  behaviour change.
+- `crates/runtime/src/service.rs`: `WireReceipt.contract` and its projection.
+- `crates/runtime/src/recursive.rs`: `composition_graph` now names the contract module (its only
+  use there is the `Error` behind `#[from]`); `VerifiedGraph` from verify; `rule_contract::verify`
+  becomes `grounded::verify`.
+- `crates/rules/src/lib.rs`, `demand.rs`, `frontier.rs`, `pages.rs`, `provider.rs`: import lines;
+  the two checker calls become `grounded::verify`/`grounded::verify_support`; `premise_stride` is
+  called unqualified and its adjacent comment drops the module prefix.
+- `tests/verifier_boundary.rs`: the record/receipt equality assertion gains the contract field, and
+  the forgery table gains a case that flips `record.contract[0]`.
+- Every other core file in the commit changes only `use` lines, plus four files where the mirrored
+  module names collide in one scope and an alias resolves it:
+  `crates/rules/tests/contract_properties.rs` and `properties.rs` bind the replay refusal as
+  `ReplayError` (the contract's) so `composition_graph` can stay bound to verify's checker module;
+  `contract_properties.rs`, `properties.rs`, `boolean.rs`, `contracts.rs`,
+  `crates/runtime/tests/update_cost.rs` and `update_properties.rs` import the grounded checker as
+  `verify_grounded` rather than shadowing a local named `grounded`.
+- `scripts/check-verifier-dependencies.py`: checks both packages' direct dependency sets and the
+  verifier's workspace closure being itself and the contract.
+- `docs/rule-contract.md`, `docs/verification.md`, `docs/language-semantics.md`,
+  `docs/dev/contributor-boundaries.md`, `DESIGN.md`: the new package, the dependency direction, the
+  two identities, and `-p ergodis-contract` in the documented replay command.
+
+## Identities
+
+| Identity | Value |
+|--------------------------------|------------------------------------------------------------------|
+| checker, before the split | `efcfa1af06d8ee380bc0578e8bd80a11996c600caf36e275176b1bd3c1f7f313` |
+| checker, after (`ergodis-verify`) | `0ea8d53f610945bdcb867341aa8fcdae6e6d3b7580518856179b48bf34cf6498` |
+| contract (`ergodis-contract`) | `85346c30659b5f5d8ddd5f36a7659a2d9eae13e206b3a08292e3112afe0504b2` |
+
+The checker identity moved once, for three stated reasons: six source files left its hashed list,
+`support.rs` and the new `grounded.rs` joined it, and the domain separator went from
+`ergodis/direct-binary-composition-check/v2` to `…/v3`. The contract identity's separator is
+`ergodis/finite-rule-contract/v1`.
+
+Both values were read from the compiled code, by a temporary probe test under
+`crates/verify/tests/` (which is outside `src/` and so contributes to neither identity), and they
+agree digit for digit with an independent offline recomputation from the file bytes. The probe was
+removed before the commit.
+
+**The docstring demonstration.** With the packages as committed, one docstring line was added above
+`UNRANKED` in `crates/contract/src/support.rs` with the Edit tool and the probe re-run:
+
+| | contract | checker |
+|------------------|------------------------------------------------------------------|------------------------------------------------------------------|
+| before the edit | `85346c30659b5f5d8ddd5f36a7659a2d9eae13e206b3a08292e3112afe0504b2` | `0ea8d53f610945bdcb867341aa8fcdae6e6d3b7580518856179b48bf34cf6498` |
+| with the edit | `d4146e0a9230708e0bbc8cf026a885480767329d00acc9e80bd2610de3d86baf` | `0ea8d53f610945bdcb867341aa8fcdae6e6d3b7580518856179b48bf34cf6498` |
+| after reverting | `85346c30659b5f5d8ddd5f36a7659a2d9eae13e206b3a08292e3112afe0504b2` | `0ea8d53f610945bdcb867341aa8fcdae6e6d3b7580518856179b48bf34cf6498` |
+
+The checker identity is unmoved by a contract docstring edit, which is what the split was for. The
+edit was reverted with the Edit tool; no git operation touched the working tree.
+
+## Receipt inventory
+
+No stored artifact in any repository carries an `implementation_identity()` value, so nothing is
+regenerated. Searched: core `evidence/` (its `checker_sha256` fields are hashes of the Python
+checking scripts written by `python/check_*.py`, unrelated), core fixtures and tests,
+`~/src/ergodis-private`, and `~/src/ergodis-evidence`. The one pinned checker hex in either tree is
+`tests/admission_pipeline.rs`'s `PRE_EXTRACTION_CHECKER_ID`, asserted with `assert_ne!` against the
+current value; it still holds and needed no edit.
+
+What did regenerate: `SHA256SUMS` (source, script and document bytes changed, and the manifest
+walks `crates/` in full) and `Cargo.lock` (one new package).
+
+## Invariants
+
+| Invariant | How it is pinned | Result |
+|-------------------------------------|-----------------------------------------------------------------|--------|
+| wire source identity | `crates/rules/tests/demand.rs`, `contracts.rs`, `demand_nary.rs`; `crates/verify/src/datalog_store.rs` tests; the `datalog.rs` test `admits_closure_and_numbers_variables_in_body_order`, which asserts `admit`'s identity equals `ground`'s | unmoved |
+| prepared source identity | `crates/rules/tests/demand_prepared.rs`, over `admit_prepared`'s own domain tag | unmoved |
+| certificate bytes | `crates/rules/tests/native_abi.py` ("native C ABI: 129 min-plus programs, one Boolean closure, independent oracle … passed") and `crates/rules/tests/wasm_abi.mjs`, which replays a **byte-identical native certificate** under the wasm32 build | unmoved |
+| plan fingerprints and helper loads | `python3 python/generate_fixtures.py --check` | unmoved |
+| parity digest, Python differential | `python/generate_fixtures.py --check`, plus `dynamic_updates_match_independent_python_oracle` (512 updates) and the oracle parity inside both ABI harnesses | unmoved |
+| `finite_lowering.rs` byte-identical | absent from `83eec12`'s file list; `git diff` empty | **holds** |
+| `min_plus_transition.rs` byte-identical | `git diff -M HEAD~1 HEAD` | **does not hold**: exactly one line, `use crate::weight::{BoundedMinPlus, TransitionWeight}` becoming `use ergodis_contract::weight::{…}`. The module imported the carrier trait from the package that moved, so the path had to follow. No item, signature or body changed. Consequence: the private pin on this file's hash in `analysis/weighted-normalization/SHA256SUMS` no longer matches and is handled in the private commit |
+
+## Gates run
+
+| Gate | Command | Result |
+|-------------------------|--------------------------------------------------------------------|--------|
+| baseline, before any edit | `cargo test --all-features` | green, 59s |
+| format | `cargo fmt --check` | clean |
+| lint | `cargo clippy --locked --all-targets --all-features -- -D warnings` | clean |
+| tests | `cargo test --locked --all-features` | 1021 passed, 0 failed, across 84 result sections; includes both `sources_are_complete` completeness tests and `tests/evidence_manifest.rs` |
+| fixtures and oracle | `python3 python/generate_fixtures.py --check` | clean |
+| manifest | `python3 python/generate_evidence.py --check` | clean |
+| verifier boundary | `python3 scripts/check-verifier-dependencies.py` | "the contract and four approved external direct dependencies; 25 packages in normal/build closure; no solver or host package" |
+| runtime boundary | `python3 scripts/check-runtime-dependencies.py` | "runtime -> core, rules, verifier; no reverse or default host edge" |
+| native ABI | `cargo build -p ergodis-rules --release` then `native_abi.py` | "129 min-plus programs, one Boolean closure, independent oracle, source/claim/handle/capacity lifecycle gates passed" |
+| wasm32 ABI | `cargo build -p ergodis-rules --release --target wasm32-unknown-unknown` under `nix develop .#wasm`, then `wasm_abi.mjs` | "129 programs, native certificate and Python oracle parity, lifecycle gates passed" |
+| publication guards | `bash tests/publication-guards.sh` | 105 passed, 0 failed |
+| publication lint | the pre-commit hook, on the staged and export-filtered trees | "public-lint: clean" for both, on `db7fec6` and `83eec12` |
+
+The performance A/B is deliberately not run here; it is a separate milestone.
