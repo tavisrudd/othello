@@ -25,6 +25,9 @@ inventory in its section 4) and
 
 ### Core (`crates/verify`, `crates/rules`)
 
+The core half runs after C1209 (contract crate split, Tavis 2026-09-21): the error type and the
+refusal record are contract types and land in the contract crate. The private half does not wait.
+
 - A refusal record carried by the error — kind of bound, the relation or index it concerns where
   one exists, the round where one exists, the limit, the observed or projected figure, and the
   unit — produced at every site in `demand.rs` that refuses, and at the admission sites in

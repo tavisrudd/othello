@@ -22,6 +22,9 @@ and `notes/2026-09-18-c1204-review-half2-contract-evaluator-checkers.md` (F1, F1
 
 ### Milestone a — core: a byte-level door for the prepared route
 
+Runs after C1209 (contract crate split, Tavis 2026-09-21): the encoder, the decoder and the source
+enum's contract half land in the contract crate; the checker entry points land in `ergodis-verify`.
+
 - Factor the canonical encoding that `datalog::admit_prepared` already streams into SHA-256 into
   an encoder and a decoder for a prepared source, so the prepared identity is recomputable from
   bytes; the identity of every existing prepared source must not change.

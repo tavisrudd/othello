@@ -164,7 +164,11 @@ Each leads with the recommendation.
    on the result. Pro: a `Program` then says which language it is in, and a certificate says which
    checker accepted it. Con: every wire `source_id` and recorded wire certificate regenerates.
    Alternative: a profile field under the existing schema (same invalidation, less clear).
-5. **Contract crate split (finding N).** Recommend: do it, and first — before C1205 milestone a —
+5. **Contract crate split (finding N). DECIDED (Tavis, 2026-09-21): yes, split first.** Allocated
+   as **C1209** (`notes/2026-09-21-c1209-contract-crate-split.md`), which carries one new question
+   the split raises: admission is trust-relevant code the checkers' verdict depends on, so what the
+   checker identity must still cover is a design-step decision there. Original recommendation:
+   do it, and first — before C1205 milestone a —
    so the prepared encoder and decoder, the refusal record and the admission code land outside the
    checker identity from the start. Pro: the identity moves anyway under C1205/C1206, its one
    consumer is the binary-composition record, it already omits `support.rs`, and nothing is
@@ -226,8 +230,8 @@ No identifiers are reserved; each waits for section 3.
    the programme goal. Week.
 2. **Small-repairs bundle** (section 4). Hours; closes a silent wrong-answer path and stops the
    evidence claims reading wider than they are while C1205 is in progress.
-3. **alloc-9 — contract crate split** (decide-5), only if taken first; otherwise it drops to after
-   C1206. Days.
+3. **alloc-9 — contract crate split** (decide-5). **Allocated as C1209, 2026-09-21**, ahead of
+   C1205 milestone a and C1206's core half. Days.
 4. **alloc-5 — arity-dependent domain ceiling** (decide-2). Before C1195 fixes cohort sizes. Days.
 5. **alloc-4 — Datalog schema string and checker identity field** (decide-4). Before C1195 freezes
    artifacts; C1196 builds on it. Days.
