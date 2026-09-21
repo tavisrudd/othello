@@ -646,3 +646,83 @@ walks `crates/` in full) and `Cargo.lock` (one new package).
 | publication lint | the pre-commit hook, on the staged and export-filtered trees | "public-lint: clean" for both, on `db7fec6` and `83eec12` |
 
 The performance A/B is deliberately not run here; it is a separate milestone.
+
+## Private importers
+
+Private commit `55dab0c`. `ergodis-private` gained an `ergodis-contract` path dependency; nothing
+else in the private workspace needed one. `tasks/tools`, `tasks/gem-hunt` and
+`tasks/hadamard-2092` are unchanged: the only core paths `tasks/tools` names are
+`min_plus_transition`, which stayed in the checker package.
+
+| File | Change |
+|---------------------------------------|--------|
+| `Cargo.toml`, `Cargo.lock` | the new path dependency |
+| `src/rel_lowering.rs` | `rule_contract::{Atom, Fact, Program, Relation, Rule, Term, SCHEMA}` retargeted |
+| `src/rel_stratified.rs` | `datalog::{PreparedAtom, PreparedRelation, PreparedRule, PreparedSource, Slot}` and `rule_contract::Error` retargeted |
+| `src/datalog_certificate_codecs.rs` | `ranked::RankedRelation` retargeted; the docstring's `RankedCertificate` path follows |
+| `src/rel_frontend/lower.rs` | one docstring path |
+| `examples/closure_ballpark.rs` | `rule_contract`, `DerivationCertificate`, `RankedCertificate`, `premise_stride` retargeted |
+| `tests/rel_lowering.rs` | the six `datalog::MAX_*` bounds the backend mirrors |
+| `tests/datalog_certificate_codecs.rs` | `ranked::RankedRelation` retargeted |
+| `docs/adr/0004-rel-lowering-ir.md` | the core rule-contract path |
+| `docs/adr/0005-contract-crate-and-two-identities.md` | status Proposed to Accepted, corrected to what was built, with the three open cut questions answered and the unforeseen consequence recorded |
+
+Every Rust change is a path retarget; no signature, type or body changed. What still names
+`ergodis_verify` in private, correctly: `src/lrc_transition_verification.rs`,
+`src/privacy_lowering.rs`, `tests/independent_summary_transition.rs`,
+`tests/summary_transition_forgery.rs` and `tasks/tools/src/generic_certificate_bench.rs`, all of
+which use `min_plus_transition` or `finite_lowering`.
+
+### Private gates
+
+| Gate | Result |
+|---------------------|--------|
+| `cargo fmt --check` | clean |
+| `cargo clippy --all-targets --all-features -- -D warnings` | clean |
+| `cargo test --all-features` | `exit=0`, 13m54s, 1171 passed, 0 failed across 40 result sections |
+| parity digest and reference-evaluator differential | inside that run: `tests/rel_reference_eval.rs` (`the_committed_fixtures_agree_with_the_reference_evaluator`, `the_generated_corpus_agrees`, `the_negation_corpus_agrees`, `every_figure_three_and_four_equation_agrees_with_the_reference_evaluator`, `the_recorded_rejection_surface_agrees`) and `tests/rel_lowering.rs`, all green |
+
+### The two private hash pins
+
+- `evidence/2026-09-12-privacy-lowering.sha256` pins `../ergodis/crates/verify/src/finite_lowering.rs`
+  at `68ee2202…`. That file is byte-identical after the split and the pin **still verifies**.
+- `analysis/weighted-normalization/SHA256SUMS` pins
+  `../ergodis/crates/verify/src/min_plus_transition.rs` at `61390899…`. That file now hashes to
+  `7c55b24b…`, because its one import line had to follow the carrier trait into the contract
+  package, so the pin **no longer verifies**.
+
+Both files were left untouched, deliberately. They are point-in-time receipts of dated audits, not
+live gates: nothing in the test suite checks them, the weighted-normalization README replays them
+by hand and names the core revision it inspected (`2e1bab2`), and the `Cargo.lock` hashes both
+receipts pin were **already stale before this task** (the private lock at the previous commit
+hashed `b2f8e002…` against a pinned `ebeb7931…`; the core lock before the split hashed
+`12fe7846…` against a pinned `b9fdafe1…`). Rewriting one line of a dated receipt would make it
+claim an attestation it never made. Refreshing that bundle, if wanted, is a task for whoever owns
+the weighted-normalization audit and means a re-run, not a hash edit.
+
+### One private artifact left alone and flagged
+
+`analysis/rel-frontend/coverage-v1.json` contains the prose "projects the IR layer by layer into
+`ergodis_verify::rule_contract::Program`". It is a versioned coverage record rather than live
+documentation, and the coordinator's scope named only the ADR 0004 line and the `lower.rs`
+docstring, so it was not edited. The type it names is the same type, now spelled
+`ergodis_contract::rule_contract::Program`.
+
+## Deviations from the approved cut
+
+1. **`min_plus_transition.rs` is not byte-identical.** One line: the carrier trait it imports moved
+   to the contract package, so the `use` path followed. No item, signature or body changed.
+   `finite_lowering.rs` is byte-identical as expected.
+2. **One lint annotation was added that the cut did not anticipate.** The second identity pushed
+   `AdmissionOutcome::Admitted` past clippy's `large_enum_variant` threshold. Boxing the variant,
+   which is what clippy suggests, would change the public type and add an allocation to a
+   once-per-check path, so the enum carries `#[allow(clippy::large_enum_variant)]` with a comment
+   stating why. No behaviour or API change.
+3. **The root `ergodis` package gained a contract dependency**, which the phase-1 inventory said it
+   would not need. It needs one now because `admission::contract_identity()` calls
+   `ergodis_contract::implementation_identity()` for the record's second field.
+4. **Six test files import the grounded checker under an alias.** With the contract mirroring the
+   checker's module names, `use ergodis_verify::grounded;` would sit beside a local binding named
+   `grounded` in several of these tests, so they import `verify as verify_grounded`. Two of them
+   also bind the replay refusal as `ReplayError`. These are readability aliases in tests, not API
+   changes.
