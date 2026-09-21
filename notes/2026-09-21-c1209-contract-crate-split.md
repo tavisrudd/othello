@@ -2,7 +2,8 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-21
-**Status**: QUEUED (allocated by Tavis, 2026-09-21, from C1204 finding N via the C1208 triage,
+**Status**: DONE 2026-09-21, audited and repaired; report
+`notes/2026-09-21-c1209-contract-crate-split-report.md`. Originally QUEUED (allocated by Tavis, 2026-09-21, from C1204 finding N via the C1208 triage,
 decision 5: split, and split first). **Runs before C1205 milestone a and before C1206's core
 half**, so the prepared-source encoder and decoder and the refusal record land in the contract
 crate from the start.

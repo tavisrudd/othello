@@ -379,3 +379,20 @@ array's layout and a denser key packing would remove it.
 **Evidence level**: `sweep-2026-09-18-c1203-stages-blocks*-repeats1.json` and
 `stages-2026-09-18-c1203-process-density48.json`; report open ledger item 3. No stage varies the
 reservation size at a fixed page count. No C-ID allocated.
+
+## 2026-09-21 — thin LTO does not inline a three-line non-generic accessor across a workspace package boundary (C1209)
+
+**Observation**: after the contract crate split, `Admitted::tuple` and `Admitted::pack` (non-generic,
+one to three lines) became out-of-line GOT calls from `ergodis-verify`'s two Datalog load passes
+under `lto = "thin"`, `codegen-units = 1`, while the ten one-expression carrier methods of
+`BoundedMinPlus`/`Boolean` stayed inlined. The first disassembly reading missed `pack` because the
+symbol search `Admitted5(pack|tuple)` cannot match `Admitted4pack`: Rust mangling length-prefixes
+each path component.
+**Why it may matter**: every later package boundary (the proposed Rel subsystem crate, the
+product/instrument split of `ergodis-rules`) carries the same exposure, and the automatic
+cross-crate inlining heuristic draws its line somewhere between a one-expression method and a
+three-line fold. A symbol-table diff (defined out of line in the candidate, absent in the control)
+is the reliable detector; a mangled-name grep is not. `symbol_disasm.py` in private
+`analysis/datalog-comparison/` is the committed normalizer.
+**Evidence level**: C1209 report "Performance A/B" and audit finding 1 (GOT-reference counts per
+retained binary). Where the heuristic's threshold sits was not measured. No C-ID allocated.
