@@ -38,6 +38,11 @@ that the identity's one consumer is `binary_composition.rs`'s verification recor
 
 Item 1 (the exact cut) stays a design-step reading, recorded in the report.
 
+The trade-offs behind these decisions, with each rejected alternative and its reason, are private
+ADR 0005 (`~/src/ergodis-private/docs/adr/0005-contract-crate-and-two-identities.md`, private
+`74f974c`, status Proposed). This task moves it to Accepted in the same change as the code,
+corrected to what was built, and fills in its three open cut questions.
+
 ## Design step first
 
 1. **The cut.** Proposed: a new `ergodis-contract` crate takes `rule_contract`'s wire types,
