@@ -21,7 +21,24 @@ inventory, dependency arrows), `notes/2026-09-21-c1208-step2-code-verification.m
 that the identity's one consumer is `binary_composition.rs`'s verification record),
 `notes/2026-09-21-c1208-c1204-findings-triage-report.md` (decision 5).
 
-## Design step first (short, with Tavis where marked)
+## Decided (Tavis delegated the call, 2026-09-21; main agent's decisions)
+
+- **Two identities** (item 2, option (a)). `ergodis-contract` exposes its own implementation
+  identity over all of its sources, built the way the checker's is; `ergodis-verify`'s identity
+  covers checker sources only. A verification record carries both, as separate named fields, so a
+  reader can tell a contract edit from a checker edit, and the checker identity is stable under
+  producer-facing changes. Reasons against the others: keeping admission in the checker crate
+  leaves `ergodis-rules` depending on the checker crate for admission and keeps most of the
+  coupling; one identity over both crates keeps all of it. Consequence for the C1208 decision on a
+  checker identity field for Datalog certificates: wherever that field lands, it is the pair.
+- **The checker identity covers every checker source file, `support.rs` included** (item 3), with
+  a test that fails when a module of either crate is missing from its crate's list. The identity
+  moves once in this task anyway, so the omission is repaired in the same move.
+- **No transition re-exports** (item 4): every importer is updated in the same change.
+
+Item 1 (the exact cut) stays a design-step reading, recorded in the report.
+
+## Design step first
 
 1. **The cut.** Proposed: a new `ergodis-contract` crate takes `rule_contract`'s wire types,
    schema constants, `Error`, encoding and identity functions, and `datalog`'s budgets,
