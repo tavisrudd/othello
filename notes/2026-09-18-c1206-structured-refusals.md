@@ -35,7 +35,10 @@ inventory in its section 4) and
 - Clamp the caller-supplied `direct_limit` at the public checker entry points.
 - One statement of the budget model where a reader of `demand.rs` will meet it: each bound, its
   unit, whether it is a refusal or a fallback to another representation, and that the checker's
-  direct limit is deliberately independent of the evaluator's ceilings.
+  direct limit is deliberately independent of the evaluator's ceilings (C1208 triage: the two
+  docstrings already derive their own figures, 64 MiB of index heads against 256 MiB of checker
+  array, so this needs a cross-reference, not a new argument). The statement also says what
+  `MAX_WORKSPACE_BYTES` was chosen against; it is the one core budget with no derivation.
 - The refusal path stays cold: no new work, state or register pressure in the derivation loop.
   The record is built at the refusal site from values already in hand.
 
@@ -50,7 +53,10 @@ inventory in its section 4) and
 - Record-check errors name the record kind, its index and the failing field; `CheckersDisagree`
   names the relation and the first differing tuple. (If C1205 milestone b lands first it owns this
   item; whichever task runs second verifies it.)
-- Move `MAX_COMPLEMENT`/`MAX_FILTER` beside `MAX_LAYER_TUPLES` where they are enforced; anchor
+- Move `MAX_COMPLEMENT`/`MAX_FILTER` beside `MAX_LAYER_TUPLES` where they are enforced; their
+  docstrings already explain why the three share a value, so state the missing part, what 2^22
+  was chosen against, and that `MAX_COMPLEMENT` also bounds a one-byte-per-entry membership
+  vector that the construction and the record check each allocate (C1208 triage); anchor
   `MAX_NAME` to a named core constant or extend the constants test.
 - `rel-lower` and the bench print the structured refusal; a refused cohort in a receipt records the
   refusal record, which is what C1195's reach tables need.

@@ -5,6 +5,14 @@
 **Status**: QUEUED — AFTER C1192; min-plus rows gated on C1194. Rule-contract programme step 5.
 Ranked fourth among the Datalog programme's next steps
 (`2026-09-16-ergodis-datalog-programme-review.md`).
+**From the C1204 review (C1208 triage, 2026-09-21)**: (1) no external engine has yet evaluated a
+Rel-lowered program, so exact tuple-set agreement with Soufflé on the *lowered* programs is a
+correctness deliverable of this suite, reported separately from timing; (2) do not fix cohort
+sizes before the domain-ceiling decision (the value dictionary is capped at 65,536 entries for
+every program today; triage report decision 2); (3) a refused cohort records C1206's structured
+refusal record in its receipt, which is what the reach tables are built from; (4) artifacts should
+freeze after the Datalog schema-string decision (triage report decision 4), which moves every
+wire source identity.
 
 ## Why
 

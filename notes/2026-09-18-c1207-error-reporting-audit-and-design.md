@@ -27,7 +27,8 @@ what finally reaches a person.
   `crates/verify` errors, `crates/rules`, `crates/runtime`, `crates/modules`; the C ABI and
   provider status codes; what WASM hosts receive.
 - Private: `rel_frontend` codes and `diagnostic.rs` rendering, `LowerFailure`/`Budget`,
-  `rel_stratified::Error`, and a bounded sample of the non-Datalog providers and application
+  `rel_stratified::Error`, `Readout::decode` (which renders an unknown dictionary id as `"?"`
+  because it has no failure channel; C1208 triage), and a bounded sample of the non-Datalog providers and application
   modules, enough to tell whether they share the problem.
 - Tools: what `ergodis-tools` subcommands print on failure, exit codes, what a receipt records for
   a refused or failed run.

@@ -4,6 +4,13 @@
 **Date**: 2026-09-16
 **Status**: QUEUED. Ranked third among the Datalog programme's next steps
 (`2026-09-16-ergodis-datalog-programme-review.md`); independent of C1192/C1193.
+**Gate (C1204 finding F, C1208 triage 2026-09-21)**: do not scope or start before the precursor
+design decision — whether the min-plus relational evaluator reuses `Demand`'s plan, index and
+workspace machinery or is a second kernel, and what a min-plus relational certificate carries. The
+demand path is Boolean with set semantics in the evaluator and in both certificate formats, and
+the prepared seam has no carrier or fact cost, so the Deliverable's "the certificate is the
+existing min-plus certificate" holds only on the grounded path (two-atom bodies, small bounds).
+See `2026-09-21-c1208-c1204-findings-triage-report.md`, decision 1.
 
 ## Why
 

@@ -37,7 +37,10 @@ and `notes/2026-09-18-c1204-review-half2-contract-evaluator-checkers.md` (F1, F1
 - `LayerReport` (or a successor record) carries, per layer: the prepared source identity, the
   declared relations with arity and input flag, digests of both certificates, the mapping from each
   negated, compared or aggregated literal to the declared relation that replaced it, and a digest
-  per seeded input relation. Decide and record whether the certificates and the encoded layer
+  per seeded input relation. The declared set is deliberately a superset of what the layer's
+  rules read (a relation whose own layer this is gets declared even when no rule reads it, which
+  a fact-only layer zero depends on), so name the field for what it is, not "relations read".
+  Decide and record whether the certificates and the encoded layer
   source themselves are retained, returned on request, or written by the tool.
 - Record digests get domain separation (schema tag, record kind, relation, arity) before anything
   durable stores one.
@@ -58,7 +61,11 @@ and `notes/2026-09-18-c1204-review-half2-contract-evaluator-checkers.md` (F1, F1
 - Replace `rel_lowering::project` with a wire export built from the per-layer assembly the driver
   already does, so an exported program is by construction the one that ran; the fragment check
   lives in one place. Refresh ADR 0004 and the lowering architecture note to describe the code as
-  it stands.
+  it stands. The refresh also records two things that today are written nowhere but source
+  comments (C1208 triage): the inventory of identities on the Rel route and which binds which, and
+  the exactness argument for per-column complement domains (now only in the `rel_stratified`
+  module header). An export under the n-ary body policy is admitted by the Datalog admission only,
+  never by the grounded one; both checkers admit through the Datalog door, so it is checkable.
 
 ## Decision for Tavis before milestone b closes
 

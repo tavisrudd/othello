@@ -5,6 +5,15 @@
 **Status**: QUEUED. Ranked fifth among the Datalog programme's next steps
 (`2026-09-16-ergodis-datalog-programme-review.md`); independent of the others, becomes urgent
 for C1195 because certificate emission and size are measured rows there.
+**From the C1204 review (C1208 triage, 2026-09-21)**: (1) the product route is the prepared one,
+which has no wire form until C1205 milestone a; build the encodings on that byte form, not on the
+`rel_lowering::project` route nothing produces; (2) both checkers index the certificates' flat
+`Vec<u32>` fields arithmetically and `premise_stride` floors at two with a zero sentinel, so a
+layout change moves the stride rule, the sentinel meaning and every direct index together, and
+checking from the compact form means a checker rewrite, not a decode step; (3) the Portability
+bullet presupposes an ABI for the Datalog path, decided 2026-09-21 and proposed as its own task
+(triage report decision 8) — that bullet waits for it; (4) if the certificate format opens, the
+checker identity field (core F13; triage report decision 4) rides with it.
 
 ## Why
 
