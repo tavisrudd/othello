@@ -1,0 +1,506 @@
+# C1209 — contract crate split: report
+
+**Lane**: `ergodis`
+**Date**: 2026-09-21
+
+## Design step: the cut
+
+Read-only inventory over `~/src/ergodis/crates/verify/` (all of `src/`, `Cargo.toml`, `tests/`),
+every core importer, `~/src/ergodis-private`, the core documents, guard scripts and the evidence
+generator. Nothing was edited and nothing was built; the present implementation identity was
+recomputed offline from the file bytes rather than by running a test.
+
+### 1. Item-level cut
+
+`ergodis-contract` mirrors the file names of the modules it takes, so every move is reviewable as a
+move and each crate's hashed list is the listing of its own `src/`. Neither crate has a `src/`
+subdirectory, so a completeness test over `src/*.rs` is exact.
+
+#### `ergodis-contract`
+
+| Item | Source file | Destination | Visibility change |
+|-------------------------------------------------------|----------------------|--------------------------------|-------------------|
+| `sealed::Sealed`, `Stability`, `WeightProperties`, `TransitionWeight`, `BoundedMinPlus`, `Boolean`, both impls, size assertions | `weight.rs` (whole file) | `contract::weight` | none |
+| `semi_naive_product` | `weight.rs` | `contract::weight` | none (see knot 2) |
+| `SCHEMA`, `CERTIFICATE_SCHEMA`, `BOOLEAN_CERTIFICATE_SCHEMA`, `MAX_BYTES`, `MAX_SCALARS`, `MAX_PRODUCTS`, `MAX_WORK` | `rule_contract.rs` | `contract::rule_contract` | none |
+| `Relation`, `Term`, `Atom`, `Rule`, `Fact`, `Program`, `Certificate` | `rule_contract.rs` | `contract::rule_contract` | none |
+| `Error` (all twelve variants, Display strings verbatim) | `rule_contract.rs` | `contract::rule_contract` | none |
+| `Carrier` and its six methods | `rule_contract.rs` | `contract::rule_contract` | none |
+| `WireValue` + `impl WireValue for BoundedMinPlus/Boolean`, `decode_values` | `rule_contract.rs` | `contract::rule_contract` | none |
+| `check_invariance` | `rule_contract.rs` | `contract::rule_contract` | **private → `pub`** |
+| `FactStream` (+ `Debug` impl, `FACTS_FIELD`) | `rule_contract.rs` | `contract::rule_contract` | none (stays private) |
+| `Grounded` + all accessors + `rebind` | `rule_contract.rs` | `contract::rule_contract` | none |
+| `round_bound`, `identifier`, `is_identifier`, `atom_index`, `ground` | `rule_contract.rs` | `contract::rule_contract` | none (`is_identifier` stays `pub(crate)`; its only caller, `datalog`, moves with it) |
+| `decode_program`, `decode_certificate`, `decode_support_certificate` | `rule_contract.rs` | `contract::rule_contract` | none |
+| `encode_source`, `identity_of` | `rule_contract.rs` | `contract::rule_contract` | none |
+| `parse_rules` (and its inner `atom`) | `rule_contract.rs` | `contract::rule_contract` | none |
+| Everything: `MAX_DOMAIN`/`MAX_ARITY`/`MAX_VARIABLES`/`MAX_RELATIONS`/`MAX_RULES`/`MAX_BODY`, `universe`, `Slot`, `AtomRef`, `AdmittedRule`, `AdmittedRelation`, `AdmittedFact`, `Admitted` (+`pack`, `tuple`), `admit`, `PREPARED_SCHEMA`, `PreparedRelation/Atom/Rule/Source`, `Streaming`, `admit_prepared`, the `#[cfg(test)]` module | `datalog.rs` (whole file) | `contract::datalog` | none |
+| `ProductRule` (+ `new`, size assertion), `Limits`, `Error` (six variants, Display strings verbatim) | `composition_graph.rs` | `contract::composition_graph` | none |
+| `SUPPORT_SCHEMA`, `BOOLEAN_SUPPORT_SCHEMA`, `SupportCertificate` | `support.rs` | `contract::support` | none |
+| `derive`, `UNRANKED` | `support.rs` | `contract::support` | none (see knot 3) |
+| `DERIVATION_SCHEMA`, `premise_stride`, `DerivationCertificate`, `Rejection`, `impl From<Rejection> for Error`, `decode_derivation_certificate` | `derivation.rs` | `contract::derivation` | none |
+| `RANKED_SCHEMA`, `RankedRelation`, `RankedCertificate`, `Rejection`, `impl From<Rejection> for Error`, `decode_ranked_certificate` | `ranked.rs` | `contract::ranked` | none |
+| new `implementation_identity()` over the contract's own `src/*.rs`, domain string `ergodis/finite-rule-contract/v1`, returning `[u8; 32]` | — | `contract::lib` | new item |
+
+#### `ergodis-verify` after the split
+
+| Item | Source file | Destination | Visibility change |
+|---------------------------------------------|-------------------------|-----------------------------|-------------------|
+| `VerifiedGraph`, `copy`, `verify`, `propagate` | `composition_graph.rs` | stays (`verify::composition_graph`) | none |
+| `check`, `Rejection`, the two `#[cfg(test)]` support tests | `support.rs` | stays (`verify::support`) | none; tests import `contract::support::derive` |
+| `Verified`, `replay`, `verify`, `support_check`, `verify_support` (lines 656–765 of `rule_contract.rs`) | `rule_contract.rs` | **new `verify::grounded`** | none; must read `Grounded` through the existing public accessors instead of its private fields |
+| `unify`, `head_tuple`, `head_matches`, `head_key`, `fixed_mask`, `mark_bound`, `closed_world`, `declared`, `ABSENT`, `Relations`, `check`, `check_bounded`, `check_admitted`, `check_admitted_bounded` | `derivation.rs` | stays | none (`pub(crate)` helpers keep their consumers in-crate) |
+| `Store`, `head_bound`, `visit_order`, `needed_indexes`, `justified`, the four `check*` entry points | `ranked.rs` | stays | none |
+| Whole file (`RelationStore`, `Rows`, `JoinIndexes`, `atom_key`, `DIRECT_LIMIT`, `MASKS`) | `datalog_store.rs` | stays, still a private module | none |
+| Whole files | `binary_composition.rs`, `min_plus_transition.rs`, `finite_lowering.rs` | stay | none |
+| `ContentId`, `DIRECT_LIMIT` re-export, `implementation_identity()` rebuilt over the checker sources including `support.rs` and `grounded.rs` | `lib.rs` | stays | none |
+
+**The exhaustive list of forced visibility widenings is one item: `rule_contract::check_invariance`
+becomes `pub`.** Nothing else in the split crosses a private boundary. In particular `Grounded`'s
+six private fields need no widening: `replay`, `support_check`, `verify` and `verify_support` read
+them as fields today (`grounded.inputs`, `grounded.products`, `grounded.source_id`) and must be
+rewritten to call `inputs()`, `products()`, `source_id()` and `round_bound()`, all of which are
+already `pub`. That rewrite is mechanical and adds no API surface.
+
+#### Where the planned cut fails, and the correction
+
+1. **`Error::Derivation` and `Error::Ranked` carry payloads the planned cut left in the checker
+   crate.** `rule_contract::Error` has `Derivation(crate::derivation::Rejection)` and
+   `Ranked(crate::ranked::Rejection)`. `Error` is contract, so contract must name both enums, and
+   they must move. Correction: `derivation::Rejection` and `ranked::Rejection` move to
+   `contract::derivation` and `contract::ranked` beside their certificate structs, with their
+   `impl From<Rejection> for Error` (both types are then contract-local, so the orphan rule is
+   satisfied and the `{0:?}` Debug renderings are unchanged). Neither the ADR nor the planned cut
+   named these. `support::Rejection` is *not* dragged along, because `Error::Support` is a unit
+   variant, so it stays in the checker crate with `support::check`.
+2. **`decode_derivation_certificate` and `decode_ranked_certificate` were unplaced.** They return
+   `Result<_, contract::Error>` and are the decode half of the wire format, exactly like
+   `decode_program`. They move to contract with their certificate structs.
+3. **`premise_stride` and `Relations` split apart.** `premise_stride` defines the certificate's
+   premise-block width and is read by the producer (`crates/rules/src/demand.rs:2699`), the two
+   checkers and the private example; it is contract. `Relations` is the checkers' return type and
+   stays in verify. `crates/rules/src/demand.rs` therefore imports `derivation` items from both
+   crates; it must use explicit item imports rather than `use ...::derivation::{self, ...}`, since
+   the two module names are identical.
+4. **The planned cut's "`support::{derive?, check, Rejection}` stays in verify" is wrong for
+   `derive`.** See knot 3 below: `derive` is a producer with no checker caller.
+5. **`Limits` was left ambiguous.** Strictly, contract does not need it once `replay` moves to
+   verify. Recommended anyway: move it, because it is a declared admission budget and the ADR puts
+   budgets in the contract, and because moving all three plain types leaves verify's
+   `composition_graph.rs` as nothing but the replay kernel. See knot 1.
+6. **Everything else in the planned cut holds.** `weight.rs` moves whole and unmodified; all of
+   `datalog.rs` moves including its test module (its tests use only contract items:
+   `parse_rules`, `Fact`, `Relation`, `Rule`, `ground`); the scalar `Certificate`, `Carrier`,
+   `WireValue`, `decode_values`, `FactStream`, `Grounded`, `ground`, `round_bound`, the identifier
+   helpers, the decoders, `encode_source`, `identity_of` and `parse_rules` are contract as planned.
+
+#### The ADR's three open questions, answered
+
+- **Grounded admission and the scalar certificate against the replay checker.** `ground`,
+  `Grounded` (with `rebind`, `FactStream` and `round_bound`), `Certificate` and `check_invariance`
+  are contract. `Verified`, `replay`, `verify`, `support_check` and `verify_support` are the
+  checker and move to a new `verify::grounded` module. The seam is exactly `check_invariance`
+  (contract, now `pub`, called by both checker entry points) and the `Grounded` accessors. Nothing
+  in the grounding needs a checker type once `ProductRule` moves.
+- **Are the certificate structs contract?** Yes, all of them, with their schema constants and
+  decoders: `Certificate` and its two schema strings, `support::SupportCertificate` with
+  `SUPPORT_SCHEMA`/`BOOLEAN_SUPPORT_SCHEMA`, `DerivationCertificate` with `DERIVATION_SCHEMA` and
+  `premise_stride`, `RankedCertificate` + `RankedRelation` with `RANKED_SCHEMA`. The contract's own
+  error type independently forces `derivation::Rejection` and `ranked::Rejection` across with them,
+  so the rejection vocabularies are contract too.
+- **Is the sealed carrier trait contract?** Yes. `weight.rs` moves whole and unaltered, private
+  `sealed` module included. Every implementation of `TransitionWeight` and of `WireValue` lives in
+  the two files that move (`weight.rs`, `rule_contract.rs`), and the only other `Sealed` trait in
+  either repository is an unrelated one in the root crate's `src/field.rs`. The seal is therefore
+  unchanged, not weakened: `sealed::Sealed` stays private to the contract crate, so no downstream
+  crate can add a carrier.
+
+#### The three knots
+
+**Knot 1 — `Error::Replay(#[from] composition_graph::Error)` and `Grounded.products:
+Arc<[ProductRule]>`.** `ProductRule` must move: it is a field of `Grounded`, the return type of the
+public `Grounded::products()`, constructed by `ground`, and named by the producer
+`crates/rules/src/frontier.rs`. The graph `Error` must move: it is the payload of a contract error
+variant. Smallest possible move is `{ProductRule, Error}`; recommended move is
+`{ProductRule, Limits, Error}` into a contract module named `composition_graph`, so that an
+importer of those three changes only the crate name in its path. Verify's `composition_graph` then
+holds `VerifiedGraph`, `verify`, `propagate` and `copy` and imports the three types by name — not
+by `pub use`, which would be the re-export the ADR ruled out. Both enums keep their variants,
+`#[derive]` list and `#[error("…")]` strings byte for byte, so `Display` output and the
+`Replay(…)` rendering are unchanged. `ProductRule`'s private `reserved` field and public
+`const fn new` are unchanged, and nothing anywhere constructs it by struct literal.
+
+**Knot 2 — `weight::semi_naive_product`.** Its only non-test caller in either repository is
+`composition_graph::propagate`; the other two callers are verify's own tests,
+`tests/weight_properties.rs` and `tests/composition_graph.rs`, which use it to state the semi-naive
+identity as a *law of the carrier*. `crates/rules`, `crates/runtime`, the root crate and
+`ergodis-private` never name it. Recommendation: **leave it in `weight.rs` and let it move to
+contract with the file.** It is generic, so it is monomorphized in whichever crate calls it and its
+inlining is unaffected either way; leaving it makes `weight.rs` a byte-for-byte file move, which is
+the cheapest and most auditable form the "pure move" gate can take; and the law tests stay where
+the law is stated. If the layering bothers you later, moving it to `verify::composition_graph` is a
+zero-risk follow-up that touches three files.
+
+**Knot 3 — `support::derive`.** Callers: `crates/rules/src/lib.rs:245` (the certificate producer,
+through `derive_support`) and the two tests inside `support.rs`. No checker calls it.
+Recommendation: **move `derive` and its private `UNRANKED` constant to `contract::support`.** The
+split is clean — `check` does not use `UNRANKED`, and `derive` needs only `ProductRule` and
+`TransitionWeight`, both contract. The reason is the point of the task: ADR decision 3 puts every
+checker source under the checker identity, so leaving a producer in `support.rs` means a
+producer-side edit still moves the checker identity. The two existing tests exercise `derive` and
+`check` together and stay in verify's `support.rs`, importing `contract::support::derive` (verify
+has contract as a normal dependency, so no dev-dependency is added).
+
+**Knot 4 — the other checker modules.** `derivation.rs`, `ranked.rs`, `datalog_store.rs`,
+`binary_composition.rs`, `min_plus_transition.rs` and `finite_lowering.rs` were checked for items
+that contract needs or that need non-public contract items. Results: `min_plus_transition` imports
+only `weight::{BoundedMinPlus, TransitionWeight}` (public, contract); `finite_lowering` imports
+nothing from the crate; `binary_composition` imports only `crate::{implementation_identity,
+ContentId}` (both stay in verify); `datalog_store` imports `datalog::{Admitted, AtomRef, Slot,
+MAX_ARITY}` (all public, contract) and stays a private module whose `pub(crate)` items keep all
+their consumers in verify; `derivation`'s seven `pub(crate)` helpers are consumed only by
+`derivation` and `ranked`, both of which stay. Nothing in contract needs an item from any of these
+six files except the two `Rejection` enums already handled.
+
+**Knot 5 — `ContentId`.** The alias is used by `binary_composition.rs` and by the root crate's
+`src/admission.rs`; no contract source names it, since the contract spells its identities
+`[u8; 32]` literally everywhere. Recommendation: **leave `ContentId` in `verify::lib`** and have
+`contract::implementation_identity()` return `[u8; 32]`. Moving the alias to contract would put a
+contract dependency on the root crate for a transparent alias and buy nothing; duplicating it in
+both crates would give two names for one type.
+
+### 2. Dependency graph and Cargo wiring
+
+Intra-workspace edges after the split (normal dependencies; `→` is "depends on"):
+
+```
+ergodis-contract        → (no workspace member)
+ergodis-verify          → ergodis-contract
+ergodis-modules         → (no workspace member)
+ergodis-rules           → ergodis-contract, ergodis-verify, ergodis-modules
+ergodis (root)          → ergodis-verify
+ergodis-runtime         → ergodis, ergodis-verify, ergodis-rules, ergodis-contract
+ergodis-repository-native → ergodis-runtime
+ergodis-wasm (excluded) → ergodis-runtime
+ergodis-private         → ergodis, ergodis-verify, ergodis-rules, ergodis-contract
+tasks/*                 → ergodis, ergodis-private, (tools also ergodis-rules, ergodis-verify)
+```
+
+**No cycle.** `ergodis-contract` has zero outgoing workspace edges: its dependencies are the four
+external crates only. It is therefore a sink in the intra-workspace graph, and adding a vertex of
+out-degree zero to an acyclic graph cannot create a cycle, because every cycle through a vertex
+uses an outgoing edge from it. The rest of the graph is unchanged, and it is acyclic today. The one
+back edge in the workspace, verify's `[dev-dependencies] ergodis = { path = "../.." }`, is
+unchanged and remains dev-only, binding test targets and never the library. `ergodis-contract` must
+acquire no dev-dependency on `ergodis` or `ergodis-verify`; its in-crate tests (the `datalog`
+module's) use only contract items, so it needs none.
+
+The root crate does **not** gain a contract dependency: its only verify usages are
+`binary_composition`, `finite_lowering`, `ContentId` and `implementation_identity`, all of which
+stay in verify.
+
+**`crates/contract/Cargo.toml` dependencies**, all four required:
+
+| Crate | Why |
+|--------------|---------------------------------------------------------------|
+| `serde` (derive) | every wire struct: `Program`, `Certificate`, `SupportCertificate`, `DerivationCertificate`, `RankedCertificate`, `RankedRelation` and their components |
+| `serde_json` | `encode_source`, all five decoders, `FactStream::new`/`identity`, `Grounded::rebind` |
+| `sha2` | `identity_of`, `FactStream`, `datalog::Streaming`, `implementation_identity` |
+| `thiserror` | `rule_contract::Error`, `composition_graph::Error` |
+
+**No verify dependency becomes unused.** `serde` is still needed by `binary_composition` and
+`finite_lowering`; `serde_json` by `binary_composition::from_json` and its `VerificationError::Json`
+variant; `sha2` by `lib.rs`, `binary_composition`, `min_plus_transition` and `finite_lowering`;
+`thiserror` by `binary_composition::VerificationError`, `finite_lowering::Error` and
+`min_plus_transition`'s error type. Verify gains exactly one dependency, `ergodis-contract`.
+
+Workspace file changes: `members` and `default-members` in the root `Cargo.toml` gain
+`crates/contract`; `crates/verify`, `crates/rules`, `crates/runtime` gain the dependency line;
+`Cargo.lock` gains a package.
+
+### 3. Importer inventory
+
+#### Core — Rust, with the paths each file uses
+
+`ergodis_verify::` occurrences per file, split by destination crate. "C" = moves to
+`ergodis_contract`, "V" = stays `ergodis_verify`.
+
+| File | C | V | Paths |
+|-----------------------------------------------|---|---|--------------------------------------------------------------|
+| `crates/rules/src/lib.rs` | 3 | 1 | C `rule_contract::{self, Atom, Carrier, Certificate, Error, Fact, Grounded, Program, Relation, Rule, Term, WireValue}`, `support::SupportCertificate`, `support::derive`, `weight::{Boolean, BoundedMinPlus, Stability, TransitionWeight}`; V `rule_contract::verify`, `rule_contract::verify_support` → `grounded::{verify, verify_support}` |
+| `crates/rules/src/demand.rs` | 4 | 2 | C `datalog::{self, Admitted, AtomRef, PreparedSource, Slot, MAX_ARITY, MAX_BODY, MAX_VARIABLES}`, `derivation::{DerivationCertificate, premise_stride, DERIVATION_SCHEMA}`, `ranked::{RankedCertificate, RankedRelation, RANKED_SCHEMA}`, `rule_contract::{Error, Program}`; V `derivation::{check, check_admitted, Relations}`, `ranked::{check, check_admitted}` |
+| `crates/rules/src/frontier.rs` | 1 | 0 | C `composition_graph::ProductRule` |
+| `crates/rules/src/pages.rs` | 1 | 0 | C `rule_contract::Error` |
+| `crates/rules/src/provider.rs` | 1 | 0 | C `rule_contract::{decode_certificate, decode_program, decode_support_certificate, MAX_BYTES}` |
+| `crates/rules/tests/allocation.rs` | 11 | 0 | C `rule_contract` (10), `datalog` |
+| `crates/rules/tests/demand_nary.rs` | 4 | 0 | C `datalog`, `derivation`, `ranked`, `rule_contract` |
+| `crates/rules/tests/demand.rs` | 3 | 0 | C `derivation`, `ranked`, `rule_contract` |
+| `crates/rules/tests/demand_prepared.rs` | 3 | 0 | C `datalog`, `derivation`, `rule_contract` |
+| `crates/rules/tests/demand_sparse.rs` | 3 | 0 | C `datalog` (2), `rule_contract` |
+| `crates/rules/tests/contract_properties.rs` | 3 | 0 | C `composition_graph`, `rule_contract`, `weight` |
+| `crates/rules/tests/properties.rs` | 3 | 0 | C `composition_graph`, `rule_contract`, `weight` |
+| `crates/rules/tests/support/density.rs` | 3 | 0 | C `composition_graph`, `rule_contract` (2) |
+| `crates/rules/tests/support.rs` | 2 | 0 | C `rule_contract`, `support` |
+| `crates/rules/tests/boolean.rs` | 2 | 0 | C `rule_contract`, `support` |
+| `crates/rules/tests/contracts.rs` | 1 | 0 | C `rule_contract::{self, Carrier, Certificate, Program, Verified}` — note `Verified` is V (`grounded::Verified`) |
+| `crates/rules/tests/density_control.rs` | 1 | 0 | C `rule_contract` |
+| `crates/rules/tests/grammar_properties.rs` | 1 | 0 | C `rule_contract` |
+| `crates/rules/tests/incremental.rs` | 1 | 0 | C `rule_contract` |
+| `crates/rules/tests/provider_properties.rs` | 1 | 0 | C `rule_contract` |
+| `crates/rules/tests/workspace_commit.rs` | 1 | 0 | C `rule_contract` |
+| `crates/rules/examples/replay_profile.rs` | 1 | 0 | C `rule_contract` |
+| `crates/rules/examples/lean_boundary_fixtures.rs` | 1 | 0 | C `rule_contract` |
+| `crates/runtime/src/recursive.rs` | 3 | 0 | C `composition_graph`, `rule_contract`, `weight` |
+| `crates/runtime/src/lineage.rs` | 1 | 0 | C `rule_contract` |
+| `crates/runtime/src/bundle_workflow.rs` | 0 | 1 | V `min_plus_transition` |
+| `crates/runtime/tests/update_cost.rs` | 2 | 0 | C `rule_contract`, `weight` |
+| `crates/runtime/tests/update_properties.rs` | 1 | 0 | C `rule_contract` |
+| `crates/verify/tests/composition_graph.rs` | 2 | 1 | C `weight::{semi_naive_product, Boolean, BoundedMinPlus, Stability, TransitionWeight}`, `composition_graph::{Error, Limits, ProductRule}`; V `composition_graph::{verify, VerifiedGraph}` |
+| `crates/verify/tests/weight_properties.rs` | 1 | 0 | C `weight` |
+| `crates/verify/tests/finite_lowering_properties.rs` | 0 | 1 | V `finite_lowering` |
+| `src/admission.rs` | 0 | 3 | V `binary_composition`, `ContentId`, `implementation_identity` |
+| `src/finite_lowering.rs` | 0 | 1 | V `finite_lowering` |
+| `tests/verifier_boundary.rs` | 0 | 1 | V `binary_composition` |
+| `tests/finite_lowering.rs` | 0 | 1 | V `finite_lowering` |
+
+Core files that reference nothing in verify: `crates/modules/**`, `crates/repository-native/**`,
+`benches/**`, `wasm/**`, all of `python/**`, and the rest of the root `src/`.
+
+**Core `Cargo.toml` files needing the new dependency:** `crates/verify`, `crates/rules`,
+`crates/runtime`. The root `Cargo.toml` needs the workspace `members`/`default-members` entries but
+no dependency. `wasm/Cargo.toml` needs nothing.
+
+#### `~/src/ergodis-private`
+
+| File | C | V | Paths |
+|-------------------------------------------------|---|---|-------------------------------------------------------------|
+| `src/rel_lowering.rs` | 1 | 0 | C `rule_contract::{Atom, Fact, Program, Relation, Rule, Term, SCHEMA}` |
+| `src/rel_stratified.rs` | 2 | 0 | C `datalog::{PreparedAtom, PreparedRelation, PreparedRule, PreparedSource, Slot}`, `rule_contract::Error` |
+| `src/datalog_certificate_codecs.rs` | 2 | 0 | C `ranked::RankedRelation` (plus a docstring naming `ranked::RankedCertificate`) |
+| `src/privacy_lowering.rs` | 0 | 1 | V `finite_lowering::Model` |
+| `src/lrc_transition_verification.rs` | 0 | 1 | V `min_plus_transition::{…}` |
+| `src/rel_frontend/lower.rs` | — | — | docstring only, names `ergodis_verify::rule_contract` |
+| `examples/closure_ballpark.rs` | 4 | 0 | C `rule_contract::{self as contract, Fact, Program, Relation, SCHEMA}`, `derivation::DerivationCertificate`, `derivation::premise_stride`, `ranked::RankedCertificate` |
+| `tests/rel_lowering.rs` | 6 | 0 | C `datalog::{MAX_ARITY, MAX_VARIABLES, MAX_RELATIONS, MAX_RULES, MAX_BODY, MAX_DOMAIN}` |
+| `tests/datalog_certificate_codecs.rs` | 1 | 0 | C `ranked::RankedRelation` |
+| `tests/independent_summary_transition.rs` | 0 | 1 | V `min_plus_transition::{verify_snapshot, TransitionVerifier}` |
+| `tests/summary_transition_forgery.rs` | 0 | 2 | V `min_plus_transition::{verify_snapshot, TransitionVerifier}` |
+| `tasks/tools/src/generic_certificate_bench.rs` | 0 | 1 | V `min_plus_transition::{…}` |
+
+**Private `Cargo.toml` files needing the new dependency:** the `ergodis-private` root package only.
+`tasks/tools` uses verify alone (`min_plus_transition`) and needs no change; `tasks/gem-hunt` and
+`tasks/hadamard-2092` name neither crate. The bare-`rustc` Rel parity harness imports neither
+crate, as the card states.
+
+#### Non-Rust references
+
+| Reference | What it needs |
+|---------------------------------------------------------|---------------|
+| `docs/rule-contract.md:5` — "the independent `ergodis-verify::rule_contract` checker" | rename to `ergodis-verify::grounded`; the crate-split sentence added |
+| `docs/rule-contract.md:281,287-288` — `cargo test -p ergodis-rules -p ergodis-verify`, the wasm32 `ergodis-rules` build and `crates/rules/tests/wasm_abi.mjs` | add `-p ergodis-contract`; the wasm32 build and ABI test are otherwise unaffected (`ergodis-rules` gains one path dependency with no new external crate) |
+| `docs/verification.md:109-113` — "the root workspace includes `ergodis`, `ergodis-verify` and `ergodis-runtime`", "the verifier's dependencies are serde/serde_json, SHA-256 and error support" | both sentences become wrong; rewrite for the new member and the contract edge. The list is already stale (it omits `ergodis-rules`, `ergodis-modules`, `ergodis-repository-native`) |
+| `docs/verification.md:96-106` — the checker-identity migration paragraph | extend for the second identity |
+| `DESIGN.md:38` — the crate table | one row for `ergodis-contract` |
+| `docs/language-semantics.md:76`, `docs/dev/contributor-boundaries.md:12` | prose naming `ergodis-verify` as the home of the contract; adjust |
+| `docs/finite-lowering.md`, `docs/summary-transitions.md`, `docs/run-bundles.md` | name only `finite_lowering` / `min_plus_transition`; **no change** |
+| `.publicignore` | no crate paths; the new crate exports automatically. **No change**, but confirm no hold entry is wanted |
+| `.public-lint-allow`, `.publication-profile` | no crate paths. **No change** |
+| `scripts/export-public.sh`, `scripts/public-lint.sh`, `scripts/publication-profile.sh` | no crate lists. **No change** |
+| `python/generate_evidence.py` | `HASHED_TREES` walks `crates` in full plus `Cargo.toml`/`Cargo.lock`, so the new crate is absorbed; `SHA256SUMS` must be regenerated with `python3 python/generate_evidence.py --write` in the same commit, because `tests/evidence_manifest.rs` runs inside `cargo test` |
+| `scripts/check-verifier-dependencies.py` | **breaks.** It asserts verify's direct normal dependencies are exactly `{serde, serde_json, sha2, thiserror}` and that verify's workspace-member closure is exactly `{verify}`. Both become false. Extend it to check the pair: contract's direct set is the four, verify's is the four plus `ergodis-contract`, and the closure is `{verify, contract}`; keep the forbidden-package check over the union |
+| `scripts/check-runtime-dependencies.py` | **already failing today**, before this task: it asserts runtime's workspace closure is `{runtime, core, verifier}`, and runtime has depended on `ergodis-rules` (hence also `ergodis-modules`) for some time. Running it now prints `runtime workspace dependencies changed`. It will need `ergodis-contract` too |
+| Lean audit gate Rust-side inputs (`~/src/othello/lean/WeightedRules/README.md`) | consumes the `ergodis-rules` cdylib through `ergodis_module_v1` and the `lean_boundary_fixtures` example; neither the ABI nor the fixture schema changes. Rebuild the library and rerun the gate as a check, no edit expected |
+| `~/src/ergodis-private/docs/adr/0004-rel-lowering-ir.md:10`, `analysis/property-tests/design.md:91` | prose naming `ergodis_verify::rule_contract` and `ergodis-verify::binary_composition`; the first needs the new path, the second is still correct |
+| `~/src/ergodis-private/analysis/weighted-normalization/SHA256SUMS`, `evidence/2026-09-12-privacy-lowering.sha256` | pin `../ergodis/crates/verify/src/min_plus_transition.rs` and `.../finite_lowering.rs` by path and hash. Both files stay in verify unmodified, so **both pins remain valid**; they are the reason `min_plus_transition.rs` and `finite_lowering.rs` must not be renamed or relocated in this task |
+
+### 4. Identity inventory
+
+**Present value**, recomputed offline from the file bytes at core `687217f` (SHA-256 over
+`RULE_ID` ‖ `RULE_VERSION` little-endian ‖ `ergodis/direct-binary-composition-check/v2` ‖ the
+eleven source files in `lib.rs`'s order):
+
+```
+efcfa1af06d8ee380bc0578e8bd80a11996c600caf36e275176b1bd3c1f7f313
+```
+
+**The single consumer.** `binary_composition::verify` (line 303) writes
+`checker: implementation_identity()` into `VerificationRecord`. That record has
+`schema: u32` (minted as `1`, never validated anywhere except through whole-record equality) and
+`rule_version: u32` (checked against `RULE_VERSION` by `replay`). `binary_composition::replay`
+accepts only when the freshly computed record equals the supplied one, so the identity is compared
+by full-record equality, not by a dedicated check.
+
+The record's field propagates through three more structs, each of which must gain the second named
+field:
+
+| Struct | File | Role |
+|-------------------------------|-------------------------------------|-------------------------------------|
+| `VerificationRecord.checker` | `crates/verify/src/binary_composition.rs:197` | minted at 303, compared by equality at 321 |
+| `AdmissionReceipt.checker` | `src/admission.rs:239` | copied out at 298, rebuilt into a record at 452, compared against `checker_identity()` at 527 |
+| `WireReceipt.checker` | `crates/runtime/src/service.rs:138` | one-way wire projection at 603; `#[serde(deny_unknown_fields)]`, no reverse mapping, no JavaScript consumer |
+| `ergodis::admission::checker_identity()` | `src/admission.rs:326` | the root crate's alias for the verify identity |
+
+**Adding a second named field requires:** a `contract: ContentId` field on all three structs
+(all three derive `Serialize`/`Deserialize` with `deny_unknown_fields`, so the JSON shape changes);
+`binary_composition::verify` filling it from `ergodis_contract::implementation_identity()`;
+a `contract_identity()` beside `checker_identity()` in `src/admission.rs` and the extra clause in
+the comparison at line 527; the projection in `service.rs:599-612`; and a forgery test for the new
+field mirroring `tests/verifier_boundary.rs:194` and `tests/admission_pipeline.rs:168`, which flip
+`record.checker[0]`/`forged.checker[0]`. `tests/verifier_boundary.rs:108` asserts
+`record.checker == receipt.checker` and gains the parallel assertion.
+
+**Stored artifacts carrying an `implementation_identity()` value: none.** Searched core
+`evidence/` (every `checker`-bearing file there carries `checker_sha256`, which is a hash of a
+Python checking script written by `python/check_*.py`, unrelated), core `tests/` and fixtures,
+`~/src/ergodis-private` (only ADR 0005 mentions the identity at all, in prose), and
+`~/src/ergodis-evidence` (no match). The only pinned hex in either tree is
+`tests/admission_pipeline.rs:55` `PRE_EXTRACTION_CHECKER_ID =
+0e3afc66 7762301b cbe39577 fd25d10d e2327caa c8f72f86 38552bac f0957cb0`, and the test asserts
+`assert_ne!` against it — a deliberate negative pin of a historical pre-extraction value. It stays
+valid across this change and needs no update.
+
+**So the receipt migration cost is nil.** What must be regenerated is `SHA256SUMS` (source bytes
+change) and `Cargo.lock`. Record the old value above and the two new values in the task report when
+the move lands. The contract identity's domain string is proposed as
+`ergodis/finite-rule-contract/v1`; whether verify's tag bumps from `…/v2` to `…/v3` is an open
+question below.
+
+**Completeness test shape.** `include_bytes!` needs a literal path, so each crate's hashed list
+becomes a `const HASHED: [(&str, &[u8]); N] = [("lib.rs", include_bytes!("lib.rs")), …]`, with
+`implementation_identity()` folding over it in order and a test comparing the name set against
+`std::fs::read_dir(concat!(env!("CARGO_MANIFEST_DIR"), "/src"))` filtered to `*.rs`. Both crates'
+`src/` are flat, so this is exact. Verify's list gains `support.rs` (the repair the ADR names) and
+`grounded.rs`, and loses the six files that move.
+
+### 5. Performance exposure
+
+**The workspace release profile** (root `Cargo.toml:128-141`) is `opt-level = 3`,
+`lto = "thin"`, `codegen-units = 1`, `panic = "abort"`; `[profile.bench]` is the same without
+`panic`; `[profile.profiling]` inherits release with debug info; `[profile.campaign]` inherits
+release with overflow checks. ThinLTO with one codegen unit gives cross-crate inlining in release
+and bench builds. Debug and test builds get no LTO, so a cross-crate non-generic call there is a
+real call.
+
+**What actually crosses the new boundary:**
+
+1. **The evaluator's kernel does not.** `Demand::evaluate_into` →
+   `evaluate_counting::<COUNT>` (`crates/rules/src/demand.rs:1989-2011`) runs entirely on
+   `ergodis-rules`-local structures: `RelationPlan`, `Op`, `DemandWorkspace`, `key_of`, `power`.
+   The contract types `Admitted`, `AtomRef`, `Slot` and `MAX_*` appear only in plan construction
+   (lines 798-1100) and `Error` only as a return type. **No contract call sits inside the
+   derivation loop.** This is the single most reassuring finding for the A/B; the card's worry
+   about `evaluate_into` crossing the boundary does not materialize, and the remaining risk there
+   is ThinLTO reshuffling, not a lost inline.
+2. **The carrier methods do, and this is the real exposure.** `composition_graph::propagate`
+   (verify) calls `W::plus`, `W::times`, `W::minus`, `W::zero` per rule per round, and
+   `support::check` calls `plus`/`times` per coordinate and per product. `propagate` and `check`
+   are generic and are instantiated in verify, but the impl methods
+   `<BoundedMinPlus as TransitionWeight>::plus` and the eight others are **non-generic functions
+   defined in the contract crate**. In release/bench, rustc's automatic cross-crate-inlining
+   heuristic for tiny functions plus ThinLTO should cover them; in a debug or test build they
+   become calls. `semi_naive_product` is generic and therefore unaffected wherever it lives.
+3. **Two small non-generic accessors cross in the checkers' load passes.** `Admitted::pack` and
+   `Admitted::tuple` are called per fact and per listed tuple in `derivation.rs:184,203,269` and
+   `ranked.rs:268,271,289`. These are O(facts + listed tuples) setup passes, not the join kernels —
+   the join kernels use `RelationStore::tuple` and `JoinIndexes::probe`, both of which stay inside
+   verify. `datalog::universe` is called once per relation at admission and is not hot.
+4. **`ProductRule` field reads** in `propagate`, `support::check` and `support::derive` are plain
+   struct field loads of a `#[repr(C)]` type; a crate boundary does not affect them.
+
+**Recommended `#[inline]` additions** — each non-generic, one expression or close to it, and on a
+per-element path:
+
+| Item | File | Why |
+|-------------------------------------|-------------------|-----|
+| the ten `TransitionWeight` methods of `BoundedMinPlus` and `Boolean` (`zero`, `one`, `plus`, `times`, `minus`) | `contract::weight` | called per rule per round in `propagate`, per coordinate and per product in `support::check`, and throughout `min_plus_transition` |
+| `Admitted::pack` | `contract::datalog` | per fact and per listed tuple in both Datalog checkers |
+| `Admitted::tuple` | `contract::datalog` | same |
+
+`decode`/`encode` on the carriers, `universe`, and everything in `rule_contract` are not on a hot
+loop and should not get the attribute. **Recommendation on timing:** land the move pure, with no
+`#[inline]`, then measure; add the attributes in a separate commit only if the interleaved A/B
+shows a regression, with its own numbers. That keeps the move auditable as a move and keeps each
+attribute justified by measurement rather than by a guess, which is what `PERFORMANCE.md` asks for.
+The A/B targets are the grounded replay over both carriers, `support::check`, the derivation and
+ranked checkers, and `evaluate_into` as an A/A null, all against re-retained controls.
+
+### 6. Proposed implementation plan
+
+**Core commit A — the move and the two identities.** One commit, because the identity must change
+exactly once: splitting the move from the identity rebuild would move it twice. Contents: new
+`crates/contract` (`Cargo.toml` + the eight `src` files above) with its `implementation_identity()`
+and completeness test; verify reduced to its ten files with the rebuilt list, the new `grounded`
+module, and its own completeness test; `check_invariance` made `pub`; the four moved `Grounded`
+field reads rewritten to accessors; workspace `members`/`default-members`; the three core
+`Cargo.toml` dependency lines; every core importer from the table in §3; `docs/rule-contract.md`,
+`docs/verification.md`, `DESIGN.md`, `docs/language-semantics.md`,
+`docs/dev/contributor-boundaries.md`; `scripts/check-verifier-dependencies.py` extended to the
+pair and `scripts/check-runtime-dependencies.py` repaired; `Cargo.lock`; `SHA256SUMS` regenerated.
+*Gate:* `cargo fmt --check`; `cargo clippy --all-targets --all-features -- -D warnings`;
+`cargo test --all-features` (which includes `tests/evidence_manifest.rs` and the public lint);
+both dependency guard scripts printing pass; the Python differential on the bounded fixture corpus
+including costs, witnesses and helper loads; `cargo build -p ergodis-rules --release` plus
+`native_abi.py`, and the wasm32 build plus `wasm_abi.mjs`; the old and new identity hexes recorded;
+and a demonstration that editing a contract docstring moves only the contract identity.
+
+**Core commit B — the record carries both identities.** `VerificationRecord.contract`,
+`AdmissionReceipt.contract`, `WireReceipt.contract`, `admission::contract_identity()`, the extended
+comparison at `src/admission.rs:527`, the parallel forgery tests, `docs/verification.md`'s
+migration paragraph, `SHA256SUMS`. *Gate:* the full suite again, plus a stated reading of what a
+record with only one identity now does (it fails to deserialize under `deny_unknown_fields`, and
+nothing stored has one).
+
+**Core commit C — the performance evidence.** Re-retain the controls first, as the lane handoff
+says. Interleaved multi-round A/B on the grounded replay over both carriers, `support::check`, the
+derivation and ranked checkers, and `evaluate_into` as an A/A null; the compiled `evaluate_into`
+and `propagate` compared; instructions, cycles, branches, branch misses, peak RSS. `#[inline]`
+additions folded in here only if measured, each with its numbers. *Gate:*
+`ergodis-dev/PERFORMANCE.md`'s required validation for a hot-loop change, and the evidence bundle
+committed per `notes/research-reproducibility-conventions.md`.
+
+**Private commit D — importers follow.** `ergodis-private/Cargo.toml` gains `ergodis-contract`; the
+six private sources and tests from §3 rewired; `docs/adr/0004-rel-lowering-ir.md:10` and
+`src/rel_frontend/lower.rs`'s docstring updated; ADR 0005 moved to Accepted, corrected to what was
+built, with its three open questions filled from §1. *Gate:* private `cargo test`, the Rel lowering
+differential, and confirmation that the two private `SHA256SUMS` pins on
+`min_plus_transition.rs`/`finite_lowering.rs` still verify.
+
+**Othello commit E — lifecycle.** This report completed with the cut as built, the identity values,
+the receipt inventory and the A/B; the card closed and archived per
+`notes/task-lifecycle-conventions.md`; handoff and queue updated.
+
+### Open questions, each with a recommendation
+
+1. **Contract module names.** Mirror verify's file names (`rule_contract`, `datalog`, `weight`,
+   `support`, `composition_graph`, `derivation`, `ranked`)? *Recommend yes*: the diff reads as a
+   move, each crate's hashed list is its own directory listing, and most importers change only the
+   crate name. The cost is that `crates/rules/src/demand.rs` imports `derivation` and `ranked`
+   items from two crates and must use explicit item imports instead of `self`. The alternative,
+   one combined certificate module, would force renaming the two `Rejection` types, which is a type
+   change the card forbids.
+2. **`Limits`.** Move it to contract with `ProductRule` and the graph `Error`, or leave it in
+   verify? *Recommend move*: it is a declared admission budget, the ADR puts budgets in the
+   contract, and it leaves verify's `composition_graph.rs` as nothing but the replay kernel. The
+   strictly minimal move is `{ProductRule, Error}` if you prefer minimality over the semantic line.
+3. **`semi_naive_product`.** *Recommend leaving it in `weight.rs`* so that file is a byte-for-byte
+   move; it is generic, so no inlining question arises either way.
+4. **`support::derive`.** *Recommend moving it to contract*: it is a producer with no checker
+   caller, and leaving it keeps a producer under the checker identity, which is the coupling this
+   task exists to remove.
+5. **`VerificationRecord.schema`.** The record gains a field. Bump `schema` from `1` to `2`?
+   *Recommend yes*: only `binary_composition.rs:299` mints it, nothing validates it except
+   whole-record equality, and nothing is stored, so the bump is free and makes the shape change
+   self-describing.
+6. **Verify's identity domain string.** Bump `ergodis/direct-binary-composition-check/v2` to `v3`,
+   since the hashed list changes composition? *Recommend yes*, same reasoning as 5.
+7. **The new checker module's name.** `verify::grounded`, as you proposed. *Recommend yes*;
+   `rule_contract` would collide confusingly with the contract crate's module of that name.
+8. **`#[inline]` timing.** *Recommend after the A/B*, in a separate commit, so each attribute is
+   justified by a measurement rather than by the split.
+9. **`scripts/check-runtime-dependencies.py` is already red** before this task, because runtime
+   gained `ergodis-rules` and the script still asserts the closure is `{runtime, core, verifier}`.
+   *Recommend repairing it inside core commit A*, since the split touches that same assertion; say
+   so explicitly in the commit message so the repair is not mistaken for a consequence of the
+   split.
+10. **Contract crate directory name.** `crates/contract` with package name `ergodis-contract`,
+    matching `crates/verify`/`ergodis-verify`. *Recommend yes.*
