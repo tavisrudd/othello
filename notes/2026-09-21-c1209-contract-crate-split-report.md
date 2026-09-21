@@ -604,6 +604,11 @@ removed before the commit.
 The checker identity is unmoved by a contract docstring edit, which is what the split was for. The
 edit was reverted with the Edit tool; no git operation touched the working tree.
 
+The contract identity above is the one `83eec12` mints. The measured `#[inline]` repair in
+`f7b0d16` edits `crates/contract/src/datalog.rs` and therefore moves it once more, to
+`2b68f01e3995ff310017539d6c1cbbc339ba3452eac65e959a52e131ae434100`, leaving the checker identity
+where it is; see "Performance A/B".
+
 ## Receipt inventory
 
 No stored artifact in any repository carries an `implementation_identity()` value, so nothing is
@@ -726,3 +731,409 @@ docstring, so it was not edited. The type it names is the same type, now spelled
    `grounded` in several of these tests, so they import `verify as verify_grounded`. Two of them
    also bind the replay refusal as `ReplayError`. These are readability aliases in tests, not API
    changes.
+
+## Performance A/B
+
+The split is a pure code move, so the whole question is whether the new crate boundary changed what
+the compiler emits. The release profile is `lto = "thin"`, `codegen-units = 1`, so cross-crate
+inlining is available; the risk is that a non-generic method that used to be inlined inside one
+crate is now an out-of-line call, and the secondary risk is that ThinLTO reshuffles a kernel that
+the move does not otherwise touch.
+
+### Arms
+
+Every hash below is recorded **as measured**, never cited: the thing to run is the retain recipe at
+the named revision. Both controls were retained fresh for this task, from detached worktrees under
+`~/.cache/ergodis/worktrees/c1209/` whose `git status --short` was empty. The handoff's named
+controls `closure_ballpark-5217cdb` and `ergodis-tools-ab6be13` predate `96aee9b`, so they are not
+used here.
+
+| Arm | Role | Private | Core | Dirty | Retained name | Measured sha256 |
+| --- | --- | --- | --- | --- | --- | --- |
+| control, derivation loop and checkers | the tree before the split | `74f974c` | `96aee9b` | no | `closure_ballpark-74f974c` | `e8e2b139b02d7545b331fdad69f96a47adf33dc1f3363ba1b769d93bc434e72f` |
+| control, frontend and backend stages | the Rel route before the split | `74f974c` | `96aee9b` | no | `ergodis-tools-74f974c` | `6a9c0a8693edbfcaf89a4bea2e722bdccba140c250eb068fdb41ddd2040a8838` |
+| candidate, derivation loop and checkers | the tree after the split | `55dab0c` | `83eec12` | no | `closure_ballpark-55dab0c` | `97bd6231da918e7e0f1ecfb05349a5cdde3b2830252c034f5e6cf3498d50f44b` |
+| candidate, frontend and backend stages | the Rel route after the split | `55dab0c` | `83eec12` | no | `ergodis-tools-55dab0c` | `e579be0e129a0ccda26fcb35b4694b607d295f2dc0e0bcfb0c121209ad16a9b5` |
+
+rustc 1.95.0 (59807616e 2026-04-14), release profile, no features, on every row, from the core
+flake's devShell; `flake.nix`, `flake.lock` and `rust-toolchain.toml` are byte-identical between
+`96aee9b` and `83eec12`, so the two arms differ only in the code under test. The core revision of
+each arm is this session's record: `retain-bin.sh` still stores only the crate directory's
+revision, which for both arms is the private one.
+
+Retain recipes, the control from `~/.cache/ergodis/worktrees/c1209/ergodis-private` and the
+candidate from `~/src/ergodis-private`:
+
+```sh
+../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example
+../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools
+```
+
+### Method
+
+`~/src/ergodis-dev/PERFORMANCE.md` and `~/src/ergodis-dev/performance-playbook.md`, both read in
+full first. Event set `instructions,cycles,branches,branch-misses,page-faults,minor-faults`, which
+fits this PMU without multiplexing; cache events would get their own run and are not needed here,
+because no ratio leaves the null. Rounds alternate arm order and every cohort carries its own A/A
+null. Every run is pinned to core 5. Two-point differencing between `repeats` and `2 × repeats`
+removes process startup and preparation from each per-iteration figure. Instruction ratios decide;
+cycle ratios are reported but this box was running at load average 5.4 throughout, so they are
+noise-dominated and settle nothing. Bulk output under `~/.cache/ergodis/c1209/`.
+
+### 1. The derivation loop: an A/A null, and the kernel is byte-identical
+
+Eighteen cohorts through `ab.py --mode evaluate`, which prepares once and then enters
+`Demand::evaluate_into` `repeats` times with no certificate, checker or output.
+
+| Cohort | Instructions, split ÷ control | 95 % interval | A/A null | Cycles | Derived tuples |
+|------------------------|--------|--------------------|-----------|---------|-------------------|
+| `closure:sparse:256`   | 1.00000 | [0.99999, 1.00001] | 0.9999986 | 0.98506 | 62979 / 62979 |
+| `closure:sparse:1024`  | 1.00000 | [1.00000, 1.00000] | 1.0000002 | 0.96586 | 979983 / 979983 |
+| `closure:dense:256`    | 1.00000 | [0.99999, 1.00001] | 1.0000012 | 0.94497 | 65536 / 65536 |
+| `closure:dense:512`    | 1.00000 | [1.00000, 1.00000] | 1.0000004 | 0.93330 | 262144 / 262144 |
+| `samegen:sparse:1024`  | 1.00000 | [1.00000, 1.00001] | 1.0000024 | 1.00420 | 258691 / 258691 |
+| `samegen:dense:512`    | 1.00000 | [1.00000, 1.00000] | 1.0000011 | 1.00525 | 507425 / 507425 |
+| `closure:blocks:4096`  | 1.00000 | [0.99997, 1.00003] | 0.9999943 | 0.93777 | 65536 / 65536 |
+| `closure:blocks:16384` | 0.99999 | [0.99997, 1.00002] | 0.9999866 | 0.95964 | 262144 / 262144 |
+| `cycle:blocks:4096`    | 1.00000 | [0.99997, 1.00002] | 0.9999947 | 0.95881 | 131072 / 131072 |
+| `triangle:sparse:16384`| 0.99998 | [0.99995, 1.00002] | 0.9999751 | 0.98300 | 15 / 15 |
+| `path3:sparse:4096`    | 1.00002 | [0.99996, 1.00007] | 1.0000205 | 0.97150 | 110213 / 110213 |
+| `path3:sparse:16384`   | 1.00000 | [0.99997, 1.00003] | 1.0000109 | 1.01358 | 441937 / 441937 |
+| `path4:sparse:4096`    | 0.99999 | [0.99997, 1.00000] | 0.9999937 | 0.93444 | 327629 / 327629 |
+| `path4:sparse:16384`   | 1.00000 | [1.00000, 1.00001] | 1.0000016 | 1.00060 | 1322538 / 1322538 |
+| `mutual:blocks:4096`   | 1.00007 | [0.99995, 1.00019] | 1.0000242 | 0.98643 | 61440 / 61440 |
+| `mutual:blocks:8192`   | 1.00006 | [0.99992, 1.00020] | 1.0000581 | 0.99047 | 122880 / 122880 |
+| `triangle:sparse:4096` | 0.99994 | [0.99984, 1.00003] | 0.9999475 | 0.99173 | 48 / 48 |
+| `triangle:blocks:4096` | 1.00000 | [0.99999, 1.00001] | 1.0000001 | 1.00181 | 61440 / 61440 |
+
+The largest deviation from unity over the eighteen cohorts is 7 parts in 100,000, on
+`mutual:blocks:4096`, whose own A/A null on the same run is 2.4 parts in 100,000 and whose interval
+contains unity. Derived, probe and candidate counts and the output digest agree on every cohort.
+
+**The symbol comparison settles it more firmly than the counters do.** `Demand::evaluate_into` is a
+fourteen-byte thunk that tail-calls one `evaluate_counting` instantiation. In both binaries that
+callee is the 0x87e6-byte, 7,659-instruction instantiation, and its normalized disassembly is
+**identical instruction for instruction** across the two arms. The grounded producer's kernel,
+`Prepared::evaluate_into` at 0x1f8 bytes and 118 instructions with `Prepared::propagate` inlined
+into it, is likewise identical.
+
+The only kernel-shaped difference anywhere near this path is in the *other* `evaluate_counting`
+instantiation, the one the `COUNT` const generic selects and which only `--count-probes` reaches:
+36,489 bytes and 7,898 instructions before, 36,452 bytes and 7,893 instructions after. The whole
+difference in its call multiset is **one fewer `core::panicking::panic_bounds_check`** — 123 calls
+becomes 122, one elided bounds check on a cold panic path — with the rest being register and
+alignment scheduling around it. Nothing on the production path moved, and this instantiation is not
+in any timed loop.
+
+So the card's worry that a crate boundary would disturb this kernel does not materialize, and the
+0.8–1.7 % excursions this kernel has shown under unrelated edits do not recur here.
+
+### 2. Frontend and backend stages: all but one within the null
+
+`bench.py` against the retained control, five rounds, both scanner variants, stages
+`scan,parse,admit,lower,stratify`, over the five Rel cohorts and then the `datalog` cohort. The
+counter set ran at 100 per cent enabled on every one of the 341 measurements in the `datalog` run
+and likewise in the cohort run; load average over the rounds was 1.3–3.3.
+
+Fifty-six candidate-over-control comparisons on the five Rel cohorts, and the largest deviation
+from unity in instructions is **2 parts in 100,000** (`comment-string/scan/byte` and
+`comment-string/parse/byte-null`, the latter being the run's own drift null). Nothing on the
+scanner, parser, admission or lowering stages moves.
+
+The `datalog` cohort is the only one that reaches the stratified backend, and it does move:
+
+| Operation | Instructions, split ÷ control | 95 % interval |
+|--------------------------|--------|--------------------|
+| `datalog/stratify/byte`  | 1.00071 | [1.00071, 1.00071] |
+| `datalog/stratify/scalar`| 1.00071 | [1.00071, 1.00071] |
+| `prepare`                | 1.00005 | [0.99994, 1.00016] |
+| `datalog/parse/byte`     | 1.00002 | [1.00000, 1.00004] |
+| `datalog/parse/byte-null`| 1.00002 | [1.00001, 1.00003] |
+| `datalog/scan/scalar`    | 0.99998 | [0.99998, 0.99999] |
+| the remaining six        | 1.00000 | width ≤ 2e-5 |
+
+The stratify interval is degenerate because the instruction count is deterministic: the stage
+retires 1,684,818,752 instructions per iteration on the control and about 1.19 million more on the
+candidate. Every other operation sits at the run's null of 2 parts in 100,000.
+
+**This is not really an item-2 result.** The Rel cohorts' `stratify` figures are identical to their
+`lower` figures to the instruction (`ascii/stratify/byte` 3,937,315 against `ascii/lower/byte`
+3,937,314): a Rel dictionary never reaches the backend, so those rows measure lowering twice. The
+`datalog` cohort's stratify stage is the only operation in the whole frontend set that runs the
+stratified backend, and that stage is precisely item 3 — it admits one contract program per layer,
+evaluates it, emits both certificates and runs both of the core's independent checkers. The 0.071
+per cent therefore belongs to item 3 and is diagnosed there.
+
+### 3. The real exposure: the carriers, `support::check`, and the two Datalog checkers
+
+**What has a driver and what does not.** The derivation and ranked checkers have one: the
+`datalog/stratify` stage above runs both of them per iteration, inside an interleaved, two-point
+differenced, counter-based A/B with its own null. The grounded replay and `support::check` have
+**no driver at all**, and the reason is stronger than "nobody wrote one": `composition_graph` and
+`ergodis_verify::support` do not appear in the symbol table of `closure_ballpark`, `ergodis-tools`
+or the core `ergodis` binary on either arm, so no existing executable in either repository reaches
+them. `ab.py --mode full` cannot substitute, because its two-point differencing over the evaluation
+repeat count cancels the certificate and checker passes, which run once per process. Rather than
+write a new benchmark for a pure code move, both paths are read from the compiled code, in the one
+release artifact that does instantiate them.
+
+**The carriers are still inlined; `support::check` is still inlined.** Read from the release build
+of `crates/rules`'s `contract_properties` test, retained as an arm on each side
+(`rules-contract-properties-96aee9b`, measured sha256
+`a63989ff8609634c27b967310a2665fb91475475ceda7063589af372131c9bee`, and
+`rules-contract-properties-83eec12`, measured sha256
+`23e4d63cfdba64d2cc54b9a8b6b0b3c482e5a407c96a39a5b7dcc2a89c84c157`; recipe
+`../ergodis-dev/scripts/retain-bin.sh crates/rules contract_properties --test --label
+rules-contract-properties`). Neither binary defines a single out-of-line symbol for any
+`TransitionWeight` method of `BoundedMinPlus` or `Boolean`: all ten are inlined into their callers
+on both arms, which is what rustc's cross-crate heuristic for tiny functions plus thin LTO is
+supposed to do. Of the three `composition_graph::propagate` instantiations, two are identical
+instruction for instruction across the arms (492 and 494 instructions); the third goes from 495 to
+491 instructions with the **same set of nineteen call targets** — `finish_grow`, `free`, `memcpy`,
+`memset`, `panic_bounds_check`, `len_mismatch_fail` and `_Unwind_Resume`, none of them a carrier
+method — so the difference is register allocation and alignment, not a lost inline.
+`grounded::support_check` is 0x2cf bytes for both carriers on both arms, with `support::check`
+inlined into it, and the producer's `Prepared::support_certificate` is 0xe11 bytes on both. The
+outer `verify_support` wrapper, which does schema and binding checks and is not a loop, shrinks
+from 0x296 to 0x24f bytes.
+
+**`Admitted::tuple` lost its inline; `Admitted::pack` did not.** In the control, neither method
+exists as an out-of-line symbol anywhere: both are inlined at every call site. In the candidate,
+both appear as out-of-line functions in `ergodis-tools` and in `closure_ballpark`, and
+`Admitted::tuple` is **called through the GOT from exactly two places in each binary** —
+`ergodis_verify::ranked::check_admitted_bounded` and
+`ergodis_verify::derivation::check_admitted_bounded`, the two checkers' load passes, which call it
+once per listed tuple. `Admitted::pack` is emitted but has no call site in either binary, so it is
+still inlined where it is used. The two load passes shrink accordingly —
+`derivation::check_admitted_bounded` from 0x14c9 to 0x12e8 bytes and
+`ranked::check_admitted_bounded` from 0x2858 to 0x2616 — which is the body of `tuple` leaving the
+loop and a call taking its place.
+
+That is the cause of the 0.071 per cent on `datalog/stratify`, it is a loss outside the null on an
+item-3 path, and it is exactly the shape the decision rule admits a repair for.
+
+### 4. The repair: one attribute on `Admitted::tuple`
+
+Core commit `f7b0d16` adds `#[inline]` to `Admitted::tuple` in `crates/contract/src/datalog.rs`,
+with a comment naming the two load passes and the boundary, and nothing else. `Admitted::pack` does
+**not** get the attribute, because the disassembly shows it inlined at every site it is actually
+called from; giving it one would be a guess rather than a measurement. The ten `TransitionWeight`
+methods do not get it either, for the same reason.
+
+Retained as `closure_ballpark-inline-55dab0c`, measured sha256
+`478f9e9c361e7677c6f8dade4c7802ee92f1604c26bd954407fd6e00bf98de85`, and
+`ergodis-tools-inline-55dab0c`, measured sha256
+`b6b666e761eea8380b49abbeb2c62d7f64f6f97dbf1f733def7ce6476b88bb21`, both at private `55dab0c` and
+core `f7b0d16`, from a clean tree, by the same two recipes with `--label` added to keep them apart
+from the pre-repair arms at the same private revision.
+
+**The attribute did what the disassembly predicted.** `Admitted::tuple` has no out-of-line symbol
+in either rebuilt binary, and neither `tuple` nor `pack` has a single call site left;
+`derivation::check_admitted_bounded` grows from 0x12e8 to 0x13a8 bytes and
+`ranked::check_admitted_bounded` from 0x2616 to 0x272b as the body returns to the loop. Both stay
+below their pre-split sizes (0x14c9 and 0x2858), so the recovered code is scheduled differently
+from the control's, not restored to it.
+
+**Counters after the repair**, `ergodis-tools-inline-55dab0c` against the same pre-split control,
+`datalog` cohort, five rounds, load average 1.9–3.3:
+
+| Operation | Instructions, repaired ÷ control | 95 % interval | Before the repair |
+|--------------------------|--------|--------------------|---------|
+| `datalog/stratify/byte`  | 0.99953 | [0.99953, 0.99953] | 1.00071 |
+| `datalog/stratify/scalar`| 0.99953 | [0.99953, 0.99953] | 1.00071 |
+| `prepare`                | 1.00003 | [1.00000, 1.00007] | 1.00005 |
+| `datalog/parse/byte`     | 1.00001 | [0.99999, 1.00004] | 1.00002 |
+| `datalog/parse/byte-null`| 1.00001 | [0.99999, 1.00002] | 1.00002 |
+| the remaining seven      | 1.00000 | width ≤ 2e-5 | 1.00000 |
+
+The stratified backend stage goes from 1,683,620,476 instructions per iteration on the control to
+1,682,835,524 on the repaired candidate: the 0.071 per cent loss becomes a **0.047 per cent win**,
+785,000 instructions per iteration better than the tree before the split. Nothing else moves.
+
+The five Rel cohorts were rerun with the repaired binary as well — 56 comparisons, counter set at
+100 per cent enabled on all 1,622 measurements, load average 1.1–1.9 — and the largest deviation
+from unity is 4 parts in 100,000 on `prepare`, against a run null of 3 parts in 100,000 on
+`comment-string/parse/byte-null`. No scan, parse, admit or lower operation moves.
+
+**The derivation loop is unaffected by the repair.** The eighteen-cohort `ab.py` run against the
+same control gives a worst deviation of 5 parts in 100,000 (`triangle:sparse:4096`, null
+1.4e-5, interval containing unity), derived and probe counts and output digests equal on every
+cohort, and — the firmer statement — the production `evaluate_counting` instantiation and
+`Prepared::propagate` are **still identical instruction for instruction** to the control's.
+
+### The identity the repair moves
+
+`#[inline]` is a source edit under `crates/contract/src`, so the contract identity moves one more
+time, exactly as the card anticipates for any such edit:
+
+| Identity | Value |
+|--------------------------------|------------------------------------------------------------------|
+| contract, at `83eec12` | `85346c30659b5f5d8ddd5f36a7659a2d9eae13e206b3a08292e3112afe0504b2` |
+| contract, at `f7b0d16` | `2b68f01e3995ff310017539d6c1cbbc339ba3452eac65e959a52e131ae434100` |
+| checker, unchanged by the repair | `0ea8d53f610945bdcb867341aa8fcdae6e6d3b7580518856179b48bf34cf6498` |
+
+The new value is an offline recomputation of `implementation_identity()` — SHA-256 over
+`ergodis/finite-rule-contract/v1` followed by the eight `HASHED_SOURCES` files in their listed
+order — and the same recomputation applied to the file bytes at `83eec12` reproduces
+`85346c30…04b2` digit for digit, which is what licenses the method. No tracked file in either
+repository pins the old value, so nothing else needed regenerating beyond `SHA256SUMS`. The repair
+commit carries the source edit, the regenerated `SHA256SUMS` and nothing else, and it passed
+`cargo fmt --check`, `cargo clippy --all-targets --all-features -D warnings` and
+`cargo test --all-features` (84 `test result: ok` blocks, zero `FAILED`) under the pinned
+toolchain in the same commit.
+
+### Verdict against the card's acceptance line
+
+The card asks that "the derivation loop and the frontend/backend stages hold against the retained
+controls within the A/A null, with the compiled `evaluate_into` compared". They do.
+
+1. **Derivation loop:** within the null on all eighteen cohorts, and the compiled kernel
+   `Demand::evaluate_into` tail-calls is byte-identical to the control's, before and after the
+   repair. The grounded producer's `Prepared::evaluate_into` and `Prepared::propagate` are
+   identical too.
+2. **Frontend and backend stages:** within the null on every scan, parse, admit and lower
+   operation across six cohorts and both scanner variants.
+3. **The exposure paths:** the carrier methods and `support::check` are still inlined, and the
+   three `composition_graph::propagate` instantiations carry the same call sets. The one lost
+   inline the move produced, `Admitted::tuple` in both Datalog checkers' load passes, was found in
+   the disassembly, cost 0.071 per cent of the stratified backend stage, and is repaired by one
+   attribute; the repaired arm is 0.047 per cent *ahead* of the pre-split tree on that stage.
+
+**Unexplained movement, stated plainly.** Three small things are observed and not explained. The
+counted `evaluate_counting` instantiation lost one `panic_bounds_check` call and five instructions
+across the move, on a path no timed run enters. The `verify_support` wrapper shrank from 0x296 to
+0x24f bytes, and one of the three `propagate` instantiations moved by four instructions with an
+unchanged call set — both are scheduling under a changed module summary, neither is on a measured
+path, and no counter can see them because nothing links those symbols. After the repair the two
+checker load passes sit between their split and pre-split sizes rather than returning to either,
+which is why the repaired stage is faster than the control rather than equal to it; the direction
+is favourable and the cause is ThinLTO's inlining order, not a semantic difference.
+
+### Receipts and commits
+
+| Repository | Commit | What |
+| --- | --- | --- |
+| `ergodis` | `f7b0d16` | `#[inline]` on `Admitted::tuple`, with the regenerated `SHA256SUMS` |
+| `ergodis-private` | `a082a07` | the eight receipts, four from `ab.py` and four from `bench.py` |
+| `othello` | this section | written incrementally as each arm was measured |
+
+The receipts are `analysis/datalog-comparison/ab-2026-09-21-c1209-derivation-loop.json` and
+`-inline.json` with their streamed `.jsonl` companions, and
+`analysis/rel-frontend/performance-v11-c1209-split-55dab0c.json`,
+`-split-datalog-55dab0c.json`, `-inline-55dab0c.json` and `-inline-datalog-55dab0c.json`. Each
+carries its arms' binary hashes, the event set, the per-event enabled fraction, the load average
+over the rounds, the per-operation ratios with intervals and the nulls.
+
+### Replay commands
+
+Every build, gate and measurement went through `nix develop ~/src/ergodis`, whose devShell asserts
+its rustc equals the `rust-toolchain.toml` pin. Working files under `~/.cache/ergodis/c1209/`.
+
+```sh
+# The control worktrees. The private workspace resolves the core by the relative
+# path ../ergodis, so the pair must sit side by side under one parent.
+mkdir -p ~/.cache/ergodis/worktrees/c1209
+git -C ~/src/ergodis worktree add --detach \
+    ~/.cache/ergodis/worktrees/c1209/ergodis 96aee9b
+git -C ~/src/ergodis-private worktree add --detach \
+    ~/.cache/ergodis/worktrees/c1209/ergodis-private 55dab0c^
+
+# The arms. Each retained with its tree at the named revision and `git status
+# --short` empty, checked before the recipe ran.
+cd ~/.cache/ergodis/worktrees/c1209/ergodis-private
+../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example      # private 74f974c, core 96aee9b
+../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools         # private 74f974c, core 96aee9b
+cd ~/src/ergodis-private
+../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example      # private 55dab0c, core 83eec12
+../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools         # private 55dab0c, core 83eec12
+../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --label closure_ballpark-inline
+../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools --label ergodis-tools-inline
+# the last two: private 55dab0c, core f7b0d16
+
+# The release test binaries that instantiate the grounded replay and
+# support::check, which no driver in either repository links.
+cd ~/.cache/ergodis/worktrees/c1209/ergodis
+../ergodis-dev/scripts/retain-bin.sh crates/rules contract_properties --test \
+    --label rules-contract-properties                                   # core 96aee9b
+cd ~/src/ergodis
+../ergodis-dev/scripts/retain-bin.sh crates/rules contract_properties --test \
+    --label rules-contract-properties                                   # core 83eec12
+
+# Gates for the repair, core, at f7b0d16. Outcome: exit 0, 84 `test result: ok`
+# blocks, zero FAILED; clippy and fmt clean.
+cd ~/src/ergodis
+nix develop . --command python3 python/generate_evidence.py --write
+nix develop . --command cargo fmt --all -- --check
+nix develop . --command cargo clippy --all-targets --all-features -j 12 -- -D warnings
+nix develop . --command cargo test --all-features --no-fail-fast -j 12
+
+cd ~/src/ergodis-private
+A=analysis/datalog-comparison; B=analysis/rel-frontend
+C=~/.cache/ergodis/bin; W=~/.cache/ergodis/c1209
+E=instructions,cycles,branches,branch-misses,page-faults,minor-faults
+ALL=closure:sparse:256,closure:sparse:1024,closure:dense:256,closure:dense:512,samegen:sparse:1024,samegen:dense:512,closure:blocks:4096,closure:blocks:16384,cycle:blocks:4096,triangle:sparse:16384,path3:sparse:4096,path3:sparse:16384,path4:sparse:4096,path4:sparse:16384,mutual:blocks:4096,mutual:blocks:8192,triangle:sparse:4096,triangle:blocks:4096
+
+# The derivation loop, before and after the repair. Outcome: 0.99994 to 1.00007,
+# then 0.99999 to 1.00005.
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $C/closure_ballpark-74f974c \
+    --a-name control-74f974c --b $C/closure_ballpark-55dab0c --b-name split-55dab0c \
+    --mode evaluate --rounds 5 --cpu 5 --repeats 3 --cohorts $ALL \
+    --work $W/ab-evaluate --out $A/ab-2026-09-21-c1209-derivation-loop.json
+nix develop ~/src/ergodis --command python3 $A/ab.py --a $C/closure_ballpark-74f974c \
+    --a-name control-74f974c --b $C/closure_ballpark-inline-55dab0c --b-name inline-f7b0d16 \
+    --mode evaluate --rounds 5 --cpu 5 --repeats 3 --cohorts $ALL \
+    --work $W/ab-evaluate-inline --out $A/ab-2026-09-21-c1209-derivation-loop-inline.json
+
+# The frontend and backend stages over the five Rel cohorts, before and after.
+nix develop ~/src/ergodis --command python3 $B/bench.py --binary $C/ergodis-tools-55dab0c \
+    --control $C/ergodis-tools-74f974c --rounds 5 --cpu 5 \
+    --stages scan,parse,admit,lower,stratify --events $E \
+    --out $B/performance-v11-c1209-split-55dab0c.json
+nix develop ~/src/ergodis --command python3 $B/bench.py --binary $C/ergodis-tools-inline-55dab0c \
+    --control $C/ergodis-tools-74f974c --rounds 5 --cpu 5 \
+    --stages scan,parse,admit,lower,stratify --events $E \
+    --out $B/performance-v11-c1209-inline-55dab0c.json
+
+# The datalog cohort, whose stratify stage is the only operation that runs the
+# stratified backend and both checkers. Outcome: 1.00071, then 0.99953.
+nix develop ~/src/ergodis --command python3 $B/bench.py --binary $C/ergodis-tools-55dab0c \
+    --control $C/ergodis-tools-74f974c --rounds 5 --cpu 5 --cohorts datalog \
+    --stages scan,parse,admit,lower,stratify --events $E \
+    --out $B/performance-v11-c1209-split-datalog-55dab0c.json
+nix develop ~/src/ergodis --command python3 $B/bench.py --binary $C/ergodis-tools-inline-55dab0c \
+    --control $C/ergodis-tools-74f974c --rounds 5 --cpu 5 --cohorts datalog \
+    --stages scan,parse,admit,lower,stratify --events $E \
+    --out $B/performance-v11-c1209-inline-datalog-55dab0c.json
+```
+
+The symbol comparisons are `nm -C --defined-only --print-size` over each pair of binaries for the
+size and presence questions, and `objdump -d -C --no-show-raw-insn` restricted to one symbol's
+address range, with branch targets rewritten relative to the function start and RIP displacements
+elided, for the instruction-for-instruction questions.
+
+Inputs are deterministic: `ab.py` drives the C1182 xorshift edge generator seeded by the domain for
+the `sparse` and `dense` densities and a complete digraph inside each block for `blocks`, and
+`bench.py` builds its cohorts from a fixed definition count with a recorded per-cohort source hash.
+
+### What this measurement left under `~/.cache/ergodis/`
+
+Eight retained binaries: `closure_ballpark-74f974c` and `ergodis-tools-74f974c` (the controls),
+`closure_ballpark-55dab0c` and `ergodis-tools-55dab0c` (the split as built),
+`closure_ballpark-inline-55dab0c` and `ergodis-tools-inline-55dab0c` (the repair, and **the
+controls the next A/B in this lane should use**), and `rules-contract-properties-96aee9b` and
+`-83eec12` (the release test binaries the carrier and `support::check` inlining was read from).
+`ergodis-96aee9b` and `ergodis-83eec12` were also retained, to establish that the core binary does
+not link the grounded replay; they carry no figure. `c1209/` holds the two `ab.py` work
+directories. No `perf record` profile was taken: every measurement is a `perf stat` A/B through
+`ab.py` or `bench.py`. Two git worktrees under `worktrees/c1209/` were removed with
+`git worktree remove` at close.
+
+`../ergodis-dev/scripts/cache-gc.sh` was run in its listing mode and **nothing was deleted; that is
+Tavis's call.** It scanned 43 entries and reports 21 unreferenced and old enough to remove, none of
+them this task's: `audit-c1198` (68K), `c1190-audit` (107K), `c1190-milestone-c-audit` (168K),
+`c1191` (49K), `c1191-audit` (524K), `c1192-audit` (8.9M), `c1193` (18M), `c1193-audit` (72K),
+`c1198` (16M), `c1199-audit` (3.8M), `c1200` (4.1M), `c1201` (16M), `c1201-audit` (248K),
+`c1202-audit` (35M), `c1203` (26M), `perf-c1191` (423K), `perf-c1192` (572K), `perf-c1193` (185K),
+`perf-c1193-replay` (8.3M), `perf-c1198` (317K) and `rel-frontend-parity` (134K), plus `wt` (9.0K)
+which it names with the three reports that reference it. `worktrees` at 105 MB is kept only because
+it is younger than two days, and other lanes' worktrees live there.
