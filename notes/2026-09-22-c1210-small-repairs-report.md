@@ -218,3 +218,18 @@ RIR bytes unchanged. These are predictions, not generated-v2 results. The intend
 gate uses ASCII plus Datalog (successful lowering), scan/parse/admit/lower, both scanners,
 parse A/A nulls, fitted separate cache events, profiles/calls and RSS. Both policy spellings
 must be checked in standalone bench receipts; schema remains v1 there, v2 only for parity.
+
+## Sequencing measurement review
+
+Main reviewed `analysis/rel-frontend/c1210-stage-primary.json`: seven rounds, four cohorts,
+parse/admit/lower, both scanners, six events all enabled 100%. Every nested output/work
+record compared exactly across arms. Byte Datalog parse/admit/lower add approximately
+9.70/32.17/35.46 retired instructions per source; ASCII adds 3.05/30.17/31.30.
+These are small genuine entry costs, consistent with the prewritten tens-of-instructions
+Fermi, not a zero-cost claim. Datalog lower ratio is 1.0000062456,
+interval [1.0000046553, 1.0000078360], with parse A/A null 0.9999995220,
+[0.9999962305, 1.0000028135]. Valid execution and malformed parse outcomes are unchanged;
+the new behavior is tested on stale/unadmitted calls, not exercised as a successful benchmark.
+Byte Datalog lowering RSS is 6,012→6,056 KiB; retained 11,045,388 and occupied 274,832
+bytes are unchanged. Cycle ratios are noisy and do not decide this correctness repair.
+Fitted cache and call/profile review remain pending.
