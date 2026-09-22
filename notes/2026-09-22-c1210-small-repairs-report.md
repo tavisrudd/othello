@@ -205,6 +205,11 @@ removed and found no other changes. Main also recomputed the clean retained cand
 measured SHA-256 as `891bca69263a0cbf8678f98208b0bd4ffe0960ae9b830bd555cf06983e504613`.
 Matched control is `8192836`, both with core `61116a3`. Stage A/B acceptance remains pending.
 
+One sequencing cache invocation was refused before measurement because the main agent's
+three-event recipe omitted `cycles`, which `bench.py` requires alongside `instructions`.
+The corrected separate set is `instructions,cycles,cache-references,cache-misses`, already
+confirmed at 100% enabled in cleanup. No source change or primary rerun was needed.
+
 Record-update Fermi before integration: `body_policy` mapping/JSON emission is outside the
 timed loop, so expected kernel/work/fingerprint delta is zero; ThinLTO layout still requires
 a matched driver A/B. Forty-two lowered records gain three u32 counters each: predicted
