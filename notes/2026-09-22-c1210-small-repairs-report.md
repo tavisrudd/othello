@@ -63,6 +63,29 @@ corrected to whole-program refusal. No behavior was changed for these correction
 Pending implementation, review and validation. Incidental discoveries, retained artifacts and
 any unresolved evidence gaps will be recorded before task closure.
 
+## Isolated preparation and validation scheduling
+
+While private cleanup gates run, later source changes are prepared separately and do not
+alter the measured primary checkout or start another build:
+
+- `~/.cache/ergodis/worktrees/c1210-sequencing`, based on private `bfd79c9`: uncommitted
+  `src/rel_frontend/mod.rs`, `src/rel_frontend/diagnostic.rs`, `tests/rel_lowering.rs`.
+  Source reviewed; not compiled or tested yet. It cannot land before cleanup acceptance.
+- `~/.cache/ergodis/worktrees/c1210-records`, same base: uncommitted
+  `tests/rel_frontend_portability.rs`, `analysis/rel-frontend/portability.py`,
+  `analysis/rel-frontend/README.md`, `tasks/tools/src/rel_frontend_bench.rs`.
+  Source reviewed; artifact generation, smoke/parity/performance gates remain pending.
+  It cannot land before the sequencing repair is accepted.
+
+These source-only worktrees intentionally have no build targets or dependency-symlink trees.
+Reviewed patches will be integrated into the primary checkout and validated in sequence.
+They remain uncommitted because validation is pending, not as sole evidence of completion.
+
+Private fmt and Clippy passed. The first full test invocation used Cargo jobs=12 but omitted
+the test-harness cap, so the agent interrupted it without claiming acceptance and restarted
+with `RUST_TEST_THREADS=12`. Subsequent test commands must carry both caps. No failure was
+reported before interruption; only the completed constrained run can count as a gate.
+
 ## Core documentation validation
 
 Core `61116a3` changes comments only in contract derivation, verify derivation/ranked and
