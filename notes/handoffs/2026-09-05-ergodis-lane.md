@@ -18,6 +18,10 @@ C1017, C1061 and C985 remain in progress. C1062 and C1070 await Tavis's close ca
 portability work, read `notes/ergodis-architecture-context.md` after this handoff. It is private,
 not-to-ship contributor guidance. Narrow UI/admin work does not require the full context.
 
+**Whole-system review (2026-09-22)**: `../2026-09-22-ergodis-architectural-review.org` —
+pinned public/private architecture and module inventory, prioritized findings, and
+macOS/Windows/ARM portability assessment; review only, no implementation changes.
+
 **Performance context (required)**: `~/src/ergodis-dev/PERFORMANCE.md` is the always-on rules
 layer for any Ergodis Rust edit. Before a hot-path edit, benchmark, A/B, profiling or
 measurement-stage task, also read `~/src/ergodis-dev/performance-playbook.md` in full (contract

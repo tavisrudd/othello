@@ -1,5 +1,10 @@
 # Ergodis architecture context
 
+Current whole-system source review: `2026-09-22-ergodis-architectural-review.org`.
+Pinned public/private crate and module inventory, evidence/host boundaries, and
+macOS/Windows/ARM assessment; distinguishes current core main from the older public
+snapshot. Records the macOS memory-advice blocker and stale canonical WASM lock.
+
 Current paired native/JS capability inventory and implementation ordering:
 `2026-09-09-c1130-js-wasm-parity-review.md`. Resolve host fragmentation together;
 preserve typed native execution. This is private, not-to-ship context.
