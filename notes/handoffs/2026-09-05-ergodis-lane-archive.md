@@ -491,3 +491,18 @@ drafts and possible independently substantial follow-ons are in
 search are in its sources companion. Novelty and coupling experiments remain explicit C985
 evidence work. The local public snapshot predates the newer rule-contract features; no
 public documentation, export, manuscript or foreign-lane file was changed.
+
+## 2026-09-22 — C1210 cleanup-first small repairs complete
+
+Authority and detailed evidence: `../2026-09-22-c1210-small-repairs-report.md`.
+Main coordinated/reviewed Terra/Sol work. Core docs `61116a3`; private cleanup
+`8192836`, sequencing `69426b9`, record update `67b782a`, each with separate evidence.
+Focused tests and native/WASM parity pass; the sequencing guard costs about 35 retired
+instructions per successful Datalog source in the measured cohort. It establishes stage
+freshness, not arbitrary source-byte identity. Parity v2 is 243 cases and 529,626 bytes
+(exactly +504 for three counters on 42 lowered records); bench v1 adds `body_policy`.
+Cycle attribution and small scalar-scan movement remain limited as documented; no
+full-private-suite, universal timing-neutrality or cache-effect claim. Cache GC was dry-run
+only; retained controls/profiles and two isolated draft worktrees are inventoried in the report.
+No incidental discovery entry was warranted. C1214 a is the next test-only increment;
+C1213 parallel design/preparation was allowed and its live-checkout/build hold is now lifted.

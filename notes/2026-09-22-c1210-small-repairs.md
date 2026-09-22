@@ -2,8 +2,8 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: IN PROGRESS — cleanup-first implementation, coordinated/reviewed by the main
-agent with Terra/Sol implementation assistance as requested by Tavis. Report:
+**Status**: COMPLETE (2026-09-22) — all three milestones separately committed and accepted,
+coordinated/reviewed by the main agent with Terra/Sol implementation assistance. Report:
 `notes/2026-09-22-c1210-small-repairs-report.md`.
 **Authority**: `notes/2026-09-22-c1208-follow-up-triage.md` (approved allocation and order).
 

@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: IN PROGRESS. Cleanup and stage sequencing accepted; record-format gates remain open.
+**Status**: COMPLETE. All three milestones accepted, with measured costs and evidence limits below.
 
 ## Scope and coordination
 
@@ -31,7 +31,7 @@ The main agent reviews diffs, gates and receipt interpretation before commits ar
 | Core checker/fact-count documentation | Committed `61116a3` | Main reviewed all four documentation diffs; fmt, Clippy and 85/85 test groups passed; manifest regenerated |
 | Private documentation and byte-preserving cleanup | Accepted `8192836`; evidence `1bd7d79` | fmt/Clippy and 100 affected tests pass; native/WASM canonical digest unchanged; primary A/B/null, fitted cache, calls and RSS reviewed |
 | Stage sequencing | Accepted `69426b9`; evidence `c1b398f` | 100 focused tests, unchanged native/WASM parity, measured entry cost and unchanged loop call targets |
-| Parity v2 and additive bench policy | Candidate `67b782a`; performance pending | Native/WASM v2 agrees and byte-growth forecast reconciles; both bench policy spellings pass |
+| Parity v2 and additive bench policy | Accepted `67b782a`; evidence `235142c`, corrected `d8b901a` | Native/WASM v2 and byte forecast agree; both policy smokes, matched A/B, fitted cache and call/profile checks pass |
 
 ## Decisions and limits
 
@@ -71,8 +71,11 @@ records, so exact lowering outcomes/counts/IR fingerprints must also be checked 
 
 ## Closeout
 
-The final record-update gates and task-lifecycle closure remain open. Incidental discoveries,
-retained artifacts and unresolved evidence gaps will be accounted for at closure.
+Cleanup, stage sequencing and record updates are separately committed and accepted.
+The main agent coordinated and reviewed Terra/Sol implementation and measurement work.
+Focused gates pass; no full-private-suite or timing-neutrality claim is made. C1213's
+live-checkout/build hold is lifted now that C1210 measurements have ended. C1214 a remains
+the recommended test-only next increment; coordinate checker/fixture edits with C1213.
 
 ## Isolated preparation and validation scheduling
 
@@ -86,8 +89,8 @@ alter the measured primary checkout or start another build:
 - `~/.cache/ergodis/worktrees/c1210-records`, same base: uncommitted
   `tests/rel_frontend_portability.rs`, `analysis/rel-frontend/portability.py`,
   `analysis/rel-frontend/README.md`, `tasks/tools/src/rel_frontend_bench.rs`.
-  Source reviewed; artifact generation, smoke/parity/performance gates remain pending.
-  It cannot land before the sequencing repair is accepted.
+  Source reviewed, then integrated and validated as primary `67b782a` after sequencing
+  acceptance. This isolated draft itself was never built and retains its pre-generation README.
 
 These source-only worktrees intentionally have no build targets or dependency-symlink trees.
 Reviewed patches will be integrated into the primary checkout and validated in sequence.
@@ -291,4 +294,51 @@ per source, ratio 1.0000125867 [1.0000062038, 1.0000189697]. A separately record
 same-binary primary null has an overlapping interval [0.9999967306, 1.0000084977].
 The built-in parse null already existed, so this extra standalone run is retained as
 corroboration, not a reason to repeat another standalone cache-null campaign. No speed
-improvement or universal zero-delta claim is made. Cache and call/profile gates follow.
+improvement or universal zero-delta claim is made. Cache and call/profile gates passed:
+main inspected the four-event fitted receipt (all events enabled 100%, both built-in
+parse null intervals include 1), with no supported cache-effect claim. Scanner, parser
+and lowering symbolic target/count summaries match; these summaries do not prove ordered
+call-site stream equality. Main independently reproduced the lower summary hash on both
+retained binaries (`a9d56fd0ce96121143e8cd8c90dd010fb0b377d32d891dd3c4aff5c9e91d2758`)
+and confirmed 175 candidate call sites. The evidence note's initial "per source byte"
+unit was corrected on review to "per source invocation"; it also now distinguishes
+ASCII's lowering refusal from Datalog's successful lowering. Final evidence is private
+`analysis/rel-frontend/c1210-records-evidence.md`, commits `235142c` and `d8b901a`.
+
+## Final evidence index and retained artifacts
+
+- Core source/docs: `61116a3`.
+- Private cleanup: source `8192836`, evidence `1bd7d79`, replay-doc correction `b01fcac`;
+  `analysis/rel-frontend/c1210-m1-evidence.md`.
+- Stage sequencing: source `69426b9`, evidence `c1b398f`, replay-doc correction `e50545e`;
+  `analysis/rel-frontend/c1210-stage-evidence.md`.
+- Record update: source/artifact `67b782a`, evidence `235142c`, review correction `d8b901a`;
+  `analysis/rel-frontend/c1210-records-evidence.md` and `portability-v2.json`.
+
+The final cache-GC dry run scanned 53 entries and listed 20 old/unreferenced candidates;
+nothing was deleted. The three retained candidate binaries are 6.0 MiB each; the initial
+control is also retained. Main measured `~/.cache/ergodis/c1210-m1` at 2.9 MiB and
+`perf-c1210` at 99 KiB; the record-update owner reports its four profiles at 136 KiB.
+The two explicitly listed source-only worktrees are 22 MiB each and retain uncommitted
+draft copies. They are not authoritative artifacts or the sole evidence for any claim;
+all delivered source and receipts are committed in the primary repositories. No new build
+target tree, publication, Lean operation or cache deletion occurred.
+
+## Remaining evidence limits and discovery review
+
+- The stage state settles freshness and removes counter-wrap risk; source-byte identity
+  remains the documented caller precondition, not something this guard proves.
+- The sequencing cycle increases remain unattributed. The record-only scalar scan's
+  13.17-instruction per-invocation movement also has no established cause; its same-binary
+  null overlaps. Neither observation is represented as a speedup or a universal no-regression
+  result. A later timing investigation would need fresh matched measurements/attribution;
+  no additional optimization work is allocated here.
+- Cache counts are too noisy for an effect claim, and profile target summaries do not
+  prove the absence of every existing exceptional/setup call. The known clear/copy calls
+  were not hidden or silently repaired.
+- The broad private test attempts establish no full-suite result. The required focused
+  tests, allocation regression, differential tests and parity gates are the evidence claimed.
+
+Discovery discriminator reviewed at closeout: these findings were sought by the planned
+correctness/performance gates, so they belong in this report. No genuinely incidental
+discovery was found and no discovery-track entry was manufactured.
