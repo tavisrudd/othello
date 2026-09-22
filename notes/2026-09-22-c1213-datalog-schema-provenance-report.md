@@ -7,7 +7,7 @@
 Worktrees, branch `c1213`: core `~/.cache/ergodis/worktrees/c1213/ergodis` from core `main`
 `61116a3`; private `~/.cache/ergodis/worktrees/c1213/ergodis-private` from private `main` `e50545e`.
 
-Status: design written; implementation waits for approval.
+Status: design approved 2026-09-22 (both decisions as recommended); implementation in progress.
 
 ## Design
 
@@ -322,6 +322,11 @@ private `cargo fmt --check`, `cargo clippy --all-targets --all-features -- -D wa
 All builds under `run-quiet`, heavy runs under `choom -n 1000` with at most 12 jobs.
 
 ### Decisions for Tavis
+
+Both taken as recommended (Tavis, 2026-09-22): provenance lives only in the verification
+record and certificates are unchanged (D1); dispatch is strict, with no legacy door (D2).
+Where records are stored — the on-disk chain, tool output, evidence bundles — is left to the
+callers; C1205 milestone b is the first.
 
 **D1 — where provenance lives.**
 Recommendation: certificates carry no contract or checker identity; both live only in a record
