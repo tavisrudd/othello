@@ -5,11 +5,12 @@
 
 ## Milestone a
 
-Status: done (core `a92050a`, private receipts `bfd79c9`). The prepared source has a canonical
-byte form whose hash is the unchanged prepared identity; both checkers admit it for themselves;
-`Demand` names its source form and hands the bytes out. Every prepared and wire identity and
-certificate digest recorded before the change is unchanged, the derivation loop is identical
-instruction for instruction, and the backend stage that admits prepared sources reads 0.99998.
+Status: done, audited and repaired (core `a92050a`, repairs `c73ed85`, private receipts
+`bfd79c9`). The prepared source has a canonical byte form whose hash is the unchanged prepared
+identity; both checkers admit it for themselves; `Demand` names its source form and hands the
+bytes out. Every prepared and wire identity and certificate digest recorded before the change is
+unchanged, and the derivation loop is identical instruction for instruction. The backend stage
+that admits prepared sources reads 0.99998, within that cohort's own A/A drift.
 
 Repositories: core `~/src/ergodis` (start `2b71f67`, clean), private `~/src/ergodis-private`
 (start `8de4932`, clean).
@@ -77,10 +78,13 @@ admission sorts and deduplicates the facts and fixes the numbering, so the publi
   position, `fact_count` equal to the number of facts; `Error::Source` otherwise, and this is what
   keeps the fact walk from indexing out of range on a hand-built `Admitted`), encodes, refuses an
   encoding above the decoder's bound with `Error::Budget`, and refuses with `Error::Binding`
-  unless the bytes hash to the admitted `source_id`. The last check is one SHA-256 over the
-  encoding, off every timed path, and it makes the function total over any `Admitted` and never
-  wrong about what it returns: a wire admission, whose identity is the wire identity, is refused
-  by one check or the other rather than encoded into bytes that name a different source.
+  unless the bytes hash to the admitted `source_id`. As first committed (`a92050a`) that was
+  the last check, and the claim here that it made the function "total over any `Admitted` and
+  never wrong about what it returns" was false: the audit built a self-consistent `Admitted` with
+  two tuples swapped whose bytes `encode_prepared` returned and the decoder refused. Since
+  `c73ed85` the encoder also decodes its own bytes and returns them only when they decode to the
+  given `Admitted` field for field, so every returned encoding is one a checker accepts; the cost
+  is one decode per encode, on no timed path.
 - `datalog::prepared_identity(&[u8]) -> [u8; 32]` recomputes the identity from bytes.
 
 #### Decoder
@@ -105,12 +109,23 @@ an instance of: a name that is not UTF-8 is not an identifier (`Error::Source`),
 word above 255 is necessarily at or above the rule's variable count (`Error::Source`). Before
 any allocation each count is checked against the bytes that remain, so allocation is bounded by
 the input length, and a relation or rule count above its budget is refused with `Error::Budget`
-before the list is read.
+before the list is read. Since `c73ed85` a fact list that is not strictly increasing is refused
+while it is parsed, without admission's sort: the rest of the source is admitted with no facts
+so that a source admission would refuse still gets admission's value, then an out-of-domain fact
+value is `Error::Source` and anything else `Error::Encoding`.
 
 Bound: `datalog::MAX_PREPARED_BYTES = 1 << 30` bytes. The prepared route has no byte budget of
-its own and `admit_prepared` takes any fact count; the bound keeps what a decode holds (the
-input, its parsed buffers and the admitted form, each about the input's size) within a few GiB
-while admitting some 268 million tuple values. The largest cohorts in the committed benchmark
+its own and `admit_prepared` takes any fact count. The bound admits some 268 million tuple values.
+What a decode holds was first stated here as "each about the input's size, within a few GiB",
+which the audit measured to be wrong by about two: per tuple the input, the parsed rows and the
+admitted tuples are one times the input each, the fact record 1.5× (binary) to 3× (unary), and
+admission's sort keys 2× to 4×; measured peak RSS on a 128 MiB input was 6.4× for a binary
+relation, and reserved memory about 10×. So a decode at the bound holds some 7 to 10 GiB before a
+checker allocates anything. I kept the bound and stated this multiple in the docstring rather
+than reducing it: the committed cohorts need tens of MB, a caller with a smaller memory budget
+refuses a large input before decoding, and a caller-supplied bound is a milestone-b decision
+(open item). The one reduction made is that the out-of-order case no longer sorts before
+refusing, and the parsed rows are released before the re-encoding is built. The largest cohorts in the committed benchmark
 harnesses derive on the order of a million tuples, and their prepared inputs are smaller than
 that. An admitted source whose encoding would exceed the bound is admitted in process but not
 encodable, and `encode_prepared` says so with `Error::Budget` rather than producing bytes the
@@ -163,6 +178,7 @@ that accepts a prepared source can also accept a certificate of the same order.
 | --- | --- | --- |
 | `ergodis` | `a92050a` | encoder, decoder, `prepared_identity`, `SourceForm`, both `check_prepared` pairs, `Demand::source`/`prepared_encoding`, the certificate decoder bound, the new checker-crate tests, the pinned identities and certificate digests, regenerated `SHA256SUMS` |
 | `ergodis-private` | `bfd79c9` | the A/B receipts: derivation loop, path-length null, Rel cohorts, `datalog` cohort |
+| `ergodis` | `c73ed85` | repairs after the audit (see "Repairs after audit") |
 | `othello` | this report | written incrementally |
 
 ### Identities
@@ -176,7 +192,7 @@ Recorded at `2b71f67` (before any source change) by the test that now pins them,
 | `closure.json`, wire | `f22e5918…1c3aa4` | `76f25a38…18244c` | `d297c98a…440fc0` |
 | `closure.json`, prepared | `7f987bdd…bb6082` | `5360dca7…d541b6` | `e34e6082…4c1767` |
 | `same_generation.json`, wire | `691a3478…8a50f8` | `6e488f46…c15fb5` | `d3e7f321…35731d` |
-| `same_generation.json`, prepared | `0e333c41…93d2f2` | `45356bc3…27903e` | `97d921fc…05660` |
+| `same_generation.json`, prepared | `0e333c41…93d2f2` | `45356bc3…27903e` | `97d921fc…105660` |
 
 Old equals new on every cell; the full hexes are in
 `crates/rules/tests/demand_prepared.rs::the_identities_and_certificates_of_both_routes_are_pinned`,
@@ -207,17 +223,21 @@ Core at `a92050a`, all under `nix develop ~/src/ergodis`:
 | `cargo fmt --all -- --check` | clean |
 | `cargo clippy --all-targets --all-features -j 12 -- -D warnings` | clean |
 | `cargo test --all-features --no-fail-fast -j 12` | exit 0, 85 `test result: ok` blocks, zero FAILED (84 before; the new block is `prepared_source`) |
-| `python3 python/generate_fixtures.py --check` (plan fingerprints, helper loads, parity digest) | exit 0 |
+| `python3 python/generate_fixtures.py --check` | exit 0, but vacuous for this change (audit): it regenerates the Python oracle's fixtures and compares them with the committed files, and this change touches neither; the Rust side of parity (plan fingerprints, helper loads, parity digest) runs inside `cargo test` |
 | `python3 scripts/check-runtime-dependencies.py` | passed |
 | native ABI: release `ergodis-rules`, then `crates/rules/tests/native_abi.py` | "129 min-plus programs, one Boolean closure, independent oracle, source/claim/handle/capacity lifecycle gates passed" |
 | wasm32 ABI: `nix develop .#wasm`, release wasm32 `ergodis-rules`, then `wasm_abi.mjs` | "129 programs, native certificate and Python oracle parity, lifecycle gates passed" |
 
 ### Tests
 
-`crates/verify/tests/prepared_source.rs`, new. Its certificates come from a naive reference
-producer written in the test (rounds of full re-evaluation, a round's heads added at its end,
-derivations listed rule by rule within a round, rank equal to round), which is not the
-demand-driven evaluator and lists derivations in an order the evaluator never emits. The byte
+`crates/verify/tests/prepared_source.rs`, new. As committed in `a92050a` (the table below), its
+certificates came from a naive reference producer written in the test (rounds of full
+re-evaluation, derivations listed rule by rule within a round, rank equal to round). The claim
+first written here, that this producer "lists derivations in an order the evaluator never emits",
+was false for `closure.json`: the audit found its certificates byte-identical to the evaluator's
+on that fixture, so the "producer cannot emit" coverage rested on `same_generation.json` alone.
+The repair (`c73ed85`, see "Repairs after audit") makes the difference structural and asserts
+it on every fixture. The byte
 grammar is restated by a writer in the test and pinned to the encoder's output on the fixtures,
 so each hand-built encoding is an encoding of the documented format.
 
@@ -227,7 +247,7 @@ so each hand-built encoding is an encoding of the documented format.
 | `the_encoding_is_of_the_fact_set_and_only_its_canonical_form_decodes` | reversed and repeated fact input admit to the same bytes; the decoder refuses those unsorted and repeated forms with `Error::Encoding` |
 | `every_truncation_and_every_extension_is_refused` | every proper prefix of both fixtures' encodings, and one trailing byte of three values |
 | `every_single_byte_change_is_refused_or_names_another_source` | every byte position times three xor masks: refused, or the canonical encoding of a different source whose identity is recomputed from the changed bytes; never the original |
-| `the_decoder_refuses_what_admission_refuses_with_admissions_values` | twenty-two invalid sources (every admission budget and refusal, plus a non-UTF-8 name and a variable word above 255) give exactly `admit_prepared`'s error through the bytes; an input flag or slot tag of 2 and an oversized fact count are `Error::Encoding`; input above the bound is `Error::Budget` |
+| `the_decoder_refuses_what_admission_refuses_with_admissions_values` | twenty-two invalid sources (every admission budget and refusal, plus a non-UTF-8 name and a variable word above 255) give exactly `admit_prepared`'s error through the bytes; an input flag or slot tag of 2 and an oversized fact count are `Error::Encoding`; its input-above-the-bound case was vacuous (the zeroed input's domain of 0 is refused with the same `Error::Budget`) and was replaced by a separate test in `c73ed85` |
 | `only_a_prepared_admission_is_encoded` | a wire admission, an `Admitted` relabelled with another identity, one with an edited domain, and three with a broken fact layout are refused |
 | `certificates_are_checked_from_the_bytes_alone` | both checkers accept the reference producer's certificates through `check_prepared`, with the relations `check_admitted` gives, under both direct and sorted representations; the wire door refuses them |
 | `a_certificate_binds_to_its_own_source_bytes` | a certificate of the closure is refused (`Binding`) against the bytes of the closure plus one fact and of the same-generation program; refused bytes refuse the certificate |
@@ -363,12 +383,16 @@ checkers' `check_admitted_bounded` compare empty between the arms.
 
 #### Verdict against the Fermi
 
-As predicted: the derivation loop is unchanged instruction for instruction, and the backend
-stage that runs the prepared admission moves by −1.5 × 10⁻⁵ (25.6 thousand instructions per
-iteration fewer), inside the size the Fermi allowed and in the favourable direction. No stage
-moves beyond its null except the one small-cohort residual in the derivation-loop harness,
-which is outside the loop. Peak RSS is unchanged. Nothing is retained, so no evidence enters the
-hot loop.
+The derivation loop is unchanged instruction for instruction, as predicted. The backend stage
+that runs the prepared admission reads −1.5 × 10⁻⁵ (25.6 thousand instructions per iteration
+fewer), but that is not evidence of a code effect in either direction: the `datalog` cohort's
+own A/A drift in the same run reads 1.000015 [0.999995, 1.000035], the same magnitude (audit).
+Nor can it be said to be "inside the size the Fermi allowed", as first written here, because the
+Fermi's "a few instructions per call" was never turned into a number (admissions and encoded
+bytes per iteration were not counted). What stands is that no stage moves beyond its null except
+the small-cohort residual in the derivation-loop harness, which the audit traced to heap
+behaviour outside the loop (mystery ledger). Peak RSS is unchanged. Nothing is retained, so no
+evidence enters the hot loop.
 
 ### Deviations
 
@@ -397,16 +421,19 @@ hot loop.
 
 ### Mystery ledger
 
-- **The `closure:sparse:256` residual (open).** 1.00004, interval [1.00003, 1.00004], about
+- **The `closure:sparse:256` residual (settled, by the independent audit
+  `notes/2026-09-22-c1205-milestone-a-audit.md`).** 1.00004, interval [1.00003, 1.00004], about
   1,500 instructions an evaluation, with every symbol the timed loop reaches identical under the
-  normalizer, and binary path length ruled out by a renamed-control A/A (0.999999). The previous
-  task's final arm read 1.000038 on the same cohort against its own control. Hypotheses not
-  tested: the driver's per-iteration `/proc/self` reads, whose parsing cost depends on the
-  digit counts of the values the kernel prints, or libc `memset`'s path choice from buffer
-  alignment. Evidence gap: a per-iteration instruction count of the timed region with the driver's
-  `/proc` reads excluded, or a `perf record` of the two arms on this cohort diffed by symbol.
-  Owner: whoever next measures this harness; it does not bear on this change, whose loop code is
-  identical.
+  normalizer, and binary path length ruled out by a renamed-control A/A (0.999999). The audit
+  reproduced it (1.000035, +1,336 per evaluation), showed it persists under 0–56 bytes of
+  environment padding (so not stack placement), and ran Callgrind on both arms at `repeats` 3 and
+  6: per-evaluation `evaluate_counting` and `index_rows` counts are identical between the arms
+  (35,353,621 and 3,338,552), and the whole difference (+1,861 per evaluation) is glibc
+  `malloc_consolidate` (+965), `unlink_chunk` (+347) and `HashMap::insert` (+532). These are
+  per-process heap and hash-table costs that do not cancel in the two-point difference, because
+  the control's 3-repeat run pays about 2,900 more `malloc_consolidate` instructions than its
+  6-repeat run. Cause: a differencing artifact of heap layout; the loop's work is identical. My
+  first hypotheses (the driver's `/proc/self` reads, `memset` path choice) were not the cause.
 - **`prepare` reading 1.00006 in one run and 0.99997 in the other (settled as noise-level).** A
   33.7-thousand-instruction operation moving by 3 instructions in one run and by the opposite sign
   in the other; the change does not touch it.
@@ -415,15 +442,32 @@ hot loop.
 
 - The bound `MAX_PREPARED_BYTES = 1 << 30` (shared by the certificate decoders) is a choice, not a
   measured need; Tavis may prefer another value, or a caller-supplied bound.
-- `Demand::prepared_encoding` returns `Error::Schema` on a wire plan. An `Option` or a dedicated
-  error would also serve; milestone b is the first consumer and can say which it wants.
+- `Demand::prepared_encoding` returns `Error::Schema` on a wire plan, which overloads a variant
+  that otherwise means an unsupported schema or algebra (audit finding L6). Left as it is by
+  instruction: milestone b is the first consumer and decides. The audit's recommendation is one
+  method that cannot be asked the wrong question,
+  `Demand::transferable_source() -> Result<TransferableSource<'_>, Error>` with
+  `TransferableSource::{Wire(&Program), Prepared(Vec<u8>)}`.
+- A caller-supplied bound on the `check_prepared` entries (audit, under L4), for a checker with a
+  smaller memory budget than a decode at `MAX_PREPARED_BYTES` needs; also milestone b's call.
+- Every decode refusal, `Error::Budget` included, becomes `Rejection::Binding` at the checker
+  entries, as on the wire entries (audit I2), so a checker caller cannot tell an oversized source
+  from a malformed one. Unchanged; noted for the structured-refusals candidate.
 - Milestone b needs, from this milestone, exactly `Demand::prepared_encoding`,
   `datalog::prepared_identity` and the two `check_prepared` entries; all four are in `a92050a`.
+- The receipts name their arms by private revision only (`control-8de4932`, `bytes-a92050a`
+  carries the core revision in its name but the control does not); the arm table in this report
+  carries each arm's core revision, as `PERFORMANCE.md` rule 6 asks (audit L7). `retain-bin.sh`
+  and the harnesses record the crate directory's revision only; recording the core revision in
+  the manifest and receipts is a tooling change outside this card.
 - Cache left by this milestone under `~/.cache/ergodis/`: the four retained binaries
   (`closure_ballpark-8de4932`, `ergodis-tools-8de4932`, `closure_ballpark-bytes-8de4932`,
   `ergodis-tools-bytes-8de4932`) and `c1205/` (A/B working files and the renamed control copy).
   No `cache-gc.sh` was run; deletion is Tavis's call.
-- The card's independent Opus audit happens before the task closes, not in this milestone.
+- The independent audit of this milestone is `notes/2026-09-22-c1205-milestone-a-audit.md`; its
+  repairs are in "Repairs after audit" below. The mutation worktree
+  `~/.cache/ergodis/worktrees/c1205-mut` (at `c73ed85`, mutations reverted) and the audit's
+  worktrees remain registered in the core repository; removing them is Tavis's call.
 
 ### Replay commands
 
@@ -458,6 +502,9 @@ nix develop ~/src/ergodis --command python3 $A/ab.py --a $C/closure_ballpark-8de
     --a-name control --b $W/closure_ballpark-ctrlx-8de4932 --b-name control-renamed \
     --mode evaluate --rounds 5 --cpu 5 --repeats 3 --cohorts closure:sparse:256,mutual:blocks:4096 \
     --work $W/ab-path --out $W/ab-path-length.json
+# The committed receipt is that output copied into the private tree:
+cp $W/ab-path-length.json $A/ab-2026-09-22-prepared-bytes-path-length-null.json
+cp $W/ab-path-length.json.jsonl $A/ab-2026-09-22-prepared-bytes-path-length-null.json.jsonl
 nix develop ~/src/ergodis --command python3 $B/bench.py --binary $C/ergodis-tools-bytes-8de4932 \
     --control $C/ergodis-tools-8de4932 --rounds 5 --cpu 5 \
     --stages scan,parse,admit,lower,stratify --events $E \
@@ -469,6 +516,50 @@ nix develop ~/src/ergodis --command python3 $B/bench.py --binary $C/ergodis-tool
 # Symbol comparisons: analysis/datalog-comparison/symbol_disasm.py <binary> <symbol> [rank],
 # each arm, then diff.
 ```
+
+### Repairs after audit
+
+Audit: `notes/2026-09-22-c1205-milestone-a-audit.md` (0 high, 1 medium, 7 low, 3 info). Repairs
+in core `c73ed85`; report corrections in this file's commit.
+
+| Finding | Disposition | Commit |
+| --- | --- | --- |
+| M1: on `closure.json` the reference certificates were the evaluator's, byte for byte | Repaired. The reference producer lists each round's derivations in reverse discovery order (valid: every premise is from an earlier round). A third fixture, `crates/rules/tests/mutual_recursion.json` (mutually recursive `odd`/`even` plus a nonlinear transitive closure, so several recursive rules fire per round), joins the two others in both test files. `certificates_are_checked_from_the_bytes_alone` asserts on every fixture that both reference certificates' digests differ from the evaluator's, which `demand_prepared.rs` pins against the evaluator itself (the third fixture's rows added there). New `hand_built_certificates_are_accepted_and_their_breakages_refused`, on all three fixtures including the closure: a derivation certificate reordered depth-first (the latest derivation whose premises are listed, asserted not to be the listed order) is accepted with the same least model; the same with a dependent derivation moved to the front is refused with `Rank(0)`; a ranked certificate with ranks `3·round + (i mod 3)` is accepted; the same with its highest-rank tuple set to rank 1 is refused with `Unjustified`. The mutation tests already ran on the closure. Test docs and this report corrected. Mutation check: with the reversal removed, the divergence assertion fails on the closure (`5360dca7…`). | `c73ed85` |
+| L1: the input-bound test did not test the bound | Repaired. `the_input_bound_refuses_before_anything_is_read` pads a valid closure encoding with zeroes to `MAX_PREPARED_BYTES + 1` (`Error::Budget`), beside the same encoding plus one byte (`Error::Encoding`, the value without the bound). The vacuous case was removed. Mutation check (`if false &&` on the bound): this test fails. | `c73ed85` |
+| L2: the certificate decoder bound had no test | Repaired. `the_certificate_decoders_refuse_input_above_their_bound`: `{` then zeroes, `MAX_CERTIFICATE_BYTES + 1` bytes is `Error::Budget` for both decoders, and the same at the bound is `Error::Source`. Mutation check, each decoder's bound removed separately: the test fails each time. | `c73ed85` |
+| L3: the count guards were caught only by a process abort | Repaired in code and test. After each budget check the decoder now also requires the remaining input to hold that many minimal records (6 bytes a relation, 7 a rule) before sizing the list, so no count sizes an allocation the input cannot back, with or without the budget. `the_shape_counts_are_refused_before_anything_is_sized`: relation counts `65`, `0x8000_0002`, `u32::MAX` and rule counts `1025`, `0x8000_0000`, `u32::MAX` on short inputs are `Error::Budget`; counts at the budget on the same short inputs are `Error::Encoding`. Mutation check, each guard removed: the test fails by assertion, no abort. | `c73ed85` |
+| L4: decode memory misstated; non-canonical fact lists sorted before refusal | Stated, and the sort removed. The `MAX_PREPARED_BYTES` docstring now gives the per-tuple arithmetic and the multiple (about 6.5× the input for binary relations, up to about 10× for unary; 7–10 GiB at the bound), consistent with the audit's measured 6.4× peak and about 10× reserved. The bound is kept (see the Decoder section and open items). A fact list that is not strictly increasing is refused during the parse without admission's sort, keeping admission's value for a source admission would refuse; the parsed rows are released before the re-encoding is built. | `c73ed85` |
+| L5: `encode_prepared` returned bytes the decoder refuses | Repaired. The encoder decodes its own bytes and returns them only when they decode to the given `Admitted`; decoder refusals pass through with the decoder's value, a mismatch is `Error::Binding`. `only_a_prepared_admission_is_encoded` adds the audit's case (two tuples swapped, identity set to the swapped bytes' hash: `Error::Encoding`) and an edited derived field (`universe`: `Error::Binding`). Mutation check, decode check removed: the test fails. The report's "total over any `Admitted`" sentence corrected. | `c73ed85` |
+| L6: `prepared_encoding()` overloads `Error::Schema` | Not changed, by instruction; recorded as an open item for milestone b with the audit's recommendation. | — |
+| L7: report inaccuracies | Corrected here: the path-length null's replay now copies the output to the committed receipt path; the `generate_fixtures.py --check` row says it is vacuous for this change; the backend-stage verdict no longer claims a favourable effect or a Fermi size (the `datalog` A/A drift is 1.000015); the receipts' missing core revision is recorded as an open item (the arm table carries it); the abbreviated ranked digest reads `97d921fc…105660`. | this report |
+| I1: independence is process independence | The `check_prepared` docs now say the bytes are admitted "from the bytes alone and without any object of the producer's", and that the admission code is the one the producer ran, as on the wire route. | `c73ed85` |
+| I2: every decode refusal becomes `Rejection::Binding` | No change; matches the wire entries. Open item. | — |
+| I3: relation and rule order are part of the identity | No change; pre-existing definition. "One source has one encoding" holds with source meaning the ordered relation and rule lists. | — |
+| `closure:sparse:256` residual | Moved to the mystery ledger as settled, credited to the audit (heap consolidation and `HashMap::insert` per process; loop work identical). | this report |
+
+Gates at `c73ed85`, all under `nix develop ~/src/ergodis`: `cargo fmt --all -- --check` clean;
+`cargo clippy --all-targets --all-features -j 12 -- -D warnings` clean; `cargo test
+--all-features --no-fail-fast -j 12` exit 0, 85 `test result: ok` blocks, zero FAILED
+(`prepared_source` now 14 tests, `demand_prepared` covering three fixtures); `SHA256SUMS`
+regenerated in the commit; native ABI harness passed. Private `cargo test --all-features` against
+`c73ed85`: exit 0, 1,171 passed, 0 failed across 40 result sections.
+
+Mutation checks ran in a detached scratch worktree, `~/.cache/ergodis/worktrees/c1205-mut` at
+`c73ed85`, one mutation at a time, each reverted before the next (the worktree is clean):
+input bound, relation-count guard, rule-count guard, derivation-certificate bound,
+ranked-certificate bound, the encoder's decode check, and the reference producer's reversal.
+Each made exactly one `prepared_source` test fail by assertion.
+
+No A/B rerun: no function the derivation loop or a timed stage reaches changed.
+`admit_prepared` and `write_encoding` are byte-identical in source; the changes are in
+`decode_prepared` and `encode_prepared` (called by no timed stage), doc comments in the verify
+crate, and tests. As a check against ThinLTO moving untouched code, `closure_ballpark` was
+retained at private `bfd79c9` with core `c73ed85`
+(`../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --label
+closure_ballpark-repair`; measured sha256
+`26be6851f425eab6ad689954c29322b5e1e8238752bb068cf848118ba0093765`), and all 33
+`ergodis_rules::demand::` symbols, both `evaluate_counting` instantiations among them, compare
+empty under `symbol_disasm.py` against `closure_ballpark-bytes-8de4932`.
 
 ## Milestone b
 
