@@ -12,7 +12,11 @@ separately), stage-sequencing repair, and record updates. The task does not impl
 later builder, schema/provenance, domain or ABI work.
 
 Initial core revision: `c73ed85`; initial private revision: `bfd79c9`. Scoped source trees
-were clean on entry. A fresh private tools control is being retained before any source edit.
+were clean on entry. A fresh private tools control was retained before any source edit:
+`ergodis-tools-bfd79c9`, measured SHA-256
+`c0fe7a8fb22a9327da683d0f85481409691befe1436fba6ac2509e948e0e24d2`.
+Recipe: the dev `retain-bin.sh` on private `tasks/tools`, binary `ergodis-tools`, default
+release profile under the core pinned Nix shell. Core dependency revision was `c73ed85`.
 The previous C1209 control predates C1205 a and is not assumed matched to today's tree.
 
 Core documentation and private cleanup have separate owners. The sequencing analysis is
@@ -33,6 +37,11 @@ The main agent reviews diffs, gates and receipt interpretation before commits ar
 
 - A generation check establishes workspace-stage freshness, not the identity of arbitrary
   source bytes supplied by a caller. The remaining source-byte precondition must stay explicit.
+- Review selected a smaller implementation than the originally proposed counter: a private
+  Empty/Parsed/Admitted state. Scanning invalidates before any error; successful compact parse
+  and admission advance state; lowering requires Admitted. There is no numeric wrap. Diagnostic
+  recovery stays outside the documented compact-parse admission boundary. Failed lowering
+  preserves admission for retry. This is still a plan pending implementation and tests.
 - Source implementation hashes may move even on documentation edits. No historical receipt
   is re-pinned as if its measurement had been repeated.
 - No cache deletion, publication, unrelated comment sweep or Lean operation is authorized here.
