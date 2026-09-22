@@ -106,6 +106,8 @@ All reported exit zero; 85 test-result groups, 1,037 tests passed, zero failed, 
 The core Python-parity tests compare committed Python-origin fixtures; no live Python
 process was claimed. Private Rel reference/differential coverage is a separate pending gate.
 Counts were summed from the saved post-revision log without another suite rerun.
+During coordination, a redundant whole-handoff read exceeded the command-output cap;
+it was not used for review and was replaced with a bounded C1210 section lookup.
 One redundant suite rerun occurred in the implementation subagent; it contributes no
 additional acceptance evidence. No core hot-loop/performance change is claimed.
 
