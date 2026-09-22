@@ -29,7 +29,7 @@ The main agent reviews diffs, gates and receipt interpretation before commits ar
 | Milestone | Status | Required evidence |
 |---|---|---|
 | Core checker/fact-count documentation | Committed `61116a3` | Main reviewed all four documentation diffs; fmt, Clippy and 85/85 test groups passed; manifest regenerated |
-| Private documentation and byte-preserving cleanup | Pending | Same canonical bytes, fingerprints and parity digest; layout assertions; required A/B/profile and differential |
+| Private documentation and byte-preserving cleanup | Candidate `8192836`; performance pending | fmt/Clippy and 100 affected tests pass; native/WASM canonical digest unchanged; required A/B/profile still pending |
 | Stage sequencing | Pending | Reject stale/failed/unadmitted stages, recover safely, no allocation; matched stage A/B |
 | Parity v2 and additive bench policy | Pending | Updated producer/consumers, new digest, native/WASM agreement, driver parity A/B |
 
@@ -122,3 +122,21 @@ bytes are separate from these implementation identities:
 The main agent independently reproduced all four corrected values with shell concatenation
 of the identity preimages through `git show` and `sha256sum`, separately checking the rule
 constants at both revisions. No compiled probe or rebuild was needed.
+
+## Private cleanup correctness
+
+Candidate `8192836` contains only the five reviewed source files and
+`analysis/rel-frontend/portability-c1210-m1.json`. The core dependency is `61116a3`;
+the retained baseline used `c73ed85`, whose difference is the core documentation above.
+
+Pinned fmt and all-target/all-feature Clippy pass. Affected private test targets:
+rel_frontend 28, rel_frontend_portability 1, rel_lowering 52, rel_reference_eval 19;
+100 passed, zero failed. These include the allocation and reference/differential checks.
+The full private library suite is explicitly not claimed.
+
+The main agent inspected the parity receipt: 243 cases, 529,122 canonical bytes,
+native/WASM byte equality, unchanged SHA-256
+`5f9600ef35db554dc0360624f87e2b69653193842c959c2f6d0c27daacba0cc4`.
+The standalone portability compiler and pinned shell both report rustc 1.95.0
+(`59807616e`, 2026-04-14). Candidate retention and matched performance validation follow;
+the source commit is not yet a performance-acceptance claim.
