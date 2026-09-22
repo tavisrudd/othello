@@ -1222,6 +1222,7 @@ from each binary's `.comment` when the A/B is written up.
 | private `c1205b` | `d77f3d2` | Externals: `Error::External { spelling, problem }` with `ExternalProblem::{Unknown, Derived, Repeated, Arity, Value}`, all checked before anything is seeded; `Stratified::seeded: Vec<Seeded { relation, spelling, external_tuples }>`; `tests/rel_externals.rs`; bench error witness `6 << 60` for the new variant |
 | private `c1205b` | `3940964` | Remaining steps 2 and 3 as one commit (see "Steps 2 and 3" below): `evaluate` returns `Evaluation`; `check(Evaluation, &Rir) -> Result<Stratified, Error>` with a sealed `Stratified` (`Deref<Target = Evaluation>`, `into_evaluation`); per layer `declared: Vec<Declared { name, arity, input, origin }>` and `literals: Vec<LiteralMap { literal, declared }>`; new `src/rel_chain.rs` (the program statement `Program`, the record types moved out of `rel_stratified` and re-exported from it, `tuple_digest`, `check_constructions`, `derived_layers`, `rules_of`); new `src/rel_rebuild.rs` (the independent set-based rebuild, `Value`, `compare`); the reference evaluator imports `Value` and `compare` back; `verify_records` removed; callers, `rel-lower` and the bench description updated; `tests/rel_check.rs` |
 | private `c1205b` | `48ccaaa` | `Error::CheckersDisagree(Disagreement { layer, relation, tuple, held_by, missing_from })` with `Party::{Derivation, Ranked, Evaluator}` and a merge walk (`first_difference`), for both the derivation/ranked and the checker/evaluator comparison; `Error::Record(RecordMismatch { kind, index, field })` replacing `ComplementMismatch`, with `RecordKind`, `RecordField`, `DomainPart` and a `Display` path such as `complements[0].column_domains[0].values`; `tuple_digest(DigestKind, scope, name, arity, tuples)` under tag `ergodis-private/rel-chain.v1` replacing `digest_of` in the builder and the record check; the tamper test now asserts the field of each of its seven tampers; unit tests for the disagreement and for digest separation; the bench witness keeps `3 << 60 | layer` and `4 << 60 | index` |
+| private `c1205b` | `c7d6ffa` | Step 4: `rel_chain::Evidence` (`const RETAIN`), `NoEvidence`, `ChainWriter` (directory or memory, layer files written as they arrive, only the two certificate digests kept), `Manifest`/`ManifestLayer`/`SeededEntry`/`ResultEntry` with hex digests (`to_hex`, `parse_hex`, lowercase 64 digits only), serde on every record type, `LayerFile` names, `LoweringParameters` (the one definition of the operator tool's lowering limits); `rel_stratified::evaluate_with<E: Evidence>` (`evaluate` is its `NoEvidence` instantiation), `Error::Evidence { layer, message }` (bench witness `7 << 60 \| layer`), `LayerReport::domain`, `manifest(&Stratified, &Program, &[LayerDigests])`; `check_constructions_observed`, which hands each rebuilt construction to a callback; `rel-lower --chain <dir> --externals <json>` writing `source.rel`, `lowering.json` and `producer.json` beside the chain; `tests/rel_chain.rs` (file set, manifest round trip, identities, hex strictness) |
 
 Core gate at `064cde2`: `generate_evidence.py --write`, `cargo fmt --all -- --check`, `cargo clippy
 --all-targets --all-features -D warnings`, `cargo test --all-features` (85 `ok` blocks, zero
@@ -1326,7 +1327,15 @@ updated after it. The design sections above are the specification.
 1. Done (`48ccaaa`).
 2. Done (`3940964`), with 3.
 3. Done (`3940964`).
-4. **Evidence sink and chain writer.** Notes for it: the record types in `rel_chain` have no
+4. Done (`c7d6ffa`). Gates: `cargo fmt --all --check`, clippy `--all-targets --all-features -D
+   warnings` for the root and `ergodis-tools`, suites `rel_chain` (new), `rel_layer_identities`
+   (pins unedited, pass), `rel_externals`, `rel_check`, `rel_lowering` (53), `rel_reference_eval`
+   (19), `rel_frontend_portability`, the library's `rel_` unit tests and `ergodis-tools` (44): all
+   green. The shared target held core rlibs last built through the `c1205b-mut` worktree's
+   symbolic link (two `ergodis_contract` versions in one graph); `cargo clean -p` of the four core
+   crates in the private target (5.1 GiB of their artifacts) and a rebuild fixed it. The
+   manifest's `seeded[].external` is the deduplicated count beyond `P`'s facts, as noted below.
+   Original notes: the record types in `rel_chain` have no
    serde yet (the manifest needs it, with digests as 64-character lowercase hex); `Declared`,
    `Origin`, `LiteralMap` and every `Program` part already derive it with
    `deny_unknown_fields`. The manifest's `seeded[].external` should be the count of tuples
