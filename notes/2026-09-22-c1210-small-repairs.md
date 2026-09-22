@@ -2,7 +2,9 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: QUEUED — allocated by Tavis from C1208.
+**Status**: IN PROGRESS — cleanup-first implementation, coordinated/reviewed by the main
+agent with Terra/Sol implementation assistance as requested by Tavis. Report:
+`notes/2026-09-22-c1210-small-repairs-report.md`.
 **Authority**: `notes/2026-09-22-c1208-follow-up-triage.md` (approved allocation and order).
 
 Approved C1208 bundle (report section 4); Tavis requested small, low-risk cleanup first.
