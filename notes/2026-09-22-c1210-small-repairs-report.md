@@ -104,6 +104,12 @@ test targets instead. Private AGENTS does not require the unrelated full library
 the required task gates remain intact. Neither interrupted run establishes a full-private-suite
 pass, and neither reported a failure before interruption.
 
+The record-update owner later mistakenly selected a broad
+`cargo test -p ergodis-private -p ergodis-tools --all-features` invocation despite the
+scoped plan. Main directed that task-owned run stopped and replaced by the named
+`rel_frontend_portability` integration target and relevant driver checks. The source
+fmt/Clippy gates had passed; this incomplete broad run is not a test-pass claim.
+
 ## Core documentation validation
 
 Core `61116a3` changes comments only in contract derivation, verify derivation/ranked and
