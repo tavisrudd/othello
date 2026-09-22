@@ -59,6 +59,16 @@ corrected to whole-program refusal. No behavior was changed for these correction
   is re-pinned as if its measurement had been repeated.
 - No cache deletion, publication, unrelated comment sweep or Lean operation is authorized here.
 
+Sequencing Fermi, before integration: four source-level stage stores (scan Empty, parse
+Parsed, admission Parsed then Admitted) and two entry checks per successful pipeline.
+The compiler may eliminate stores; prediction is single-digit/tens of instructions per
+source invocation, not per token, node or IR-loop iteration. Failed scan/parse resets only;
+diagnostic recovery grants no admission. Acceptance uses the clean accepted cleanup
+binary against the next candidate, with parse/admit/lower stages on ASCII, Datalog and
+early/late malformed cohorts, a parse A/A null, separate cache events, scoped profile/call
+inspection and RSS. The benchmark's automatic parity comparison omits nested lowering
+records, so exact lowering outcomes/counts/IR fingerprints must also be checked explicitly.
+
 ## Closeout
 
 Pending implementation, review and validation. Incidental discoveries, retained artifacts and
