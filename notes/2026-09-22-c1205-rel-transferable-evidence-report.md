@@ -563,7 +563,629 @@ empty under `symbol_disasm.py` against `closure_ballpark-bytes-8de4932`.
 
 ## Milestone b
 
-Not started.
+Status: design written, awaiting approval. Nothing implemented.
+
+Worktrees, branch `c1205b`: core `~/.cache/ergodis/worktrees/c1205b/ergodis` from core `main`
+`4b57649` (C1213's record API included); private `~/.cache/ergodis/worktrees/c1205b/ergodis-private`
+from private `main` `482d6e9`, whose `../ergodis` path dependency is the core worktree.
+
+### Design
+
+#### Starting point, verified in the worktree
+
+- `rel_stratified::evaluate` (`src/rel_stratified.rs`) builds one `PreparedSource` per layer,
+  evaluates it with `Demand::from_prepared_bounded`, builds both certificates, checks them
+  in-process (`Demand::verify`, `verify_ranked`, both through `check_admitted`), compares the
+  checker's relations with the evaluator's rows, and drops the plan, both certificates, the
+  per-layer `names`/`arities`/`inputs` vectors and the literal-to-relation table `atom_over`.
+  `LayerReport` is a `Copy` struct of counters. `demand.source_id()` is computed and read by
+  nobody.
+- `verify_records` is public, optional, and calls the builder's own `complement_over`,
+  `filter_over`/`satisfies`, `aggregate_over`, `digest_of` and `Dictionary`; only
+  `rebuild_domain` is a second implementation. It returns `Error::ComplementMismatch(index)` for
+  all three record kinds. Its callers: `tests/rel_lowering.rs`, `tests/rel_reference_eval.rs`,
+  `tasks/tools/src/rel_lower.rs` (fails the run), `rel_frontend_bench.rs`'s untimed description
+  (records `records_verified: false` in an otherwise normal receipt).
+- Fields written and never checked: the card's three (`ComplementRecord.source`,
+  `FilterRecord.literal`, `FilterRecord.operator`), and also every `ColumnDomain`'s
+  `column_type`, `type_start` and `type_end`, every record's `layer` and `uses`, and the
+  complement's and filter's `DomainSource` site lists (compared as recorded, never recomputed
+  from the rule). A chain in which every single-field mutation is rejected must check all of
+  them, so the design below covers the whole list, not the three.
+- `Externals` (`&[(String, Vec<Vec<u32>>)]`): an unknown spelling is skipped; a tuple is
+  appended without an arity check; a spelling that names a relation some rule derives is
+  appended to that relation's seed and then silently dropped, because a derived relation's
+  layer source takes `TupleSource::Empty`. That third case is not in the review; it is the
+  same defect class.
+- The timed `stratify` stage of `rel-frontend-bench` calls `evaluate` and nothing else. Only the
+  `stratified`, `columns`, `columns3` and `aggregate` cohorts build constructions; the A/Bs of
+  milestone a and C1213 measured `stratify` on the `datalog` cohort only, which has none.
+- Core already provides everything the verifier needs: `datalog::decode_prepared` (an `Admitted`
+  with public `relations`, `rules`, `tuples`), `datalog::prepared_identity`,
+  `derivation::check_recorded`/`ranked::check_recorded` with `datalog_record::Source::Prepared`,
+  `datalog_record::derivation_digest`/`ranked_digest`, and replay.
+- Binding sites (`src/rel_frontend/lower/passes.rs`) are the rule's positive body literals that
+  name a relation, in body order, each column holding the variable. Aggregate literals are not
+  binding sites. A verifier can therefore recompute every site list from the rule alone.
+- The RIR's canonical form (`Rir::canonical`, tag `ergodis.rel_frontend.rir.v1`) has no decoder,
+  hashes to a 64-bit FNV fingerprint, and writes binding sites only for rules with a negation
+  (comparisons read them too). It was built for parity, not as a checkable program statement,
+  and changing it would move every plan fingerprint.
+
+#### What an accepted chain establishes
+
+Stated first, because every field below exists to serve it. A chain accepted by the offline
+verifier establishes:
+
+> The relations listed in the chain's result table are the stratified model of the stratified
+> program `P` whose identity the chain names, over the seeded input relations whose digests the
+> chain names.
+
+where "stratified model" means: each layer's positive program is evaluated to its least model,
+certified by the core's derivation certificate and cross-checked by its ranked certificate,
+both checked through the prepared byte door by a process holding no `Demand`; each negated,
+compared or aggregated literal of `P` is replaced by a relation whose tuples are rebuilt by the
+verifier from relations earlier layers established; and every relation a layer reads is shown,
+tuple for tuple, to be the one an earlier layer established or the seeded input.
+
+What it does not establish: that `P` is the correct lowering of a Rel source (that is the
+frontend's job; see the optional source check below), and anything about the producer's
+performance counters.
+
+#### The subject: a stratified program statement
+
+**Decision for Tavis (D2) — what the chain is about.**
+Recommendation: the chain carries `P`, a stratified program statement computed from the RIR
+alone, with its own schema and identity; everything is checked against it. The identity is
+computable from the source without evaluating anything, and the three unchecked fields become
+checks against `P`, not against another producer-written field.
+Alternative: no `P`; the layer sources plus the literal map are the program. Less code, but the
+program's identity then depends on evaluation (complement sharing and synthetic numbering depend
+on computed domains), and a literal map entry can only be compared with the record it points to.
+
+`P` (`rel_chain::Program`, JSON, `deny_unknown_fields`), built by `Program::of(&Rir, &Readout)`,
+a pure function of the lowered RIR:
+
+| Part | Content | Why the verifier needs it |
+| --- | --- | --- |
+| `schema` | `"ergodis-private/rel-stratified-program.v1"` | dispatch; checked first |
+| `relations` | per RIR relation, in RIR order: mangled `name`, source `spelling`, `arity`, `columns` (column types), `auxiliary` | names bind layer declarations; spellings key externals; column types give `type_start`/`type_end` |
+| `values` | the lowering's dictionary, in id order: `kind`, `text` (an integer's text must be its canonical decimal) | the filter predicate and aggregate payloads; the base the aggregates extend |
+| `type_ranges` | the per-kind dense id ranges, as the RIR holds them | recomputing `type_start`/`type_end`; checked consistent with `values` on decode |
+| `facts` | per relation, the source facts, sorted and distinct | seeded relations must contain them |
+| `literals` | the RIR literal pool in RIR id order: `sign`, `op`, `relation` (or none for a comparison), `aggregate_column` (aggregates only), `terms` (constant id or rule-local variable) | the literal map, the construction semantics, binding sites |
+| `rules` | per RIR rule: `head` (literal id), `body` (literal id range), `order` (join order, a permutation of the body), `variables` | layer rules are these rules, atom for atom |
+
+RIR ids are kept (rule `i` of `P` is RIR rule `i`, literal `l` is RIR literal `l`), so a record's
+`literal` field is checkable directly. Identity: `SHA-256("ergodis-private/rel-stratified-program.v1"
+‖ 0x00 ‖ serde_json::to_vec(decoded))`, the construction core uses for certificate digests, so
+two spellings of one statement have one identity. Layer assignment and strata are not part of
+`P`: the verifier checks that the chain's layering is *a* valid stratification (below), and every
+valid stratification has the same model, so the producer's choice does not need to be trusted
+or recorded as a claim.
+
+Optional source check: the chain directory may hold the Rel source bytes and the lowering
+parameters (`Limits`, `BodyPolicy`); `rel-verify --source-check` re-lowers them and requires
+`Program::of` to reproduce `P` byte for byte. That extends the claim to "the model of this Rel
+source as this frontend lowers it", with the frontend in the trusted base. Off by default,
+because it is not what the chain proves and it pulls the whole frontend into the verifier.
+
+#### The chain format
+
+A chain is a directory. Every file but `producer.json` is verified; the verifier refuses a
+missing file, an unexpected file, and any file above its size bound before reading it.
+
+| File | Content | Size bound checked before reading |
+| --- | --- | --- |
+| `chain.json` | the manifest (below) | 64 MiB |
+| `program.json` | `P` | 64 MiB |
+| `layer-<k>.prepared` | `datalog::encode_prepared` bytes of layer `k` | `--max-layer-bytes`, default `datalog::MAX_PREPARED_BYTES` |
+| `layer-<k>.derivation.json` | the derivation certificate, `serde_json::to_vec` | `--max-certificate-bytes`, default `derivation::MAX_CERTIFICATE_BYTES` |
+| `layer-<k>.ranked.json` | the ranked certificate | same |
+| `source.rel`, `lowering.json` | optional, for `--source-check` | 1 MiB and 4 KiB |
+| `producer.json` | telemetry, not part of the chain: evaluator counters (rounds, probes, candidates), wall times, producer revision, `max_rows`, body policy. The verifier never reads it and says so | — |
+
+The verifier's size flags are the caller-supplied bound milestone a left open (audit L4): a
+checker with less memory refuses a large layer before `decode_prepared` sees it, with no core
+change, and an oversized input is reported as the verifier's own error rather than as the core's
+`Rejection::Binding` (audit I2).
+
+Manifest (`rel_chain::Manifest`, JSON, `deny_unknown_fields`; digests are 64 lowercase hex
+characters, anything else refused at decode):
+
+```text
+schema        "ergodis-private/rel-chain.v1"
+program       identity of P
+dictionary    the entries aggregates appended, in id order: { kind, text }
+seeded        per P relation that no rule derives, in P order:
+                { relation, name, tuples, external, digest }
+layers        per layer k, in order:
+                { layer, source_id, domain,
+                  declared:  [ { name, arity, input, origin } ],
+                  derivation, ranked,
+                  literals:  [ { literal, declared } ] }
+complements   ComplementRecord list (fields below)
+filters       FilterRecord list
+aggregates    AggregateRecord list
+result        per P relation: { relation, tuples, digest }
+```
+
+- `origin` of a declared relation is `{"program": id}` or `{"complement": i}`, `{"filter": i}`,
+  `{"aggregate": i}`. It is the literal-to-relation mapping read from the other side.
+- `literals` is the card's mapping: every negated, compared or aggregated literal of every rule
+  of this layer, by `P` literal id, to the index of the declared relation that replaced it.
+- `derivation`, `ranked` are `datalog_record::derivation_digest`/`ranked_digest`, so they equal a
+  verification record's `certificate` field by construction.
+- `external` is the number of tuples the caller supplied beyond `P`'s own facts.
+- No field of the chain is unverifiable: counters that only the evaluator knows live in
+  `producer.json`, and counts the verifier can derive (`relations`, `inputs`, `rules`, `facts`,
+  `layer_values`, `derived`, `derivations`) are left out rather than stored and rechecked.
+- Chain identity: `SHA-256("ergodis-private/rel-chain.v1" ‖ 0x00 ‖ serde_json::to_vec(manifest))`.
+  It names every other file through the identities and digests it contains.
+
+Record digests with domain separation (card; C1204 F16). One function,
+`rel_chain::tuple_digest(kind, scope, name, arity, tuples)`:
+
+```text
+SHA-256( "ergodis-private/rel-chain.v1" ‖ 0x00
+         ‖ kind     (one of "complement", "filter", "aggregate", "seeded", "result"; then 0x00)
+         ‖ scope    u32 LE: the layer for a construction, 0xFFFFFFFF for seeded and result
+         ‖ name     u32 LE length, then the bytes: the declared name in its layer, or the P name
+         ‖ arity    u8
+         ‖ count    u64 LE, number of tuples
+         ‖ tuples   every value u32 LE, tuples ascending lexicographic, distinct )
+```
+
+It replaces `digest_of` everywhere, in memory as well as on disk, so there is one definition.
+No tracked file pins a record digest (the parity record covers the lowered program only;
+searched `tests/`, `analysis/`), so nothing is invalidated; `rel-lower`'s printed digests change,
+deliberately.
+
+Chain schema string: `"ergodis-private/rel-chain.v1"`. The `ergodis-private/` prefix says these
+are private-crate formats, not core contract schemas.
+
+**Retention: streamed, never held.** The encoded layer sources and the certificates are handed,
+layer by layer, to a caller-supplied sink the moment they exist, and dropped by the driver
+(playbook: never retain a transcript). The library defines
+
+```rust
+pub trait Evidence {
+    const RETAIN: bool;
+    fn layer(&mut self, layer: u32, encoding: &[u8],
+             derivation: &DerivationCertificate, ranked: &RankedCertificate) -> Result<(), Error>;
+}
+pub struct NoEvidence;            // RETAIN = false, `layer` unreachable
+pub struct ChainWriter { .. }     // writes layer-<k>.* into a directory as they arrive
+```
+
+and `evaluate` is `evaluate_with(.., &mut NoEvidence)`. `RETAIN` is a const, so the default
+instantiation contains no encoding, no certificate serialization and no digest code at all.
+`rel-lower --chain <dir>` runs `evaluate_with(.., &mut ChainWriter)`, then writes `program.json`,
+the manifest and `producer.json` from the checked result. The certificate digests and source
+identity are the only per-layer evidence kept in memory (64 bytes).
+
+**Verification records are not stored in the chain (D4).** The producer checks in-process
+through `check_admitted`, which issues no record; a record it stored would have to come from a
+second check through the bytes, and would still be untrusted on read. The verifier issues fresh
+records (`check_recorded`) and writes them to its own output (`rel-verify --records <file>`),
+where a third party can `replay` them against the same chain files.
+
+**Decision for Tavis (D4) — verification records in the chain.**
+Recommendation: none stored; the verifier emits fresh records as its own output. A record then
+always names the build that actually checked.
+Alternative: the producer re-checks each layer through `check_recorded` and stores the records;
+the verifier replays them and treats a replay failure as a warning. One extra decode and two
+checks per layer on the producer, for records no reader may trust.
+
+#### Externals
+
+`Externals` keeps its type. Before anything is seeded, each entry is resolved once:
+
+| Condition | Error |
+| --- | --- |
+| no relation has this source spelling | `Error::External { spelling, problem: Unknown }` |
+| the relation is derived by some rule | `External { .., problem: Derived }` (today silently dropped) |
+| the same spelling appears twice | `External { .., problem: Repeated }` |
+| tuple `t` has length other than the arity | `External { .., problem: Arity { tuple, found, arity } }` |
+| a value is not a dictionary id | `External { .., problem: Value { tuple, value, dictionary } }` (today the core refuses it later with an unnamed `Error::Source`) |
+
+The seeded names are recorded always, in `Evaluation::seeded: Vec<Seeded { relation, spelling,
+external_tuples }>`, one entry per relation no rule derives. The per-relation digest is computed
+only when evidence is retained (it is a pass over every seeded tuple, and the timed stage
+does not need it). The differential harness's own free-name assertion stays; it becomes
+redundant but harmless.
+
+#### Checked and unchecked results are distinct types
+
+The record check does not run inside `evaluate`: with either rebuild option it repeats every
+construction (option (a) with set-based code several times slower than the builder), and
+`evaluate` is the timed `stratify` stage. So the state goes into the type:
+
+- `evaluate`/`evaluate_with` return `Evaluation`: today's `Stratified` fields plus the new
+  per-layer records, all `pub`, so a test can tamper with them.
+- `check(evaluation: Evaluation, rir: &Rir) -> Result<Stratified, Error>` builds `P` from the
+  RIR and runs the same construction checker the offline verifier runs (below), against the
+  in-process closures, which `Demand::verify` already certified.
+- `Stratified` is the checked result: a private field, no public constructor, `Deref<Target =
+  Evaluation>` for reading. `verify_records` is removed; its callers call `check`.
+- `rel-lower` prints only from a `Stratified`. `rel-frontend-bench`'s untimed description runs
+  `check` and, on failure, emits `{"stratified":false,"error":"record check: <what>"}` and
+  nothing else from that run, so a receipt cannot record a failed run's closure.
+  `records_verified` is dropped from the description (present means true). Whether `bench.py`
+  compares that description between arms is checked before the A/B; if it does, the field stays
+  as a constant `true` for this milestone's comparison and the drop is a follow-up.
+
+#### Errors
+
+`rel_stratified::Error` becomes:
+
+```rust
+pub enum Error {
+    Lowering(LowerFailure),
+    Core(CoreError),
+    External { spelling: String, problem: ExternalProblem },
+    /// Two parties that must agree on a layer's relation do not: the derivation and the ranked
+    /// checker, or the checker and the evaluator.
+    CheckersDisagree(Disagreement),
+    Record(RecordMismatch),
+    LayerCapacity { layer: u32, max_rows: u32 },
+}
+pub struct Disagreement { layer: u32, relation: String, tuple: Vec<u32>,
+                          held_by: Party, missing_from: Party }   // Party: Derivation | Ranked | Evaluator
+pub struct RecordMismatch { kind: RecordKind, index: usize, field: RecordField }
+```
+
+`RecordKind` is `Complement | Filter | Aggregate | Literal | Declared | Seeded`, `index` is the
+index into that kind's own list (so the index spaces no longer collide), and `RecordField`
+names the field, down to `ColumnDomains { column, part: Source | Values | ColumnType | TypeStart
+| TypeEnd }`. `Display` renders the path, for example `complements[2].column_domains[1].values`.
+The first differing tuple is found by a merge walk over two sorted relations, run only on the
+failure path. The bench's error witness keeps its existing encoding for the existing variants
+(`CheckersDisagree` still maps to `3 << 60 | layer`), so no cohort's witness moves.
+
+#### Every record field checked, against `P`
+
+The construction checker takes `P`, the per-layer records, the construction records and the
+relations established so far, and checks each field against something the producer did not
+write. For a literal `l` of rule `r` of layer `k` that the literal map sends to declared `d`:
+
+| Field | Checked against |
+| --- | --- |
+| literal map entry | `l` is a non-positive literal of a rule whose head is derived in layer `k`; every such literal has exactly one entry; the prepared rule's body atom at `l`'s join-order position names `d` with `l`'s terms as slots |
+| `ComplementRecord.relation`, `.source` | `P.literals[l].relation` and that relation's name, for every literal mapped to the record (`source` was unchecked) |
+| `FilterRecord.operator` | `P.literals[l].op` (was unchecked) |
+| `FilterRecord.literal` | the first literal, in `P` order, mapped to this filter (was unchecked) |
+| `AggregateRecord.relation`, `.source`, `.operator`, `.column`, `.group_columns`, `.arity` | the aggregate literal's relation, op, aggregate column, and that relation's arity |
+| `declared`, `layer`, `complement`/`filter`/`result` name | the layer's declared list: `declared[d]` has this name, this arity, `input = true`, and `origin` this record |
+| `uses` | the number of literal-map entries pointing at the record |
+| `ColumnDomain.column` | position |
+| `ColumnDomain.column_type` | `P.relations[relation].columns[column]` (unknown for a comparison operand) |
+| `ColumnDomain.type_start`, `type_end` | `P.type_ranges` for that type (was unchecked) |
+| `ColumnDomain.source` | recomputed from rule `r` of `P`: constant term, or the binding sites (positive literals naming a relation, body order, each column holding the variable), `Bound` when every site's relation is seeded or derived in a layer before `k`, else `Dictionary` (the site list was compared as recorded, never recomputed) |
+| `ColumnDomain.values` | rebuilt from that source over the relations established before layer `k` |
+| `dictionary`, `dictionary_before` | the dictionary size when layer `k` was built (base plus the entries earlier aggregates appended) |
+| `universe`, `closure_tuples`, `closure_inside`, `facts`, `interned`, `digest` | the rebuilt construction |
+| sharing | two literals of one layer map to one record exactly when their recomputed signatures (relation or operator or aggregate spec, plus domains) are equal |
+
+The checker is one function used twice: by `check` in-process (closures from `Evaluation`) and
+by the offline verifier (closures from the checked certificates).
+
+#### The offline verifier
+
+Library: `rel_verify::verify_chain(dir: &Path, bounds: &Bounds) -> Result<VerifiedChain,
+ChainError>`, with an in-memory form `verify_parts(&ChainParts, ..)` that the mutation suite
+drives. `VerifiedChain` is sealed like `Stratified` and carries the chain identity, `P`'s
+identity, the final relations, the readout and the fresh verification records. No `Demand`,
+no `ergodis_rules` item and no `rel_stratified::evaluate` is reachable from it: `rel_verify`
+and `rel_rebuild` import neither, and a test reads their source files and fails on any
+`ergodis_rules` or `rel_stratified` path.
+
+Subcommand: `ergodis-tools rel-verify <dir> [--source-check] [--records <file>]
+[--max-layer-bytes N] [--max-certificate-bytes N]`, printing one JSON line: `accepted`, the
+chain and program identities, per layer the source identity and both certificate digests, and
+per result relation its count and digest; or `accepted: false` with the error path.
+
+Steps, each failing with a `ChainError` that names the file, the layer and the field:
+
+1. Directory listing: exactly the expected files for the manifest's layer count; sizes within
+   bounds.
+2. Decode the manifest; schema first. Decode `P`; schema first; internal consistency (relation,
+   literal and rule references in range, join orders are permutations, facts in arity and
+   dictionary, integer texts canonical, type ranges agree with kinds); identity equals
+   `manifest.program`. With `--source-check`, re-lower and compare.
+3. Layering: every relation some rule of `P` derives is declared as non-input in exactly one
+   layer, and all its rules are that layer's; a positive body relation is seeded or derived at
+   the same or an earlier layer; a negated or aggregated relation is seeded or derived at a
+   strictly earlier layer. A layer with no rules is allowed (layer zero of a fact-only source).
+4. Dictionary: `P.values` followed by `manifest.dictionary`; the extension is checked entry by
+   entry when the aggregates are rebuilt.
+5. Seeded relations: one `seeded` entry per relation no rule derives; its tuples are the facts
+   of that relation in the first layer that declares it, identical in every other layer that
+   declares it, a superset of `P`'s facts, `tuples` and `external` match, and the digest
+   recomputes. A seeded relation no layer declares is empty and must say so.
+6. For each layer `k`, in order:
+   1. `prepared_identity(bytes) == source_id`; `decode_prepared(bytes)`; `domain` is the
+      dictionary size at `k`.
+   2. The declared list equals the decoded relations (name, arity, input), and each `origin`
+      is consistent (a program relation's name and arity are `P`'s; a construction's is its
+      record's).
+   3. The decoded rules are exactly `P`'s rules of this layer, in `P` order: head and body
+      atoms in join order, a positive literal as its program relation, a non-positive one as
+      the relation the literal map names, variables renumbered by first occurrence in body
+      order then head (the numbering admission fixes), constants as dictionary ids.
+   4. Every program input relation's decoded tuples equal the relation established for it:
+      seeded tuples, or the checked relation of the layer that derived it. A difference names
+      the relation and the first differing tuple.
+   5. Constructions: the checker above, rebuilding each from the relations established before
+      `k`, and each construction's decoded tuples equal the rebuilt ones.
+   6. Certificates: both digests recompute; `derivation::check_recorded(Source::Prepared(bytes),
+      ..)` and `ranked::check_recorded(..)` accept; their relations agree (else
+      `CheckersDisagree` with relation and tuple). The derived relations of `k` become
+      established.
+7. Result: every `P` relation's final tuples (seeded or derived) match `result` in count and
+   digest, and every relation appears once.
+
+What the verifier shares with the producer: the contract crate's admission (as every checker
+does), the core checkers (which the producer also ran, in-process), serde, the digest
+definitions, and, under option (b) below, the construction code. It does not share the driver,
+the layer assembly, the evaluator or `Demand`.
+
+#### `Demand::prepared_encoding`'s return type (D3)
+
+**Decision for Tavis (D3).**
+Recommendation: replace it with `Demand::transferable_source() -> Result<TransferableSource<'_>,
+Error>`, `TransferableSource::{Wire(&Program), Prepared(Vec<u8>)}`, with `as_source() ->
+datalog_record::Source<'_>` so a caller goes straight to `check_recorded`. No wrong question to
+ask, and `Error::Schema` keeps its one meaning (audit L6).
+Alternative: keep the name and return `Result<Option<Vec<u8>>, Error>`, `None` for a wire plan.
+Smaller core diff, but every caller still handles a case it may not expect, and the wire plan's
+transferable form stays undiscoverable from the method.
+
+Under the recommendation, core `main` gains one commit on `c1205b`: the type in
+`ergodis_rules::demand`, `prepared_encoding` removed (callers: core tests `demand_prepared.rs`,
+`docs/datalog-certificates.md`; no private caller), `SHA256SUMS`. The private driver matches
+`Prepared(bytes)` and treats `Wire` as `Error::Core(CoreError::Schema)`, which cannot occur on
+the prepared route.
+
+#### The construction rebuild (D1, the card's open decision)
+
+The rest of the design is the same under either option: the rebuild is behind one interface,
+
+```rust
+pub trait Rebuild {
+    fn domain(&self, program: &Program, sites: &[(u32, u8)], established: &Established) -> Vec<u32>;
+    fn complement(&self, domains: &[Vec<u32>], closure: &[u32]) -> Complement;   // tuples, inside
+    fn filter(&self, dictionary: &DictionaryView, operator: u8, domains: &[Vec<u32>]) -> Vec<u32>;
+    fn aggregate(&self, dictionary: &DictionaryView, closure: &[u32], arity: u8, column: u8,
+                 operator: u8) -> Result<Aggregate, AggregateRefusal>;   // tuples, appended entries
+}
+```
+
+and the construction checker compares its output with the records and the decoded facts.
+
+**(a) A separately written rebuild.** A new tier-1 module `rel_rebuild`, written from the stated
+semantics and not from the builder, in the reference evaluator's style:
+
+- values are decoded to typed values first (`Int(i64)`, `Text`, `Entity`, `Bool`, read from the
+  dictionary's kind and text), and every predicate is decided on those; the builder decides
+  equality on ids and orders on the stored integer payload;
+- a domain is a `BTreeSet<u32>` filled by walking each site relation's tuples; the builder uses a
+  bitset;
+- a complement is the product enumerated by an odometer over the domains, keeping each tuple not
+  in a `BTreeSet<Vec<u32>>` of the closure; the builder ranks tuples into a mixed-radix
+  membership vector;
+- a filter is the product filtered by a comparison over typed values, taken from the reference
+  evaluator's comparison (promoted from `tests/rel_reference/mod.rs` into the library, with the
+  test tree importing it back, so the oracle and the verifier share one statement of
+  comparison semantics and neither shares the builder's);
+- an aggregate groups into a `BTreeMap<Vec<u32>, Vec<i64>>` and folds after grouping (the builder
+  folds while grouping), interning results by scanning the dictionary as it stood before the
+  aggregate and appending in ascending group-key order.
+
+The module header states what is independent (the four algorithms and the value semantics) and
+what is not (the definitions they implement, the digest). Tests: a differential of `rel_rebuild`
+against the builder over the committed Rel fixtures and the generated corpus (every construction
+of every accepted program), and a construction-level mutation check in the scratch-worktree
+style of milestone a: a deliberately wrong builder (off-by-one domain, swapped operator,
+wrong group key) must be caught by `check` through `rel_rebuild`. Cost: about two days, most of
+it tests. It gives the offline verifier a real second implementation of the one step the core
+checkers cannot see.
+
+**(b) Replay of the builder, stated as such.** The `Rebuild` implementation calls the builder's
+`column_domains` successor, `complement_over`, `filter_over` and `aggregate_over`, moved to a
+module both sides import. The module headers of `rel_stratified` and `rel_verify` say the
+construction check is record consistency plus a replay of the producer's construction code,
+which detects a tampered or inconsistent chain and cannot detect a defect in the construction.
+Oracle agreement becomes shipped evidence: the reference evaluator moves from the test tree
+into the library unchanged, the chain may carry `source.rel`, and `rel-verify --oracle`
+evaluates the source with the reference evaluator and requires its model to equal the chain's
+result (the reference evaluator is exponential in the worst case and refuses out-of-fragment
+programs, so it is opt-in and reports "not applicable" rather than failing on a refusal); a
+committed receipt of the differential corpus (`tests/rel_reference_eval.rs`'s populations and
+the corpus digest) is regenerated by a test so it cannot go stale. Cost: about a day. A defect in
+a construction is then caught only when the oracle is run on that program.
+
+Recommendation: (a), as the review recommends. The offline verifier exists for a second party
+who does not trust the producer's code; under (b) that party re-runs the producer's code. (a)
+costs about a day more and adds no work to any timed stage, because the check runs outside
+`evaluate`. (b)'s `--oracle` is worth adding under (a) as well, later, as a whole-model
+cross-check; it is not part of this milestone under (a).
+
+#### Mutation test plan
+
+Fixture: a committed Rel source with a negation, an ordering comparison and an aggregate across
+three layers, plus one external input relation, small enough that the chain has a few hundred
+tuples. It must exercise a shared complement (`uses = 2`), a `Dictionary` domain source, a
+dictionary extension by an aggregate, and a layer with no rules. The chain is produced once per
+test run by `evaluate_with` into memory (`ChainParts`), and every mutation is verified through
+`verify_parts`.
+
+1. **Acceptance, two processes** (`tasks/tools/tests/rel_chain.rs`): run the built
+   `ergodis-tools rel-lower --source-file <fixture> --chain <tmp>` as one child process and
+   `ergodis-tools rel-verify <tmp> --records <tmp>/records.json` as another; the second prints
+   `accepted: true` with the result digests the first printed. Then `replay_derivation`/
+   `replay_ranked` of the emitted records against the chain files succeed. The temporary
+   directory is under the test's own `CARGO_TARGET_TMPDIR`, not `/tmp`.
+2. **Every manifest leaf.** The manifest is serialized to a `serde_json::Value`, every leaf is
+   enumerated with its path, and each is mutated once (integer plus one and, separately, zero;
+   string with one byte changed; boolean flipped; digest with one nibble changed; enum tag
+   swapped to each other tag). Each mutated manifest is re-encoded and verified. Every mutation
+   must be refused, and the error's field path must equal the mutated leaf's path. Where a
+   mutation is necessarily caught by an earlier, different check, the test holds an explicit
+   table of `(leaf pattern, expected path)`, reviewed in the report; the table may not contain
+   a pattern that matches nothing. List-shape mutations: drop, duplicate and swap adjacent
+   entries of every list; each refused with the list's path.
+3. **The card's six categories, each with a named expectation:**
+
+   | Mutation | Expected error |
+   | --- | --- |
+   | a layer identity (`source_id`) | `layers[k].source_id`: does not hash the layer bytes |
+   | a certificate digest | `layers[k].derivation` (or `.ranked`): does not hash the certificate file |
+   | a literal mapping (`literals[i].declared` to another construction of the layer) | `layers[k].literals[i]`: the prepared atom names another relation |
+   | an input digest (`seeded[i].digest`) | `seeded[i].digest` |
+   | a record field (each of the fields in the table above, including the three formerly unchecked) | `complements[i].source`, `filters[i].operator`, `filters[i].literal`, … |
+   | a certificate entry (each rule index, premise and tuple value of the derivation certificate; each rank and tuple of the ranked one) with the manifest digest left as is | `layers[k].derivation`: digest mismatch |
+   | the same entry with the digest recomputed to match | the core `Rejection` from `check_recorded`, carried with layer and family |
+
+4. **Consistent forgeries**, which pass every digest: a layer source rebuilt with one fact of a
+   complement removed and `source_id` recomputed (refused at step 6.5, naming the construction
+   and the missing tuple); one input relation's facts changed in a later layer (step 6.4, naming
+   the relation and tuple); a rule's negated literal pointed at a complement over another
+   relation with the record changed to match (refused by the `P` check on `source`); a filter
+   record and its facts rebuilt for another operator (refused on `operator`); `P` replaced by a
+   program with one literal's sign changed and the manifest's `program` recomputed (refused by
+   the layer rule check, 6.3).
+5. **File-level:** each layer and certificate file truncated, extended by a byte, missing,
+   and an extra file present; a file above its bound refused before it is read.
+6. **In-process `check`:** the existing `a_tampered_complement_record_does_not_rebuild` becomes a
+   table over every field of every record kind of the fixture's `Evaluation`, each refused with
+   the matching `RecordMismatch`; a `CheckersDisagree` test drives the merge walk directly with
+   two relations differing in one tuple and checks the named relation and tuple.
+7. **Externals:** each of the five problems refused with its value; the seeded list recorded.
+
+#### Performance
+
+Fermi, before implementing. Nothing below is in the derivation loop: `Demand::evaluate_into` and
+every core symbol it reaches are untouched unless D3's core commit perturbs ThinLTO, which the
+symbol comparison checks.
+
+- **Default instantiation (`NoEvidence`), the timed `stratify` stage.** Added per evaluation:
+  per layer, moving three vectors into the report instead of dropping them (no copy), a 32-byte
+  identity copy, and one literal-map vector (one allocation, one push per non-positive
+  literal): of the order of 300 instructions a layer. Per construction, the domain-separated
+  digest hashes a header of at most about 60 bytes more than today, at most two extra SHA-256
+  compressions (the `sha2` crate dispatches to SHA-NI here, a few hundred instructions each):
+  about 1,000 instructions a construction. Externals validation: zero, the bench passes none.
+  Error enum growth: a larger `Result`, no per-tuple work. Predicted: `datalog` (one layer, no
+  constructions) below 1e-6 of its 1.68e9 instructions per iteration; the four construction
+  cohorts, with three to five constructions and two or three layers each, a few thousand
+  instructions per iteration, which is below 1e-5 if their `stratify` iteration retires more
+  than about 5e8 instructions and visible otherwise. Their magnitudes have not been recorded by
+  an earlier A/B; the control run will give them, and the prediction is checked against the
+  measured per-iteration difference, not only the ratio.
+- **Evidence instantiation (`ChainWriter`), untimed.** Per layer: one `encode_prepared` (which
+  also decodes and re-admits, milestone a's repair), two certificate serializations and digests,
+  three file writes; plus one pass over seeded tuples. Expected of the order of the layer's own
+  prepare and certificate cost, so a `rel-lower --chain` run may take up to about twice a plain
+  one. Characterized once with `perf stat` on the four construction cohorts, reported, not a
+  gate.
+- **`check`**: outside every timed stage; under (a) several times the builder's construction
+  cost. Characterized once, not a gate.
+- **Peak RSS**: default path unchanged; evidence path adds at most one layer's encoding and
+  certificates at a time.
+
+A/B, per the playbook:
+
+- Controls retained **before the first source change**, from the clean worktrees (private
+  `482d6e9`, core `4b57649`): `retain-bin.sh . closure_ballpark --example --label
+  closure_ballpark-c1205b-base` and `retain-bin.sh tasks/tools ergodis-tools --label
+  ergodis-tools-c1205b-base`, run in the private worktree so the sibling core is the worktree's.
+  rustc read from each binary's `.comment`.
+- Candidates retained the same way from the final commits of both branches.
+- Symbol comparison first (`analysis/datalog-comparison/symbol_disasm.py`): every
+  `ergodis_rules::demand::` symbol in `closure_ballpark`, and the frontend, lowering and
+  checker symbols in `ergodis-tools`.
+- Derivation loop: `ab.py --mode evaluate --rounds 5 --cpu 5 --repeats 3` over the eighteen
+  cohorts, whatever the symbol comparison shows (D3 changes a core crate).
+- Stages: `bench.py --rounds 5 --cpu 5 --stages scan,parse,admit,lower,stratify
+  --events instructions,cycles,branches,branch-misses,page-faults,minor-faults` over the five
+  default cohorts, then over `datalog,stratified,columns,columns3,aggregate` (the four
+  construction cohorts are new to this measurement), A/A null per cohort, load recorded.
+  Instructions decide; the construction cohorts are read against the Fermi above.
+- Receipts committed in private under `analysis/datalog-comparison/` and `analysis/rel-frontend/`,
+  arms named with both revisions in this report.
+
+#### Identities that must not move
+
+- Prepared layer identities: the first private commit adds only `LayerReport::source_id` (one
+  field, recorded from `demand.source_id()`, no change to layer assembly) and a test pinning the
+  layer identities and both certificate digests of every layer of the fixture and of the four
+  construction cohorts at small size. Every later commit must pass it unedited.
+- Plan fingerprints and the parity digest: the existing `tests/rel_lowering.rs` and
+  `tests/rel_frontend_portability.rs` assertions, unedited.
+- The reference-evaluator differential: `tests/rel_reference_eval.rs`, its populations unedited
+  (under (a) its comparison code moves to the library and is imported back; the populations
+  and assertions do not change).
+- Core, under D3: every pinned prepared and wire identity and certificate digest in
+  `demand_prepared.rs` and `prepared_source.rs`, unedited.
+
+#### Commit plan and gates
+
+Core, branch `c1205b` (only under D3's recommendation):
+
+1. "Hand out a plan's transferable source as one typed value": `TransferableSource`, removal of
+   `prepared_encoding`, the core test and `docs/datalog-certificates.md` updates, `SHA256SUMS`.
+   Gates: `cargo fmt --all -- --check`; `cargo clippy --all-targets --all-features -- -D
+   warnings`; `cargo test --all-features`; `python3 python/generate_evidence.py --write`;
+   `python3 python/generate_fixtures.py --check`; `python3 scripts/check-runtime-dependencies.py`;
+   `python3 scripts/check-verifier-dependencies.py`.
+
+Private, branch `c1205b`, each commit gated by `cargo fmt --check`, `cargo clippy --all-targets
+--all-features -- -D warnings` and `cargo test --all-features` (which includes the parity and
+reference-evaluator suites), all under `nix develop ../ergodis`, heavy runs under
+`choom -n 1000` with at most 12 jobs:
+
+1. Controls retained (no commit). Then "Record each layer's prepared source identity", with the
+   identity pin test.
+2. "Refuse unknown, derived, repeated and malformed external inputs, and record what was
+   seeded".
+3. "Name the failing record, field and tuple in stratified errors": `Error` as above, the merge
+   walk, the domain-separated `tuple_digest` replacing `digest_of`.
+4. "Separate checked from unchecked stratified results": `Evaluation`, `check`, sealed
+   `Stratified`, the literal map and declared relations per layer, `P` (`rel_chain::Program`),
+   the construction checker checking every field against `P`, `verify_records` removed, the
+   callers in tests and tools updated, the bench description change.
+5. "Rebuild constructions independently for the record check" (D1 (a)) or "Share the
+   construction code between producer and checker, stated as a replay" (D1 (b)).
+6. "Write stratified results as a verifiable chain": the `Evidence` sink, `ChainWriter`, the
+   manifest, `rel-lower --chain`.
+7. "Verify a stratified chain offline": `rel_verify`, `rel-verify`, the mutation suite, the
+   two-process acceptance test.
+8. "Record the chain A/B": receipts.
+
+Othello: this report, updated at each step, committed with explicit pathspec.
+
+Close: an independent read-only audit by a fresh Opus sub (card), then `cache-gc.sh` as a dry run
+only, with the list reported.
+
+#### Decisions for Tavis, in one place
+
+- **D1, the construction rebuild.** Recommend (a), a separately written set-based rebuild;
+  alternative (b), a stated replay plus shipped oracle agreement. Details above.
+- **D2, the chain's subject.** Recommend a stratified program statement `P` with its own
+  identity; alternative, the layer sources plus the literal map as the program.
+- **D3, `prepared_encoding`.** Recommend `transferable_source()` returning
+  `TransferableSource`; alternative, `Result<Option<Vec<u8>>, Error>`.
+- **D4, verification records.** Recommend none in the chain, fresh records as the verifier's
+  output; alternative, producer-stored records replayed as a warning.
+
+Choices stated rather than asked, each reversible within this milestone: checked and unchecked
+as distinct types rather than a check inside `evaluate` (timed-stage cost); evidence streamed
+through a const-generic sink rather than retained; JSON for the manifest and `P`, binary only
+for the core's prepared form; hex digests in the manifest; the verifier's size bounds as the
+caller-supplied bound milestone a left open, with no core change; external inputs for a derived
+relation refused (a defect beyond the review's two); the `--source-check` option off by
+default; `producer.json` outside the chain.
 
 ## Milestone c
 
