@@ -71,8 +71,8 @@ records, so exact lowering outcomes/counts/IR fingerprints must also be checked 
 
 ## Closeout
 
-Pending implementation, review and validation. Incidental discoveries, retained artifacts and
-any unresolved evidence gaps will be recorded before task closure.
+The final record-update gates and task-lifecycle closure remain open. Incidental discoveries,
+retained artifacts and unresolved evidence gaps will be accounted for at closure.
 
 ## Isolated preparation and validation scheduling
 
@@ -81,7 +81,8 @@ alter the measured primary checkout or start another build:
 
 - `~/.cache/ergodis/worktrees/c1210-sequencing`, based on private `bfd79c9`: uncommitted
   `src/rel_frontend/mod.rs`, `src/rel_frontend/diagnostic.rs`, `tests/rel_lowering.rs`.
-  Source reviewed; not compiled or tested yet. It cannot land before cleanup acceptance.
+  Source reviewed, then integrated and validated as primary `69426b9` after cleanup acceptance.
+  This isolated copy itself was never built.
 - `~/.cache/ergodis/worktrees/c1210-records`, same base: uncommitted
   `tests/rel_frontend_portability.rs`, `analysis/rel-frontend/portability.py`,
   `analysis/rel-frontend/README.md`, `tasks/tools/src/rel_frontend_bench.rs`.
@@ -90,7 +91,8 @@ alter the measured primary checkout or start another build:
 
 These source-only worktrees intentionally have no build targets or dependency-symlink trees.
 Reviewed patches will be integrated into the primary checkout and validated in sequence.
-They remain uncommitted because validation is pending, not as sole evidence of completion.
+They remain uncommitted draft copies; the primary commits and evidence are authoritative,
+not these isolated preparations. No cache/worktree deletion was performed.
 
 Private fmt and Clippy passed. The first broad test invocation used Cargo jobs=12 but omitted
 the test-harness cap, so the agent interrupted it without claiming acceptance and restarted
@@ -114,7 +116,7 @@ Commands under the pinned core Nix shell, with `choom -n 1000` and twelve build 
 `cargo test --all-features`; `python3 python/generate_evidence.py --write`.
 All reported exit zero; 85 test-result groups, 1,037 tests passed, zero failed, three ignored.
 The core Python-parity tests compare committed Python-origin fixtures; no live Python
-process was claimed. Private Rel reference/differential coverage is a separate pending gate.
+process was claimed. Private Rel reference/differential coverage is reported separately below.
 Counts were summed from the saved post-revision log without another suite rerun.
 During coordination, a redundant whole-handoff read exceeded the command-output cap;
 it was not used for review and was replaced with a bounded C1210 section lookup.
@@ -151,8 +153,8 @@ The main agent inspected the parity receipt: 243 cases, 529,122 canonical bytes,
 native/WASM byte equality, unchanged SHA-256
 `5f9600ef35db554dc0360624f87e2b69653193842c959c2f6d0c27daacba0cc4`.
 The standalone portability compiler and pinned shell both report rustc 1.95.0
-(`59807616e`, 2026-04-14). Candidate retention and matched performance validation follow;
-the source commit is not yet a performance-acceptance claim.
+(`59807616e`, 2026-04-14). The source commit was followed by separate candidate retention
+and matched performance acceptance; the evidence and limits follow.
 
 Main independently reviewed the seven-round Datalog companion receipt
 `analysis/rel-frontend/performance-v1-c1210-m1-datalog-stages.json`: lower-stage byte
@@ -167,7 +169,7 @@ companion with parse/admit/lower/stratify. The five default cohorts also show no
 instruction interval wholly outside [0.9999, 1.0001]. Main separately reproduced
 exact cross-arm equality of nested lowering and stratification records, fingerprints,
 failures, token/node counts and admission for all three primary receipts. Cache,
-profile/call and memory acceptance remains pending.
+profile/call and memory acceptance is recorded below.
 
 Main recomputed the retained candidate's measured SHA-256 as
 `ce60240668c6edce779e68ecb85bed053be2ea8233f6ef18a014aa5454a8df67`, and
@@ -202,7 +204,7 @@ remains 243 cases, 529,122 bytes with the same digest. Source is committed as `6
 main compared all three committed files against the reviewed isolated patch with whitespace
 removed and found no other changes. Main also recomputed the clean retained candidate's
 measured SHA-256 as `891bca69263a0cbf8678f98208b0bd4ffe0960ae9b830bd555cf06983e504613`.
-Matched control is `8192836`, both with core `61116a3`. Stage A/B acceptance remains pending.
+Matched control is `8192836`, both with core `61116a3`. Stage A/B acceptance is recorded below.
 
 One sequencing cache invocation was refused before measurement because the main agent's
 three-event recipe omitted `cycles`, which `bench.py` requires alongside `instructions`.
