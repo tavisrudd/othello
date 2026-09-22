@@ -2,7 +2,8 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: IN PROGRESS. No implementation milestone accepted yet.
+**Status**: IN PROGRESS. Core documentation accepted; private cleanup performance,
+stage sequencing and record-format gates remain open.
 
 ## Scope and coordination
 
