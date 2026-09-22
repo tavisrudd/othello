@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: QUEUED — allocated by Tavis from C1208.
+**Status**: COMPLETE 2026-09-22 — report `notes/2026-09-22-c1213-datalog-schema-provenance-report.md`.
 **Authority**: `notes/2026-09-22-c1208-follow-up-triage.md` (approved allocation and order).
 
 Approved C1208 alloc-4, refined after C1209. C1205 milestone a was recorded complete during

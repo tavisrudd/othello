@@ -231,7 +231,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 - **C1207 `[ergodis]` [QUEUED — AUDIT + DESIGN SESSION WITH TAVIS]** — error reporting and error UI across core, private, tools, ABI/WASM and browser: inventory, taxonomy, general error model → `notes/2026-09-18-c1207-error-reporting-audit-and-design.md`
 - **C1211 `[ergodis]` [QUEUED]** — min-plus evaluator/certificate design memo before C1194 → `notes/2026-09-22-c1211-min-plus-design.md`
 - **C1212 `[ergodis]` [QUEUED]** — arity-dependent domain ceiling before C1195 sizing → `notes/2026-09-22-c1212-arity-domain-ceiling.md`
-- **C1213 `[ergodis]` [QUEUED]** — Datalog schema and contract/checker provenance migration of the completed C1205 a interface → `notes/2026-09-22-c1213-datalog-schema-provenance.md`
 - **C1214 `[ergodis]` [QUEUED]** — checker mutation suite, then independent completeness pass → `notes/2026-09-22-c1214-checker-tests-independence.md`
 - **C1215 `[ergodis]` [QUEUED]** — Demand builder, unified checker API, driver options and instrumentation feature → `notes/2026-09-22-c1215-demand-api-cleanup.md`
 - **C1216 `[ergodis]` [QUEUED]** — Datalog/private Rel module ABI, WASM build gate and eager-commit defaults → `notes/2026-09-22-c1216-datalog-rel-module-abi.md`
