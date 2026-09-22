@@ -31,7 +31,7 @@ The main agent reviews diffs, gates and receipt interpretation before commits ar
 |---|---|---|
 | Core checker/fact-count documentation | Committed `61116a3` | Main reviewed all four documentation diffs; fmt, Clippy and 85/85 test groups passed; manifest regenerated |
 | Private documentation and byte-preserving cleanup | Accepted `8192836`; evidence `1bd7d79` | fmt/Clippy and 100 affected tests pass; native/WASM canonical digest unchanged; primary A/B/null, fitted cache, calls and RSS reviewed |
-| Stage sequencing | Integrated; validation pending | Reject stale/failed/unadmitted stages, recover safely, no allocation; matched stage A/B |
+| Stage sequencing | Candidate `69426b9`; performance pending | 100 focused tests and unchanged native/WASM parity pass; matched stage A/B remains |
 | Parity v2 and additive bench policy | Pending | Updated producer/consumers, new digest, native/WASM agreement, driver parity A/B |
 
 ## Decisions and limits
@@ -54,7 +54,8 @@ corrected to whole-program refusal. No behavior was changed for these correction
   Empty/Parsed/Admitted state. Scanning invalidates before any error; successful compact parse
   and admission advance state; lowering requires Admitted. There is no numeric wrap. Diagnostic
   recovery stays outside the documented compact-parse admission boundary. Failed lowering
-  preserves admission for retry. This is still a plan pending implementation and tests.
+  preserves admission for retry. Implemented and correctness-tested in `69426b9`;
+  performance acceptance remains pending.
 - Source implementation hashes may move even on documentation edits. No historical receipt
   is re-pinned as if its measurement had been repeated.
 - No cache deletion, publication, unrelated comment sweep or Lean operation is authorized here.
@@ -197,8 +198,12 @@ transferred to the sequencing owner. The isolated preparation remains uncommitte
 listed above; primary source correctness and performance gates now follow in sequence.
 
 The sequencing owner reports pinned formatting, scoped Clippy, frontend/lowering/reference
-tests and the native/WASM replay passing. The parity corpus remains 243 cases with the same
-digest. Source commit, retained candidate and stage A/B acceptance remain pending.
+tests (28+53+19 = 100, all passed) and the native/WASM replay passing. The parity corpus
+remains 243 cases, 529,122 bytes with the same digest. Source is committed as `69426b9`;
+main compared all three committed files against the reviewed isolated patch with whitespace
+removed and found no other changes. Main also recomputed the clean retained candidate's
+measured SHA-256 as `891bca69263a0cbf8678f98208b0bd4ffe0960ae9b830bd555cf06983e504613`.
+Matched control is `8192836`, both with core `61116a3`. Stage A/B acceptance remains pending.
 
 Record-update Fermi before integration: `body_policy` mapping/JSON emission is outside the
 timed loop, so expected kernel/work/fingerprint delta is zero; ThinLTO layout still requires
