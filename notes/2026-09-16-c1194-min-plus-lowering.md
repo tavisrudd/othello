@@ -10,7 +10,8 @@ workspace machinery or is a second kernel, and what a min-plus relational certif
 demand path is Boolean with set semantics in the evaluator and in both certificate formats, and
 the prepared seam has no carrier or fact cost, so the Deliverable's "the certificate is the
 existing min-plus certificate" holds only on the grounded path (two-atom bodies, small bounds).
-See `2026-09-21-c1208-c1204-findings-triage-report.md`, decision 1.
+Precursor allocated as C1211 (`2026-09-22-c1211-min-plus-design.md`), approved 2026-09-22.
+Its evaluator/certificate recommendation needs Tavis's decision before implementation here.
 
 ## Why
 
@@ -29,9 +30,9 @@ components, two of the five benchmark rows step 5 names, need this.
   carrier selection per layer (a layer whose head carries a cost column and whose aggregate is
   `min` over a `+` term lowers to the bounded-min-plus program; everything else stays Boolean);
   the u32 sentinel precondition surfaced as a diagnostic, not a silent saturation.
-- Core: the demand evaluator or the existing grounded `Prepared` path evaluating the min-plus
-  layer; whichever is chosen, the certificate is the existing min-plus certificate and the Lean
-  oracle route (C1164) is unchanged. Record which path and why.
+- Core: implement the evaluator and relational certificate selected through C1211; do not
+  assume the existing grounded min-plus certificate applies to Demand. Preserve the existing
+  Lean oracle route (C1164) and record which new claim the relational certificate establishes.
 - Reference evaluator: min-plus fixed point (naive, over the admitted AST) so the differential
   covers cost programs; generated corpus with seeds.
 

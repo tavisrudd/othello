@@ -13,8 +13,11 @@ since the review. Read-only; nothing under `ergodis*` was modified.
 The main agent re-read two of its claims in the source (the wasm32 build of `ergodis-rules`, and
 `scan_variant` not clearing the admission pools); both hold.
 
-**Status**: coverage, verification and dispositions done; fold edits made (section 6). Allocation
-of the bundle and of the proposed tasks waits for Tavis's answers to section 3, per the card.
+**Status**: COMPLETE 2026-09-22. Coverage, verification and folds were completed 2026-09-21;
+Tavis approved the remaining decisions and allocations on 2026-09-22. C1210–C1218 now own
+the nine remaining tasks; C1209 completed the split. The approved cleanup-first order and
+post-split refinements are in `notes/2026-09-22-c1208-follow-up-triage.md`.
+Sections 3–5 below retain the original proposal labels; the follow-up maps each to its owner.
 
 ## 1. Disposition table
 
@@ -270,5 +273,5 @@ with no owner by choice is whether any three-atom body of the `datalog` bench co
 link-order tie; it bears on no cited number and is dropped unless that cohort is used to compare
 body policies again.
 
-The task stays open until Tavis answers section 3; the remaining deliverable is reserving IDs and
-writing cards for the approved allocations and the bundle.
+Tavis answered on 2026-09-22; IDs C1210–C1218 are reserved and their cards written.
+The allocation deliverable is complete; implementation belongs to those successors.

@@ -12,7 +12,9 @@ sizes before the domain-ceiling decision (the value dictionary is capped at 65,5
 every program today; triage report decision 2); (3) a refused cohort records C1206's structured
 refusal record in its receipt, which is what the reach tables are built from; (4) artifacts should
 freeze after the Datalog schema-string decision (triage report decision 4), which moves every
-wire source identity.
+wire source identity. Approved owners (2026-09-22): C1212 domain ceiling before cohort sizing,
+C1213 schema/provenance before artifact freeze, C1206 refusal records. Min-plus rows still
+wait for C1194 after C1211's design decision; Boolean rows do not wait for min-plus.
 
 ## Why
 

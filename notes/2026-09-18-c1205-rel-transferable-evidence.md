@@ -28,6 +28,11 @@ and `notes/2026-09-18-c1204-review-half2-contract-evaluator-checkers.md` (F1, F1
 
 Runs after C1209 (contract crate split, Tavis 2026-09-21): the encoder, the decoder and the source
 enum's contract half land in the contract crate; the checker entry points land in `ergodis-verify`.
+C1209 and this milestone are complete. C1213 owns the approved subsequent Datalog
+schema/provenance migration; it must start from the delivered byte interface rather than
+redo this milestone. The preservation acceptance below records this milestone's original
+baseline; later migrations must identify their own deliberate changes. Existing prepared
+source identities remain a preservation requirement.
 
 - Factor the canonical encoding that `datalog::admit_prepared` already streams into SHA-256 into
   an encoder and a decoder for a prepared source, so the prepared identity is recomputable from
@@ -102,7 +107,8 @@ are the one step the core checkers cannot see. Milestones a and c do not depend 
 An independent completeness pass for one checker and the wider checker-crate mutation suite; the
 contract-crate split; a separate schema string for the Datalog language; an ABI for the Datalog
 path; certificate encodings (C1196, which should build on milestone a's byte form); structured
-refusals. Each is a separate candidate in the C1204 report.
+refusals. Allocated owners: C1214 checker tests/independent completeness; completed C1209
+contract split; C1213 schema/provenance; C1216 ABI; C1196 encodings; C1206 refusals.
 
 ## Deliverables
 

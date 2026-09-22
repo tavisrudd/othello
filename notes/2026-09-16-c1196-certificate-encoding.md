@@ -13,7 +13,9 @@ layout change moves the stride rule, the sentinel meaning and every direct index
 checking from the compact form means a checker rewrite, not a decode step; (3) the Portability
 bullet presupposes an ABI for the Datalog path, decided 2026-09-21 and proposed as its own task
 (triage report decision 8) — that bullet waits for it; (4) if the certificate format opens, the
-checker identity field (core F13; triage report decision 4) rides with it.
+provenance contract (core F13; triage report decision 4) rides with it. Approved owners
+(2026-09-22): C1213 establishes schema plus separate contract/checker provenance after C1209;
+C1216 supplies the ABI portability gate. Preserve identities relative to that new baseline.
 
 ## Why
 
