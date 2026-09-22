@@ -1220,6 +1220,7 @@ from each binary's `.comment` when the A/B is written up.
 | core `c1205b` | `064cde2` | D3: `Demand::transferable_source()` returning `TransferableSource::{Wire(&Program), Prepared(Vec<u8>)}` with `as_source()`; `prepared_encoding` removed; `demand_prepared.rs` and `docs/datalog-certificates.md` updated; `SHA256SUMS` |
 | private `c1205b` | `1f8200b` | `LayerReport::source_id` (recorded from `demand.source_id()`, no change to layer assembly); fixture `tests/rel_chain/demo.rel` (three layers: shared complement with `uses = 2`, a `Dictionary` domain, `=` and `>` filters, `count` and `sum` aggregates with a dictionary extension, the free name `ext`); `tests/rel_layer_identities.rs` pinning every layer identity of the fixture and of the `stratified`, `columns` (16), `columns3` (8) and `aggregate` (16) cohorts |
 | private `c1205b` | `d77f3d2` | Externals: `Error::External { spelling, problem }` with `ExternalProblem::{Unknown, Derived, Repeated, Arity, Value}`, all checked before anything is seeded; `Stratified::seeded: Vec<Seeded { relation, spelling, external_tuples }>`; `tests/rel_externals.rs`; bench error witness `6 << 60` for the new variant |
+| private `c1205b` | `3940964` | Remaining steps 2 and 3 as one commit (see "Steps 2 and 3" below): `evaluate` returns `Evaluation`; `check(Evaluation, &Rir) -> Result<Stratified, Error>` with a sealed `Stratified` (`Deref<Target = Evaluation>`, `into_evaluation`); per layer `declared: Vec<Declared { name, arity, input, origin }>` and `literals: Vec<LiteralMap { literal, declared }>`; new `src/rel_chain.rs` (the program statement `Program`, the record types moved out of `rel_stratified` and re-exported from it, `tuple_digest`, `check_constructions`, `derived_layers`, `rules_of`); new `src/rel_rebuild.rs` (the independent set-based rebuild, `Value`, `compare`); the reference evaluator imports `Value` and `compare` back; `verify_records` removed; callers, `rel-lower` and the bench description updated; `tests/rel_check.rs` |
 | private `c1205b` | `48ccaaa` | `Error::CheckersDisagree(Disagreement { layer, relation, tuple, held_by, missing_from })` with `Party::{Derivation, Ranked, Evaluator}` and a merge walk (`first_difference`), for both the derivation/ranked and the checker/evaluator comparison; `Error::Record(RecordMismatch { kind, index, field })` replacing `ComplementMismatch`, with `RecordKind`, `RecordField`, `DomainPart` and a `Display` path such as `complements[0].column_domains[0].values`; `tuple_digest(DigestKind, scope, name, arity, tuples)` under tag `ergodis-private/rel-chain.v1` replacing `digest_of` in the builder and the record check; the tamper test now asserts the field of each of its seven tampers; unit tests for the disagreement and for digest separation; the bench witness keeps `3 << 60 | layer` and `4 << 60 | index` |
 
 Core gate at `064cde2`: `generate_evidence.py --write`, `cargo fmt --all -- --check`, `cargo clippy
@@ -1239,42 +1240,109 @@ exit 0, 17 min, 42 `ok` blocks, 1,177 passed, 0 failed. This milestone adds five
 (the identity pin, two externals tests, two `rel_stratified` unit tests); the base count at
 `482d6e9` was not rerun, so the remaining difference from milestone a's 1,171 is unattributed.
 
+#### Steps 2 and 3: checked types, the program statement and the independent rebuild
+
+Committed together as `3940964`: the construction checker of step 2 has to call a rebuild, and
+writing it against the builder's functions only to replace them one commit later would have
+been throwaway code. What was built, and where it departs from the design text:
+
+- **`bench.py` and `records_verified`.** `bench.py` compares only `tokens`, `nodes`, `failure`,
+  `admission` and `fingerprint` between arms (its `for field in (...)` loop); it never reads the
+  `stratification` description. So the field was dropped outright, not kept as a constant. The
+  description now runs `check` and, on failure, emits only
+  `{"stratified":false,"error":"record check: ..."}`.
+- **Binding sites are carried in `P`, not recomputed from the rule body.** The design's claim
+  that "a verifier can recompute every site list from the rule alone" is false for binarized
+  rules: the `bind` pass runs before binarization, and a synthetic rule shares its parent's
+  variable pool and so its parent's binding sites, which can name relations the synthetic rule's
+  own body does not read. `ProgramRule` therefore has `bindings: Vec<Vec<(relation, column)>>`
+  per rule-local variable, read from `Rir::binding_sites`. It is still a pure function of the
+  lowered IR, so D2 stands. Other `P` field shapes: `body: [first, last]`, `order`,
+  `variables`; `ProgramLiteral { sign, op, relation: Option, aggregate_column: Option, terms }`
+  with `ProgramTerm::{Constant(id), Variable(var)}`; `type_ranges: Vec<[u32; 2]>` per value kind.
+- **The record types live in `rel_chain`**, re-exported from `rel_stratified` so every existing
+  path compiles unchanged, because `rel_verify` must not import `rel_stratified`.
+- **Sharing is decided on domain values.** The builder shares a complement or filter between
+  literals whose domains hold the same values even when their provenance differs, and records
+  the first literal's (in rule order, then literal id). The checker follows that; the design's
+  sharing row said "signatures (relation or operator or aggregate spec, plus domains)", which is
+  this reading. The fixture exercises it: the `lone` literal's variable falls back to the
+  whole dictionary, whose values equal `node`'s bound domain, so it shares the `path`
+  complement with `unreached` and `gap` (`uses = 3`), and no record in the fixture carries a
+  `Dictionary` source. The report's earlier description of the fixture ("a `Dictionary` domain",
+  "`uses = 2`") is corrected here.
+- **Errors.** `RecordKind` gained `Layer` (index is the layer), `Seeded` and `Dictionary` (index
+  is the value id); `RecordField` gained `Literal`, `Layer`, `Uses`, `Declared`, `Name`,
+  `Dictionary`, `DictionaryBefore`, `Position`, `Declarations`, `DeclaredRelation { index,
+  part }`, `Literals`, `LiteralEntry { index }` and `Value`; `DomainPart` gained `ColumnType`,
+  `TypeStart`, `TypeEnd`. `Display` renders, for example, `layers[1].declared[4].origin` or
+  `complements[0].column_domains[0].type_start`.
+- **What the in-process `check` does not check:** that the prepared rules are `P`'s rules
+  (design step 6.3). `check` has no decoded layer source; the offline verifier does it.
+- **`rel-lower`** keeps its `complement_records_verified` output key, now meaning that `check`
+  passed; it prints only from a `Stratified`.
+
+Tests: `tests/rel_check.rs` (new) changes one field of the fixture's evaluation per case and
+requires the error to name it: complement `source` (formerly unchecked), `relation`,
+`dictionary`, `column_type`, `type_start`, `type_end`; filter `operator` and `literal` (both
+formerly unchecked), `uses`; aggregate `column`, `source`, `dictionary_before`, `interned`;
+seeded `spelling`; the shared complement's `uses`; a literal-map entry redirected and one
+dropped; a declared name; a construction declared under another origin; a dictionary extension
+entry. The tamper test in `tests/rel_lowering.rs` now runs `check` on an `Evaluation`; its
+provenance tamper is refused as `column_domains[0].source`, since provenance is now recomputed
+from `P` rather than resolved as recorded. The differential of `rel_rebuild` against the
+builder is `check` itself on every accepted program of `tests/rel_lowering.rs` and every corpus
+program of `tests/rel_reference_eval.rs` (the committed fixtures, the generated corpus and the
+negation corpus): each construction the builder recorded is rebuilt independently and its
+digest compared. `rel-lower` also passes `check` on the chain fixture and on the `stratified`,
+`columns`, `columns3` and `aggregate` cohorts at 16 definitions.
+
+Construction-level mutation checks, in the detached scratch worktree
+`~/.cache/ergodis/worktrees/c1205b-mut/ergodis-private` at `3940964` (sibling `ergodis` a
+symbolic link to the `c1205b` core worktree), one mutation of the builder at a time, reverted
+before the next (the worktree is clean), each run against `rel_check`, `rel_lowering` and
+`rel_reference_eval`:
+
+| Builder mutation | Caught as |
+| --- | --- |
+| off-by-one domain: `union_of_sites` sets the bit of `value − 1` | `ColumnDomain { column, part: Values }` on complements and filters; 15 `rel_lowering` and 6 `rel_reference_eval` failures, `rel_check` failed |
+| swapped operator: `CMP_LT` decided as `a > b` | filter `Facts` and `Digest`; 3 and 3 failures (`rel_check` passes: the fixture has no `<`) |
+| wrong group key: the key drops column 0 instead of the aggregated column | aggregate `Digest`; 7 and 3 failures, `rel_check` failed |
+
+Gates at `3940964` (against core `064cde2`), under `nix develop ../ergodis`: `cargo fmt --all
+--check` clean; `cargo clippy --all-targets --all-features -D warnings` clean for the root
+package and for `-p ergodis-tools`; suites `rel_layer_identities` (the pins, unedited, pass),
+`rel_externals`, `rel_lowering` (53, parity and fingerprint assertions unedited),
+`rel_reference_eval` (19, populations and assertions unedited; its comparison code is now the
+library's), `rel_frontend_portability`, `rel_check`, the library's `rel_` unit tests (5), and
+all of `ergodis-tools`' tests (44): all green. The full private `cargo test --all-features` was
+not rerun at this commit; it belongs to the close.
+
 #### Remaining steps
 
 In order; each is a commit on the private `c1205b` branch with the gates above, and the report
 updated after it. The design sections above are the specification.
 
 1. Done (`48ccaaa`).
-2. **Checked and unchecked types.** Rename today's `Stratified` to `Evaluation` (pub fields); add
-   per-layer `declared: Vec<Declared { name, arity, input, origin }>` (move `names`, `arities`,
-   `inputs` into the report after `Demand` is built; `origin` from `index_of` and the three
-   construction lists) and `literals: Vec<(u32, u32)>` (RIR literal id, declared index, pushed
-   wherever `atom_over` is set). `LayerReport` stops being `Copy`. Add
-   `rel_chain::Program::of(&Rir, &Readout)` (the `P` table in the design, serde,
-   `deny_unknown_fields`, identity `SHA-256(tag ‖ 0 ‖ serde_json::to_vec)`), and
-   `check(Evaluation, &Rir) -> Result<Stratified, Error>` with a sealed `Stratified` (private
-   field, `Deref<Target = Evaluation>`). `check` runs the construction checker against `P` for
-   every field in the design's field table (extend `RecordKind` with `Literal`, `Declared`,
-   `Seeded`, and `RecordField` with `Layer`, `Uses`, `Declared`, `Name`, `Dictionary`,
-   `DictionaryBefore`, `ColumnType`, `TypeStart`, `TypeEnd`, `Literal`). Remove
-   `verify_records`; update `tests/rel_lowering.rs` (`stratified` helper, tamper test),
-   `tests/rel_reference_eval.rs`, `tasks/tools/src/rel_lower.rs`, and
-   `rel_frontend_bench.rs`'s untimed description (check `bench.py` first for whether it
-   compares `records_verified` between arms; if so keep it as constant `true`).
-3. **Independent rebuild (D1 (a)).** New module `src/rel_rebuild.rs` as specified (typed value
-   decoding, `BTreeSet` domains, odometer complement, typed-value comparisons promoted from
-   `tests/rel_reference/mod.rs` with the test tree importing them back, group-then-fold
-   aggregates). The construction checker calls it. Differential test against the builder over
-   the committed fixtures and the generated corpus; construction-level mutation checks in a
-   scratch worktree (off-by-one domain, swapped operator, wrong group key), each caught.
-4. **Evidence sink and chain writer.** `Evidence` trait with `const RETAIN: bool`, `NoEvidence`,
+2. Done (`3940964`), with 3.
+3. Done (`3940964`).
+4. **Evidence sink and chain writer.** Notes for it: the record types in `rel_chain` have no
+   serde yet (the manifest needs it, with digests as 64-character lowercase hex); `Declared`,
+   `Origin`, `LiteralMap` and every `Program` part already derive it with
+   `deny_unknown_fields`. The manifest's `seeded[].external` should be the count of tuples
+   beyond `P`'s facts after deduplication, which is not `Seeded::external_tuples` (counted
+   before duplicates are removed). `Evidence` trait with `const RETAIN: bool`, `NoEvidence`,
    `ChainWriter`; `evaluate` = `evaluate_with(.., &mut NoEvidence)`. In the retaining
    instantiation, per layer: `demand.transferable_source()` (expect `Prepared`), both
    certificates to the sink, `derivation_digest`/`ranked_digest` into the layer record. The
    manifest (`rel_chain::Manifest`, hex digests) and `program.json` written after `check`;
    `producer.json` beside them. `rel-lower --chain <dir>`, plus `--externals <json>` so the
    fixture's `ext` can be supplied from the command line.
-5. **Offline verifier.** `src/rel_verify.rs` (`verify_chain`, `verify_parts`, sealed
+5. **Offline verifier.** It calls `rel_chain::check_constructions` with the closures it
+   established from the certificates, after checking every layer's input relations against
+   them; `P` needs a `validate` (references in range, join orders permutations, facts in arity
+   and dictionary, canonical integer texts, distinct values, type ranges agreeing with kinds)
+   before `check_constructions` indexes into it. `src/rel_verify.rs` (`verify_chain`, `verify_parts`, sealed
    `VerifiedChain`, `ChainError` with file, layer and field path), steps 1–7 of the design;
    `ergodis-tools rel-verify <dir> [--source-check] [--records <file>] [--max-layer-bytes N]
    [--max-certificate-bytes N]`; the source-scan test that `rel_verify` and `rel_rebuild`
@@ -1295,7 +1363,24 @@ updated after it. The design sections above are the specification.
 #### Divergence
 
 At the time of stopping, core `main` is `4b57649` and private `main` is `482d6e9`, the start
-points; both `c1205b` branches fast-forward onto them.
+points; both `c1205b` branches fast-forward onto them (core `c1205b` at `064cde2`, private
+`c1205b` at `3940964`). The scratch worktree `~/.cache/ergodis/worktrees/c1205b-mut` (a detached
+private worktree at `3940964`, clean, and a symbolic link) remains registered in the private
+repository; removing it is Tavis's call.
+
+#### Mystery ledger (milestone b)
+
+- **The fixture's dictionary-fallback literal records no `Dictionary` domain (settled).** The
+  `lone` literal's variable is bound only by `some`, which its own layer derives, so its domain
+  falls back to the whole dictionary; that dictionary holds exactly the four integers `node`
+  holds, so the domain's values equal the bound domain of `unreached` and `gap`, and the builder
+  shares their complement. Sharing depends on values only, which is exact: a complement is a
+  function of its relation and its domains' values, and provenance only explains them. A
+  `Dictionary` source in a record therefore appears only when the fallback domain differs from
+  every other use site's; the mutation suite of step 6 should add a fixture line that makes one
+  (for example a text constant in the dictionary).
+- **Binding sites are not recoverable from a binarized rule's body (settled).** See "Steps 2 and
+  3"; `P` carries them.
 
 ## Milestone c
 
