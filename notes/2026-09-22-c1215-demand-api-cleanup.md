@@ -37,4 +37,3 @@ instrumentation is owned by C1218, not this task.
 
 Write the dated task report and follow `notes/task-lifecycle-conventions.md` at completion.
 Follow local repository instructions and the professional source-comment standard.
-

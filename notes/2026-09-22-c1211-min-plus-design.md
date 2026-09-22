@@ -32,4 +32,3 @@ Deliverable: dated design report and the resulting C1194 gate/decision reference
 
 Write the dated task report and follow `notes/task-lifecycle-conventions.md` at completion.
 Follow local repository instructions and the professional source-comment standard.
-
