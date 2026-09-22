@@ -563,7 +563,11 @@ empty under `symbol_disasm.py` against `closure_ballpark-bytes-8de4932`.
 
 ## Milestone b
 
-Status: design written, awaiting approval. Nothing implemented.
+Status: design approved (Tavis, 2026-09-22) with all four recommendations: D1 (a), the
+independent set-based rebuild in its own module; D2, the stratified program statement with its
+own identity; D3, `Demand::transferable_source()` in one core commit; D4, no verification
+records in the chain, fresh records as the verifier's output. Implementation in progress; see
+"Implementation" below.
 
 Worktrees, branch `c1205b`: core `~/.cache/ergodis/worktrees/c1205b/ergodis` from core `main`
 `4b57649` (C1213's record API included); private `~/.cache/ergodis/worktrees/c1205b/ergodis-private`
@@ -1186,6 +1190,112 @@ for the core's prepared form; hex digests in the manifest; the verifier's size b
 caller-supplied bound milestone a left open, with no core change; external inputs for a derived
 relation refused (a defect beyond the review's two); the `--source-check` option off by
 default; `producer.json` outside the chain.
+
+### Implementation
+
+Written incrementally. Stopped by the context budget after the commits below; the exact
+remaining steps are under "Remaining steps".
+
+#### Controls
+
+Retained before any source change, from the clean worktrees (private `482d6e9`, core `4b57649`),
+in the private worktree so the sibling core is the worktree's, release profile, default
+features, through the core flake's devShell:
+
+```sh
+cd ~/.cache/ergodis/worktrees/c1205b/ergodis-private
+../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --label closure_ballpark-c1205b-base
+../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools --label ergodis-tools-c1205b-base
+```
+
+Measured sha256: `closure_ballpark-c1205b-base-482d6e9`
+`7de079c9dc9995d05a732fe30f07ae7de796a550b1672536aa28de93551ba0c1`, `ergodis-tools-c1205b-base-482d6e9`
+`2ee930b376f7aabde348559329178476456df7f191296f521537306ec16c75a0`. The rustc version is to be read
+from each binary's `.comment` when the A/B is written up.
+
+#### Commits
+
+| Repository, branch | Commit | What |
+| --- | --- | --- |
+| core `c1205b` | `064cde2` | D3: `Demand::transferable_source()` returning `TransferableSource::{Wire(&Program), Prepared(Vec<u8>)}` with `as_source()`; `prepared_encoding` removed; `demand_prepared.rs` and `docs/datalog-certificates.md` updated; `SHA256SUMS` |
+| private `c1205b` | `1f8200b` | `LayerReport::source_id` (recorded from `demand.source_id()`, no change to layer assembly); fixture `tests/rel_chain/demo.rel` (three layers: shared complement with `uses = 2`, a `Dictionary` domain, `=` and `>` filters, `count` and `sum` aggregates with a dictionary extension, the free name `ext`); `tests/rel_layer_identities.rs` pinning every layer identity of the fixture and of the `stratified`, `columns` (16), `columns3` (8) and `aggregate` (16) cohorts |
+| private `c1205b` | `d77f3d2` | Externals: `Error::External { spelling, problem }` with `ExternalProblem::{Unknown, Derived, Repeated, Arity, Value}`, all checked before anything is seeded; `Stratified::seeded: Vec<Seeded { relation, spelling, external_tuples }>`; `tests/rel_externals.rs`; bench error witness `6 << 60` for the new variant |
+| private `c1205b` | `48ccaaa` | `Error::CheckersDisagree(Disagreement { layer, relation, tuple, held_by, missing_from })` with `Party::{Derivation, Ranked, Evaluator}` and a merge walk (`first_difference`), for both the derivation/ranked and the checker/evaluator comparison; `Error::Record(RecordMismatch { kind, index, field })` replacing `ComplementMismatch`, with `RecordKind`, `RecordField`, `DomainPart` and a `Display` path such as `complements[0].column_domains[0].values`; `tuple_digest(DigestKind, scope, name, arity, tuples)` under tag `ergodis-private/rel-chain.v1` replacing `digest_of` in the builder and the record check; the tamper test now asserts the field of each of its seven tampers; unit tests for the disagreement and for digest separation; the bench witness keeps `3 << 60 | layer` and `4 << 60 | index` |
+
+Core gate at `064cde2`: `generate_evidence.py --write`, `cargo fmt --all -- --check`, `cargo clippy
+--all-targets --all-features -D warnings`, `cargo test --all-features` (85 `ok` blocks, zero
+FAILED), `generate_fixtures.py --check`, `check-runtime-dependencies.py`,
+`check-verifier-dependencies.py`: all passed in one run. Every pinned identity and certificate
+digest in `demand_prepared.rs` and `prepared_source.rs` passed unedited. Native and WASM ABI
+harnesses not rerun: the change adds a method to `Demand`, which the grounded ABI does not
+reach (to be rerun with the final core gate).
+
+Private gates per commit: `cargo fmt --check`, `cargo clippy --all-targets --all-features -D
+warnings`, and the suites `rel_layer_identities`, `rel_externals`, `rel_lowering` (53, the
+parity and fingerprint assertions unedited) and `rel_reference_eval` (19, the differential
+unedited), all green at `1f8200b`, `d77f3d2` and `48ccaaa`. Full private `cargo test
+--all-features --no-fail-fast` on the tree committed as `48ccaaa` (against core `064cde2`):
+exit 0, 17 min, 42 `ok` blocks, 1,177 passed, 0 failed. This milestone adds five tests so far
+(the identity pin, two externals tests, two `rel_stratified` unit tests); the base count at
+`482d6e9` was not rerun, so the remaining difference from milestone a's 1,171 is unattributed.
+
+#### Remaining steps
+
+In order; each is a commit on the private `c1205b` branch with the gates above, and the report
+updated after it. The design sections above are the specification.
+
+1. Done (`48ccaaa`).
+2. **Checked and unchecked types.** Rename today's `Stratified` to `Evaluation` (pub fields); add
+   per-layer `declared: Vec<Declared { name, arity, input, origin }>` (move `names`, `arities`,
+   `inputs` into the report after `Demand` is built; `origin` from `index_of` and the three
+   construction lists) and `literals: Vec<(u32, u32)>` (RIR literal id, declared index, pushed
+   wherever `atom_over` is set). `LayerReport` stops being `Copy`. Add
+   `rel_chain::Program::of(&Rir, &Readout)` (the `P` table in the design, serde,
+   `deny_unknown_fields`, identity `SHA-256(tag ‖ 0 ‖ serde_json::to_vec)`), and
+   `check(Evaluation, &Rir) -> Result<Stratified, Error>` with a sealed `Stratified` (private
+   field, `Deref<Target = Evaluation>`). `check` runs the construction checker against `P` for
+   every field in the design's field table (extend `RecordKind` with `Literal`, `Declared`,
+   `Seeded`, and `RecordField` with `Layer`, `Uses`, `Declared`, `Name`, `Dictionary`,
+   `DictionaryBefore`, `ColumnType`, `TypeStart`, `TypeEnd`, `Literal`). Remove
+   `verify_records`; update `tests/rel_lowering.rs` (`stratified` helper, tamper test),
+   `tests/rel_reference_eval.rs`, `tasks/tools/src/rel_lower.rs`, and
+   `rel_frontend_bench.rs`'s untimed description (check `bench.py` first for whether it
+   compares `records_verified` between arms; if so keep it as constant `true`).
+3. **Independent rebuild (D1 (a)).** New module `src/rel_rebuild.rs` as specified (typed value
+   decoding, `BTreeSet` domains, odometer complement, typed-value comparisons promoted from
+   `tests/rel_reference/mod.rs` with the test tree importing them back, group-then-fold
+   aggregates). The construction checker calls it. Differential test against the builder over
+   the committed fixtures and the generated corpus; construction-level mutation checks in a
+   scratch worktree (off-by-one domain, swapped operator, wrong group key), each caught.
+4. **Evidence sink and chain writer.** `Evidence` trait with `const RETAIN: bool`, `NoEvidence`,
+   `ChainWriter`; `evaluate` = `evaluate_with(.., &mut NoEvidence)`. In the retaining
+   instantiation, per layer: `demand.transferable_source()` (expect `Prepared`), both
+   certificates to the sink, `derivation_digest`/`ranked_digest` into the layer record. The
+   manifest (`rel_chain::Manifest`, hex digests) and `program.json` written after `check`;
+   `producer.json` beside them. `rel-lower --chain <dir>`, plus `--externals <json>` so the
+   fixture's `ext` can be supplied from the command line.
+5. **Offline verifier.** `src/rel_verify.rs` (`verify_chain`, `verify_parts`, sealed
+   `VerifiedChain`, `ChainError` with file, layer and field path), steps 1–7 of the design;
+   `ergodis-tools rel-verify <dir> [--source-check] [--records <file>] [--max-layer-bytes N]
+   [--max-certificate-bytes N]`; the source-scan test that `rel_verify` and `rel_rebuild`
+   import neither `ergodis_rules` nor `rel_stratified`.
+6. **Tests.** `tasks/tools/tests/rel_chain.rs` (two processes: `rel-lower --chain` then
+   `rel-verify --records`, then replay of the records); `tests/rel_chain.rs` (every manifest
+   leaf, list-shape mutations, the six named categories, consistent forgeries, file-level
+   cases, in-process `check` table). Extend `tests/rel_layer_identities.rs` to pin both
+   certificate digests per layer, now that they are recorded.
+7. **A/B.** Candidates retained from the final commits with labels `closure_ballpark-c1205b` and
+   `ergodis-tools-c1205b`; symbol comparison; `ab.py --mode evaluate` over the eighteen cohorts;
+   `bench.py` over the five default cohorts and over `datalog,stratified,columns,columns3,aggregate`,
+   exactly as in the design's A/B plan; receipts committed in private; results against the
+   Fermi. Then native and WASM ABI harnesses against the final core.
+8. **Close.** Full core and private gates at the final commits; fast-forward check of both
+   branches onto their mains; the independent audit; `cache-gc.sh` dry run.
+
+#### Divergence
+
+At the time of stopping, core `main` is `4b57649` and private `main` is `482d6e9`, the start
+points; both `c1205b` branches fast-forward onto them.
 
 ## Milestone c
 
