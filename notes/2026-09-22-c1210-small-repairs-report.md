@@ -278,3 +278,17 @@ matched driver performance acceptance follows. Main additionally checked every r
 v2 source SHA against the current files, and verified that the complete record summary is
 identical to M2's v1 summary, cases agree, and growth equals old lowered_cases × 12 exactly.
 Correctness approval alone is not final acceptance.
+
+Main independently rehashed the clean retained record candidate `67b782a`:
+`f21d8bea608a0b76e35e775a9ecf2d33296bc1c4029b6a814c65bbcf70fad951`.
+Control is `69426b9`, both with core `61116a3` and explicit `--body-policy nary`.
+The seven-round `c1210-records-primary.json` has all six counters enabled 100%; main
+confirmed every compared nested semantic/work record matches, and every candidate
+record carries `body_policy=nary`. Byte Datalog lower instruction ratio is 1.0000001139,
+[0.9999990109, 1.0000012170]; RSS is 5,992→5,996 KiB and retained bytes agree.
+One small nonzero row must not be hidden: scalar Datalog scan adds 13.17 instructions
+per source, ratio 1.0000125867 [1.0000062038, 1.0000189697]. A separately recorded
+same-binary primary null has an overlapping interval [0.9999967306, 1.0000084977].
+The built-in parse null already existed, so this extra standalone run is retained as
+corroboration, not a reason to repeat another standalone cache-null campaign. No speed
+improvement or universal zero-delta claim is made. Cache and call/profile gates follow.
