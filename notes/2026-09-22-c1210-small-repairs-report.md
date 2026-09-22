@@ -195,3 +195,16 @@ The main agent applied the reviewed stage patch to the three primary-checkout fi
 `git diff --check` passed. Only after all cleanup measurements ended was the build slot
 transferred to the sequencing owner. The isolated preparation remains uncommitted as
 listed above; primary source correctness and performance gates now follow in sequence.
+
+The sequencing owner reports pinned formatting, scoped Clippy, frontend/lowering/reference
+tests and the native/WASM replay passing. The parity corpus remains 243 cases with the same
+digest. Source commit, retained candidate and stage A/B acceptance remain pending.
+
+Record-update Fermi before integration: `body_policy` mapping/JSON emission is outside the
+timed loop, so expected kernel/work/fingerprint delta is zero; ThinLTO layout still requires
+a matched driver A/B. Forty-two lowered records gain three u32 counters each: predicted
+wire growth 504 bytes, from 529,122 to 529,626, with 243 cases and 14,238 inner canonical
+RIR bytes unchanged. These are predictions, not generated-v2 results. The intended bounded
+gate uses ASCII plus Datalog (successful lowering), scan/parse/admit/lower, both scanners,
+parse A/A nulls, fitted separate cache events, profiles/calls and RSS. Both policy spellings
+must be checked in standalone bench receipts; schema remains v1 there, v2 only for parity.
