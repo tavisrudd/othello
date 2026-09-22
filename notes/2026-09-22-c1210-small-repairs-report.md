@@ -2,8 +2,8 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: IN PROGRESS. Core documentation accepted; private cleanup performance,
-stage sequencing and record-format gates remain open.
+**Status**: IN PROGRESS. Core and private cleanup accepted; stage sequencing and
+record-format gates remain open.
 
 ## Scope and coordination
 
@@ -30,7 +30,7 @@ The main agent reviews diffs, gates and receipt interpretation before commits ar
 | Milestone | Status | Required evidence |
 |---|---|---|
 | Core checker/fact-count documentation | Committed `61116a3` | Main reviewed all four documentation diffs; fmt, Clippy and 85/85 test groups passed; manifest regenerated |
-| Private documentation and byte-preserving cleanup | Candidate `8192836`; performance pending | fmt/Clippy and 100 affected tests pass; native/WASM canonical digest unchanged; required A/B/profile still pending |
+| Private documentation and byte-preserving cleanup | Accepted `8192836`; evidence commit follows | fmt/Clippy and 100 affected tests pass; native/WASM canonical digest unchanged; primary A/B/null, fitted cache, calls and RSS reviewed |
 | Stage sequencing | Pending | Reject stale/failed/unadmitted stages, recover safely, no allocation; matched stage A/B |
 | Parity v2 and additive bench policy | Pending | Updated producer/consumers, new digest, native/WASM agreement, driver parity A/B |
 
@@ -176,3 +176,16 @@ parse 6,056→6,064 KiB; admission 6,084→6,092; lowering 6,180→6,188; strati
 25,032→25,040. Workspace retained bytes remain 11,045,388 throughout. The uniform
 8 KiB process increase is recorded, not hidden behind a memory-neutrality claim; its
 binary/startup-page origin is an inference, not an established attribution.
+
+Cleanup accepted after the fitted separate cache receipt
+`performance-v1-c1210-m1-datalog-cache-fit.json`: instructions, cycles, cache references
+and cache misses all enabled 100%; parse A/A instruction null 0.9999968313,
+[0.9999843627, 1.0000093000]. The prior six-hardware-event cache invocation multiplexed
+(minimum 66%, means about 82–84%) and is rejected as acceptance evidence. No cache
+improvement is claimed. The scoped profile/disassembly comparison found no new loop calls:
+both arms have 175 static call sites in `lower::run` and the same symbolic target list
+apart from a monomorph hash. Existing sampled workspace transfer/clear calls remain;
+the change does not establish that all existing lowering code is call-free. The ordinary
+cohorts do not execute aggregate reader paths; aggregate/forall fixtures provide correctness,
+not a separate performance claim. Cleanup is retained for clarity and accurate contracts,
+not as an optimization. Detailed replay and call attribution live in the private evidence note.
