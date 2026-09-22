@@ -5291,8 +5291,17 @@
       "last": 1209,
       "purpose": "contract crate split out of ergodis-verify, ahead of C1205 milestone a",
       "sequence": 588
+    },
+    {
+      "count": 9,
+      "first": 1210,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1218,
+      "purpose": "Approved C1208 follow-ups: small repairs, min-plus design, domain ceiling, Datalog format, checker tests and independence, API cleanup, module ABI, relational proof, Rel crate boundary",
+      "sequence": 589
     }
   ],
-  "next_id": 1210,
+  "next_id": 1219,
   "schema": "codex-task-id-allocations-v1"
 }
