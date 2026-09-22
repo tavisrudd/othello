@@ -73,7 +73,24 @@ requirement and explicitly name shared trust. The prepared fact count now names
 Commands under the pinned core Nix shell, with `choom -n 1000` and twelve build jobs:
 `cargo fmt --check`; `cargo clippy --all-targets --all-features -- -D warnings`;
 `cargo test --all-features`; `python3 python/generate_evidence.py --write`.
-All reported exit zero; 85 test-result groups passed. Exact test totals and Python-oracle
-gate accounting are being reconciled from saved logs, without another suite rerun.
+All reported exit zero; 85 test-result groups, 1,037 tests passed, zero failed, three ignored.
+The core Python-parity tests compare committed Python-origin fixtures; no live Python
+process was claimed. Private Rel reference/differential coverage is a separate pending gate.
+Counts were summed from the saved post-revision log without another suite rerun.
 One redundant suite rerun occurred in the implementation subagent; it contributes no
 additional acceptance evidence. No core hot-loop/performance change is claimed.
+
+Read-only recomputation uses the package's complete identity preimage: domain and declared
+source bytes, plus the verifier's rule ID and little-endian rule version prefix. Main
+review caught an initial calculation that omitted that prefix; the corrected values below
+use `ergodis/necessary-coordinate` and version 1 as a little-endian u32. Source identities/canonical program
+bytes are separate from these implementation identities:
+
+| Package | Before `61116a3` | After `61116a3` |
+|---|---|---|
+| contract | `b383135c5563a039650a3d911306ebf0ed8a29876e72ccb3fe1895e2b01163e4` | `dae904ed8764ec9a61d36a226677b2bcd33011f0503ed6fe894c88a12e6d7d49` |
+| verify | `381ac03f7575081a05fcb02dfa80dec9282052101f4b1b7394365e5c613cc839` | `efa1074500b1bb7436245d04e921fda1ddb16f72b265336d2a154b76f905924a` |
+
+The main agent independently reproduced all four corrected values with shell concatenation
+of the identity preimages through `git show` and `sha256sum`, separately checking the rule
+constants at both revisions. No compiled probe or rebuild was needed.
