@@ -31,7 +31,7 @@ The main agent reviews diffs, gates and receipt interpretation before commits ar
 | Core checker/fact-count documentation | Committed `61116a3` | Main reviewed all four documentation diffs; fmt, Clippy and 85/85 test groups passed; manifest regenerated |
 | Private documentation and byte-preserving cleanup | Accepted `8192836`; evidence `1bd7d79` | fmt/Clippy and 100 affected tests pass; native/WASM canonical digest unchanged; primary A/B/null, fitted cache, calls and RSS reviewed |
 | Stage sequencing | Accepted `69426b9`; evidence `c1b398f` | 100 focused tests, unchanged native/WASM parity, measured entry cost and unchanged loop call targets |
-| Parity v2 and additive bench policy | Correctness accepted; performance pending | Native/WASM v2 agrees and byte-growth forecast reconciles; both bench policy spellings pass |
+| Parity v2 and additive bench policy | Candidate `67b782a`; performance pending | Native/WASM v2 agrees and byte-growth forecast reconciles; both bench policy spellings pass |
 
 ## Decisions and limits
 
@@ -273,5 +273,8 @@ The independent forecast reconciles exactly: 42 lowered cases × 3 new u32 count
 = 504 added bytes. The reader now consumes nineteen counters plus two fingerprint
 words. Historical v1 receipts are untouched and the README labels their counts historical.
 Bounded Datalog/lower smokes for both policies retain bench schema v1 and emit canonical
-`body_policy` values `binarize` and `nary`. Source commit/retention and matched driver
-performance acceptance follow; correctness approval alone is not final acceptance.
+`body_policy` values `binarize` and `nary`. Source and v2 artifact are committed as `67b782a`;
+matched driver performance acceptance follows. Main additionally checked every recorded
+v2 source SHA against the current files, and verified that the complete record summary is
+identical to M2's v1 summary, cases agree, and growth equals old lowered_cases × 12 exactly.
+Correctness approval alone is not final acceptance.
