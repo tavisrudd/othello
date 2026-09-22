@@ -168,3 +168,11 @@ instruction interval wholly outside [0.9999, 1.0001]. Main separately reproduced
 exact cross-arm equality of nested lowering and stratification records, fingerprints,
 failures, token/node counts and admission for all three primary receipts. Cache,
 profile/call and memory acceptance remains pending.
+
+Main recomputed the retained candidate's measured SHA-256 as
+`ce60240668c6edce779e68ecb85bed053be2ea8233f6ef18a014aa5454a8df67`, and
+reconfirmed the baseline hash above. The companion's byte-path peak RSS is control→candidate:
+parse 6,056→6,064 KiB; admission 6,084→6,092; lowering 6,180→6,188; stratification
+25,032→25,040. Workspace retained bytes remain 11,045,388 throughout. The uniform
+8 KiB process increase is recorded, not hidden behind a memory-neutrality claim; its
+binary/startup-page origin is an inference, not an established attribution.
