@@ -2,7 +2,11 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-18
-**Status**: QUEUED (allocated by Tavis, 2026-09-18, from the C1204 review's first recommendation).
+**Status**: IN PROGRESS (allocated by Tavis, 2026-09-18, from the C1204 review's first recommendation).
+Milestone a done, audited and repaired 2026-09-22 (core `a92050a`, `c73ed85`; report
+`notes/2026-09-22-c1205-rel-transferable-evidence-report.md`, audit
+`notes/2026-09-22-c1205-milestone-a-audit.md`). Milestone b decides `Demand::prepared_encoding`'s
+return type (today `Error::Schema` on a wire plan; the audit recommends a typed return).
 
 ## Goal
 
