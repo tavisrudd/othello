@@ -30,8 +30,8 @@ The main agent reviews diffs, gates and receipt interpretation before commits ar
 | Milestone | Status | Required evidence |
 |---|---|---|
 | Core checker/fact-count documentation | Committed `61116a3` | Main reviewed all four documentation diffs; fmt, Clippy and 85/85 test groups passed; manifest regenerated |
-| Private documentation and byte-preserving cleanup | Accepted `8192836`; evidence commit follows | fmt/Clippy and 100 affected tests pass; native/WASM canonical digest unchanged; primary A/B/null, fitted cache, calls and RSS reviewed |
-| Stage sequencing | Pending | Reject stale/failed/unadmitted stages, recover safely, no allocation; matched stage A/B |
+| Private documentation and byte-preserving cleanup | Accepted `8192836`; evidence `1bd7d79` | fmt/Clippy and 100 affected tests pass; native/WASM canonical digest unchanged; primary A/B/null, fitted cache, calls and RSS reviewed |
+| Stage sequencing | Integrated; validation pending | Reject stale/failed/unadmitted stages, recover safely, no allocation; matched stage A/B |
 | Parity v2 and additive bench policy | Pending | Updated producer/consumers, new digest, native/WASM agreement, driver parity A/B |
 
 ## Decisions and limits
@@ -188,4 +188,10 @@ apart from a monomorph hash. Existing sampled workspace transfer/clear calls rem
 the change does not establish that all existing lowering code is call-free. The ordinary
 cohorts do not execute aggregate reader paths; aggregate/forall fixtures provide correctness,
 not a separate performance claim. Cleanup is retained for clarity and accurate contracts,
-not as an optimization. Detailed replay and call attribution live in the private evidence note.
+not as an optimization. Detailed replay and call attribution live in private
+`analysis/rel-frontend/c1210-m1-evidence.md` (`1bd7d79`), reviewed by the main agent.
+
+The main agent applied the reviewed stage patch to the three primary-checkout files;
+`git diff --check` passed. Only after all cleanup measurements ended was the build slot
+transferred to the sequencing owner. The isolated preparation remains uncommitted as
+listed above; primary source correctness and performance gates now follow in sequence.
