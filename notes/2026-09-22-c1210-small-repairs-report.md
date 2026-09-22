@@ -153,3 +153,18 @@ native/WASM byte equality, unchanged SHA-256
 The standalone portability compiler and pinned shell both report rustc 1.95.0
 (`59807616e`, 2026-04-14). Candidate retention and matched performance validation follow;
 the source commit is not yet a performance-acceptance claim.
+
+Main independently reviewed the seven-round Datalog companion receipt
+`analysis/rel-frontend/performance-v1-c1210-m1-datalog-stages.json`: lower-stage byte
+instruction ratio 0.9999998396, interval [0.9999991512, 1.0000005281]; scalar
+1.0000000974, [0.9999994529, 1.0000007418]. Parse A/A null is 0.9999998274,
+[0.9999922173, 1.0000074377]. Every recorded event was enabled 100% of its run.
+Subtracting admission from lowering means gives byte 1,326,411.19 control versus
+1,326,409.59 candidate instructions; scalar 1,326,411.24 versus 1,326,415.97.
+These subtracted means have no paired-difference interval and are corroborative, not
+an improvement claim. The initial lower-only receipt lacked an A/A null, hence the
+companion with parse/admit/lower/stratify. The five default cohorts also show no
+instruction interval wholly outside [0.9999, 1.0001]. Main separately reproduced
+exact cross-arm equality of nested lowering and stratification records, fingerprints,
+failures, token/node counts and admission for all three primary receipts. Cache,
+profile/call and memory acceptance remains pending.
