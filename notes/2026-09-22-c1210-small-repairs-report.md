@@ -31,7 +31,7 @@ The main agent reviews diffs, gates and receipt interpretation before commits ar
 | Core checker/fact-count documentation | Committed `61116a3` | Main reviewed all four documentation diffs; fmt, Clippy and 85/85 test groups passed; manifest regenerated |
 | Private documentation and byte-preserving cleanup | Accepted `8192836`; evidence `1bd7d79` | fmt/Clippy and 100 affected tests pass; native/WASM canonical digest unchanged; primary A/B/null, fitted cache, calls and RSS reviewed |
 | Stage sequencing | Accepted `69426b9`; evidence `c1b398f` | 100 focused tests, unchanged native/WASM parity, measured entry cost and unchanged loop call targets |
-| Parity v2 and additive bench policy | Integrated; validation pending | Updated producer/consumers, new digest, native/WASM agreement, driver parity A/B |
+| Parity v2 and additive bench policy | Correctness accepted; performance pending | Native/WASM v2 agrees and byte-growth forecast reconciles; both bench policy spellings pass |
 
 ## Decisions and limits
 
@@ -106,9 +106,11 @@ pass, and neither reported a failure before interruption.
 
 The record-update owner later mistakenly selected a broad
 `cargo test -p ergodis-private -p ergodis-tools --all-features` invocation despite the
-scoped plan. Main directed that task-owned run stopped and replaced by the named
+scoped plan. Main directed that task-owned run be stopped and replaced by the named
 `rel_frontend_portability` integration target and relevant driver checks. The source
 fmt/Clippy gates had passed; this incomplete broad run is not a test-pass claim.
+The owner confirmed the runner/cargo PIDs stopped and no test executable had launched;
+the retained log directory had only invocation context, not a partial test result.
 
 ## Core documentation validation
 
@@ -258,3 +260,18 @@ record patch and checked the diff. Core was still `61116a3`; the record owner re
 the clean `69426b9` control. C1213 parallel work was approved only for design and isolated
 paired core/private source preparation, with no live-checkout changes or competing builds
 until C1210 completes.
+
+## Record-update correctness
+
+Main reviewed the final three code diffs, README and v2 receipt. Scoped formatting and
+Clippy pass; the named `rel_frontend_portability` integration test passes (one test).
+The native/WASM replay agrees exactly: schema `ergodis.rel_frontend_portability.v2`,
+243 cases, 529,626 bytes, four decoder negative controls and 14,238 inner canonical
+RIR bytes. Its digest is
+`f4542625f8a358dfa1cd5155f74d787b5c5b6a6a402b7511a86c1f8202129028`.
+The independent forecast reconciles exactly: 42 lowered cases × 3 new u32 counters
+= 504 added bytes. The reader now consumes nineteen counters plus two fingerprint
+words. Historical v1 receipts are untouched and the README labels their counts historical.
+Bounded Datalog/lower smokes for both policies retain bench schema v1 and emit canonical
+`body_policy` values `binarize` and `nary`. Source commit/retention and matched driver
+performance acceptance follow; correctness approval alone is not final acceptance.
