@@ -28,12 +28,24 @@ The main agent reviews diffs, gates and receipt interpretation before commits ar
 
 | Milestone | Status | Required evidence |
 |---|---|---|
-| Core checker/fact-count documentation | Pending | Accurate shared-trust statement; fmt, Clippy, tests, regenerated manifest |
+| Core checker/fact-count documentation | Committed `61116a3` | Main reviewed all four documentation diffs; fmt, Clippy and 85/85 test groups passed; manifest regenerated |
 | Private documentation and byte-preserving cleanup | Pending | Same canonical bytes, fingerprints and parity digest; layout assertions; required A/B/profile and differential |
 | Stage sequencing | Pending | Reject stale/failed/unadmitted stages, recover safely, no allocation; matched stage A/B |
 | Parity v2 and additive bench policy | Pending | Updated producer/consumers, new digest, native/WASM agreement, driver parity A/B |
 
 ## Decisions and limits
+
+The cleanup Fermi is zero change in retired instructions/work/bytes: the literal retains
+the same 32-byte stride and two u32 positions, each initializer assigns the same values,
+and the canonical writer emits the former word zero for aggregates. The named chain
+buffer remains 64 entries. ThinLTO can nevertheless change generated code; profiles and
+matched A/B, including a separate cache-event run, are required before accepting that claim.
+
+Main-agent review caught and corrected two proposed-documentation issues before acceptance:
+`count` accepts arbitrary values, unlike the integer-only `min`/`max`/`sum`; and
+construction record checking is replay through shared builder machinery, not an independent
+implementation. The adjacent reference helper's stale "drop the group" description was also
+corrected to whole-program refusal. No behavior was changed for these corrections.
 
 - A generation check establishes workspace-stage freshness, not the identity of arbitrary
   source bytes supplied by a caller. The remaining source-byte precondition must stay explicit.
@@ -50,3 +62,18 @@ The main agent reviews diffs, gates and receipt interpretation before commits ar
 
 Pending implementation, review and validation. Incidental discoveries, retained artifacts and
 any unresolved evidence gaps will be recorded before task closure.
+
+## Core documentation validation
+
+Core `61116a3` changes comments only in contract derivation, verify derivation/ranked and
+rules demand, plus regenerated SHA256SUMS. Public check methods retain the source identity
+requirement and explicitly name shared trust. The prepared fact count now names
+`Admitted::facts.len()`; wire count includes duplicate and absent source entries.
+
+Commands under the pinned core Nix shell, with `choom -n 1000` and twelve build jobs:
+`cargo fmt --check`; `cargo clippy --all-targets --all-features -- -D warnings`;
+`cargo test --all-features`; `python3 python/generate_evidence.py --write`.
+All reported exit zero; 85 test-result groups passed. Exact test totals and Python-oracle
+gate accounting are being reconciled from saved logs, without another suite rerun.
+One redundant suite rerun occurred in the implementation subagent; it contributes no
+additional acceptance evidence. No core hot-loop/performance change is claimed.
