@@ -2,8 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: IN PROGRESS. Core and private cleanup accepted; stage sequencing and
-record-format gates remain open.
+**Status**: IN PROGRESS. Cleanup and stage sequencing accepted; record-format gates remain open.
 
 ## Scope and coordination
 
@@ -31,8 +30,8 @@ The main agent reviews diffs, gates and receipt interpretation before commits ar
 |---|---|---|
 | Core checker/fact-count documentation | Committed `61116a3` | Main reviewed all four documentation diffs; fmt, Clippy and 85/85 test groups passed; manifest regenerated |
 | Private documentation and byte-preserving cleanup | Accepted `8192836`; evidence `1bd7d79` | fmt/Clippy and 100 affected tests pass; native/WASM canonical digest unchanged; primary A/B/null, fitted cache, calls and RSS reviewed |
-| Stage sequencing | Candidate `69426b9`; performance pending | 100 focused tests and unchanged native/WASM parity pass; matched stage A/B remains |
-| Parity v2 and additive bench policy | Pending | Updated producer/consumers, new digest, native/WASM agreement, driver parity A/B |
+| Stage sequencing | Accepted `69426b9`; evidence `c1b398f` | 100 focused tests, unchanged native/WASM parity, measured entry cost and unchanged loop call targets |
+| Parity v2 and additive bench policy | Integrated; validation pending | Updated producer/consumers, new digest, native/WASM agreement, driver parity A/B |
 
 ## Decisions and limits
 
@@ -55,7 +54,7 @@ corrected to whole-program refusal. No behavior was changed for these correction
   and admission advance state; lowering requires Admitted. There is no numeric wrap. Diagnostic
   recovery stays outside the documented compact-parse admission boundary. Failed lowering
   preserves admission for retry. Implemented and correctness-tested in `69426b9`;
-  performance acceptance remains pending.
+  performance acceptance is recorded below.
 - Source implementation hashes may move even on documentation edits. No historical receipt
   is re-pinned as if its measurement had been repeated.
 - No cache deletion, publication, unrelated comment sweep or Lean operation is authorized here.
@@ -232,4 +231,22 @@ interval [1.0000046553, 1.0000078360], with parse A/A null 0.9999995220,
 the new behavior is tested on stale/unadmitted calls, not exercised as a successful benchmark.
 Byte Datalog lowering RSS is 6,012→6,056 KiB; retained 11,045,388 and occupied 274,832
 bytes are unchanged. Cycle ratios are noisy and do not decide this correctness repair.
-Fitted cache and call/profile review remain pending.
+Fitted cache and call/profile review passed: main verified all four cache-run events at
+100% enabled; cache-reference null drift and negative differenced misses preclude a cache
+effect claim. Ordered demangled call targets match exactly for `admit::run` (42) and
+`lower::run` (175), with unchanged symbol sizes. Existing clear/copy calls remain; a
+sampling display threshold is not proof of absence. Main reviewed the complete private
+`analysis/rel-frontend/c1210-stage-evidence.md`; source/evidence commits are `69426b9` /
+`c1b398f`. The source guard and measured entry cost are accepted as a correctness repair.
+
+Cycle ratios increased on ASCII/Datalog byte lower: 1.0592 [1.0480, 1.0705] and
+1.0646 [1.0264, 1.1041]. Their cause is not established; shared-host load is a possible
+factor, not a demonstrated attribution. Instruction counts decide under the existing lane
+protocol. No timing-neutrality claim follows from accepting the repair. This unresolved
+timing observation remains in the evidence, without a new optimization task or scope expansion.
+
+After the sequencing owner released the build slot, main applied the reviewed four-file
+record patch and checked the diff. Core was still `61116a3`; the record owner reuses
+the clean `69426b9` control. C1213 parallel work was approved only for design and isolated
+paired core/private source preparation, with no live-checkout changes or competing builds
+until C1210 completes.
