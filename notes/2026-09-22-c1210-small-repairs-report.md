@@ -81,10 +81,15 @@ These source-only worktrees intentionally have no build targets or dependency-sy
 Reviewed patches will be integrated into the primary checkout and validated in sequence.
 They remain uncommitted because validation is pending, not as sole evidence of completion.
 
-Private fmt and Clippy passed. The first full test invocation used Cargo jobs=12 but omitted
+Private fmt and Clippy passed. The first broad test invocation used Cargo jobs=12 but omitted
 the test-harness cap, so the agent interrupted it without claiming acceptance and restarted
-with `RUST_TEST_THREADS=12`. Subsequent test commands must carry both caps. No failure was
-reported before interruption; only the completed constrained run can count as a gate.
+with `RUST_TEST_THREADS=12`. Subsequent test commands must carry both caps. The constrained
+run also spent several minutes in unrelated library-domain tests; the previous run's bounded
+tail named tiger_blossom_sparse, q29_psd_scope_proof and order6_margin_evolve. The main agent
+stopped this task-owned broad run and selected affected frontend/lowering/stratified/reference
+test targets instead. Private AGENTS does not require the unrelated full library suite;
+the required task gates remain intact. Neither interrupted run establishes a full-private-suite
+pass, and neither reported a failure before interruption.
 
 ## Core documentation validation
 
