@@ -2,20 +2,25 @@
 #+DATE: 2026-09-22
 #+STARTUP: overview
 
-* Status and decision requested
+* Status and decision
 
-DESIGN PROPOSED; C1194 implementation awaits Tavis's evaluator/certificate
-architecture decision. This memo changes no Rust source, schema or gate. It
-pins core =8aec9aba= and private =cddd241e=. Native and WASM performance
-figures below are cost models, not measurements.
+DECIDED 2026-09-23. Tavis delegated the architecture choice and required full
+certification on demand with negligible off-path cost, no evaluator slowdown
+when checking is requested, and no growth of the normal result. This memo
+changes no Rust source or schema. It pins core =8aec9aba= and private
+=cddd241e=. Native and WASM performance figures below are cost models, not
+measurements.
 
-Recommendation: a *separate weighted relaxation kernel* in =ergodis-rules=,
+Decision: a *separate weighted relaxation kernel* in =ergodis-rules=,
 sharing cold admission, join-shape and index-shape machinery with =Demand=
 where source contracts genuinely coincide. Give it its own cost columns,
-update queue and worker workspace. Start with a source-bound, ranked trace
-certificate whose checker proves both finite-cost support and global closure.
-Keep Boolean =Demand= and its current certificate bytes and hot row layout
-unchanged. C1194 implements this choice only after approval.
+update queue and worker workspace. The ordinary weighted result carries only
+keys and minimum costs. An optional *detached value certificate* binds the
+canonical prepared source and result; an independent checker reconstructs
+finite support and proves global closure. It retains no producer witness or
+rank in the evaluator and emits no proof rows in the ordinary result. Keep
+Boolean =Demand= and its current certificate bytes and hot row layout
+unchanged. C1194 implements this choice.
 
 * Source boundary and existing facts
 
@@ -101,7 +106,7 @@ boundary aggregate.
 | Option | Data flow and updates | Setup/memory | Main risk |
 |-
 | Extend =Demand= and =DemandWorkspace= | Add a cost to each Boolean row; change duplicate handling and delta semantics in its existing loops | Reuses every plan/index and row reservation, at least one 4-byte cost column plus queues per row | Changes the measured Boolean kernel, row layout and =old/delta= assumptions; source and certificate branches invade its hot path |
-| Separate weighted kernel, shared cold shapes (recommended) | Prepare relation/atom/join/index shapes once; weighted execution owns tuple-to-row membership, cost columns, improvement queues and specialized join loops | Small cold shape extraction; second workspace and compiled hot loop; row costs/queue state separately budgeted | Some intentionally distinct hot-loop code and checker work; cold sharing must be measured for Boolean codegen |
+| Separate weighted kernel, shared cold shapes (chosen) | Prepare relation/atom/join/index shapes once; weighted execution owns tuple-to-row membership, cost columns, improvement queues and specialized join loops | Small cold shape extraction; second workspace and compiled hot loop; row costs/queue state separately budgeted | Some intentionally distinct hot-loop code and checker work; cold sharing must be measured for Boolean codegen |
 | Wholly independent weighted kernel | Copy planner, index builder and admission conventions as well as execution | Simplest isolation at first edit; duplicated cold work and tests | Planner policy, identity and portability behavior drift over time |
 
 The middle option is a *second kernel*, not a second engine or host. Its common
@@ -173,71 +178,85 @@ join propagation scales with the candidate matches visited over =A= events.
 The additional hot storage is at least one 4-byte cost, approximately two
 4-byte queue slots and one 4-byte queue flag/epoch per potential row: about
 16 bytes per row of capacity before indexes, page staggering and cold
-certificate construction. A capacity of one million rows therefore reserves
+checking. A capacity of one million rows therefore reserves
 roughly 16 MB for these columns, not a measured RSS prediction. On native
 Unix =Pages= can commit only touched rows; on WASM/other non-Unix its fallback
 commits the reservation eagerly. Preflight total reserved bytes under the
 product budget and offer explicit smaller row bounds on memory-limited hosts.
 
-* Certificate claim and independent check
+* Detached certification and independent check
 
-Propose a new versioned *weighted relational derivation certificate* bound to
-the canonical weighted prepared encoding. It lists each finite *weighted*
-relation/key once with its claimed =u32= cost and one support choice: an
-admitted weighted input fact with that exact cost, or a source rule plus one
-premise reference per body atom in source body order. A weighted premise
-references an earlier listed row; a frozen structural premise references
-its row in the independently re-admitted prepared source and contributes
-zero. The weighted list is topologically ranked by position; all weighted
-premise references are strictly earlier. Structural source rows are not
-duplicated in the certificate. An initial fact later improved may be
-supported by a rule instead. Infinity is represented by absence from the
-weighted list, never by a listed cost. Source ID, fact count, relation count,
-lengths, key domains, offsets and checked arithmetic are all bound and
-validated. A compact rank-only format can be considered later; it would
-move support search into the checker and is not the first C1194 format.
+The selected certificate is the canonical *weighted result claim*: for every
+finite weighted relation/key, exactly one =u32= minimum cost, sorted in a
+specified order, with no infinity rows. A small separate versioned envelope
+binds the domain-separated canonical prepared-source digest and canonical
+result digest. The result already contains every value a checker needs; the
+envelope duplicates no tuple, cost or proof row. If the caller only needs
+values, neither envelope nor checker is constructed. A verified result is
+the pair of admitted source and result *after* the independent checker
+accepts. The binding envelope by itself is a claim, not evidence of
+correctness or a trusted attestation.
 
-After evaluation, the producer may build this trace *cold* from final costs:
-start with weighted input facts whose costs equal the final row value, then
-repeatedly find rule matches whose already supported weighted premises and
-re-admitted frozen structural premises sum exactly to the final head cost.
-Emit each newly supported weighted row once. This avoids retaining a
-versioned witness in the weighted hot row. Zero-cost cycles are harmless if
-some source-rooted proof exists; a cycle with no root remains unsupported.
-Failure to support a finite row is an internal producer error, not a license
-to serialize a cyclic witness. For a minimum-cost proof tree, replacing any
-premise by a cheaper final proof could only lower the head's cost; with no
-accepted saturation, that would contradict the head's claimed minimum.
-Thus a minimum proof can be chosen with final-valued premises, and choosing
-minimum depth among equal-cost proofs breaks zero-cost support cycles.
+The evaluator's API exposes normal =evaluate(source, workspace) -> result=.
+The opt-in API runs that *identical* evaluator first, freezes its canonical
+result, then invokes a separate checker over serialized source and result.
+There is no =certify= flag, witness/rank field, certificate branch, hash, or
+serialization step in the weighted join/relaxation loop. Boolean =Demand=
+keeps its own path. To avoid ThinLTO changing the evaluator merely because
+the checker is linked, measure the evaluator's loop and result bytes with
+and without the opt-in route; if code shape changes, isolate the checker in
+the existing verify crate or a separate linked entry point and retain the
+matched evaluator binary. The *total* checked operation necessarily costs
+more than evaluation alone. Report evaluator and checker instruction/time/RSS
+separately; do not describe the full checked operation as zero cost.
 
-The independent checker re-admits the weighted prepared bytes and computes
-its own source ID. Its *support pass* follows the trace: every source fact or
-rule reference exists, premise tuples unify, the head key matches, and the
-claimed cost is exactly the checked sum of the earlier weighted premises,
-zero-cost frozen structural premises and the per-match offset recomputed
-from the source's typed integer fields. Its separate *closure pass* checks
-each weighted source fact has a listed cost no greater than its cost and
-independently joins every source rule over listed finite weighted rows and
-re-admitted frozen structural rows; each match's weighted head must exist at
-a cost no greater than the candidate. It uses its own bounded relation store/index preparation,
-not the producer's plan or join cursor. Only after both passes succeed may it
-issue a verification record binding source identity, certificate digest and
-checker identity. A checker called on an in-process admitted object remains
-the explicitly weaker trusted fast path.
+The independent checker re-admits the weighted prepared bytes, decodes every
+typed value strictly, recomputes source identity, checks the envelope's
+source/result digests, and validates canonical result order, unique keys,
+arity, domains, finite cost range, declared relation coverage, and checked
+arithmetic. It builds its own bounded indexes. Its *support pass* starts by
+marking listed rows whose claimed cost equals an admitted input fact. It
+repeatedly joins source rules over already marked weighted rows and frozen
+structural rows, marking a listed head only when its claimed cost equals the
+checked candidate sum. A structural-only rule joins in the initial seed
+pass. Each mark corresponds to a finite source-rooted proof tree; all finite
+claimed rows must eventually be marked. Unsupported zero-cost cycles remain
+unmarked. The checker may use an internal rank or work queue, but neither is
+serialized or supplied by the producer. To prevent a producer bug from being
+masked by code reuse, support and closure use checker-owned iteration and
+indexing, not the producer's plan or join cursor.
 
-Correctness argument on paper: every listed finite cost with a strictly
-earlier support chain is the cost of an actual finite proof tree. Thus the
-true minimum cost is at most the claimed cost (*soundness of finite rows*).
-Every input and every matched rule candidate is at least the claimed head
-cost by the closure pass. Induction over finite proof trees gives every
-claimed cost at most every derivable cost (*completeness*). The two
-inequalities yield equality. For an unlisted coordinate, closure forbids
-any finite derivation. In Boolean form, the same argument is: supported
-rows lie in the least model; a closed set contains it. This is the
-relational support-plus-closure proof, not a consequence of the grounded
-certificate's bytes. C1217 may formalize the relational statement; no Lean
-work or formal-coverage claim is made here.
+Its separate *closure pass* checks every weighted source fact has a listed
+cost no greater than its cost and joins every source rule over *all* listed
+finite weighted rows and frozen structural rows; each match's weighted head
+must exist at a cost no greater than the candidate. Resource exhaustion is a
+refusal, never acceptance. Only after both passes succeed may the checker
+issue a verification record binding the source digest, result digest,
+checker identity and check outcome. A recipient must trust or rerun that
+checker; the record is not a cryptographic proof of execution. A checker
+called on an in-process admitted object is an explicitly weaker fast path.
+
+Correctness argument on paper: every marked finite row is rooted at an
+input fact or exact rule match on earlier marked rows, so it has a finite
+proof tree of exactly its claimed cost. The true minimum is at most the
+claim (*support soundness*). Closure says every fact and rule candidate is
+at least the claimed head cost; induction over finite proof trees says every
+claim is at most every derivable cost (*completeness*). Together these give
+equality, and closure forbids finite derivations for absent coordinates.
+For a minimum-cost proof tree, replacing any premise by a cheaper final proof
+could only lower its head; closure would then be contradicted. A minimum
+depth tree among equal-cost alternatives breaks zero-cost cycles, so the
+marking pass can discover all valid claimed rows. The Boolean version is:
+supported rows lie in the least model, while a closed set contains it. This
+is the relational support-plus-closure proof, not a grounded-certificate
+claim. C1217 may formalize it; no Lean work or formal-coverage claim is made
+here.
+
+If measured checker time for repeated third-party verification is too high,
+a later *optional* detached rank sidecar may give each result row a compact
+support rank. It must be independently checked and must not change the
+evaluator or normal result format. It is not a prerequisite for full
+certification in C1194 and cannot substitute for the closure pass.
 
 * Worked recursive examples
 
@@ -274,7 +293,7 @@ Rule: =label(v) <- label(u) + link(u,v)=; the link contributes zero.
 | 2 | 1 | 1 | 1 | 5 |
 | fixed | 1 | 1 | 1 | 5 |
 
-The zero-cost cycle does not justify a label by itself; the trace starts
+The zero-cost cycle does not justify a label by itself; checker support starts
 from an input label. This example tests min aggregation independently of
 positive path weights.
 
@@ -286,13 +305,13 @@ positive path weights.
 | First derivation wins / append-only Boolean =emit= | The direct =A -> C= path inserts 9 before the route through =B= gives 5; the wrong result is 9. |
 | Stop after =rows+1= waves | One row can successively improve =9 -> 7 -> 5= without adding a key; a row-count guard can stop before 5. |
 | Support witnesses without closure | ~dist(C)=9~ has a real direct-edge proof but omits the available cost-5 route. |
-| Closure inequalities without ranked support | With no facts and rules =p <- q + 0=, =q <- p + 0=, the false claim ~p=q=0~ is locally closed but has no finite proof. |
+| Closure inequalities without source-rooted support | With no facts and rules =p <- q + 0=, =q <- p + 0=, the false claim ~p=q=0~ is locally closed but has no finite proof. |
 | Boolean support reused as a weighted certificate | An edge of cost 4 supports the *presence* of =dist(B)=, but a claimed cost 0 is false. |
 | Grounded min-plus certificate reused by schema | A three-atom relational body is admitted by Demand but has no grounded two-factor rule or matching source identity. |
 | Saturation silently treated as absence | A source path costing =u32::MAX-1= followed by a weight-1 edge reaches its endpoint mathematically, while saturation labels it =INF=. |
 | Decrease-only propagation after an increase/deletion | Change the only =A -> B= edge from cost 2 to 8: retaining ~dist(B)=2~ is stale; restart or dependency invalidation is required. |
 
-* C1194 implementation and verification gate after approval
+* C1194 implementation and verification gate
 
 1. Record the approved choice in C1194's card. Define the weighted prepared
    contract, domain-separated encoding and checked re-admission before the
@@ -310,10 +329,14 @@ positive path weights.
    acceptance also records an instruction and nanosecond budget per row,
    candidate and strict relaxation on named workloads, plus a retained
    weighted binary for its next change.
-3. Implement the independent support and closure checker with bounded memory,
-   malformed/mutated certificate cases, zero-cost unsupported cycles, missing
-   cheaper paths and source/cost/offset binding. Do not issue a verification
-   record from the producer's admitted fast path.
+3. Implement the detached value-claim envelope and independent support and
+   closure checker with bounded memory, malformed/mutated result and envelope
+   cases, zero-cost unsupported cycles, missing cheaper paths and
+   source/cost/offset binding. The normal evaluator returns the same bytes
+   and uses the same hot code whether checking follows or not. Do not issue a
+   verification record from the producer's admitted fast path. Measure the
+   checker separately and test a certificate-free call path with no witness,
+   rank, digest or certificate allocations in the evaluator.
 4. Extend the Rel route and its independently written naive reference over
    the admitted AST, not over RIR or the weighted plan. Run SSSP and component
    labels plus seeded differential cases for duplicate facts, multiple cost
@@ -329,20 +352,40 @@ positive path weights.
    core/private controls *before* C1194 edits: the older
    =ergodis-tools-e0e7331= named on C1194's card is historical context, not
    a matched immediate control after the subsequent API and driver changes.
-   Add a coverage table
+   Include both opt-in and ordinary output byte comparisons; distinguish
+   evaluator latency from post-evaluation checking latency. Add a coverage table
    per arithmetic form: parsed, admitted, lowered, executed, certified.
 
 Unresolved risks owned by C1194's implementation and measurement: the
 weighted queue's work on dense zero-cost recursive joins, a useful event
 budget, the conservative overflow refusal's accepted-source coverage, cold
-certificate synthesis cost, and WASM's eager workspace reservation. These
+support/closure checker cost, and WASM's eager workspace reservation. These
 are named gates, not assumptions that Boolean or grounded results already
 settle them.
 
-* Approval target
+* Decision and handoff
 
-Approve or reject the recommended separate weighted relaxation kernel with
-shared cold join/index shapes and the source-bound ranked trace certificate.
-The alternative is to extend =Demand= in place and accept the associated
-Boolean hot-path/layout risk; the fully separate copied planner has the
-maintenance cost above. C1194 remains gated until Tavis chooses.
+Tavis delegated the choice on 2026-09-23 with the certification/performance
+constraint stated above. The chosen second kernel and detached value
+certificate satisfy the architectural gate for C1194. C1194 still owns all
+implementation, differential, native/WASM and performance acceptance gates;
+this design decision alone makes no performance claim.
+
+* Mystery ledger and closeout
+
+The extra-juice/terence-tao pass asked whether a proof witness must travel
+with every result row. It need not: a checker can reconstruct a well-founded
+support relation from the final values and then prove closure. This removes
+the proposed trace's output and evaluator-state costs while retaining the
+full semantic proof. The binding envelope alone is deliberately not called
+a proof; independent checking is the acceptance gate.
+
+| Question | Disposition and exact next gate |
+|-
+| Can detached checking alter the evaluator code through ThinLTO? | Open until C1194's opt-in/ordinary A/B compares the evaluator symbol, instructions and result bytes; isolate linkage if it does. |
+| How expensive is support reconstruction for dense zero-cost joins? | Open until C1194 profiles checker work separately; optional rank sidecar is a measured successor only. |
+| Does the conservative overflow rule reject useful bounded answers? | Known coverage cost; C1194 tests and reports a dominated-overflow case before any relaxation of the rule. |
+| Does non-Unix eager =Pages= reservation fit the weighted workspace budget? | Open until C1194 native, WASM and host-memory sizing gates. |
+
+No further architecture ambiguity remains for C1194. These are measured
+implementation risks, not reasons to reopen the kernel/certificate choice.

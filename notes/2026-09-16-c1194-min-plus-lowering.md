@@ -4,14 +4,17 @@
 **Date**: 2026-09-16
 **Status**: QUEUED. Ranked third among the Datalog programme's next steps
 (`2026-09-16-ergodis-datalog-programme-review.md`); independent of C1192/C1193.
-**Gate (C1204 finding F, C1208 triage 2026-09-21)**: do not scope or start before the precursor
-design decision — whether the min-plus relational evaluator reuses `Demand`'s plan, index and
-workspace machinery or is a second kernel, and what a min-plus relational certificate carries. The
-demand path is Boolean with set semantics in the evaluator and in both certificate formats, and
-the prepared seam has no carrier or fact cost, so the Deliverable's "the certificate is the
-existing min-plus certificate" holds only on the grounded path (two-atom bodies, small bounds).
-Precursor allocated as C1211 (`2026-09-22-c1211-min-plus-design.md`), approved 2026-09-22.
-Its evaluator/certificate recommendation needs Tavis's decision before implementation here.
+**Gate (C1204 finding F, C1208 triage 2026-09-21)**: satisfied 2026-09-23 by the
+C1211 architecture decision (`2026-09-22-c1211-min-plus-design.org`). Tavis delegated
+the choice with an opt-in certification/performance constraint. Implement a separate
+weighted relaxation kernel that shares cold admission and join/index shapes with
+Boolean Demand where measured safe. Use a detached source/result-bound value
+certificate: the independent checker reconstructs support and checks closure
+from the canonical prepared source and ordinary result. Do not add a witness,
+rank, certificate branch, hash or proof row to the weighted evaluator hot path
+or normal result. Measure evaluator and checker costs separately, including
+opt-in evaluator code shape and byte-for-byte ordinary result. The existing
+grounded min-plus certificate does not apply to the relational path.
 
 ## Why
 
@@ -30,9 +33,10 @@ components, two of the five benchmark rows step 5 names, need this.
   carrier selection per layer (a layer whose head carries a cost column and whose aggregate is
   `min` over a `+` term lowers to the bounded-min-plus program; everything else stays Boolean);
   the u32 sentinel precondition surfaced as a diagnostic, not a silent saturation.
-- Core: implement the evaluator and relational certificate selected through C1211; do not
-  assume the existing grounded min-plus certificate applies to Demand. Preserve the existing
-  Lean oracle route (C1164) and record which new claim the relational certificate establishes.
+- Core: implement the selected weighted evaluator and detached value certificate.
+  The checker independently proves source-rooted finite support and global
+  closure; an envelope without a successful check is only a claim. Preserve
+  the existing Lean oracle route (C1164) and record the relational claim.
 - Reference evaluator: min-plus fixed point (naive, over the admitted AST) so the differential
   covers cost programs; generated corpus with seeds.
 

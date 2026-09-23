@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: IN PROGRESS — design memo drafted in `2026-09-22-c1211-min-plus-design.org`; recommended evaluator/certificate architecture awaits Tavis's decision before C1194 code.
+**Status**: COMPLETE 2026-09-23 — Tavis delegated the architecture choice with an opt-in certification/performance constraint; the decided design and proof argument are in `2026-09-22-c1211-min-plus-design.org`.
 **Authority**: `notes/2026-09-22-c1208-follow-up-triage.md` (approved allocation and order).
 
 Precursor to C1194; approved C1208 alloc-1. Documentation/design only, before min-plus code.
@@ -27,6 +27,18 @@ before proposing implementation details.
   Lean formalization; do not run Lean for this document task.
 
 Deliverable: dated design report and the resulting C1194 gate/decision reference.
+
+## Decision
+
+Use a separate weighted relaxation kernel, sharing cold admission and join/index
+shapes where measurement permits. Keep its hot path and ordinary result free of
+certificate flags, witnesses, ranks and proof rows. Certification is a detached,
+opt-in check of the canonical source and result: the checker independently
+reconstructs finite support and verifies closure, then issues a source/result-bound
+verification record. A small envelope binds the same bytes without duplicating
+tuples or costs. The full checked operation has extra cost, measured separately;
+the evaluator itself must keep the same path and output. C1194 may now implement
+this decision. A rank sidecar is only a later measured checker-speed option.
 
 ## Closeout
 
