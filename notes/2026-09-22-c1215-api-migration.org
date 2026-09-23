@@ -1,0 +1,111 @@
+#+TITLE: C1215 Demand, checker and Rel driver API migration
+#+DATE: 2026-09-22
+#+STARTUP: overview
+
+* Status and scope
+
+IN PROGRESS. This is the remaining approved C1215 migration after the public
+replay repair. No performance acceptance or task completion is claimed yet.
+The scoped exception for private =ca52a3e= does not cover this increment.
+
+The migration consolidates cold construction and admission, distinguishes the
+grounded weighted plan from the demand-driven plan, and separates measurement
+APIs from production configuration. No wire schema change is intended.
+Native macOS, Windows and ARM validation remains outside this Linux run.
+
+* Before: pinned public and private boundaries
+
+- [[file-rev:19cee8f:~/src/ergodis/crates/rules/src/demand.rs::720][Four Demand constructors]] independently expose wire/prepared source choice,
+  row bound and experimental representation policy.
+- [[file-rev:19cee8f:~/src/ergodis/crates/rules/src/lib.rs::53][Prepared]] is a grounded weighted-rule plan; the name is ambiguous beside
+  the contract's prepared Datalog source.
+- [[file-rev:19cee8f:~/src/ergodis/crates/verify/src/derivation.rs::147][Derivation checker entry points]] and
+  [[file-rev:19cee8f:~/src/ergodis/crates/verify/src/ranked.rs::188][ranked checker entry points]] duplicate wire/prepared admission wrappers.
+- [[file-rev:19cee8f:~/src/ergodis/crates/verify/src/datalog_record.rs::46][Source]] already distinguishes the two independently re-admitted regimes.
+- [[file-rev:662188f:~/src/ergodis-private/src/rel_stratified.rs::1348][Private driver]] takes a positional row bound and silently selects Auto;
+  its layer reports do not retain the lowering/index policies.
+
+* Proposed old/new mapping and caller obligations
+
+| Old boundary | New boundary | Caller obligation |
+|-
+| Demand::new(program) | Demand::builder(program).build() | Production defaults retained |
+| Demand::new_bounded(program, rows, policy) | builder(program).max_rows(rows).policy(policy).build() | Forced policy requires instrument |
+| Demand::from_prepared(source) | Demand::prepared_builder(source).build() | Borrow source through build |
+| Demand::from_prepared_bounded(source, rows, policy) | prepared_builder(source).max_rows(rows).policy(policy).build() | Row capacity is product configuration |
+| ergodis_rules::Prepared | ergodis_rules::WeightedRulePlan | Migrate imports and annotations |
+| check(program, certificate) | check(Source::Wire(program), certificate) | Explicit source regime |
+| check_prepared(bytes, certificate) | check(Source::Prepared(bytes), certificate) | Bytes re-admitted by checker |
+| source-specific bounded checks | check_bounded(Source, certificate, limit) | Direct-address budget remains available |
+| evaluate(rir, source, externals, rows) | evaluate(rir, source, externals, EvaluateOptions) | Named cold configuration |
+
+=check_recorded= remains the explicit verification-record issuer: it returns a
+different result and has provenance work that an ordinary check need not pay.
+=check_admitted= and its bounded form remain the documented in-process path;
+they do not issue independently re-admitted provenance.
+
+The rules =instrument= feature owns forced Policy variants, counted entry,
+index lookup readout, index/membership plan reports and =reservations()=.
+Auto, row bounds and workspace byte budgeting remain production capabilities.
+The pages reservation counter also determines mapping offsets: hiding its
+accessor must not remove its atomic increment or change reservation staggering.
+No workspace shape change is intended.
+
+The private feature forwards to rules; tools opt in explicitly. The closure
+harness retains default Auto evaluation/checking and refuses diagnostic flags
+without =instrument=. The frontend's separate instrumentation is not moved.
+
+* Policy records and trust
+
+The RIR retains the actual body policy selected during lowering. Each layer
+copies that value and its requested index policy into its report. Auto names
+the selection policy, not a promise about every chosen representation.
+
+These fields are operational accounting, not authenticated source provenance.
+They do not extend the canonical RIR encoding, source identities, certificate
+schemas or replay authority. Public replay consistency still does not establish
+the original Rel source or authenticate omitted layer certificates.
+
+* Acceptance and red-team checks
+
+- Default and instrument compilation separately; avoid Cargo feature unification
+  concealing an accidental production dependency.
+- Both source regimes and their binding/malformed-input tests; default row bound
+  and explicit capacity; grounded callers migrated.
+- Body-policy records across workspace reuse and multiple layers; forced index
+  choices preserve closures and replay consistency.
+- Existing allocation gates, generated differential oracle, pinned formatting,
+  Clippy, core full tests, manifest and Python fixture replay.
+- Preserve production hot loops, workspace layout and reservation staggering;
+  inspect generated code and compare retained release binaries because ThinLTO
+  can change untouched kernels when wrappers or drivers change.
+
+* Frozen controls and measurement prediction
+
+Controls were retained before Rust edits at core =19cee8f= and private
+=662188f=, both trees clean, release/default, pinned rustc 1.95.0:
+
+| Label | Measured SHA-256 |
+|-
+| c1215-api-control-closure-662188f | 3b381b6978717621cb9cd8883b8c10cc59ae1856b6b86249698c79a935b69c5d |
+| c1215-api-control-tools-662188f | 01d9c122de1182f2bde2ca667347cf5bb326f8e133eb011733c67537cb9f2378 |
+
+Recipes and source hashes:
+[[file-rev:6fa2b0c:~/src/ergodis-private/analysis/datalog-comparison/c1215-api-controls.json][committed control receipt]].
+
+Prediction before measurement: no warm-loop work is removed or added; cold
+builder setters should fold away, source-enum dispatch happens once per check,
+and policy recording adds bounded writes per lowering/layer. No speedup is
+predicted. Any systematic instruction change needs code-generation attribution.
+Core checker source hashing will change its implementation identity; Datalog
+source and certificate identities must remain unchanged.
+
+* Validation and disposition
+
+Pending implementation review, functional gates and matched native measurements.
+
+* Operational note
+
+The initial live-handoff command exceeded the output bound and was truncated.
+It was replaced with explicit bounded ranges; this command-shaping failure did
+not change source or acceptance evidence.
