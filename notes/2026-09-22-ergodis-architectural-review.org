@@ -1009,10 +1009,10 @@ Subsequently, [[file-rev:2e0807a1f:~/src/othello/notes/2026-09-22-c1214-independ
 records the delivered independent ranked completeness pass (core =19cee8f=),
 Astra acceptance, final correctness gates and measured costs. Admission, stores,
 indexes and ranked support helpers remain shared. Overall B− and portability C−
-grades are unchanged. The subsequent [[file-rev:ab033a8f0:~/src/othello/notes/2026-09-22-c1215-replay-shape-validation.org][public replay repair report]]
-records repair candidate =ca52a3e=: malformed replay shapes now reject
+grades are unchanged. The subsequent [[file-rev:88645e4bd:~/src/othello/notes/2026-09-22-c1215-replay-shape-validation.org][public replay repair report]]
+records kept repair =ca52a3e=: malformed replay shapes now reject
 explicitly, with 116 relevant native tests passing. Native instruction
-non-regression failed; a measured-exception decision remains pending. Replay still does not authenticate the
+non-regression failed; the user approved a scoped exception on 2026-09-22. Replay still does not authenticate the
 missing original source/layer certificates. A whole-private-root wasm32 check
 fails on the existing Unix control-plane dependency. Full API cleanup, native
 target execution and mandatory-gate policy remain open.

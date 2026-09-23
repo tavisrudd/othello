@@ -18,8 +18,8 @@ and all-feature gates pass; all nine provider families compile separately on
 native/wasm32. C1214 independent ranked completeness subsequently landed in core
 `19cee8f`; final gates, shared trust and measured limits are recorded in
 `2026-09-22-c1214-independent-completeness.org`. C1215 public replay shape validation
-is implemented in candidate `ca52a3e`; correctness gates pass but native
-non-regression failed, with a scoped exception decision pending. Evidence and the
+is kept in `ca52a3e` with the user-approved performance exception (2026-09-22);
+correctness gates pass and the native non-regression failure remains recorded. Evidence and the
 existing whole-private-root WASM failure: `2026-09-22-c1215-replay-shape-validation.org`.
 The broader API migration and transferable layer/source authority remain open.
 

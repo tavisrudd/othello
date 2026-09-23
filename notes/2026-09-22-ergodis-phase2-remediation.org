@@ -300,8 +300,8 @@ Remaining work is intentionally explicit:
    and final performance/correctness gates. Admission and store/index trust
    remain shared. This later authorized increment is distinct from the initial
    test-only changes documented here.
-2. C1215 public record/closure validation is implemented in candidate
-   =ca52a3e=; its native non-regression exception decision is pending; the [[file-rev:ab033a8f0:~/src/othello/notes/2026-09-22-c1215-replay-shape-validation.org][public replay repair report]]
+2. C1215 public record/closure validation is kept in =ca52a3e= with the
+   user-approved performance exception (2026-09-22); the [[file-rev:88645e4bd:~/src/othello/notes/2026-09-22-c1215-replay-shape-validation.org][public replay repair report]]
    records explicit rejection regressions, native gates and the remaining
    authority/portability limits. Constructor/builder design, source binding and
    instrumentation remain in the owning API migration.
