@@ -925,7 +925,12 @@ values, making its own source identity depend on =A='s actual result.
 The final Boolean stage seeds both min relations once, then runs only rules
 outside the two candidate/min definitions. Certificate objects, hashes,
 proof rows and checker dispatch remain absent from ordinary weighted
-evaluation and ordinary output.
+evaluation and ordinary output. The new chain API returns the final
+=Stratified= closure/readout once; both temporary weighted results are
+discarded after seeding. A cold claim encoder reconstructs each canonical
+weighted result from its min-head closure rows and typed dictionary, using
+the stage's prepared source to set canonical relation counts. This avoids
+duplicating stage rows in the normal result solely to support checking.
 
 The opt-in claim is an ordered pair of canonical weighted result/envelope
 byte pairs. Source replay checks =A='s prepared result first. Only decoded
