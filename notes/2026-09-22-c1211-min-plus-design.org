@@ -117,7 +117,8 @@ either tuple loop.
 
 1. Lower Rel's weighted layer to a *weighted prepared source*, separate from
    the current Boolean =PreparedSource=: relations with key arity and cost
-   position, canonical cost-bearing input rows, a typed value table for every
+   position, canonical cost-bearing input rows and frozen structural input
+   rows, a typed value table for every
    key-domain ID (integer entries carry the signed payload), rules with
    key atoms and a bounded list of offset addends (literal or body atom/typed
    integer column), and the declared carrier. Validate that every addend is
@@ -181,21 +182,26 @@ product budget and offer explicit smaller row bounds on memory-limited hosts.
 * Certificate claim and independent check
 
 Propose a new versioned *weighted relational derivation certificate* bound to
-the canonical weighted prepared encoding. It lists each finite relation/key
-once with its claimed =u32= cost and one support choice: an admitted input
-fact with that exact cost, or a source rule plus one earlier certified row per
-body atom in source body order. The list is topologically ranked by position;
-all premise references are strictly earlier. An initial fact later improved
-may be supported by a rule instead. Infinity is represented by absence from
-the list, never by a listed cost. Source ID, fact count, relation count,
+the canonical weighted prepared encoding. It lists each finite *weighted*
+relation/key once with its claimed =u32= cost and one support choice: an
+admitted weighted input fact with that exact cost, or a source rule plus one
+premise reference per body atom in source body order. A weighted premise
+references an earlier listed row; a frozen structural premise references
+its row in the independently re-admitted prepared source and contributes
+zero. The weighted list is topologically ranked by position; all weighted
+premise references are strictly earlier. Structural source rows are not
+duplicated in the certificate. An initial fact later improved may be
+supported by a rule instead. Infinity is represented by absence from the
+weighted list, never by a listed cost. Source ID, fact count, relation count,
 lengths, key domains, offsets and checked arithmetic are all bound and
 validated. A compact rank-only format can be considered later; it would
 move support search into the checker and is not the first C1194 format.
 
 After evaluation, the producer may build this trace *cold* from final costs:
-start with input facts whose costs equal the final row value, then repeatedly
-find rule matches whose already supported premises sum exactly to the final
-head cost. Emit each newly supported row once. This avoids retaining a
+start with weighted input facts whose costs equal the final row value, then
+repeatedly find rule matches whose already supported weighted premises and
+re-admitted frozen structural premises sum exactly to the final head cost.
+Emit each newly supported weighted row once. This avoids retaining a
 versioned witness in the weighted hot row. Zero-cost cycles are harmless if
 some source-rooted proof exists; a cycle with no root remains unsupported.
 Failure to support a finite row is an internal producer error, not a license
@@ -208,12 +214,13 @@ minimum depth among equal-cost proofs breaks zero-cost support cycles.
 The independent checker re-admits the weighted prepared bytes and computes
 its own source ID. Its *support pass* follows the trace: every source fact or
 rule reference exists, premise tuples unify, the head key matches, and the
-claimed cost is exactly the checked sum of the earlier premises and the
-per-match offset recomputed from the source's typed integer fields.
-Its separate *closure pass* checks each source fact has a listed cost no
-greater than its cost and independently joins every source rule over the
-listed finite rows; each match's head must exist at a cost no greater than
-the candidate. It uses its own bounded relation store/index preparation,
+claimed cost is exactly the checked sum of the earlier weighted premises,
+zero-cost frozen structural premises and the per-match offset recomputed
+from the source's typed integer fields. Its separate *closure pass* checks
+each weighted source fact has a listed cost no greater than its cost and
+independently joins every source rule over listed finite weighted rows and
+re-admitted frozen structural rows; each match's weighted head must exist at
+a cost no greater than the candidate. It uses its own bounded relation store/index preparation,
 not the producer's plan or join cursor. Only after both passes succeed may it
 issue a verification record binding source identity, certificate digest and
 checker identity. A checker called on an in-process admitted object remains
