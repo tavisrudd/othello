@@ -165,3 +165,153 @@ must be identified separately from native execution.
 
 Planning started 2026-09-22. Results, exact commands, limitations and commit
 references will be appended here as each repair is evaluated.
+
+** Implementation disposition
+
+All three repairs were reviewed and committed separately on 2026-09-22.
+Implementation is complete; native portability validation remains open. These
+commits are local private-main commits, not public exports or releases.
+
+| Step | Repository / commit | Reviewed change | Acceptance status |
+|------+---------------------+-----------------+-------------------|
+| R3 | core =b1cd0bc1b03ca035c585c6edb6c4192750adfeef= | [[file-rev:b1cd0bc1b03ca035c585c6edb6c4192750adfeef:/home/tavis/src/ergodis/wasm/Cargo.lock::230][Lock reconciliation]]: 15 added lines, contract package and current path-dependency edges; no registry version/checksum changes | Locked check, fresh build, WASM tests, Python parity and browser smoke passed |
+| R4 | core =831d56c68bb9430d11436291de1078a37ad79478= | [[file-rev:831d56c68bb9430d11436291de1078a37ad79478:/home/tavis/src/ergodis/crates/rules/src/pages.rs::239][Linux/Android advice cfg]], other native Unix no-op; Linux mmap/advice/release body unchanged; manifest regenerated | Linux tests and core gates passed; Darwin compile/native acceptance remains open |
+| R5 | private =85f2586d19229dba20c4a6e52abe85b49505771b= | [[file-rev:85f2586d19229dba20c4a6e52abe85b49505771b:/home/tavis/src/ergodis-private/src/repr_grammar.rs::2008][Monotonic fallback]], saturating conversion, [[file-rev:85f2586d19229dba20c4a6e52abe85b49505771b:/home/tavis/src/ergodis-private/tasks/tools/src/repr_search/mod.rs::69][target-specific receipt description]]; x86 TSC and cost-vector/ranking arithmetic preserved | Eight representation tests, private Clippy and deterministic receipt smoke passed; actual ARM execution/overhead unverified |
+
+The primary read the complete owned diffs and checked the agents' claims against
+source. The final primary adjustment removed the clock's obsolete claim that no
+performance harness exists and avoided calling raw x86 TSC unconditionally
+monotonic. The x86 receipt text was retained for compatibility; it still assumes
+an invariant TSC and does not detect that hardware property. No new guarantee of
+cross-host timestamp or score comparability is made.
+
+** Reproducible commands and observed results
+
+Canonical compiler: Nix Rust =1.95.0=, commit
+=59807616e1fa2540724bfbac14d7976d7e4a3860=, LLVM =21.1.8=,
+host =x86_64-unknown-linux-gnu=. All validation below used the pinned core Nix
+shell/apps. The working trees held only the owned repair changes during builds;
+core and private source worktrees were clean after their commits. The checks ran
+against the combined R3/R4 tree, with R5 layered on that core for private checks.
+No performance A/B was run or claimed: the Linux active page code, x86 timing
+instructions, per-element loops and hot layouts were unchanged.
+
+From =/home/tavis/src/ergodis= (wrapped in =run-quiet=, eight build workers):
+
+#+begin_src sh
+# Minimal offline reconciliation, followed by the actual locked regression gate.
+nix develop . -c cargo check --offline -j 8 --manifest-path wasm/Cargo.toml --target wasm32-unknown-unknown
+nix develop . -c cargo check --locked -j 8 --manifest-path wasm/Cargo.toml --target wasm32-unknown-unknown
+CARGO_BUILD_JOBS=8 nix run .#wasm-build
+nix run .#wasm-smoke
+nix develop . -c python3 python/generate_evidence.py --write
+nix develop . -c cargo fmt --check
+nix develop . -c cargo clippy --locked -j 8 --all-targets --all-features -- -D warnings
+nix develop . -c cargo test --locked -j 8 --all-features
+nix develop . -c python3 python/generate_fixtures.py --check
+CARGO_BUILD_JOBS=8 nix run .#wasm-test
+#+end_src
+
+All commands passed. Core Cargo tests: *1,046 passed, zero failed, three
+ignored*, across 85 test-result summaries including doctests. This is the root
+workspace/default-member command, not a claim that every excluded provider or
+feature combination was tested. Ignored cases were =profile=, the explicit
+external browser-exchange fixture writer, and =per_update_cost_split=.
+All six existing page tests passed, including bounded failure, zero/write,
+empty, advice, sparse reservation, and Linux address-space release checks.
+The canonical WASM native suite passed 11 tests; the independent Python parity
+script passed eight exact cost/witness/work cases.
+
+Browser smoke ran after the successful fresh release build. It passed repository
+prepare/recover, composition, reduction/runtime corpora, campaign UI/Worker
+checkpoints, and offline bundle inspection. It does not establish a native OS
+port or test every provider family. Generated artifact hashes, measured here:
+
+| Artifact | SHA-256 |
+|----------+---------|
+| =wasm/www/pkg/ergodis_wasm_bg.wasm= | =f2723c25c66a207d7c6f66fe85104fdeaa3a94072bd231da685fe12ca4f52825= |
+| =wasm/www/pkg/ergodis_wasm.js= | =e46274b324f717ee10bff3bea1f4505fad820f88150023c75efacb99e19df71e= |
+
+From =/home/tavis/src/ergodis-private= (four build workers while the independent
+core gate ran):
+
+#+begin_src sh
+nix develop /home/tavis/src/ergodis -c cargo test --locked -j 4 -p ergodis-private repr_grammar
+nix develop /home/tavis/src/ergodis -c cargo fmt --check
+nix develop /home/tavis/src/ergodis -c cargo clippy --locked -j 4 -p ergodis-private -p ergodis-tools --all-targets --all-features -- -D warnings
+nix develop /home/tavis/src/ergodis -c cargo run --locked -j 4 -p ergodis-tools -- repr-search --deterministic --rounds 1 --iterations 1 --probes 1 --generations 1 --beam-width 1 --max-candidates 1 --report /home/tavis/.cache/ergodis/phase1-remediation/repr-search-smoke.json
+#+end_src
+
+Eight focused library tests passed, including exhaustive applicable-pipeline
+round trips, probe/reference agreement, descriptor checks, and the new fallback
+clock nondecrease/saturation test. Other private tests were filtered out, not
+silently counted as passing. Formatting and Clippy passed for the affected
+library/tool packages. Formatting was rechecked after the final doc adjustment.
+
+The debug-profile deterministic CLI smoke exercised six corpus instances and
+the existing admission paths; it is correctness evidence, not a benchmark.
+JSON inspection asserted the exact old x86 clock description, deterministic
+mode, zero in all four timing fields for 47 emitted cost vectors, and zero
+allocator events for all 42 emitted admitted evaluation rows. The independent
+check recomputed each of 47 emitted objectives from declared byte, working-byte,
+and syntax weights and found exact equality. No claim of byte-identical whole
+receipts against a retained old binary is made.
+
+** Target-validation limitation and next acceptance work
+
+Attempted Intel Darwin compile using Nix Rust plus explicit rustup target
+sysroot failed before Ergodis type checking with =E0514=: standard-library
+metadata was incompatible with the Nix compiler build. The official compiler
+has the same Rust commit but LLVM =22.1.2=, versus Nix LLVM =21.1.8=. Matching
+release numbers did not make the artifacts interchangeable. The attempted gate:
+
+#+begin_src sh
+CARGO_TARGET_X86_64_APPLE_DARWIN_RUSTFLAGS='--sysroot=/home/tavis/.rustup/toolchains/1.95.0-x86_64-unknown-linux-gnu' \
+  nix develop /home/tavis/src/ergodis -c cargo check --locked -j 8 \
+  --target x86_64-apple-darwin -p ergodis-rules -p ergodis-runtime --no-default-features
+#+end_src
+
+Do not repeat that mixed-sysroot command as a supported workflow. The Sol
+reviewer evaluated the pinned Nixpkgs ARM cross compiler: it exists as a
+derivation but was neither installed nor present in the checked Nix binary
+cache. Building a compiler was outside this cheap repair. No official-rustup
+compiler run was substituted for the canonical Nix gates. ARM Darwin, ARM
+Linux and Windows compilation were therefore not established in this run.
+
+Remaining acceptance work, in order:
+
+1. Provide a compatible pinned cross toolchain or native runners; compile
+   =ergodis-rules= and =ergodis-runtime= for both Darwin architectures, and the
+   private clock consumers for ARM Linux. Compile the Windows portable subset
+   separately from the known native host gaps.
+2. Execute bounded reserve/touch/release tests on macOS and the portable
+   allocation backend; explicitly account for the Linux-specific sparse-map and
+   /proc tests. Native macOS memory-commit semantics remain unproven.
+3. Run ARM representation/scoring/receipt checks; verify the emitted fallback
+   label and measure clock overhead before making any ARM performance claim.
+4. Reassess the original due-diligence findings from these results. Keep the
+   overall B− and portability/release-readiness C− provisional grades unchanged
+   for now: three repaired defects do not establish native target support or
+   resolve the larger assurance, boundary, and release-gate findings.
+
+** Artifacts and environment
+
+Logs and the deterministic receipt are under
+=~/.cache/ergodis/phase1-remediation/=. Builds used the existing shared
+=target/ergodis= and =target/ergodis-private= directories. No retained benchmark
+binaries or profiles were created. Canonical wasm-pack refreshed the ignored
+=wasm/www/pkg/= output. Four Rust 1.95.0 target standard libraries were installed
+under the existing rustup toolchain; they were not used to claim successful
+native target validation.
+
+The user clarified during this work that =/tmp= is now disk-backed, not tmpfs.
+That supersedes the old environment assumption in the contributor guides; this
+run continued using its established cache paths.
+
+Cache dry-run at close: 59 entries scanned, zero unreferenced and old enough
+for deletion. Nothing was deleted. Reproduce with
+=ERGODIS_NOTES_DIR=/home/tavis/src/othello/notes /home/tavis/src/ergodis-dev/scripts/cache-gc.sh=.
+
+Org validation passed: 13 headings, five =file-rev:= links. All five saved
+revision targets were checked with Git; numeric anchors were within file bounds
+and the source Phase 1 heading existed at its saved revision.
