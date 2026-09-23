@@ -1009,8 +1009,12 @@ Subsequently, [[file-rev:2e0807a1f:~/src/othello/notes/2026-09-22-c1214-independ
 records the delivered independent ranked completeness pass (core =19cee8f=),
 Astra acceptance, final correctness gates and measured costs. Admission, stores,
 indexes and ranked support helpers remain shared. Overall B− and portability C−
-grades are unchanged. The panics remain unfixed; full API cleanup, native target
-execution and mandatory-gate policy remain open.
+grades are unchanged. The subsequent [[file-rev:087f5de64:~/src/othello/notes/2026-09-22-c1215-replay-shape-validation.org][public replay repair report]]
+records private =ec7bb32=: malformed replay shapes now reject explicitly, with
+116 relevant native tests passing. Replay still does not authenticate the
+missing original source/layer certificates. A whole-private-root wasm32 check
+fails on the existing Unix control-plane dependency. Full API cleanup, native
+target execution and mandatory-gate policy remain open.
 
 | Step | Recommended change | Effort / risk | Acceptance |
 |------+--------------------+---------------+------------|
@@ -1102,7 +1106,8 @@ chain can be independently replayed.
 
 The contract extraction and Datalog schema/provenance migration have already
 landed; they should not be re-proposed as missing architecture. The current
-handoff's next semantic increment is C1215 public replay shape validation.
+handoff's next semantic increment is C1215 builder/API/instrument migration,
+following the delivered public replay shape validation.
 
 ** Maintenance and extension work after the boundary decisions
 

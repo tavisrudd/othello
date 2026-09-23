@@ -300,10 +300,11 @@ Remaining work is intentionally explicit:
    and final performance/correctness gates. Admission and store/index trust
    remain shared. This later authorized increment is distinct from the initial
    test-only changes documented here.
-2. C1215: specify and implement complete public record/closure validation, then
-   turn the two panic characterizations into rejection regressions. Address
-   constructor opacity, source binding and instrumentation in the owning API
-   migration; do not mistake the audit for those repairs.
+2. C1215 public record/closure validation subsequently landed in private
+   =ec7bb32=; the [[file-rev:087f5de64:~/src/othello/notes/2026-09-22-c1215-replay-shape-validation.org][public replay repair report]]
+   records explicit rejection regressions, native gates and the remaining
+   authority/portability limits. Constructor/builder design, source binding and
+   instrumentation remain in the owning API migration.
 3. R6 follow-up: decide whether any opt-in row becomes mandatory; provision
    compatible native Darwin/ARM/Windows runners and provider ABI transcript
    fixtures. Optional threaded/provider feature combinations remain separate

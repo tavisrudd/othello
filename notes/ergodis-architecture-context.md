@@ -18,7 +18,9 @@ and all-feature gates pass; all nine provider families compile separately on
 native/wasm32. C1214 independent ranked completeness subsequently landed in core
 `19cee8f`; final gates, shared trust and measured limits are recorded in
 `2026-09-22-c1214-independent-completeness.org`. C1215 public replay shape validation
-is in progress; characterization of a panic does not repair it.
+landed in private `ec7bb32`; native gates and the existing whole-private-root
+WASM dependency failure are recorded in `2026-09-22-c1215-replay-shape-validation.org`.
+The broader API migration and transferable layer/source authority remain open.
 
 Current paired native/JS capability inventory and implementation ordering:
 `2026-09-09-c1130-js-wasm-parity-review.md`. Resolve host fragmentation together;

@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: IN PROGRESS — initial trust-boundary audit and panic reproductions delivered; shape validation and the larger API migration remain open.
+**Status**: IN PROGRESS — public replay shape repair delivered in private `ec7bb32`; final performance disposition is in `2026-09-22-c1215-replay-shape-validation.org`. Builder/API/instrument migration remains open.
 **Authority**: `notes/2026-09-22-c1208-follow-up-triage.md` (approved allocation and order).
 
 Approved C1208 alloc-3. After C1205 milestone a's source enum and byte door; use C1213's
@@ -12,10 +12,13 @@ format. Prefer before any separately allocated growing-index successor.
 
 Current audit and bounded regression work: `2026-09-22-ergodis-phase2-remediation.org`.
 
-Private `6e31900` characterizes two existing public replay panics, with a passing
-valid control. These are reproductions, not repairs. Complete record/closure
-shape validation must replace the panic expectations with explicit rejection;
-the trusted admitted fast path and re-admitting external doors remain distinct.
+Private `ec7bb32` replaces the two panic characterizations from `6e31900` with
+explicit rejection, shared record/readout/closure validation and bounded adjacent
+regressions. Native gates pass (116 relevant tests, formatting and Clippy).
+`2026-09-22-c1215-replay-shape-validation.org` records the repair and limitations:
+replay consistency does not authenticate missing source/layer certificates. The
+whole private root still fails wasm32 compilation on its Unix control-plane
+dependency. The trusted admitted fast path remains unchanged.
 
 - Consolidate Demand construction into a builder with production defaults.
 - Expose one checker entry point over the source enum, retaining a clearly documented
