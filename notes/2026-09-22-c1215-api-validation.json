@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-09-22",
-  "status": "functional gates passed; first default candidate performance failed; v2 four-helper call-boundary repair awaiting native measurement",
+  "status": "functional and exactness gates pass; full native matrix has small instruction losses; scoped keep/revert decision pending",
   "sources": {
     "/home/tavis/src/ergodis": "a63b4445fe2a4cdd5074b21570bbb3a0334c9b85",
     "/home/tavis/src/ergodis-private": "0f41eb4fde20634c3cbedd61cb4692553c6fbf10"
@@ -158,6 +158,19 @@
         "failed": 0,
         "ignored": 0
       }
+    },
+    {
+      "label": "v2-wasm",
+      "core_revision": "8aec9aba067f5fbe471ec31d3ac9c48ed2a77392",
+      "command": "choom -n 1000 -- nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=2 cargo check -p ergodis-rules -p ergodis-verify --target wasm32-unknown-unknown && choom -n 1000 -- nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=2 cargo check -p ergodis-rules -p ergodis-verify --target wasm32-unknown-unknown --features ergodis-rules/instrument",
+      "result": "exit_code: 0\nduration: 1sec 322ms 930\u00b5s 77ns\nstdout_lines: 0\nstderr_lines: 4\ntail: |\n      Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.57s\n      Checking ergodis-rules v0.1.0 (/home/tavis/src/ergodis/crates/rules)\n      Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.23s\n",
+      "log_sha256": {
+        "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr.log": "ed403182ede0afbe2b28facf997c506917c9e268293f4b6a48901b768c0cb23f"
+      },
+      "claims": [
+        "final v2 rules/verifier wasm32 compile, default and instrument"
+      ]
     }
   ],
   "limits": [
@@ -165,8 +178,46 @@
     "whole private-root wasm32 failure on existing Unix control-plane dependency was not rerun",
     "native macOS, Windows and ARM untested",
     "default count excludes feature-only forced-policy/plan-report tests; Auto sparse, capacity, reset and allocation tests remain",
-    "replay performance exception applies only to ca52a3e; API performance pending"
+    "replay performance exception applies only to ca52a3e; no exception yet for API migration"
   ],
   "v2_core_revision": "8aec9aba067f5fbe471ec31d3ac9c48ed2a77392",
-  "v2_private_code_revision": "0f41eb4fde20634c3cbedd61cb4692553c6fbf10"
+  "v2_private_code_revision": "0f41eb4fde20634c3cbedd61cb4692553c6fbf10",
+  "native_measurement": {
+    "rounds": 5,
+    "receipt_count": 24,
+    "all_checked_result_and_work_parity": true,
+    "event_enabled_percent": 100,
+    "status": "small instruction losses; no unqualified non-regression acceptance",
+    "evidence": [
+      {
+        "revision": "d2b0f0e",
+        "path": "analysis/datalog-comparison/c1215-api-v2-full-matrix.json"
+      },
+      {
+        "revision": "46af22c",
+        "path": "analysis/datalog-comparison/c1215-api-v2-full-matrix.md"
+      },
+      {
+        "revision": "e756f14",
+        "path": "analysis/datalog-comparison/c1215-api-code-shape.json"
+      },
+      {
+        "revision": "cddd241",
+        "path": "analysis/datalog-comparison/c1215-api-lowering-diagnosis.md"
+      }
+    ],
+    "limits": [
+      "cache nulls and negative subtracted miss estimates limit cache interpretation",
+      "path4 instruction A/A interval excludes unity",
+      "wall medians lack paired confidence intervals; timing neutrality not established",
+      "no speedup claim; no broader portability claim"
+    ]
+  },
+  "cache_gc": {
+    "mode": "dry-run",
+    "exit_code": 0,
+    "scanned": 69,
+    "old_unreferenced": 20,
+    "deleted": 0
+  }
 }

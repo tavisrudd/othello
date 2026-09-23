@@ -4,10 +4,11 @@
 
 * Status and scope
 
-IN PROGRESS: implemented in core =a63b444= and private =0f41eb4=; functional
-gates pass, native performance pending. This is the remaining approved C1215
-migration after the public replay repair. No task completion is claimed yet.
-The scoped exception for private =ca52a3e= does not cover this increment.
+IN PROGRESS: implemented in core =a63b444= / =8aec9ab= and private =0f41eb4=.
+Functional gates and exact benchmark parity pass. The full native matrix
+retains small instruction losses; acceptance needs a scoped disposition.
+This is the remaining approved C1215 migration after the public replay repair.
+The exception for private =ca52a3e= does not cover this increment.
 
 The migration consolidates cold construction and admission, distinguishes the
 grounded weighted plan from the demand-driven plan, and separates measurement
@@ -145,16 +146,16 @@ records exact commands, source revisions and log hashes.
 
 Default test count is lower because forced-policy/report-only cases now belong
 to instrument; ordinary Auto sparse, capacity, reset and allocator/reservation
-checks remain. The private instrument test pass preceded only a constructor-name
-correction in a test docstring; final default tests and both Clippy configurations
-include that correction.
+checks remain. Both private feature configurations were rerun after the
+call-boundary repair and include the final constructor-name docstring correction.
 
 The whole private-root wasm32 Unix control-plane failure remains a separate
 known limitation; it was not rerun unchanged. Neither core WASM compilation nor
 Linux execution establishes native macOS, Windows or ARM support.
 
-Matched native acceptance remains pending. The first default candidate fails
-the instruction gate; it is not accepted under the replay exception.
+Matched native acceptance remains pending. The first default candidate's large
+instruction loss is repaired; the second candidate still has smaller losses.
+Neither is accepted under the replay exception.
 
 ** First candidate calibration: native gate failed
 
@@ -193,6 +194,94 @@ all 1,057 core all-feature tests, Clippy, formatting, Python parity and the
 manifest pass. The private 117 default and 118 instrument tests pass again,
 now including the final test docstring. Native acceptance is still pending.
 
+** Second candidate: full matrix and remaining decision
+
+Clean retained binaries pair core =8aec9ab= with private source =3a0fb0c=
+(Rust unchanged since =0f41eb4=):
+[[file-rev:f916668:~/src/ergodis-private/analysis/datalog-comparison/c1215-api-v2-binaries.json][retention recipes and measured hashes]].
+The frozen five-round matrix produced 24 counter/cache receipts, including
+default/default evaluation and checkers, Rel byte/scalar stages, diagnostic
+forced policies and A/A controls. All checked sample results and work agree;
+all events were 100% enabled. Separate cache runs have noisy/null-limited
+results and do not establish a cache improvement or regression.
+
+The repaired closure evaluator is neutral: sparse128 instruction ratio
+1.000000 [0.999989, 1.000010], dense64 1.000011 [0.999951, 1.000071].
+The following instruction costs remain; ratios are candidate/control and
+brackets are the harness's per-comparison 95% intervals.
+
+| Boundary | Cohort | Ratio and interval |
+|-
+| Rel lower, byte | positive | 1.001079 [1.000900, 1.001259] |
+| Rel lower, byte | negation | 1.001707 [1.001390, 1.002024] |
+| Rel lower, byte | comparison | 1.000884 [1.000469, 1.001300] |
+| Rel lower, byte | aggregation | 1.000910 [1.000207, 1.001615] |
+| Rel stratify, byte | positive | 1.000372 [1.000327, 1.000416] |
+| Rel stratify, byte | negation | 1.000498 [1.000474, 1.000522] |
+| Evaluate | path3 sparse64 | 1.000250 [1.000173, 1.000327] |
+| Evaluate | path4 sparse32 | 1.000097 [1.000044, 1.000150] |
+| Ranked check | mutual blocks16:64 | 1.000483 [1.000317, 1.000649] |
+| Ranked check | cycle sparse64 | 1.000025 [1.000010, 1.000040] |
+| Trace check | closure dense64 | 1.000124 [1.000052, 1.000197] |
+
+Scalar lowering has similar losses on all four sources. Whole stratification
+improves on comparison and aggregation (ratios 0.997050 and 0.998233).
+The consistent lowering loss also appeared in calibration; it cannot be
+dismissed as a single marginal comparison. The many intervals above are not
+a simultaneous family-wise confidence statement. Default evaluator peak RSS
+was 12--20 KiB higher in sampled processes; these independent cold-process
+observations do not identify an allocation regression.
+
+[[file-rev:46af22c:~/src/ergodis-private/analysis/datalog-comparison/c1215-api-v2-full-matrix.md][Matrix interpretation, final profile and limitations]] and
+[[file-rev:d2b0f0e:~/src/ergodis-private/analysis/datalog-comparison/c1215-api-v2-full-matrix.json][compact event/null/RSS/parity receipt]]
+preserve every cohort, raw-sample hash, source identity and measurement limit.
+The exact replay entry is
+[[file-rev:d2b0f0e:~/src/ergodis-private/analysis/datalog-comparison/c1215-api-measurement.md][the frozen measurement plan]].
+
+The path4 instruction result is limited by an A/A interval below unity
+(0.999973 [0.999951, 0.999994]). Other instruction null intervals include
+unity. Cache subtraction produced some negative miss estimates and unstable
+nulls; for example sparse-closure cache-reference A/A is 1.362 [1.073, 1.730].
+These are measurement limitations, not negative physical event counts.
+Dense-triangle evaluator cycles are 1.042 [1.004, 1.083], with a broad
+A/A interval 0.960 [0.914, 1.007]. The largest observed wall-median slowdown
+is 2.1% on sparse-triangle evaluation, without a paired wall interval.
+Timing neutrality is not established by this shared-host run.
+
+The final v2 profile has 20,551 instruction samples and zero lost samples.
+It samples the same evaluator/indexing bodies as the control, with no sampled
+allocator/libc/format/panic symbols. Static evaluator call sites match the
+old binary, including pre-existing cold bounds/panic paths. Profile shares
+are location evidence, not measurements of saved work.
+
+Primary instruction-text comparison restores all five old evaluator/helper
+bodies exactly after address, symbol-hash and RIP-reference normalization,
+including instruction positions and local branch offsets. This comparison
+does not establish referenced-data or other-callee equality and does not
+explain the small path3/path4 measurement changes. Reproducible script and
+receipt:
+[[file-rev:e756f14:~/src/ergodis-private/analysis/datalog-comparison/c1215-api-code-shape.py][code-shape comparator]],
+[[file-rev:e756f14:~/src/ergodis-private/analysis/datalog-comparison/c1215-api-code-shape.json][normalized results]].
+
+Sol's independent lowering review found changed stack/register allocation in
+=lower::run= (frame 0x318 to 0x338). Calibration adds about 32 instructions
+per positive-source lower-stage iteration and 82 per aggregation iteration;
+subtracting parse-stage changes gives about 40 and 91. One metadata store
+does not explain these differences. The existing A/B changes several API
+boundaries, so it cannot isolate the RIR metadata field as the cause. No
+further source change is justified by this evidence alone. Exact commands,
+identities and arithmetic:
+[[file-rev:cddd241:~/src/ergodis-private/analysis/datalog-comparison/c1215-api-lowering-diagnosis.md][independent lowering diagnosis]].
+
+Recommendation: retain this API cleanup under an explicit, bounded exception
+for these revisions and this recorded matrix, including its unresolved timing
+and cache limits. Its maintenance benefit is concrete: fewer construction and
+admission wrappers, explicit configuration, accurate policy accounting and a
+smaller default measurement API. It is not a native speedup. The alternative
+is a forward revert of this increment while preserving the separately approved
+replay repair. =PERFORMANCE.md= requires a revert for measured losses; the
+recommendation therefore awaits the user's decision. C1215 stays open.
+
 ** Review repairs before acceptance
 
 - Primary review removed duplicated Auto policy logic introduced by conditional
@@ -216,3 +305,7 @@ now including the final test docstring. Native acceptance is still pending.
 The initial live-handoff command exceeded the output bound and was truncated.
 It was replaced with explicit bounded ranges; this command-shaping failure did
 not change source or acceptance evidence.
+
+The final core v2 rules/verifier wasm32 checks pass with and without instrument.
+Cache GC ran in dry-run mode: 69 entries scanned, 20 old unreferenced candidates;
+nothing was deleted. No public export, publication or push was performed.
