@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: IN PROGRESS — replay repair `ca52a3e` remains kept under its approved exception. API migration (core `a63b444` / `8aec9ab`, private `0f41eb4`) passes functional/exactness gates. The full native matrix retains small instruction losses; a scoped keep/revert decision is pending. Report: `2026-09-22-c1215-api-migration.org`. The replay exception does not cover this increment.
+**Status**: COMPLETED 2026-09-22 — replay repair `ca52a3e` and the API migration (core `a63b444` / `8aec9ab`, private `0f41eb4`) are kept under separate user-approved performance exceptions. Functional/exactness gates pass. The full matrix's small instruction losses and timing/cache limits remain recorded in `2026-09-22-c1215-api-migration.org`; replay evidence is in `2026-09-22-c1215-replay-shape-validation.org`.
 **Authority**: `notes/2026-09-22-c1208-follow-up-triage.md` (approved allocation and order).
 
 Approved C1208 alloc-3. After C1205 milestone a's source enum and byte door; use C1213's
@@ -36,7 +36,8 @@ dependency. The trusted admitted fast path remains unchanged.
 Default and instrument builds work; tools explicitly opt into measurement APIs. All
 constructor/entry-point call sites are migrated with no accidental production dependency
 on the feature. Both source regimes, layer policy records, allocation gates and matched
-native performance pass. Preserve bytes/identities except explicitly approved format
+native measurement are documented; measured losses are kept under the scoped
+exception recorded in the dated report. Preserve bytes/identities except explicitly approved format
 changes owned by C1213; source-hash changes are reported separately. No dispatch or
 measurement overhead enters hot loops.
 
@@ -45,5 +46,6 @@ instrumentation is owned by C1218, not this task.
 
 ## Closeout
 
-Write the dated task report and follow `notes/task-lifecycle-conventions.md` at completion.
-Follow local repository instructions and the professional source-comment standard.
+The dated API report records the scoped user exception, retained matrix and
+remaining platform limits. The task row moved to the queue archive once; the
+ergodis handoff now selects C1211.

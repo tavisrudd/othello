@@ -22,8 +22,8 @@ is kept in `ca52a3e` with the user-approved performance exception (2026-09-22);
 correctness gates pass and the native non-regression failure remains recorded. Evidence and the
 existing whole-private-root WASM failure: `2026-09-22-c1215-replay-shape-validation.org`.
 The broader API migration is implemented (core `a63b444` / `8aec9ab`, private
-`0f41eb4`) with functional/exactness gates passing. Small native instruction
-losses leave its scoped disposition pending; API map and measurements:
+`0f41eb4`) with functional/exactness gates passing. The user kept its small
+native instruction losses under a second scoped exception; API map and measurements:
 `2026-09-22-c1215-api-migration.org`. Transferable layer/source authority remains open.
 
 Current paired native/JS capability inventory and implementation ordering:

@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-09-22",
-  "status": "functional and exactness gates pass; full native matrix has small instruction losses; scoped keep/revert decision pending",
+  "status": "completed; functional and exactness gates pass; native instruction losses kept under user-approved scoped API performance exception",
   "sources": {
     "/home/tavis/src/ergodis": "a63b4445fe2a4cdd5074b21570bbb3a0334c9b85",
     "/home/tavis/src/ergodis-private": "0f41eb4fde20634c3cbedd61cb4692553c6fbf10"
@@ -178,7 +178,7 @@
     "whole private-root wasm32 failure on existing Unix control-plane dependency was not rerun",
     "native macOS, Windows and ARM untested",
     "default count excludes feature-only forced-policy/plan-report tests; Auto sparse, capacity, reset and allocation tests remain",
-    "replay performance exception applies only to ca52a3e; no exception yet for API migration"
+    "replay performance exception applies only to ca52a3e; API migration has a separate user-approved scoped exception"
   ],
   "v2_core_revision": "8aec9aba067f5fbe471ec31d3ac9c48ed2a77392",
   "v2_private_code_revision": "0f41eb4fde20634c3cbedd61cb4692553c6fbf10",
@@ -187,7 +187,7 @@
     "receipt_count": 24,
     "all_checked_result_and_work_parity": true,
     "event_enabled_percent": 100,
-    "status": "small instruction losses; no unqualified non-regression acceptance",
+    "status": "24-receipt matrix retains small instruction losses under user-approved scoped API exception; no unqualified non-regression claim",
     "evidence": [
       {
         "revision": "d2b0f0e",
@@ -211,7 +211,23 @@
       "path4 instruction A/A interval excludes unity",
       "wall medians lack paired confidence intervals; timing neutrality not established",
       "no speedup claim; no broader portability claim"
-    ]
+    ],
+    "disposition": {
+      "date": "2026-09-22",
+      "user_choice": "Keep the API cleanup with a documented scoped exception (Recommended)",
+      "covered_core_revisions": [
+        "a63b4445fe2a4cdd5074b21570bbb3a0334c9b85",
+        "8aec9aba067f5fbe471ec31d3ac9c48ed2a77392"
+      ],
+      "covered_private_code_revision": "0f41eb4fde20634c3cbedd61cb4692553c6fbf10",
+      "scope": "measured C1215 API instruction losses and recorded timing/cache limitations in retained Linux x86-64 rustc 1.95.0 matrix",
+      "not_covered": [
+        "future changes",
+        "native macOS, Windows, ARM validation",
+        "unqualified timing neutrality",
+        "separate replay repair ca52a3e"
+      ]
+    }
   },
   "cache_gc": {
     "mode": "dry-run",

@@ -35,7 +35,9 @@ and all nine provider families' separate native/wasm32 checks pass. Existing
 public replay repair `ca52a3e` is kept with the user-approved performance
 exception (2026-09-22); scope, measurements and
 remaining private-root WASM limitation: `../2026-09-22-c1215-replay-shape-validation.org`.
-The broader C1215 API migration remains open. C1214 is complete:
+The broader C1215 API migration is complete under a separate user-approved
+scoped performance exception; full native matrix and limits:
+`../2026-09-22-c1215-api-migration.org`. C1214 is complete:
 independent ranked completeness in core `19cee8f`; Astra review, final gates and
 measured limits: `../2026-09-22-c1214-independent-completeness.org`. Native gaps remain.
 
@@ -345,7 +347,8 @@ core type (keep public or feature-gate); cache-gc lists eight old unreferenced e
 **Source-comment standard (Tavis, 2026-09-18)**: Ergodis source carries professional comments only — no task IDs, notes paths or process narrative. Inventory `../2026-09-18-ergodis-core-task-reference-sweep.md`; core clean-up and lint in progress (`../2026-09-18-ergodis-core-comment-cleanup-report.md`); private/dev inventory `../2026-09-18-ergodis-private-dev-task-reference-sweep.md` (dev source clean; private fix not yet run).
 **C1204 review and C1208 triage closed.** Dispositions: `../2026-09-21-c1208-c1204-findings-triage-report.md`. C1209 contract split is complete and audited (`../2026-09-21-c1209-contract-crate-split-report.md`); contract types and admission live in `ergodis-contract`, with separate contract/checker identities.
 **C1210 small repairs complete (2026-09-22).** Documentation/byte-preserving cleanup, stage sequencing and parity-v2/additive bench policy landed separately; evidence and limits: `../2026-09-22-c1210-small-repairs-report.md`.
-**Next: C1215 — scoped API migration disposition** (`../2026-09-22-c1215-demand-api-cleanup.md`). Core `a63b444` / `8aec9ab` and private `0f41eb4` pass functional/exactness gates. The full native matrix retains small instruction losses; recommendation and evidence for a keep/revert decision: `../2026-09-22-c1215-api-migration.org`. C1215 stays open until disposition. The separate replay exception for `ca52a3e` remains kept and does not cover this increment.
+**C1215 complete (2026-09-22).** Replay repair `ca52a3e` and the API migration (core `a63b444` / `8aec9ab`, private `0f41eb4`) are retained under separate user-approved scoped performance exceptions. Functional/exactness gates pass; measured native losses and limits: `../2026-09-22-c1215-api-migration.org`; card: `../2026-09-22-c1215-demand-api-cleanup.md`.
+**Next: C1211 — min-plus evaluator/certificate design memo** (`../2026-09-22-c1211-min-plus-design.md`) before C1194.
 **C1213 Datalog schema and provenance complete (2026-09-22).** Datalog wire programs carry `finite-boolean-datalog-rules.v1` under strict one-door dispatch; certificates carry no provenance; checkers issue verification records after re-admitting checks (`check_recorded`, `replay`); user doc `docs/datalog-certificates.md`. Core `378f146`, `4b57649`; private `69d68f3`, `482d6e9`; report `../2026-09-22-c1213-datalog-schema-provenance-report.md`.
 **Follow-up order and dependencies:** Tavis approved C1210–C1218 on 2026-09-22; full order and dependencies: `../2026-09-22-c1208-follow-up-triage.md`. C1205 a is complete and audited (`../2026-09-22-c1205-rel-transferable-evidence-report.md`); its remaining b/c work follows under the existing card, with b's construction-verifier choice open. C1211 design gates C1194; C1212 domain ceiling gates C1195 sizing; C1213 completed the C1205 a schema/provenance migration before artifact freeze. C1206 refusals and C1207 diagnostics remain queued. C1214 delivered independent ranked completeness; C1215 owns API cleanup, C1216 Datalog/private Rel ABI and WASM gate, C1217 relational formalization, C1218 Rel extraction after C1205 c.
 **Programme review and next steps (2026-09-16)**: `../2026-09-16-ergodis-datalog-programme-review.md`

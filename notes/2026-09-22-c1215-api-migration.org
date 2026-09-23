@@ -4,11 +4,11 @@
 
 * Status and scope
 
-IN PROGRESS: implemented in core =a63b444= / =8aec9ab= and private =0f41eb4=.
-Functional gates and exact benchmark parity pass. The full native matrix
-retains small instruction losses; acceptance needs a scoped disposition.
-This is the remaining approved C1215 migration after the public replay repair.
-The exception for private =ca52a3e= does not cover this increment.
+COMPLETED 2026-09-22: implemented in core =a63b444= / =8aec9ab= and
+private =0f41eb4=. Functional gates and exact benchmark parity pass. The
+full native matrix retains small instruction losses; the user approved a
+scoped exception for this API cleanup on 2026-09-22. The earlier exception
+for private =ca52a3e= covers only that separate replay repair.
 
 The migration consolidates cold construction and admission, distinguishes the
 grounded weighted plan from the demand-driven plan, and separates measurement
@@ -153,9 +153,9 @@ The whole private-root wasm32 Unix control-plane failure remains a separate
 known limitation; it was not rerun unchanged. Neither core WASM compilation nor
 Linux execution establishes native macOS, Windows or ARM support.
 
-Matched native acceptance remains pending. The first default candidate's large
-instruction loss is repaired; the second candidate still has smaller losses.
-Neither is accepted under the replay exception.
+The first default candidate's large instruction loss is repaired. The second
+candidate's smaller losses are accepted under the API-specific exception
+recorded below, not under the replay exception.
 
 ** First candidate calibration: native gate failed
 
@@ -192,7 +192,8 @@ retained second candidate will test this; a full matrix is paused meanwhile.
 The four-attribute repair is committed as core =8aec9ab=. Default rules tests,
 all 1,057 core all-feature tests, Clippy, formatting, Python parity and the
 manifest pass. The private 117 default and 118 instrument tests pass again,
-now including the final test docstring. Native acceptance is still pending.
+now including the final test docstring. Native no-loss acceptance is addressed
+by the scoped exception recorded below.
 
 ** Second candidate: full matrix and remaining decision
 
@@ -273,14 +274,24 @@ further source change is justified by this evidence alone. Exact commands,
 identities and arithmetic:
 [[file-rev:cddd241:~/src/ergodis-private/analysis/datalog-comparison/c1215-api-lowering-diagnosis.md][independent lowering diagnosis]].
 
-Recommendation: retain this API cleanup under an explicit, bounded exception
-for these revisions and this recorded matrix, including its unresolved timing
-and cache limits. Its maintenance benefit is concrete: fewer construction and
-admission wrappers, explicit configuration, accurate policy accounting and a
-smaller default measurement API. It is not a native speedup. The alternative
-is a forward revert of this increment while preserving the separately approved
-replay repair. =PERFORMANCE.md= requires a revert for measured losses; the
-recommendation therefore awaits the user's decision. C1215 stays open.
+** User decision and scoped exception, 2026-09-22
+
+After reviewing the full matrix and the separate replay exception, the user
+chose: "Keep the API cleanup with a documented scoped exception." This
+authorizes retention of core =a63b444= / =8aec9ab= and private =0f41eb4=
+despite the measured C1215 instruction losses recorded above and in the
+24-receipt matrix. It covers this Linux x86-64, rustc 1.95.0, retained-binary
+comparison and the recorded uncertainty in cycles, wall time, cache events
+and independent cold-process RSS observations. It does not establish timing
+neutrality, native macOS/Windows/ARM support, or a waiver for future changes.
+The =PERFORMANCE.md= default revert rule is overridden only for this approved
+API increment. The first candidate's 3.5% default regression remains
+rejected; the four-helper repair =8aec9ab= is part of the retained version.
+
+The maintenance benefit is concrete: fewer construction and admission
+wrappers, explicit configuration, accurate policy accounting and a smaller
+default measurement API. No native speedup is claimed. C1215 is complete
+under this explicit exception and the separate replay exception.
 
 ** Review repairs before acceptance
 
