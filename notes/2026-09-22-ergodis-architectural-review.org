@@ -1005,8 +1005,12 @@ records the opt-in command matrix, C1214 a's bounded independent-oracle/mutation
 coverage, and C1215's trust-boundary audit with two existing replay-panic
 reproductions. Core/default/all-feature gates and separate native/wasm32 checks
 for all nine provider families passed after a documented shared-target rebuild.
-The panics remain unfixed; production completeness independence, full API cleanup,
-native target execution and mandatory-gate policy remain open.
+Subsequently, [[file-rev:2e0807a1f:~/src/othello/notes/2026-09-22-c1214-independent-completeness.org][C1214 independent completeness report]]
+records the delivered independent ranked completeness pass (core =19cee8f=),
+Astra acceptance, final correctness gates and measured costs. Admission, stores,
+indexes and ranked support helpers remain shared. Overall B− and portability C−
+grades are unchanged. The panics remain unfixed; full API cleanup, native target
+execution and mandatory-gate policy remain open.
 
 | Step | Recommended change | Effort / risk | Acceptance |
 |------+--------------------+---------------+------------|
@@ -1088,7 +1092,8 @@ chain can be independently replayed.
 
 ** Continue already allocated semantic work
 
-- C1214: checker mutation tests and an independent completeness implementation.
+- C1214 completed: bounded checker mutation/oracle tests and independently
+  implemented ranked completeness; see the delivery report above.
 - C1205 b/c: transferable layered Rel evidence and construction verification.
 - C1215: API cleanup, especially opaque validated state and source binding.
 - C1216: Datalog/private Rel ABI and real backend WASM coverage.
@@ -1097,7 +1102,7 @@ chain can be independently replayed.
 
 The contract extraction and Datalog schema/provenance migration have already
 landed; they should not be re-proposed as missing architecture. The current
-handoff's next semantic increment is C1214 a.
+handoff's next semantic increment is C1215 public replay shape validation.
 
 ** Maintenance and extension work after the boundary decisions
 

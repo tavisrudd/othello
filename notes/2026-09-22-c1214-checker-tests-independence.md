@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: IN PROGRESS — milestone a bounded fixtures delivered and reviewed (core `b1b3686`); milestone b remains open.
+**Status**: COMPLETE — milestone a bounded fixtures (core `b1b3686`) and milestone b independent ranked completeness (core `19cee8f`) delivered and reviewed by Astra.
 **Authority**: `notes/2026-09-22-c1208-follow-up-triage.md` (approved allocation and order).
 
 Approved C1208 alloc-2. Two separately reviewable milestones; use C1205 milestone a's
@@ -28,6 +28,12 @@ mutation family is exercised and rejected for the intended reason, not an earlie
 unrelated failure. Retain minimized regressions.
 
 ## Milestone b — independent completeness
+
+Delivered: `2026-09-22-c1214-independent-completeness.org`; final validation in
+the adjacent `-validation.json`. Default/all-feature suites, manifest, Clippy,
+formatting, Python parity and wasm32 compilation pass. Nine measured cohorts
+improve whole-check instruction counts; native platform execution remains open.
+Shared admission, stores/indexes and ranked support helpers are explicitly retained.
 
 Write one checker's closed-world/completeness pass independently of the shared pass,
 with its own algorithmic explanation and tests. Name remaining shared admission, stores

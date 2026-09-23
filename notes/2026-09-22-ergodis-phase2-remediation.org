@@ -295,9 +295,11 @@ are committed; bulk logs remain in the cache.
 
 Remaining work is intentionally explicit:
 
-1. C1214 b: implement and review an independent production completeness pass,
-   with its own algorithm, bounded-oracle agreement and performance gates. The
-   current two production checkers still share that pass.
+1. C1214 b subsequently completed in core =19cee8f=: [[file-rev:2e0807a1f:~/src/othello/notes/2026-09-22-c1214-independent-completeness.org][C1214 independent completeness report]]
+   records the independent ranked pass, bounded-oracle agreement, Astra review
+   and final performance/correctness gates. Admission and store/index trust
+   remain shared. This later authorized increment is distinct from the initial
+   test-only changes documented here.
 2. C1215: specify and implement complete public record/closure validation, then
    turn the two panic characterizations into rejection regressions. Address
    constructor opacity, source binding and instrumentation in the owning API
@@ -307,13 +309,14 @@ Remaining work is intentionally explicit:
    fixtures. Optional threaded/provider feature combinations remain separate
    coverage, not implicit in default-family compile checks.
 
-No new kernel or algorithm was introduced, so no performance result or speed
-claim accompanies these test changes. The shared-target stale-artifact incident
+The initial test-only increment introduced no new kernel or algorithm, so no
+performance result or speed claim accompanies those changes. The subsequent
+C1214 b report separately records its production implementation and measurements. The shared-target stale-artifact incident
 is retained above as a diagnosed validation failure followed by a successful
 rebuild, not hidden behind a clean retry. No genuinely incidental research
 discovery arose; the findings were directly sought by this audit.
 
-Cache closeout: 61 entries scanned, zero unreferenced and old enough to delete;
+Initial test-only cache closeout: 61 entries scanned, zero unreferenced and old enough to delete;
 dry run only. No retained benchmark binaries or profiles were created. All local
 Org revision links use =~/= as requested and were checked with the custom link
 parser; actual validation commands retain their explicit absolute working paths.

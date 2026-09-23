@@ -231,7 +231,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 - **C1207 `[ergodis]` [QUEUED — AUDIT + DESIGN SESSION WITH TAVIS]** — error reporting and error UI across core, private, tools, ABI/WASM and browser: inventory, taxonomy, general error model → `notes/2026-09-18-c1207-error-reporting-audit-and-design.md`
 - **C1211 `[ergodis]` [QUEUED]** — min-plus evaluator/certificate design memo before C1194 → `notes/2026-09-22-c1211-min-plus-design.md`
 - **C1212 `[ergodis]` [QUEUED]** — arity-dependent domain ceiling before C1195 sizing → `notes/2026-09-22-c1212-arity-domain-ceiling.md`
-- **C1214 `[ergodis]` [IN PROGRESS]** — milestone a bounded mutation/oracle suite delivered; b independent completeness remains → `notes/2026-09-22-c1214-checker-tests-independence.md`
 - **C1215 `[ergodis]` [IN PROGRESS]** — initial audit/panic reproductions delivered; shape validation and builder/API/instrument migration remain → `notes/2026-09-22-c1215-demand-api-cleanup.md`
 - **C1216 `[ergodis]` [QUEUED]** — Datalog/private Rel module ABI, WASM build gate and eager-commit defaults → `notes/2026-09-22-c1216-datalog-rel-module-abi.md`
 - **C1217 `[ergodis]` [QUEUED]** — formal relational support/completeness argument after the design memo → `notes/2026-09-22-c1217-relational-support-proof.md`

@@ -332,7 +332,7 @@ Build jobs, Rust test threads and Rayon threads were capped at eight. The final
 matrix accepted the run and recorded unchanged source snapshots before/after;
 primary matched both the committed tracked patch hash and new-module hash to
 that validated snapshot. Full compact gate data is in
-=2026-09-22-c1214-independent-completeness-validation.json= beside this report.
+[[file-rev:2e0807a1f:~/src/othello/notes/2026-09-22-c1214-independent-completeness-validation.json][the committed final validation receipt]].
 
 Replay the correctness matrix from =~/src/othello=:
 
@@ -398,3 +398,6 @@ mandatory-gate policy remain separate open work.
 - Cheap closeout checks completed: source-to-validation hash matching, committed
   executable re-retention, and explicit intentional-duplication guidance.
   No incidental research discovery arose; all observations were directly sought.
+
+Cache closeout: dry run scanned 64 entries, zero unreferenced and old enough
+to delete. No cache entries or retained binaries were deleted.
