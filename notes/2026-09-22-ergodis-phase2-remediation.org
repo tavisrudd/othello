@@ -1,0 +1,72 @@
+#+title: Ergodis architecture review — Phase 2 protection and API audit
+#+date: 2026-09-22
+#+author: Tavis Rudd / Codex
+#+startup: overview
+
+* Scope and authority
+
+User authorized starting Phase 2 while an independent Astra agent reviewed
+Phase 1. The scope is R6–R8 in the
+[[file-rev:acd900c3a:/home/tavis/src/othello/notes/2026-09-22-ergodis-architectural-review.org::*Phase 2 — add inexpensive protection against recurrence][architectural remediation plan]].
+This is an opt-in validation inventory and test/audit increment. Changing
+required CI/release gates, public type visibility, wire formats, or production
+checker algorithms is outside this increment.
+
+Starting revisions: core =831d56c68bb9430d11436291de1078a37ad79478=,
+private =85f2586d19229dba20c4a6e52abe85b49505771b=.
+The Phase 1 Astra review is tracked in its original dated report; its small
+documentation/test follow-up may advance the private revision before these gates.
+
+* Work plan
+
+** R6 — explicit validation command matrix
+
+Primary owns a private contributor script under =notes/scripts/= and this
+report. Inventory root defaults/all-features, the separately enabled native
+module host, canonical browser workflow, and each of nine independently built
+provider packages for native and wasm32. Keep provider features separate so
+feature unification cannot disguise a missing family build.
+
+The opt-in runner must execute actual commands, record repository revisions,
+dirty state, toolchain, command exit status and logs, show unselected rows as
+skipped, and label compile-only checks separately from execution. The browser
+row orders locked check, fresh build, tests and smoke; a failed build must stop
+that row before stale artifacts can be tested. Record generated artifact hashes.
+An ignored module recipient test remains an explicit integration gap until its
+separate package/transcript fixture is supplied. No support matrix cell becomes
+native execution coverage merely because it compiles or runs as WASM.
+
+** R7 — checker mutations, C1214 milestone a
+
+A Sol agent owns only checker integration tests. Start with the delivered
+prepared-source byte-door fixtures. Compute expected tiny closures with an
+independent bounded oracle, not either production completeness pass. Add exact
+rejection checks for isolated support/rank, missing/extra/duplicate fact,
+premise/index, source-binding, n-ary and decoder-bound mutations across both
+certificate formats. Each valid control must pass first; each mutation must
+reach its intended check. State finite scope and missing cases.
+
+Primary reviews the test oracle, mutation discriminators and coverage ledger,
+then runs the focused tests and existing core gates and regenerates the source
+manifest in the same commit. Production checker changes require a separate
+decision if a test exposes a real defect. C1214 milestone b remains open; tests
+do not establish algorithmic independence or formal soundness.
+
+** R8 — validated-state API audit, initial C1215 slice
+
+A second Sol agent inventories constructors and trust assumptions behind
+admitted/certified/verified types, including external re-admission and trusted
+in-process paths. Distinguish a violated documented precondition from unsafe
+acceptance of external bytes. Propose bounded regression tests at the concrete
+boundaries; avoid colliding with R7's checker tests. Report source ownership,
+indexing and staged-frontend invariants explicitly.
+
+Opaque types, builder migration, instrumentation features and frontend source
+binding remain the larger owning-task work. No panic guard is added until its
+intended contract is established. Primary owns review and acceptance.
+
+* Review and validation record
+
+In progress. Build windows and manifest regeneration are coordinated by the
+primary; sub-agents do not run competing Cargo jobs. Existing performance rules
+apply to any proposed kernel or layout change; this increment plans neither.

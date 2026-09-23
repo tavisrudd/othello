@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: QUEUED — allocated by Tavis from C1208.
+**Status**: IN PROGRESS — milestone a started under the user-authorized architecture Phase 2; milestone b remains open.
 **Authority**: `notes/2026-09-22-c1208-follow-up-triage.md` (approved allocation and order).
 
 Approved C1208 alloc-2. Two separately reviewable milestones; use C1205 milestone a's
@@ -11,6 +11,8 @@ after C1210; extend those tests when C1213 migrates formats. This is distinct fr
 new-door tests, and does not wait for the format migration to start.
 
 ## Milestone a — tests first
+
+Current implementation and coverage record: `2026-09-22-ergodis-phase2-remediation.org`.
 
 Build checker-crate fixtures and mutate both certificate families, including cases no
 producer emits: support/rank errors, missing/extra/duplicate facts, bad premises and
