@@ -177,3 +177,41 @@ are labelled whole-process symbol shares, not isolated completeness costs.
 Pending: final full gates, candidate retention, candidate call inspection,
 interleaved counters/cache measurements, final evidence review and disposition.
 The production patch remains uncommitted until those acceptance gates settle.
+
+** First measured candidate — rejected for cost
+
+Functional gates passed: 923 default tests (2 ignored), 1,056 all-feature tests
+(3 ignored), formatting, all-target/all-feature Clippy, Python fixture parity
+and source manifest. The verifier also compiled for =wasm32-unknown-unknown=.
+These gates establish neither native macOS/Windows/ARM execution nor browser
+execution of this increment.
+
+Candidate measured SHA-256:
+=80e1834d8739fbb864031e3702e21018c0967f4c10062386e67d2d38f54b4785=;
+private =60353f9=, core =b1b3686= plus the frozen owned patch. The source snapshot
+was stable throughout the accepted validation matrix and retention.
+
+Five interleaved rounds at 3/6 repeated whole checks measured six instruction
+regressions of approximately 0.9–1.8% across nine frozen cohorts. Dense closure
+improved about 1.9%; path3/path4 improved slightly. A/A instruction nulls were
+within approximately 25 ppm; unchanged trace-checker controls stayed near
+unity. This is a ranked-checker cost, not explained by measurement noise.
+Exact results and evaluator work counts agreed in every sample. Evaluator work
+counts are not measurements of completeness traversal work.
+
+The traversal's only ordinary out-of-line call is the shared index probe;
+bounds/panic calls are cold paths. Two fixed 256-byte =memcpy= calls occur in
+per-rule compilation/setup, before traversal, not inside its tuple loop.
+Symbol profiles locate the changed work but do not measure isolated phase
+cost. Some small-cohort cache-event A/A differences are unstable and cannot
+support a cache-effect claim.
+
+Primary rejected this candidate for acceptance and retained its source patch,
+binary and measurement evidence. Astra approved one narrow next experiment:
+dispatch once per rule to body lengths 1–4 using a const generic, size the
+frame/bucket arrays to that body length, and use the constant at the leaf test.
+Keep matching, projection and all other representations unchanged. Expected
+benefit: less setup for short bodies and fewer runtime length/bounds operations.
+It need not eliminate the dynamic first-position branch; recovery of the
+measured cost remains a hypothesis. Compact frames are deferred to avoid
+combining changes before evidence warrants them.
