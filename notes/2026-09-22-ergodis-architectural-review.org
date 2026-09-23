@@ -977,6 +977,15 @@ that effect and follow the existing manifest/record compatibility rules.
 
 ** Phase 1 — repair the three concrete, bounded defects
 
+Implementation update (2026-09-22): the detailed plan, Sol red-team review,
+three independent repair commits, exact gates and remaining target-validation
+limits are recorded in
+[[file-rev:b80c0bd87:/home/tavis/src/othello/notes/2026-09-22-ergodis-phase1-remediation.org][Phase 1 implementation and validation]].
+R3 passed the locked build and fresh browser checks. R4 and R5 are implemented
+with Linux/host regression coverage; Darwin compilation and native ARM/Windows
+execution remain unverified. This update does not replace the historical
+findings or raise the due-diligence grades.
+
 | Step | Recommended change | Effort / risk | Acceptance and stop condition |
 |------+--------------------+---------------+-------------------------------|
 | R3 | Refresh the separate WASM lock against the intended pinned dependency graph (F02) | Small; low if confined to graph reconciliation | Review every lock diff; explain or exclude unrelated dependency upgrades. The documented locked wasm32 check/build passes, then browser smoke/parity runs against that newly built artifact |

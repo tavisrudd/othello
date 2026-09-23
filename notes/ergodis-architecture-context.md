@@ -5,6 +5,12 @@ Pinned public/private crate and module inventory, evidence/host boundaries, and
 macOS/Windows/ARM assessment; distinguishes current core main from the older public
 snapshot. Records the macOS memory-advice blocker and stale canonical WASM lock.
 
+Phase 1 implementation: `2026-09-22-ergodis-phase1-remediation.org` records the
+reviewed lock, page-advice and fallback-clock repairs (core `b1cd0bc`/`831d56c`,
+private `85f2586`), passing Linux/WASM gates, and outstanding native-target
+validation. The original review and grades remain historical; the repairs do
+not establish macOS/Windows/ARM support.
+
 Current paired native/JS capability inventory and implementation ordering:
 `2026-09-09-c1130-js-wasm-parity-review.md`. Resolve host fragmentation together;
 preserve typed native execution. This is private, not-to-ship context.

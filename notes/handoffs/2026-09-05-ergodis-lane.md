@@ -22,6 +22,12 @@ not-to-ship contributor guidance. Narrow UI/admin work does not require the full
 pinned public/private architecture and module inventory, prioritized findings, and
 macOS/Windows/ARM portability assessment; review only, no implementation changes.
 
+**Architecture Phase 1 (2026-09-22)**: `../2026-09-22-ergodis-phase1-remediation.org`
+contains the detailed plan, Sol red-team disposition, and three reviewed repair
+commits: core `b1cd0bc` (WASM lock), `831d56c` (page advice), private `85f2586`
+(monotonic fallback and receipt units). Linux/WASM gates pass; Darwin compilation
+and native ARM/Windows validation remain open. No public export or grade change.
+
 **Performance context (required)**: `~/src/ergodis-dev/PERFORMANCE.md` is the always-on rules
 layer for any Ergodis Rust edit. Before a hot-path edit, benchmark, A/B, profiling or
 measurement-stage task, also read `~/src/ergodis-dev/performance-playbook.md` in full (contract
