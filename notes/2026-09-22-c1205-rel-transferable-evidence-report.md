@@ -1229,6 +1229,9 @@ from each binary's `.comment` when the A/B is written up.
 | private `c1205b` | `db37035` | Step 6: the tests (see "Step 6" below): `tasks/tools/tests/rel_chain.rs` (two processes), the leaf, list, certificate-entry, forgery and file suites in `tests/rel_chain.rs`, fixture `tests/rel_chain/fallback.rel`, `tests/rel_layer_identities.rs::the_certificate_digests_of_every_layer_are_pinned`; `ergodis-contract` as a dev-dependency of `ergodis-tools` |
 | private `c1205b` | `4138f8b` | Step 7 receipts: `analysis/datalog-comparison/ab-2026-09-22-chain-derivation-loop.json` (+ `.jsonl`), `analysis/rel-frontend/performance-v11-chain-db37035.json`, `performance-v11-chain-constructions-db37035.json` |
 | private `c1205b` | `222b4f8` | Step 7 remainder receipts, `analysis/rel-frontend/chain-stage-shift/`: callgrind attribution of the `lower` and `stratify` stages (`callgrind_attribution.py`, `callgrind-{lower,stratify}-<cohort>.json`), the glibc mmap-threshold A/B (`mmap_threshold.py`, `mmap-threshold-<cohort>.json`), peak RSS (`peak_rss.py`, `peak-rss.json`, `peak-rss-mmap-threshold.json`), massif peak trees of the `stratified` cohort, the executed-instruction mix of the lowering body and `dedup_rows` (`instr_mix.py`, `instr-mix.txt`), the normalized `dedup_rows` disassembly diff, the chain cost (`chain_cost.py`, `chain-cost-512.json`), and `call_counts.py` |
+| private `c1205b` | `6575bba` | `evaluate_with` drops the ranked checker's relations (`searched`) right after the derivation/ranked comparison, before the checker/evaluator comparison where a layer's memory peaks |
+| private `c1205b` | `71c25e7` | `rel-lower --chain` stages the chain in a sibling `<name>.partial-<pid>` directory and renames it into place only when complete (the staging directory is removed on every other exit); each refusal path returns an error with `--chain`, so the process exits 1; `tasks/tools/tests/rel_chain.rs::a_refused_run_exits_with_an_error_and_leaves_no_chain` |
+| private `c1205b` | `267acdd` | Receipts for the two fixes: `analysis/rel-frontend/performance-v11-chain-drop-71c25e7.json`, `chain-stage-shift/peak-rss-drop-71c25e7.json`, `peak-rss-drop-71c25e7-mmap-threshold.json`; `peak_rss.py` takes a candidate binary and cohort list |
 
 Core gate at `064cde2`: `generate_evidence.py --write`, `cargo fmt --all -- --check`, `cargo clippy
 --all-targets --all-features -D warnings`, `cargo test --all-features` (85 `ok` blocks, zero
@@ -1255,6 +1258,25 @@ Full private `cargo test --all-features --no-fail-fast -j 12` at `4138f8b` (agai
 `064cde2`, under `nix develop ../ergodis`): exit 0, 14 min, 44 `ok` blocks, 1,196 passed, 0
 failed, 17 ignored. Nothing to fix. The tree was clean at the start; the untracked receipt
 directory of `222b4f8` was written during the run and is read by no test.
+
+Gates at `71c25e7` (the two fixes; receipts `267acdd` add no code): `cargo fmt --all --check`
+clean; clippy `--all-targets --all-features -D warnings` clean for the root and for `-p
+ergodis-tools`; `rel_chain` (12), `rel_check` (3), `rel_layer_identities` (2, pins
+unedited), `rel_externals` (1), `rel_frontend_portability` (2), `rel_lowering` (53, parity and
+fingerprint assertions unedited), `rel_reference_eval` (19, the differential unedited), the
+library's `rel_` unit tests (5) and `ergodis-tools` (41 + 3 + 2, the new refusal test
+included): all green. Full private `cargo test --all-features --no-fail-fast -j 12` at
+`267acdd`, clean tree: the 43 test binaries 1,194 passed, 0 failed, 17 ignored; the doctest
+target failed to compile, and on rerun alone after the step below, passed (2). Cause, foreign:
+another session built `~/src/ergodis-private` against `~/src/ergodis` into the shared target
+at 18:30 and again at 18:48, overwriting the unhashed `debug/deps/libergodis_rules.rlib`
+(the crate also builds a `cdylib`, so its rlib carries no metadata hash), and rustdoc then
+linked `ergodis_rules` from `~/src/ergodis`, which lacks `TransferableSource`. `cargo clean -p
+ergodis-rules --profile dev` (this crate's dev artifacts only) and an immediate rerun of the
+doctests fixed it. Totals as at `4138f8b`: 44 blocks, 1,196 passed (the root package's `cargo
+test` does not build `ergodis-tools`, whose tests ran separately above). The collision
+recurs whenever both trees build into the shared target; it affects any `c1205b` gate run
+while the main checkout is being built.
 
 #### Steps 2 and 3: checked types, the program statement and the independent rebuild
 
@@ -1588,11 +1610,58 @@ medians within 84 KiB, inside the round-to-round range (about 5.9 to 6.6 MB).
   as a temporary, freed at the end of the statement; the candidate binds `let searched =
   demand.verify_ranked(&ranked)?` for the disagreement report, so the ranked checker's
   relations live to the end of the layer, across the checker/evaluator comparison whose
-  `dedup_rows` copies make the peak. A `drop(searched)` after the comparison (or scoping the
-  binding) would restore the control's peak; not done here, since it changes the timed code.
+  `dedup_rows` copies make the peak. Fixed in `6575bba` (next subsection).
 - **The other differences follow the heap layout:** under the fixed threshold `datalog`'s
   +1.65 MB is +0.19 MB and `aggregate`'s −2.4 MB is +0.12 MB. The remaining +0.1 to +0.2 MB is
   of the order of the candidate binary's larger text.
+
+#### The ranked relations released (`6575bba`), re-measured (receipts `267acdd`)
+
+`6575bba` adds `drop(searched)` directly after the derivation/ranked comparison in
+`evaluate_with`, before the checker/evaluator comparison where a layer's memory peaks; nothing
+else reads `searched`. New candidate arm: `ergodis-tools-c1205b-drop-71c25e7`, private
+`71c25e7` (both fixes), core `064cde2`, clean, release, default features, rustc 1.95.0
+(59807616e 2026-04-14), retained with `retain-bin.sh tasks/tools ergodis-tools --label
+ergodis-tools-c1205b-drop` and `ERGODIS_FLAKE_DIR` at the core worktree; measured sha256
+`775a8800f108361d1f514cb8a4f111aba9def11514444ea853a85e7aebcf7913`. Control unchanged
+(`ergodis-tools-c1205b-base-482d6e9`).
+
+Peak RSS (`peak_rss.py`, VmHWM, `--repeat 2`, 512 definitions, byte scanner; median KiB with
+range; five rounds, and three with the fixed mmap threshold):
+
+| Cohort | `stratify` control | `stratify` candidate `71c25e7` | Δ | fixed threshold: control | candidate | Δ | Δ at `db37035` |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `datalog` | 24,964 [24,924–25,020] | 25,088 [25,008–25,212] | +124 | 24,636 | 24,760 | +124 | +1,652 |
+| `stratified` | 51,700 [51,640–51,772] | 51,960 [51,796–52,060] | +260 | 50,420 | 50,820 | +400 | +6,400 |
+| `columns` | 57,044 [57,004–57,184] | 57,256 [57,176–57,284] | +212 | 56,220 | 56,296 | +76 | +144 |
+| `columns3` | 6,720 [6,704–6,836] | 6,864 [6,836–7,016] | +144 | 6,720 | 6,888 | +168 | +100 |
+| `aggregate` | 66,380 [66,368–66,532] | 66,644 [66,584–66,732] | +264 | 61,300 | 61,540 | +240 | −2,424 |
+
+The `stratified` peak is back to within 0.26 MB of the control (0.5 per cent), the same +0.1 to
++0.4 MB every cohort shows, including `columns3`, which has no large checker allocation; that
+residual is the larger binary and heap-layout noise, not retention. The 4.18 MB allocation is
+gone from the peak.
+
+Stage A/B (`bench.py --rounds 5 --cpu 5 --stages parse,admit,lower,stratify`, the six-event
+set, 100 per cent enabled, receipt `analysis/rel-frontend/performance-v11-chain-drop-71c25e7.json`;
+load 2.1–13.8, from another tenant, which widens cycles only). Per-iteration instruction
+differences, candidate minus control; every A/A null within 7e-6 of unity:
+
+| Cohort | `stratify` ratio byte / scalar [byte interval] | `stratify` Δ | own Δ (`stratify` − `lower`) | own Δ at `db37035` | own Δ at `db37035`, fixed threshold | lower own Δ |
+| --- | --- | --- | --- | --- | --- | --- |
+| `datalog` | 0.99981 / 0.99981 [0.999806, 0.999807] | −325,343 | −308,410 | −402,650 | −304,573 | −16,913 |
+| `stratified` | 0.99969 / 0.99969 [0.999693, 0.999694] | −480,335 | −451,407 | −399,398 | −437,341 | −28,910 |
+| `columns` | 0.99969 / 0.99969 [0.999693, 0.999695] | −479,282 | −444,160 | −384,972 | −452,295 | −35,104 |
+| `columns3` | 0.99734 / 0.99755 [0.997342, 0.997344] | −21,552 | +13,496 | +16,598 | +19,590 | −35,029 |
+| `aggregate` | 0.99965 / 0.99965 [0.999651, 0.999656] | −245,651 | −219,794 | −178,964 | −199,664 | −25,839 |
+
+`lower` and admission are unchanged from `db37035` to within 40 instructions: the lowering code
+generation is the same. `stratify`'s own difference moved by −94 to +94 thousand per iteration
+between the two candidates, the size of the heap-layout term; the new candidate's figures sit
+within 4 to 20 thousand of `db37035`'s fixed-threshold figures, so releasing one allocation
+early reset the heap layout close to the fixed-threshold one rather than changing any
+instruction path in the loop (the `drop` is one `free` per layer). `columns3` is 3 thousand
+lower, within that term.
 
 #### Cost of retaining the evidence (receipts `222b4f8`)
 
@@ -1615,9 +1684,30 @@ derivation certificates are 54 to 57 per cent. The Fermi said "up to about twice
 measured +21 to +38 per cent. Checking a chain in another process costs 1.4 to 1.7 times the
 plain producer run. The retaining run's peak RSS rises 7 to 11 MB on the three-layer cohorts
 (one layer's encoding and certificates held while written) and not measurably on the others.
-Observation, not a gate: a refused run (`columns3` at 128 and at 512 definitions) exits 0 from
-`rel-lower --chain` and leaves the layers written before the refusal in the directory, with no
-`chain.json`; `rel-verify` refuses that directory (`Missing`, `chain.json`), so it fails closed.
+At `db37035` a refused run (`columns3` at 128 and at 512 definitions) exited 0 from `rel-lower
+--chain` and left the layers written before the refusal in the directory, with no `chain.json`;
+`rel-verify` refused that directory (`Missing`, `chain.json`). Fixed in `71c25e7`:
+
+- **Choice: stage beside the target and rename into place on success.** `rel-lower` checks that
+  the target is absent or an empty directory, writes the chain into a fresh sibling
+  `<name>.partial-<pid>` in the same parent, and `rename`s it onto the target after the manifest
+  is written (an empty target directory is replaced, which `rename` permits). An unpublished
+  staging directory is removed when the run ends, on every refusal and error path. Chosen over
+  deleting what was written because the target then never holds a partial chain at any
+  instant, including when the process is killed or runs out of memory mid-run, when no
+  cleanup runs: the most such a death leaves is a `.partial-<pid>` sibling, never a partial
+  chain under the requested name. The rename is atomic within one filesystem, which the
+  same-parent sibling guarantees.
+- **Exit status.** Each of the six refusal paths (parse, admission, lowering, the backend's
+  lowering budget, the evaluator's row capacity, any other stratified error) still prints its
+  JSON report on stdout; with `--chain` it then returns an error, so the process exits 1 with
+  "<stage> refused the source; no chain written to <dir>" on stderr. Without `--chain` the
+  behavior is unchanged (exit 0 with the report), since that mode is a report tool.
+- **Test** `tasks/tools/tests/rel_chain.rs::a_refused_run_exits_with_an_error_and_leaves_no_chain`:
+  `columns3` at 128 definitions (layer 0 is evaluated and written, layer 1 refused) exits
+  non-zero with `stage: backend`, `ok: false`, no chain at the target and nothing else in the
+  parent; with an empty directory at the target the refusal leaves it empty; the same target
+  then takes a complete chain at 8 definitions, with no staging directory left.
 
 Replay (private worktree at `222b4f8`, arms retained as in the arms table; valgrind 3.26.0):
 
@@ -1717,13 +1807,14 @@ updated after it. The design sections above are the specification.
    and "Cost of retaining the evidence" above). The stage shifts are attributed; peak RSS is
    measured per cohort and stage; the chain cost is measured on the four construction cohorts;
    both ABI harnesses pass at `064cde2`; the full private suite passes at `4138f8b` with nothing
-   to fix. No Ergodis source changed in this step.
-8. **Close.** Decide first on the `searched` retention (mystery ledger: a one-line
-   `drop(searched)` restores the control's peak RSS on `stratified`; it changes timed code, so
-   it needs a new candidate retain, the stage A/B and the peak-RSS run again) and on the
-   refused `rel-lower --chain` run's exit status and partial directory. Then full core and
-   private gates at the final commits; fast-forward check of both branches onto their mains;
-   the independent audit; `cache-gc.sh` dry run.
+   to fix. The two findings of step 7 are fixed: `6575bba` releases the ranked checker's
+   relations before the checker/evaluator comparison, and `71c25e7` publishes a chain only when
+   complete and fails a refused `--chain` run; re-measured against the same controls in
+   receipts `267acdd` (see "The ranked relations released"). The chain-cost table above was
+   measured on `db37035`; the staging rename adds one directory rename per run and was not
+   re-timed.
+8. **Close.** Full core and private gates at the final commits; fast-forward check of both
+   branches onto their mains; the independent audit; `cache-gc.sh` dry run.
 
 #### Divergence
 
@@ -1785,20 +1876,23 @@ repository; removing it is Tavis's call.
   generation or heap layout, and the added work is three to five times the Fermi's "few
   thousand".
 - **The `stratified` cohort's `stratify` peak RSS rose 6.4 MB, 4.4 MB with the heap layout
-  fixed (settled cause, fix open).** The ranked checker's relations (4,184,092 bytes on this
+  fixed (settled; fixed in `6575bba`: +0.26 MB against the control after the fix, the same
+  residual as every other cohort).** The ranked checker's relations (4,184,092 bytes on this
   cohort) are now bound to `searched` for the disagreement report and live to the end of the
   layer, across the checker/evaluator comparison where the peak falls; the control freed
   them at the end of the comparison statement. Massif: peak heap 48.86 MB against 53.05 MB, the
   difference exactly that allocation. The design's performance section said the default path's
-  peak RSS was unchanged; it is not, on this cohort. A `drop(searched)` after the comparison
-  should restore it; it changes timed code, so it goes with the close (Remaining steps,
-  item 8), with a new candidate retain, the stage A/B and the peak-RSS run.
-- **A refused `rel-lower --chain` run exits 0 and leaves a partial directory (open, owner:
-  the close).** Found while timing the chain: `columns3` at 128 and 512 definitions is refused
-  by the complement budget in its second layer; the tool reports the diagnostic, exits 0, and
-  leaves layer 0's three files without `chain.json`. `rel-verify` refuses the directory
-  (`Missing`), so nothing false is accepted. Writing into a temporary directory renamed on
-  success, or a non-zero exit on refusal, would make the failure visible to a script.
+  peak RSS was unchanged; it was not, on this cohort. `6575bba` drops `searched` after the
+  derivation/ranked comparison; with a new candidate (`71c25e7`) the `stratified` peak is
+  51,960 KiB against the control's 51,700, and the stage A/B shows only a heap-layout move in
+  `stratify` (see "The ranked relations released").
+- **A refused `rel-lower --chain` run exited 0 and left a partial directory (settled, fixed
+  in `71c25e7`).** Found while timing the chain: `columns3` at 128 and 512 definitions is
+  refused by the complement budget in its second layer; the tool reported the diagnostic,
+  exited 0, and left layer 0's three files without `chain.json` (`rel-verify` refused the
+  directory, so nothing false was accepted). The chain is now staged in a sibling directory
+  and renamed into place when complete, and a refused `--chain` run exits 1; tested by
+  `a_refused_run_exits_with_an_error_and_leaves_no_chain`.
 - **Literal-map order (settled, fixed in `0d270c7`).** The map was checked as a set, so a
   permuted map was a second spelling with a second chain identity; this was the one case where
   the manifest had a free order the verifier did not fix.
