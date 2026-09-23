@@ -5,11 +5,13 @@
 
 * Status and scope
 
-C1214 milestone b is in progress. Milestone a is recorded in
+C1214 milestones a and b are complete. Milestone b is committed in core
+=19cee8fc08530465ea958e065908e8d0fd29cafe=; Astra accepted the source, tests
+and measured performance disposition. Milestone a is recorded in
 [[file-rev:b837fa65a:~/src/othello/notes/2026-09-22-ergodis-phase2-remediation.org][the Phase 2 report]].
 The user authorized continuing with the independent completeness pass after
 the test-only milestone. No public API, certificate schema, admission policy,
-or release gate change is planned.
+or release gate changed. The verifier implementation identity advances.
 
 Starting core revision: =b1b36861cdbc6cd2b1472a19a6663e94f2b7f310=.
 Starting private revision: =6e31900fb51b8b8b049b9e57404c74dbb0207482=.
@@ -22,9 +24,10 @@ Both tracked worktrees were clean before baseline retention.
 Replace the ranked checker's call to shared trace completeness with a private
 module. Keep witness/rank validation separate. The new pass independently
 computes prefix binding masks, matches constants and repeated variables,
-maintains binding snapshots, and packs each implied head. A uniform iterative
-traversal covers every body position, including the first; rule and body order
-remain the source order. The first atom scans its relation; subsequent atoms
+maintains binding snapshots, and packs each implied head. The final traversal
+dispatches once per rule to body lengths 1–4, then uses bounded nested loops
+and local eight-variable parent/child snapshots. Rule and body order remain
+the source order. The first atom scans its relation; subsequent atoms
 use compound indexes. Prepare required indexes per rule before its traversal.
 
 Compile each atom's constant checks, first variable assignments and equality
@@ -47,14 +50,14 @@ checker implementation rather than silently naming the new one.
 
 ** Invariants
 
-1. A frame owns the binding snapshot on entry; failed rows and descendants
+1. Each loop level owns its parent binding snapshot; failed rows and descendants
    cannot leak bindings into siblings.
 2. Candidate enumeration includes every tuple consistent with the bound
    columns. The independent matcher checks every slot, including constants
    and equality between repeated occurrences of a variable.
 3. Every variable used in an implied head is bound after a complete body match,
    by admission's range restriction. Head packing follows domain radix order.
-4. At a leaf, check membership without opening a fifth frame. Empty relations
+4. At a leaf, check membership without opening a fifth loop level. Empty relations
    exhaust normally. Keep original rule order for =Incomplete(first_rule)=.
 5. Allocate indexes before traversal. The real traversal runs repeatedly under
    an allocation counter and uses fixed capacity state.
@@ -79,8 +82,8 @@ extra indexes and fully populated-head shortcuts are outside this increment.
 Sol implements bounded checker tests and the new private pass; a separate Sol
 implements a repeated-check mode in the existing private benchmark example.
 Primary reviews and owns build coordination, acceptance and this report.
-Astra independently reviewed both design alternatives and will review the
-actual source and evidence before acceptance.
+Astra independently reviewed the design alternatives, actual source, tests
+and final performance evidence; primary accepted the final result.
 
 * Measurement protocol
 
@@ -136,10 +139,9 @@ serial; there is no parallel checker mode to validate.
 
 Astra's final source/test review accepted the implementation with no remaining
 required source changes. Primary reviewed the compiled matcher, prefix/local
-binding distinction, snapshot restoration, head arithmetic and frame bounds.
+binding distinction, snapshot isolation, head arithmetic and loop bounds.
 Earlier review corrections repaired stale shared-completeness documentation
-and completed size/alignment assertions. The initial checker-crate test run
-passed; the final broader gates and measurements remain pending.
+and completed size/alignment assertions. The final full gates and measurements passed as recorded below.
 
 The added integration tests cover four fixed nonbinary source variants against
 the independent tiny closure oracle, through both certificate formats, both
@@ -174,9 +176,8 @@ traversal and index construction before traversal. The latter calls =memmove=;
 it is not evidence of a libc call in the tuple loop. Baseline profile shares
 are labelled whole-process symbol shares, not isolated completeness costs.
 
-Pending: final full gates, candidate retention, candidate call inspection,
-interleaved counters/cache measurements, final evidence review and disposition.
-The production patch remains uncommitted until those acceptance gates settle.
+Final acceptance is recorded below. Two rejected implementations remain
+reproducible as committed patches and measurement receipts.
 
 ** First measured candidate — rejected for cost
 
@@ -215,3 +216,185 @@ benefit: less setup for short bodies and fewer runtime length/bounds operations.
 It need not eliminate the dynamic first-position branch; recovery of the
 measured cost remains a hypothesis. Compact frames are deferred to avoid
 combining changes before evidence warrants them.
+
+The [[file-rev:f743b6e:~/src/ergodis-private/analysis/datalog-comparison/c1214b-variant1-ab.json][first candidate's complete receipt]]
+and [[file-rev:f743b6e:~/src/ergodis-private/analysis/datalog-comparison/c1214b-variant1.patch][exact source patch]]
+are committed, including negative controls and cache limitations.
+
+** Body-length specialization — rejected diagnostic
+
+The second candidate passed the checker-crate tests and Astra source review.
+Its measured binary SHA-256 was
+=dd7408b4b26bda9f0b2d8f1927ab8ffdf0c01b41faa889f787815b2c42c25cf1=.
+It recovered part of the cost, but five-round diagnostic ratios remained
+=1.00892= (sparse closure), =1.00938= (mutual) and =1.00901= (binarized triangle).
+All three remained slower beyond the instruction A/A noise. Broader cache
+measurements were stopped at this failed gate.
+
+[[file-rev:ec30824:~/src/ergodis-private/analysis/datalog-comparison/c1214b-variant2-diagnostic.json][Second candidate diagnostic]]
+and [[file-rev:ec30824:~/src/ergodis-private/analysis/datalog-comparison/c1214b-variant2.patch][exact source patch]].
+
+Primary and Astra selected bounded nested loops for the third candidate.
+Admission permits at most four atoms, so four explicit loop levels can retain
+source order and independent matching while removing dynamic depth, cursor
+and indexed-frame bookkeeping. Parent binding snapshots remain fixed arrays;
+head projection uses one small inline helper. This remains iterative, with a
+compile-time assertion that the admission bound is four. Unlike the earlier
+dynamic-stack design, it exposes each level directly to the compiler. Matching,
+index masks, head semantics and store/index trust remain unchanged. Predicted
+benefit is several fewer bookkeeping instructions per visited candidate;
+code growth, actual calls and counter results still decide acceptance.
+
+** Bounded nested loops — accepted and committed
+
+The third candidate passed the checker-crate tests and Astra source review.
+Retained name =c1214b-unrolled-ec30824=; measured binary SHA-256:
+=e21eefd4f340c5779c8093e5e8546ef9f24245a9ba58a2100f00e9a52449f1a7=.
+All nine frozen cohorts improved whole-check instruction counts, with zero
+exactness failures, 100% event enablement and A/A nulls near unity:
+
+| Cohort | Candidate / control instructions |
+|--------+----------------------------------|
+| closure, sparse, 128 | 0.95862 |
+| closure, dense, 64 | 0.89717 |
+| samegen, sparse, 256 | 0.98018 |
+| mutual, blocks16, 64 | 0.98778 |
+| cycle, sparse, 64 | 0.96299 |
+| path3, sparse, 64 | 0.97896 |
+| path4, sparse, 32 | 0.96288 |
+| triangle, binarized, dense, 64 | 0.96700 |
+| triangle, binarized, sparse, 512 | 0.97850 |
+
+The last cohort crosses the direct-membership budget for its ternary relation
+without generating a large dense relation. These are whole ranked-checker
+measurements on the named workloads, not isolated completeness instruction
+counts or a universal performance guarantee. All final gates passed; the
+following limits are part of the accepted disposition.
+
+
+** Final evidence, costs and measured exceptions
+
+The [[file-rev:62fca14:~/src/ergodis-private/analysis/datalog-comparison/c1214b-variant3-ab.json][committed final A/B receipt]]
+contains all six full receipts, raw-sample hashes, exact source patch identity,
+profiles, cache events, wall/cycle intervals and memory deltas. Its
+[[file-rev:62fca14:~/src/ergodis-private/analysis/datalog-comparison/c1214b-variant3.patch][source patch]]
+is the code committed in core =19cee8f=. The independent
+[[file-rev:57c5862:~/src/ergodis-private/analysis/datalog-comparison/c1214b-census.py][candidate census script]]
+and [[file-rev:57c5862:~/src/ergodis-private/analysis/datalog-comparison/c1214b-census.json][census receipt]]
+replay the original retained generator and infer source-order joins. These are
+independent inferred counts, not production traversal instrumentation.
+
+Measurements used an AMD Ryzen AI 9 HX 370, x86_64 Linux, CPU 3, five
+interleaved rounds, repeat counts 3/6 and the matched pinned compiler.
+Instructions improved 1.2–10.3% across the nine frozen ranked workloads.
+Unchanged trace controls were approximately 1.00001 and 0.99994. This does not
+establish a universal wall-clock speedup:
+
+| Cohort | Paired whole-check wall ratio | 95% interval |
+|--------+-------------------------------+--------------|
+| closure sparse | 0.953 | [0.912, 0.995] |
+| closure dense | 0.891 | [0.866, 0.917] |
+| samegen | 0.976 | [0.960, 0.992] |
+| mutual | 1.007 | [0.988, 1.025] |
+| cycle | 0.979 | [0.939, 1.022] |
+| path3 | 0.961 | [0.906, 1.020] |
+| path4 | 0.936 | [0.918, 0.955] |
+| triangle dense | 1.001 | [0.984, 1.019] |
+| triangle sparse | 0.990 | [0.938, 1.045] |
+
+Intervals use paired high-repeat wall measurements and five log-ratio rounds;
+several effects remain unresolved. Seven checker VmHWM deltas were unchanged;
+samegen changed 1,128 to 1,156 KiB and path4 changed 40 to 36 KiB. These include
+code, stack and allocator pages; no isolated cause is established.
+
+The four traversal symbols total 25,689 bytes (25,728 occupied bytes including
+alignment), versus 10,880 occupied bytes for rejected candidate two. The old
+shared trace completeness symbol is 3,068 bytes but includes setup and is not
+a like-for-like kernel comparison; it remains in the executable. Small-cohort
+cache nulls were noisy. Stress cache ratios were approximately 0.987
+[0.944, 1.033] and 0.968 [0.932, 1.005]; no cache improvement is established.
+
+Astra accepted a measured exception for ordinary out-of-line shared
+=JoinIndexes::probe= calls in body lengths 2–4 and =RelationStore::tuple= calls
+in all body lengths. The actual traversal has no libc calls and passes the
+allocation regression; it is not fully call-free. Two fixed 256-byte =memcpy=
+calls occur in per-rule compilation and shared index setup has =memmove=,
+outside tuple traversal. The whole-implementation A/B supports retaining this
+code; it does not isolate the cost of tuple calls or an inlining counterfactual.
+Whole-process profile shares locate work, not isolated phase cost.
+
+** Final validation and reproducibility
+
+Final default tests: 923 passed, 2 ignored. All features: 1,056 passed, 3 ignored.
+Formatting, all-target/all-feature Clippy with warnings denied, Python bounded
+fixture parity, evidence/source manifest and verifier wasm32 compilation passed.
+Build jobs, Rust test threads and Rayon threads were capped at eight. The final
+matrix accepted the run and recorded unchanged source snapshots before/after;
+primary matched both the committed tracked patch hash and new-module hash to
+that validated snapshot. Full compact gate data is in
+=2026-09-22-c1214-independent-completeness-validation.json= beside this report.
+
+Replay the correctness matrix from =~/src/othello=:
+
+#+begin_src sh
+RUST_TEST_THREADS=8 RAYON_NUM_THREADS=8 \
+  nix develop ~/src/ergodis -c python3 notes/scripts/ergodis-validation-matrix.py \
+  --jobs 8 --run core-default core-all-features \
+  --output ~/.cache/ergodis/c1214b/replay-final
+nix develop ~/src/ergodis -c cargo check --manifest-path ~/src/ergodis/Cargo.toml \
+  --locked -j8 -p ergodis-verify --target wasm32-unknown-unknown
+#+end_src
+
+The A/B receipt retains exact per-cohort argv, binary/source hashes and event
+selection. Raw logs/profiles remain under =~/.cache/ergodis/c1214b=; committed
+receipts retain the measurements and hashes needed to audit the conclusions.
+After both source repositories were committed, retained control
+=c1214b-kept-62fca14= reproduced the measured executable SHA-256 exactly:
+=e21eefd4f340c5779c8093e5e8546ef9f24245a9ba58a2100f00e9a52449f1a7=.
+It pins private =62fca14= and core =19cee8f=. Original, matched-control and rejected
+binaries remain retained; no export or push was performed.
+
+** Source map and maintenance obligations
+
+- [[file-rev:19cee8f:~/src/ergodis/crates/verify/src/ranked_completeness.rs][Private independent completeness module]]:
+  compiled checks/masks/head packing, fixed bounded traversal and allocation test.
+- [[file-rev:19cee8f:~/src/ergodis/crates/verify/src/ranked.rs][Ranked checker]]:
+  unchanged support validation followed by the new completeness pass.
+- [[file-rev:19cee8f:~/src/ergodis/crates/verify/src/lib.rs][Verifier identity]]:
+  source list includes the new module, list-domain version advances to v5.
+- [[file-rev:19cee8f:~/src/ergodis/crates/verify/tests/prepared_source.rs][Cross-door/store oracle and omission tests]]:
+  fixed nonbinary/cyclic sources, edge-domain packing and all eight variables.
+
+The duplicated semantic implementation is intentional assurance diversity.
+Do not consolidate matching, masks or head packing back into the trace helpers.
+Admission-bound changes must update the compile-time four-body assertion and
+fixtures. Future compact-format work must preserve both source doors and both
+certificate families; the completed C1213 migration is already represented.
+
+** Due-diligence disposition and next remediation
+
+Overall grade remains *B−*; portability remains *C−*. This closes the identified
+shared-completeness implementation gap and strengthens bounded tests. Admission,
+stores/indexes and ranked support helpers remain shared. No native macOS,
+Windows or ARM run was performed; wasm32 compilation does not establish native
+OS integration, calling conventions, memory behavior or ARM performance. Full
+browser/provider execution was not repeated for this core-only increment.
+
+Next: C1215 public replay shape validation, converting the two known panic
+characterizations into rejection regressions, followed by the approved API
+migration. Those existing panics remain unfixed. Native runner coverage and
+mandatory-gate policy remain separate open work.
+
+** Closeout / mystery ledger
+
+- Settled: the original independent implementation added measurable bookkeeping
+  cost. The bounded-loop variant removes the regression across all nine frozen
+  instruction cohorts while retaining exact outputs and oracle agreement.
+- Open measurement limit: precise micro-attribution and the tuple-inlining
+  counterfactual are not established. Whole-implementation acceptance does not
+  require another speculative optimization experiment.
+- Open coverage: cache effects and several wall deltas are unresolved; native
+  portability requires native runner evidence. Neither is promoted to a claim.
+- Cheap closeout checks completed: source-to-validation hash matching, committed
+  executable re-retention, and explicit intentional-duplication guidance.
+  No incidental research discovery arose; all observations were directly sought.
