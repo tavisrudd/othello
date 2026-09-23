@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "date": "2026-09-22",
+  "repair_commit": "ec7bb3200e96e9e301399602130841578ab005a5",
+  "source_snapshot": {
+    "private_base": "f95cb528550d02f54776f6bc87953025bbc246ee",
+    "core_revision": "19cee8fc08530465ea958e065908e8d0fd29cafe",
+    "files": {
+      "src/rel_stratified.rs": "ecb57ff0280a6347bc24c8c2f1dc7ee2c467882bac8bd6ec9d19e6910fc92570",
+      "tests/rel_lowering.rs": "ce721bc8ac7ec6bcf6b7d7d592f6f32e448c73fe037a83ef33eef8451e7704e2"
+    },
+    "owned_diff_sha256": "35f977067610462db5715c88b24baa4d2e40a8406da27070482aadaea8a85406"
+  },
+  "commit_matches_validated_files": true,
+  "native_gates_pass": true,
+  "optional_private_root_wasm_gate_pass": false,
+  "commands": [
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--check"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "-j8",
+        "-p",
+        "ergodis-private",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-j8",
+        "-p",
+        "ergodis-private",
+        "--all-features",
+        "--test",
+        "rel_lowering",
+        "--test",
+        "rel_reference_eval",
+        "--test",
+        "rel_frontend",
+        "--test",
+        "rel_frontend_portability",
+        "--test",
+        "datalog_certificate_codecs"
+      ],
+      "exit": 0,
+      "test_counts": {
+        "datalog_certificate_codecs": 11,
+        "rel_frontend": 28,
+        "rel_frontend_portability": 1,
+        "rel_lowering": 57,
+        "rel_reference_eval": 19
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "check",
+        "--locked",
+        "-j8",
+        "-p",
+        "ergodis-private",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 101,
+      "first_error": "E0433 cannot find unix in os; ergodis/src/control/mod.rs:14",
+      "limitation": "Private root unconditionally enables core control-plane. Existing Unix-only dependency boundary; no wasm support established for this root. Not repaired in the replay increment."
+    }
+  ],
+  "working_directory": "~/src/ergodis-private",
+  "environment": {
+    "CARGO_BUILD_JOBS": "8",
+    "RUST_TEST_THREADS": "8",
+    "RAYON_NUM_THREADS": "8"
+  },
+  "wrapper": [
+    "nix",
+    "develop",
+    "/home/tavis/src/ergodis",
+    "-c",
+    "bash",
+    "-c"
+  ],
+  "logs": {
+    "/home/tavis/.cache/ergodis/c1215/20260922-202707-nix-develop-ergodis-c-bash-c-cargo-fmt-check-cargo-clippy-locked-j8-p-ergodis-pri/stdout.log": "81f420908a61cd48d9082848ed01b43d32608cdf78e79d8c23f94b85d04b94cb",
+    "/home/tavis/.cache/ergodis/c1215/20260922-202707-nix-develop-ergodis-c-bash-c-cargo-fmt-check-cargo-clippy-locked-j8-p-ergodis-pri/stderr.log": "37b44bed3aada6270df2e72786ca52c3f882416b0ce5d29697c52bd226627c98"
+  },
+  "limitations": [
+    "No native macOS, Windows or ARM execution",
+    "No new browser or private provider ABI execution",
+    "Whole private root wasm compilation failed on existing Unix control-plane dependency",
+    "Record replay timing not measured by existing stratify loop"
+  ]
+}

@@ -5,8 +5,10 @@
 
 * Status and bounded scope
 
-In progress: the next C1215 increment repairs malformed public inputs to
-=rel_stratified::verify_records=. The initial audit and two panic reproductions
+The bounded replay repair is implemented in private =ec7bb32= and native
+validation passed. Performance regression measurements are pending. The broader
+C1215 API migration remains open. This increment repairs malformed public inputs
+to =rel_stratified::verify_records=. The initial audit and two panic reproductions
 are recorded in
 [[file-rev:b82b3f040:~/src/othello/notes/2026-09-22-ergodis-phase2-remediation.org][the Phase 2 report]].
 Starting private revision =62fca14=; core =19cee8f=. The user requested Sol
@@ -22,7 +24,7 @@ The broader C1215 builder, checker source-enum facade, driver options, Prepared
 rename and instrument-feature migration remain open under the existing task
 card. No new validation policy or public format change is proposed here.
 
-* Planned rejection boundary
+* Implemented rejection boundary
 
 1. Validate shared readout and closure shape before any dictionary rebuild or
    unchecked indexing: parallel lengths, supported arities, tuple divisibility,
@@ -44,8 +46,9 @@ this container alone is documented rather than advertised as verified.
 
 * Cost and validation plan
 
-The repair belongs at the cold replay boundary. Predicted additional work is
-linear in supplied readout/closure data plus domain/provenance checks; allocation
+The repair belongs at the cold replay boundary. The preflight adds
+O(D log D + R log R + T) work for dictionary entries, relation names and closure
+values, plus text comparison and per-record domain/provenance checks; allocation
 and reconstruction already occur in this replay operation. No savings are
 predicted. Evaluator loops and trusted producer construction should be unchanged.
 
@@ -60,3 +63,110 @@ Required gates: malformed-input regression matrix with valid controls, existing
 Rel lowering/record tests, pinned formatting and relevant Clippy/build checks.
 Broaden only where the dependency/feature surface changes. Final receipt records
 actual commands, source snapshot, results and limitations.
+
+
+* Review record
+
+Sol implemented the repair; primary and the already-running Astra reviewer
+independently checked the boundary. Primary owns final acceptance and subsequent
+review, following the user's direction to use Sol subagents without additional
+Astra subagents.
+
+Review corrections before acceptance:
+
+- Replace quadratic prefix scans for duplicate dictionary values/relation names
+  with cold borrowed-key BTreeSets. At 65,536 dictionary entries the former
+  approach could perform roughly 2.1 billion comparisons.
+- Enforce the supported arity bound and test true partial binary rows; a unary
+  row mutation only tested canonical ordering, not tuple divisibility.
+- Reject unknown operators using controls matching the old fallback behavior,
+  making the regression distinguish operator validation from digest mismatch.
+- Check canonical integer spelling and unique typed values, not only successful
+  parsing; validate even a result carrying no materialization records.
+- Bind reconstructed aggregate extensions to the final typed dictionary prefix,
+  and reconcile total facts/bytes with the supplied records using checked sums.
+- Put the source/certificate authority limitation in the public replay rustdoc.
+
+The focused Rel lowering suite passes 57 tests. It includes the existing
+independent fixture oracle, valid complements/filters/all four aggregates,
+empty dictionary/closures, and explicit malformed-input rejection. Logical
+nullary programs are refused by lowering; there is no claimed producer-valid
+nullary test. Replay retains its physical row-width convention =max(1, arity)=.
+This bounded test set is not exhaustive over all hand-built public values.
+
+* API mapping and unchanged obligations
+
+| Surface | Before | This increment |
+|---------+--------+----------------|
+| =verify_records(&Stratified)= | Could panic or use unchecked defaults on malformed public shapes | Same signature; guarded replay returns explicit mismatch |
+| =Error::ComplementMismatch(index)= | Primarily documented for complements | Same variant; documented across all three record families; index 0 also represents shared-shape/summary failure |
+| =Stratified= / =Readout= | Public mutable records | Still public; validation occurs at replay entry |
+| Core trusted admitted checker | Caller-owned admitted invariants | Unchanged |
+| Source, certificate and layer authority | Supplied separately from this container | Still not authenticated by this replay operation |
+
+Type-range metadata is checked for known kinds and range bounds; exact source
+column typing and temporal provenance require source/layer evidence. Declared
+relation IDs, literal IDs and use counts are not authenticated against missing
+layer programs. The four overall materialized facts/bytes counters are reconciled;
+other layer accounting remains descriptive. These limits belong to the broader
+API/evidence work, not a claim of universal malformed-input authenticity.
+
+* Retained control and measurement boundary
+
+The [[file-rev:f95cb52:~/src/ergodis-private/analysis/rel-frontend/c1215-replay-measurement.md][frozen measurement plan]]
+records the four valid cohorts (positive, negation, comparison, aggregation).
+Control: =c1215-replay-control-62fca14=, core =19cee8f=,
+release/default features, pinned Nix rustc 1.95.0, build jobs 8.
+Measured executable SHA-256:
+=2ff64db93aeb231a444337d3a52e9966ff59c2dc5e55afdd8a1ae6342bc0e942=.
+
+The retained manifest marks the private tree dirty: tests/rel_lowering.rs changed
+while the control tool was building. Production sources were held until retention
+completed; the test file is not linked into that executable. Fixture additions
+followed retention. This is not a claim of a wholly frozen clean worktree.
+
+The existing =stratify= stage repeats parsing, admission, lowering, evaluation
+and core certificate checking. =verify_records= runs once outside that timing
+loop to produce the parity field. Its =source_sha256= hashes Rel input bytes,
+not the Rust backend source. No implemented private checker identity change has
+been identified; source/binary provenance changes separately.
+
+Thus evaluator A/B checks compilation/layout movement in unchanged evaluation;
+it does not price the new replay preflight. Replay wall cost remains unmeasured.
+The replay operation deliberately allocates cold reconstruction state; no
+allocation-free replay claim is made, and evaluator hot loops were not edited.
+
+
+* Validation results
+
+Pinned native gates pass: formatting; private all-target/all-feature Clippy with
+warnings denied; and 116 tests across =datalog_certificate_codecs= (11),
+=rel_frontend= (28), =rel_frontend_portability= (1), =rel_lowering= (57) and
+=rel_reference_eval= (19). The reference evaluation target includes generated
+and negation-corpus oracle agreement. These are native tests, including the
+portability-named target; they do not represent browser execution.
+
+The optional whole-private-library wasm32 check failed before reaching the
+changed private module: =ergodis/src/control/mod.rs= imports =std::os::unix=,
+which the private root enables through its unconditional =control-plane=
+dependency. This is the pre-existing boundary identified in the architectural
+review, not a repair regression or a successful WASM gate. No repeat of the
+unchanged failure was attempted. Provider crates' separate portable dependencies
+remain distinct; this increment does not establish WASM exposure for Rel replay.
+C1216 and the existing portability work retain that frontier.
+
+The adjacent =2026-09-22-c1215-replay-shape-validation.json= records exact commands,
+counts, logs/hashes, the failed optional gate and source provenance. Primary
+verified that both committed Rust files exactly match the validated file hashes.
+Core source, certificate formats and source IDs were unchanged. No native
+macOS/Windows/ARM run or new provider ABI/browser run was performed.
+
+Implementation anchors:
+[[file-rev:ec7bb32:~/src/ergodis-private/src/rel_stratified.rs][replay guards and API contract]],
+[[file-rev:ec7bb32:~/src/ergodis-private/tests/rel_lowering.rs][rejection and valid-control tests]].
+The benchmark receipt audit was separately hardened in private =d146f81=:
+[[file-rev:d146f81:~/src/ergodis-private/analysis/rel-frontend/bench.py][actual high/low sample auditing]]
+and [[file-rev:d146f81:~/src/ergodis-private/analysis/rel-frontend/test_bench_samples.py][six focused regressions]].
+Previously only the final high-repeat result was retained. Direct replays cannot
+substitute for observing the actual timed samples, so every measured invocation
+now participates in parity checks.
