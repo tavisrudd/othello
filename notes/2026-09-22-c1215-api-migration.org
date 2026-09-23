@@ -147,7 +147,40 @@ The whole private-root wasm32 Unix control-plane failure remains a separate
 known limitation; it was not rerun unchanged. Neither core WASM compilation nor
 Linux execution establishes native macOS, Windows or ARM support.
 
-Matched native measurements and final binary/source reconciliation remain pending.
+Matched native acceptance remains pending. The first default candidate fails
+the instruction gate; it is not accepted under the replay exception.
+
+** First candidate calibration: native gate failed
+
+Three interleaved rounds, exact output/work parity, 100% enabled events:
+
+| Default evaluator cohort | Instruction ratio | 95% interval |
+|-
+| closure sparse 128 | 1.03587 | 1.03580--1.03595 |
+| closure dense 64 | 1.03449 | 1.03443--1.03454 |
+| path3 sparse 64 | 1.00029 | 0.99962--1.00097 |
+| path4 sparse 32 | 1.00001 | 0.99974--1.00028 |
+
+The instrument build running Auto is neutral on the same two closure cases:
+1.00001 [0.99995, 1.00007] and 1.00005 [0.99990, 1.00019]. A/A instruction
+nulls stay near unity. The feature-dependent compilation shape is implicated;
+this does not yet isolate the instruction delta's mechanism.
+
+Evidence: [[file-rev:ec03e7a:~/src/ergodis-private/analysis/datalog-comparison/c1215-api-calibration.md][calibration and discriminator]],
+[[file-rev:3d6ddc5:~/src/ergodis-private/analysis/datalog-comparison/c1215-api-candidates.json][clean retained candidate metadata]].
+
+Primary disassembly review: the old uncounted evaluator is 0x87e6 bytes and the
+new default is 0x8a6d. The old body calls =shape=, =clear_indexes=,
+=clear_membership= and =index_rows= (three sites); the new default inlines the
+first three and one index-row site. Removing the counted instantiation makes
+these helpers single-use. The trace and ranked admitted-checker bodies retain
+their old sizes; size equality alone is not instruction equality.
+
+Bounded repair hypothesis, before its measurement: preserve those four existing
+helper call boundaries with explicit non-inlining. No algorithm, workspace
+layout or iteration count changes. If changed inlining accounts for the loss,
+the two closure instruction ratios should return to unity. Profiles and a
+retained second candidate will test this; a full matrix is paused meanwhile.
 
 ** Review repairs before acceptance
 
