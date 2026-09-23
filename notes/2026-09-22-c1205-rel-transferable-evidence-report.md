@@ -1818,9 +1818,13 @@ updated after it. The design sections above are the specification.
 
 #### Divergence
 
-At the time of stopping, core `main` is `4b57649` and private `main` is `482d6e9`, the start
-points; both `c1205b` branches fast-forward onto them (core `c1205b` at `064cde2`, private
-`c1205b` at `222b4f8`; checked with `git merge-base --is-ancestor`). The scratch worktree `~/.cache/ergodis/worktrees/c1205b-mut` (a detached
+Both `c1205b` branches still descend from their start points (core `4b57649`, private
+`482d6e9`; checked with `git merge-base --is-ancestor`), core `c1205b` at `064cde2` and private
+`c1205b` at `267acdd`. The mains have moved since, by other work: core `main` is `831d56c`
+(two commits: `b1cd0bc` WASM lock refresh, `831d56c` huge-page advice gated to Linux and
+Android) and private `main` is `5e87740` (two commits on timing units, `85f2586`, `5e87740`).
+So neither branch is a fast-forward of its current main any more; landing needs a rebase or
+merge onto them and the gates again, which is Tavis's call. Not rebased. The scratch worktree `~/.cache/ergodis/worktrees/c1205b-mut` (a detached
 private worktree at `3940964`, clean, and a symbolic link) remains registered in the private
 repository; removing it is Tavis's call.
 
