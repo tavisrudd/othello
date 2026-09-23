@@ -6,7 +6,9 @@
 * Status and bounded scope
 
 The bounded replay repair is implemented in private =ec7bb32= and native
-validation passed. Performance regression measurements are pending. The broader
+validation passed. The first measured variant failed the performance regression gate; a narrow
+cold-only correction is committed in private =53ad57e=, with final native gates
+passing again. Its performance disposition is pending. The broader
 C1215 API migration remains open. This increment repairs malformed public inputs
 to =rel_stratified::verify_records=. The initial audit and two panic reproductions
 are recorded in
@@ -170,3 +172,42 @@ and [[file-rev:d146f81:~/src/ergodis-private/analysis/rel-frontend/test_bench_sa
 Previously only the final high-repeat result was retained. Direct replays cannot
 substitute for observing the actual timed samples, so every measured invocation
 now participates in parity checks.
+
+
+* First measured variant — rejected for aggregate code generation cost
+
+The [[file-rev:743e011:~/src/ergodis-private/analysis/rel-frontend/c1215-replay-variant1.json][committed first-variant receipt]]
+retains all counter samples, A/A controls, parity, profiles and disassembly
+hashes. All actual samples agree exactly; event enablement is 100%.
+Nevertheless, the aggregation fixture consistently increased whole-stage
+instructions by about 0.095% (284–311 instructions per iteration), while lower
+stage differences were only 1–15 instructions. Other cohorts were near parity.
+Cycle intervals included unity; that does not negate the instruction regression.
+
+The unchanged =evaluate= symbol has the same 30,311-byte size and 5,716-mnemonic
+sequence. =aggregate_over= shrank from 3,479 to 3,029 bytes, with a new ordinary
+out-of-line =SpecToString::spec_to_string= call replacing previously inlined
+integer formatting. The new canonical-integer validation's =to_string= call
+is a specific plausible compiler-inlining cause. This is not an isolated replay
+cost: the timed loop does not run record replay. The primary rejected the
+performance disposition rather than silently accepting the small regression.
+
+One narrow experiment replaces that cold formatting comparison with an
+equivalent check: successful i64 decimal parsing, and either exactly =0= or an
+optional minus followed by a first digit 1–9. Parsing checks all remaining
+digits and range; the prefix rule excludes plus signs, leading zeros and =-0=.
+New tests reject =+1=, =00=, =-0= and =-01= and accept negative values and both
+i64 endpoints as well-shaped dictionary entries. Evaluator helpers are unchanged.
+
+Prediction before measuring: if the new formatting call changed inlining,
+removing that call should restore the old aggregate formatting path and recover
+roughly the observed 300 extra instructions per aggregation iteration. This is
+a bounded compiler hypothesis, not a claim of proven instruction attribution.
+
+
+The cold canonical-spelling correction is committed in
+[[file-rev:53ad57e:~/src/ergodis-private/src/rel_stratified.rs][private =53ad57e=]],
+with [[file-rev:53ad57e:~/src/ergodis-private/tests/rel_lowering.rs][edge-case regressions]].
+Formatting, all-target/all-feature Clippy and all 116 native tests passed again
+on this exact snapshot. The optional unchanged private-root WASM failure was
+not rerun. Both variants' validation receipts are retained in the adjacent JSON.
