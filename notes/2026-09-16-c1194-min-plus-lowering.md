@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-16
-**Status**: QUEUED. Ranked third among the Datalog programme's next steps
+**Status**: IN PROGRESS 2026-09-23. Ranked third among the Datalog programme's next steps
 (`2026-09-16-ergodis-datalog-programme-review.md`); independent of C1192/C1193.
 **Gate (C1204 finding F, C1208 triage 2026-09-21)**: satisfied 2026-09-23 by the
 C1211 architecture decision (`2026-09-22-c1211-min-plus-design.org`). Tavis delegated
@@ -47,6 +47,17 @@ components, two of the five benchmark rows step 5 names, need this.
 - Lowering-stage A/B against `ergodis-tools-e0e7331`: scan/parse/admit unity, lowering cost stated.
 - Report with Mystery ledger and the explicit coverage rows (parsed / admitted / lowered /
   executed / certified) for every arithmetic form; audit.
+
+## Current implementation plan
+
+See `2026-09-23-c1194-implementation.org`. The clean immediate Rel control
+`ergodis-tools-cddd241` was retained before source edits under rustc 1.95.0.
+Luna agents implement bounded coding slices; the primary agent designs,
+reviews and verifies them. New weighted contract admission and canonical
+source/result encodings come first, followed by the independent verifier,
+weighted kernel, Rel lowering and naive reference. The existing Boolean hot
+path must retain exact results and measured code shape; new weighted code
+needs its own first-acceptance per-unit budget and profile.
 
 ## Out of scope
 

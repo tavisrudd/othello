@@ -1,0 +1,99 @@
+#+TITLE: C1194 — Weighted Rel implementation plan and evidence ledger
+#+DATE: 2026-09-23
+#+STARTUP: overview
+
+* Status and authority
+
+IN PROGRESS. C1211's [[file-rev:add9af95e:~/src/othello/notes/2026-09-22-c1211-min-plus-design.org][decided architecture]] is the
+source of truth for the admitted fragment, semantics, support-plus-closure
+argument, detached certification and performance boundary. This plan records
+implementation order and evidence; it does not claim completion.
+
+Tavis delegated architecture selection on 2026-09-23 and asked for full
+certification on demand, negligible off-path cost, and unchanged evaluator
+throughput and ordinary output when checking is selected. The primary agent
+designs, reviews and verifies; Luna agents write bounded implementation
+slices.
+
+* Clean controls before source edits
+
+| Arm | Repository/revision | Dirty | Profile/toolchain | Retain recipe and measured hash |
+|-
+| Rel/evaluator/checker control | =ergodis-private cddd241e42495867a65e05c0ecbdf309d34ad60d=, core =8aec9aba067f5fbe471ec31d3ac9c48ed2a77392= | clean/clean | release, rustc 1.95.0, no extra features | =ergodis-dev/scripts/retain-bin.sh ../ergodis-private/tasks/tools ergodis-tools=; SHA-256 =79d986c1087fbcbc23da13e0df7efde5db6f501ebb44c655a316fb3017a424fe= |
+
+The historical =closure_ballpark= binary no longer exists as a core bin
+at this revision. The available =ergodis-tools= control is the matched
+immediate Rel/evaluator driver. Its Boolean demand subcommand and a fresh
+A/A null are the control for any old-path A/B. No new-kernel baseline exists;
+its first accepted build must record instruction and nanosecond cost per
+candidate, row and strict relaxation plus a kernel-scoped profile, then be
+retained for its next edit.
+
+* Implementation order and interfaces
+
+1. Contract. Add a distinct weighted prepared source. Its value table maps
+   every domain ID to an integer payload or an explicit noninteger tag. A
+   weighted relation has a key arity and one cost column outside the key;
+   structural relations are frozen inputs with zero relation cost. Rules
+   contain resolved atoms plus a bounded list of literal/body-field offset
+   addends; each weighted body factor's cost contributes exactly once.
+   Admission checks shape, source budgets, canonical variable binding,
+   finite nonnegative fact costs and addend references. Duplicate weighted
+   facts take the minimum. Encoding includes the typed table and rule
+   addends, is domain separated, and decodes only canonical bytes. Define a
+   canonical sorted value result and a separate fixed-size source/result
+   binding envelope. This module must not change Boolean bytes or semantics.
+2. Verifier. Given *serialized* source/result/envelope, re-admit source,
+   validate canonical result and binding, then independently mark finite
+   rows supported by exact-cost source facts and rule matches on already
+   marked rows. After every listed row is marked, independently test all
+   input facts and all rule matches for closure. Reject exhaustion,
+   overflow, unsupported zero cycles, lower omitted costs, and tampering.
+   Issue a verification record only after both passes. The envelope alone is
+   a claim. The checker belongs in =ergodis-verify= and does not call the
+   weighted producer or its compiled joins.
+3. Evaluator. Prepare a separate weighted relaxation kernel in
+   =ergodis-rules=. Share only cold admission/join/index shape code whose
+   extraction preserves measured Boolean code shape; otherwise retain
+   bounded cold duplication. Stable row IDs index flat tuple and parallel
+   best-cost columns; joins follow every improvement, including improved
+   existing keys. A source-only rule has a seed pass. Queues and join frames
+   are presized; overflow or work exhaustion refuses. The evaluator has no
+   certificate flag, hash, witness/rank column or proof serialization.
+4. Rel. Admit term-level integer =+= and normalize each weighted recursive
+   head-cost expression to every weighted body cost once plus nonnegative
+   literal and bound typed-field addends. Reject subtraction,
+   multiplication, repeated/missing cost variables, negative/noninteger
+   costs, and cost-dependent negation/comparison with =REL05xx= diagnostics.
+   The private route maps the typed dictionary and per-layer carrier to the
+   prepared source. Earlier structural layers freeze before entry.
+5. Independent reference and acceptance. Evaluate min-plus fixed point
+   naively from the admitted AST, without reading RIR or weighted plan.
+   Exercise source SSSP and component labels, duplicate and improved keys,
+   zero/positive cycles, 3/4-body joins, sentinels, malformed bytes,
+   mixed layers and seeded differential cases. Check ordinary result bytes
+   are identical with and without an opt-in check. Run native and WASM
+   compile/parity gates and old-path A/B; profile the new weighted kernel
+   and the verifier separately. Close with the required arithmetic coverage
+   and Mystery ledger.
+
+* Fermi and red-team gates before implementation
+
+- Hot storage at capacity =R=: approximately 16 bytes per row beyond tuple
+  and indexes (cost, two queue slots, epoch). One million rows reserves
+  roughly 16 MB on paper; Unix pages commit lazily, while other targets may
+  commit eagerly. This is a capacity estimate, not an RSS measurement.
+- Off-path certification cost should be one cold API dispatch and zero hot
+  operations; the intended generated weighted loop and normal result bytes
+  are identical. ThinLTO may defeat source-level isolation, so disassembly
+  and an interleaved old/new evaluator A/B are mandatory.
+- Checked total cost is evaluator plus checker. A value-only result makes
+  checker support reconstruction potentially expensive, especially on
+  dense zero-cost joins; measure its marks, matches, instructions, time and
+  RSS separately. A later rank sidecar is allowed only if that measurement
+  warrants it and never changes the normal evaluator/result.
+- An overflow in even a dominated candidate is a deliberate refusal in
+  the first contract. A test must show this exact conservative behavior;
+  no saturated =INF= may silently certify an unbounded answer.
+- Source-bound prepared identity is not full Rel text authority. The
+  existing layer/source provenance task owns that separate boundary.
