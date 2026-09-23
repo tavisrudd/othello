@@ -993,11 +993,17 @@ independent Bellman--Ford =A= then =B= oracle; six chain checker tests; three
 shape tests; the older one-pair pipeline and source checker tests; and strict
 =cargo clippy -p ergodis-private --all-targets --all-features -- -D warnings=.
 The standalone frontend portability test compiles under strict Clippy after
-moving shape tests out of the source it path-includes. A whole-library test
-run was stopped after five minutes without a result; it is not counted as a
-pass. No new macOS, Windows, ARM or WASM runtime run is claimed for this
-private two-stage path. Native code uses portable Rust and the same prepared
-weighted contract, but that is only an architectural portability argument.
+moving shape tests out of the source it path-includes. Its native/WASM replay
+at current source reports 245 cases and 541,205 canonical bytes in exact
+agreement (SHA-256 =c22885cd48011eb77b423a8cb0c14c7f11d59dc9cc6f56d4d63fb1a3d7ad60d1=;
+[[file-rev:955182a:~/src/ergodis-private/analysis/rel-frontend/portability.py][portability runner]]:
+=python3 analysis/rel-frontend/portability.py --output /tmp/c1194-portability-2026-09-23.json=,
+rustc 1.95.0 and Node 24.19.0). That probe compiles the owned recognizer
+source but does not execute the private two-stage evaluator on WASM. A
+whole-library test run was stopped after five minutes without a result; it
+is not counted as a pass. No new macOS, Windows or ARM runtime run is claimed.
+Native code uses portable Rust and the same prepared weighted contract, but
+that remains an architectural portability argument for those hosts.
 
 The checker refuses tampering of either stage result, swapped envelopes,
 omission of any of the four claim components, a changed =A= source even when
