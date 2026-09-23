@@ -25,7 +25,7 @@ Native macOS, Windows and ARM validation remains outside this Linux run.
 - [[file-rev:662188f:~/src/ergodis-private/src/rel_stratified.rs::1348][Private driver]] takes a positional row bound and silently selects Auto;
   its layer reports do not retain the lowering/index policies.
 
-* Proposed old/new mapping and caller obligations
+* Old/new mapping and caller obligations
 
 | Old boundary | New boundary | Caller obligation |
 |-
@@ -50,6 +50,12 @@ Auto, row bounds and workspace byte budgeting remain production capabilities.
 The pages reservation counter also determines mapping offsets: hiding its
 accessor must not remove its atomic increment or change reservation staggering.
 No workspace shape change is intended.
+
+The =policy= builder setter accepts Auto without the feature; only its forced
+enum values require instrumentation. =Policy= retains one-byte representation
+under both feature sets. The existing lookup-counter workspace allocation and
+=Evaluation.lookups= field remain to avoid an unrelated layout/kernel change;
+the production evaluation still selects its uncounted instantiation.
 
 The private feature forwards to rules; tools opt in explicitly. The closure
 harness retains default Auto evaluation/checking and refuses diagnostic flags
@@ -102,7 +108,27 @@ source and certificate identities must remain unchanged.
 
 * Validation and disposition
 
-Pending implementation review, functional gates and matched native measurements.
+The first private default pass accepted 117 relevant tests; the instrument pass
+accepted 118. These are interim passes while the combined source gate finishes.
+Matched native measurements and final source-hash reconciliation remain pending.
+
+** Review repairs before acceptance
+
+- Primary review removed duplicated Auto policy logic introduced by conditional
+  compilation, preserving one selection rule.
+- Sol review found file/module feature gates that hid ordinary Auto sparse,
+  large-universe, budget and workspace-reset tests. These now remain in the
+  default suite; only representation reports and forced-policy cases are gated.
+- Hiding the reservation accessor had weakened the default allocation test's
+  mmap coverage. An isolated unit-test subprocess now checks the private counter
+  around repeated real evaluation without races against parallel unit tests.
+  Primary review caught its initial nesting error; the corrected child must
+  report one passed test, so an empty test filter cannot pass the gate.
+- The measurement driver retains its original =Demand::verify= calls. An
+  unnecessary source clone/direct-checker rewrite was removed before retention
+  so the measured boundary remains comparable.
+- Policy reports describe requested operational configuration, not authenticated
+  evidence. Source/certificate schemas and identities remain separate.
 
 * Operational note
 
