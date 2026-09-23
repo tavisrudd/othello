@@ -15,8 +15,10 @@ Phase 2 initial protection: `2026-09-22-ergodis-phase2-remediation.org` records
 the opt-in command matrix, C1214 a bounded checker oracle/mutations (core
 `b1b3686`), and C1215 API audit/panic reproductions (private `6e31900`). Defaults
 and all-feature gates pass; all nine provider families compile separately on
-native/wasm32. Public replay shape validation and independent completeness are
-still open; characterization of a panic does not repair it.
+native/wasm32. C1214 independent ranked completeness subsequently landed in core
+`19cee8f`; final gates, shared trust and measured limits are recorded in
+`2026-09-22-c1214-independent-completeness.org`. C1215 public replay shape validation
+is in progress; characterization of a panic does not repair it.
 
 Current paired native/JS capability inventory and implementation ordering:
 `2026-09-09-c1130-js-wasm-parity-review.md`. Resolve host fragmentation together;
