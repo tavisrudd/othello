@@ -35,6 +35,38 @@ promising portable computational base and guarded x86 specializations, but there
 is no native ARM validation from this review. Portability needs a matrix of
 components, features, targets, and resource behavior.
 
+** Technical due-diligence grade
+
+*Overall: B−. Confidence: moderate.* Ergodis contains substantial engineering
+with a coherent central design, but product maturity is uneven. This is an
+engineering-readiness assessment of the reviewed revisions. It weighs the
+implementation, maintained boundaries, and demonstrated validation; it is not
+an arithmetic average of the category grades.
+
+| Area | Grade | Basis in this review |
+|------+-------+----------------------|
+| Technical substance | A− | Serious specialized kernels, explicit performance discipline, meaningful verification machinery |
+| Architecture | B+ | Strong plan/workspace separation and inward dependencies; several competing workflow surfaces (F08–F10) |
+| Correctness assurance | B | Scoped checks and independent fixtures; shared completeness logic and incomplete Rel evidence chain (F04–F06/F15) |
+| Maintainability | C+ | Large public surfaces, duplicated implementations, inconsistent validated-state APIs, documentation drift (F06–F08/F16–F17) |
+| Portability/release readiness | C− | Concrete macOS blocker, Windows host gaps, stale WASM lock, and insufficient native target validation (F01–F03/F11/F13–F14) |
+
+The diligence recommendation is to continue development with a focused hardening
+phase before positioning Ergodis as a broadly portable platform. Most findings
+call for consolidation and stronger enforcement of existing boundaries. The
+largest uncertainty is whether new features can be maintained consistently
+across execution, verification, and host paths without multiplying exceptions.
+
+Confidence is moderate because this review combines source inspection with
+scoped tests. It does not establish whole-system correctness or production
+reliability. The technical-substance grade recognizes implemented engineering;
+it does not certify every algorithm or imply a novelty assessment.
+
+The remediation plan below prioritizes inexpensive, independently reviewable
+steps. Closing the build blockers would improve release readiness, but an A-level
+assessment would additionally require stronger evidence independence, demonstrated
+native platform coverage, and sustained control of the API/maintenance surface.
+
 ** Reviewed revisions and visibility
 
 | Repository / tree | Pinned revision | Role |
@@ -918,18 +950,123 @@ Source: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bp_osd.rs::15][guard
 5. Only then describe supported workflows by OS/CPU/features. Retain browser
    runtime coverage separately, including browser engine and thread/SIMD mode.
 
-* Recommended sequence
+* Recommended safe and inexpensive remediation plan
 
-** Immediate bounded repairs
+This is a proposed sequence, not completed implementation work or new task
+allocation. The step labels below are local to this report. Existing C-task
+ownership is retained. Before implementing a step, recheck its finding against
+the then-current source so that a repair already landed elsewhere is not repeated.
 
-- Refresh the WASM lock and bind it to shared dependency changes (F02).
-- Gate Linux memory advice correctly and add Darwin compile coverage (F01).
-- Correct the non-x86 measurement clock and units (F14).
-- Record the explicit Windows feature limitations and portable memory policy
-  before advertising native support (F03/F11).
+“Small” means one bounded concern with a narrow diff and an existing validation
+route. “Medium” involves several consumers or new platform execution. These are
+relative effort estimates, not calendar promises. A missing target runner can
+make a small code change wait for meaningful validation.
 
-These are recommendations from this review, not completed implementation work
-or newly allocated C tasks.
+** Phase 0 — make the support contract accurate
+
+| Step | Recommended change | Effort / risk | Acceptance |
+|------+--------------------+---------------+------------|
+| R1 | Correct current architecture/status documents and the obsolete dependency/performance comments identified in F16; retain historical measurements in their dated reports | Small; low behavioral risk | Claims agree with the recorded source/export revision; no source semantics or numerical evidence changes |
+| R2 | Publish one component × feature × target capability matrix covering native core, control, repository, providers, and WASM; distinguish build, execution, evidence, and performance coverage | Small; documentation only | Windows host gaps, untested native targets, memory-backend differences, and the actual Rel/provider boundary are explicit; every “tested” cell names a reproducible gate |
+
+R1 and R2 can be prepared together, but the matrix should remain a compact current
+map. The large module catalogue and historical rationale belong in this report.
+Correcting a statement does not change a capability's implementation status.
+Comment edits inside identity-hashed source still change provenance (F17); record
+that effect and follow the existing manifest/record compatibility rules.
+
+** Phase 1 — repair the three concrete, bounded defects
+
+| Step | Recommended change | Effort / risk | Acceptance and stop condition |
+|------+--------------------+---------------+-------------------------------|
+| R3 | Refresh the separate WASM lock against the intended pinned dependency graph (F02) | Small; low if confined to graph reconciliation | Review every lock diff; explain or exclude unrelated dependency upgrades. The documented locked wasm32 check/build passes, then browser smoke/parity runs against that newly built artifact |
+| R4 | Restrict Linux huge-page advice to Linux while retaining the appropriate existing allocation backend on each other target (F01) | Small source diff; target validation required | Linux behavior remains equivalent; rules/runtime compile for Intel and ARM Darwin; available native memory allocation/failure/drop tests pass. Cross-compilation alone is labelled as such |
+| R5 | Replace the non-x86 wall-clock cost source with monotonic elapsed timing and make the units explicit (F14) | Small implementation; medium if receipt consumers assume TSC units | Inspect all consumers first; delta measurements cannot use epoch time, receipts distinguish units, and ARM/fallback scoring tests pass. If a serialized contract or ranking policy must change, split that migration into a separately reviewed step |
+
+Use one coherent commit per repair. R3, R4, and R5 are independent; finishing one
+does not require completion of the others. R4's minimal repair should not redesign
+virtual memory, change Linux allocation thresholds, or introduce a new backend.
+R5 should preserve the existing x86 path unless evidence requires a separate change.
+
+** Phase 2 — add inexpensive protection against recurrence
+
+| Step | Recommended change | Effort / risk | Acceptance |
+|------+--------------------+---------------+------------|
+| R6 | Propose a checked command matrix for root/default, modules/native, canonical WASM, and each independently compiled provider family (F02/F09/F10/F13) | Small initial script; medium for native runners | Commands execute validation rather than merely build wrappers; source/artifact revisions are recorded; intentionally skipped configurations are visible. Adopt new required gates through the existing validation-policy decision |
+| R7 | Complete C1214 a's checker mutation fixtures, starting from the existing prepared-byte tests (F05) | Small increments; test-only | Each omitted consequence, bad premise/rank, source mismatch, malformed encoding, and n-ary case fails for its intended reason; expected tiny closures come from an independent bounded oracle |
+| R8 | Under C1215, inventory public validated-state constructors and document trusted in-process versus re-admitting entry points; add bounded regressions for the concrete invariant failures (F06/F15) | Small audit/tests first; API changes deferred | Each malformed-object test names its intended contract. New rejection guards are narrow and preserve valid-input behavior; changes to visibility, source ownership, or public types wait for the API design |
+
+R7 is the cheapest meaningful correctness-assurance improvement, but it does not
+make the two production completeness passes independent. R8 should establish
+which APIs intentionally trust caller invariants before changing them; a panic
+under a documented precondition violation is not automatically the same defect
+as accepting an invalid certificate through an external byte door.
+
+For R6, start with an explicit manifest of commands already supported by the
+repository. Expand to actual native OS/CPU runners as they become available.
+Reusing stale browser artifacts cannot satisfy the new-source gate. Updating
+public CI or changing which checks block a merge/release is a separate policy
+choice, not an incidental consequence of writing the script.
+
+** Phase 3 — consolidate one small duplicate at a time
+
+R9: start with the duplicated cold claim-status bookkeeping or another helper
+whose semantics are demonstrably identical (F07). Compare behavior, public types,
+serialization, error mapping, and callers before replacing private logic with a
+core-backed adapter. Preserve the private calling shape where practical, following
+=hall_core=. Retain differential fixtures for the old and delegated behavior.
+
+This is small only when the core API already expresses the exact private
+contract. If conversion would change wire bytes, identities, supported inputs,
+error semantics, or hot-loop layout, stop the small cleanup and scope that change
+explicitly. The specialized 18-by-29 margin kernel is a later measured candidate.
+Independent reference evaluators and deliberately different checkers remain
+independent; their duplication serves a correctness purpose.
+
+R10: improve navigation with module overviews and an explicit subsystem map
+(F08/F16). Those documentation changes are inexpensive. Physical Rust module moves
+are a separate step: broad public visibility, source-based identities, provider
+=#[path]= wiring, and ThinLTO sensitivity mean “file-only refactor” is not a
+sufficient safety argument. Require evidence of a concrete maintenance benefit
+before moving large files or introducing more crates.
+
+** Changes that need a larger contract or architecture decision
+
+| Work | Why it is not a cheap cleanup | Existing owner / prerequisite |
+|------+------------------------------+-------------------------------|
+| Independent completeness implementation | New checking algorithm with time/memory and soundness obligations | C1214 b after mutation coverage |
+| Transferable layered Rel evidence | Source/layer/construction binding and evidence retention must be specified | C1205 b/c; construction-verifier choice |
+| Opaque admitted state and source-bound frontend stages | Public API, ownership, and caller migration | C1215; coordinate frontend extraction |
+| Portable resource admission | Must account for resident memory, address space, checkers, decoding, and concurrent layers | F11; coordinate C1212 sizing and C1216 WASM work |
+| Datalog/Rel provider lifecycle | New descriptors, execution/evidence exposure, and native/WASM parity | C1216 |
+| Windows native control/persistence | New OS effects and publication/locking/retry guarantees | Explicit supported-workflow decision first |
+| Portable private-library extraction or control-plane relocation | Dependency and feature migration across many consumers | F08/F10; concrete extraction design and retained gates |
+
+The safe first response to a missing Windows host is an accurate capability
+statement. Delivering that host is a distinct engineering project. Likewise,
+opaque types and independent evidence should follow their reviewed contracts
+instead of being bundled into a portability fix.
+
+** Validation, rollback, and reassessment
+
+For each implementation step, record the affected finding, exact owned paths,
+valid-input behavior to preserve, and acceptance result. Apply the repository's
+existing required gates, including manifest regeneration when its covered files
+change. A change touching hot code or layout still requires the prescribed
+allocation, profile, retained A/B, and applicable parallel checks; small diff
+size does not waive them. Documentation-only steps need document/link validation.
+
+Keep unrelated schema, dependency, performance-policy, and publication changes
+out of a repair commit. If a repair fails its acceptance criteria, investigate
+the specific failure or revert that owned change by a forward commit. Preserve
+other work and the reviewed snapshot; publication remains a separate action.
+
+After R1–R8, reassess release readiness and assurance from the new evidence.
+After R9–R10, reassess whether duplicated maintenance and API navigation actually
+improved. Do not automatically raise the overall grade because tickets closed:
+Windows remains unsupported until implemented/tested, ARM performance remains
+unmeasured until measured, and Rel evidence remains incomplete until its full
+chain can be independently replayed.
 
 ** Continue already allocated semantic work
 
@@ -969,7 +1106,7 @@ evaluation backend is not required to address the findings above.
 | Canonical facade locked wasm32 check | Failed before compilation: lock needs update | Current locked graph is stale; no current WASM build claimed |
 | Native target availability | Linux x86-64 and wasm32 standard libraries present | No Darwin, Windows, or AArch64 native build/test performed |
 | Link validation | 518 links / 418 distinct file-revision targets passed | Every source file exists at its saved Git revision; numeric line targets are in range |
-| Org validation | Parsed by batch Emacs with the supplied link handler | 52 headings and all 518 custom links recognized |
+| Org validation | Parsed by batch Emacs with the supplied link handler | 58 headings and all 518 custom links recognized after the grading/plan addendum |
 
 Exact commands, from =/home/tavis/src/ergodis=:
 
