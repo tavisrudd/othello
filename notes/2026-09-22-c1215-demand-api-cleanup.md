@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: IN PROGRESS — public replay repair `ca52a3e` is kept with the user-approved performance exception (2026-09-22); correctness gates pass and measured costs remain recorded. Evidence: `2026-09-22-c1215-replay-shape-validation.org`. Builder/API/instrument migration remains open.
+**Status**: IN PROGRESS — public replay repair `ca52a3e` is kept with the user-approved performance exception (2026-09-22); correctness gates pass and measured costs remain recorded. Evidence: `2026-09-22-c1215-replay-shape-validation.org`. Builder/API/instrument migration is implemented in core `a63b444` and private `0f41eb4`; functional gates pass and matched native performance is pending. See `2026-09-22-c1215-api-migration.org`.
 **Authority**: `notes/2026-09-22-c1208-follow-up-triage.md` (approved allocation and order).
 
 Approved C1208 alloc-3. After C1205 milestone a's source enum and byte door; use C1213's

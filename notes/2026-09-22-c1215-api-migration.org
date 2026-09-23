@@ -4,8 +4,9 @@
 
 * Status and scope
 
-IN PROGRESS. This is the remaining approved C1215 migration after the public
-replay repair. No performance acceptance or task completion is claimed yet.
+IN PROGRESS: implemented in core =a63b444= and private =0f41eb4=; functional
+gates pass, native performance pending. This is the remaining approved C1215
+migration after the public replay repair. No task completion is claimed yet.
 The scoped exception for private =ca52a3e= does not cover this increment.
 
 The migration consolidates cold construction and admission, distinguishes the
@@ -106,11 +107,47 @@ predicted. Any systematic instruction change needs code-generation attribution.
 Core checker source hashing will change its implementation identity; Datalog
 source and certificate identities must remain unchanged.
 
+* Implemented revisions
+
+| Repository | Revision | Boundary |
+|-
+| core | a63b444 | Demand builder, WeightedRulePlan, source-enum checkers, instrument feature and owned core callers |
+| private | 0f41eb4 | Rel driver options, actual body policy in RIR/layer accounting, feature forwarding and owned tools/tests |
+
+Current implementations:
+[[file-rev:a63b444:~/src/ergodis/crates/rules/src/demand.rs][Demand and builder]],
+[[file-rev:a63b444:~/src/ergodis/crates/rules/src/lib.rs][grounded weighted plan]],
+[[file-rev:a63b444:~/src/ergodis/crates/verify/src/derivation.rs][derivation source API]],
+[[file-rev:a63b444:~/src/ergodis/crates/verify/src/ranked.rs][ranked source API]],
+[[file-rev:0f41eb4:~/src/ergodis-private/src/rel_stratified.rs][driver options and layer accounting]],
+[[file-rev:0f41eb4:~/src/ergodis-private/examples/closure_ballpark.rs][default/instrument harness boundary]].
+
 * Validation and disposition
 
-The first private default pass accepted 117 relevant tests; the instrument pass
-accepted 118. These are interim passes while the combined source gate finishes.
-Matched native measurements and final source-hash reconciliation remain pending.
+Functional gates pass. The adjacent =2026-09-22-c1215-api-validation.json=
+records exact commands, source revisions and log hashes.
+
+| Gate | Result |
+|-
+| Core default | 910 passed, 2 ignored |
+| Core all features | 1,057 passed, 3 ignored |
+| Private five relevant targets, default | 117 passed |
+| Private five relevant targets, instrument | 118 passed |
+| Core/private Clippy, default and all features | all targets, warnings denied, passed |
+| Formatting, Python bounded fixture parity, core manifest | passed |
+| Core rules/verifier wasm32, default and instrument | compilation passed |
+
+Default test count is lower because forced-policy/report-only cases now belong
+to instrument; ordinary Auto sparse, capacity, reset and allocator/reservation
+checks remain. The private instrument test pass preceded only a constructor-name
+correction in a test docstring; final default tests and both Clippy configurations
+include that correction.
+
+The whole private-root wasm32 Unix control-plane failure remains a separate
+known limitation; it was not rerun unchanged. Neither core WASM compilation nor
+Linux execution establishes native macOS, Windows or ARM support.
+
+Matched native measurements and final binary/source reconciliation remain pending.
 
 ** Review repairs before acceptance
 

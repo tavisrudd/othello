@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "date": "2026-09-22",
+  "status": "functional gates passed; native performance pending",
+  "sources": {
+    "/home/tavis/src/ergodis": "a63b4445fe2a4cdd5074b21570bbb3a0334c9b85",
+    "/home/tavis/src/ergodis-private": "0f41eb4fde20634c3cbedd61cb4692553c6fbf10"
+  },
+  "toolchain": "pinned Nix rustc 1.95.0",
+  "gates": [
+    {
+      "label": "core-full",
+      "command": "nix develop /home/tavis/src/ergodis -c cargo fmt --all && nix develop /home/tavis/src/ergodis -c python3 python/generate_evidence.py --write && nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=4 RUST_TEST_THREADS=4 RAYON_NUM_THREADS=4 cargo test --locked && nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=4 RUST_TEST_THREADS=4 RAYON_NUM_THREADS=4 cargo clippy --all-targets --all-features -- -D warnings && nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=4 RUST_TEST_THREADS=4 RAYON_NUM_THREADS=4 cargo test --all-features && nix develop /home/tavis/src/ergodis -c python3 python/generate_fixtures.py --check && nix develop /home/tavis/src/ergodis -c python3 python/generate_evidence.py --check && nix develop /home/tavis/src/ergodis -c cargo fmt --check",
+      "result": "exit_code: 0\nduration: 3min 14sec 480ms 548\u00b5s 944ns\nstdout_lines: 2802\nstderr_lines: 199\ntail: |\n  test crates/verify/src/datalog_record.rs - datalog_record::Verified (line 106) - compile fail ... ok\n  \n  test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.14s\n",
+      "log_sha256": {
+        "stdout.log": "245aee343e76313d87071b12e85e7acffc476f227c8bd2353e359c3ad9053ef1",
+        "stderr.log": "37c2bfd87f2d598967db0c78aa081c132cc4d1249b1065ac839f9d81cd34d54b"
+      },
+      "claims": [
+        "default 910 passed, 2 ignored",
+        "all-features 1057 passed, 3 ignored",
+        "all-target/all-feature Clippy warnings denied",
+        "Python bounded fixture parity",
+        "evidence manifest",
+        "format"
+      ],
+      "test_totals": {
+        "passed": 1967,
+        "failed": 0,
+        "ignored": 5
+      }
+    },
+    {
+      "label": "core-final",
+      "command": "nix develop /home/tavis/src/ergodis -c cargo fmt --all && nix develop /home/tavis/src/ergodis -c python3 python/generate_evidence.py --write && nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=8 cargo clippy --all-targets -- -D warnings && nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=8 cargo check -p ergodis-rules -p ergodis-verify --target wasm32-unknown-unknown && nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=8 cargo check -p ergodis-rules -p ergodis-verify --target wasm32-unknown-unknown --features ergodis-rules/instrument && nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=8 RUST_TEST_THREADS=8 cargo test --locked && nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=8 RUST_TEST_THREADS=8 cargo test --all-features",
+      "result": "exit_code: 0\nduration: 2min 14sec 275ms 257\u00b5s 626ns\nstdout_lines: 2802\nstderr_lines: 193\ntail: |\n  test crates/verify/src/binary_composition.rs - binary_composition::VerifiedRestriction (line 216) - compile fail ... ok\n  \n  test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s\n",
+      "log_sha256": {
+        "stdout.log": "61e3b396333a7ad897b4fa3fca64c47e83b39bdc85f356e8c97cef08a2427c53",
+        "stderr.log": "2ee6d0e4dadba417d896cb3bc14c9f42dad8e46a97c919fd4ce609b6ad99614a"
+      },
+      "claims": [
+        "default Clippy warnings denied",
+        "rules and verifier wasm32 default compile",
+        "rules and verifier wasm32 instrument compile",
+        "default 910 passed, 2 ignored",
+        "all-features 1057 passed, 3 ignored",
+        "regenerated manifest after feature-only import cleanup"
+      ],
+      "test_totals": {
+        "passed": 1967,
+        "failed": 0,
+        "ignored": 5
+      }
+    },
+    {
+      "label": "private-instrument-tests",
+      "command": "choom -n 1000 -- nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=4 cargo test --all-features --test datalog_certificate_codecs --test rel_frontend --test rel_frontend_portability --test rel_lowering --test rel_reference_eval",
+      "result": "exit_code: 0\nduration: 1min 295ms 846\u00b5s 581ns\nstdout_lines: 143\nstderr_lines: 10\ntail: |\n  test the_generated_corpus_agrees ... ok\n  \n  test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.83s\n",
+      "log_sha256": {
+        "stdout.log": "416846e2d59b0d5475deab566a6578e07318bd1cf87ea85b07123897de5067f2",
+        "stderr.log": "428d165c26cfbb03b21f17ea9c9c3982bd07a5bb174cee48a7d06c1285be69ef"
+      },
+      "claims": [
+        "118 relevant tests passed; later reference-test comment-only constructor-name update"
+      ],
+      "test_totals": {
+        "passed": 118,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "private-default-tests",
+      "command": "choom -n 1000 -- nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=4 cargo test --no-default-features --test datalog_certificate_codecs --test rel_frontend --test rel_frontend_portability --test rel_lowering --test rel_reference_eval",
+      "result": "exit_code: 0\nduration: 37sec 96ms 528\u00b5s 873ns\nstdout_lines: 142\nstderr_lines: 10\ntail: |\n  test the_generated_corpus_agrees ... ok\n  \n  test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.64s\n",
+      "log_sha256": {
+        "stdout.log": "c934acd9cb6ea0ca32948b1d09b3ad92b970c657acb765916f03fad2dad6d098",
+        "stderr.log": "e84bc13fb3d33051130716dc77275785eb8e61fb164f0471e60109a289bd2a32"
+      },
+      "claims": [
+        "117 relevant tests passed on final private source"
+      ],
+      "test_totals": {
+        "passed": 117,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "private-default-clippy",
+      "command": "choom -n 1000 -- nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=4 cargo clippy --all-targets --no-default-features -- -D warnings",
+      "result": "exit_code: 0\nduration: 23sec 257ms 717\u00b5s 939ns\nstdout_lines: 0\nstderr_lines: 5\ntail: |\n      Checking ergodis-runtime v0.1.0 (/home/tavis/src/ergodis/crates/runtime)\n      Checking ergodis-private v0.0.0 (/home/tavis/src/ergodis-private)\n      Finished `dev` profile [unoptimized + debuginfo] target(s) in 22.97s\n",
+      "log_sha256": {
+        "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr.log": "fb4430054357a6bb5f6ef41cd0f748ea54036a70f5dd888aed024a8bd5391161"
+      },
+      "claims": [
+        "all targets, no default features, warnings denied"
+      ]
+    },
+    {
+      "label": "private-all-feature-clippy",
+      "command": "choom -n 1000 -- nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=4 cargo clippy --all-targets --all-features -- -D warnings",
+      "result": "exit_code: 0\nduration: 32sec 59ms 408\u00b5s 866ns\nstdout_lines: 0\nstderr_lines: 7\ntail: |\n      Checking ergodis-runtime v0.1.0 (/home/tavis/src/ergodis/crates/runtime)\n      Checking ergodis-private v0.0.0 (/home/tavis/src/ergodis-private)\n      Finished `dev` profile [unoptimized + debuginfo] target(s) in 31.70s\n",
+      "log_sha256": {
+        "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr.log": "2f588f73dafbec1f5161f61d2df1720feaca2e9a788207d25c60209e1831ee25"
+      },
+      "claims": [
+        "all targets, all features, warnings denied"
+      ]
+    },
+    {
+      "label": "private-format",
+      "command": "nix develop /home/tavis/src/ergodis -c cargo fmt --all --check",
+      "result": "exit_code: 0\nduration: 2sec 985ms 819\u00b5s 599ns\nstdout_lines: 0\nstderr_lines: 1\ntail: |\n  warning: Git tree '/home/tavis/src/ergodis' is dirty\n",
+      "log_sha256": {
+        "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr.log": "07675762059031049eda7f910b424cd4633bce53f0e48f9f436665de864eba2c"
+      },
+      "claims": [
+        "cargo fmt --all --check"
+      ]
+    }
+  ],
+  "limits": [
+    "wasm32 checks are compilation only",
+    "whole private-root wasm32 failure on existing Unix control-plane dependency was not rerun",
+    "native macOS, Windows and ARM untested",
+    "default count excludes feature-only forced-policy/plan-report tests; Auto sparse, capacity, reset and allocation tests remain",
+    "private instrument tests preceded a comment-only test docstring update; final default tests and both Clippy configurations include it",
+    "replay performance exception applies only to ca52a3e; API performance pending"
+  ]
+}
