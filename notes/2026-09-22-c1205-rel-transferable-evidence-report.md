@@ -1223,6 +1223,7 @@ from each binary's `.comment` when the A/B is written up.
 | private `c1205b` | `3940964` | Remaining steps 2 and 3 as one commit (see "Steps 2 and 3" below): `evaluate` returns `Evaluation`; `check(Evaluation, &Rir) -> Result<Stratified, Error>` with a sealed `Stratified` (`Deref<Target = Evaluation>`, `into_evaluation`); per layer `declared: Vec<Declared { name, arity, input, origin }>` and `literals: Vec<LiteralMap { literal, declared }>`; new `src/rel_chain.rs` (the program statement `Program`, the record types moved out of `rel_stratified` and re-exported from it, `tuple_digest`, `check_constructions`, `derived_layers`, `rules_of`); new `src/rel_rebuild.rs` (the independent set-based rebuild, `Value`, `compare`); the reference evaluator imports `Value` and `compare` back; `verify_records` removed; callers, `rel-lower` and the bench description updated; `tests/rel_check.rs` |
 | private `c1205b` | `48ccaaa` | `Error::CheckersDisagree(Disagreement { layer, relation, tuple, held_by, missing_from })` with `Party::{Derivation, Ranked, Evaluator}` and a merge walk (`first_difference`), for both the derivation/ranked and the checker/evaluator comparison; `Error::Record(RecordMismatch { kind, index, field })` replacing `ComplementMismatch`, with `RecordKind`, `RecordField`, `DomainPart` and a `Display` path such as `complements[0].column_domains[0].values`; `tuple_digest(DigestKind, scope, name, arity, tuples)` under tag `ergodis-private/rel-chain.v1` replacing `digest_of` in the builder and the record check; the tamper test now asserts the field of each of its seven tampers; unit tests for the disagreement and for digest separation; the bench witness keeps `3 << 60 | layer` and `4 << 60 | index` |
 | private `c1205b` | `c7d6ffa` | Step 4: `rel_chain::Evidence` (`const RETAIN`), `NoEvidence`, `ChainWriter` (directory or memory, layer files written as they arrive, only the two certificate digests kept), `Manifest`/`ManifestLayer`/`SeededEntry`/`ResultEntry` with hex digests (`to_hex`, `parse_hex`, lowercase 64 digits only), serde on every record type, `LayerFile` names, `LoweringParameters` (the one definition of the operator tool's lowering limits); `rel_stratified::evaluate_with<E: Evidence>` (`evaluate` is its `NoEvidence` instantiation), `Error::Evidence { layer, message }` (bench witness `7 << 60 \| layer`), `LayerReport::domain`, `manifest(&Stratified, &Program, &[LayerDigests])`; `check_constructions_observed`, which hands each rebuilt construction to a callback; `rel-lower --chain <dir> --externals <json>` writing `source.rel`, `lowering.json` and `producer.json` beside the chain; `tests/rel_chain.rs` (file set, manifest round trip, identities, hex strictness) |
+| private `c1205b` | `6c0d24a` | Step 5: `src/rel_verify.rs` (`verify_chain`, `verify_parts`, `Bounds`, sealed `VerifiedChain`, `ChainError { file, layer, path, problem }`, `LayerRecords`); `ergodis-tools rel-verify <dir> [--source-check] [--records <file>] [--max-layer-bytes N] [--max-certificate-bytes N]`, one JSON line, exit status 1 on refusal; `tests/rel_chain.rs` extended (acceptance and replay of the emitted records, a round trip of every accepted program of four generated corpora, the dependency-closure source scan, the card's named single-field mutations and three file-level cases) |
 
 Core gate at `064cde2`: `generate_evidence.py --write`, `cargo fmt --all -- --check`, `cargo clippy
 --all-targets --all-features -D warnings`, `cargo test --all-features` (85 `ok` blocks, zero
@@ -1347,20 +1348,62 @@ updated after it. The design sections above are the specification.
    manifest (`rel_chain::Manifest`, hex digests) and `program.json` written after `check`;
    `producer.json` beside them. `rel-lower --chain <dir>`, plus `--externals <json>` so the
    fixture's `ext` can be supplied from the command line.
-5. **Offline verifier.** It calls `rel_chain::check_constructions` with the closures it
-   established from the certificates, after checking every layer's input relations against
-   them; `P` needs a `validate` (references in range, join orders permutations, facts in arity
-   and dictionary, canonical integer texts, distinct values, type ranges agreeing with kinds)
-   before `check_constructions` indexes into it. `src/rel_verify.rs` (`verify_chain`, `verify_parts`, sealed
-   `VerifiedChain`, `ChainError` with file, layer and field path), steps 1–7 of the design;
-   `ergodis-tools rel-verify <dir> [--source-check] [--records <file>] [--max-layer-bytes N]
-   [--max-certificate-bytes N]`; the source-scan test that `rel_verify` and `rel_rebuild`
-   import neither `ergodis_rules` nor `rel_stratified`.
-6. **Tests.** `tasks/tools/tests/rel_chain.rs` (two processes: `rel-lower --chain` then
-   `rel-verify --records`, then replay of the records); `tests/rel_chain.rs` (every manifest
-   leaf, list-shape mutations, the six named categories, consistent forgeries, file-level
-   cases, in-process `check` table). Extend `tests/rel_layer_identities.rs` to pin both
-   certificate digests per layer, now that they are recorded.
+5. Done (`6c0d24a`), design steps 1–7 as written, with these specifics and departures:
+   - Files are read through one interface over a directory or a `ChainParts` map, one layer at
+     a time; a file's bound is checked from the listing and again while it is read, so a file
+     that grew after listing is still refused. `source.rel` and `lowering.json` come as a pair,
+     are allowed without `--source-check` and required with it; `producer.json` is allowed and
+     never read; anything else, and any entry that is not a file, is `Unexpected`.
+   - `validate(&Program)` runs before anything indexes the statement: arity within the core's,
+     one column type per column, canonical and distinct values, one type range per kind within
+     the dictionary and agreeing with every value's kind, facts ascending and inside arity and
+     dictionary, literal sign/relation/aggregate-column consistency, one term per column,
+     constants in the dictionary, heads positive, bodies in range, join orders permutations,
+     bindings in range, variables below each rule's count.
+   - The per-layer rule check (design 6.3) runs before the input check, and a wrong relation at
+     a replaced literal is reported at `layers[k].literals[i]`, anything else at
+     `layer-k.prepared` `rules[j]`. A derived relation's facts in its deriving layer must equal
+     `P`'s facts for it (the producer gives none; the corpus round trip shows `P` has none there).
+   - Constructions: the decoded tuples of every construction are kept until the end, and
+     `check_constructions_observed` compares each rebuilt construction with them tuple for tuple
+     after its record checks, so a forged layer names the construction and the first differing
+     tuple. Each layer's `domain` is checked against the manifest while decoding and against the
+     dictionary the aggregates built once the construction check has passed.
+   - The dependency-closure test follows `crate::` references transitively from `rel_verify`
+     (comments stripped) and fails on `ergodis_rules`, `rel_stratified` or `Demand` in any
+     reached source; it reaches `rel_chain`, `rel_rebuild`, `rel_frontend` and `rel_lowering`.
+     The crate as a whole still depends on `ergodis-rules`; the closure is enforced at module
+     level.
+   - Named mutations covered in `tests/rel_chain.rs`: every layer's `source_id`; both
+     certificate digests; a literal map entry pointed at another declaration; every seeded
+     digest; `complements[0].source`, `filters[0].operator`, `filters[0].literal`,
+     `complements[0].universe`, `complements[0].column_domains[0].type_start`,
+     `aggregates[0].digest`; three derivation-certificate entries (rule index, premise, tuple
+     value) with the manifest digest kept (refused at `layers[k].derivation`) and recomputed
+     (refused by `check_recorded` with family `Derivation`); a missing, an extra and an
+     oversized file. Each asserts the exact file and path.
+   - Two processes, by hand (not yet a committed test): `rel-lower --source-file
+     tests/rel_chain/demo.rel --chain <dir> --externals <json>` printed chain identity
+     `513f1938…ce60098`; `rel-verify <dir> --source-check --records <file>` in a second process
+     printed `accepted: true` with the same identity and wrote three layers' records;
+     `--max-layer-bytes 10` refused `layer-0.prepared` as `TooLarge` with exit status 1.
+   Gates at `6c0d24a`: fmt clean; clippy `-D warnings` clean for the root and `ergodis-tools`;
+   `rel_chain` (6), `rel_layer_identities` (pins unedited), `rel_externals`, `rel_check`,
+   `rel_lowering` (53), `rel_reference_eval` (19), `rel_frontend_portability`, the `rel_` unit
+   tests and `ergodis-tools` (44): all green. The corpus round trip accepted 470 chains, 252
+   of them with more than one layer.
+6. **Tests still to write.** (a) `tasks/tools/tests/rel_chain.rs`: the two-process acceptance as
+   a committed test (spawn the built `ergodis-tools` twice under `CARGO_TARGET_TMPDIR`, compare
+   the printed result digests, replay the written records). (b) In `tests/rel_chain.rs`: every
+   manifest leaf mutated with the expected-path table the design describes, list-shape
+   mutations (drop, duplicate, swap), the remaining ranked-certificate entries, the consistent
+   forgeries of design item 4 (they need a helper that re-admits an edited `Admitted` through
+   `admit_prepared` and re-encodes it), and truncated or extended layer and certificate files.
+   (c) A second fixture file (not an edit of `demo.rel`, whose layer identities are pinned) with
+   a text constant so a fallback domain differs from every bound one and a record carries a
+   `Dictionary` source (mystery ledger). (d) Extend `tests/rel_layer_identities.rs` with a new
+   test, leaving the existing one unedited, that pins both certificate digests per layer from
+   `ChainWriter::layers()`.
 7. **A/B.** Candidates retained from the final commits with labels `closure_ballpark-c1205b` and
    `ergodis-tools-c1205b`; symbol comparison; `ab.py --mode evaluate` over the eighteen cohorts;
    `bench.py` over the five default cohorts and over `datalog,stratified,columns,columns3,aggregate`,
@@ -1373,7 +1416,7 @@ updated after it. The design sections above are the specification.
 
 At the time of stopping, core `main` is `4b57649` and private `main` is `482d6e9`, the start
 points; both `c1205b` branches fast-forward onto them (core `c1205b` at `064cde2`, private
-`c1205b` at `3940964`). The scratch worktree `~/.cache/ergodis/worktrees/c1205b-mut` (a detached
+`c1205b` at `6c0d24a`; checked with `git merge-base --is-ancestor`). The scratch worktree `~/.cache/ergodis/worktrees/c1205b-mut` (a detached
 private worktree at `3940964`, clean, and a symbolic link) remains registered in the private
 repository; removing it is Tavis's call.
 
