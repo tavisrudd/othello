@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-09-22",
-  "status": "functional gates passed; native performance pending",
+  "status": "functional gates passed; first default candidate performance failed; v2 four-helper call-boundary repair awaiting native measurement",
   "sources": {
     "/home/tavis/src/ergodis": "a63b4445fe2a4cdd5074b21570bbb3a0334c9b85",
     "/home/tavis/src/ergodis-private": "0f41eb4fde20634c3cbedd61cb4692553c6fbf10"
@@ -121,6 +121,43 @@
       "claims": [
         "cargo fmt --all --check"
       ]
+    },
+    {
+      "label": "v2-core",
+      "command": "nix develop /home/tavis/src/ergodis -c python3 python/generate_evidence.py --write && nix develop /home/tavis/src/ergodis -c cargo fmt --check && nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=8 RUST_TEST_THREADS=8 RAYON_NUM_THREADS=8 cargo test -p ergodis-rules && nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=8 cargo clippy --all-targets --all-features -- -D warnings && nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=8 RUST_TEST_THREADS=8 RAYON_NUM_THREADS=8 cargo test --all-features && nix develop /home/tavis/src/ergodis -c python3 python/generate_fixtures.py --check && nix develop /home/tavis/src/ergodis -c python3 python/generate_evidence.py --check",
+      "result": "exit_code: 0\nduration: 1min 23sec 755ms 171\u00b5s 656ns\nstdout_lines: 1652\nstderr_lines: 121\ntail: |\n  test crates/verify/src/datalog_record.rs - datalog_record::Verified (line 106) - compile fail ... ok\n  \n  test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s\n",
+      "log_sha256": {
+        "stdout.log": "71d98d16df63ed5afd3e72479d36fe2f438989dfaabcd4df859659e5321b0806",
+        "stderr.log": "347389320c72ade7dc67536a64654744569c2cbba421079b09e7ecdb24d07585"
+      },
+      "claims": [
+        "rules default tests and allocation/reservation gates",
+        "full core all-features 1057 passed, 3 ignored",
+        "all-feature/all-target Clippy warnings denied",
+        "format, Python fixture parity and regenerated manifest"
+      ],
+      "test_totals": {
+        "passed": 1139,
+        "failed": 0,
+        "ignored": 3
+      }
+    },
+    {
+      "label": "v2-private",
+      "command": "nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=2 RUST_TEST_THREADS=2 RAYON_NUM_THREADS=2 cargo test -p ergodis-private --test rel_lowering --test rel_reference_eval --test rel_frontend --test rel_frontend_portability --test datalog_certificate_codecs && nix develop /home/tavis/src/ergodis -c env CARGO_BUILD_JOBS=2 RUST_TEST_THREADS=2 RAYON_NUM_THREADS=2 cargo test -p ergodis-private --features instrument --test rel_lowering --test rel_reference_eval --test rel_frontend --test rel_frontend_portability --test datalog_certificate_codecs",
+      "result": "exit_code: 0\nduration: 57sec 522ms 499\u00b5s 430ns\nstdout_lines: 285\nstderr_lines: 20\ntail: |\n  test the_generated_corpus_agrees ... ok\n  \n  test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.70s\n",
+      "log_sha256": {
+        "stdout.log": "57dd0b0639f7bb6bc515e2d1c5c3809ae5b7a37e161c907de04fcbbfb1869837",
+        "stderr.log": "102a5d301bac82aabbba89ec9b2649785e957921f733173164ab993b143e9770"
+      },
+      "claims": [
+        "117 default and 118 instrument relevant tests on unchanged private code with four non-inlining attributes in core"
+      ],
+      "test_totals": {
+        "passed": 235,
+        "failed": 0,
+        "ignored": 0
+      }
     }
   ],
   "limits": [
@@ -128,7 +165,8 @@
     "whole private-root wasm32 failure on existing Unix control-plane dependency was not rerun",
     "native macOS, Windows and ARM untested",
     "default count excludes feature-only forced-policy/plan-report tests; Auto sparse, capacity, reset and allocation tests remain",
-    "private instrument tests preceded a comment-only test docstring update; final default tests and both Clippy configurations include it",
     "replay performance exception applies only to ca52a3e; API performance pending"
-  ]
+  ],
+  "v2_core_revision": "8aec9aba067f5fbe471ec31d3ac9c48ed2a77392",
+  "v2_private_code_revision": "0f41eb4fde20634c3cbedd61cb4692553c6fbf10"
 }

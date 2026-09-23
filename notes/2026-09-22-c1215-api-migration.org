@@ -112,6 +112,7 @@ source and certificate identities must remain unchanged.
 | Repository | Revision | Boundary |
 |-
 | core | a63b444 | Demand builder, WeightedRulePlan, source-enum checkers, instrument feature and owned core callers |
+| core | 8aec9ab | Preserve four evaluator helper call boundaries; second performance candidate |
 | private | 0f41eb4 | Rel driver options, actual body policy in RIR/layer accounting, feature forwarding and owned tools/tests |
 
 Current implementations:
@@ -181,6 +182,11 @@ helper call boundaries with explicit non-inlining. No algorithm, workspace
 layout or iteration count changes. If changed inlining accounts for the loss,
 the two closure instruction ratios should return to unity. Profiles and a
 retained second candidate will test this; a full matrix is paused meanwhile.
+
+The four-attribute repair is committed as core =8aec9ab=. Default rules tests,
+all 1,057 core all-feature tests, Clippy, formatting, Python parity and the
+manifest pass. The private 117 default and 118 instrument tests pass again,
+now including the final test docstring. Native acceptance is still pending.
 
 ** Review repairs before acceptance
 
