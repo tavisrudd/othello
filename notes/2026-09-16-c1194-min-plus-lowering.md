@@ -50,14 +50,20 @@ components, two of the five benchmark rows step 5 names, need this.
 
 ## Current implementation plan
 
-See `2026-09-23-c1194-implementation.org`. The clean immediate Rel control
-`ergodis-tools-cddd241` was retained before source edits under rustc 1.95.0.
-Luna agents implement bounded coding slices; the primary agent designs,
-reviews and verifies them. New weighted contract admission and canonical
-source/result encodings come first, followed by the independent verifier,
-weighted kernel, Rel lowering and naive reference. The existing Boolean hot
-path must retain exact results and measured code shape; new weighted code
-needs its own first-acceptance per-unit budget and profile.
+See `2026-09-23-c1194-implementation.org` for the dated implementation,
+TODO states, exact source/result binding, tests and A/B receipts. The first
+recursive weighted pair, detached checker, Boolean predecessor freeze and
+weighted-to-Boolean pipeline are implemented (core `6a69b76`, `7702f33`;
+private through `083985f`). The latter accepts one recursive weighted pair
+followed by Boolean layers; multiple weighted pairs remain to be designed.
+The clean immediate old-Boolean control is `ergodis-tools-cddd241` under
+rustc 1.95.0. Final candidate `083985f` preserves exact outcomes and
+improves the 512-definition stage, but measures small 16-definition parse,
+lowering and stratification instruction losses. `PERFORMANCE.md` therefore
+requires a scoped disposition before this implementation can be accepted.
+The dense zero-cost checked path passes the bounded fixture; its larger
+scaling behavior remains open. Luna agents implement bounded coding slices;
+the primary agent designs, reviews and verifies them.
 
 ## Out of scope
 

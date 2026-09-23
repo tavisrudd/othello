@@ -1,6 +1,58 @@
 #+TITLE: C1194 — Weighted Rel implementation plan and evidence ledger
 #+DATE: 2026-09-23
 #+STARTUP: overview
+#+TODO: TODO NEXT WAIT | DONE CANCELED
+
+* TODO C1194 — complete the weighted Rel source route
+
+** DONE Decide the opt-in certification architecture
+
+The C1211 memo fixes the separate weighted kernel and detached source/result
+claim. The ordinary evaluator and result carry no certificate data.
+
+** DONE Implement and test the first recursive weighted fragment
+
+Source SSSP and component labels execute and pass the focused differential
+and detached weighted checks. The single candidate/min pair and its accepted
+arithmetic forms are recorded below.
+
+** DONE Freeze and check Boolean predecessors on demand
+
+Ordinary projection consumes Boolean closure values; source-claim replay
+checks predecessor records before freezing the weighted source.
+
+** DONE Certify the mixed weighted-to-Boolean handoff
+
+The pipeline route, exact claim API and adversarial tests are committed at
+=ergodis-private 6c38571=. The caller-bound claim rejects rebinding to a
+changed source even when the weighted optimum is unchanged. The trust
+boundary is recorded below.
+
+** WAIT Close the old Boolean performance gate
+
+Measure the final clean pipeline build against the retained Boolean control
+on short and long sources and the stratified route. The measurements below
+show a small credible short-source loss. The earlier replay/API exceptions
+do not cover C1194; this gate awaits a scoped user disposition.
+
+** DONE Measure dense zero-cost checker behavior
+
+The bounded 16-vertex, 240-edge cohort passes the detached checker under
+the one-million-candidate budget. Five paired runs price the checked path
+separately below. The checker record exposes no exact work counter; the
+cohort and successful budget admission bound it without an invented count.
+
+** TODO Define the next multi-weighted-layer fragment
+
+The current route handles one recursive candidate/min pair followed by
+Boolean rules. Arbitrary alternation of weighted layers remains outside the
+accepted fragment and needs a separate design and differential gate.
+
+** DONE Finish the current C1194 acceptance audit
+
+The arithmetic and Mystery ledgers, native/WASM scope, portability limits,
+task card and cache dry-run are current. The performance disposition and
+multiple weighted layers remain separate open tasks above.
 
 * Status and authority
 
@@ -92,6 +144,15 @@ consumer, every candidate rule has one cost-defining expression in the
 normal form, and the =min= groups by all remaining candidate columns in
 the same order. Otherwise emit a =REL05xx= refusal with the offending term.
 
+Current Rel declarations are otherwise source-visible. For this weighted
+pattern, the candidate relation is a *virtual intermediate*: recognizing the
+pair removes it from the weighted readout, even though the source spells it
+with =def=. This is an explicit fragment semantics, not a property inferred
+from the generic Rel visibility flag. Recognition must reject any other
+literal consumer of the candidate; nonweighted programs keep the existing
+readout behavior. A later explicit private-source spelling would make the
+intent clearer, but is not needed to accept the first pattern.
+
 For example, semantic Rel shape (exact binder spelling belongs to the
 parser's existing grammar):
 
@@ -141,3 +202,671 @@ at entry, and a downstream source binds the enlarged dictionary separately.
   opting into checking does not change the refusal result.
 - Source-bound prepared identity is not full Rel text authority. The
   existing layer/source provenance task owns that separate boundary.
+
+* In-progress evidence, 2026-09-23
+
+- The new contract module passed its 10-test crate gate. The independent
+  weighted verifier passed all 25 =ergodis-verify= unit tests and strict
+  all-target/all-feature Clippy after event dispatch and work accounting
+  changes. Its focused suite includes an 8,000-edge chain, unsupported
+  zero cycle, omitted cheaper derivation, typed-field refusal, digest
+  mutation, dominated overflow, and zero-allocation repeated support and
+  closure scans. These are implementation gates, not yet a source-level
+  C1194 acceptance claim.
+- The Rel cost-definition syntax slice passed all 61 =rel_lowering=
+  integration tests under the pinned Nix toolchain, including old canonical
+  byte/fingerprint invariants and explicit Boolean-backend refusal of the
+  new sign. Candidate/min fusion and execution remain in progress.
+- Core =cargo check -p ergodis-rules= passed for
+  =wasm32-unknown-unknown= under Nix and for =aarch64-apple-darwin=,
+  =x86_64-apple-darwin=, =x86_64-pc-windows-gnu= and
+  =aarch64-unknown-linux-gnu= with the installed Rustup 1.95.0 targets.
+  The Nix compiler lacks the latter target standard libraries, so those
+  checks were repeated successfully in the configured shared
+  =.cargo/config.toml= target with Rustup after an initial scratch-target
+  hygiene mistake. They are compile-only checks, not runtime or
+  performance evidence.
+- Primary review found two evaluator index defects before acceptance:
+  inconsistent full-key packing and global index IDs assigned in rule order
+  but initially stored in relation order. The kernel coder corrected both;
+  six focused regression tests and strict library Clippy now pass. The
+  kernel's repeated derive-loop allocation regression counts zero; readout
+  allocation is outside that measured hot loop. Performance measurements
+  taken before the index corrections would not be meaningful.
+- An independent BTreeMap/Cartesian fixed-point reference over the admitted
+  weighted contract agrees with the evaluator on 67 deterministic tiny
+  sources and sends each canonical result to the detached checker. It also
+  tests overflow, malformed and rebound false results. Full
+  =cargo test -p ergodis-rules= passed. This is a core contract differential;
+  source-level SSSP/CC and mixed-layer gates remain open.
+- First kernel-scoped profile before hot fixes: the release 64-vertex sparse
+  path example (one seed, 64 edges, one two-body rule, 64 result rows,
+  524 ordinary result bytes) ran 1,000 evaluations with 136,176,744 total
+  user instructions and 24,089,651 cycles in one =perf stat= observation;
+  elapsed evaluator sum was 10,074,301 ns. Process setup and the constant
+  sink are included in the counters, so these totals are not yet a per-unit
+  estimate. A 100,000-evaluation cycles profile located the active
+  =run_rule= and =relax= symbols; direct disassembly found an out-of-line
+  =bcmp= from key slice equality in =relax=, one =relax= call from
+  =run_rule=, and cold panic/bounds-check calls. Profile sample shares are
+  used only to locate the work. Retained pre-fix example:
+  =weighted-bench-prehotfix-8aec9ab=, SHA-256
+  =bb592a7764323111c35be520240be84166334c98ea2c557091b35aa5bf0a5db3=,
+  dirty core revision =8aec9ab=, pinned Nix release rustc 1.95.0,
+  retain recipe =scripts/retain-bin.sh /home/tavis/src/ergodis/crates/rules weighted_bench --example --label weighted-bench-prehotfix=.
+  A scalar key-equality variant passed matched A/B and remains under final
+  integration gates. Four interleaved rounds pinned to CPU 0, with 50,000
+  and 100,000 iterations per arm and two-point differencing, yielded
+  135,701.96–135,702.02 control versus 132,516.97–132,517.06 candidate
+  instructions/evaluation, candidate/control ratio 0.976529–0.976530.
+  The A/A control null ratio was 1.00000031–1.00000039. Result checksum,
+  row count and 524-byte ordinary output matched. Cycles ratios ranged
+  0.914–0.979 and evaluator nanosecond ratios 0.920–1.163, so timing is
+  unresolved under shared-box load 1.30–1.59; instruction reduction decides
+  this isolated variant. The six-event set (instructions, cycles, branches,
+  branch misses, page faults, minor faults) was 100% enabled. An
+  instruction-scoped profile found =run_rule=, =relax= and readout sort as
+  the principal symbols; disassembly of scalar =relax= has no non-error
+  out-of-line call. Its retained binary is =weighted-bench-scalar-8aec9ab=,
+  SHA-256 =1831e5f7c7d94803773ac6571ca1ad47e6d88014707de64969d6f52c3c4f9f65=,
+  from the same dirty core revision and Nix release profile. The remaining
+  =run_rule= -> =relax= call was tested as a separate inlining variant.
+- Adding =#[inline(always)]= to =relax= alone reduced instructions from
+  132,517.00–132,517.05 to 129,015.95–129,016.06 per evaluation in four
+  matched rounds (ratio 0.973580–0.973581, A/A null
+  0.99999957–0.99999995), with exact checksum and output size. Cycles ratio
+  0.958–1.082 and evaluator nanosecond ratio 0.991–1.228 remain noisy.
+  The retained candidate is =weighted-bench-inline-relax-8aec9ab=, SHA-256
+  =17663d7d5652df259291371e0a5005548a04fd62e69694dc328154652a73c3eb=,
+  dirty core =8aec9ab=, same pinned release profile and fixture. The
+  remaining non-error call in =run_rule= is =find=; its isolated inlining
+  experiment is underway.
+- Inlining =find= eliminated the last ordinary =run_rule= call. Four matched
+  rounds measured 129,016.00–129,016.06 control versus
+  122,607.005–122,607.016 candidate instructions/evaluation (ratio
+  0.95032365–0.95032395, A/A null 0.99999978–1.00000049). Cycles ratio
+  0.923–1.004, evaluator nanosecond ratio 0.925–1.089 under load
+  1.82–1.91; elapsed time remains uncertain. Exact checksum, 64 rows and
+  524 ordinary bytes matched. Retained candidate
+  =weighted-bench-inline-find-8aec9ab=, SHA-256
+  =a75adb5222c4556b6d2c705d170d6d0d85dd60a79f7bc63cba9cbd33afe3afad=,
+  dirty core =8aec9ab= and the same pinned release profile. Relative to the
+  original pre-hotfix binary, the current kernel uses about 9.65% fewer
+  instructions per evaluation. Its named sparse-path fixture costs about
+  122,607 instructions/evaluation, or 1,916 per 64 output rows. That is a
+  fixture-specific per-output budget, not a general complexity claim.
+  An instruction profile of 100,000 evaluations located =run_rule= (55.52%
+  samples), =evaluate= (26.09%) and readout sorting (14.86% combined);
+  profile shares are only for localization. Disassembly shows no ordinary
+  calls inside =run_rule=; =__memmove_avx512_unaligned_erms= samples come
+  from readout sorting outside rule evaluation.
+- Fermi bound for a final outer =run_rule= inlining experiment: the 64-row
+  path fixture executes at most roughly one rule invocation per seed and
+  changed row, around 65 invocations/evaluation. Removing a few call/return
+  instructions therefore offers only hundreds of instructions against a
+  122,607-instruction evaluation (<1% unless whole-program optimization
+  exposes more). Inlining the large rule body can increase code size or
+  register pressure. Accept it only after an isolated matched A/B, exact
+  checksum/readout, and disassembly; revert on instruction or credible
+  elapsed regression.
+- The isolated =run_rule= inlining A/B exceeded that simple call-bound
+  estimate: four rounds found 122,606.96–122,607.07 control versus
+  119,042.91–119,043.06 candidate instructions/evaluation, ratio
+  0.9709305–0.9709322, with exact checksum, 64 rows and 524 bytes. Cycles
+  ratios 0.680–0.983 and evaluator nanosecond ratios 0.603–0.994 include an
+  extreme first-round load shift; instruction count is the stable signal.
+  This is about 1,860 instructions per output row for this fixture. Retained
+  =weighted-bench-inline-rule-8aec9ab=, SHA-256
+  =af36a047095d4f05f7470f79ffdae05307b87bcc34b67ba07a9560208040c09c=,
+  dirty core =8aec9ab=, same pinned profile. The Fermi model omitted
+  cross-boundary compiler simplification: =run_rule= is now fused into
+  =evaluate=. This is an inference from the symbols and instruction delta;
+  it is not yet a quantified source of all 3,564 saved instructions.
+  A 100,000-evaluation instruction profile has =evaluate= 68.90% of samples,
+  =emit_match= 12.71%, readout sorting about 15%; the only ordinary hot
+  calls found in =evaluate= are two =emit_match= sites. These calls are now
+  being tested as an isolated final inlining variant.
+- Fermi bound for =emit_match= inlining: at about 65 path matches per
+  evaluation, the direct call overhead alone is likely only a few hundred
+  instructions (<1% of 119,043). Cross-boundary constant propagation may
+  change that bound, as the previous experiment showed. Check the isolated
+  A/B and generated hot loop before keeping it.
+- =emit_match= forced inlining was rejected and its source annotation was
+  removed. Four matched rounds changed 119,042.95–119,043.09 to
+  119,005.00–119,005.05 instructions/evaluation (only 0.032% fewer), with
+  cycles ratio 0.992–1.050 and evaluator nanosecond ratio 0.997–1.156;
+  three of four timing rounds were slower. Exact result checksum and 524
+  output bytes matched. Retained rejected arm
+  =weighted-bench-inline-emit-8aec9ab=, SHA-256
+  =cc93426872f1bdb1b36558fe9c0f7fbffd1490a74e493f7ac7b39bd1300540e8=,
+  dirty core =8aec9ab=. The ordinary =emit_match= call is justified by
+  this wash with credible timing loss. The accepted source remains the
+  119,043-instruction =run_rule= inline variant; its hot loop is allocation
+  free, with the measured =emit_match= call and cold error/bounds calls.
+- The Rel projection now passes 68 =rel_lowering= tests. The source base
+  case =candidate(v,c)=seed(v,c)= lowers to a structural source rule; direct
+  candidate facts alongside rules are refused by the existing Rel language,
+  so their projection path is defensive. Primary review found two source
+  alias hazards before execution: a repeated weighted cost variable across
+  two body atoms imposes an equality that projected key-only atoms lose,
+  and a defined head cost variable reused in a weighted body key can impose
+  an equality that projected cost computation loses. The private coder is
+  adding targeted refusal regressions before the execution bridge.
+
+* Execution bridge design, 2026-09-23
+
+- A cold =RelWeightedPlan= owns the projected core =WeightedPlan= and the
+  mapping from its relation 0 back to the Rel min head. Its ordinary
+  =evaluate(&mut WeightedWorkspace)= returns only the core =WeightedResult=:
+  sorted dictionary key IDs and parallel finite numeric minimum costs.
+  The candidate relation is virtual and absent from this result. Existing
+  Boolean =rel_stratified::evaluate= retains its own route and API.
+- An explicit =verify_prepared_result(&WeightedResult)= path encodes the
+  admitted source and ordinary result only after evaluation, makes the
+  detached envelope, invokes =ergodis_verify::weighted::verify= and returns
+  its compact verification record. The core plan exposes only a cold
+  read-only source accessor; the contract's on-demand admitted encoder
+  checks its stored source ID. No checker choice, hash, proof row or source
+  serialization enters the evaluator or ordinary result.
+- To bind a Rel text to the prepared certificate, a separate opt-in replay
+  must create a fresh Rel workspace, parse/admit/lower the supplied bytes,
+  project again, compare the canonical prepared source identity, and then
+  invoke the detached core checker on the result. This is an independent
+  execution of the lowering stages with the same implementation, not a
+  separate formal proof of the Rel compiler. The record must state this
+  trust boundary. The prepared-only record must not be described as a
+  full-source certificate.
+- Source tests decode result keys through the Rel dictionary and compare
+  numeric costs for SSSP (duplicate seed, improved path, positive cycle)
+  and component-label propagation (zero offset). They compare exact ordinary
+  result bytes before and after checking and exercise a rebound source and
+  malformed result. Resource-budget failures and overflow are refusals.
+- The first checked-mode smoke on the 64-row fixture (1,000 iterations)
+  reported 6,767,391 evaluator ns and 142,599,018 ns for result encoding,
+  detached envelope construction and independent verification combined.
+  These one-run timings are *not* a stable performance estimate; they show
+  the expected separation of work. Ordinary result bytes remain 524 in
+  both modes. A checked call necessarily takes additional time even though
+  the evaluator itself has no certification branch.
+
+* Mixed-layer handoff and source claim, 2026-09-23
+
+The terminal =RelWeightedPlan= keeps its current refusal for any rule reading
+the min head downstream; silently returning only the weighted result would
+lose source-declared rows. A separate opt-in pipeline route projects the same
+weighted pair, removes its candidate and min defining rules from a cloned
+Boolean RIR, and executes that RIR only after the weighted result has been
+seeded into the min relation. The structural predecessors are still frozen
+before weighted evaluation; a predecessor depending on the changing min
+relation remains a refusal. The first mixed route handles one recursive
+candidate/min pair with later Boolean layers, not arbitrary alternation of
+multiple weighted pairs.
+
+Each weighted result key is an existing Rel dictionary ID; its numeric cost
+may be absent from the source dictionary. The cold handoff interns that cost
+as an integer without moving existing IDs, appends a full min-head tuple and
+then runs the existing Boolean strata. These injected integers become the
+seeded dictionary base for downstream Boolean record replay. No seed branch
+or dictionary extension belongs inside the core weighted evaluator.
+
+For a source-bound composite check, replay the source and independently
+check its weighted prepared result first, using checked Boolean predecessors
+for the weighted input freeze. Then evaluate the filtered downstream RIR from
+the verified weighted rows on the checked Boolean path, verify its records
+and compare closure plus readout against the caller's ordinary pipeline
+result. The weighted checker establishes the authority of seeded min facts;
+the Boolean checker establishes the later closure. Both replay the same Rel
+compiler, so this remains a source-bound consistency check with the compiler
+trust caveat above. The ordinary weighted output stays unchanged.
+
+The first implementation is committed at =ergodis-private 6c38571=:
+[[file-rev:6c38571:~/src/ergodis-private/src/rel_weighted.rs][pipeline projection and filtered RIR]],
+[[file-rev:6c38571:~/src/ergodis-private/src/rel_stratified.rs][seeded Boolean evaluator]],
+[[file-rev:6c38571:~/src/ergodis-private/src/rel_weighted_run.rs][ordinary pipeline plan]], and
+[[file-rev:6c38571:~/src/ergodis-private/src/rel_weighted_source_check.rs][opt-in claim checker]].
+The producer's cold =encode_claim= returns canonical weighted result bytes
+and the source/result envelope; =verify_pipeline_source_claim= accepts those
+bytes unchanged, checks the weighted prepared source first, then replays and
+checks downstream Boolean records. A convenience value check recomputes an
+envelope for the supplied source; use the claim API when the original source
+identity matters. The envelope names the *canonical prepared weighted source*,
+not a hash of raw Rel text: two texts with the same projection and downstream
+closure may both verify. The Boolean claim comparison covers closure,
+readout and dictionary; report counters are diagnostic metadata. A newly
+produced cost outside the source dictionary is
+interned before Boolean layers, with the seeded dictionary boundary recorded
+for aggregate replay. The new Boolean path is selected only through the
+pipeline API; the terminal weighted API still refuses downstream readers.
+
+Focused gates passed after review: 1 pipeline integration, 2 pipeline
+projection, 1 seeded-dictionary, 1 portability, 71 lowering, 4 differential,
+3 predecessor and 2 source-check tests. Strict all-target/all-feature
+Clippy, formatting and diff checks passed for the private library. The
+integration test covers SSSP, later reachability and negation, a new cost ID,
+tampered weighted cost, tampered downstream closure, and an exact source
+claim against a dominated-edge change that leaves the optimum unchanged.
+The release-tool exhaustive diagnostic match was repaired in forward commit
+=ergodis-private e0e9074=; the final clean retained binary and A/B are
+recorded below.
+
+* Core checkpoint, 2026-09-23
+
+The core [[file-rev:6a69b76:~/src/ergodis/crates/contract/src/weighted.rs][weighted contract]],
+[[file-rev:6a69b76:~/src/ergodis/crates/verify/src/weighted.rs][independent checker]],
+[[file-rev:6a69b76:~/src/ergodis/crates/rules/src/weighted.rs][evaluator]],
+[[file-rev:6a69b76:~/src/ergodis/crates/rules/tests/weighted_reference.rs][naive reference]]
+and [[file-rev:6a69b76:~/src/ergodis/crates/rules/examples/weighted_bench.rs][reproducible sparse-path bench]]
+are committed at =ergodis 6a69b76=.
+Before commit the pinned Nix toolchain passed =cargo fmt --all -- --check=,
+strict =cargo clippy --all-targets --all-features -- -D warnings=, and
+=cargo test --all-features= (including 671 root unit tests, core differential,
+evidence manifest and doc tests). The generated =SHA256SUMS= was committed
+with the source. The selected final release example was retained from this
+clean revision as =weighted-bench-accepted-6a69b76=, SHA-256
+=e286afb7f7de28b5b8f740e1e0c814cbe1cfe9316914d3d1298dcae9238efe37=.
+The previous dirty retained variants remain labelled experimental. The
+matched clean-binary A/B and opt-in cost follow.
+
+The final retained clean binary versus the initial retained dirty binary
+passed four interleaved A/B rounds on CPU 0 with 50,000/100,000 two-point
+differencing. Control used 135,701.97–135,702.03 instructions/evaluation;
+accepted used 119,042.99–119,043.07, ratio 0.8772381–0.8772390
+(12.28% fewer). The A/A null ratio was 0.99999963–1.00000030. Cycles
+ratio 0.860–0.946 and evaluator-nanosecond ratio 0.858–0.942 in these
+rounds; this is fixture-specific, not a universal time claim. Every arm
+reported the same checksum, 64 rows and 524 ordinary bytes. The six-event
+counter set was 100% enabled. A separate cache-event run on 100,000
+evaluations observed roughly 0.85–0.97 million control and 1.23–1.62
+million accepted cache references, with 8.2–9.2 thousand versus 9.1–10.7
+thousand cache misses. The cache-reference increase is a remaining
+observation under noisy shared-machine conditions, even though instruction
+and cycle counts improved. A 100,000-evaluation accepted run peaked at
+3,260 KiB RSS. A one-round accepted versus last dirty arm check had
+119,042.99 versus 119,043.07 instructions/evaluation and exact output;
+the clean commit did not change evaluator instruction shape.
+
+An opt-in checked call on the same *clean* binary, measured against two
+interleaved evaluator-only controls at 1,000/2,000 iterations, used about
+900,081–900,118 instructions/evaluation-plus-check, or roughly 781,037–
+781,074 extra instructions per check. Checked readout remains 524 bytes and
+64 rows. In the three steadier rounds the evaluator portion was about
+4.06–4.16 microseconds/call against 3.89–4.15 for evaluator-only controls,
+while encoding/envelope/checking took 90.7–91.9 microseconds/call; the first
+round was noisy (132 microseconds check). A checked instruction profile
+located 58.89% of samples in SHA-256 block digestion, 9.54% in evaluator,
+and smaller shares in detached match enumeration/index lookup. Sample shares
+localize work; they are not attributed per-operation costs. A 10,000-call
+checked run peaked at 3,208 KiB RSS. The checker adds substantial *total*
+time on this tiny fixture; it does not add a branch or byte to the evaluator
+or its ordinary result. Reusing an independently decoded source across many
+checks might amortize this cost later, but is not part of first acceptance.
+
+The private =RelWeightedPlan= bridge passed 70 focused source lowering
+tests and strict all-target Clippy. SSSP source gives key/cost rows
+=(1,0),(2,4),(3,6)= with duplicate seed and improved path; zero-offset
+component propagation gives five expected rows. It compares exact ordinary
+result bytes before/after prepared checking and refuses a tampered cost.
+Fresh Rel-text replay distinguishes a prepared-only record from a
+source-bound one, within the stated Rel compiler trust boundary.
+
+The first source replay adapter now fresh-parses, admits, lowers and projects
+Rel text before detached checking. A caller-supplied claim API carries
+result/envelope bytes unchanged into the checker. Its targeted test adds a
+dominated edge that preserves all ordinary result bytes but changes the
+prepared source identity; the old envelope is refused specifically for
+binding. A convenience API may issue a new record for the changed source
+when its result remains valid. Both focused replay tests and strict Clippy
+pass. The Rel compiler remains trusted source translation: replay uses the
+same implementation, so its record does not claim an independent proof of
+the translation.
+
+A private source-level differential passes 32 deterministic tiny directed
+graph sources against an independent synchronous Bellman-Ford reference,
+then sends every result through the detached prepared checker. It covers
+duplicate seeds/edges, zero and positive cycles, and improving paths; a
+separate dominated-overflow source refuses. A core test-only Python
+Bellman-Ford oracle adds 24 seeded graph cases for the admitted weighted
+contract. This second oracle passed its focused gate, strict all-target
+Clippy, formatting, and the full =cargo test --all-features= gate (including
+the root's 671 unit tests); its [[file-rev:30bb59e:~/src/ergodis/crates/rules/tests/weighted_oracle.py][Python reference]]
+and [[file-rev:30bb59e:~/src/ergodis/crates/rules/tests/weighted_reference.rs][comparison test]] are committed at =ergodis 30bb59e= with the
+updated evidence manifest. This is test-only; the measured evaluator source
+remains =6a69b76=.
+
+The committed core weighted contract, checker and evaluator all pass
+compile-only checks for =wasm32-unknown-unknown= (pinned Nix rustc 1.95.0),
+=aarch64-apple-darwin=, =x86_64-apple-darwin=,
+=x86_64-pc-windows-gnu= and =aarch64-unknown-linux-gnu= (installed Rustup
+1.95.0 and the configured shared target). These checks establish target
+type-checking, not runtime or performance parity. The private Rel
+frontend's standalone native/WASM canonical parity gate is reported below.
+
+The first weighted native/WASM probe surfaced a modular boundary defect:
+the standalone =rel_frontend= portability build used a =cfg(test)= stub that
+always refused recursive =min=, while the owning library's stratifier
+consulted the private weighted recognizer. A reused-workspace SSSP probe
+therefore returned =REL0502= in both scanner variants even after a fresh
+successful parse/admission; the failure was the build configuration, not
+stale workspace state. The recognizer was extracted into a pure frontend
+module, shared by ordinary stratification and the standalone portability
+compilation. The corrected probe passed: 245 cases and 541,205 canonical
+bytes were exactly equal between native and WASM, including weighted SSSP
+with duplicate seeds and an admitted subtraction expression refused with
+=REL0507=. Both scanner variants produced the same weighted SSSP RIR bytes.
+The canonical SHA-256 was
+=c22885cd48011eb77b423a8cb0c14c7f11d59dc9cc6f56d4d63fb1a3d7ad60d1=;
+the receipt is
+=~/.cache/ergodis/rel-frontend-parity/c1194.json=.
+This exercises parse/admission/lowering portability, not the full weighted
+evaluator on a non-native host.
+
+The private implementation is committed at =ergodis-private 65211d5=:
+[[file-rev:65211d5:~/src/ergodis-private/src/rel_frontend/lower/weighted_shape.rs][pure weighted shape recognition]],
+[[file-rev:65211d5:~/src/ergodis-private/src/rel_weighted.rs][cold weighted projection and predecessor freeze]],
+[[file-rev:65211d5:~/src/ergodis-private/src/rel_weighted_run.rs][ordinary evaluator bridge]], and
+[[file-rev:65211d5:~/src/ergodis-private/src/rel_weighted_source_check.rs][source replay checker]].
+The predecessor closure walks the transitive Boolean rules of each
+structural relation read by the candidate, evaluates a filtered RIR using
+the existing stratified route, checks its layer records, and freezes sorted
+deduplicated tuples as weighted structural input. A direct-input source
+uses a fact-copy fast path and does not run Boolean evaluation. An unknown
+derived cost-field type is accepted as integer only when its *checked*
+nonempty frozen column contains solely integer values. A predecessor that
+reads the changing weighted pair and any downstream rule that consumes the
+weighted result are refused with =REL0507=; no incomplete result is silently
+returned. A derived edge, a predecessor with a negative literal, source
+replay, rebound claims, and both refusal directions have focused tests.
+The ordinary weighted result remains key IDs plus numeric minimum costs.
+
+Red-team review then found an off-path cost in the derived-predecessor case:
+ordinary =RelWeightedPlan::new= at =65211d5= called a projection that checked
+Boolean layer certificates and replayed records before freezing facts. The
+weighted evaluator itself was unchanged, but preparation charged for
+certification when the caller asked only for values. The forward commit
+=ergodis-private d4dce79= splits these paths:
+[[file-rev:d4dce79:~/src/ergodis-private/src/rel_stratified.rs][closure-only Boolean evaluation]]
+feeds ordinary projection, while
+[[file-rev:d4dce79:~/src/ergodis-private/src/rel_weighted_source_check.rs][source-claim replay]]
+uses checked predecessor closure, record verification and the detached
+weighted checker. The direct-input path still copies facts without invoking
+the Boolean evaluator. Focused derived and negative-predecessor tests prove
+the two projections have the same canonical prepared source identity. The
+checker and its records remain outside ordinary weighted result bytes.
+
+After the combined edits, pinned tests passed: 1 portability, 71 source
+lowering, 4 differential, 3 predecessor and 2 source-check tests. Strict
+all-target/all-feature Clippy, formatting check and =git diff --check= passed.
+The broad 968-test private unit suite had no failures during its initial
+run but was interrupted after several minutes in unrelated long search
+tests before this final predecessor edit; it is not claimed as a completed
+gate. The weighted-focused gates above are the acceptance evidence for this
+checkpoint.
+
+* Arithmetic coverage ledger, 2026-09-23
+
+=Lowered= means accepted by the weighted projection, not merely represented
+in RIR. =Certified= means the detached support-and-closure checker accepted
+the ordinary result; Rel-to-prepared translation remains trusted as stated
+above. =Refused= is the intended outcome for excluded forms.
+
+| Rel form | Parsed | Admitted | Lowered | Executed | Certified | Evidence / disposition |
+|-
+| =c = a + w=, current minimum plus typed input weight | yes | yes | yes | yes | yes | SSSP and 32 seeded graph cases; source replay checks the binding. |
+| =c = a + 0= | yes | yes | yes | yes | yes | Five-row component-label propagation. |
+| =c = a + w + 1= | yes | yes | yes | yes | yes | Exact rows checked on a cyclic graph and a four-body join with a constant atom. |
+| =candidate(v,c) = seed(v,c)=, direct integer cost field | yes | yes | yes | yes | yes | SSSP duplicate seed and improved-key result. |
+| =a - 1=, =a * 2=, =a + -1=, =a + "x"= | yes | yes | refused | no | no | =REL0507= with source spans. |
+| Noninteger typed field as a cost summand | yes | yes | refused | no | no | =REL0507=; a text input field cannot be an offset. |
+| Missing/repeated weighted cost, cost-as-key alias, or candidate cost as weighted key | yes | yes | refused | no | no | Shape projection refuses equations whose equality would be erased. |
+| Addend =u32::MAX= | yes | yes | refused | no | no | Sentinel is excluded at the weighted boundary. |
+| A reachable sum crossing the sentinel, even for a dominated candidate | yes | yes | yes | refused | no | Explicit core error; conservative contract coverage cost. |
+
+* Mystery and closeout ledger, 2026-09-23
+
+| Question | Current evidence and next gate |
+|-
+| Does opt-in checking alter the evaluator or ordinary bytes? | The same clean binary executes either path; 64 rows and 524 ordinary bytes agree. The weighted evaluator has no certificate flag, digest, witness or proof column. Evaluator-only and checked-call evaluator timings overlap in the steadier rounds; the checker adds about 781,000 instructions and roughly 91 microseconds on this tiny fixture. A larger checked/unchecked evaluator-only instruction comparison remains useful before claiming no indirect cache effect. |
+| Is source replay an independent proof of Rel lowering? | No. It binds the caller's envelope to the canonical prepared source produced by a fresh parse/admit/lower/project pass, and the core checker independently proves that prepared program's result. A separate compiler proof or independent lowering oracle remains outside this certificate. |
+| Can dense zero-cost joins make support reconstruction impractical? | A 16-vertex complete directed zero-cost cohort passes at 16 rows under a one-million-candidate budget. The checked path adds about 1.04 million instructions and 102 microseconds per call over evaluation on this host. This bounds one small dense shape, not larger dense joins; no rank sidecar is justified by this fixture alone. |
+| Does conservative overflow exclude useful finite answers? | Yes: a dominated candidate crossing the sentinel is refused. The source differential has an explicit case; any relaxation needs a new proof and checker rule. |
+| Does non-Unix workspace reservation fit? | Core compiles for macOS, Windows, ARM Linux and WASM, and private frontend native/WASM bytes match. Eager reservation and runtime RSS on those hosts are still unmeasured. |
+| Can derived Boolean facts feed a weighted layer, and can cost results feed later Boolean rules? | Checked predecessor freezing works, including a negative-literal predecessor. The separate pipeline API seeds one weighted pair into later Boolean reachability, negation and aggregate layers; its exact caller-bound claim passes. Multiple weighted pairs are still refused. |
+| Does the old Boolean frontend retain its cost? | The final 512-definition stages improve. The 16-definition parse, lower and combined stratify stages have small credible instruction losses; their disposition awaits a scoped user decision. The final 512-definition stratify stage also reads about 0.75 MiB more peak RSS, while one-run Massif live heap and Memcheck allocation counts agree exactly. |
+
+* First private old-path A/B and correction, 2026-09-23
+
+The clean =ergodis-private 65211d5= tool was retained with
+SHA-256 =478ad5efd186cd515e7baa680b902d73c2b4bac1e64e7b2d125f47f33467cfa4=,
+recipe =ergodis-dev/scripts/retain-bin.sh
+/home/tavis/src/ergodis-private/tasks/tools ergodis-tools --label
+ergodis-tools-c1194-65211d5=. Control is the clean =cddd241= tool and
+SHA-256 recorded above. Both use pinned release rustc 1.95.0 with no extra
+features. The 512-definition Datalog source is 15,934 bytes, SHA-256
+=aa4f2d5fdee869f0040e184a2c861028915e3c666f852d42ed0e705a29ab9edc=;
+both arms return the same token/node census and lowering fingerprint
+=06aa82af43b2b958=. The interleaved 5-round receipt is
+=~/.cache/ergodis/c1194/rel-ab-512.json=; six requested events were 100%
+enabled and 1-minute load ranged 3.88–4.51.
+
+| Stage | Byte candidate/control instructions | Scalar candidate/control instructions |
+|-
+| Scan | 0.999996675 (95% interval 0.999971725–1.000021625) | 0.999999902 (0.999993232–1.000006572) |
+| Parse | 0.999998519 (0.999994676–1.000002362) | 1.000001442 (0.999997957–1.000004927) |
+| Admit | 0.999998935 (0.999997505–1.000000365) | 0.999998991 (0.999998588–0.999999395) |
+| Lower | *1.000751922* (1.000748706–1.000755138) | *1.000684951* (1.000683444–1.000686457) |
+
+The parse byte/byte A/A null was 0.999999716 instructions (interval
+0.999993133–1.000006298). Lowering added about 4,277 instructions per
+source in either scanner variant: byte 5,687,830 to 5,692,107 and scalar
+6,236,645 to 6,240,917. Cycles intervals did not settle a timing claim.
+The Fermi estimate for scanning 256 old Boolean body literals once more is
+roughly 4,000 instructions and matches the observed loss. This committed
+checkpoint is a measured negative, not the final accepted performance arm.
+A Luna coder isolated cost-definition validation behind a run-level RIR
+flag in the clean forward commit =ergodis-private 29a9dae=. The
+[[file-rev:29a9dae:~/src/ergodis-private/src/rel_frontend/lower/passes.rs][range restriction dispatch]]
+selects a const-generic Boolean or cost-aware loop once per lowering run;
+the cost scan compiles out of the Boolean instantiation. The flag resets on
+workspace reuse and a weighted-then-Boolean regression matches fresh
+Boolean canonical RIR. Pinned 71-test =rel_lowering=, strict Clippy, format
+and diff gates passed. Its clean retained binary has SHA-256
+=8894e92025e0a92cd69b11a10d1f3d61a2220a42d74e9fb5d30171d8334e0f7c=,
+recipe =ergodis-dev/scripts/retain-bin.sh
+/home/tavis/src/ergodis-private/tasks/tools ergodis-tools --label
+ergodis-tools-c1194-fast-29a9dae=.
+
+The same five-round, CPU-3, pinned-toolchain A/B against =cddd241= on the
+512-definition Datalog source is
+=~/.cache/ergodis/c1194/rel-ab-fast-512.json=. All counters were 100%
+enabled and exact source/lowering fingerprints matched. Byte/scalar
+candidate/control instruction ratios are scan 0.999989362/0.999996663,
+parse 0.999998806/0.999998624, admit 0.999994475/0.999995038, and
+lower *0.999967032/0.999970859*. Lowering uses about 188/182 fewer
+instructions per source. The lowering 95% ratio intervals are
+0.999965522–0.999968543 and 0.999969092–0.999972626; cycles ratios
+0.949/0.945 are shared-machine observations. Peak RSS was about
+5,980 KiB versus 5,984 KiB control. The parse A/A null interval includes
+unity.
+
+A 16-definition short-source A/B with the same protocol, 0.03-second
+calibration target and receipt
+=~/.cache/ergodis/c1194/rel-ab-fast-16.json= exposed a residual *loss*:
+byte/scalar lowering instruction ratios 1.000318060/1.000302320
+(95% intervals 1.000212546–1.000423585 and
+1.000134978–1.000469690), about 37/41 extra instructions per source.
+Source SHA-256
+=22b0784ac6b254a97cd0525c3eb7bf8ad5d576fed399703c94ce0ad6be9dc368=
+and lowering fingerprint =79789fdd69487759= matched exactly; the six
+events were 100% enabled. This small-source loss is not accepted under
+=PERFORMANCE.md=. A bounded experiment is restoring the original Boolean
+range-restriction function body exactly, leaving the weighted validation
+separate, then remeasuring.
+
+The exact-function experiment was committed at =ergodis-private 7eb38fa=
+and retained clean with SHA-256
+=acc7e179afbe168a7f0ceda0073f83ead2c7ae5061823c400d1e817e9d0e47cf=,
+recipe =ergodis-dev/scripts/retain-bin.sh
+/home/tavis/src/ergodis-private/tasks/tools ergodis-tools --label
+ergodis-tools-c1194-bool-7eb38fa=. Its five-round 16-definition A/B
+receipt is =~/.cache/ergodis/c1194/rel-ab-bool-16.json=. The byte/scalar
+lowering instruction ratios were 1.000380640/1.000253883 (95% intervals
+1.000145479–1.000615855 and 1.000036674–1.000471139), still a measured
+loss. The bounded duplication did not repair the short-path cost and was
+reverted by forward commit =ergodis-private d64835e=. The separate
+const-generic dispatch from =29a9dae= remains the current code while the
+opt-in predecessor split proceeds. No performance acceptance is claimed for
+the 16-definition route.
+
+A further clean experiment placed the preparation-only cost flag at the end
+of =Rir=, leaving earlier field declarations in their old order. Commit
+=ergodis-private 0080714= was retained as
+=ergodis-tools-c1194-layout-0080714-0080714=, SHA-256
+=1ef198a09046c5a80cd0b4d3e153a1d8dcf453b3418a82ea0127b95c9953b2f3=.
+The same five-round short-source A/B receipt is
+=~/.cache/ergodis/c1194/rel-ab-layout-16.json=; all source and result
+fingerprints matched. Lowering instruction ratios *worsened* to
+1.000552562 byte (95% interval 1.000387726–1.000717426) and 1.000575491
+scalar (1.000531996–1.000618988). The field-layout hypothesis therefore
+failed; forward commit =ergodis-private 91e17a9= reverted it. Neither the
+short-source loss nor the layout experiment has performance acceptance.
+
+* Final C1194 old-path A/B and remaining decision, 2026-09-23
+
+The cold seeded Boolean handoff initially made the 16-definition combined
+stratified stage about 0.047–0.048% more expensive even though 512-definition
+stratification improved. A Fermi estimate assigned roughly 365 of its 437
+extra instructions per short source to the old Boolean backend. Commit
+=ergodis-private 840b321= made seeded setup a const-generic selection:
+the old =evaluate= instantiation compiles with =SEEDED=false=, while only the
+new pipeline compiles =SEEDED=true=. Focused seeded and pipeline tests
+passed. Its clean retained tool,
+=ergodis-tools-c1194-unseeded-840b321-840b321=, has SHA-256
+=d49d84cd029e71a7900733a97faa917390bad6f356c6ff678e751be5cc3f0e8f=.
+Five-round receipts against retained =cddd241= are
+=~/.cache/ergodis/c1194/rel-ab-unseeded-16.json= and
+=~/.cache/ergodis/c1194/rel-ab-unseeded-512.json=. On 16 definitions,
+byte/scalar lowering instruction ratios were 1.000211134/1.000225835,
+while full stratification improved to 0.999740126/0.999746745. On 512
+definitions, lowering improved to 0.999584727/0.999621222 and full
+stratification to 0.999904798/0.999904886. Thus the compile-time split
+recovered the old Boolean evaluation stage, but short-source lowering still
+lost about 24–26 instructions per source. These are measurements of the
+whole tool stages, not isolated generated code for each pass.
+
+The benchmark tool then needed an exhaustive =WeightedSeed= diagnostic arm
+(=ergodis-private e0e9074=) and one pre-existing field-shorthand Clippy
+fix (=ergodis-private 083985f=). The exact final clean retained tool is
+=ergodis-tools-c1194-final-083985f-083985f=, SHA-256
+=f879c2a5df945e0665d91d7f459d4f3f5792c4cb9735433c5c2e04730c98d37e=,
+release rustc 1.95.0 with no extra features. The unchanged retained control
+is =cddd241=, SHA-256 =79d986c1087fbcbc23da13e0df7efde5db6f501ebb44c655a316fb3017a424fe=.
+Both repositories were clean for the final A/B. The interleaved five-round
+CPU-3 receipts are
+=~/.cache/ergodis/c1194/rel-ab-final-083985f-16.json= and
+=~/.cache/ergodis/c1194/rel-ab-final-083985f-512.json=; the six requested
+events were 100% enabled. All candidate/control source, parse, admission,
+lowering and stratification records match exactly. The 16-definition source
+is 517 bytes with SHA-256
+=22b0784ac6b254a97cd0525c3eb7bf8ad5d576fed399703c94ce0ad6be9dc368=;
+the 512-definition source is 15,934 bytes with SHA-256
+=aa4f2d5fdee869f0040e184a2c861028915e3c666f852d42ed0e705a29ab9edc=.
+
+| Definitions | Stage | Byte candidate/control instructions (95% interval) | Scalar candidate/control instructions (95% interval) |
+|-
+| 16 | Lower | *1.000250421* (1.000187173–1.000313673) | *1.000209408* (1.000168050–1.000250767) |
+| 16 | Stratify, including lower | *1.000090988* (1.000080002–1.000101973) | *1.000086963* (1.000075490–1.000098437) |
+| 512 | Lower | 0.999586007 (0.999583553–0.999588461) | 0.999620996 (0.999619341–0.999622652) |
+| 512 | Stratify, including lower | 0.999905902 (0.999905693–0.999906111) | 0.999905685 (0.999905160–0.999906209) |
+
+The short-source scan/admission ratios straddle unity. Byte parsing measured
+1.000099076 (95% interval 1.000014488–1.000183671); scalar parsing
+straddled unity, and the parse A/A null also straddled unity. Long-source
+scan/parse/admission stayed close to unity. The final short-source lower
+stage costs about 29 extra instructions per source, while the combined
+stratified stage costs about 82. Absolute cycles and wall time are not used
+to settle this decision. The one-line tool-only shorthand change shifted
+the short-source stage result relative to =840b321=; the 29,726 bytes of
+the =rel_stratified::evaluate_engine= machine-code symbol are *identical*
+between the two retained binaries (SHA-256
+=2993865df17c1633827374ae1728d48795b92c0a7256359f9bd919189dcc6e84=).
+That local evidence points to code outside that symbol for the changed
+stage count; it is not a proof that every backend call instruction is
+identical. The final stage receipt remains the acceptance arm.
+
+Separate cache-event receipts for the =840b321= candidate are
+=~/.cache/ergodis/c1194/rel-ab-unseeded-cache-16.json= and
+=~/.cache/ergodis/c1194/rel-ab-unseeded-cache-512.json=, both with 100%
+counter enablement. Cache-reference direction differed by scanner and size;
+cache-miss subtraction included a negative long-source byte value because
+the event count was below its overhead floor. No cache improvement or loss
+is claimed from those samples. Peak RSS on the final 512-definition
+stratified byte stage was 25,732 KiB versus 24,968 KiB control, with 41,312
+versus 39,323 minor faults over eight repeats. Direct one-repeat probes
+showed roughly 250 extra minor faults. Massif on the same one-repeat source
+found *identical* 27,739,908-byte peak live heap in control and final;
+Memcheck counted 5,926 allocations and 5,627 frees in both arms, with only
+160 more total allocated bytes in final. The higher native RSS/page-fault
+reading is therefore recorded as resident-page behavior, not evidence of a
+new logical allocation count or peak heap. Its exact cause remains open.
+
+The scoped performance decision is the 16-definition old Boolean frontend:
+byte parsing, lowering and full stratification show small but credible
+instruction losses in the final retained binary. The 512-definition route
+improves, and the weighted evaluator's result and certificate boundary are
+unchanged. =PERFORMANCE.md= requires measured losses to be reverted absent
+an explicit exception. The prior exceptions for replay repair and C1215
+API cleanup do not apply to C1194. No acceptance is claimed here without
+that decision.
+
+* Dense zero-cost detached-checker gate, 2026-09-23
+
+Core commit =7702f33= adds an opt-in =dense-zero= fixture to
+[[file-rev:7702f33:~/src/ergodis/crates/rules/examples/weighted_bench.rs][weighted_bench]]. The original two-argument sparse-path mode is unchanged.
+The new fixture has 16 vertices, every directed non-self edge (240 edges),
+one zero-cost seed, one recursive two-atom relaxation rule, a 256-row
+capacity and a one-million-candidate work limit. It produces 16 rows and
+140 ordinary result bytes in both modes; the checked mode verifies the
+same result after evaluation. This is a small dense stress case, not a
+scaling law.
+
+The clean retained release binary is
+=~/.cache/ergodis/bin/weighted-bench-dense-7702f33-7702f33=, SHA-256
+=a509d42d03faf32103e2f1776a25724035df13be8eda7276e5fd8fa0f4cba458=.
+Receipt =~/.cache/ergodis/c1194/dense-zero-7702f33.json= stores five
+paired CPU-3 runs at 1,000 and 2,000 iterations in each mode, full stdout
+and raw =perf stat= counters. Every requested event was 100% enabled.
+The per-call figures use the 2,000-minus-1,000 counter difference, then
+average five pairs. =checked= includes evaluation, result encoding,
+envelope construction and the independent checker.
+
+| Mode | Instructions/call | Cycles/call | Branches/call | Scope |
+|-
+| Evaluation | 221,004 | 33,426 | 46,280 | Ordinary result only. |
+| Evaluation plus check | 1,256,280 | 543,716 | 153,981 | Same ordinary result, detached verification. |
+| Checked increment | 1,035,276 | 510,290 | 107,701 | Includes encoding and binding, not only the checker kernel. |
+
+The instruction spread across five paired differences was 221,003–221,005
+for evaluation and 1,256,280–1,256,281 for the checked call (rounded to
+whole instructions). The benchmark's own clock reported a median
+approximately 6.9 microseconds per evaluation in both modes and 102
+microseconds in its checked segment at 2,000 iterations; that clock is a
+timing observation, not the acceptance counter. A separate five-pair
+=/usr/bin/time= receipt at
+=~/.cache/ergodis/c1194/dense-rss-7702f33.json= recorded peak RSS
+medians of 2,352 KiB for evaluation and 2,428 KiB for checked, with
+overlapping ranges 2,168–2,404 and 2,348–2,536 KiB. No stable memory
+delta follows from those process-level samples.
+
+The checker marks all 16 claimed rows and performs a closure pass over
+the complete graph; acceptance establishes that its charged work stayed
+within the one-million-candidate budget. Its public
+[[file-rev:6a69b76:~/src/ergodis/crates/verify/src/weighted.rs][verification record]] carries source, result and checker identities,
+not an exact work counter, so this report does not assign an unmeasured
+match count. Larger dense zero-cost joins remain a separate scaling gate.
+Strict =ergodis-rules= example Clippy, the release build, format and diff
+checks pass at =7702f33=.
+
+The =ergodis-dev/scripts/cache-gc.sh= default dry-run with
+=ERGODIS_NOTES_DIR=~/src/othello/notes= scanned 77 cache entries and
+found zero unreferenced entries old enough for deletion. Nothing was
+deleted.
