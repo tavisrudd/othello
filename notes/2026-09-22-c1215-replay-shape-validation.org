@@ -1,0 +1,62 @@
+#+title: Ergodis — public stratified record replay shape validation
+#+date: 2026-09-22
+#+author: Tavis Rudd / Codex
+#+startup: overview
+
+* Status and bounded scope
+
+In progress: the next C1215 increment repairs malformed public inputs to
+=rel_stratified::verify_records=. The initial audit and two panic reproductions
+are recorded in
+[[file-rev:b82b3f040:~/src/othello/notes/2026-09-22-ergodis-phase2-remediation.org][the Phase 2 report]].
+Starting private revision =62fca14=; core =19cee8f=. The user requested Sol
+subagents, primary review and independent Astra review.
+
+This increment addresses record/readout/closure shape and replay consistency.
+It does not establish source lowering, layer certificate authority or record
+completeness. The public container can be hand-built; rebuilding its records
+is not a replacement for the remaining transferable evidence chain. The core
+trusted admitted fast path is outside this repair.
+
+The broader C1215 builder, checker source-enum facade, driver options, Prepared
+rename and instrument-feature migration remain open under the existing task
+card. No new validation policy or public format change is proposed here.
+
+* Planned rejection boundary
+
+1. Validate shared readout and closure shape before any dictionary rebuild or
+   unchecked indexing: parallel lengths, supported arities, tuple divisibility,
+   bounded dense dictionary IDs, valid value kinds/payloads and closure IDs.
+2. Validate each complement's source/relation/arity and each domain's position,
+   provenance, historical dictionary range and bounded product before allocation.
+3. Whitelist filter and aggregate operators; validate aggregate column/group
+   shape, source closure and dictionary prefix before rebuilding.
+4. Require canonical set closures where replay relies on set semantics; compare
+   aggregate dictionary extensions as well as counts/digests.
+5. Preserve successful producer outputs and existing explicit mismatch returns;
+   replace panic characterizations with direct rejection assertions. Tests must
+   cover adjacent partial-row, aggregate and forged-domain paths, not only the
+   two originally observed index failures.
+
+Astra red-teams the boundary and reviews the final patch; primary checks the
+implementation and gates. Source metadata that cannot be authenticated from
+this container alone is documented rather than advertised as verified.
+
+* Cost and validation plan
+
+The repair belongs at the cold replay boundary. Predicted additional work is
+linear in supplied readout/closure data plus domain/provenance checks; allocation
+and reconstruction already occur in this replay operation. No savings are
+predicted. Evaluator loops and trusted producer construction should be unchanged.
+
+Retain the existing Rel benchmark executable before source edits. Use matched
+valid-input cohorts to check exact outputs and same-module ThinLTO movement;
+measure replay overhead separately if the existing harness exposes that stage.
+Source/compiler identities and any intentionally changed fingerprints must be
+reported separately from result/work parity. No native portability claim follows
+from a Linux measurement or wasm32 compilation.
+
+Required gates: malformed-input regression matrix with valid controls, existing
+Rel lowering/record tests, pinned formatting and relevant Clippy/build checks.
+Broaden only where the dependency/feature surface changes. Final receipt records
+actual commands, source snapshot, results and limitations.
