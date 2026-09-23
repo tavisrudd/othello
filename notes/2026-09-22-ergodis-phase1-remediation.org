@@ -312,6 +312,28 @@ Cache dry-run at close: 59 entries scanned, zero unreferenced and old enough
 for deletion. Nothing was deleted. Reproduce with
 =ERGODIS_NOTES_DIR=/home/tavis/src/othello/notes /home/tavis/src/ergodis-dev/scripts/cache-gc.sh=.
 
-Org validation passed: 13 headings, five =file-rev:= links. All five saved
+At the initial close, Org validation passed: 13 headings, five =file-rev:= links. All five saved
 revision targets were checked with Git; numeric anchors were within file bounds
 and the source Phase 1 heading existed at its saved revision.
+
+* Independent Astra review, 2026-09-22
+
+At the user's request, a fresh =gpt-6-astra= agent reviewed the three source
+commits before reading the implementation report. Recommendation: *conditional
+acceptance; keep all three commits*. It found no introduced correctness defect.
+Its work was source/report inspection, not an independent build rerun. The
+primary separately audited 13 saved command receipts: the only nonzero receipt
+was the disclosed Darwin metadata incompatibility; core test totals and both
+fresh browser artifact hashes matched this report.
+
+| Priority | Finding | Disposition |
+|----------+---------+-------------|
+| P2 evidence gap | Darwin/ARM repaired branches have no successful target build | Remains open; no native support claim |
+| P2 evidence gap | Host helper test and deterministic x86 smoke do not exercise non-x86 dispatch, measured fallback scoring or fallback receipt label | Remains open; require ARM measured-path integration including Q16 objective recomputation |
+| P3 improvement | Per-field cost docs still said cycles, and saturation assertions would allow an always-max conversion | Fixed in private =5e87740=: consistent tick wording, 16 fractional bits, ordinary zero/one-second/max-minus-one conversion assertions |
+
+The primary reviewed and committed the
+[[file-rev:5e87740:/home/tavis/src/ergodis-private/src/repr_grammar.rs::463][documentation/test follow-up]].
+Pinned formatting and all eight representation tests passed after formatting
+the new multi-line assertion. There is no production timing or ranking change
+in this follow-up. The due-diligence grades remain unchanged.
