@@ -1227,6 +1227,7 @@ from each binary's `.comment` when the A/B is written up.
 | private `c1205b` | `0d270c7` | Defect found by the list-shape mutations (step 6): a layer's literal-map entries in another order were accepted, so one chain had several spellings and identities. The driver now records the map ascending by literal and `check_constructions` refuses an entry out of order (`LiteralEntry { index }`); `tests/rel_check.rs::a_literal_map_out_of_order_is_refused` |
 | private `c1205b` | `745b5b6` | Error attribution found by the leaf mutations (step 6): a construction declared in a layer its record does not name let that layer's tuples replace the construction's own in the verifier's `given` map (keyed by origin only), so the refusal named a difference at the record's layer instead of the bad declaration; each construction declaration is now checked against its record's layer and index first (`rel_verify::record_place`). A derived relation no layer derives is named at its first declaration's `input` rather than at the last layer's declarations; `tests/rel_check.rs::a_derived_relation_declared_as_input_is_refused_at_its_declaration` |
 | private `c1205b` | `db37035` | Step 6: the tests (see "Step 6" below): `tasks/tools/tests/rel_chain.rs` (two processes), the leaf, list, certificate-entry, forgery and file suites in `tests/rel_chain.rs`, fixture `tests/rel_chain/fallback.rel`, `tests/rel_layer_identities.rs::the_certificate_digests_of_every_layer_are_pinned`; `ergodis-contract` as a dev-dependency of `ergodis-tools` |
+| private `c1205b` | `4138f8b` | Step 7 receipts: `analysis/datalog-comparison/ab-2026-09-22-chain-derivation-loop.json` (+ `.jsonl`), `analysis/rel-frontend/performance-v11-chain-db37035.json`, `performance-v11-chain-constructions-db37035.json` |
 
 Core gate at `064cde2`: `generate_evidence.py --write`, `cargo fmt --all -- --check`, `cargo clippy
 --all-targets --all-features -D warnings`, `cargo test --all-features` (85 `ok` blocks, zero
@@ -1399,6 +1400,64 @@ Gates at `db37035` (against core `064cde2`): `cargo fmt --all --check` clean; cl
 assertions unedited), `rel_reference_eval` (19, the differential unedited), the library's `rel_`
 unit tests (5) and `ergodis-tools` (41 + 3 + 1): all green.
 
+#### Step 7: the A/B (receipts `4138f8b`)
+
+Arms, all rustc 1.95.0 (59807616e 2026-04-14) read from each binary's `.comment`, release, default
+features, retained with `~/src/ergodis-dev/scripts/retain-bin.sh` from clean trees in the private
+worktree with `ERGODIS_FLAKE_DIR` set to the core worktree:
+
+| Arm | Private | Core | Dirty | Retained name | Measured sha256 |
+| --- | --- | --- | --- | --- | --- |
+| control, derivation loop | `482d6e9` | `4b57649` | no | `closure_ballpark-c1205b-base-482d6e9` | `7de079c9…ba0c1` |
+| control, stages | `482d6e9` | `4b57649` | no | `ergodis-tools-c1205b-base-482d6e9` | `2ee930b3…c75a0` |
+| candidate, derivation loop | `db37035` | `064cde2` | no | `closure_ballpark-c1205b-db37035` | `03fb4927…12a83` |
+| candidate, stages | `db37035` | `064cde2` | no | `ergodis-tools-c1205b-db37035` | `00a0ddb2…fc9f5` |
+
+Method as milestone a: event set `instructions,cycles,branches,branch-misses,page-faults,minor-faults`,
+100 per cent enabled on every measurement, five rounds alternating arm order, A/A null per cohort,
+core 5, two-point differencing. Runner and logs under `~/.cache/ergodis/c1205b/`.
+
+- **Derivation loop** (`ab.py --mode evaluate --repeats 3`, eighteen cohorts, load 0.72–0.89,
+  no failures; receipt `analysis/datalog-comparison/ab-2026-09-22-chain-derivation-loop.json`):
+  instruction ratios 0.99994 to 1.00001, every interval within about 1e-4 of unity and each
+  null of the same size (largest `mutual:blocks:8192` 0.99994 [0.99988, 1.00000], null 0.99996);
+  derived counts equal on every cohort; peak RSS within 16 KiB on every cohort. Symbol
+  comparison (normalized `symbol_disasm.py`): of 61 `ergodis_rules::` symbols 58 are identical;
+  one `Demand::evaluate_counting` instantiation (0x8e95 control, 0x8e64 candidate) differs in
+  register allocation and spill slots, a ThinLTO perturbation from the D3 core commit (the
+  loop's source is unchanged), and the other (0x87e6) is identical. The counts show no effect.
+- **Stages, five default cohorts** (receipt `analysis/rel-frontend/performance-v11-chain-db37035.json`,
+  load 1.2–1.8): scan, parse and admit within 4e-5 of unity; `lower` and `stratify` 0.99992 to
+  0.99997 except `comment-string`, 0.9951–0.9957 (fewer instructions); `prepare` 1.00516
+  [1.00498, 1.00534] (more).
+- **Stages, construction cohorts** (receipt
+  `analysis/rel-frontend/performance-v11-chain-constructions-db37035.json`, load 1.0–1.9):
+
+  | Cohort | `lower` (byte/scalar) | `stratify` (byte/scalar) | scan, parse, admit |
+  | --- | --- | --- | --- |
+  | `datalog` | 0.99701 / 0.99728 | 0.99975 / 0.99975 | within 1e-5 |
+  | `stratified` | 0.99263 / 0.99350 | 0.99973 / 0.99973 | within 2e-5 |
+  | `columns` | 0.99271 / 0.99378 | 0.99973 / 0.99973 | within 1e-5 |
+  | `columns3` | 0.99267 / 0.99357 | 0.99772 / 0.99790 | within 1e-5 |
+  | `aggregate` | 0.99304 / 0.99385 | 0.99971 / 0.99971 | within 2e-5 |
+
+  Every interval is narrower than 1e-5 and every A/A null reads 1.00000. Cycles settle nothing
+  (intervals up to ±20 per cent on `datalog`).
+- **Against the Fermi.** The Fermi predicted the timed `stratify` stage would *gain* a few
+  thousand instructions per iteration on the construction cohorts; it lost 0.03 to 0.2 per cent
+  instead, and `lower`, which this milestone did not touch, lost 0.3 to 0.7 per cent. Neither
+  is explained yet (mystery ledger): the tools binary's symbols moved widely (for example
+  `Workspace::admit` 0x92 to 0x9e5 bytes, an inlining change; `rel_stratified::evaluate` is
+  now a 0x1d-byte call into `evaluate_with`), so the likely cause is inlining and ThinLTO
+  reshuffling, and the per-iteration differences, not only the ratios, still have to be read
+  from the receipts. `prepare` (+0.5 per cent, some 170 instructions on 33.7 thousand) is the
+  one operation that got more expensive.
+- **Evidence out of the hot loop, by disassembly.** The candidate `ergodis-tools` has two
+  `evaluate_with` instantiations (0x7ace and 0x7548 bytes). `evaluate` calls the 0x7548 one.
+  Its callees do not include `Demand::transferable_source` or `<ChainWriter as Evidence>::layer`,
+  which appear only among the other instantiation's callees, so the default `NoEvidence`
+  instantiation has no sink code. A kernel-scoped `perf record` was not taken.
+
 #### Remaining steps
 
 In order; each is a commit on the private `c1205b` branch with the gates above, and the report
@@ -1472,11 +1531,23 @@ updated after it. The design sections above are the specification.
    tests and `ergodis-tools` (44): all green. The corpus round trip accepted 470 chains, 252
    of them with more than one layer.
 6. Done (`0d270c7`, `745b5b6`, `db37035`); see "Step 6" above.
-7. **A/B.** Candidates retained from the final commits with labels `closure_ballpark-c1205b` and
-   `ergodis-tools-c1205b`; symbol comparison; `ab.py --mode evaluate` over the eighteen cohorts;
-   `bench.py` over the five default cohorts and over `datalog,stratified,columns,columns3,aggregate`,
-   exactly as in the design's A/B plan; receipts committed in private; results against the
-   Fermi. Then native and WASM ABI harnesses against the final core.
+7. Partly done (receipts `4138f8b`; see "Step 7" above). Stopped here by the context budget.
+   Still open, in order:
+   (a) Explain the `lower` and `stratify` reductions and the `prepare` increase. Read the
+   per-iteration differences from the two receipts. Compare the normalized `rel_frontend::` and
+   `rel_stratified::` symbols of the stage entry points between the two tools binaries
+   (scratch helper `symcmp.py`: every symbol matching a pattern, compared rank by rank through
+   `symbol_disasm.normalized`). Settle whether the cause is inlining or ThinLTO.
+   (b) Peak RSS for the Rel stages. `bench.py` does not record it, so measure `rel-lower
+   --cohort <c> --definitions 512` on both arms, alternating, with `wait4` rusage.
+   (c) Optionally, characterize `rel-lower --chain` once with `perf stat` on the four
+   construction cohorts. The design lists this as a report item, not a gate.
+   (d) Run the native and WASM ABI harnesses against core `064cde2`: release `ergodis-rules`,
+   then `crates/rules/tests/native_abi.py`, then the wasm32 build and `wasm_abi.mjs`, with the
+   commands in milestone a's replay block, run from the core worktree.
+   (e) Run the full private `cargo test --all-features` at `4138f8b`. It was last run at
+   `48ccaaa`. The core is unchanged since its gate at `064cde2`, so the full core gate is not
+   needed.
 8. **Close.** Full core and private gates at the final commits; fast-forward check of both
    branches onto their mains; the independent audit; `cache-gc.sh` dry run.
 
@@ -1521,6 +1592,12 @@ repository; removing it is Tavis's call.
   therefore not unique; its identity is. A verifier that must also fix the bytes would compare
   each JSON file with the serialization of what it decoded (one serialization per file); not
   done, because the approved design chose the decoded form.
+- **The `lower` stage lost 0.3 to 0.7 per cent of its instructions, and `stratify` lost 0.03 to
+  0.2 per cent (open).** `lower` is code this milestone did not change. The Fermi predicted a
+  small gain for `stratify`, not a loss. `prepare` gained 0.5 per cent. The likely cause is
+  inlining and ThinLTO in a tools binary that grew by the verifier. What would settle it: the
+  per-iteration differences, and symbol comparisons of the stage entry points (Remaining steps,
+  item 7(a)).
 - **Literal-map order (settled, fixed in `0d270c7`).** The map was checked as a set, so a
   permuted map was a second spelling with a second chain identity; this was the one case where
   the manifest had a free order the verifier did not fix.
