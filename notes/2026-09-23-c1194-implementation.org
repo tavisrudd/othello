@@ -28,12 +28,13 @@ The pipeline route, exact claim API and adversarial tests are committed at
 changed source even when the weighted optimum is unchanged. The trust
 boundary is recorded below.
 
-** WAIT Close the old Boolean performance gate
+** DONE Close the old Boolean performance gate with a scoped exception
 
-Measure the final clean pipeline build against the retained Boolean control
-on short and long sources and the stratified route. The measurements below
-show a small credible short-source loss. The earlier replay/API exceptions
-do not cover C1194; this gate awaits a scoped user disposition.
+The final clean pipeline build was measured against the retained Boolean
+control on short and long sources and the stratified route. Tavis approved
+keeping the C1194 implementation with a new scoped exception on
+2026-09-23. It covers only the final =083985f= old-Boolean losses reported
+below, and does not waive performance gates for subsequent edits.
 
 ** DONE Measure dense zero-cost checker behavior
 
@@ -42,11 +43,33 @@ the one-million-candidate budget. Five paired runs price the checked path
 separately below. The checker record exposes no exact work counter; the
 cohort and successful budget admission bound it without an invented count.
 
-** TODO Define the next multi-weighted-layer fragment
+** DONE Define the next multi-weighted-layer fragment
 
-The current route handles one recursive candidate/min pair followed by
-Boolean rules. Arbitrary alternation of weighted layers remains outside the
-accepted fragment and needs a separate design and differential gate.
+The next bounded fragment is two distinct recursive candidate/min pairs in
+one-way dependency order. The first min relation may be a frozen structural
+input to the second pair; later Boolean rules may consume either result.
+An interposed derived Boolean layer, cross-pair recursion, and three or more
+pairs remain explicit refusals. The stage and claim contract is below.
+
+** TODO Implement the two-pair stage schedule
+
+Keep the one-pair and old Boolean APIs intact. Recognize two disjoint pairs,
+run the first, freeze its ordinary result as typed source facts, project and
+run the second, then seed both results into the final Boolean closure.
+
+** TODO Implement chained opt-in certification
+
+Replay the source, verify stage one against its prepared source, construct
+stage two only from that verified result, verify stage two, then check the
+final Boolean closure. Keep every claim byte and checker record off the
+ordinary evaluator/result path.
+
+** TODO Differentially gate the two-pair fragment
+
+Exercise exact sequential minima, new integer IDs, dominated alternatives,
+source/result tampering at either stage, cross-pair cycle refusals and the
+old Boolean A/B. Do not expand the accepted fragment on passing only the
+existing one-pair tests.
 
 ** DONE Finish the current C1194 acceptance audit
 
@@ -631,7 +654,7 @@ above. =Refused= is the intended outcome for excluded forms.
 | Does conservative overflow exclude useful finite answers? | Yes: a dominated candidate crossing the sentinel is refused. The source differential has an explicit case; any relaxation needs a new proof and checker rule. |
 | Does non-Unix workspace reservation fit? | Core compiles for macOS, Windows, ARM Linux and WASM, and private frontend native/WASM bytes match. Eager reservation and runtime RSS on those hosts are still unmeasured. |
 | Can derived Boolean facts feed a weighted layer, and can cost results feed later Boolean rules? | Checked predecessor freezing works, including a negative-literal predecessor. The separate pipeline API seeds one weighted pair into later Boolean reachability, negation and aggregate layers; its exact caller-bound claim passes. Multiple weighted pairs are still refused. |
-| Does the old Boolean frontend retain its cost? | The final 512-definition stages improve. The 16-definition parse, lower and combined stratify stages have small credible instruction losses; their disposition awaits a scoped user decision. The final 512-definition stratify stage also reads about 0.75 MiB more peak RSS, while one-run Massif live heap and Memcheck allocation counts agree exactly. |
+| Does the old Boolean frontend retain its cost? | The final 512-definition stages improve. The 16-definition parse, lower and combined stratify stages have small credible instruction losses, kept by Tavis's 2026-09-23 scoped exception. The final 512-definition stratify stage also reads about 0.75 MiB more peak RSS, while one-run Massif live heap and Memcheck allocation counts agree exactly. |
 
 * First private old-path A/B and correction, 2026-09-23
 
@@ -809,14 +832,19 @@ Memcheck counted 5,926 allocations and 5,627 frees in both arms, with only
 reading is therefore recorded as resident-page behavior, not evidence of a
 new logical allocation count or peak heap. Its exact cause remains open.
 
-The scoped performance decision is the 16-definition old Boolean frontend:
+The scoped performance decision concerns the 16-definition old Boolean frontend:
 byte parsing, lowering and full stratification show small but credible
 instruction losses in the final retained binary. The 512-definition route
 improves, and the weighted evaluator's result and certificate boundary are
 unchanged. =PERFORMANCE.md= requires measured losses to be reverted absent
 an explicit exception. The prior exceptions for replay repair and C1215
-API cleanup do not apply to C1194. No acceptance is claimed here without
-that decision.
+API cleanup do not apply to C1194. Tavis explicitly approved *keeping*
+C1194 with a scoped exception on 2026-09-23. The scope is the final
+=083985f= candidate versus =cddd241=: 16-definition byte parsing
+1.000099076, byte/scalar lowering 1.000250421/1.000209408, and combined
+byte/scalar stratification 1.000090988/1.000086963 instruction ratios,
+with the intervals above. It covers no later source, tool, compiler or
+fixture change; each new measured loss requires its own disposition.
 
 * Dense zero-cost detached-checker gate, 2026-09-23
 
@@ -870,3 +898,52 @@ The =ergodis-dev/scripts/cache-gc.sh= default dry-run with
 =ERGODIS_NOTES_DIR=~/src/othello/notes= scanned 77 cache entries and
 found zero unreferenced entries old enough for deletion. Nothing was
 deleted.
+
+* Next bounded fragment: two sequential weighted pairs
+
+The next accepted source shape will have exactly two disjoint recursive
+candidate/min pairs =A= and =B=. =B='s candidate rules may read =A='s min
+head only as a *frozen structural relation* after =A= reaches its optimum;
+=B= must still carry its own recursive weighted body cost through the
+existing cost-definition form. =A= may not read =B=, and no intermediate
+derived Boolean relation may sit between them in this increment. Boolean
+rules may read either min head after both weighted stages. Candidate
+relations remain virtual and unobservable. Three or more pairs, an
+interposed Boolean layer and a cross-pair cycle receive a source-span
+=REL05xx= refusal before execution. This is an explicit fragment boundary,
+not an assertion that all stratified weighted programs are supported.
+
+Recognition will find both pairs in normalized RIR and admit the two
+aggregate SCC edges only after validating both shapes and the one-way
+dependency. The existing one-pair API and old Boolean path remain separate.
+The first plan can be compiled at construction. The second prepared source
+depends on the first result, so its plan is constructed only after the
+first ordinary evaluation. Frozen =A= rows use original key IDs and an
+extended typed dictionary for any new integer costs; the original IDs
+never move. The second prepared source canonically includes those rows and
+values, making its own source identity depend on =A='s actual result.
+The final Boolean stage seeds both min relations once, then runs only rules
+outside the two candidate/min definitions. Certificate objects, hashes,
+proof rows and checker dispatch remain absent from ordinary weighted
+evaluation and ordinary output.
+
+The opt-in claim is an ordered pair of canonical weighted result/envelope
+byte pairs. Source replay checks =A='s prepared result first. Only decoded
+and *verified* =A= rows may build =B='s prepared source; the detached checker
+then proves =B=. A final checked Boolean replay from both verified seeds
+compares closure, dictionary and readout to the caller's ordinary result.
+The claim API must preserve the caller's envelopes unchanged; a convenience
+value API may construct fresh envelopes but cannot claim to check an
+original source binding. The trust boundary remains the shared Rel
+parse/admit/lower/project implementation, followed by independent
+prepared-source checkers. The one-pair record/API stays compatible.
+
+Red-team gates: reject a swapped or omitted stage claim, a changed =A=
+result that happens to leave =B='s optimum unchanged, a changed source
+with the same optimum, a forged =B= structural seed, an =A=/=B= cycle,
+dictionary exhaustion from newly interned costs, and a noninteger prior
+cost field. Exact generated two-stage differential cases must include
+zero and positive cycles, dominated edges, and a cost absent from the
+original source dictionary. The old Boolean 16/512-definition A/B must
+be rerun against retained =083985f=; the scoped exception above cannot be
+used to accept a new regression.

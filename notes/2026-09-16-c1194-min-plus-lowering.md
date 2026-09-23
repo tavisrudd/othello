@@ -59,8 +59,9 @@ followed by Boolean layers; multiple weighted pairs remain to be designed.
 The clean immediate old-Boolean control is `ergodis-tools-cddd241` under
 rustc 1.95.0. Final candidate `083985f` preserves exact outcomes and
 improves the 512-definition stage, but measures small 16-definition parse,
-lowering and stratification instruction losses. `PERFORMANCE.md` therefore
-requires a scoped disposition before this implementation can be accepted.
+lowering and stratification instruction losses. Tavis approved a scoped
+exception for those exact losses on 2026-09-23; future changes retain their
+own `PERFORMANCE.md` gates.
 The dense zero-cost checked path passes the bounded fixture; its larger
 scaling behavior remains open. Luna agents implement bounded coding slices;
 the primary agent designs, reviews and verifies them.
