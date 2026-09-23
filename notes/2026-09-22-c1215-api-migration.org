@@ -45,6 +45,11 @@ different result and has provenance work that an ordinary check need not pay.
 =check_admitted= and its bounded form remain the documented in-process path;
 they do not issue independently re-admitted provenance.
 
+The producer builder owns a wire =Program= or borrows a structured
+=PreparedSource=. The checker's existing =Source= borrows a wire program or
+canonical prepared bytes to re-admit. These distinct input types preserve the
+ownership and trust requirements at each boundary.
+
 The rules =instrument= feature owns forced Policy variants, counted entry,
 index lookup readout, index/membership plan reports and =reservations()=.
 Auto, row bounds and workspace byte budgeting remain production capabilities.
