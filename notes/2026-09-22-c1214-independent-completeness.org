@@ -1,0 +1,112 @@
+#+title: Ergodis — independently implemented ranked completeness
+#+date: 2026-09-22
+#+author: Tavis Rudd / Codex
+#+startup: overview
+
+* Status and scope
+
+C1214 milestone b is in progress. Milestone a is recorded in
+[[file-rev:b837fa65a:~/src/othello/notes/2026-09-22-ergodis-phase2-remediation.org][the Phase 2 report]].
+The user authorized continuing with the independent completeness pass after
+the test-only milestone. No public API, certificate schema, admission policy,
+or release gate change is planned.
+
+Starting core revision: =b1b36861cdbc6cd2b1472a19a6663e94f2b7f310=.
+Starting private revision: =6e31900fb51b8b8b049b9e57404c74dbb0207482=.
+Both tracked worktrees were clean before baseline retention.
+
+* Design and red team
+
+** Accepted implementation boundary
+
+Replace the ranked checker's call to shared trace completeness with a private
+module. Keep witness/rank validation separate. The new pass independently
+computes prefix binding masks, matches constants and repeated variables,
+maintains binding snapshots, and packs each implied head. A uniform iterative
+traversal covers every body position, including the first; rule and body order
+remain the source order. The first atom scans its relation; subsequent atoms
+use compound indexes. Prepare required indexes per rule before its traversal.
+
+This is independent implementation, not algorithmic diversity. Shared trust
+remains in source admission, tuple storage, membership, CSR index construction,
+index probing and its key computation. Ranked support checking also retains
+shared helpers. A storage/index bug that drops candidates can still correlate
+both completeness verdicts. No formal soundness claim follows from tests.
+
+The new source module must join the verifier identity's hashed source list;
+its list-domain tag advances. Certificate grammar and prepared source identity
+remain unchanged. Existing verification records continue identifying the old
+checker implementation rather than silently naming the new one.
+
+** Invariants
+
+1. A frame owns the binding snapshot on entry; failed rows and descendants
+   cannot leak bindings into siblings.
+2. Candidate enumeration includes every tuple consistent with the bound
+   columns. The independent matcher checks every slot, including constants
+   and equality between repeated occurrences of a variable.
+3. Every variable used in an implied head is bound after a complete body match,
+   by admission's range restriction. Head packing follows domain radix order.
+4. At a leaf, check membership without opening a fifth frame. Empty relations
+   exhaust normally. Keep original rule order for =Incomplete(first_rule)=.
+5. Allocate indexes before traversal. The real traversal runs repeatedly under
+   an allocation counter and uses fixed capacity state.
+
+** Fermi estimate and rejected scope
+
+The first Sol proposal dynamically chose the smallest remaining atom and used
+single-column indexes. Astra conditionally accepted its correctness design but
+identified a multiplicative enumeration risk: individual column buckets can
+be large when their conjunction is selective. Existing binarized triangle
+programs provide a bounded ternary-relation stress case.
+
+Primary and Astra selected the narrower source-order compound-index design
+before production implementation. It preserves candidate sets, traversal
+order, index requirements, and asymptotic work. It still needs measurement:
+uniform frame handling and independent matching can change instruction count
+and constant factors. No speedup is predicted or claimed. Dynamic planning,
+extra indexes and fully populated-head shortcuts are outside this increment.
+
+** Review roles
+
+Sol implements bounded checker tests and the new private pass; a separate Sol
+implements a repeated-check mode in the existing private benchmark example.
+Primary reviews and owns build coordination, acceptance and this report.
+Astra independently reviewed both design alternatives and will review the
+actual source and evidence before acceptance.
+
+* Measurement protocol
+
+Before any edits, retain the original release example:
+
+#+begin_src sh
+CARGO_BUILD_JOBS=8 ~/src/ergodis-dev/scripts/retain-bin.sh \
+  ~/src/ergodis-private closure_ballpark --example --profile release \
+  --label c1214b-original
+#+end_src
+
+Measured executable SHA-256:
+=8718d54a4e12b13b900816b59b0cc2554e45e1ac38d66b2fa563df9c0c653b85=.
+Retained name: =c1214b-original-6e31900=.
+
+The existing full harness checks each certificate once. Its A/B driver's
+two-point difference isolates repeated evaluation, even in full mode; those
+counter ratios cannot measure the checker. Add =--check-only trace|ranked=
+to the existing example and =--mode check= to its A/B driver. Prepare/evaluate
+and generate a certificate once; repeat only the selected whole checker.
+Hash and compare checked relations outside timing. Whole-check counters include
+store/index construction, witness validation and completeness; do not label
+them completeness-only counters. Profiles must identify actual traversal calls.
+
+Validate the harness-only change against the original retained executable,
+then retain a matched harness control before changing production checker code.
+Interleave control/candidate rounds with A/A nulls, instructions/cycles/branches/
+branch misses, separate cache events, exact result parity and peak RSS. Include
+sparse/dense, cyclic, n-ary and binarized triangle cases. Checker traversal is
+serial; there is no parallel checker mode to validate.
+
+* Acceptance record
+
+Pending: matched control, implementation, bounded oracle/omission tests,
+allocation regression, scoped profiles, retained A/B, core gates and final
+independent source review. This report records a plan, not a delivered checker.
