@@ -109,7 +109,7 @@
     "Whole private root wasm compilation failed on existing Unix control-plane dependency",
     "Record replay timing not measured by existing stratify loop"
   ],
-  "final_repair_commit": "53ad57ea376b7b7d2ec884158a3864b448938175",
+  "final_repair_commit": "ca52a3e1b8e080a470ef53fc60a1cd62edded95b",
   "variant2_native_validation": {
     "source_snapshot": {
       "private_base": "743e011338d577616a7d97130ef21cc7608c5137",
@@ -189,5 +189,85 @@
       "/home/tavis/.cache/ergodis/c1215/20260922-203800-nix-develop-ergodis-c-bash-c-cargo-fmt-cargo-fmt-check-cargo-clippy-locked-j8-p-e/stderr.log": "36d40e753b3c5fe14d54a80794003894e1c8bba6d277f1891007b8a2d35212d7"
     },
     "optional_wasm_check": "Not repeated: the unchanged Unix dependency failure above remains applicable."
+  },
+  "variant3_native_validation": {
+    "source_snapshot": {
+      "private_base": "76bff83a6e5e44c3a2b9ef35a59ff0d198d9a937",
+      "core_revision": "19cee8fc08530465ea958e065908e8d0fd29cafe",
+      "files": {
+        "src/rel_stratified.rs": "74564f270b5f4503ba1b9383852f4eac406d204def62575b87c4d411dbed1bcd",
+        "tests/rel_lowering.rs": "d75341520a6edc1fabff5f5233d9c158a12aced273a32090d77c81258de3ce0d"
+      },
+      "owned_diff_sha256": "92eac1845c2da6d983b34ad1336750df48eab5263aa59c8eca16bc05c3fdf560"
+    },
+    "commit_matches_validated_files": true,
+    "commands": [
+      {
+        "command": [
+          "cargo",
+          "fmt"
+        ],
+        "exit": 0
+      },
+      {
+        "command": [
+          "cargo",
+          "fmt",
+          "--check"
+        ],
+        "exit": 0
+      },
+      {
+        "command": [
+          "cargo",
+          "clippy",
+          "--locked",
+          "-j8",
+          "-p",
+          "ergodis-private",
+          "--all-targets",
+          "--all-features",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit": 0
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-j8",
+          "-p",
+          "ergodis-private",
+          "--all-features",
+          "--test",
+          "rel_lowering",
+          "--test",
+          "rel_reference_eval",
+          "--test",
+          "rel_frontend",
+          "--test",
+          "rel_frontend_portability",
+          "--test",
+          "datalog_certificate_codecs"
+        ],
+        "exit": 0,
+        "test_counts": {
+          "datalog_certificate_codecs": 11,
+          "rel_frontend": 28,
+          "rel_frontend_portability": 1,
+          "rel_lowering": 57,
+          "rel_reference_eval": 19
+        }
+      }
+    ],
+    "test_total": 116,
+    "logs": {
+      "/home/tavis/.cache/ergodis/c1215/20260922-204331-nix-develop-ergodis-c-bash-c-cargo-fmt-cargo-fmt-check-cargo-clippy-locked-j8-p-e/stdout.log": "5680fdf2e52745346bc5d04348963e50d70017c5f2e7665590f505e7476ab27b",
+      "/home/tavis/.cache/ergodis/c1215/20260922-204331-nix-develop-ergodis-c-bash-c-cargo-fmt-cargo-fmt-check-cargo-clippy-locked-j8-p-e/stderr.log": "c581dcb03bbadecd539fe9d0ea201be3508755f04cb39247b1b2a735f7b7842e"
+    },
+    "optional_wasm_check": "Not repeated; unchanged Unix dependency failure retained above."
   }
 }

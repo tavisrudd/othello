@@ -6,9 +6,9 @@
 * Status and bounded scope
 
 The bounded replay repair is implemented in private =ec7bb32= and native
-validation passed. The first measured variant failed the performance regression gate; a narrow
-cold-only correction is committed in private =53ad57e=, with final native gates
-passing again. Its performance disposition is pending. The broader
+validation passed. The first two measured variants failed the performance regression gate.
+The current candidate is private =ca52a3e=; its formatting, Clippy and 116 native
+tests pass. Its performance disposition is pending. The broader
 C1215 API migration remains open. This increment repairs malformed public inputs
 to =rel_stratified::verify_records=. The initial audit and two panic reproductions
 are recorded in
@@ -211,3 +211,29 @@ with [[file-rev:53ad57e:~/src/ergodis-private/tests/rel_lowering.rs][edge-case r
 Formatting, all-target/all-feature Clippy and all 116 native tests passed again
 on this exact snapshot. The optional unchanged private-root WASM failure was
 not rerun. Both variants' validation receipts are retained in the adjacent JSON.
+
+
+* Second measured variant — narrower diagnostic still fails
+
+The [[file-rev:76bff83:~/src/ergodis-private/analysis/rel-frontend/c1215-replay-variant2.json][second variant's committed diagnostic]]
+records five aggregate A/B rounds and aggregate A/A controls. All samples agree
+exactly and counters are 100% enabled. Aggregate whole-stage instruction ratios
+remain 1.000562 [1.000451, 1.000673] for byte and 1.000489
+[1.000432, 1.000546] for scalar. Lower-stage differences are approximately zero.
+The out-of-line integer-formatting call remains and the aggregate symbol remains
+3,029 bytes. The first inlining-restoration hypothesis therefore failed; broader
+and cache runs were stopped at the failed diagnostic gate.
+
+The next bounded representation variant replaces the two cold BTreeSets with
+presized vectors of borrowed keys, sorting and adjacent-duplicate detection.
+The validation contract and asymptotic comparison cost are unchanged; this
+removes per-node allocations and two new tree-set instantiations. It changes no
+evaluator helper. The hypothesis is that the smaller added generic footprint
+avoids the same-module compiler change; only the retained measurement can decide.
+
+
+The flat-key variant is committed in
+[[file-rev:ca52a3e:~/src/ergodis-private/src/rel_stratified.rs][private =ca52a3e=]].
+It again passes formatting, all-target/all-feature Clippy and 116 native tests;
+primary matched committed file hashes to the stable validated snapshot. The
+correctness contract and API remain those reviewed above.
