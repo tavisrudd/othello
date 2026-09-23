@@ -1224,6 +1224,9 @@ from each binary's `.comment` when the A/B is written up.
 | private `c1205b` | `48ccaaa` | `Error::CheckersDisagree(Disagreement { layer, relation, tuple, held_by, missing_from })` with `Party::{Derivation, Ranked, Evaluator}` and a merge walk (`first_difference`), for both the derivation/ranked and the checker/evaluator comparison; `Error::Record(RecordMismatch { kind, index, field })` replacing `ComplementMismatch`, with `RecordKind`, `RecordField`, `DomainPart` and a `Display` path such as `complements[0].column_domains[0].values`; `tuple_digest(DigestKind, scope, name, arity, tuples)` under tag `ergodis-private/rel-chain.v1` replacing `digest_of` in the builder and the record check; the tamper test now asserts the field of each of its seven tampers; unit tests for the disagreement and for digest separation; the bench witness keeps `3 << 60 | layer` and `4 << 60 | index` |
 | private `c1205b` | `c7d6ffa` | Step 4: `rel_chain::Evidence` (`const RETAIN`), `NoEvidence`, `ChainWriter` (directory or memory, layer files written as they arrive, only the two certificate digests kept), `Manifest`/`ManifestLayer`/`SeededEntry`/`ResultEntry` with hex digests (`to_hex`, `parse_hex`, lowercase 64 digits only), serde on every record type, `LayerFile` names, `LoweringParameters` (the one definition of the operator tool's lowering limits); `rel_stratified::evaluate_with<E: Evidence>` (`evaluate` is its `NoEvidence` instantiation), `Error::Evidence { layer, message }` (bench witness `7 << 60 \| layer`), `LayerReport::domain`, `manifest(&Stratified, &Program, &[LayerDigests])`; `check_constructions_observed`, which hands each rebuilt construction to a callback; `rel-lower --chain <dir> --externals <json>` writing `source.rel`, `lowering.json` and `producer.json` beside the chain; `tests/rel_chain.rs` (file set, manifest round trip, identities, hex strictness) |
 | private `c1205b` | `6c0d24a` | Step 5: `src/rel_verify.rs` (`verify_chain`, `verify_parts`, `Bounds`, sealed `VerifiedChain`, `ChainError { file, layer, path, problem }`, `LayerRecords`); `ergodis-tools rel-verify <dir> [--source-check] [--records <file>] [--max-layer-bytes N] [--max-certificate-bytes N]`, one JSON line, exit status 1 on refusal; `tests/rel_chain.rs` extended (acceptance and replay of the emitted records, a round trip of every accepted program of four generated corpora, the dependency-closure source scan, the card's named single-field mutations and three file-level cases) |
+| private `c1205b` | `0d270c7` | Defect found by the list-shape mutations (step 6): a layer's literal-map entries in another order were accepted, so one chain had several spellings and identities. The driver now records the map ascending by literal and `check_constructions` refuses an entry out of order (`LiteralEntry { index }`); `tests/rel_check.rs::a_literal_map_out_of_order_is_refused` |
+| private `c1205b` | `745b5b6` | Error attribution found by the leaf mutations (step 6): a construction declared in a layer its record does not name let that layer's tuples replace the construction's own in the verifier's `given` map (keyed by origin only), so the refusal named a difference at the record's layer instead of the bad declaration; each construction declaration is now checked against its record's layer and index first (`rel_verify::record_place`). A derived relation no layer derives is named at its first declaration's `input` rather than at the last layer's declarations; `tests/rel_check.rs::a_derived_relation_declared_as_input_is_refused_at_its_declaration` |
+| private `c1205b` | `db37035` | Step 6: the tests (see "Step 6" below): `tasks/tools/tests/rel_chain.rs` (two processes), the leaf, list, certificate-entry, forgery and file suites in `tests/rel_chain.rs`, fixture `tests/rel_chain/fallback.rel`, `tests/rel_layer_identities.rs::the_certificate_digests_of_every_layer_are_pinned`; `ergodis-contract` as a dev-dependency of `ergodis-tools` |
 
 Core gate at `064cde2`: `generate_evidence.py --write`, `cargo fmt --all -- --check`, `cargo clippy
 --all-targets --all-features -D warnings`, `cargo test --all-features` (85 `ok` blocks, zero
@@ -1320,6 +1323,82 @@ library's), `rel_frontend_portability`, `rel_check`, the library's `rel_` unit t
 all of `ergodis-tools`' tests (44): all green. The full private `cargo test --all-features` was
 not rerun at this commit; it belongs to the close.
 
+#### Step 6: the tests
+
+Committed as `db37035`, after the two fixes the suites exposed (`0d270c7`, `745b5b6`).
+
+- **Two processes** (`tasks/tools/tests/rel_chain.rs::a_chain_written_by_one_process_is_accepted_by_another`):
+  the built `ergodis-tools` runs `rel-lower --source-file tests/rel_chain/demo.rel --chain <dir>
+  --externals <json>` in one child process and `rel-verify <dir> --records <file>` in another,
+  with and without `--source-check`; the verifier prints `accepted: true` with the chain and
+  program identities and the result table (relation, tuple count, digest) the producer printed;
+  every issued record passes `replay_derivation`/`replay_ranked` against the chain's files; then
+  one layer file extended on disk is refused by a third process with exit status 1 at
+  `chain.json` `layers[1].source_id`. The directory is under `CARGO_TARGET_TMPDIR` and removed.
+- **Every manifest leaf** (`every_manifest_leaf_mutation_is_refused_at_its_field`), over both
+  fixtures: 968 mutations (integer plus one and zeroed, digest nibble, string byte, boolean,
+  every other enum tag). Each is refused, at its own path unless a row of the reviewed table
+  `LEAF_TABLE` says otherwise; every row must match some mutation. The rows fall under four
+  reasons, stated in the test: a field compared as a whole names the whole (domain values and
+  provenance, group columns, a literal-map entry, a dictionary entry); of two fields that must
+  agree, the declaration's side is named (a construction's name, arity, layer and declaration
+  index against the declaration pointing at it; a declaration's program id against its name);
+  a literal-map entry naming another literal leaves its literal unmapped, which the rule check
+  names at `layers[k].literals`; and a provenance tag with a payload of another shape, or an
+  origin tag swap that orphans a derived relation, is refused by the decoder or at the last
+  layer's declarations.
+- **Every list** (`every_list_shape_mutation_is_refused_at_its_list`): 448 mutations (each entry
+  dropped, duplicated, swapped with the next), refused at the list or inside it, with the table
+  `LIST_TABLE` for construction lists (named at the declaration whose index moved), binding-site
+  lists (the provenance), the layer list (a file unexpected or missing) and a dropped derived
+  declaration (the last layer's declarations). The literal-map reordering was accepted before
+  `0d270c7`.
+- **Every certificate entry** (`every_certificate_entry_mutation_is_refused`): every layer's
+  derivation certificate, each rule index, premise and tuple value plus one and zeroed (379), and
+  its ranked certificate, each rank zeroed and lowered by one and each tuple value plus one and
+  zeroed (183). With the manifest digest kept, each is refused at `layers[k].derivation` or
+  `.ranked`; with the digest recomputed, by the core checker of its family (`Rejected`), carried
+  with the layer and file, except three premise changes that the checker accepts, correctly: the
+  rule `some(x) = unreached(x, _)` admits any `unreached` tuple with that `x` as its premise,
+  and the three moved references land on another such tuple. The test allows acceptance only for
+  premises and only with the original relations established. Raising a rank is not tried: a
+  higher rank than the premises need is still a valid certificate.
+- **Consistent forgeries** (`consistent_forgeries_are_refused_by_what_they_contradict`), each
+  passing every digest and both core checkers (the layer re-admitted from its decoded form,
+  evaluated and certified by `Demand`, identity and digests recomputed; the forging path with no
+  edit reproduces the layer files byte for byte): a complement fact removed (refused at
+  `layer-1.prepared` `complements[0]`, `Differs` with the removed tuple); a seeded relation's
+  tuple removed in a later layer (`layers[1].declared[0]`, `Differs` naming `node` and the
+  tuple); a complement record pointed at another relation of the same arity with its source
+  name to match (`complements[1].relation`: the statement's check on the relation id comes before
+  the one on `source`, so the design's expected `source` is named as `relation`); a filter
+  rebuilt for `<` with facts, count and digest recomputed and the layer re-certified
+  (`filters[0].operator`); and the statement with one negated literal made positive and its
+  identity recomputed (`layer-1.prepared` `rules[j]`, the rule check).
+- **Files** (`truncated_and_extended_files_are_refused`): every layer and certificate file and
+  both JSON files, truncated by one byte, extended by `x`, and extended by a newline. A layer
+  encoding no longer hashes to its identity (`layers[k].source_id`); every other change is a
+  decode refusal at the file, except whitespace after a JSON value, which decodes to the same
+  value and is accepted with the same chain identity. That is the design's stated property (a
+  JSON file is named by the digest of what it decodes to, so two spellings have one identity),
+  now asserted. A certificate above `--max-certificate-bytes` is refused before it is read.
+- **Second fixture** `tests/rel_chain/fallback.rel`: the text constant `"a"` makes the fallback
+  domain of `lone`'s negated literal (five values) differ from `node`'s bound domain (four), so
+  the complement over `path` is built twice and one record carries a `Dictionary` provenance
+  over the whole dictionary; `x > 2` gives a `Constant` operand. Accepted by the verifier; both
+  mutation suites run over it too. `demo.rel` is unedited.
+- **Certificate pins** (`tests/rel_layer_identities.rs::the_certificate_digests_of_every_layer_are_pinned`):
+  per layer, the source identity and both certificate digests from `ChainWriter::layers()`, for
+  both fixtures and the `stratified` (16), `columns` (16), `columns3` (8) and `aggregate` (16)
+  cohorts. Its layer identities equal the existing pins, which are unedited.
+
+Gates at `db37035` (against core `064cde2`): `cargo fmt --all --check` clean; clippy
+`--all-targets --all-features -D warnings` clean for the root and `ergodis-tools`; suites
+`rel_chain` (12), `rel_check` (3), `rel_layer_identities` (2, the original pin unedited),
+`rel_externals`, `rel_frontend_portability`, `rel_lowering` (53, parity and fingerprint
+assertions unedited), `rel_reference_eval` (19, the differential unedited), the library's `rel_`
+unit tests (5) and `ergodis-tools` (41 + 3 + 1): all green.
+
 #### Remaining steps
 
 In order; each is a commit on the private `c1205b` branch with the gates above, and the report
@@ -1392,18 +1471,7 @@ updated after it. The design sections above are the specification.
    `rel_lowering` (53), `rel_reference_eval` (19), `rel_frontend_portability`, the `rel_` unit
    tests and `ergodis-tools` (44): all green. The corpus round trip accepted 470 chains, 252
    of them with more than one layer.
-6. **Tests still to write.** (a) `tasks/tools/tests/rel_chain.rs`: the two-process acceptance as
-   a committed test (spawn the built `ergodis-tools` twice under `CARGO_TARGET_TMPDIR`, compare
-   the printed result digests, replay the written records). (b) In `tests/rel_chain.rs`: every
-   manifest leaf mutated with the expected-path table the design describes, list-shape
-   mutations (drop, duplicate, swap), the remaining ranked-certificate entries, the consistent
-   forgeries of design item 4 (they need a helper that re-admits an edited `Admitted` through
-   `admit_prepared` and re-encodes it), and truncated or extended layer and certificate files.
-   (c) A second fixture file (not an edit of `demo.rel`, whose layer identities are pinned) with
-   a text constant so a fallback domain differs from every bound one and a record carries a
-   `Dictionary` source (mystery ledger). (d) Extend `tests/rel_layer_identities.rs` with a new
-   test, leaving the existing one unedited, that pins both certificate digests per layer from
-   `ChainWriter::layers()`.
+6. Done (`0d270c7`, `745b5b6`, `db37035`); see "Step 6" above.
 7. **A/B.** Candidates retained from the final commits with labels `closure_ballpark-c1205b` and
    `ergodis-tools-c1205b`; symbol comparison; `ab.py --mode evaluate` over the eighteen cohorts;
    `bench.py` over the five default cohorts and over `datalog,stratified,columns,columns3,aggregate`,
@@ -1431,8 +1499,31 @@ repository; removing it is Tavis's call.
   `Dictionary` source in a record therefore appears only when the fallback domain differs from
   every other use site's; the mutation suite of step 6 should add a fixture line that makes one
   (for example a text constant in the dictionary).
+  Correction (step 6): the claim above and in "Steps 2 and 3" that no record of `demo.rel`
+  carries a `Dictionary` source is wrong. The filter of `far(x, y) = unreached(x, y) and x > y`
+  does (both operands are bound only by `unreached`, which its own layer derives); it is only
+  the complement that has none. The second fixture `fallback.rel` now gives a complement a
+  `Dictionary` provenance (five values against the bound domain's four), and both mutation
+  suites run over it.
 - **Binding sites are not recoverable from a binarized rule's body (settled).** See "Steps 2 and
   3"; `P` carries them.
+- **Three premise changes accepted by the derivation checker (settled, correct).** With the
+  certificate digest recomputed, moving the premise reference of three `some(x) = unreached(x,
+  _)` derivations to the next derivation is accepted, because that derivation is another
+  `unreached` tuple with the same `x`; a rule with a body variable the head does not bind has
+  several valid supports per tuple. The unused second premise slot of that one-atom rule, made
+  non-zero, is refused, so the checker is not ignoring slots. Certificates are therefore not
+  unique for a model, and a chain's identity names one certificate among several valid ones.
+- **Whitespace after a JSON file's value is accepted (settled, by design).** The manifest,
+  statement and certificate files are named by the digest of what they decode to, as the design
+  states for `P` ("two spellings of one statement have one identity"), so the verifier accepts
+  a file with trailing whitespace and reports the same chain identity. The chain's byte image is
+  therefore not unique; its identity is. A verifier that must also fix the bytes would compare
+  each JSON file with the serialization of what it decoded (one serialization per file); not
+  done, because the approved design chose the decoded form.
+- **Literal-map order (settled, fixed in `0d270c7`).** The map was checked as a set, so a
+  permuted map was a second spelling with a second chain identity; this was the one case where
+  the manifest had a free order the verifier did not fix.
 
 ## Milestone c
 
