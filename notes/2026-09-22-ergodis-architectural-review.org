@@ -91,11 +91,11 @@ back to the saved revision when that target is unavailable. The saved SHA is
 the review's provenance; following a link after subsequent edits may show newer
 text. For an exact historical reading, open the recorded revision in Magit.
 
-Sources: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/Cargo.toml][current core workspace]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/Cargo.toml][private workspace]],
-[[file-rev:2e1992070c83:/home/tavis/src/ergodis/Cargo.toml][actual local public workspace]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/EXPORTS.md][core export ledger]], and
-[[file-rev:58d8619e8834:/home/tavis/src/ergodis-evidence/EXPORTS.md][evidence export ledger]].
+Sources: [[file-rev:4b576490e4f3:~/src/ergodis/Cargo.toml][current core workspace]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/Cargo.toml][private workspace]],
+[[file-rev:2e1992070c83:~/src/ergodis/Cargo.toml][actual local public workspace]],
+[[file-rev:4b576490e4f3:~/src/ergodis/EXPORTS.md][core export ledger]], and
+[[file-rev:58d8619e8834:~/src/ergodis-evidence/EXPORTS.md][evidence export ledger]].
 
 ** Method and limits
 
@@ -148,9 +148,9 @@ removals need explicit synchronization. The current =.publicignore= has an empty
 work-in-progress hold section: new source is eligible by default unless excluded.
 The export policy therefore depends on review and lint as well as placement.
 
-Sources: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/.publicignore][export exclusions]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/scripts/export-public.sh][snapshot construction]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/docs-private/evidence-export.md][evidence ownership and refresh]].
+Sources: [[file-rev:4b576490e4f3:~/src/ergodis/.publicignore][export exclusions]],
+[[file-rev:4b576490e4f3:~/src/ergodis/scripts/export-public.sh][snapshot construction]],
+[[file-rev:4b576490e4f3:~/src/ergodis/docs-private/evidence-export.md][evidence ownership and refresh]].
 
 ** Cargo components and dependency direction
 
@@ -191,10 +191,10 @@ as a direct test target; loading code is behind its =native= feature. The
 separate WASM manifest/lock and private provider matrix are additional validation
 surfaces, not covered automatically by a default workspace test.
 
-Sources: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/contract/src/lib.rs][contract boundary]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/lib.rs][checker boundary]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/rules/Cargo.toml][rules dependencies]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/Cargo.toml][runtime dependencies]].
+Sources: [[file-rev:4b576490e4f3:~/src/ergodis/crates/contract/src/lib.rs][contract boundary]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/lib.rs][checker boundary]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/rules/Cargo.toml][rules dependencies]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/Cargo.toml][runtime dependencies]].
 
 ** Core mathematical subsystems
 
@@ -221,11 +221,11 @@ compilation reasons about supplied finite contexts; scheduling retains resource
 frontiers; Datalog stores tuples and semi-naive join plans. This diversity is
 useful and should survive cleanup.
 
-Sources: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/lib.rs][public facade]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/composition.rs][composition]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/interface.rs][finite interface adapter]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/observational.rs][observational compiler]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bp_osd.rs][candidate-only decoder contract]].
+Sources: [[file-rev:4b576490e4f3:~/src/ergodis/src/lib.rs][public facade]],
+[[file-rev:4b576490e4f3:~/src/ergodis/src/composition.rs][composition]],
+[[file-rev:4b576490e4f3:~/src/ergodis/src/interface.rs][finite interface adapter]],
+[[file-rev:4b576490e4f3:~/src/ergodis/src/observational.rs][observational compiler]],
+[[file-rev:4b576490e4f3:~/src/ergodis/src/bp_osd.rs][candidate-only decoder contract]].
 
 ** Private subsystems and extension packages
 
@@ -262,12 +262,12 @@ control feature, permits separate payloads, and reuses the actual kernels.
 It also duplicates module wiring, feature lists, and build context. Provider
 families are mutually exclusive within each package's shared entry source.
 
-Sources: [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/lib.rs][private facade]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/open_problem.rs][retained-composition traits]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/parametric_lrc_contract.rs][model/plan/query ownership]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/execution-provider/src/lib.rs][shared provider implementation]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/lrc-provider/Cargo.toml][family manifest]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/component-provider/src/lib.rs][component adapter]].
+Sources: [[file-rev:482d6e9e4845:~/src/ergodis-private/src/lib.rs][private facade]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/src/open_problem.rs][retained-composition traits]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/src/parametric_lrc_contract.rs][model/plan/query ownership]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/packages/execution-provider/src/lib.rs][shared provider implementation]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/packages/lrc-provider/Cargo.toml][family manifest]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/packages/component-provider/src/lib.rs][component adapter]].
 
 * Execution and evidence paths
 
@@ -292,9 +292,9 @@ construction, serialization, certificate production, layer materialization, and
 some convenience wrappers allocate. Preserve these phase boundaries when assessing
 performance or proposing abstractions.
 
-Sources: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/root_execution.rs][root execution]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/composition.rs::27][compact records]],
-[[file-rev:a60f03bc4369:/home/tavis/src/ergodis-dev/PERFORMANCE.md][performance contract]].
+Sources: [[file-rev:4b576490e4f3:~/src/ergodis/src/root_execution.rs][root execution]],
+[[file-rev:4b576490e4f3:~/src/ergodis/src/composition.rs::27][compact records]],
+[[file-rev:a60f03bc4369:~/src/ergodis-dev/PERFORMANCE.md][performance contract]].
 
 ** Two rule execution models
 
@@ -327,12 +327,12 @@ closed-world pass. Trace checking validates named premises; ranked checking
 searches for smaller-rank support. Both additionally need completeness, which
 is precisely where the shared pass matters.
 
-Sources: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/contract/src/rule_contract.rs][grounded contract]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/contract/src/datalog.rs][Datalog admission and encoding]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/rules/src/lib.rs][weighted evaluator]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/rules/src/demand.rs][demand plans and execution]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/derivation.rs][trace checker]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/ranked.rs][ranked checker]].
+Sources: [[file-rev:4b576490e4f3:~/src/ergodis/crates/contract/src/rule_contract.rs][grounded contract]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/contract/src/datalog.rs][Datalog admission and encoding]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/rules/src/lib.rs][weighted evaluator]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/rules/src/demand.rs][demand plans and execution]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/derivation.rs][trace checker]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/ranked.rs][ranked checker]].
 
 ** Rel frontend and layered execution
 
@@ -384,13 +384,13 @@ admission, so bugs common to those stages are invisible to that differential.
 Frontend native/WASM parity likewise checks the compiled frontend representation;
 it does not exercise the whole stratified backend.
 
-Sources: [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/rel_frontend/mod.rs][frontend API and stages]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/rel_frontend/lower.rs][relational IR]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/rel_frontend/lower/build.rs][IR construction]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/rel_frontend/lower/passes.rs][normalization passes]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/rel_stratified.rs::1750][layer evaluation and checks]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/tests/rel_reference/mod.rs][reference semantics]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/tests/rel_frontend_portability.rs][actual frontend parity boundary]].
+Sources: [[file-rev:482d6e9e4845:~/src/ergodis-private/src/rel_frontend/mod.rs][frontend API and stages]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/src/rel_frontend/lower.rs][relational IR]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/src/rel_frontend/lower/build.rs][IR construction]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/src/rel_frontend/lower/passes.rs][normalization passes]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/src/rel_stratified.rs::1750][layer evaluation and checks]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/tests/rel_reference/mod.rs][reference semantics]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/tests/rel_frontend_portability.rs][actual frontend parity boundary]].
 
 ** Admission, certificates, and authority
 
@@ -418,11 +418,11 @@ lifting, and related scalar contracts. It should not be read as a proof of the
 Rel parser, stratifier, sparse join implementation, lazy memory backend, provider
 ABI, or full relational compiler. No Lean build or proof replay was performed.
 
-Sources: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/datalog_record.rs][record issuance and replay]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/admission.rs][opaque admission]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/semantic_theorems.rs][claim bookkeeping]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/observational.rs::4970][deferred verification API]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/rules/src/lib.rs][stated algebraic proof connection]].
+Sources: [[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/datalog_record.rs][record issuance and replay]],
+[[file-rev:4b576490e4f3:~/src/ergodis/src/admission.rs][opaque admission]],
+[[file-rev:4b576490e4f3:~/src/ergodis/src/semantic_theorems.rs][claim bookkeeping]],
+[[file-rev:4b576490e4f3:~/src/ergodis/src/observational.rs::4970][deferred verification API]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/rules/src/lib.rs][stated algebraic proof connection]].
 
 * Hosts, persistence, and user interfaces
 
@@ -447,10 +447,10 @@ These are related, but not one integrated universal campaign lifecycle. Adding
 a provider does not automatically supply campaign history, repository activation,
 checkpoint restoration, native/WASM UI parity, or cancellation semantics.
 
-Sources: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/control/mod.rs][native control]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/campaign.rs][portable campaign]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/service.rs][session service]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/execution-loop.js][cooperative browser controller]].
+Sources: [[file-rev:4b576490e4f3:~/src/ergodis/src/control/mod.rs][native control]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/campaign.rs][portable campaign]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/service.rs][session service]],
+[[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/execution-loop.js][cooperative browser controller]].
 
 ** Provider boundary
 
@@ -474,10 +474,10 @@ certificate names while a separate semiring map advertises Boolean names: a
 generic consumer needs a defined resolution rule before treating those strings
 as a complete output-schema contract.
 
-Sources: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/modules/src/lib.rs][ABI]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/modules/src/native.rs][native loader]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/module-host.js][WASM host]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/rules/src/provider.rs][grounded-rule provider]].
+Sources: [[file-rev:4b576490e4f3:~/src/ergodis/crates/modules/src/lib.rs][ABI]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/modules/src/native.rs][native loader]],
+[[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/module-host.js][WASM host]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/rules/src/provider.rs][grounded-rule provider]].
 
 ** Persistent records and repositories
 
@@ -498,11 +498,11 @@ explicitly excludes Windows, network filesystems, power-loss guarantees, and
 multi-user authorization. Those exclusions are sensible limits, not proof of
 equivalent semantics on other platforms.
 
-Sources: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/run_record.rs][run data]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/repository.rs][repository transactions]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/repository_journal.rs][journal]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/repository-native/src/lib.rs][Unix persistence]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/repository-worker.js][browser persistence host]].
+Sources: [[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/run_record.rs][run data]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/repository.rs][repository transactions]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/repository_journal.rs][journal]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/repository-native/src/lib.rs][Unix persistence]],
+[[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/repository-worker.js][browser persistence host]].
 
 ** Native, browser, and Python reach
 
@@ -520,10 +520,10 @@ extension mechanism, not evidence that every solver already has a method.
 The Python tree also holds oracles, fixtures, benchmark drivers, and external
 comparison scripts, which have different purposes from the user client.
 
-Sources: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/src/lib.rs][browser Rust facade]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/rpc.rs::235][actual RPC registry]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/python/ergodis/client.py][Python facade]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/python/ergodis/_rpc.py][subprocess transport]].
+Sources: [[file-rev:4b576490e4f3:~/src/ergodis/wasm/src/lib.rs][browser Rust facade]],
+[[file-rev:4b576490e4f3:~/src/ergodis/src/rpc.rs::235][actual RPC registry]],
+[[file-rev:4b576490e4f3:~/src/ergodis/python/ergodis/client.py][Python facade]],
+[[file-rev:4b576490e4f3:~/src/ergodis/python/ergodis/_rpc.py][subprocess transport]].
 
 * Findings, ordered by practical priority
 
@@ -549,9 +549,9 @@ including error paths and drop. Do not infer that Apple VM behavior matches
 Linux from a successful compile. Root-core-only builds do not import the rules
 crate and are not blocked by this particular defect.
 
-Evidence: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/rules/src/pages.rs::202][Unix backend and huge-page call]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/rules/Cargo.toml][Unix libc dependency]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/Cargo.lock::553][locked libc version]].
+Evidence: [[file-rev:4b576490e4f3:~/src/ergodis/crates/rules/src/pages.rs::202][Unix backend and huge-page call]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/rules/Cargo.toml][Unix libc dependency]],
+[[file-rev:4b576490e4f3:~/src/ergodis/Cargo.lock::553][locked libc version]].
 
 ** F02 — P1: current canonical locked WASM build is not reproducible
 
@@ -567,9 +567,9 @@ crate/dependency migration; make the canonical locked WASM check a required
 graph-change gate. Then replay browser tests against freshly built artifacts.
 This review did not change the lock or retry with unlocked dependency resolution.
 
-Evidence: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/Cargo.lock::214][stale WASM graph]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/Cargo.toml][separate manifest]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/flake.nix][locked build entry points]].
+Evidence: [[file-rev:4b576490e4f3:~/src/ergodis/wasm/Cargo.lock::214][stale WASM graph]],
+[[file-rev:4b576490e4f3:~/src/ergodis/wasm/Cargo.toml][separate manifest]],
+[[file-rev:4b576490e4f3:~/src/ergodis/flake.nix][locked build entry points]].
 
 ** F03 — P1 capability gap: Windows native hosts and private root are unavailable
 
@@ -587,9 +587,9 @@ desired capabilities. A Windows repository must preserve lease fencing,
 publication/retry, file replacement, and locking semantics, not merely replace
 path separators. WSL running Linux binaries is a different deployment target.
 
-Evidence: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/control/mod.rs::14][Unix imports]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/Cargo.toml][forced native features]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/repository-native/src/lib.rs::1][Unix-only adapter]].
+Evidence: [[file-rev:4b576490e4f3:~/src/ergodis/src/control/mod.rs::14][Unix imports]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/Cargo.toml][forced native features]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/repository-native/src/lib.rs::1][Unix-only adapter]].
 
 ** F04 — P1 assurance gap: the Rel result does not carry its complete evidence chain
 
@@ -605,10 +605,10 @@ binding, layer sources and certificates, exact construction inputs, final
 readout mapping, and an explicit construction-verifier choice. Keep each
 guarantee named. Do not describe digest equality as a proof of the compiler.
 
-Evidence: [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/rel_stratified.rs::354][returned result]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/rel_stratified.rs::980][record reconstruction]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/rel_stratified.rs::1783][local certificates and checks]],
-[[file-rev:1cb4ad484761:notes/2026-09-22-c1205-rel-transferable-evidence-report.md][delivered prepared-byte milestone]].
+Evidence: [[file-rev:482d6e9e4845:~/src/ergodis-private/src/rel_stratified.rs::354][returned result]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/src/rel_stratified.rs::980][record reconstruction]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/src/rel_stratified.rs::1783][local certificates and checks]],
+[[file-rev:1cb4ad484761:~/src/othello/notes/2026-09-22-c1205-rel-transferable-evidence-report.md][delivered prepared-byte milestone]].
 
 ** F05 — P1 assurance gap: Datalog completeness checking has one shared implementation
 
@@ -624,10 +624,10 @@ then one independently written completeness implementation. Document remaining
 shared admission/stores/helpers. Preserve algorithmic diversity where it supplies
 evidence; do not deduplicate it away as ordinary maintenance duplication.
 
-Evidence: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/ranked.rs::358][ranked checker calling shared pass]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/derivation.rs][shared completeness implementation]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/tests/prepared_source.rs][independent fixture producer]],
-[[file-rev:1cb4ad484761:notes/2026-09-22-c1214-checker-tests-independence.md][existing owner and gates]].
+Evidence: [[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/ranked.rs::358][ranked checker calling shared pass]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/derivation.rs][shared completeness implementation]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/tests/prepared_source.rs][independent fixture producer]],
+[[file-rev:1cb4ad484761:~/src/othello/notes/2026-09-22-c1214-checker-tests-independence.md][existing owner and gates]].
 
 ** F06 — P2 correctness/API risk: “admitted” and “certified” state is not consistently protected
 
@@ -650,10 +650,10 @@ keep explicit unchecked/test construction separate; bind staged frontend data to
 its source lifetime/identity. For trust-boundary APIs, reject malformed data
 before indexing. Coordinate with C1215 and the frontend extraction work.
 
-Evidence: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/contract/src/datalog.rs::210][mutable admitted fields]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/derivation.rs::230][trusting checker entry]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/rel_frontend/mod.rs::532][source obligation]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/rel_stratified.rs::980][public record-checking boundary]].
+Evidence: [[file-rev:4b576490e4f3:~/src/ergodis/crates/contract/src/datalog.rs::210][mutable admitted fields]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/derivation.rs::230][trusting checker entry]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/src/rel_frontend/mod.rs::532][source obligation]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/src/rel_stratified.rs::980][public record-checking boundary]].
 
 ** F07 — P2: promoted generic algorithms still have private implementations
 
@@ -669,12 +669,12 @@ delegating to the promoted core kernel. Recommend that pattern for genuinely
 shared logic, with parity fixtures. Do not merge independent correctness oracles
 or performance-justified specializations merely because their mathematics overlaps.
 
-Evidence: [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/predicate_cover.rs][private cover]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/predicate_cover.rs][core cover]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/mask_cycle_proof.rs][private cycle proof]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/mask_cycle_proof.rs][core cycle proof]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/semantic_theorems.rs][private claim statuses]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/hall_core.rs][delegating Hall adapter]].
+Evidence: [[file-rev:482d6e9e4845:~/src/ergodis-private/src/predicate_cover.rs][private cover]],
+[[file-rev:4b576490e4f3:~/src/ergodis/src/predicate_cover.rs][core cover]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/src/mask_cycle_proof.rs][private cycle proof]],
+[[file-rev:4b576490e4f3:~/src/ergodis/src/mask_cycle_proof.rs][core cycle proof]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/src/semantic_theorems.rs][private claim statuses]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/src/hall_core.rs][delegating Hall adapter]].
 
 ** F08 — P2: root libraries are too broad to communicate stable subsystem boundaries
 
@@ -693,11 +693,11 @@ feature, release, or portability isolation provides concrete benefit. Move nativ
 control toward host ownership; review workload-specific public modules for a
 generic contract or private placement. Preserve compatibility and hot layouts.
 
-Evidence: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/lib.rs][core surface]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/lib.rs][private surface]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/balanced.rs][specialized public family]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/defect.rs][research-specific public framing]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/docs/dev/contributor-boundaries.md][placement contract]].
+Evidence: [[file-rev:4b576490e4f3:~/src/ergodis/src/lib.rs][core surface]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/src/lib.rs][private surface]],
+[[file-rev:4b576490e4f3:~/src/ergodis/src/balanced.rs][specialized public family]],
+[[file-rev:4b576490e4f3:~/src/ergodis/src/defect.rs][research-specific public framing]],
+[[file-rev:4b576490e4f3:~/src/ergodis/docs/dev/contributor-boundaries.md][placement contract]].
 
 ** F09 — P2: workflow and provider extension is still a multi-surface change
 
@@ -714,10 +714,10 @@ binary pilot schema. Share cold protocol fixtures/schema validation where useful
 keep typed execution and family-specific preservation checks. Clarify the
 semiring-dependent readout formats in the current rules descriptor.
 
-Evidence: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/campaign.rs][pilot schema]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/recursive.rs][weighted update lifecycle]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/rules/src/provider.rs][grounded ABI]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/module-host.js][JS protocol validation]].
+Evidence: [[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/campaign.rs][pilot schema]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/recursive.rs][weighted update lifecycle]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/rules/src/provider.rs][grounded ABI]],
+[[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/module-host.js][JS protocol validation]].
 
 ** F10 — P2: provider reuse is source inclusion rather than a clean reusable crate boundary
 
@@ -734,9 +734,9 @@ ABI. Until then, test each family artifact/configuration explicitly. This is a
 targeted extraction opportunity, not a reason to adopt one monolithic private
 WASM build.
 
-Evidence: [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/execution-provider/src/lib.rs][source graph]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/qec-provider/Cargo.toml][shared-entry manifest]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/analysis/module-loading/build-distribution.sh][artifact feature matrix]].
+Evidence: [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/execution-provider/src/lib.rs][source graph]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/packages/qec-provider/Cargo.toml][shared-entry manifest]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/analysis/module-loading/build-distribution.sh][artifact feature matrix]].
 
 ** F11 — P1 resource risk / P2 design: memory bounds mean different things on different hosts
 
@@ -759,10 +759,10 @@ account for concurrent evaluator/checker/layer storage. Keep exact refusal and
 do not silently change semantics. Windows virtual-memory reservation is an
 optional future adapter, not something the portable allocator already supplies.
 
-Evidence: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/rules/src/pages.rs][backing strategies]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/rules/src/demand.rs::185][reservation ceiling]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/datalog_store.rs::56][eager checker stores]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/contract/src/datalog.rs][prepared encoding bounds]].
+Evidence: [[file-rev:4b576490e4f3:~/src/ergodis/crates/rules/src/pages.rs][backing strategies]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/rules/src/demand.rs::185][reservation ceiling]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/datalog_store.rs::56][eager checker stores]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/contract/src/datalog.rs][prepared encoding bounds]].
 
 ** F12 — P2: relational language boundaries and refusals need a single executable contract
 
@@ -780,9 +780,9 @@ should name the responsible stage, budget, observed value, and supported shape.
 Do not grow the grammar without stating denotation and backend behavior. Existing
 C1206/C1207, C1211/C1212, and C1218 are the natural owners for these parts.
 
-Evidence: [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/rel_frontend/lower.rs][IR and backend limits]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/rel_frontend/diagnostic.rs][diagnostics]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/tests/rel_reference/mod.rs][explicit semantic boundary]].
+Evidence: [[file-rev:482d6e9e4845:~/src/ergodis-private/src/rel_frontend/lower.rs][IR and backend limits]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/src/rel_frontend/diagnostic.rs][diagnostics]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/tests/rel_reference/mod.rs][explicit semantic boundary]].
 
 ** F13 — P2: validation and development tooling do not establish native platform support
 
@@ -802,10 +802,10 @@ not proof of filesystem, threading, memory, or performance behavior. Either test
 the declared MSRV or align the support statement with tested compilers. Keep
 machine-local cache configuration private.
 
-Evidence: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/flake.nix][Linux-only flake systems]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/.github/workflows/public-lint.yml][actual CI scope]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/tests/toolchain_pin.rs][pin gate]],
-[[file-rev:a60f03bc4369:/home/tavis/src/ergodis-dev/scripts/retain-bin.sh][retained-build toolchain]].
+Evidence: [[file-rev:4b576490e4f3:~/src/ergodis/flake.nix][Linux-only flake systems]],
+[[file-rev:4b576490e4f3:~/src/ergodis/.github/workflows/public-lint.yml][actual CI scope]],
+[[file-rev:4b576490e4f3:~/src/ergodis/tests/toolchain_pin.rs][pin gate]],
+[[file-rev:a60f03bc4369:~/src/ergodis-dev/scripts/retain-bin.sh][retained-build toolchain]].
 
 ** F14 — P2 correctness of measurements: non-x86 clock fallback is not monotone
 
@@ -821,8 +821,8 @@ represent measurement units explicitly in scores/receipts. Do not compare TSC
 and nanosecond magnitudes as one portable cost scale. Validate ranking behavior
 on ARM independently of functional execution.
 
-Evidence: [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/repr_grammar.rs::2005][counter implementation]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/tasks/tools/src/repr_search/scorer.rs::274][cost consumer]].
+Evidence: [[file-rev:482d6e9e4845:~/src/ergodis-private/src/repr_grammar.rs::2005][counter implementation]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/tasks/tools/src/repr_search/scorer.rs::274][cost consumer]].
 
 ** F15 — P2 clarity: trust-state terminology is stronger than some types enforce
 
@@ -840,9 +840,9 @@ specific checked object at persistence/activation boundaries. Preserve explicit
 legacy naming. The scalar Lean results should remain scoped to their actual
 semantics until relational formalization is delivered under C1217.
 
-Evidence: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/observational.rs::4983][same-type deferred artifact]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/semantic_theorems.rs][caller-supplied statuses]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/generic_certificate.rs][legacy versus current private checking]].
+Evidence: [[file-rev:4b576490e4f3:~/src/ergodis/src/observational.rs::4983][same-type deferred artifact]],
+[[file-rev:4b576490e4f3:~/src/ergodis/src/semantic_theorems.rs][caller-supplied statuses]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/src/generic_certificate.rs][legacy versus current private checking]].
 
 ** F16 — P2/P3: architecture documentation and performance rationale have drifted
 
@@ -862,11 +862,11 @@ test-checked capability matrix so status does not have to be copied into many
 documents. This report records the discrepancies rather than silently fixing
 historical records.
 
-Evidence: [[file-rev:1cb4ad484761:notes/handoffs/2026-09-05-ergodis-lane.md][handoff at review start]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/EXPORTS.md][export authority]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/analysis/rel-frontend/README.md][frontend README]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/rules/src/pages.rs::76][stagger rationale]],
-[[file-rev:1cb4ad484761:notes/2026-09-17-c1200-c1198-repair-pass.md][isolating experiment]].
+Evidence: [[file-rev:1cb4ad484761:~/src/othello/notes/handoffs/2026-09-05-ergodis-lane.md][handoff at review start]],
+[[file-rev:4b576490e4f3:~/src/ergodis/EXPORTS.md][export authority]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/analysis/rel-frontend/README.md][frontend README]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/rules/src/pages.rs::76][stagger rationale]],
+[[file-rev:1cb4ad484761:~/src/othello/notes/2026-09-17-c1200-c1198-repair-pass.md][isolating experiment]].
 
 ** F17 — P2 operational coupling: source identities and publication manifests have broad blast radius
 
@@ -884,10 +884,10 @@ reverification/reissuance an explicit operation, retain old verification context
 and check export inventories for stale deletions. Do not weaken source provenance
 merely to make cosmetic edits cheaper; first decide what compatibility is needed.
 
-Evidence: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/contract/src/lib.rs][contract identity]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/lib.rs][checker identity]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/datalog_record.rs][record replay]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/docs-private/evidence-export.md][evidence synchronization]].
+Evidence: [[file-rev:4b576490e4f3:~/src/ergodis/crates/contract/src/lib.rs][contract identity]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/lib.rs][checker identity]],
+[[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/datalog_record.rs][record replay]],
+[[file-rev:4b576490e4f3:~/src/ergodis/docs-private/evidence-export.md][evidence synchronization]].
 
 * Portability assessment
 
@@ -924,11 +924,11 @@ uses =simd128= by default; threaded variants add atomics/shared memory and a
 separate pinned nightly toolchain. The ordinary import-free provider host is not
 the entirety of the threaded deployment story.
 
-Source: [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bp_osd.rs::15][guarded intrinsics]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/linear_code.rs::215][multiversion kernel]],
-[[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bin/css_distance_native.rs::434][Linux affinity with non-Linux refusal]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/execution-provider/src/provider_threading.rs][thread readiness]],
-[[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/analysis/module-loading/build-distribution.sh][WASM build variants]].
+Source: [[file-rev:4b576490e4f3:~/src/ergodis/src/bp_osd.rs::15][guarded intrinsics]],
+[[file-rev:4b576490e4f3:~/src/ergodis/src/linear_code.rs::215][multiversion kernel]],
+[[file-rev:4b576490e4f3:~/src/ergodis/src/bin/css_distance_native.rs::434][Linux affinity with non-Linux refusal]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/packages/execution-provider/src/provider_threading.rs][thread readiness]],
+[[file-rev:482d6e9e4845:~/src/ergodis-private/analysis/module-loading/build-distribution.sh][WASM build variants]].
 
 ** Required portability gates
 
@@ -980,7 +980,7 @@ that effect and follow the existing manifest/record compatibility rules.
 Implementation update (2026-09-22): the detailed plan, Sol red-team review,
 three independent repair commits, exact gates and remaining target-validation
 limits are recorded in
-[[file-rev:b80c0bd87:/home/tavis/src/othello/notes/2026-09-22-ergodis-phase1-remediation.org][Phase 1 implementation and validation]].
+[[file-rev:b80c0bd87:~/src/othello/notes/2026-09-22-ergodis-phase1-remediation.org][Phase 1 implementation and validation]].
 R3 passed the locked build and fresh browser checks. R4 and R5 are implemented
 with Linux/host regression coverage; Darwin compilation and native ARM/Windows
 execution remain unverified. This update does not replace the historical
@@ -1151,278 +1151,278 @@ and the deeper reviewed paths are described above.
 
 | Module | Source overview (descriptive, not a support guarantee) |
 |--------+------------------------------------------------------|
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/admission.rs::1][admission]] | Bounded, target-specific admission of discovered label restrictions. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/alignment.rs::1][alignment]] | Exact attachment separation for aligned-design queries. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/allocation_surface.rs::1][allocation_surface]] | Exact independent-choice minima and reusable two-resource allocation surfaces. Source compilation and workspace allocation are separate from execution. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/applications.rs::1][applications]] | Application-facing exact kernels built on the recovery-state abstractions. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/arithmetic/mod.rs::1][arithmetic]] | Allocation-free arithmetic kernels. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/automata.rs::1][automata]] | Adapters for deterministic finite automata. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/balanced.rs::1][balanced]] | Normalized exact front end for the Gf27 balanced =q=27= branch. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/binary_kernel_search.rs::1][binary_kernel_search]] | Random information-set search for low-weight constrained binary-kernel words. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/binary_margin_lift.rs::1][binary_margin_lift]] | Exact liftability of a binary matrix from two transverse margins. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bitset.rs::1][bitset]] | No module-level overview; see implementation. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bounded_subset_sum.rs::1][bounded_subset_sum]] | Exact bounded signed-multiset subset sums for cold theorem templates. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bp_osd.rs::1][bp_osd]] | Sparse binary normalized-min-sum BP with bounded OSD post-processing. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/character_sum.rs::1][character_sum]] | Exact quadratic-character sums over odd prime fields. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/coherent_closure.rs::1][coherent_closure]] | Exact coherent refinement of finite pair observations. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/commutant.rs::1][commutant]] | Verified commutants and invariant splits for packed binary actions. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/composition.rs::1][composition]] | No module-level overview; see implementation. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/composition_io.rs::1][composition_io]] | Shared cold JSON schema and execution boundary for labelled composition. Serialization and field dispatch stay outside typed composition kernels. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/composition_shape.rs::1][composition_shape]] | Validated geometry for a padded binary retained-composition tree. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/confinement.rs::1][confinement]] | No module-level overview; see implementation. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/contextual.rs::1][contextual]] | Contextual quotients and rank-bounded outer tests. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/continuation.rs::1][continuation]] | Exact quotient towers for progressively richer continuation alphabets. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/control/mod.rs::1][control]] | Optional, experimental control plane for long theorem-search campaigns. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/css_distance.rs::1][css_distance]] | Exact bounded CSS-distance search over connected support representatives. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/cyclic_action.rs::1][cyclic_action]] | Exact lock counts for finite actions on a cyclic carrier. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/defect.rs::1][defect]] | Exact arithmetic pruning for the open q=27, /D/=54 defect-19 branch. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/family_response.rs::1][family_response]] | Compact observations for application families defined by exact minima. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/family_substitution.rs::1][family_substitution]] | Checked domain-scoped substitution for independent optional resource families. Preserves maximum cardinality and a liftable witness, not labelled optima. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/feature_dag.rs::1][feature_dag]] | Bounded, typed feature terms for theorem evolution. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/fibre.rs::1][fibre]] | Bounded exact indexing of dense equivalence fibres. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/field.rs::1][field]] | No module-level overview; see implementation. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/finite_lowering.rs::1][finite_lowering]] | Cold counterexample-guided synthesis of a finite summary transition table. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/frozen_shortest_path.rs::1][frozen_shortest_path]] | Allocation-free label setting over a compiled observational quotient. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/graph_obstruction.rs::1][graph_obstruction]] | Allocation-free scalar obstructions for small simple graphs. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/group_action.rs::1][group_action]] | Exact orbit compilation for finite permutation actions. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/group_aggregation.rs::1][group_aggregation]] | Bounded permutation-invariant aggregation over typed feature groups. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/group_histogram.rs::1][group_histogram]] | Exact finite-value histograms and structural aggregate identities. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/hall.rs::1][hall]] | Allocation-free exact Hall matching and obstruction extraction. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/incidence.rs::1][incidence]] | No module-level overview; see implementation. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/integer_moments.rs::1][integer_moments]] | Exact allocation-free enumeration under first and second integer moments. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/interface.rs::1][interface]] | Domain-independent compilation boundary for exact finite interfaces. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/linear_code.rs::1][linear_code]] | Exact minimum nonzero weight for small-rank binary linear codes. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/mask_cycle_proof.rs::1][mask_cycle_proof]] | Compact structural proofs for complements of sufficient feature masks. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/matrix.rs::1][matrix]] | No module-level overview; see implementation. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/modular_power.rs::1][modular_power]] | Compact exact certificates for independence of integer matrix powers. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/multiset.rs::1][multiset]] | Exact bounded compilation of permutation-invariant group summaries. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/observable_admission.rs::1][observable_admission]] | Cold admission of additional finite observables on a compiled quotient. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/observational.rs::1][observational]] | Exact observational minimization for finite typed deterministic systems. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/orbit.rs::1][orbit]] | No module-level overview; see implementation. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/orbit_compile.rs::1][orbit_compile]] | No module-level overview; see implementation. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/ordered_resource.rs::1][ordered_resource]] | Exact finite ordered-resource algebras and Pareto composition. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/packed_ternary.rs::1][packed_ternary]] | No module-level overview; see implementation. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/parametric_certificate.rs::1][parametric_certificate]] | Resource-bounded verification of exact one-parameter certificate families. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/predicate_cover.rs::1][predicate_cover]] | Discovery-only greedy cover synthesis for exact predicates. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/prime_polynomial.rs::1][prime_polynomial]] | Exact polynomial-function reduction and additive recurrence over prime fields. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/projective.rs::1][projective]] | No module-level overview; see implementation. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/provenance.rs::1][provenance]] | Flat, domain-neutral provenance sidecars. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/quadratic_window.rs::1][quadratic_window]] | Exact integer windows for concave quadratic obstructions. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/query_design.rs::1][query_design]] | Exact replay and deterministic construction for finite binary-query designs. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/reduction_language.rs::1][reduction_language]] | Versioned, bounded logical documents for necessary-coordinate reductions. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/residual_hitting.rs::1][residual_hitting]] | Exact bounded residual Hitting Set with streamed negative evidence. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/root_execution.rs::1][root_execution]] | Domain-neutral execution of independent search roots. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/rpc.rs::1][rpc]] | Persistent JSON-RPC transport for exact Ergodis primitives. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/sat.rs::1][sat]] | Exact theorem certificates for structured CNF instances. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/scalar/mod.rs::1][scalar]] | Portable bounded scalar-plan language and feature-batch evaluation. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/scheduler.rs::1][scheduler]] | No module-level overview; see implementation. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/scheduler_bound.rs::1][scheduler_bound]] | Certified Lagrangian bounds for the weighted repair scheduler. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/scheduler_dominance.rs::1][scheduler_dominance]] | Certified state-dominance pruning for the sparse scheduler frontier. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/selector.rs::1][selector]] | Exact successive specialization of finite-field selector polynomials. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/semantic_symmetry.rs::1][semantic_symmetry]] | Certified coordinate-orbit covers for nonempty-support optimization. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/semantic_theorems.rs::1][semantic_theorems]] | Proof-safety contracts for composing discovered theorem fragments. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/span.rs::1][span]] | No module-level overview; see implementation. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/structured_integer_set.rs::1][structured_integer_set]] | Exact finite integer sets represented as interval/residue bases minus holes. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/theorem_search.rs::1][theorem_search]] | Deterministic bounded evolution of candidate sufficient conditions. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/transfer.rs::1][transfer]] | Exact compilation of binary recovery data over characteristic-two fields. |
-| [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/witness.rs::1][witness]] | No module-level overview; see implementation. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/admission.rs::1][admission]] | Bounded, target-specific admission of discovered label restrictions. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/alignment.rs::1][alignment]] | Exact attachment separation for aligned-design queries. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/allocation_surface.rs::1][allocation_surface]] | Exact independent-choice minima and reusable two-resource allocation surfaces. Source compilation and workspace allocation are separate from execution. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/applications.rs::1][applications]] | Application-facing exact kernels built on the recovery-state abstractions. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/arithmetic/mod.rs::1][arithmetic]] | Allocation-free arithmetic kernels. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/automata.rs::1][automata]] | Adapters for deterministic finite automata. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/balanced.rs::1][balanced]] | Normalized exact front end for the Gf27 balanced =q=27= branch. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/binary_kernel_search.rs::1][binary_kernel_search]] | Random information-set search for low-weight constrained binary-kernel words. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/binary_margin_lift.rs::1][binary_margin_lift]] | Exact liftability of a binary matrix from two transverse margins. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/bitset.rs::1][bitset]] | No module-level overview; see implementation. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/bounded_subset_sum.rs::1][bounded_subset_sum]] | Exact bounded signed-multiset subset sums for cold theorem templates. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/bp_osd.rs::1][bp_osd]] | Sparse binary normalized-min-sum BP with bounded OSD post-processing. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/character_sum.rs::1][character_sum]] | Exact quadratic-character sums over odd prime fields. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/coherent_closure.rs::1][coherent_closure]] | Exact coherent refinement of finite pair observations. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/commutant.rs::1][commutant]] | Verified commutants and invariant splits for packed binary actions. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/composition.rs::1][composition]] | No module-level overview; see implementation. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/composition_io.rs::1][composition_io]] | Shared cold JSON schema and execution boundary for labelled composition. Serialization and field dispatch stay outside typed composition kernels. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/composition_shape.rs::1][composition_shape]] | Validated geometry for a padded binary retained-composition tree. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/confinement.rs::1][confinement]] | No module-level overview; see implementation. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/contextual.rs::1][contextual]] | Contextual quotients and rank-bounded outer tests. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/continuation.rs::1][continuation]] | Exact quotient towers for progressively richer continuation alphabets. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/control/mod.rs::1][control]] | Optional, experimental control plane for long theorem-search campaigns. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/css_distance.rs::1][css_distance]] | Exact bounded CSS-distance search over connected support representatives. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/cyclic_action.rs::1][cyclic_action]] | Exact lock counts for finite actions on a cyclic carrier. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/defect.rs::1][defect]] | Exact arithmetic pruning for the open q=27, /D/=54 defect-19 branch. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/family_response.rs::1][family_response]] | Compact observations for application families defined by exact minima. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/family_substitution.rs::1][family_substitution]] | Checked domain-scoped substitution for independent optional resource families. Preserves maximum cardinality and a liftable witness, not labelled optima. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/feature_dag.rs::1][feature_dag]] | Bounded, typed feature terms for theorem evolution. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/fibre.rs::1][fibre]] | Bounded exact indexing of dense equivalence fibres. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/field.rs::1][field]] | No module-level overview; see implementation. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/finite_lowering.rs::1][finite_lowering]] | Cold counterexample-guided synthesis of a finite summary transition table. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/frozen_shortest_path.rs::1][frozen_shortest_path]] | Allocation-free label setting over a compiled observational quotient. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/graph_obstruction.rs::1][graph_obstruction]] | Allocation-free scalar obstructions for small simple graphs. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/group_action.rs::1][group_action]] | Exact orbit compilation for finite permutation actions. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/group_aggregation.rs::1][group_aggregation]] | Bounded permutation-invariant aggregation over typed feature groups. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/group_histogram.rs::1][group_histogram]] | Exact finite-value histograms and structural aggregate identities. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/hall.rs::1][hall]] | Allocation-free exact Hall matching and obstruction extraction. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/incidence.rs::1][incidence]] | No module-level overview; see implementation. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/integer_moments.rs::1][integer_moments]] | Exact allocation-free enumeration under first and second integer moments. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/interface.rs::1][interface]] | Domain-independent compilation boundary for exact finite interfaces. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/linear_code.rs::1][linear_code]] | Exact minimum nonzero weight for small-rank binary linear codes. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/mask_cycle_proof.rs::1][mask_cycle_proof]] | Compact structural proofs for complements of sufficient feature masks. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/matrix.rs::1][matrix]] | No module-level overview; see implementation. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/modular_power.rs::1][modular_power]] | Compact exact certificates for independence of integer matrix powers. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/multiset.rs::1][multiset]] | Exact bounded compilation of permutation-invariant group summaries. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/observable_admission.rs::1][observable_admission]] | Cold admission of additional finite observables on a compiled quotient. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/observational.rs::1][observational]] | Exact observational minimization for finite typed deterministic systems. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/orbit.rs::1][orbit]] | No module-level overview; see implementation. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/orbit_compile.rs::1][orbit_compile]] | No module-level overview; see implementation. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/ordered_resource.rs::1][ordered_resource]] | Exact finite ordered-resource algebras and Pareto composition. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/packed_ternary.rs::1][packed_ternary]] | No module-level overview; see implementation. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/parametric_certificate.rs::1][parametric_certificate]] | Resource-bounded verification of exact one-parameter certificate families. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/predicate_cover.rs::1][predicate_cover]] | Discovery-only greedy cover synthesis for exact predicates. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/prime_polynomial.rs::1][prime_polynomial]] | Exact polynomial-function reduction and additive recurrence over prime fields. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/projective.rs::1][projective]] | No module-level overview; see implementation. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/provenance.rs::1][provenance]] | Flat, domain-neutral provenance sidecars. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/quadratic_window.rs::1][quadratic_window]] | Exact integer windows for concave quadratic obstructions. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/query_design.rs::1][query_design]] | Exact replay and deterministic construction for finite binary-query designs. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/reduction_language.rs::1][reduction_language]] | Versioned, bounded logical documents for necessary-coordinate reductions. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/residual_hitting.rs::1][residual_hitting]] | Exact bounded residual Hitting Set with streamed negative evidence. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/root_execution.rs::1][root_execution]] | Domain-neutral execution of independent search roots. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/rpc.rs::1][rpc]] | Persistent JSON-RPC transport for exact Ergodis primitives. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/sat.rs::1][sat]] | Exact theorem certificates for structured CNF instances. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/scalar/mod.rs::1][scalar]] | Portable bounded scalar-plan language and feature-batch evaluation. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/scheduler.rs::1][scheduler]] | No module-level overview; see implementation. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/scheduler_bound.rs::1][scheduler_bound]] | Certified Lagrangian bounds for the weighted repair scheduler. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/scheduler_dominance.rs::1][scheduler_dominance]] | Certified state-dominance pruning for the sparse scheduler frontier. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/selector.rs::1][selector]] | Exact successive specialization of finite-field selector polynomials. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/semantic_symmetry.rs::1][semantic_symmetry]] | Certified coordinate-orbit covers for nonempty-support optimization. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/semantic_theorems.rs::1][semantic_theorems]] | Proof-safety contracts for composing discovered theorem fragments. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/span.rs::1][span]] | No module-level overview; see implementation. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/structured_integer_set.rs::1][structured_integer_set]] | Exact finite integer sets represented as interval/residue bases minus holes. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/theorem_search.rs::1][theorem_search]] | Deterministic bounded evolution of candidate sufficient conditions. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/transfer.rs::1][transfer]] | Exact compilation of binary recovery data over characteristic-two fields. |
+| [[file-rev:4b576490e4f3:~/src/ergodis/src/witness.rs::1][witness]] | No module-level overview; see implementation. |
 
 ** Private root public modules
 
 | Module | Source overview (descriptive, not a support guarantee) |
 |--------+------------------------------------------------------|
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/actual_cause.rs::1][actual_cause]] | Exact modified Halpern–Pearl actual causality, responsibility, and a class-pruned exhaustion certificate. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/alignment_control.rs::1][alignment_control]] | No module-level overview; see implementation. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/arith.rs::1][arith]] | Integer arithmetic helpers shared by the gem-hunt task drivers. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/banked_rule_evolve.rs::1][banked_rule_evolve]] | Discovery-only Ergodis corpora for the sealed private proof mechanisms. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/banked_semantic_evolve.rs::1][banked_semantic_evolve]] | Discovery-only semantic-coordinate corpora for the fourteen C1016 reductions. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/best_intervention.rs::1][best_intervention]] | Best intervention as a search over the monoid action on the compiled quotient, with the economics that decide whether compiling was worth it. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/binary_margin_lift.rs::1][binary_margin_lift]] | Exact binary-matrix liftability from two transverse compressed margins. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/bitset_sumset.rs::1][bitset_sumset]] | Fixed-width allocation-free sumsets for small binary quotient spaces. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/causal.rs::1][causal]] | Finite acyclic structural causal models lowered onto the exact observational quotient. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/causal_abstraction.rs::1][causal_abstraction]] | C1062 probe 5: Evolve proposes the abstraction, the separating intervention refutes it. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/causal_composition.rs::1][causal_composition]] | The compositional lowering: reduce a causal model's exogenous alphabet along the DAG instead of materializing the =(u, I)= carrier. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/causal_counterfactual.rs::1][causal_counterfactual]] | Level-three counterfactual queries on the compiled quotient, and the exact condition under which that is legitimate. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/causal_design.rs::1][causal_design]] | k-ary experiment design over a bounded hypothesis family, and the decision equivalence that says when identification may stop early. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/causal_fixtures.rs::1][causal_fixtures]] | Shared causal fixtures. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/causal_sequential.rs::1][causal_sequential]] | The unrolled sequential window: the one regime where the intervention word is not a word-shaped presentation of a single edit. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/certified_predecoder.rs::1][certified_predecoder]] | A context-certified predecoder: commit only what every future agrees on. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/compiled_transducer.rs::1][compiled_transducer]] | The compiled-policy endpoint for the LRC fleet. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/congruence_search.rs::1][congruence_search]] | Searching for the smallest sufficient statistic closed under an update monoid. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/counted_family.rs::1][counted_family]] | The counted-kernel family, and a family-level test of probe 9's closed form. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/css_codes.rs::1][css_codes]] | Binary code constructions and Clifford-hierarchy level bookkeeping shared by the C1018 transversal-CSS and level-census drivers. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/css_residual_bounds.rs::1][css_residual_bounds]] | Source-independent residual charge inequalities for binary completion. These predicates are proof templates, not learned answers or solver results. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/cyclic_polynomial_moment_evolve.rs::1][cyclic_polynomial_moment_evolve]] | Blind bounded polynomial-moment mining on target-relative cyclic signals. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/cyclic_quotient_defects.rs::1][cyclic_quotient_defects]] | Exact cyclic quotient autocorrelation defects. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/cyclic_residual_features.rs::1][cyclic_residual_features]] | Generic discovery of cyclic residual quotients and scoped sparse motifs. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/cyclic_residual_relation_evolve.rs::1][cyclic_residual_relation_evolve]] | Blind relation mining on a cyclic residual orbit, followed by structural replay. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/datalog_certificate_codecs.rs::1][datalog_certificate_codecs]] | Candidate byte encodings of a ranked-relation Datalog certificate payload. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/delta_composition.rs::1][delta_composition]] | Retained min-plus composition tree with typed leaf deltas. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/detector_error_model.rs::1][detector_error_model]] | Reader for a stim detector error model, the weighted circuit-level noise source the TigerBlossom grid is measured on (C1064). |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/dynamic_routing.rs::1][dynamic_routing]] | Dynamic shortest-path comparators for the folded-Clos fabric. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/fabric_routing.rs::1][fabric_routing]] | Routing resilience on a folded-Clos fabric as a retained min-plus (and Pareto) composition over pod separators. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/feature_interval.rs::1][feature_interval]] | Offline, bounded interval analysis of the actual checked-i64 FeatureDag model. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/feature_synthesis.rs::1][feature_synthesis]] | Domain-neutral bounded feature synthesis over paired integer observations. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/fleet_congruence.rs::1][fleet_congruence]] | Mechanical confirmation that the fleet's profile-count vector is the optimization congruence, and that the coarser gain state is not. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/fleet_obligations.rs::1][fleet_obligations]] | Sealed compilation obligations for the LRC fleet schema. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/fleet_semirings.rs::1][fleet_semirings]] | One decomposition, several semirings, on the LRC fleet. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g133_cycle_mod11_proof.rs::1][g133_cycle_mod11_proof]] | Sealed evolve-to-proof adapter for the g133 three-cycle obstruction. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g133_evolve_adapter.rs::1][g133_evolve_adapter]] | Typed discovery-only Ergodis campaign adapter for exact g133 shift cells. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g133_exact_q2_proof.rs::1][g133_exact_q2_proof]] | Sealed exact-q2 interior-gap proof for the private g133 order-2092 shard. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g133_exact_shift_proof.rs::1][g133_exact_shift_proof]] | Sealed parametric exact-shift proof for the private g133 order-2092 shard. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g133_sparse_defect.rs::1][g133_sparse_defect]] | Sparse q0 scout for the private g133 order-2092 multiplier shard. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_crt_allocation.rs::1][g41_crt_allocation]] | Typed q29-allocation to q87 mixed-CRT feature extraction for g41. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_defect_scout.rs::1][g41_defect_scout]] | Exact sparse-background q0 scout for the private g41 order-2092 shard. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_digit_witness_cache.rs::1][g41_digit_witness_cache]] | Sealed binary cache for the exact g41 common-quotient digit interfaces. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_joint_quotient_search.rs::1][g41_joint_quotient_search]] | Discovery-only common-quotient search over the 768 sealed g41 roots. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q174_degree_fibre.rs::1][g41_q174_degree_fibre]] | Structural whole-fibre census between q29 coefficients and q174 states. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q174_energy_theorem.rs::1][g41_q174_energy_theorem]] | Exact zero-energy lower bound for the g41/q18 source interfaces at q174. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q174_full_q87_join.rs::1][g41_q174_full_q87_join]] | Exact full-q87 endgame join over lifted q174 target fibres. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q174_grouped_join.rs::1][g41_q174_grouped_join]] | Hierarchical exact four-block join for q174 profiles. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q174_joint.rs::1][g41_q174_joint]] | Exact joint q58/q87 profile census through the common q174 refinement. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q174_joint_join.rs::1][g41_q174_joint_join]] | Exact four-block join for common q174 refinement profiles. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q29_aggregate_pair_graph.rs::1][g41_q29_aggregate_pair_graph]] | Exact aggregate-signature pair graph for reusable q29 transposition tables. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q29_energy_boxes.rs::1][g41_q29_energy_boxes]] | Exact energy-conditioned interval relaxation for four q29 profile blocks. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q29_evolve.rs::1][g41_q29_evolve]] | Discovery-only fine-orbit evolution beneath exact g41 quotient witnesses. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q29_exact_tablebase.rs::1][g41_q29_exact_tablebase]] | Exact q29 block-profile tablebases beneath a common g41 quotient interface. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q29_fibre_endgame.rs::1][g41_q29_fibre_endgame]] | Exact full-PAF endgames inside one q29-preserving fine-orbit fibre. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q29_matched_pair_cache.rs::1][g41_q29_matched_pair_cache]] | Sealed reader for exact q29 profile pairs retained by the global target set. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q29_pair_target_cache.rs::1][g41_q29_pair_target_cache]] | Sealed discovery-only cache for exact aggregate q29 pair-sum targets. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q29_pair_target_cycle.rs::1][g41_q29_pair_target_cycle]] | Structural interpretation of evolved q29 pair-target feature cycles. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q29_profile_descent.rs::1][g41_q29_profile_descent]] | Discovery-only coordinate descent over exact q29 profile tablebases. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q29_profile_endgame.rs::1][g41_q29_profile_endgame]] | Bounded exact pair-table neighbourhoods for g41 q29 profile joins. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q29_profile_lattice_proof.rs::1][g41_q29_profile_lattice_proof]] | Sealed exact-computational proof for the g41 q29 profile-difference lattice. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q29_profile_multiset.rs::1][g41_q29_profile_multiset]] | Canonical four-profile multisets for the g41 aggregate pair graph. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q29_profile_shard.rs::1][g41_q29_profile_shard]] | Exact low-memory shards for g41 q29 four-profile joins. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q29_q58_energy.rs::1][g41_q29_q58_energy]] | Cross-level q29 profile table augmented by necessary q58 shift-29 energy fibres.  The q29 image and q58 lane extractor remain independently sealed; this adapter joins them without trusting… |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q29_shard_census.rs::1][g41_q29_shard_census]] | Exact two-coordinate pair-shard workload census using 2D NTT convolution. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q29_signature_energy.rs::1][g41_q29_signature_energy]] | Exact energy-class joins for scoped g41 q29 aggregate signatures. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q29_source_pair_graph.rs::1][g41_q29_source_pair_graph]] | Exact source-pair graph beneath the aggregate q29 pair-target quotient. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q58_exact_tablebase.rs::1][g41_q58_exact_tablebase]] | Exact q58 refinement beneath one g41 q29 coefficient vector. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q58_gram_masks.rs::1][g41_q58_gram_masks]] | Sparse cyclic Gram-square predicates for the g41 q58 anti profiles. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q58_profile_join.rs::1][g41_q58_profile_join]] | Bounded exact meet-in-the-middle join for q58 anti profiles. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q87_energy.rs::1][g41_q87_energy]] | Exact marginal order-87 mixed-character energy above q29 coefficients. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_q87_exact_energy.rs::1][g41_q87_exact_energy]] | Exact q87 coefficient-state replay for selected mixed-character energies. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g41_quotient_filter_proof.rs::1][g41_quotient_filter_proof]] | Sealed private proof for the g41 quotient-root filter. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g53_defect_profile_proof.rs::1][g53_defect_profile_proof]] | Structural g53 defect-profile theorem synthesized from quotient PAF. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g53_mod14_reduction.rs::1][g53_mod14_reduction]] | Structural mod-14 refinement of the g53 mod-seven quotient roots. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g53_mod28_reduction.rs::1][g53_mod28_reduction]] | Exact-row mod-28 refinement of the g53 quotient roots. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g53_mod343_scout.rs::1][g53_mod343_scout]] | Discovery-only q0--q4 lift scout modulo 7^3 for g53. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g53_mod49_high_scout.rs::1][g53_mod49_high_scout]] | Deeper per-mask mod-49 saturation scout for q5--q7. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g53_mod49_reduction.rs::1][g53_mod49_reduction]] | Per-mask saturation scout for the g53 mod-49 quotient refinement. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g53_mod7_reduction.rs::1][g53_mod7_reduction]] | Exact small modular reduction for the g53 Z/18 quotient equations. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g53_q0_diverse.rs::1][g53_q0_diverse]] | Bounded diverse exact-q0 seed compiler for the private g53 search. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g53_q4_profiles.rs::1][g53_q4_profiles]] | Exact bounded q0--q3 block-profile compiler for the g53 quotient search. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g53_reduction_proof.rs::1][g53_reduction_proof]] | Sealed structural proof adapter for the generator-53 CRT reduction. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g53_search.rs::1][g53_search]] | Private heuristic search for the generator-53 order-2092 shard. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g53_sparse_defect.rs::1][g53_sparse_defect]] | Sparse exact-q0 profile compiler for the private g53 search. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g53_sparse_dual.rs::1][g53_sparse_dual]] | Small dual-inequality synthesis for the private g53 sparse profile sets. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g53_sparse_prefix.rs::1][g53_sparse_prefix]] | Exact q4 fibres above the private g53 q0--q3 sparse profile equations. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g53_sparse_q4_oracle.rs::1][g53_sparse_q4_oracle]] | Independent oracle for the private g53 sparse q0--q4 census. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g53_sparse_q4_proof.rs::1][g53_sparse_q4_proof]] | Sealed proof object for the private g53 q0--q4 exclusion. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/g91_defect_obstruction.rs::1][g91_defect_obstruction]] | Structural q0 obstruction for the private g91 order-2092 multiplier shard. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/gadget_corpus.rs::1][gadget_corpus]] | C1070 probe 9: ingestion of masking-verification gadget corpora. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/generic_certificate.rs::1][generic_certificate]] | One event-sourced proof chain for every summary type. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/gf2_linalg.rs::1][gf2_linalg]] | Bit-packed GF(2) linear algebra on 64-coordinate words. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/hadamard_2092.rs::1][hadamard_2092]] | Private order-2092 adapters over reusable Ergodis cyclic kernels. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/hall_core.rs::1][hall_core]] | Allocation-free repeated Hall tests over caller-supplied CSR graphs. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/hierarchical_leakage.rs::1][hierarchical_leakage]] | Exact leakage analysis for mask-free hierarchical linear encodings. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/incidence_symmetry.rs::1][incidence_symmetry]] | Cold, bounded automorphism proposals for finite incidence structures. This module consumes only a ground-set size and hyperedges. It knows no application family, geometry, target answer, or… |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/incremental_certificate.rs::1][incremental_certificate]] | Event-sourced proof chain over a retained min-plus composition tree. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/landed_rank_adapter.rs::1][landed_rank_adapter]] | Domain adapter for the landed =GF(9)= intertwiner calculation. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/leakage.rs::1][leakage]] | C1070 probe 8: one library surface for the compositional leakage analysis. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/leakage_design.rs::1][leakage_design]] | C1070 probe 7: legitimate versus illegitimate recoverability as one design problem. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/leakage_structure.rs::1][leakage_structure]] | C1070 probe 2: structure of the =t=-symbol leakage profile. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/local_commit_predecoder.rs::1][local_commit_predecoder]] | A certified predecoder whose committed action is a **local correction**. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/lrc_capacity_design.rs::1][lrc_capacity_design]] | Minimum additive, equal-unit-cost capacity upgrades for the fixed LRC model. This is a separate readout; the existing forward kernels are unchanged. Search and reconstruction use fixed arrays and… |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/lrc_delta_binding.rs::1][lrc_delta_binding]] | A real capacitated repair kernel bound as leaves of a retained composition tree, with maintained witnesses. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/lrc_transition_verification.rs::1][lrc_transition_verification]] | Cold domain binding for authenticated LRC leaf-summary transitions. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/lrc_update_admission.rs::1][lrc_update_admission]] | Cold event-to-leaf admission for the fixed LRC fleet interpretation. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/margin_certificate.rs::1][margin_certificate]] | A local decoding certificate that **charges the crossing context its own weight**, rather than quantifying over contexts for free. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/mask_cycle_proof.rs::1][mask_cycle_proof]] | Compact structural proofs for complements of sufficient feature masks. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/masked_leakage.rs::1][masked_leakage]] | Masked labelled recovery costs for two-level linear towers. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/matching_signature.rs::1][matching_signature]] | Is the dense boundary table an expanded form of a small matching object? |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/open_problem.rs::1][open_problem]] | One abstraction over every retained-composition domain in this workspace, and the empirical test of whether it survives them. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/order6_crt_residual.rs::1][order6_crt_residual]] | Exact order-six CRT residual between q58, q87, and q174. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/order6_margin_evolve.rs::1][order6_margin_evolve]] | Discovery-only evolution of the unrestricted q29/q58/q87 margin shells. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/parameterization_synthesis.rs::1][parameterization_synthesis]] | Cold, bounded parameterization synthesis over Boolean-sign polynomials. A checked substitution proves witness lifting, never existence or coverage by itself. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/parametric_lrc.rs::1][parametric_lrc]] | Parametric single-pass transfer operator for the Azure LRC(12,2,2) kernel. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/parametric_lrc_contract.rs::1][parametric_lrc_contract]] | Cold admission for the existing fixed-layout LRC budget family. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/planted_gap_corpus.rs::1][planted_gap_corpus]] | Deterministic planted training/direct-model corpus pair for admission tests. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/policy_automaton.rs::1][policy_automaton]] | Security policy evaluation as a retained composition over a request trace, and rule edits as the structural event. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/policy_minimizer.rs::1][policy_minimizer]] | A split-only incremental minimizer for policy automata, and emission of the compiled transition transducer. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/policy_topk.rs::1][policy_topk]] | An allocation-free fleet policy that maintains the discount order incrementally instead of rescanning it. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/policy_worklist.rs::1][policy_worklist]] | Worklist (Hopcroft-shaped) incremental refinement for policy automata. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/predecoder_pipeline.rs::1][predecoder_pipeline]] | The certified predecoder in front of TigerBlossom. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/predicate_cover.rs::1][predicate_cover]] | Discovery-only greedy cover synthesis for exact predicates. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/privacy_lowering.rs::1][privacy_lowering]] | Exhaustive finite lowering for two binary secrets and one shared mask. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/profile_vocabulary.rs::1][profile_vocabulary]] | The event alphabet at the profile level, and the count-vector state it makes a congruence. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/projected_orbit_min_cost.rs::1][projected_orbit_min_cost]] | Domain-neutral exact minimum-cost synthesis for projected orbit choices. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/projective_grid.rs::1][projective_grid]] | Unpublished projective grid-game adapter for Ergodis root execution. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/proof_synthesis.rs::1][proof_synthesis]] | Domain-neutral private proof-synthesis primitives. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/prs.rs::1][prs]] | Finite-field and normal-rational-curve helpers shared by the projective Reed–Solomon (PRS) deep-hole drivers. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q16_quadratic.rs::1][q16_quadratic]] | Private =PG(2,16)= quadratic-avoidance replay adapter. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q18_energy_corpus.rs::1][q18_energy_corpus]] | Discovery-only corpus measurement for the exact q174-to-q18 energy gate. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q18_energy_gate.rs::1][q18_energy_gate]] | Exact q18 zero-energy gate derived from q174 binary margins. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q18_local_repair.rs::1][q18_local_repair]] | Exact distinct-block local repair for evolved q18 near misses. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q18_pair_split.rs::1][q18_pair_split]] | Sealed structural reduction for the unassumed length-18 GS quotient. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q18_q174_margin_lift.rs::1][q18_q174_margin_lift]] | Exact compatibility of the length-18 and length-174 binary projections. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q18_unassumed_evolve.rs::1][q18_unassumed_evolve]] | Discovery-only evolution of unrestricted q18 compressed GS roots. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q19_marked_polar.rs::1][q19_marked_polar]] | Private marked-polar falsifier over =F_19=. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q25_pair_repair.rs::1][q25_pair_repair]] | Private =PG(2,25)= Frobenius-pair repair adapter. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q29_complete_even_moments.rs::1][q29_complete_even_moments]] | Complete even autocorrelation moments over =F_29=. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q29_even_moment_proof.rs::1][q29_even_moment_proof]] | Structural even-moment and sparse-trade proofs for the retained q29 root. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q29_exact_anneal.rs::1][q29_exact_anneal]] | Discovery-only exact q29 anneal seeded from a directly replayed mod18 shell. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q29_four_plus_one.rs::1][q29_four_plus_one]] | Exact retained-root q29 =4+1= repair census. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q29_inventory_scope.rs::1][q29_inventory_scope]] | Exact magnitude-inventory scope for the unrestricted q29 shell. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q29_mod3_norm.rs::1][q29_mod3_norm]] | Typed q29 group-ring congruence for unrestricted order-2092 discovery. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q29_mod9_generator.rs::1][q29_mod9_generator]] | Constructive residue-first generator for the unrestricted q29 shell. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q29_mod9_lift.rs::1][q29_mod9_lift]] | Exact bounded integer lift of a supplied four-row q29 mod-nine shell. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q29_pair_key_evolve.rs::1][q29_pair_key_evolve]] | Learned coarse q29 pair keys with exact full-signature replay. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q29_parity_support.rs::1][q29_parity_support]] | Exact parity quotient for the unrestricted length-29 compressed shell. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q29_psd_scope_proof.rs::1][q29_psd_scope_proof]] | Exact small-principal-minor obstructions for q29 row-repair scopes. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/q29_transfer_anneal.rs::1][q29_transfer_anneal]] | Discovery-only q29 transfer anneal from an arbitrary bounded root. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/quotient_paf_proof.rs::1][quotient_paf_proof]] | Private structural proof for cyclic quotient-PAF aggregation. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/raw_feature_evolve.rs::1][raw_feature_evolve]] | Generic pre-residual feature expansion for blind C1016 evolve controls. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/reduction_proof.rs::1][reduction_proof]] | Private spike: lift evolved observations into small structural proofs. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/rel_frontend/mod.rs::1][rel_frontend]] | Owned, bounded Rel-style syntax prototype. Parsing confers no execution authority. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/rel_lowering.rs::1][rel_lowering]] | Backend v1 of the Rel lowering: the projection of a normalized relational IR into the core rule contract, with the readout map that decodes derived tuples back to typed values. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/rel_stratified.rs::1][rel_stratified]] | The stratified projection of a normalized relational IR: one core rule contract =Program=, one derivation certificate and two checks per layer, with the finite complement of every negated relation… |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/repr_grammar.rs::1][repr_grammar]] | A small typed grammar of lossless encoders, with allocation-free decode and random-access probe paths over caller-owned presized buffers. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/residual_obligations.rs::1][residual_obligations]] | Cold, independent checking of nonnegative action-cost lower bounds. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/resource_capacity_fit.rs::1][resource_capacity_fit]] | Bounded exact capacity design over admitted resource-option families. Compilation and result materialization are cold; traversal owns fixed storage. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/scheduling_contract.rs::1][scheduling_contract]] | Cold bindings for the existing native resource scheduler and GPU-checkpoint compiler. This adapter changes no search kernel or native backend policy. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/semantic_plan.rs::1][semantic_plan]] | Typed, bounded =match / reduce / canonicalize= recipe contracts. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/semantic_rank.rs::1][semantic_rank]] | Exact semantic block cores for row systems over =GF(9)=. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/semantic_sets.rs::1][semantic_sets]] | Allocation-free hot-loop kernels for semantic finite-set profiling. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/semantic_theorems.rs::1][semantic_theorems]] | Proof-safety contracts for composing discovered theorem fragments. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/semiring_tree.rs::1][semiring_tree]] | A retained composition tree over boundary-indexed summaries, generic in the target semiring and in the boundary width. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/snapshot_acceleration.rs::1][snapshot_acceleration]] | Accelerating the snapshot-bind stage of the LRC fleet artifact. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/soft_output.rs::1][soft_output]] | Soft output: the complementary gap, which the framework computes for free. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/space_axis_window.rs::1][space_axis_window]] | Quantum error correction decoding cut along the **space** axis, and a cluster-growth decoder whose state is a partition under idempotent merges. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/sparse_composition.rs::1][sparse_composition]] | Sparsity-aware retained composition, and the cheaper solver it competes with. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/sparse_defect_synthesis.rs::1][sparse_defect_synthesis]] | Domain-neutral synthesis of sparse energy defects from a finite alphabet. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/sparse_margin_predecoder.rs::1][sparse_margin_predecoder]] | Sparse position evaluation, an exact matching oracle, and the per-witness margin. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/sparse_parameterization.rs::1][sparse_parameterization]] | Scalable cold IR for exact signed polynomial substitutions over finite arrays. Restricted maps preserve witnesses, never original coverage by assumption. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/subgroup_energy_proof.rs::1][subgroup_energy_proof]] | Private structural proof for cyclic-subgroup PAF aggregation. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/summary_cache.rs::1][summary_cache]] | Deciding a leaf summary before the kernel runs, and serving witnesses from the decided state. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/surface_predecoder.rs::1][surface_predecoder]] | The context-certified predecoder on the rotated surface code. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/symmetric_feature_evolve.rs::1][symmetric_feature_evolve]] | Allocation-free symmetric scalar features for blind private evolve corpora. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/syndrome_window.rs::1][syndrome_window]] | Quantum error correction decoding as a retained composition over rounds. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/tactical_completion.rs::1][tactical_completion]] | Private foundations for tactical-decomposition completion campaigns. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/tiger_blossom.rs::1][tiger_blossom]] | TigerBlossom: a zero-allocation, bounded-memory minimum-weight matching kernel specialized to a compiled detector graph. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/tiger_blossom_graph.rs::1][tiger_blossom_graph]] | Compiled detector graph for the TigerBlossom minimum-weight matching kernel. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/tiger_blossom_sparse.rs::1][tiger_blossom_sparse]] | Sparse region-growth matching over the compiled detector graph. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/transcript_leakage.rs::1][transcript_leakage]] | C1070 probe 6: exact leakage state of a linear protocol transcript. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/two_adic_autocorrelation.rs::1][two_adic_autocorrelation]] | Allocation-free 2-adic lifting for cyclic autocorrelation. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/vector_leakage.rs::1][vector_leakage]] | Vector-cost leakage analysis: Pareto antichains under per-level budgets. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/window_exactness.rs::1][window_exactness]] | What a =T=-round decoding window optimizes exactly, and what it gives up. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/z2k_subgroup.rs::1][z2k_subgroup]] | Bounded, allocation-free subgroup membership over =Z / 2^k=. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/sparse_fault_search.rs::1][sparse_fault_search]] | Experimental exact bounded logical-fault search over sparse binary columns. No model-family knowledge, supplied roots or symmetry reductions are required. Compile and workspace construction… |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/fault_projection.rs::1][fault_projection]] | Cold inference of unit-cost coordinate retractions from sparse fault columns. No family labels, solution seeds, supplied masks, or distances are consulted. |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/fault_exclusion.rs::1][fault_exclusion]] | Independent bounded exclusion replay. No solver plan, fingerprint, pruning receipt or proposer is trusted. Dense exact signatures and depth-local eligible bitsets deliberately differ from sparse… |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/weighted_normalization.rs::1][weighted_normalization]] | Bounded offline normalization of existing four-boundary summary chains. Explicit absence and checked u64 costs are separate from the legacy clipped u32 projection. No production summary format or… |
-| [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/src/audit_output.rs::1][audit_output]] | No module-level overview; see implementation. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/actual_cause.rs::1][actual_cause]] | Exact modified Halpern–Pearl actual causality, responsibility, and a class-pruned exhaustion certificate. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/alignment_control.rs::1][alignment_control]] | No module-level overview; see implementation. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/arith.rs::1][arith]] | Integer arithmetic helpers shared by the gem-hunt task drivers. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/banked_rule_evolve.rs::1][banked_rule_evolve]] | Discovery-only Ergodis corpora for the sealed private proof mechanisms. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/banked_semantic_evolve.rs::1][banked_semantic_evolve]] | Discovery-only semantic-coordinate corpora for the fourteen C1016 reductions. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/best_intervention.rs::1][best_intervention]] | Best intervention as a search over the monoid action on the compiled quotient, with the economics that decide whether compiling was worth it. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/binary_margin_lift.rs::1][binary_margin_lift]] | Exact binary-matrix liftability from two transverse compressed margins. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/bitset_sumset.rs::1][bitset_sumset]] | Fixed-width allocation-free sumsets for small binary quotient spaces. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/causal.rs::1][causal]] | Finite acyclic structural causal models lowered onto the exact observational quotient. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/causal_abstraction.rs::1][causal_abstraction]] | C1062 probe 5: Evolve proposes the abstraction, the separating intervention refutes it. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/causal_composition.rs::1][causal_composition]] | The compositional lowering: reduce a causal model's exogenous alphabet along the DAG instead of materializing the =(u, I)= carrier. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/causal_counterfactual.rs::1][causal_counterfactual]] | Level-three counterfactual queries on the compiled quotient, and the exact condition under which that is legitimate. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/causal_design.rs::1][causal_design]] | k-ary experiment design over a bounded hypothesis family, and the decision equivalence that says when identification may stop early. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/causal_fixtures.rs::1][causal_fixtures]] | Shared causal fixtures. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/causal_sequential.rs::1][causal_sequential]] | The unrolled sequential window: the one regime where the intervention word is not a word-shaped presentation of a single edit. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/certified_predecoder.rs::1][certified_predecoder]] | A context-certified predecoder: commit only what every future agrees on. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/compiled_transducer.rs::1][compiled_transducer]] | The compiled-policy endpoint for the LRC fleet. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/congruence_search.rs::1][congruence_search]] | Searching for the smallest sufficient statistic closed under an update monoid. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/counted_family.rs::1][counted_family]] | The counted-kernel family, and a family-level test of probe 9's closed form. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/css_codes.rs::1][css_codes]] | Binary code constructions and Clifford-hierarchy level bookkeeping shared by the C1018 transversal-CSS and level-census drivers. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/css_residual_bounds.rs::1][css_residual_bounds]] | Source-independent residual charge inequalities for binary completion. These predicates are proof templates, not learned answers or solver results. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/cyclic_polynomial_moment_evolve.rs::1][cyclic_polynomial_moment_evolve]] | Blind bounded polynomial-moment mining on target-relative cyclic signals. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/cyclic_quotient_defects.rs::1][cyclic_quotient_defects]] | Exact cyclic quotient autocorrelation defects. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/cyclic_residual_features.rs::1][cyclic_residual_features]] | Generic discovery of cyclic residual quotients and scoped sparse motifs. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/cyclic_residual_relation_evolve.rs::1][cyclic_residual_relation_evolve]] | Blind relation mining on a cyclic residual orbit, followed by structural replay. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/datalog_certificate_codecs.rs::1][datalog_certificate_codecs]] | Candidate byte encodings of a ranked-relation Datalog certificate payload. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/delta_composition.rs::1][delta_composition]] | Retained min-plus composition tree with typed leaf deltas. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/detector_error_model.rs::1][detector_error_model]] | Reader for a stim detector error model, the weighted circuit-level noise source the TigerBlossom grid is measured on (C1064). |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/dynamic_routing.rs::1][dynamic_routing]] | Dynamic shortest-path comparators for the folded-Clos fabric. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/fabric_routing.rs::1][fabric_routing]] | Routing resilience on a folded-Clos fabric as a retained min-plus (and Pareto) composition over pod separators. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/feature_interval.rs::1][feature_interval]] | Offline, bounded interval analysis of the actual checked-i64 FeatureDag model. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/feature_synthesis.rs::1][feature_synthesis]] | Domain-neutral bounded feature synthesis over paired integer observations. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/fleet_congruence.rs::1][fleet_congruence]] | Mechanical confirmation that the fleet's profile-count vector is the optimization congruence, and that the coarser gain state is not. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/fleet_obligations.rs::1][fleet_obligations]] | Sealed compilation obligations for the LRC fleet schema. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/fleet_semirings.rs::1][fleet_semirings]] | One decomposition, several semirings, on the LRC fleet. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g133_cycle_mod11_proof.rs::1][g133_cycle_mod11_proof]] | Sealed evolve-to-proof adapter for the g133 three-cycle obstruction. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g133_evolve_adapter.rs::1][g133_evolve_adapter]] | Typed discovery-only Ergodis campaign adapter for exact g133 shift cells. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g133_exact_q2_proof.rs::1][g133_exact_q2_proof]] | Sealed exact-q2 interior-gap proof for the private g133 order-2092 shard. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g133_exact_shift_proof.rs::1][g133_exact_shift_proof]] | Sealed parametric exact-shift proof for the private g133 order-2092 shard. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g133_sparse_defect.rs::1][g133_sparse_defect]] | Sparse q0 scout for the private g133 order-2092 multiplier shard. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_crt_allocation.rs::1][g41_crt_allocation]] | Typed q29-allocation to q87 mixed-CRT feature extraction for g41. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_defect_scout.rs::1][g41_defect_scout]] | Exact sparse-background q0 scout for the private g41 order-2092 shard. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_digit_witness_cache.rs::1][g41_digit_witness_cache]] | Sealed binary cache for the exact g41 common-quotient digit interfaces. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_joint_quotient_search.rs::1][g41_joint_quotient_search]] | Discovery-only common-quotient search over the 768 sealed g41 roots. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q174_degree_fibre.rs::1][g41_q174_degree_fibre]] | Structural whole-fibre census between q29 coefficients and q174 states. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q174_energy_theorem.rs::1][g41_q174_energy_theorem]] | Exact zero-energy lower bound for the g41/q18 source interfaces at q174. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q174_full_q87_join.rs::1][g41_q174_full_q87_join]] | Exact full-q87 endgame join over lifted q174 target fibres. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q174_grouped_join.rs::1][g41_q174_grouped_join]] | Hierarchical exact four-block join for q174 profiles. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q174_joint.rs::1][g41_q174_joint]] | Exact joint q58/q87 profile census through the common q174 refinement. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q174_joint_join.rs::1][g41_q174_joint_join]] | Exact four-block join for common q174 refinement profiles. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q29_aggregate_pair_graph.rs::1][g41_q29_aggregate_pair_graph]] | Exact aggregate-signature pair graph for reusable q29 transposition tables. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q29_energy_boxes.rs::1][g41_q29_energy_boxes]] | Exact energy-conditioned interval relaxation for four q29 profile blocks. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q29_evolve.rs::1][g41_q29_evolve]] | Discovery-only fine-orbit evolution beneath exact g41 quotient witnesses. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q29_exact_tablebase.rs::1][g41_q29_exact_tablebase]] | Exact q29 block-profile tablebases beneath a common g41 quotient interface. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q29_fibre_endgame.rs::1][g41_q29_fibre_endgame]] | Exact full-PAF endgames inside one q29-preserving fine-orbit fibre. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q29_matched_pair_cache.rs::1][g41_q29_matched_pair_cache]] | Sealed reader for exact q29 profile pairs retained by the global target set. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q29_pair_target_cache.rs::1][g41_q29_pair_target_cache]] | Sealed discovery-only cache for exact aggregate q29 pair-sum targets. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q29_pair_target_cycle.rs::1][g41_q29_pair_target_cycle]] | Structural interpretation of evolved q29 pair-target feature cycles. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q29_profile_descent.rs::1][g41_q29_profile_descent]] | Discovery-only coordinate descent over exact q29 profile tablebases. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q29_profile_endgame.rs::1][g41_q29_profile_endgame]] | Bounded exact pair-table neighbourhoods for g41 q29 profile joins. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q29_profile_lattice_proof.rs::1][g41_q29_profile_lattice_proof]] | Sealed exact-computational proof for the g41 q29 profile-difference lattice. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q29_profile_multiset.rs::1][g41_q29_profile_multiset]] | Canonical four-profile multisets for the g41 aggregate pair graph. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q29_profile_shard.rs::1][g41_q29_profile_shard]] | Exact low-memory shards for g41 q29 four-profile joins. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q29_q58_energy.rs::1][g41_q29_q58_energy]] | Cross-level q29 profile table augmented by necessary q58 shift-29 energy fibres.  The q29 image and q58 lane extractor remain independently sealed; this adapter joins them without trusting… |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q29_shard_census.rs::1][g41_q29_shard_census]] | Exact two-coordinate pair-shard workload census using 2D NTT convolution. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q29_signature_energy.rs::1][g41_q29_signature_energy]] | Exact energy-class joins for scoped g41 q29 aggregate signatures. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q29_source_pair_graph.rs::1][g41_q29_source_pair_graph]] | Exact source-pair graph beneath the aggregate q29 pair-target quotient. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q58_exact_tablebase.rs::1][g41_q58_exact_tablebase]] | Exact q58 refinement beneath one g41 q29 coefficient vector. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q58_gram_masks.rs::1][g41_q58_gram_masks]] | Sparse cyclic Gram-square predicates for the g41 q58 anti profiles. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q58_profile_join.rs::1][g41_q58_profile_join]] | Bounded exact meet-in-the-middle join for q58 anti profiles. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q87_energy.rs::1][g41_q87_energy]] | Exact marginal order-87 mixed-character energy above q29 coefficients. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_q87_exact_energy.rs::1][g41_q87_exact_energy]] | Exact q87 coefficient-state replay for selected mixed-character energies. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g41_quotient_filter_proof.rs::1][g41_quotient_filter_proof]] | Sealed private proof for the g41 quotient-root filter. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g53_defect_profile_proof.rs::1][g53_defect_profile_proof]] | Structural g53 defect-profile theorem synthesized from quotient PAF. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g53_mod14_reduction.rs::1][g53_mod14_reduction]] | Structural mod-14 refinement of the g53 mod-seven quotient roots. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g53_mod28_reduction.rs::1][g53_mod28_reduction]] | Exact-row mod-28 refinement of the g53 quotient roots. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g53_mod343_scout.rs::1][g53_mod343_scout]] | Discovery-only q0--q4 lift scout modulo 7^3 for g53. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g53_mod49_high_scout.rs::1][g53_mod49_high_scout]] | Deeper per-mask mod-49 saturation scout for q5--q7. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g53_mod49_reduction.rs::1][g53_mod49_reduction]] | Per-mask saturation scout for the g53 mod-49 quotient refinement. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g53_mod7_reduction.rs::1][g53_mod7_reduction]] | Exact small modular reduction for the g53 Z/18 quotient equations. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g53_q0_diverse.rs::1][g53_q0_diverse]] | Bounded diverse exact-q0 seed compiler for the private g53 search. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g53_q4_profiles.rs::1][g53_q4_profiles]] | Exact bounded q0--q3 block-profile compiler for the g53 quotient search. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g53_reduction_proof.rs::1][g53_reduction_proof]] | Sealed structural proof adapter for the generator-53 CRT reduction. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g53_search.rs::1][g53_search]] | Private heuristic search for the generator-53 order-2092 shard. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g53_sparse_defect.rs::1][g53_sparse_defect]] | Sparse exact-q0 profile compiler for the private g53 search. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g53_sparse_dual.rs::1][g53_sparse_dual]] | Small dual-inequality synthesis for the private g53 sparse profile sets. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g53_sparse_prefix.rs::1][g53_sparse_prefix]] | Exact q4 fibres above the private g53 q0--q3 sparse profile equations. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g53_sparse_q4_oracle.rs::1][g53_sparse_q4_oracle]] | Independent oracle for the private g53 sparse q0--q4 census. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g53_sparse_q4_proof.rs::1][g53_sparse_q4_proof]] | Sealed proof object for the private g53 q0--q4 exclusion. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/g91_defect_obstruction.rs::1][g91_defect_obstruction]] | Structural q0 obstruction for the private g91 order-2092 multiplier shard. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/gadget_corpus.rs::1][gadget_corpus]] | C1070 probe 9: ingestion of masking-verification gadget corpora. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/generic_certificate.rs::1][generic_certificate]] | One event-sourced proof chain for every summary type. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/gf2_linalg.rs::1][gf2_linalg]] | Bit-packed GF(2) linear algebra on 64-coordinate words. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/hadamard_2092.rs::1][hadamard_2092]] | Private order-2092 adapters over reusable Ergodis cyclic kernels. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/hall_core.rs::1][hall_core]] | Allocation-free repeated Hall tests over caller-supplied CSR graphs. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/hierarchical_leakage.rs::1][hierarchical_leakage]] | Exact leakage analysis for mask-free hierarchical linear encodings. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/incidence_symmetry.rs::1][incidence_symmetry]] | Cold, bounded automorphism proposals for finite incidence structures. This module consumes only a ground-set size and hyperedges. It knows no application family, geometry, target answer, or… |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/incremental_certificate.rs::1][incremental_certificate]] | Event-sourced proof chain over a retained min-plus composition tree. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/landed_rank_adapter.rs::1][landed_rank_adapter]] | Domain adapter for the landed =GF(9)= intertwiner calculation. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/leakage.rs::1][leakage]] | C1070 probe 8: one library surface for the compositional leakage analysis. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/leakage_design.rs::1][leakage_design]] | C1070 probe 7: legitimate versus illegitimate recoverability as one design problem. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/leakage_structure.rs::1][leakage_structure]] | C1070 probe 2: structure of the =t=-symbol leakage profile. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/local_commit_predecoder.rs::1][local_commit_predecoder]] | A certified predecoder whose committed action is a **local correction**. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/lrc_capacity_design.rs::1][lrc_capacity_design]] | Minimum additive, equal-unit-cost capacity upgrades for the fixed LRC model. This is a separate readout; the existing forward kernels are unchanged. Search and reconstruction use fixed arrays and… |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/lrc_delta_binding.rs::1][lrc_delta_binding]] | A real capacitated repair kernel bound as leaves of a retained composition tree, with maintained witnesses. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/lrc_transition_verification.rs::1][lrc_transition_verification]] | Cold domain binding for authenticated LRC leaf-summary transitions. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/lrc_update_admission.rs::1][lrc_update_admission]] | Cold event-to-leaf admission for the fixed LRC fleet interpretation. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/margin_certificate.rs::1][margin_certificate]] | A local decoding certificate that **charges the crossing context its own weight**, rather than quantifying over contexts for free. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/mask_cycle_proof.rs::1][mask_cycle_proof]] | Compact structural proofs for complements of sufficient feature masks. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/masked_leakage.rs::1][masked_leakage]] | Masked labelled recovery costs for two-level linear towers. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/matching_signature.rs::1][matching_signature]] | Is the dense boundary table an expanded form of a small matching object? |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/open_problem.rs::1][open_problem]] | One abstraction over every retained-composition domain in this workspace, and the empirical test of whether it survives them. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/order6_crt_residual.rs::1][order6_crt_residual]] | Exact order-six CRT residual between q58, q87, and q174. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/order6_margin_evolve.rs::1][order6_margin_evolve]] | Discovery-only evolution of the unrestricted q29/q58/q87 margin shells. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/parameterization_synthesis.rs::1][parameterization_synthesis]] | Cold, bounded parameterization synthesis over Boolean-sign polynomials. A checked substitution proves witness lifting, never existence or coverage by itself. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/parametric_lrc.rs::1][parametric_lrc]] | Parametric single-pass transfer operator for the Azure LRC(12,2,2) kernel. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/parametric_lrc_contract.rs::1][parametric_lrc_contract]] | Cold admission for the existing fixed-layout LRC budget family. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/planted_gap_corpus.rs::1][planted_gap_corpus]] | Deterministic planted training/direct-model corpus pair for admission tests. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/policy_automaton.rs::1][policy_automaton]] | Security policy evaluation as a retained composition over a request trace, and rule edits as the structural event. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/policy_minimizer.rs::1][policy_minimizer]] | A split-only incremental minimizer for policy automata, and emission of the compiled transition transducer. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/policy_topk.rs::1][policy_topk]] | An allocation-free fleet policy that maintains the discount order incrementally instead of rescanning it. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/policy_worklist.rs::1][policy_worklist]] | Worklist (Hopcroft-shaped) incremental refinement for policy automata. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/predecoder_pipeline.rs::1][predecoder_pipeline]] | The certified predecoder in front of TigerBlossom. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/predicate_cover.rs::1][predicate_cover]] | Discovery-only greedy cover synthesis for exact predicates. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/privacy_lowering.rs::1][privacy_lowering]] | Exhaustive finite lowering for two binary secrets and one shared mask. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/profile_vocabulary.rs::1][profile_vocabulary]] | The event alphabet at the profile level, and the count-vector state it makes a congruence. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/projected_orbit_min_cost.rs::1][projected_orbit_min_cost]] | Domain-neutral exact minimum-cost synthesis for projected orbit choices. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/projective_grid.rs::1][projective_grid]] | Unpublished projective grid-game adapter for Ergodis root execution. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/proof_synthesis.rs::1][proof_synthesis]] | Domain-neutral private proof-synthesis primitives. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/prs.rs::1][prs]] | Finite-field and normal-rational-curve helpers shared by the projective Reed–Solomon (PRS) deep-hole drivers. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q16_quadratic.rs::1][q16_quadratic]] | Private =PG(2,16)= quadratic-avoidance replay adapter. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q18_energy_corpus.rs::1][q18_energy_corpus]] | Discovery-only corpus measurement for the exact q174-to-q18 energy gate. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q18_energy_gate.rs::1][q18_energy_gate]] | Exact q18 zero-energy gate derived from q174 binary margins. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q18_local_repair.rs::1][q18_local_repair]] | Exact distinct-block local repair for evolved q18 near misses. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q18_pair_split.rs::1][q18_pair_split]] | Sealed structural reduction for the unassumed length-18 GS quotient. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q18_q174_margin_lift.rs::1][q18_q174_margin_lift]] | Exact compatibility of the length-18 and length-174 binary projections. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q18_unassumed_evolve.rs::1][q18_unassumed_evolve]] | Discovery-only evolution of unrestricted q18 compressed GS roots. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q19_marked_polar.rs::1][q19_marked_polar]] | Private marked-polar falsifier over =F_19=. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q25_pair_repair.rs::1][q25_pair_repair]] | Private =PG(2,25)= Frobenius-pair repair adapter. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q29_complete_even_moments.rs::1][q29_complete_even_moments]] | Complete even autocorrelation moments over =F_29=. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q29_even_moment_proof.rs::1][q29_even_moment_proof]] | Structural even-moment and sparse-trade proofs for the retained q29 root. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q29_exact_anneal.rs::1][q29_exact_anneal]] | Discovery-only exact q29 anneal seeded from a directly replayed mod18 shell. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q29_four_plus_one.rs::1][q29_four_plus_one]] | Exact retained-root q29 =4+1= repair census. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q29_inventory_scope.rs::1][q29_inventory_scope]] | Exact magnitude-inventory scope for the unrestricted q29 shell. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q29_mod3_norm.rs::1][q29_mod3_norm]] | Typed q29 group-ring congruence for unrestricted order-2092 discovery. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q29_mod9_generator.rs::1][q29_mod9_generator]] | Constructive residue-first generator for the unrestricted q29 shell. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q29_mod9_lift.rs::1][q29_mod9_lift]] | Exact bounded integer lift of a supplied four-row q29 mod-nine shell. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q29_pair_key_evolve.rs::1][q29_pair_key_evolve]] | Learned coarse q29 pair keys with exact full-signature replay. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q29_parity_support.rs::1][q29_parity_support]] | Exact parity quotient for the unrestricted length-29 compressed shell. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q29_psd_scope_proof.rs::1][q29_psd_scope_proof]] | Exact small-principal-minor obstructions for q29 row-repair scopes. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/q29_transfer_anneal.rs::1][q29_transfer_anneal]] | Discovery-only q29 transfer anneal from an arbitrary bounded root. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/quotient_paf_proof.rs::1][quotient_paf_proof]] | Private structural proof for cyclic quotient-PAF aggregation. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/raw_feature_evolve.rs::1][raw_feature_evolve]] | Generic pre-residual feature expansion for blind C1016 evolve controls. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/reduction_proof.rs::1][reduction_proof]] | Private spike: lift evolved observations into small structural proofs. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/rel_frontend/mod.rs::1][rel_frontend]] | Owned, bounded Rel-style syntax prototype. Parsing confers no execution authority. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/rel_lowering.rs::1][rel_lowering]] | Backend v1 of the Rel lowering: the projection of a normalized relational IR into the core rule contract, with the readout map that decodes derived tuples back to typed values. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/rel_stratified.rs::1][rel_stratified]] | The stratified projection of a normalized relational IR: one core rule contract =Program=, one derivation certificate and two checks per layer, with the finite complement of every negated relation… |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/repr_grammar.rs::1][repr_grammar]] | A small typed grammar of lossless encoders, with allocation-free decode and random-access probe paths over caller-owned presized buffers. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/residual_obligations.rs::1][residual_obligations]] | Cold, independent checking of nonnegative action-cost lower bounds. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/resource_capacity_fit.rs::1][resource_capacity_fit]] | Bounded exact capacity design over admitted resource-option families. Compilation and result materialization are cold; traversal owns fixed storage. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/scheduling_contract.rs::1][scheduling_contract]] | Cold bindings for the existing native resource scheduler and GPU-checkpoint compiler. This adapter changes no search kernel or native backend policy. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/semantic_plan.rs::1][semantic_plan]] | Typed, bounded =match / reduce / canonicalize= recipe contracts. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/semantic_rank.rs::1][semantic_rank]] | Exact semantic block cores for row systems over =GF(9)=. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/semantic_sets.rs::1][semantic_sets]] | Allocation-free hot-loop kernels for semantic finite-set profiling. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/semantic_theorems.rs::1][semantic_theorems]] | Proof-safety contracts for composing discovered theorem fragments. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/semiring_tree.rs::1][semiring_tree]] | A retained composition tree over boundary-indexed summaries, generic in the target semiring and in the boundary width. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/snapshot_acceleration.rs::1][snapshot_acceleration]] | Accelerating the snapshot-bind stage of the LRC fleet artifact. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/soft_output.rs::1][soft_output]] | Soft output: the complementary gap, which the framework computes for free. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/space_axis_window.rs::1][space_axis_window]] | Quantum error correction decoding cut along the **space** axis, and a cluster-growth decoder whose state is a partition under idempotent merges. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/sparse_composition.rs::1][sparse_composition]] | Sparsity-aware retained composition, and the cheaper solver it competes with. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/sparse_defect_synthesis.rs::1][sparse_defect_synthesis]] | Domain-neutral synthesis of sparse energy defects from a finite alphabet. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/sparse_margin_predecoder.rs::1][sparse_margin_predecoder]] | Sparse position evaluation, an exact matching oracle, and the per-witness margin. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/sparse_parameterization.rs::1][sparse_parameterization]] | Scalable cold IR for exact signed polynomial substitutions over finite arrays. Restricted maps preserve witnesses, never original coverage by assumption. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/subgroup_energy_proof.rs::1][subgroup_energy_proof]] | Private structural proof for cyclic-subgroup PAF aggregation. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/summary_cache.rs::1][summary_cache]] | Deciding a leaf summary before the kernel runs, and serving witnesses from the decided state. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/surface_predecoder.rs::1][surface_predecoder]] | The context-certified predecoder on the rotated surface code. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/symmetric_feature_evolve.rs::1][symmetric_feature_evolve]] | Allocation-free symmetric scalar features for blind private evolve corpora. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/syndrome_window.rs::1][syndrome_window]] | Quantum error correction decoding as a retained composition over rounds. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/tactical_completion.rs::1][tactical_completion]] | Private foundations for tactical-decomposition completion campaigns. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/tiger_blossom.rs::1][tiger_blossom]] | TigerBlossom: a zero-allocation, bounded-memory minimum-weight matching kernel specialized to a compiled detector graph. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/tiger_blossom_graph.rs::1][tiger_blossom_graph]] | Compiled detector graph for the TigerBlossom minimum-weight matching kernel. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/tiger_blossom_sparse.rs::1][tiger_blossom_sparse]] | Sparse region-growth matching over the compiled detector graph. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/transcript_leakage.rs::1][transcript_leakage]] | C1070 probe 6: exact leakage state of a linear protocol transcript. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/two_adic_autocorrelation.rs::1][two_adic_autocorrelation]] | Allocation-free 2-adic lifting for cyclic autocorrelation. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/vector_leakage.rs::1][vector_leakage]] | Vector-cost leakage analysis: Pareto antichains under per-level budgets. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/window_exactness.rs::1][window_exactness]] | What a =T=-round decoding window optimizes exactly, and what it gives up. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/z2k_subgroup.rs::1][z2k_subgroup]] | Bounded, allocation-free subgroup membership over =Z / 2^k=. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/sparse_fault_search.rs::1][sparse_fault_search]] | Experimental exact bounded logical-fault search over sparse binary columns. No model-family knowledge, supplied roots or symmetry reductions are required. Compile and workspace construction… |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/fault_projection.rs::1][fault_projection]] | Cold inference of unit-cost coordinate retractions from sparse fault columns. No family labels, solution seeds, supplied masks, or distances are consulted. |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/fault_exclusion.rs::1][fault_exclusion]] | Independent bounded exclusion replay. No solver plan, fingerprint, pruning receipt or proposer is trusted. Dense exact signatures and depth-local eligible bitsets deliberately differ from sparse… |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/weighted_normalization.rs::1][weighted_normalization]] | Bounded offline normalization of existing four-boundary summary chains. Explicit absence and checked u64 costs are separate from the legacy clipped u32 projection. No production summary format or… |
+| [[file-rev:482d6e9e4845:~/src/ergodis-private/src/audit_output.rs::1][audit_output]] | No module-level overview; see implementation. |
 
 ** Crate-internal module map
 
@@ -1432,40 +1432,40 @@ helpers; notably =control= has its own internal service/storage modules.
 
 | Crate | Production source files |
 |-------+-------------------------|
-| contract | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/contract/src/composition_graph.rs::1][composition_graph.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/contract/src/datalog.rs::1][datalog.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/contract/src/derivation.rs::1][derivation.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/contract/src/lib.rs::1][lib.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/contract/src/ranked.rs::1][ranked.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/contract/src/rule_contract.rs::1][rule_contract.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/contract/src/support.rs::1][support.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/contract/src/weight.rs::1][weight.rs]] |
-| verify | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/binary_composition.rs::1][binary_composition.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/composition_graph.rs::1][composition_graph.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/datalog_record.rs::1][datalog_record.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/datalog_store.rs::1][datalog_store.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/derivation.rs::1][derivation.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/finite_lowering.rs::1][finite_lowering.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/grounded.rs::1][grounded.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/lib.rs::1][lib.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/min_plus_transition.rs::1][min_plus_transition.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/ranked.rs::1][ranked.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/verify/src/support.rs::1][support.rs]] |
-| rules | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/rules/src/demand.rs::1][demand.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/rules/src/frontier.rs::1][frontier.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/rules/src/lib.rs::1][lib.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/rules/src/pages.rs::1][pages.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/rules/src/provider.rs::1][provider.rs]] |
-| modules | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/modules/src/lib.rs::1][lib.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/modules/src/native.rs::1][native.rs]] |
-| runtime | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/bundle_workflow.rs::1][bundle_workflow.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/campaign.rs::1][campaign.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/lib.rs::1][lib.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/lineage.rs::1][lineage.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/recursive.rs::1][recursive.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/repository.rs::1][repository.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/repository_journal.rs::1][repository_journal.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/run_bundle.rs::1][run_bundle.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/run_capture.rs::1][run_capture.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/run_record.rs::1][run_record.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/runtime/src/service.rs::1][service.rs]] |
-| repository-native | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/crates/repository-native/src/lib.rs::1][lib.rs]] |
+| contract | [[file-rev:4b576490e4f3:~/src/ergodis/crates/contract/src/composition_graph.rs::1][composition_graph.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/contract/src/datalog.rs::1][datalog.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/contract/src/derivation.rs::1][derivation.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/contract/src/lib.rs::1][lib.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/contract/src/ranked.rs::1][ranked.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/contract/src/rule_contract.rs::1][rule_contract.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/contract/src/support.rs::1][support.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/contract/src/weight.rs::1][weight.rs]] |
+| verify | [[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/binary_composition.rs::1][binary_composition.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/composition_graph.rs::1][composition_graph.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/datalog_record.rs::1][datalog_record.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/datalog_store.rs::1][datalog_store.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/derivation.rs::1][derivation.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/finite_lowering.rs::1][finite_lowering.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/grounded.rs::1][grounded.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/lib.rs::1][lib.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/min_plus_transition.rs::1][min_plus_transition.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/ranked.rs::1][ranked.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/verify/src/support.rs::1][support.rs]] |
+| rules | [[file-rev:4b576490e4f3:~/src/ergodis/crates/rules/src/demand.rs::1][demand.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/rules/src/frontier.rs::1][frontier.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/rules/src/lib.rs::1][lib.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/rules/src/pages.rs::1][pages.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/rules/src/provider.rs::1][provider.rs]] |
+| modules | [[file-rev:4b576490e4f3:~/src/ergodis/crates/modules/src/lib.rs::1][lib.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/modules/src/native.rs::1][native.rs]] |
+| runtime | [[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/bundle_workflow.rs::1][bundle_workflow.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/campaign.rs::1][campaign.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/lib.rs::1][lib.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/lineage.rs::1][lineage.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/recursive.rs::1][recursive.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/repository.rs::1][repository.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/repository_journal.rs::1][repository_journal.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/run_bundle.rs::1][run_bundle.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/run_capture.rs::1][run_capture.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/run_record.rs::1][run_record.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/crates/runtime/src/service.rs::1][service.rs]] |
+| repository-native | [[file-rev:4b576490e4f3:~/src/ergodis/crates/repository-native/src/lib.rs::1][lib.rs]] |
 
 ** Root implementation modules and native entry points
 
 | Group | Source files |
 |-------+--------------|
-| Unexported root modules | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/arena.rs::1][src/arena.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/field_dispatch.rs::1][src/field_dispatch.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/zdd.rs::1][src/zdd.rs]] |
-| Control internals | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/control/client.rs::1][src/control/client.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/control/evolution.rs::1][src/control/evolution.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/control/mod.rs::1][src/control/mod.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/control/proposal_artifact.rs::1][src/control/proposal_artifact.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/control/proposal_daemon.rs::1][src/control/proposal_daemon.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/control/proposal_policy.rs::1][src/control/proposal_policy.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/control/proposal_rate_store.rs::1][src/control/proposal_rate_store.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/control/proposal_request_schema.rs::1][src/control/proposal_request_schema.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/control/proposal_session.rs::1][src/control/proposal_session.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/control/proposal_session_store.rs::1][src/control/proposal_session_store.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/control/proposal_submission_store.rs::1][src/control/proposal_submission_store.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/control/proposal_ticket.rs::1][src/control/proposal_ticket.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/control/proposal_ticket_store.rs::1][src/control/proposal_ticket_store.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/control/synthesis.rs::1][src/control/synthesis.rs]] |
-| Nested arithmetic | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/arithmetic/bitmap.rs::1][src/arithmetic/bitmap.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/arithmetic/mod.rs::1][src/arithmetic/mod.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/arithmetic/subgroup.rs::1][src/arithmetic/subgroup.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/arithmetic/two_adic.rs::1][src/arithmetic/two_adic.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/arithmetic/xor_sumset.rs::1][src/arithmetic/xor_sumset.rs]] |
-| CSS cooperative execution | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/css_distance/portable.rs::1][src/css_distance/portable.rs]] |
-| Native binary sources | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bin/bench_kernels.rs::1][src/bin/bench_kernels.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bin/binary_linear_distance.rs::1][src/bin/binary_linear_distance.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bin/css_automorphism_adapter.rs::1][src/bin/css_automorphism_adapter.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bin/css_distance_native.rs::1][src/bin/css_distance_native.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bin/css_distance_random.rs::1][src/bin/css_distance_random.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bin/css_distance_shard_ledger.rs::1][src/bin/css_distance_shard_ledger.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bin/css_isomorphism_adapter.rs::1][src/bin/css_isomorphism_adapter.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bin/ergodis.rs::1][src/bin/ergodis.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bin/ergodis_campaign.rs::1][src/bin/ergodis_campaign.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bin/ergodis_rpc.rs::1][src/bin/ergodis_rpc.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/src/bin/ergodisctl.rs::1][src/bin/ergodisctl.rs]] |
-| WASM Rust bindings | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/src/allocation.rs::1][wasm/src/allocation.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/src/bundle.rs::1][wasm/src/bundle.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/src/evolution.rs::1][wasm/src/evolution.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/src/lib.rs::1][wasm/src/lib.rs]], [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/src/repository.rs::1][wasm/src/repository.rs]] |
+| Unexported root modules | [[file-rev:4b576490e4f3:~/src/ergodis/src/arena.rs::1][src/arena.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/field_dispatch.rs::1][src/field_dispatch.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/zdd.rs::1][src/zdd.rs]] |
+| Control internals | [[file-rev:4b576490e4f3:~/src/ergodis/src/control/client.rs::1][src/control/client.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/control/evolution.rs::1][src/control/evolution.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/control/mod.rs::1][src/control/mod.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/control/proposal_artifact.rs::1][src/control/proposal_artifact.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/control/proposal_daemon.rs::1][src/control/proposal_daemon.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/control/proposal_policy.rs::1][src/control/proposal_policy.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/control/proposal_rate_store.rs::1][src/control/proposal_rate_store.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/control/proposal_request_schema.rs::1][src/control/proposal_request_schema.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/control/proposal_session.rs::1][src/control/proposal_session.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/control/proposal_session_store.rs::1][src/control/proposal_session_store.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/control/proposal_submission_store.rs::1][src/control/proposal_submission_store.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/control/proposal_ticket.rs::1][src/control/proposal_ticket.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/control/proposal_ticket_store.rs::1][src/control/proposal_ticket_store.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/control/synthesis.rs::1][src/control/synthesis.rs]] |
+| Nested arithmetic | [[file-rev:4b576490e4f3:~/src/ergodis/src/arithmetic/bitmap.rs::1][src/arithmetic/bitmap.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/arithmetic/mod.rs::1][src/arithmetic/mod.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/arithmetic/subgroup.rs::1][src/arithmetic/subgroup.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/arithmetic/two_adic.rs::1][src/arithmetic/two_adic.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/arithmetic/xor_sumset.rs::1][src/arithmetic/xor_sumset.rs]] |
+| CSS cooperative execution | [[file-rev:4b576490e4f3:~/src/ergodis/src/css_distance/portable.rs::1][src/css_distance/portable.rs]] |
+| Native binary sources | [[file-rev:4b576490e4f3:~/src/ergodis/src/bin/bench_kernels.rs::1][src/bin/bench_kernels.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/bin/binary_linear_distance.rs::1][src/bin/binary_linear_distance.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/bin/css_automorphism_adapter.rs::1][src/bin/css_automorphism_adapter.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/bin/css_distance_native.rs::1][src/bin/css_distance_native.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/bin/css_distance_random.rs::1][src/bin/css_distance_random.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/bin/css_distance_shard_ledger.rs::1][src/bin/css_distance_shard_ledger.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/bin/css_isomorphism_adapter.rs::1][src/bin/css_isomorphism_adapter.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/bin/ergodis.rs::1][src/bin/ergodis.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/bin/ergodis_campaign.rs::1][src/bin/ergodis_campaign.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/bin/ergodis_rpc.rs::1][src/bin/ergodis_rpc.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/src/bin/ergodisctl.rs::1][src/bin/ergodisctl.rs]] |
+| WASM Rust bindings | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/src/allocation.rs::1][wasm/src/allocation.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/wasm/src/bundle.rs::1][wasm/src/bundle.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/wasm/src/evolution.rs::1][wasm/src/evolution.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/wasm/src/lib.rs::1][wasm/src/lib.rs]], [[file-rev:4b576490e4f3:~/src/ergodis/wasm/src/repository.rs::1][wasm/src/repository.rs]] |
 
 ** Private package and task entry points
 
 | Package | Manifest | Implementation entry |
 |---------+----------+----------------------|
-| =ergodis-component-provider= | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/component-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/component-provider/src/lib.rs::1][packages/component-provider/src/lib.rs]] |
-| =ergodis-composition-provider= | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/composition-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/execution-provider/src/lib.rs::1][packages/execution-provider/src/lib.rs]] |
-| =ergodis-css-provider= | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/css-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/execution-provider/src/lib.rs::1][packages/execution-provider/src/lib.rs]] |
-| =ergodis-fault-provider= | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/fault-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/execution-provider/src/lib.rs::1][packages/execution-provider/src/lib.rs]] |
-| =ergodis-hadamard-provider= | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/hadamard-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/execution-provider/src/lib.rs::1][packages/execution-provider/src/lib.rs]] |
-| =ergodis-lrc-provider= | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/lrc-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/execution-provider/src/lib.rs::1][packages/execution-provider/src/lib.rs]] |
-| =ergodis-parameterization-provider= | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/parameterization-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/parameterization-provider/src/lib.rs::1][packages/parameterization-provider/src/lib.rs]] |
-| =ergodis-qec-provider= | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/qec-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/execution-provider/src/lib.rs::1][packages/execution-provider/src/lib.rs]] |
-| =ergodis-scheduling-provider= | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/scheduling-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/packages/execution-provider/src/lib.rs::1][packages/execution-provider/src/lib.rs]] |
-| =gem-hunt= | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/tasks/gem-hunt/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/tasks/gem-hunt/src/main.rs::1][tasks/gem-hunt/src/main.rs]] |
-| =hadamard-2092= | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/tasks/hadamard-2092/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/tasks/hadamard-2092/src/main.rs::1][tasks/hadamard-2092/src/main.rs]] |
-| =ergodis-tools= | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/tasks/tools/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:/home/tavis/src/ergodis-private/tasks/tools/src/main.rs::1][tasks/tools/src/main.rs]] |
+| =ergodis-component-provider= | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/component-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/component-provider/src/lib.rs::1][packages/component-provider/src/lib.rs]] |
+| =ergodis-composition-provider= | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/composition-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/execution-provider/src/lib.rs::1][packages/execution-provider/src/lib.rs]] |
+| =ergodis-css-provider= | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/css-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/execution-provider/src/lib.rs::1][packages/execution-provider/src/lib.rs]] |
+| =ergodis-fault-provider= | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/fault-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/execution-provider/src/lib.rs::1][packages/execution-provider/src/lib.rs]] |
+| =ergodis-hadamard-provider= | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/hadamard-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/execution-provider/src/lib.rs::1][packages/execution-provider/src/lib.rs]] |
+| =ergodis-lrc-provider= | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/lrc-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/execution-provider/src/lib.rs::1][packages/execution-provider/src/lib.rs]] |
+| =ergodis-parameterization-provider= | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/parameterization-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/parameterization-provider/src/lib.rs::1][packages/parameterization-provider/src/lib.rs]] |
+| =ergodis-qec-provider= | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/qec-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/execution-provider/src/lib.rs::1][packages/execution-provider/src/lib.rs]] |
+| =ergodis-scheduling-provider= | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/scheduling-provider/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:~/src/ergodis-private/packages/execution-provider/src/lib.rs::1][packages/execution-provider/src/lib.rs]] |
+| =gem-hunt= | [[file-rev:482d6e9e4845:~/src/ergodis-private/tasks/gem-hunt/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:~/src/ergodis-private/tasks/gem-hunt/src/main.rs::1][tasks/gem-hunt/src/main.rs]] |
+| =hadamard-2092= | [[file-rev:482d6e9e4845:~/src/ergodis-private/tasks/hadamard-2092/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:~/src/ergodis-private/tasks/hadamard-2092/src/main.rs::1][tasks/hadamard-2092/src/main.rs]] |
+| =ergodis-tools= | [[file-rev:482d6e9e4845:~/src/ergodis-private/tasks/tools/Cargo.toml::1][Cargo.toml]] | [[file-rev:482d6e9e4845:~/src/ergodis-private/tasks/tools/src/main.rs::1][tasks/tools/src/main.rs]] |
 
 The shared =execution-provider= entry is intentionally compiled through several
 manifests; it is not an additional workspace crate. =src/lib.rs= is the root
@@ -1475,23 +1475,23 @@ private API, but provider =#[path]= declarations also select modules directly.
 
 | Module | Source |
 |--------+--------|
-| =allocation-client= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/allocation-client.js::1][allocation-client.js]] |
-| =allocation-worker= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/allocation-worker.js::1][allocation-worker.js]] |
-| =bundle-client= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/bundle-client.js::1][bundle-client.js]] |
-| =bundle-limits= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/bundle-limits.js::1][bundle-limits.js]] |
-| =bundle-worker= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/bundle-worker.js::1][bundle-worker.js]] |
-| =bundle= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/bundle.js::1][bundle.js]] |
-| =campaign= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/campaign.js::1][campaign.js]] |
-| =compiled-module= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/compiled-module.js::1][compiled-module.js]] |
-| =execution-loop= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/execution-loop.js::1][execution-loop.js]] |
-| =introduction= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/introduction.js::1][introduction.js]] |
-| =learning-example= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/learning-example.js::1][learning-example.js]] |
-| =main= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/main.js::1][main.js]] |
-| =module-host= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/module-host.js::1][module-host.js]] |
-| =module-worker= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/module-worker.js::1][module-worker.js]] |
-| =repository-client= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/repository-client.js::1][repository-client.js]] |
-| =repository-worker= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/repository-worker.js::1][repository-worker.js]] |
-| =run-id= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/run-id.js::1][run-id.js]] |
-| =session-client= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/session-client.js::1][session-client.js]] |
-| =session-worker= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/session-worker.js::1][session-worker.js]] |
-| =worker= | [[file-rev:4b576490e4f3:/home/tavis/src/ergodis/wasm/www/worker.js::1][worker.js]] |
+| =allocation-client= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/allocation-client.js::1][allocation-client.js]] |
+| =allocation-worker= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/allocation-worker.js::1][allocation-worker.js]] |
+| =bundle-client= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/bundle-client.js::1][bundle-client.js]] |
+| =bundle-limits= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/bundle-limits.js::1][bundle-limits.js]] |
+| =bundle-worker= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/bundle-worker.js::1][bundle-worker.js]] |
+| =bundle= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/bundle.js::1][bundle.js]] |
+| =campaign= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/campaign.js::1][campaign.js]] |
+| =compiled-module= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/compiled-module.js::1][compiled-module.js]] |
+| =execution-loop= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/execution-loop.js::1][execution-loop.js]] |
+| =introduction= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/introduction.js::1][introduction.js]] |
+| =learning-example= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/learning-example.js::1][learning-example.js]] |
+| =main= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/main.js::1][main.js]] |
+| =module-host= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/module-host.js::1][module-host.js]] |
+| =module-worker= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/module-worker.js::1][module-worker.js]] |
+| =repository-client= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/repository-client.js::1][repository-client.js]] |
+| =repository-worker= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/repository-worker.js::1][repository-worker.js]] |
+| =run-id= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/run-id.js::1][run-id.js]] |
+| =session-client= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/session-client.js::1][session-client.js]] |
+| =session-worker= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/session-worker.js::1][session-worker.js]] |
+| =worker= | [[file-rev:4b576490e4f3:~/src/ergodis/wasm/www/worker.js::1][worker.js]] |

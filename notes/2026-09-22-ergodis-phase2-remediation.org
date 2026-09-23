@@ -7,7 +7,7 @@
 
 User authorized starting Phase 2 while an independent Astra agent reviewed
 Phase 1. The scope is R6–R8 in the
-[[file-rev:acd900c3a:/home/tavis/src/othello/notes/2026-09-22-ergodis-architectural-review.org::*Phase 2 — add inexpensive protection against recurrence][architectural remediation plan]].
+[[file-rev:acd900c3a:~/src/othello/notes/2026-09-22-ergodis-architectural-review.org::*Phase 2 — add inexpensive protection against recurrence][architectural remediation plan]].
 This is an opt-in validation inventory and test/audit increment. Changing
 required CI/release gates, public type visibility, wire formats, or production
 checker algorithms is outside this increment.
@@ -78,8 +78,8 @@ The opt-in runner and four false-green regressions are committed in notes
 quality/oracle/manifest gates, native module host, canonical browser workflow,
 and nine provider families checked separately on native and wasm32.
 
-[[file-rev:3eb321cf5:/home/tavis/src/othello/notes/scripts/ergodis-validation-matrix.py][Runner]]
-and [[file-rev:3eb321cf5:/home/tavis/src/othello/notes/scripts/test_ergodis_validation_matrix.py][runner regressions]].
+[[file-rev:3eb321cf5:~/src/othello/notes/scripts/ergodis-validation-matrix.py][Runner]]
+and [[file-rev:3eb321cf5:~/src/othello/notes/scripts/test_ergodis_validation_matrix.py][runner regressions]].
 With no =--run= argument it lists the matrix. Execution requires explicit row
 names and a new output directory. This does not establish a mandatory gate or
 modify CI/release policy.
@@ -179,18 +179,18 @@ The audit separates construction authority from a type's name:
 | =IndependentCheck= / claim-status ledger | Caller-supplied evidence/status, not construction of proof authority | Requires explicit authority/type design before broader assertions |
 
 Source anchors:
-[[file-rev:831d56c:/home/tavis/src/ergodis/crates/contract/src/datalog.rs::210][public admitted state]],
-[[file-rev:831d56c:/home/tavis/src/ergodis/crates/verify/src/derivation.rs::223][trace fast-path contract]],
-[[file-rev:831d56c:/home/tavis/src/ergodis/crates/verify/src/ranked.rs::250][ranked fast-path contract]],
-[[file-rev:831d56c:/home/tavis/src/ergodis/crates/verify/src/datalog_record.rs::46][recorded source re-admission]],
-[[file-rev:831d56c:/home/tavis/src/ergodis/crates/verify/src/datalog_record.rs::110][opaque verified result]],
-[[file-rev:6e31900:/home/tavis/src/ergodis-private/src/rel_stratified.rs::980][public record replay]],
-[[file-rev:6e31900:/home/tavis/src/ergodis-private/src/rel_frontend/mod.rs::532][frontend source obligation]],
-[[file-rev:831d56c:/home/tavis/src/ergodis/src/observational.rs::4983][deferred observation compilation]],
-[[file-rev:831d56c:/home/tavis/src/ergodis/src/semantic_theorems.rs::133][caller-supplied independent-check evidence]].
+[[file-rev:831d56c:~/src/ergodis/crates/contract/src/datalog.rs::210][public admitted state]],
+[[file-rev:831d56c:~/src/ergodis/crates/verify/src/derivation.rs::223][trace fast-path contract]],
+[[file-rev:831d56c:~/src/ergodis/crates/verify/src/ranked.rs::250][ranked fast-path contract]],
+[[file-rev:831d56c:~/src/ergodis/crates/verify/src/datalog_record.rs::46][recorded source re-admission]],
+[[file-rev:831d56c:~/src/ergodis/crates/verify/src/datalog_record.rs::110][opaque verified result]],
+[[file-rev:6e31900:~/src/ergodis-private/src/rel_stratified.rs::980][public record replay]],
+[[file-rev:6e31900:~/src/ergodis-private/src/rel_frontend/mod.rs::532][frontend source obligation]],
+[[file-rev:831d56c:~/src/ergodis/src/observational.rs::4983][deferred observation compilation]],
+[[file-rev:831d56c:~/src/ergodis/src/semantic_theorems.rs::133][caller-supplied independent-check evidence]].
 
 The characterization commit is private =6e31900=:
-[[file-rev:6e31900:/home/tavis/src/ergodis-private/tests/rel_lowering.rs::893][malformed public replay cases]].
+[[file-rev:6e31900:~/src/ergodis-private/tests/rel_lowering.rs::893][malformed public replay cases]].
 The test verifies an untouched control first, then catches two current panics:
 an out-of-range complement relation and an absent closure used by bound-domain
 provenance. Its name and documentation state that this is an existing robustness

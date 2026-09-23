@@ -6,7 +6,7 @@
 * Scope and decision
 
 Implement the three bounded Phase 1 repairs from the
-[[file-rev:40b2f2439:/home/tavis/src/othello/notes/2026-09-22-ergodis-architectural-review.org::*Phase 1 — repair the three concrete, bounded defects][architectural review]].
+[[file-rev:40b2f2439:~/src/othello/notes/2026-09-22-ergodis-architectural-review.org::*Phase 1 — repair the three concrete, bounded defects][architectural review]].
 The user requested a detailed plan, adversarial review before implementation,
 and Sol sub-agents with primary-agent review. This record separates intended
 acceptance from observed results. No public export or push is authorized here.
@@ -174,9 +174,9 @@ commits are local private-main commits, not public exports or releases.
 
 | Step | Repository / commit | Reviewed change | Acceptance status |
 |------+---------------------+-----------------+-------------------|
-| R3 | core =b1cd0bc1b03ca035c585c6edb6c4192750adfeef= | [[file-rev:b1cd0bc1b03ca035c585c6edb6c4192750adfeef:/home/tavis/src/ergodis/wasm/Cargo.lock::230][Lock reconciliation]]: 15 added lines, contract package and current path-dependency edges; no registry version/checksum changes | Locked check, fresh build, WASM tests, Python parity and browser smoke passed |
-| R4 | core =831d56c68bb9430d11436291de1078a37ad79478= | [[file-rev:831d56c68bb9430d11436291de1078a37ad79478:/home/tavis/src/ergodis/crates/rules/src/pages.rs::239][Linux/Android advice cfg]], other native Unix no-op; Linux mmap/advice/release body unchanged; manifest regenerated | Linux tests and core gates passed; Darwin compile/native acceptance remains open |
-| R5 | private =85f2586d19229dba20c4a6e52abe85b49505771b= | [[file-rev:85f2586d19229dba20c4a6e52abe85b49505771b:/home/tavis/src/ergodis-private/src/repr_grammar.rs::2008][Monotonic fallback]], saturating conversion, [[file-rev:85f2586d19229dba20c4a6e52abe85b49505771b:/home/tavis/src/ergodis-private/tasks/tools/src/repr_search/mod.rs::69][target-specific receipt description]]; x86 TSC and cost-vector/ranking arithmetic preserved | Eight representation tests, private Clippy and deterministic receipt smoke passed; actual ARM execution/overhead unverified |
+| R3 | core =b1cd0bc1b03ca035c585c6edb6c4192750adfeef= | [[file-rev:b1cd0bc1b03ca035c585c6edb6c4192750adfeef:~/src/ergodis/wasm/Cargo.lock::230][Lock reconciliation]]: 15 added lines, contract package and current path-dependency edges; no registry version/checksum changes | Locked check, fresh build, WASM tests, Python parity and browser smoke passed |
+| R4 | core =831d56c68bb9430d11436291de1078a37ad79478= | [[file-rev:831d56c68bb9430d11436291de1078a37ad79478:~/src/ergodis/crates/rules/src/pages.rs::239][Linux/Android advice cfg]], other native Unix no-op; Linux mmap/advice/release body unchanged; manifest regenerated | Linux tests and core gates passed; Darwin compile/native acceptance remains open |
+| R5 | private =85f2586d19229dba20c4a6e52abe85b49505771b= | [[file-rev:85f2586d19229dba20c4a6e52abe85b49505771b:~/src/ergodis-private/src/repr_grammar.rs::2008][Monotonic fallback]], saturating conversion, [[file-rev:85f2586d19229dba20c4a6e52abe85b49505771b:~/src/ergodis-private/tasks/tools/src/repr_search/mod.rs::69][target-specific receipt description]]; x86 TSC and cost-vector/ranking arithmetic preserved | Eight representation tests, private Clippy and deterministic receipt smoke passed; actual ARM execution/overhead unverified |
 
 The primary read the complete owned diffs and checked the agents' claims against
 source. The final primary adjustment removed the clock's obsolete claim that no
@@ -333,7 +333,7 @@ fresh browser artifact hashes matched this report.
 | P3 improvement | Per-field cost docs still said cycles, and saturation assertions would allow an always-max conversion | Fixed in private =5e87740=: consistent tick wording, 16 fractional bits, ordinary zero/one-second/max-minus-one conversion assertions |
 
 The primary reviewed and committed the
-[[file-rev:5e87740:/home/tavis/src/ergodis-private/src/repr_grammar.rs::463][documentation/test follow-up]].
+[[file-rev:5e87740:~/src/ergodis-private/src/repr_grammar.rs::463][documentation/test follow-up]].
 Pinned formatting and all eight representation tests passed after formatting
 the new multi-line assertion. There is no production timing or ranking change
 in this follow-up. The due-diligence grades remain unchanged.
