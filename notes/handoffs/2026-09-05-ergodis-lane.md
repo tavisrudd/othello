@@ -32,7 +32,8 @@ and native ARM/Windows validation remain open. No public export or grade change.
 records the opt-in command matrix and C1214 a bounded fixture delivery (core
 `b1b3686`), plus C1215 audit/panic reproductions (private `6e31900`). Core gates
 and all nine provider families' separate native/wasm32 checks pass. Existing
-public replay panics are repaired in private `ec7bb32`; scope, native gates and
+public replay repair candidate `ca52a3e` passes correctness but awaits a native
+performance exception decision; scope, measurements and
 remaining private-root WASM limitation: `../2026-09-22-c1215-replay-shape-validation.org`.
 The broader C1215 API migration remains open. C1214 is complete:
 independent ranked completeness in core `19cee8f`; Astra review, final gates and
