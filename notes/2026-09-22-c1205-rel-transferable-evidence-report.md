@@ -1193,8 +1193,8 @@ default; `producer.json` outside the chain.
 
 ### Implementation
 
-Written incrementally. Stopped by the context budget after the commits below; the exact
-remaining steps are under "Remaining steps".
+Written incrementally. Steps 1 to 7 are done; only the close (step 8) remains, under
+"Remaining steps".
 
 #### Controls
 
@@ -1228,14 +1228,20 @@ from each binary's `.comment` when the A/B is written up.
 | private `c1205b` | `745b5b6` | Error attribution found by the leaf mutations (step 6): a construction declared in a layer its record does not name let that layer's tuples replace the construction's own in the verifier's `given` map (keyed by origin only), so the refusal named a difference at the record's layer instead of the bad declaration; each construction declaration is now checked against its record's layer and index first (`rel_verify::record_place`). A derived relation no layer derives is named at its first declaration's `input` rather than at the last layer's declarations; `tests/rel_check.rs::a_derived_relation_declared_as_input_is_refused_at_its_declaration` |
 | private `c1205b` | `db37035` | Step 6: the tests (see "Step 6" below): `tasks/tools/tests/rel_chain.rs` (two processes), the leaf, list, certificate-entry, forgery and file suites in `tests/rel_chain.rs`, fixture `tests/rel_chain/fallback.rel`, `tests/rel_layer_identities.rs::the_certificate_digests_of_every_layer_are_pinned`; `ergodis-contract` as a dev-dependency of `ergodis-tools` |
 | private `c1205b` | `4138f8b` | Step 7 receipts: `analysis/datalog-comparison/ab-2026-09-22-chain-derivation-loop.json` (+ `.jsonl`), `analysis/rel-frontend/performance-v11-chain-db37035.json`, `performance-v11-chain-constructions-db37035.json` |
+| private `c1205b` | `222b4f8` | Step 7 remainder receipts, `analysis/rel-frontend/chain-stage-shift/`: callgrind attribution of the `lower` and `stratify` stages (`callgrind_attribution.py`, `callgrind-{lower,stratify}-<cohort>.json`), the glibc mmap-threshold A/B (`mmap_threshold.py`, `mmap-threshold-<cohort>.json`), peak RSS (`peak_rss.py`, `peak-rss.json`, `peak-rss-mmap-threshold.json`), massif peak trees of the `stratified` cohort, the executed-instruction mix of the lowering body and `dedup_rows` (`instr_mix.py`, `instr-mix.txt`), the normalized `dedup_rows` disassembly diff, the chain cost (`chain_cost.py`, `chain-cost-512.json`), and `call_counts.py` |
 
 Core gate at `064cde2`: `generate_evidence.py --write`, `cargo fmt --all -- --check`, `cargo clippy
 --all-targets --all-features -D warnings`, `cargo test --all-features` (85 `ok` blocks, zero
 FAILED), `generate_fixtures.py --check`, `check-runtime-dependencies.py`,
 `check-verifier-dependencies.py`: all passed in one run. Every pinned identity and certificate
 digest in `demand_prepared.rs` and `prepared_source.rs` passed unedited. Native and WASM ABI
-harnesses not rerun: the change adds a method to `Demand`, which the grounded ABI does not
-reach (to be rerun with the final core gate).
+harnesses at `064cde2`, from the core worktree with the milestone a replay commands (release
+`ergodis-rules`, then `native_abi.py`; wasm32 release build, then `wasm_abi.mjs` against the
+native certificate output): both passed, "129 min-plus programs, one Boolean closure,
+independent oracle, source/claim/handle/capacity lifecycle gates passed" and "129 programs,
+native certificate and Python oracle parity, lifecycle gates passed". Measured sha256 of the
+artifacts: `libergodis_rules.so` `e38d2dee2aea1fc3f511f71c139f6d1085bcc4f44f01027d357f07af47ee63cf`,
+`ergodis_rules.wasm` `af0e76e91b05f28016ea89ec80e127078b1c573dc8e65796422f79dac6477c6e`.
 
 Private gates per commit: `cargo fmt --check`, `cargo clippy --all-targets --all-features -D
 warnings`, and the suites `rel_layer_identities`, `rel_externals`, `rel_lowering` (53, the
@@ -1245,6 +1251,10 @@ unedited), all green at `1f8200b`, `d77f3d2` and `48ccaaa`. Full private `cargo 
 exit 0, 17 min, 42 `ok` blocks, 1,177 passed, 0 failed. This milestone adds five tests so far
 (the identity pin, two externals tests, two `rel_stratified` unit tests); the base count at
 `482d6e9` was not rerun, so the remaining difference from milestone a's 1,171 is unattributed.
+Full private `cargo test --all-features --no-fail-fast -j 12` at `4138f8b` (against core
+`064cde2`, under `nix develop ../ergodis`): exit 0, 14 min, 44 `ok` blocks, 1,196 passed, 0
+failed, 17 ignored. Nothing to fix. The tree was clean at the start; the untracked receipt
+directory of `222b4f8` was written during the run and is read by no test.
 
 #### Steps 2 and 3: checked types, the program statement and the independent rebuild
 
@@ -1444,19 +1454,191 @@ core 5, two-point differencing. Runner and logs under `~/.cache/ergodis/c1205b/`
   Every interval is narrower than 1e-5 and every A/A null reads 1.00000. Cycles settle nothing
   (intervals up to ±20 per cent on `datalog`).
 - **Against the Fermi.** The Fermi predicted the timed `stratify` stage would *gain* a few
-  thousand instructions per iteration on the construction cohorts; it lost 0.03 to 0.2 per cent
-  instead, and `lower`, which this milestone did not touch, lost 0.3 to 0.7 per cent. Neither
-  is explained yet (mystery ledger): the tools binary's symbols moved widely (for example
-  `Workspace::admit` 0x92 to 0x9e5 bytes, an inlining change; `rel_stratified::evaluate` is
-  now a 0x1d-byte call into `evaluate_with`), so the likely cause is inlining and ThinLTO
-  reshuffling, and the per-iteration differences, not only the ratios, still have to be read
-  from the receipts. `prepare` (+0.5 per cent, some 170 instructions on 33.7 thousand) is the
-  one operation that got more expensive.
+  thousand instructions per iteration on the construction cohorts; on four of them it lost
+  0.2–0.4 million, and `lower`, which this milestone did not touch, lost 17–35 thousand.
+  "Stage shifts, explained" below attributes both: code generation in functions whose source
+  did not change, plus a heap-layout term, with the milestone's own added work (+15 to +20
+  thousand instructions per iteration) visible only on `columns3`, where little else runs.
 - **Evidence out of the hot loop, by disassembly.** The candidate `ergodis-tools` has two
   `evaluate_with` instantiations (0x7ace and 0x7548 bytes). `evaluate` calls the 0x7548 one.
   Its callees do not include `Demand::transferable_source` or `<ChainWriter as Evidence>::layer`,
   which appear only among the other instantiation's callees, so the default `NoEvidence`
   instantiation has no sink code. A kernel-scoped `perf record` was not taken.
+
+#### Stage shifts, explained (receipts `222b4f8`)
+
+The bench stages are cumulative (`lower` runs parse, admit and lower; `stratify` runs all of
+those and the backend), so each stage's own difference is read as a difference of stages.
+Per-iteration instruction differences, candidate minus control, from the receipts at
+`4138f8b`: scan, parse and admit within 25 on every construction cohort; lower's own
+(`lower` − `admit`) −16,953 (`datalog`), −28,947 (`stratified`), −35,141 (`columns`), −35,064
+(`columns3`), −25,876 (`aggregate`); on the default cohorts −330 (`ascii`, `unicode`), −18,353
+(`comment-string`) and zero on the two malformed cohorts, which never reach lowering.
+`stratify`'s own (`stratify` − `lower`): −402,650, −399,398, −384,972, +16,598, −178,964.
+
+Method: events counted, not shares. Each stage was run under callgrind at two repeat counts
+per arm (`--repeat 32/64` for `lower`, `2/4` for `stratify`, 512 definitions, byte scanner)
+and each function's per-iteration self cost taken as the difference, which removes startup and
+the untimed description as `bench.py`'s differencing does. Callgrind is deterministic here
+(three runs of one arm agree to 50 instructions in 5.1e9). It counts guest instructions: a
+`rep movsb` counts per byte and `sha2` runs its portable compression, since valgrind does not
+expose SHA-NI; the buckets keep those apart. Normalized disassembly
+(`symbol_disasm.normalized`) compares code; `call_counts.py` confirms equal call counts.
+
+- **`lower`: code generation, no work removed.** Callgrind's per-iteration lowering
+  differences equal the perf ones to within 50 on every cohort (−16,996, −28,934, −35,148,
+  −35,064, −25,874). `rel_frontend` source is identical between the arms. The ThinLTO
+  inliner changed the shape: in the control `lower::run` holds the whole lowering with the
+  passes inlined and `lower::lower` is a shell; in the candidate `run` is inlined into
+  `lower::lower` (0x362f bytes) and five passes (`stratify`, `project`, `range_restrict`,
+  `bind`, `plan_bodies`) are out of line, four more calls per lowering. The callees with most
+  of the remaining cost (`build::constant`, `Rir::fingerprint`) are identical by normalized
+  disassembly and retire the same counts. The executed-instruction mix of the lowering code
+  on `stratified`, per lowering (`instr-mix.txt`): register-only instructions −45.3 thousand,
+  loads other than stack −28.0 thousand, stores other than stack −4.7 thousand, stack loads
+  +24.2 thousand, stack stores +26.7 thousand, branches −1.6 thousand (the receipt's branch
+  difference is −1,643). The candidate keeps values in stack slots where the control
+  re-derived or re-loaded them through pointers: a register-allocation outcome of a
+  different inlining, not less lowering. `Workspace::admit` inlining `admit::admit` (0x92 to
+  0x9e5 bytes) retires the same count (−26 per iteration).
+- **`stratify`'s own shift: three code-generation moves, one heap-layout term, and the
+  milestone's real added work.** Per iteration:
+
+  | Cohort | native own Δ | native own Δ, fixed mmap threshold | callgrind: `dedup_rows` + slice sort | tuple digest (self) | rest of the code | code sum | heap-layout term (native − fixed) |
+  | --- | --- | --- | --- | --- | --- | --- | --- |
+  | `datalog` | −402,413 | −304,573 | −327,101 | 0 | +12,724 | −314,377 | −97,840 |
+  | `stratified` | −399,127 | −437,341 | −524,648 | +65,529 | +8,126 | −450,993 | +38,214 |
+  | `columns` | −384,990 | −452,295 | −525,158 | +65,529 | +9,156 | −450,473 | +67,305 |
+  | `columns3` | +19,500 | +19,590 | −2,288 | +97 | +8,829 | +6,638 | −90 |
+  | `aggregate` | −179,257 | −199,664 | −266,184 | +33,348 | +2,328 | −230,508 | +20,407 |
+
+  "Native" is `perf stat` instructions with two-point differencing (`mmap_threshold.py`, three
+  alternating rounds, every per-arm spread below 1,700); "fixed mmap threshold" reruns it
+  with `GLIBC_TUNABLES=glibc.malloc.mmap_threshold=131072`, which turns off glibc's dynamic
+  threshold and with it the heap-layout dependence of which allocations are mapped and which
+  reallocations copy. The code sum leaves out callgrind's memcpy, allocator and SHA buckets,
+  which depend on heap layout or on the SHA implementation. With the threshold fixed, the
+  native difference and the callgrind code sum agree within 10 thousand on `datalog`, 14 on
+  `stratified`, 2 on `columns`, 13 on `columns3` and 31 on `aggregate` (at most 4.3e-5 of the
+  stage on the four long cohorts).
+  1. **`dedup_rows`: register allocation, one instruction per tuple comparison.** Its source
+     is unchanged and it is called the same number of times (75 in a `stratified` run, as is
+     its callee `bcmp`, 1,576,788 times per three evaluations). Normalized disassembly
+     (`dedup-rows-normalized-disasm.diff`, 0x1f4 to 0x1fe bytes): the candidate keeps the
+     loop's `1 − n` in `r12` and spills one register across the `bcmp` call; the control kept
+     it on the stack and moved two registers per iteration. Executed mix (`instr-mix.txt`):
+     register moves −3.147 million, stack stores +1.574 million per three evaluations, net
+     −1.574 million, one instruction per comparison: −525 thousand per iteration on
+     `stratified` and `columns`, −266 thousand on `aggregate`, −264 thousand on `datalog`.
+  2. **The slice sort's small-sort instantiation.** `small_sort_general` in the control,
+     `small_sort_general_with_scratch` in the candidate, same call counts: −78 thousand per
+     iteration on `datalog`, about zero elsewhere.
+  3. **`tuple_digest` against `digest_of`: real, small.** The same bytes are hashed except
+     for the domain-separated header, which adds three SHA-256 compressions per iteration on
+     `stratified` (32,659 to 32,662) and one on `columns3`; the rewritten per-tuple feed loop
+     retires 1.0 per cent more (+65.5 thousand on `stratified`, `columns`; +33 thousand on
+     `aggregate`). The Fermi priced the header at about 1,000 instructions per construction;
+     it did not price a slower feed loop.
+  4. **The heap-layout term.** Native minus fixed-threshold: −98 thousand to +67 thousand,
+     either sign. glibc's dynamic mmap threshold rises after the first large free, so where
+     each arm's large vectors land, and whether a `realloc` moves them, follows the
+     allocation history, which the candidate's changed evaluation reshapes. Callgrind shows
+     the same kind of term with its own layout: on `aggregate`, +522 thousand memcpy per
+     iteration comes entirely from `_int_realloc` copies (realloc calls 220 against 221).
+     Not Ergodis work; any change to allocation order moves it.
+  5. **The milestone's own added work** is the "rest of the code" column plus the header
+     compressions: +8 to +13 thousand on `datalog`, `stratified` and `columns` (+2 thousand on
+     `aggregate`, where an inlining move between `aggregate_over` and `BTreeMap::insert`
+     offsets part of it), +15 to +20 thousand natively on `columns3` (whose 512-definition run is refused by the complement
+     budget in its second layer, so the stage is short and nothing masks it). The Fermi said
+     "a few thousand per iteration"; the measured figure is three to five times that, from
+     the `evaluate` shell now calling `evaluate_with` (+6.4 thousand on `columns3`), the per
+     layer declaration and literal-map vectors and their allocations (+4.2 thousand), and
+     the header compressions.
+- **`prepare` +174 per iteration: allocator path, not code.** `Workspace::new` is identical by
+  normalized disassembly (0x129a bytes both). Under callgrind the candidate retires 70 fewer
+  per iteration, all of it inside glibc's `_int_malloc`, `_int_free` and `unlink_chunk`. The
+  stage is one allocation and drop of the workspace pools, whose glibc path depends on the
+  heap state the process reaches before the loop, which differs between the two binaries
+  (the candidate's command tree is larger). Branches +53 are consistent with that.
+
+#### Peak RSS, Rel stages (receipts `222b4f8`)
+
+`peak_rss.py`: VmHWM, as the bench binary reports it after `exec`, one fresh process per
+measurement, `--repeat 2`, 512 definitions, byte scanner, five alternating rounds; median KiB,
+with the fixed-mmap-threshold run (three rounds, `stratify` only) beside it. `wait4`'s
+`ru_maxrss` is recorded too but is floored at the forking interpreter's 14.6 MB and not used.
+
+| Cohort | `stratify` control | `stratify` candidate | Δ | fixed threshold: control | candidate | Δ |
+| --- | --- | --- | --- | --- | --- | --- |
+| `datalog` | 25,072 | 26,724 | +1,652 | 24,620 | 24,808 | +188 |
+| `stratified` | 51,688 | 58,088 | +6,400 | 50,476 | 54,900 | +4,424 |
+| `columns` | 57,164 | 57,308 | +144 | 56,192 | 56,392 | +200 |
+| `columns3` | 6,824 | 6,924 | +100 | 6,768 | 6,948 | +180 |
+| `aggregate` | 66,436 | 64,012 | −2,424 | 61,588 | 61,704 | +116 |
+
+`admit` and `lower` on all ten cohorts, and `stratify` on the five default cohorts: the two arms'
+medians within 84 KiB, inside the round-to-round range (about 5.9 to 6.6 MB).
+
+- **The `stratified` cohort's +4.4 MB is real retention.** Massif under the fixed threshold
+  (`massif-peak-stratified-*.txt`): peak heap 48,863,240 bytes against 53,048,608. The
+  difference, 4,184,092 bytes, is exactly one allocation of the ranked checker
+  (`Demand::verify_ranked` → `ranked::check_admitted_bounded`), live at the candidate's peak
+  and not at the control's. The control compared `demand.verify_ranked(&ranked)? != checked`
+  as a temporary, freed at the end of the statement; the candidate binds `let searched =
+  demand.verify_ranked(&ranked)?` for the disagreement report, so the ranked checker's
+  relations live to the end of the layer, across the checker/evaluator comparison whose
+  `dedup_rows` copies make the peak. A `drop(searched)` after the comparison (or scoping the
+  binding) would restore the control's peak; not done here, since it changes the timed code.
+- **The other differences follow the heap layout:** under the fixed threshold `datalog`'s
+  +1.65 MB is +0.19 MB and `aggregate`'s −2.4 MB is +0.12 MB. The remaining +0.1 to +0.2 MB is
+  of the order of the candidate binary's larger text.
+
+#### Cost of retaining the evidence (receipts `222b4f8`)
+
+`chain_cost.py`, candidate binary, `rel-lower --cohort <c>` with and without `--chain`, one
+process each, pinned to core 5, three alternating rounds, medians; one `rel-verify` of each
+chain beside it. `columns3` is measured at 64 definitions: above 64 its run is refused by the
+backend's complement budget (at 512: 134,217,728 complement facts against 4,194,304).
+
+| Cohort | Defs | Layers | Wall plain → chain | Instructions plain → chain | Chain bytes | derivation / ranked / encodings / JSON and source | Peak RSS plain → chain (KiB) | `rel-verify`: wall, instructions, peak RSS |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `stratified` | 512 | 3 | 0.131 → 0.178 s (+36%) | 1.742 → 2.245 G (+29%) | 10,875,186 | 6,212,280 / 2,505,232 / 2,105,703 / 51,971 | 58,140 → 65,272 | 0.200 s, 2.640 G, 48,372 |
+| `columns` | 512 | 3 | 0.133 → 0.178 s (+34%) | 1.747 → 2.254 G (+29%) | 11,108,251 | 6,350,996 / 2,573,628 / 2,109,825 / 73,802 | 57,684 → 69,124 | 0.194 s, 2.651 G, 52,556 |
+| `columns3` | 64 | 2 | 0.169 → 0.211 s (+25%) | 1.733 → 2.387 G (+38%) | 14,029,349 | 7,646,447 / 3,219,500 / 3,147,804 / 15,598 | 135,264 → 135,236 | 0.241 s, 2.925 G, 114,056 |
+| `aggregate` | 512 | 2 | 0.102 → 0.123 s (+21%) | 0.749 → 1.005 G (+34%) | 5,491,529 | 3,080,039 / 1,267,081 / 1,071,443 / 72,966 | 64,524 → 64,652 | 0.141 s, 1.245 G, 70,252 |
+
+Beside the timed stage it is kept out of: the `stratify` stage retires 1.565 G (`stratified`),
+1.567 G (`columns`) and 0.709 G (`aggregate`) per iteration, so retaining the chain costs about
+a third of the stage again (0.50, 0.51 and 0.26 G), and 5 to 14 MB of files, of which the
+derivation certificates are 54 to 57 per cent. The Fermi said "up to about twice a plain one";
+measured +21 to +38 per cent. Checking a chain in another process costs 1.4 to 1.7 times the
+plain producer run. The retaining run's peak RSS rises 7 to 11 MB on the three-layer cohorts
+(one layer's encoding and certificates held while written) and not measurably on the others.
+Observation, not a gate: a refused run (`columns3` at 128 and at 512 definitions) exits 0 from
+`rel-lower --chain` and leaves the layers written before the refusal in the directory, with no
+`chain.json`; `rel-verify` refuses that directory (`Missing`, `chain.json`), so it fails closed.
+
+Replay (private worktree at `222b4f8`, arms retained as in the arms table; valgrind 3.26.0):
+
+```sh
+cd analysis/rel-frontend/chain-stage-shift
+C=~/.cache/ergodis/bin/ergodis-tools-c1205b-base-482d6e9; D=~/.cache/ergodis/bin/ergodis-tools-c1205b-db37035
+for c in datalog stratified columns columns3 aggregate; do
+  python3 callgrind_attribution.py --control $C --candidate $D --cohorts $c --stage stratify \
+      --lo 2 --hi 4 --work ~/.cache/ergodis/c1205b/cga --out callgrind-stratify-$c.json --run
+  python3 callgrind_attribution.py --control $C --candidate $D --cohorts $c --stage lower \
+      --lo 32 --hi 64 --work ~/.cache/ergodis/c1205b/cga --out callgrind-lower-$c.json --run
+  python3 mmap_threshold.py $c 3
+done
+python3 peak_rss.py 5 peak-rss.json
+GLIBC_TUNABLES=glibc.malloc.mmap_threshold=131072 python3 peak_rss.py 3 peak-rss-mmap-threshold.json stratify
+python3 chain_cost.py 512 3
+# Instruction mix: valgrind --tool=callgrind --dump-instr=yes --compress-pos=no --compress-strings=no
+#   on `--stage lower --repeat 64` and `--stage stratify --repeat 2` (cohort stratified), then
+#   instr_mix.py <binary> <out> ergodis_private::rel_frontend::lower:: (or ...::dedup_rows).
+# Massif: GLIBC_TUNABLES as above, valgrind --tool=massif, `--stage stratify --repeat 1`, ms_print.
+```
 
 #### Remaining steps
 
@@ -1531,31 +1713,23 @@ updated after it. The design sections above are the specification.
    tests and `ergodis-tools` (44): all green. The corpus round trip accepted 470 chains, 252
    of them with more than one layer.
 6. Done (`0d270c7`, `745b5b6`, `db37035`); see "Step 6" above.
-7. Partly done (receipts `4138f8b`; see "Step 7" above). Stopped here by the context budget.
-   Still open, in order:
-   (a) Explain the `lower` and `stratify` reductions and the `prepare` increase. Read the
-   per-iteration differences from the two receipts. Compare the normalized `rel_frontend::` and
-   `rel_stratified::` symbols of the stage entry points between the two tools binaries
-   (scratch helper `symcmp.py`: every symbol matching a pattern, compared rank by rank through
-   `symbol_disasm.normalized`). Settle whether the cause is inlining or ThinLTO.
-   (b) Peak RSS for the Rel stages. `bench.py` does not record it, so measure `rel-lower
-   --cohort <c> --definitions 512` on both arms, alternating, with `wait4` rusage.
-   (c) Optionally, characterize `rel-lower --chain` once with `perf stat` on the four
-   construction cohorts. The design lists this as a report item, not a gate.
-   (d) Run the native and WASM ABI harnesses against core `064cde2`: release `ergodis-rules`,
-   then `crates/rules/tests/native_abi.py`, then the wasm32 build and `wasm_abi.mjs`, with the
-   commands in milestone a's replay block, run from the core worktree.
-   (e) Run the full private `cargo test --all-features` at `4138f8b`. It was last run at
-   `48ccaaa`. The core is unchanged since its gate at `064cde2`, so the full core gate is not
-   needed.
-8. **Close.** Full core and private gates at the final commits; fast-forward check of both
-   branches onto their mains; the independent audit; `cache-gc.sh` dry run.
+7. Done (receipts `4138f8b`, `222b4f8`; see "Step 7", "Stage shifts, explained", "Peak RSS"
+   and "Cost of retaining the evidence" above). The stage shifts are attributed; peak RSS is
+   measured per cohort and stage; the chain cost is measured on the four construction cohorts;
+   both ABI harnesses pass at `064cde2`; the full private suite passes at `4138f8b` with nothing
+   to fix. No Ergodis source changed in this step.
+8. **Close.** Decide first on the `searched` retention (mystery ledger: a one-line
+   `drop(searched)` restores the control's peak RSS on `stratified`; it changes timed code, so
+   it needs a new candidate retain, the stage A/B and the peak-RSS run again) and on the
+   refused `rel-lower --chain` run's exit status and partial directory. Then full core and
+   private gates at the final commits; fast-forward check of both branches onto their mains;
+   the independent audit; `cache-gc.sh` dry run.
 
 #### Divergence
 
 At the time of stopping, core `main` is `4b57649` and private `main` is `482d6e9`, the start
 points; both `c1205b` branches fast-forward onto them (core `c1205b` at `064cde2`, private
-`c1205b` at `6c0d24a`; checked with `git merge-base --is-ancestor`). The scratch worktree `~/.cache/ergodis/worktrees/c1205b-mut` (a detached
+`c1205b` at `222b4f8`; checked with `git merge-base --is-ancestor`). The scratch worktree `~/.cache/ergodis/worktrees/c1205b-mut` (a detached
 private worktree at `3940964`, clean, and a symbolic link) remains registered in the private
 repository; removing it is Tavis's call.
 
@@ -1593,11 +1767,38 @@ repository; removing it is Tavis's call.
   each JSON file with the serialization of what it decoded (one serialization per file); not
   done, because the approved design chose the decoded form.
 - **The `lower` stage lost 0.3 to 0.7 per cent of its instructions, and `stratify` lost 0.03 to
-  0.2 per cent (open).** `lower` is code this milestone did not change. The Fermi predicted a
-  small gain for `stratify`, not a loss. `prepare` gained 0.5 per cent. The likely cause is
-  inlining and ThinLTO in a tools binary that grew by the verifier. What would settle it: the
-  per-iteration differences, and symbol comparisons of the stage entry points (Remaining steps,
-  item 7(a)).
+  0.2 per cent (settled; see "Stage shifts, explained").** `lower`: a ThinLTO inlining change
+  (`lower::run` into `lower::lower`, five passes out of line) and the register allocation that
+  followed; callgrind reproduces the perf differences to within 50 instructions per iteration,
+  with the same calls and the same work. `stratify`'s own shift: `dedup_rows`, unchanged
+  source, retires one instruction fewer per tuple comparison after a register-allocation
+  change (−264 to −525 thousand per iteration); the slice sort's small-sort instantiation
+  (−78 thousand on `datalog`); a heap-layout term that follows glibc's dynamic mmap
+  threshold (−98 to +67 thousand, zeroed by fixing the threshold); and the milestone's real
+  added work, +8 to +20 thousand, including three SHA-256 compressions for the header and a
+  1 per cent slower per-tuple digest feed. With the threshold fixed, the native differences and
+  the callgrind code sums agree within 2 to 31 thousand per iteration. The residual is not
+  attributed per function natively; doing so would need a native exact per-function count
+  (uprobes, which need `perf_event_paranoid` at most 1). `prepare` +174: `Workspace::new` is
+  identical; the difference is in glibc's malloc and free paths and depends on the heap state
+  at stage entry. None of the shifts is a saving this milestone made; each is kept as code
+  generation or heap layout, and the added work is three to five times the Fermi's "few
+  thousand".
+- **The `stratified` cohort's `stratify` peak RSS rose 6.4 MB, 4.4 MB with the heap layout
+  fixed (settled cause, fix open).** The ranked checker's relations (4,184,092 bytes on this
+  cohort) are now bound to `searched` for the disagreement report and live to the end of the
+  layer, across the checker/evaluator comparison where the peak falls; the control freed
+  them at the end of the comparison statement. Massif: peak heap 48.86 MB against 53.05 MB, the
+  difference exactly that allocation. The design's performance section said the default path's
+  peak RSS was unchanged; it is not, on this cohort. A `drop(searched)` after the comparison
+  should restore it; it changes timed code, so it goes with the close (Remaining steps,
+  item 8), with a new candidate retain, the stage A/B and the peak-RSS run.
+- **A refused `rel-lower --chain` run exits 0 and leaves a partial directory (open, owner:
+  the close).** Found while timing the chain: `columns3` at 128 and 512 definitions is refused
+  by the complement budget in its second layer; the tool reports the diagnostic, exits 0, and
+  leaves layer 0's three files without `chain.json`. `rel-verify` refuses the directory
+  (`Missing`), so nothing false is accepted. Writing into a temporary directory renamed on
+  success, or a non-zero exit on refusal, would make the failure visible to a script.
 - **Literal-map order (settled, fixed in `0d270c7`).** The map was checked as a set, so a
   permuted map was a second spelling with a second chain identity; this was the one case where
   the manifest had a free order the verifier did not fix.
