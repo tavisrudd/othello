@@ -54,14 +54,19 @@ See `2026-09-23-c1194-implementation.org` for the dated implementation,
 TODO states, exact source/result binding, tests and A/B receipts. The first
 recursive weighted pair, detached checker, Boolean predecessor freeze and
 weighted-to-Boolean pipeline are implemented (core `6a69b76`, `7702f33`;
-private through `083985f`). The latter accepts one recursive weighted pair
-followed by Boolean layers; multiple weighted pairs remain to be designed.
-The clean immediate old-Boolean control is `ergodis-tools-cddd241` under
-rustc 1.95.0. Final candidate `083985f` preserves exact outcomes and
-improves the 512-definition stage, but measures small 16-definition parse,
-lowering and stratification instruction losses. Tavis approved a scoped
-exception for those exact losses on 2026-09-23; future changes retain their
-own `PERFORMANCE.md` gates.
+private through `083985f`). Two sequential directly dependent weighted
+pairs, their final Boolean readout and opt-in chained checker are implemented
+at private `86d2125` with expanded adversarial tests at `7942932`; the
+current production source at `955182a` is unchanged after three reverted
+performance probes. Three pairs, interposed Boolean aliases and cross-pair
+cycles remain refused. The initial old-Boolean control was
+`ergodis-tools-cddd241` under rustc 1.95.0. Candidate `083985f` preserved
+exact outcomes and improved the 512-definition stage, but measured small
+16-definition parse, lowering and stratification instruction losses. Tavis
+approved a scoped exception for those exact losses on 2026-09-23. The new
+two-stage binary is measured against `083985f` and has further 16-definition
+stratification and 512-definition lowering instruction losses. That new
+disposition is open under `PERFORMANCE.md`.
 The dense zero-cost checked path passes the bounded fixture; its larger
 scaling behavior remains open. Luna agents implement bounded coding slices;
 the primary agent designs, reviews and verifies them.

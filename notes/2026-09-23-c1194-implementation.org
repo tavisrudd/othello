@@ -51,25 +51,29 @@ input to the second pair; later Boolean rules may consume either result.
 An interposed derived Boolean layer, cross-pair recursion, and three or more
 pairs remain explicit refusals. The stage and claim contract is below.
 
-** TODO Implement the two-pair stage schedule
+** DONE Implement the two-pair stage schedule
 
 Keep the one-pair and old Boolean APIs intact. Recognize two disjoint pairs,
 run the first, freeze its ordinary result as typed source facts, project and
 run the second, then seed both results into the final Boolean closure.
 
-** TODO Implement chained opt-in certification
+** DONE Implement chained opt-in certification
 
 Replay the source, verify stage one against its prepared source, construct
 stage two only from that verified result, verify stage two, then check the
 final Boolean closure. Keep every claim byte and checker record off the
 ordinary evaluator/result path.
 
-** TODO Differentially gate the two-pair fragment
+** WAIT Resolve the two-pair old-Boolean performance disposition
 
 Exercise exact sequential minima, new integer IDs, dominated alternatives,
 source/result tampering at either stage, cross-pair cycle refusals and the
 old Boolean A/B. Do not expand the accepted fragment on passing only the
 existing one-pair tests.
+
+The functional and adversarial gates pass. The final retained binary has
+small measured old-Boolean instruction losses outside the approved =083985f=
+exception; the paired receipt and attempted repairs are recorded below.
 
 ** DONE Finish the current C1194 acceptance audit
 
@@ -653,8 +657,9 @@ above. =Refused= is the intended outcome for excluded forms.
 | Can dense zero-cost joins make support reconstruction impractical? | A 16-vertex complete directed zero-cost cohort passes at 16 rows under a one-million-candidate budget. The checked path adds about 1.04 million instructions and 102 microseconds per call over evaluation on this host. This bounds one small dense shape, not larger dense joins; no rank sidecar is justified by this fixture alone. |
 | Does conservative overflow exclude useful finite answers? | Yes: a dominated candidate crossing the sentinel is refused. The source differential has an explicit case; any relaxation needs a new proof and checker rule. |
 | Does non-Unix workspace reservation fit? | Core compiles for macOS, Windows, ARM Linux and WASM, and private frontend native/WASM bytes match. Eager reservation and runtime RSS on those hosts are still unmeasured. |
-| Can derived Boolean facts feed a weighted layer, and can cost results feed later Boolean rules? | Checked predecessor freezing works, including a negative-literal predecessor. The separate pipeline API seeds one weighted pair into later Boolean reachability, negation and aggregate layers; its exact caller-bound claim passes. Multiple weighted pairs are still refused. |
-| Does the old Boolean frontend retain its cost? | The final 512-definition stages improve. The 16-definition parse, lower and combined stratify stages have small credible instruction losses, kept by Tavis's 2026-09-23 scoped exception. The final 512-definition stratify stage also reads about 0.75 MiB more peak RSS, while one-run Massif live heap and Memcheck allocation counts agree exactly. |
+| Can derived Boolean facts feed a weighted layer, and can cost results feed later Boolean rules? | Checked predecessor freezing works, including a negative-literal predecessor. The one-pair pipeline seeds later Boolean layers. The new chain accepts two directly dependent weighted pairs and returns a final Boolean closure; an interposed Boolean layer, cross-pair cycle or third pair remains refused. |
+| Does the old Boolean frontend retain its cost? | The =083985f= short-source losses were kept under Tavis's scoped exception. The two-stage binary introduces a further measured 16-definition stratify and 512-definition lower instruction loss; the prior exception does not cover them. Three repair probes were reverted and the new disposition is open. The old =083985f= 512-definition stratify stage also read about 0.75 MiB more peak RSS than its own control, while one-run Massif live heap and Memcheck allocation counts agreed exactly. |
+| What causes the new old-Boolean instruction difference? | It persists after both stratifier shape probes. An evaluator symbol has the same mnemonic sequence, but the linked binary and allocator state differ; Callgrind and no-inline probes did not isolate a safe win. The final paired receipt, not this incomplete attribution, determines acceptance. |
 
 * First private old-path A/B and correction, 2026-09-23
 
@@ -899,9 +904,9 @@ The =ergodis-dev/scripts/cache-gc.sh= default dry-run with
 found zero unreferenced entries old enough for deletion. Nothing was
 deleted.
 
-* Next bounded fragment: two sequential weighted pairs
+* Two sequential weighted pairs: design boundary
 
-The next accepted source shape will have exactly two disjoint recursive
+The implemented source shape has exactly two disjoint recursive
 candidate/min pairs =A= and =B=. =B='s candidate rules may read =A='s min
 head only as a *frozen structural relation* after =A= reaches its optimum;
 =B= must still carry its own recursive weighted body cost through the
@@ -913,7 +918,7 @@ interposed Boolean layer and a cross-pair cycle receive a source-span
 =REL05xx= refusal before execution. This is an explicit fragment boundary,
 not an assertion that all stratified weighted programs are supported.
 
-Recognition will find both pairs in normalized RIR and admit the two
+Recognition finds both pairs in normalized RIR and admits the two
 aggregate SCC edges only after validating both shapes and the one-way
 dependency. The existing one-pair API and old Boolean path remain separate.
 The first plan can be compiled at construction. The second prepared source
@@ -962,3 +967,82 @@ zero and positive cycles, dominated edges, and a cost absent from the
 original source dictionary. The old Boolean 16/512-definition A/B must
 be rerun against retained =083985f=; the scoped exception above cannot be
 used to accept a new regression.
+
+* Two-stage implementation and verification, 2026-09-23
+
+Private [[file-rev:86d2125:~/src/ergodis-private/src/rel_frontend/lower/weighted_shape.rs][pair recognition]] returns the two validated pairs in dependency order and refuses
+three pairs, indirect Boolean aliases and cross-pair cycles. The
+[[file-rev:86d2125:~/src/ergodis-private/src/rel_weighted_chain.rs][ordinary chain runner]] evaluates =A=, freezes its optimum into =B='s typed
+prepared source, evaluates =B=, and returns one Boolean =Stratified=
+closure/readout. Its evaluator does not encode a claim or attach weighted
+proof rows. The [[file-rev:86d2125:~/src/ergodis-private/src/rel_weighted_chain_check.rs][cold checker]] reconstructs canonical weighted results from
+that ordinary closure, checks each caller-supplied result/envelope against
+its replayed prepared source in order, and checked-replays the final Boolean
+closure from the two verified seeds. The returned verification records are
+separate from the ordinary result. Private commit =7942932= adds omitted
+component and invalid frozen-cost refusals; =955182a= is the current source
+state after reverting three measured-loss repair probes. The final release
+tool at =955182a= has SHA-256
+=da92d2b008e3444e7ee4665ffe8af32226ac63d4f06f4acec0db5052d821e7e8=,
+byte-identical to the retained =86d2125= tool. The production-source diff
+between those revisions is empty.
+
+Focused pinned native gates: 16 weighted library tests; three chain runner
+tests including four generated six-vertex graph pairs compared with an
+independent Bellman--Ford =A= then =B= oracle; six chain checker tests; three
+shape tests; the older one-pair pipeline and source checker tests; and strict
+=cargo clippy -p ergodis-private --all-targets --all-features -- -D warnings=.
+The standalone frontend portability test compiles under strict Clippy after
+moving shape tests out of the source it path-includes. A whole-library test
+run was stopped after five minutes without a result; it is not counted as a
+pass. No new macOS, Windows, ARM or WASM runtime run is claimed for this
+private two-stage path. Native code uses portable Rust and the same prepared
+weighted contract, but that is only an architectural portability argument.
+
+The checker refuses tampering of either stage result, swapped envelopes,
+omission of any of the four claim components, a changed =A= source even when
+the optimum stays the same, a changed final closure, and a sentinel prior
+cost in direct =B= projection. The generated cases exercise zero and positive
+cycles, dominated edges, fact-order changes and an unreachable vertex. A
+new integer optimum absent from the source dictionary is present in =B='s
+typed source and the final readout. A near-ceiling 65,536-value dictionary
+case and a direct cross-platform runtime test remain open. Claim bytes are
+canonical prepared-source bindings, not a digest of raw Rel whitespace or
+comments.
+
+** WAIT Resolve the new old-Boolean instruction losses
+
+The retained candidate =c1194-chain-final-955182a-955182a= is byte-identical
+to =c1194-chain-86d2125-86d2125=; the latter was measured in five
+interleaved rounds against the immutable =083985f= control on CPU 3, release
+rustc 1.95.0, with all six requested counters 100% enabled. Receipts:
+=~/.cache/ergodis/c1194/rel-ab-chain-86d2125-16.json= and
+=~/.cache/ergodis/c1194/rel-ab-chain-86d2125-512.json=. All compared
+source, parse, admission, lowering and stratification records and exact
+fingerprints match. Ratios below are candidate/control user instructions;
+parentheses give 95% intervals.
+
+| Definitions | Stage | Byte | Scalar |
+|-
+| 16 | Lower | 0.999872241 (0.999782195--0.999962295) | 0.999934556 (0.999839341--1.000029780) |
+| 16 | Stratify, including lower and certified Boolean replay | *1.000866258* (1.000862314--1.000870202) | *1.000850984* (1.000846957--1.000855011) |
+| 512 | Lower | *1.000102967* (1.000102169--1.000103766) | *1.000093279* (1.000092606--1.000093952) |
+| 512 | Stratify, including lower and certified Boolean replay | *1.000001629* (1.000001253--1.000002004) | *1.000001302* (1.000001282--1.000001322) |
+
+The 16-definition combined stage adds about 768--769 instructions per
+source. The 512-definition lower stage loses about 0.01%. The 16-definition
+scan/parse/admission intervals straddle unity, as do most long-source
+frontend intervals. These losses are *new* relative to =083985f= and are
+outside Tavis's prior exception. Two stratifier code-shape repairs
+(=5d36898= and =f8fd514=) left the short-source loss near 0.085%; a
+=rel_lowering::name_of= no-inline probe (=cb5019c=) worsened it to about
+0.096%. All three were forward-reverted (=200d4ce=, =80494e2=, =955182a=).
+The exact source of the remaining difference is unresolved: the unseeded
+=evaluate_engine= has the same 5,555-instruction mnemonic sequence in
+control and candidate, while ThinLTO changed other cold/readout layout and
+Callgrind attribution was dominated by allocator-state differences. Neither
+observation excuses the measured loss. =PERFORMANCE.md= requires reverting
+it unless Tavis grants a new, specifically scoped exception. Certification
+remains an opt-in detached call and does not change the evaluator's result
+shape; this A/B nevertheless measures a small old-Boolean instruction loss
+from the linked candidate.
