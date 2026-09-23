@@ -1,0 +1,167 @@
+#+title: Ergodis architecture review — Phase 1 implementation plan and record
+#+date: 2026-09-22
+#+author: Tavis Rudd / Codex
+#+startup: overview
+
+* Scope and decision
+
+Implement the three bounded Phase 1 repairs from the
+[[file-rev:40b2f2439:/home/tavis/src/othello/notes/2026-09-22-ergodis-architectural-review.org::*Phase 1 — repair the three concrete, bounded defects][architectural review]].
+The user requested a detailed plan, adversarial review before implementation,
+and Sol sub-agents with primary-agent review. This record separates intended
+acceptance from observed results. No public export or push is authorized here.
+
+Starting core revision: =4b576490e4f34d732c6abaf698219ae4c151fcbc=.
+Starting private revision: =482d6e9e4845f2c00cb737eae0de9fac62785524=.
+Both source worktrees were clean at the initial check. Other lane work may
+continue in the shared repositories; only owned paths enter these commits.
+
+* Detailed sequence
+
+** 1. Review before changing source
+
+Three Sol investigations run independently: the page backend, the timing
+API/consumers, and an adversarial review of the whole sequence including the
+WASM build. Each first reads the applicable repository/performance rules.
+The primary agent checks their reasoning against source, decides the smallest
+safe patch, and records accepted objections below before authorizing edits.
+
+** 2. R3 — reconcile the excluded WASM workspace lock
+
+Owned path: =ergodis/wasm/Cargo.lock=, plus generated =SHA256SUMS= if covered.
+Read manifests and both dependency graphs before resolution. Let pinned Cargo
+reconcile the existing lock with minimal changes; do not run an unrestricted
+dependency update. Inspect package identities, versions, sources, checksums,
+and dependency edges. An unrelated registry upgrade is a stop condition:
+explain why required or constrain the resolution before proceeding.
+
+Acceptance:
+
+1. The canonical =--locked= wasm32 check succeeds using the pinned toolchain.
+2. =nix run .#wasm-build= succeeds from current source with the repaired lock.
+   Record the freshly generated WASM artifact hash; do not treat pre-existing
+   =wasm/www/pkg= output as evidence of this build.
+3. The WASM native tests and Python composition oracle pass; the latter checks
+   fixture costs, witnesses and work counts and is not itself browser execution.
+4. The canonical browser smoke executes against the newly generated artifact.
+   Record precisely which runtime paths it checks, and any unrelated blocker.
+5. The existing repository validation gates pass, including source manifest and
+   bounded Python differential fixtures. Record any pre-existing failures.
+
+Rollback: revert the independent lock/manifest commit. A downstream smoke
+failure is diagnosed before changing unrelated browser/provider behavior.
+
+** 3. R4 — constrain huge-page advice to its supported OS
+
+Owned path: =ergodis/crates/rules/src/pages.rs= and its manifest entry.
+Keep Unix anonymous mmap and release behavior, thresholds, pointer alignment,
+and Linux advice body intact. Compile Linux advice only on Linux; use an
+explicit no-op on other Unix targets. Do not add a Windows virtual-memory
+backend or change portable allocation policy.
+
+Acceptance:
+
+1. Review cfg coverage: exactly one advice implementation on Linux, Darwin,
+   Windows and WASM; no Apple reference to =MADV_HUGEPAGE=.
+2. Run existing Linux allocation/alignment/zeroing/drop/failure tests and the
+   repository gates. Use bounded existing cases; do not first-touch multi-GiB
+   buffers on a newly enabled portable target merely to run a sparse-map test.
+3. Attempt pinned cross-target checks for =ergodis-rules= and the runtime on
+   =x86_64-apple-darwin= and =aarch64-apple-darwin=, with default features off
+   where appropriate. Record missing standard libraries or further blockers.
+4. Linux execution, Darwin compilation and native Darwin execution are three
+   separate claims. Native macOS/ARM/Windows execution remains unverified when
+   no runner is available. WASM success does not establish native portability.
+
+This is allocation setup code, with unchanged Linux active code and no hot
+record/kernel redesign. If review finds an actual hot-code effect, retain the
+control before editing and apply the full profile/A/B gates. No speed claim is
+intended. Rollback is the independent page/manifest commit.
+
+** 4. R5 — monotonic fallback measurements and honest units
+
+Investigate =ergodis-private/src/repr_grammar.rs= and timing consumers in
+=tasks/tools/src/repr_search= before selecting the patch. List each producer,
+delta operation, score conversion, display field, serialized field and reader.
+Preserve the x86 TSC implementation and existing ranking weights.
+
+Required design properties:
+
+- Non-x86 elapsed measurement uses =Instant= or an equivalent monotonic source,
+  not an epoch timestamp. Resolve initialization outside measured intervals.
+- Specify overflow, zero-resolution and elapsed subtraction behavior. Tests
+  assert nondecrease and units rather than requiring a positive tiny duration.
+- Cost units are visible at the receipt boundary. Do not relabel nanoseconds
+  as cycles, infer cross-machine comparability, or silently reinterpret old
+  saved receipts.
+- Avoid owned timing state in hot records and changes to kernel loops. Keep
+  timing around the measured work. Review the cost of any shared clock origin.
+- If a receipt schema/ranking migration is necessary, isolate its design and
+  review before editing; do not bundle a broad compatibility break into R5.
+
+Acceptance: meaningful fallback tests even on this x86 host, existing private
+representation/scoring regressions, explicit receipt-unit tests, formatting and
+Clippy; compile actual non-x86 cfg branches if the pinned target is available.
+Native ARM timing remains unverified without an ARM runner. Any changed hot
+path requires retained controls and the prescribed profiles and interleaved
+hardware-counter A/B; x86 TSC preservation alone is not a performance result.
+Rollback is the independent private repair commit.
+
+* Review and execution controls
+
+The primary owns core build scheduling, manifest regeneration and commits.
+Agents initially investigate only; implementation authorization names bounded
+owned files. Do not run competing Cargo builds in the shared core target.
+Use pinned Nix Rust, shared target directories, at most eight build workers,
+and =run-quiet= logs under =~/.cache/ergodis/phase1-remediation/=.
+
+Before each commit, inspect the complete owned diff, verify no unrelated
+dependency/schema/source changes, run the acceptance gates, and commit explicit
+paths. If another lane changes an input, record it and reassess affected gates.
+Each commit must carry its own manifest update. Preserve historical findings
+and add remediation status rather than rewriting the original reviewed state.
+
+* Adversarial review disposition
+
+The three Sol read-only reviews completed before implementation authorization.
+The primary inspected the relevant source and accepted these objections:
+
+| Risk raised | Disposition |
+|-------------+-------------|
+| Browser smoke accepts an old package merely because its JS file exists | Require a successful fresh canonical build, artifact hash, then smoke |
+| Android also exposes the advice constant | Preserve advice on Linux and Android; no-op only other Unix targets |
+| Apple has the mmap flag but that does not establish Linux commit semantics | Narrow source documentation; distinguish compile coverage from native memory execution |
+| The existing 4 GiB test and Linux /proc drop test do not establish portable memory behavior | Keep their limitations explicit; no native Darwin claim from these tests |
+| Timing units affect both receipts and ranking; CostVector has an asserted 64-byte shape | Preserve fields, layout and arithmetic; correct the existing receipt clock label by target |
+| Precondition encoders also sample time | Include those call sites in review and run representation regressions |
+| A nanosecond conversion can wrap; a tiny elapsed interval can be zero | Saturate conversion, test nondecrease and saturation, not strict increase |
+
+R5 does not change the historical fallback unit: it was already nanoseconds.
+It changes its source from wall time to monotonic elapsed time and makes the
+existing host-specific objective explicit. Frequency normalization and portable
+cross-host ranking remain separate work. The x86 receipt wording and TSC path
+remain intact. The WASM lock is outside the current manifest's covered paths;
+R4 does require manifest regeneration.
+
+Implementation authorization: primary owns R3; page reviewer owns only
+=pages.rs=; clock reviewer owns the private clock helper, clock documentation,
+existing receipt metadata and focused tests. Primary owns review, gates and
+commits. Neither source agent runs competing builds.
+
+The second adversarial pass identified =OnceLock::get_or_init= at each fallback
+timestamp boundary. Accepted as bounded measurement overhead: the calls bracket
+the two precondition loops and scorer rounds, with none inside a per-element
+loop. Initialization precedes the timestamp; no allocation or hot record is
+introduced. The primary inspected both call sites and all scorer samples.
+This repairs the existing clock instrumentation, not a kernel or layout. No
+speed claim or ARM overhead claim is made. Old ARM receipts are not migrated.
+
+Supplementary target standard libraries were installed for pinned Rust 1.95.0:
+Intel/ARM Darwin, ARM Linux, and GNU Windows x86_64. Canonical Linux/WASM gates
+remain on the Nix toolchain; any mixed Nix compiler/rustup target-library checks
+must be identified separately from native execution.
+
+* Execution record
+
+Planning started 2026-09-22. Results, exact commands, limitations and commit
+references will be appended here as each repair is evaluated.
