@@ -999,6 +999,15 @@ R5 should preserve the existing x86 path unless evidence requires a separate cha
 
 ** Phase 2 — add inexpensive protection against recurrence
 
+Implementation update (2026-09-22):
+[[file-rev:8878418dd:~/src/othello/notes/2026-09-22-ergodis-phase2-remediation.org][Phase 2 report and validation receipts]]
+records the opt-in command matrix, C1214 a's bounded independent-oracle/mutation
+coverage, and C1215's trust-boundary audit with two existing replay-panic
+reproductions. Core/default/all-feature gates and separate native/wasm32 checks
+for all nine provider families passed after a documented shared-target rebuild.
+The panics remain unfixed; production completeness independence, full API cleanup,
+native target execution and mandatory-gate policy remain open.
+
 | Step | Recommended change | Effort / risk | Acceptance |
 |------+--------------------+---------------+------------|
 | R6 | Propose a checked command matrix for root/default, modules/native, canonical WASM, and each independently compiled provider family (F02/F09/F10/F13) | Small initial script; medium for native runners | Commands execute validation rather than merely build wrappers; source/artifact revisions are recorded; intentionally skipped configurations are visible. Adopt new required gates through the existing validation-policy decision |

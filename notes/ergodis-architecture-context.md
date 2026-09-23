@@ -11,6 +11,13 @@ private `85f2586`), passing Linux/WASM gates, and outstanding native-target
 validation. The original review and grades remain historical; the repairs do
 not establish macOS/Windows/ARM support.
 
+Phase 2 initial protection: `2026-09-22-ergodis-phase2-remediation.org` records
+the opt-in command matrix, C1214 a bounded checker oracle/mutations (core
+`b1b3686`), and C1215 API audit/panic reproductions (private `6e31900`). Defaults
+and all-feature gates pass; all nine provider families compile separately on
+native/wasm32. Public replay shape validation and independent completeness are
+still open; characterization of a panic does not repair it.
+
 Current paired native/JS capability inventory and implementation ordering:
 `2026-09-09-c1130-js-wasm-parity-review.md`. Resolve host fragmentation together;
 preserve typed native execution. This is private, not-to-ship context.
