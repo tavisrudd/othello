@@ -269,5 +269,13 @@
       "/home/tavis/.cache/ergodis/c1215/20260922-204331-nix-develop-ergodis-c-bash-c-cargo-fmt-cargo-fmt-check-cargo-clippy-locked-j8-p-e/stderr.log": "c581dcb03bbadecd539fe9d0ea201be3508755f04cb39247b1b2a735f7b7842e"
     },
     "optional_wasm_check": "Not repeated; unchanged Unix dependency failure retained above."
+  },
+  "performance": {
+    "receipt_commit": "8166ed531b5cf031fb9d5bc6abfb2d4278f697bf",
+    "receipt": "~/src/ergodis-private/analysis/rel-frontend/c1215-replay-performance.json",
+    "receipt_sha256": "31c360c894f1e250b2933f1d3f60d80aaf81361a02de546b2bcec4704a842fda",
+    "native_non_regression_pass": false,
+    "decision": "user measured-exception decision pending",
+    "wall_cycle_risk": "unresolved after significant first aggregate byte result and noisy seven-round confirmation"
   }
 }

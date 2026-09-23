@@ -8,7 +8,9 @@
 The bounded replay repair is implemented in private =ec7bb32= and native
 validation passed. The first two measured variants failed the performance regression gate.
 The current candidate is private =ca52a3e=; its formatting, Clippy and 116 native
-tests pass. Its performance disposition is pending. The broader
+tests pass. It also failed the aggregate instruction non-regression diagnostic.
+Full impact characterization is complete. A user decision on a measured
+exception remains pending; no performance acceptance is claimed. The broader
 C1215 API migration remains open. This increment repairs malformed public inputs
 to =rel_stratified::verify_records=. The initial audit and two panic reproductions
 are recorded in
@@ -237,3 +239,105 @@ The flat-key variant is committed in
 It again passes formatting, all-target/all-feature Clippy and 116 native tests;
 primary matched committed file hashes to the stable validated snapshot. The
 correctness contract and API remain those reviewed above.
+
+
+* Third measured variant — aggregate diagnostic still fails
+
+The [[file-rev:517feed:~/src/ergodis-private/analysis/rel-frontend/c1215-replay-variant3.json][third variant's diagnostic receipt]]
+records restored =aggregate_over= symbol size (3,479 bytes) and inlined formatting
+without the =SpecToString= call. Nevertheless, aggregate stage instruction
+ratios remain 1.000838 [1.000763, 1.000912] for byte and 1.000808
+[1.000723, 1.000894] for scalar: approximately 250 extra instructions per
+iteration. Lower-stage instruction intervals include unity. All actual samples
+verify and agree, and counters are 100% enabled. The byte cycle ratio is 1.064
+[1.001, 1.130]; the scalar cycle interval includes unity. Do not dismiss those
+results as a performance pass merely because the instruction ratio is small.
+
+The =evaluate= symbol changed from 30,311 to 28,858 bytes. Restoring one helper's
+call shape therefore did not restore total cost. Neither formatting-call
+attribution nor a general compiler remedy has been established. Three bounded
+cold variants have been evaluated; further source experiments are not automatic.
+Full frozen-cohort characterization below makes the proposed exception reviewable.
+
+* Acceptance boundary
+
+=~/src/ergodis-dev/PERFORMANCE.md= directs that measured losses be reverted and
+uses instruction counts as the decision metric. The code passes correctness
+gates but has not passed native non-regression. Keeping this candidate requires
+an explicit, scoped measured exception; the rule itself is not being weakened.
+No export, push or release has occurred. The candidate and rejected alternatives
+remain reconstructible from their ordinary forward commits and retained binaries.
+
+
+* Full current-candidate characterization — exception decision pending
+
+The [[file-rev:8166ed5:~/src/ergodis-private/analysis/rel-frontend/c1215-replay-performance.json][full four-cohort receipt]]
+retains the eight main/cache A/B results, aggregate A/A, source and executable
+hashes, actual sample parity, instructions/cycles/wall intervals and RSS ranges.
+All 320 actual stratify high/low samples verify and agree exactly; all events
+were 100% enabled. No representation-change allowance was used.
+
+| Frozen cohort | Byte instruction ratio [95% CI] | Scalar instruction ratio [95% CI] |
+|---------------+---------------------------------+-----------------------------------|
+| positive | 1.000632 [1.000503, 1.000761] | 1.000514 [1.000197, 1.000832] |
+| negation | 1.000350 [1.000052, 1.000648] | 1.000472 [1.000280, 1.000663] |
+| comparison | 0.998637 [0.998474, 0.998799] | 0.998421 [0.998214, 0.998628] |
+| aggregate | 1.000838 [1.000763, 1.000912] | 1.000808 [1.000723, 1.000894] |
+
+These are small but measured instruction regressions on three cohorts, and a
+small improvement on comparison. They are not a non-regression pass. The
+aggregate byte wall ratio is 1.07039 [1.01419, 1.12970], and its cycle ratio is
+1.06391 [1.00133, 1.13041]. The other seven wall intervals include unity. The
+seven-round confirmation on the same binaries was inconclusive: load rose from
+2.71–3.02 to 7.24–12.91, calibration changed byte/scalar repeats from 1,024/1,024
+to 512/256, and byte wall ratio was 1.5139 [0.5067, 4.5234]. Its cycle ratio was
+0.9283 [0.7026, 1.2265]. The protocols differ, so the runs are not pooled. All 56
+confirmation stratify samples verify and agree. The first significant wall/cycle
+result remains visible; timing risk is unresolved, not disproved.
+
+High-repeat whole-process RSS ranges overlap on most comparisons; across the
+four cohorts/variants the control spans 5,980–6,164 KiB and the candidate spans
+6,020–6,216 KiB. They include process/code/allocator effects. Separate cache
+means are descriptive, not a demonstrated cache win or attribution.
+
+Current candidate =c1215-replay-v3-ca52a3e=, private =ca52a3e= / core =19cee8f=, release with no
+optional features, pinned rustc 1.95.0. Measured SHA-256:
+=01d9c122de1182f2bde2ca667347cf5bb326f8e133eb011733c67537cb9f2378=.
+The candidate retention was clean. Earlier variants and control remain retained.
+
+Cache closeout dry run scanned 67 entries with zero unreferenced and old enough
+to delete. No entries were deleted. Task logs/profiles live under
+=~/.cache/ergodis/c1215= and =~/.cache/ergodis/c1215-replay=; executable manifests
+retain all binary identities.
+
+* Mystery ledger / closeout
+
+- Settled: public malformed shapes now reject directly; partial tuples and
+  dictionary-history/payload inconsistencies are covered by bounded regressions.
+- Settled: canonical-number validation needs no formatting or heap allocation.
+  Borrowed sorted keys avoid quadratic duplicate scans and tree-node allocation.
+- Open: cold validation changes shifted compiler output in existing evaluation.
+  Restoring the original aggregate formatting call shape did not restore total
+  instruction cost. The report does not assert an isolated root cause.
+- Open: the original aggregate byte wall increase remains unresolved after a
+  noisy retained-binary confirmation; replay-only cost remains unmeasured.
+- Open: private-root WASM compilation fails on an existing Unix dependency;
+  native macOS/Windows/ARM execution and the broader C1215 API work remain open.
+- All observations were directly sought by validation; no incidental discovery
+  entry is manufactured. Overall due-diligence B− and portability C− remain.
+
+
+* Recommended disposition for decision
+
+Keep the correctness repair with a *scoped, explicit performance exception* for
+private =ca52a3e=, provided the user accepts the measured instruction increases
+and unresolved aggregate wall/cycle risk. It closes known public replay panics
+and silent malformed-input fallbacks without an API or certificate-format change.
+The primary is not granting that exception under the existing rule. An exception
+would not change future non-regression requirements or establish portable native
+execution. Until the decision, this is a tested candidate, not an accepted gate.
+
+No more speculative source variants or timing reruns are planned. If the exception
+is declined, revert the three repair source commits through an ordinary forward
+commit and retain this complete reviewable evidence for a separate isolation
+investigation. The broader C1215 builder/API/instrument work remains allocated.
