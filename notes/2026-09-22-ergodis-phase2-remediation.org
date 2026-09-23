@@ -67,6 +67,204 @@ intended contract is established. Primary owns review and acceptance.
 
 * Review and validation record
 
-In progress. Build windows and manifest regeneration are coordinated by the
-primary; sub-agents do not run competing Cargo jobs. Existing performance rules
-apply to any proposed kernel or layout change; this increment plans neither.
+Build windows and manifest regeneration are coordinated by the primary;
+sub-agents do not run competing Cargo jobs. No production kernel, hot record,
+checker algorithm, or source-identity format is changed in this increment.
+
+** R6 runner and review
+
+The opt-in runner and four false-green regressions are committed in notes
+=3eb321cf5=. It has 22 rows: core defaults, core all-features plus existing
+quality/oracle/manifest gates, native module host, canonical browser workflow,
+and nine provider families checked separately on native and wasm32.
+
+[[file-rev:3eb321cf5:/home/tavis/src/othello/notes/scripts/ergodis-validation-matrix.py][Runner]]
+and [[file-rev:3eb321cf5:/home/tavis/src/othello/notes/scripts/test_ergodis_validation_matrix.py][runner regressions]].
+With no =--run= argument it lists the matrix. Execution requires explicit row
+names and a new output directory. This does not establish a mandatory gate or
+modify CI/release policy.
+
+Astra found two defects in the first draft: untracked file names without content
+hashes could conceal input changes, and inherited target-directory overrides
+could escape the shared build directories. Both were repaired before executing
+the matrix. The runner now hashes untracked contents (NUL-safe names) and symlink
+targets, rejects compiler/target overrides, and records absolute repository roots
+and command working directories. Astra accepted the revised implementation by
+inspection. Four local regressions passed, including actual temporary Git
+repositories and mocked validation commands; they do not run Ergodis builds.
+
+The regressions demonstrate:
+
+1. Editing an existing untracked source changes its snapshot.
+2. A source change during a nominally successful command makes the receipt
+   unaccepted and returns a failure status.
+3. A failed fresh browser build prevents all later tests/smoke in that row and
+   emits no artifact hashes.
+4. A target override is refused before execution or output creation.
+
+Source snapshots identify commits, dirty paths, tracked-diff hashes and
+untracked-content hashes. They are provenance checks, not immutable filesystem
+snapshots: a change and restoration entirely between samples is not detected,
+nor is arbitrary external input captured. Provider rows are explicitly
+compile-only; Cargo check does not prove linking, ABI compatibility or execution.
+The ignored native module =loaded_transcript= test remains disclosed.
+
+** R7 bounded oracle and mutation coverage
+
+The Sol implementation modifies only =crates/verify/tests/prepared_source.rs=;
+the primary inspected the independent interpreter and every mutation family.
+The focused command passed *18 tests*:
+
+#+begin_src sh
+cd /home/tavis/src/ergodis
+nix develop . -c cargo test --locked -j 4 -p ergodis-verify --test prepared_source
+#+end_src
+
+The new interpreter reads fixture parts directly, uses ordinary sets and a
+fixed-point loop, and enumerates matching body tuples without calling admission's
+joins or either production completeness/unification implementation. The source
+domain is ={0,1,2}=, with five unary relations and four rules. All 64 pairs of
+input subsets are exercised for both three- and four-body join shapes: *128
+source instances*. A redundant recursive dependency and a two-body join are
+included. The outputs of trace/ranked checkers through prepared bytes and wire
+admission, with direct and sorted stores, produce *1,024 closure comparisons*.
+A literal expected closure anchors the default fixture independently as well.
+After Astra's review, the fourth body atom was strengthened from a duplicate of
+the first condition to =f(1)=. Some enumerated masks then change the expected
+closure if that fourth condition is omitted, so this tests its semantics as
+well as handling four premise slots.
+
+| Certificate | Isolated fault | Exact expected rejection |
+|-------------+----------------+--------------------------|
+| Trace | Changed source identity; changed fact count | Binding |
+| Trace | Rule index outside the four-rule fixture | Rule(0) |
+| Trace | Missing first premise | Premise(0) |
+| Trace | Premise names wrong relation | Unification(0) |
+| Trace | Premise refers forward | Rank(0) |
+| Trace | Claimed head does not follow the grounded body | Head(0) |
+| Trace | Trailing tuple value | Coverage |
+| Trace | Omitted final consequence | Incomplete(1) |
+| Trace | Repeated derivation | Duplicate(4) |
+| Trace | Missing third/fourth body premise | Premise(2) |
+| Ranked | Changed source identity; missing relation | Binding |
+| Ranked | Zero rank; missing rank entry | Coverage(2) |
+| Ranked | Certificate entry in an input relation | Duplicate(0,0) |
+| Ranked | Repeated derived tuple | Duplicate(2,2) |
+| Ranked | Unsupported extra tuple | Unjustified(2,2) |
+| Ranked | Consequence rank does not exceed its premise | Unjustified(3,0) |
+| Ranked | Omitted required tuple | Incomplete(0) |
+
+The 12 trace mutations and nine ranked mutations run under both stores;
+previous decoder bound, malformed prepared source, binding, and larger binary
+fixture mutation tests remain. The new exact-rejection fixtures use prepared
+bytes; the new valid closure corpus also covers wire re-admission. Existing
+larger binary mutations still use broad rejection assertions. This is a bounded
+coverage increment, not exhaustive testing of all programs, predicates,
+multi-variable joins or malformed encodings. Production completeness is still
+shared; C1214 milestone b is untouched.
+
+** R8 API trust map and existing panic reproductions
+
+The audit separates construction authority from a type's name:
+
+| Surface | Authority / caller obligation | Disposition |
+|---------+-------------------------------+-------------|
+| =Admitted= and its nested records | Public fields can be hand-built/mutated; relation, tuple, variable and identity invariants are not protected by the type | C1215 opacity/builder design remains open |
+| =check_admitted[_bounded]= | Explicitly documented trusted producer-owned in-process fast path | Do not invent a universal malformed-input rejection contract |
+| =check=, =check_prepared=, recorded =Source::{Wire,Prepared}= | Re-admit external source material before verification | External rejection tests remain the appropriate gate |
+| =datalog_record::Verified= | Private fields and issuer; replay rechecks evidence | Checked capability stronger than the public mutable input structs |
+| =Stratified= / =verify_records= | Public mutable result; replay explicitly anticipates nonproducer records but some closure indexes remain unchecked | Two existing panics reproduced; full shape validation still needed |
+| Frontend parse/admit/lower source slices | Caller must supply the same bytes across stages; stages do not bind source lifetime/identity | Source-binding/API work remains open |
+| Deferred =CompiledObservation= | Same result type as immediate compilation; =verify_compilation= is the verification operation | Do not infer checked authority from the container alone |
+| =IndependentCheck= / claim-status ledger | Caller-supplied evidence/status, not construction of proof authority | Requires explicit authority/type design before broader assertions |
+
+Source anchors:
+[[file-rev:831d56c:/home/tavis/src/ergodis/crates/contract/src/datalog.rs::210][public admitted state]],
+[[file-rev:831d56c:/home/tavis/src/ergodis/crates/verify/src/derivation.rs::223][trace fast-path contract]],
+[[file-rev:831d56c:/home/tavis/src/ergodis/crates/verify/src/ranked.rs::250][ranked fast-path contract]],
+[[file-rev:831d56c:/home/tavis/src/ergodis/crates/verify/src/datalog_record.rs::46][recorded source re-admission]],
+[[file-rev:831d56c:/home/tavis/src/ergodis/crates/verify/src/datalog_record.rs::110][opaque verified result]],
+[[file-rev:6e31900:/home/tavis/src/ergodis-private/src/rel_stratified.rs::980][public record replay]],
+[[file-rev:6e31900:/home/tavis/src/ergodis-private/src/rel_frontend/mod.rs::532][frontend source obligation]],
+[[file-rev:831d56c:/home/tavis/src/ergodis/src/observational.rs::4983][deferred observation compilation]],
+[[file-rev:831d56c:/home/tavis/src/ergodis/src/semantic_theorems.rs::133][caller-supplied independent-check evidence]].
+
+The characterization commit is private =6e31900=:
+[[file-rev:6e31900:/home/tavis/src/ergodis-private/tests/rel_lowering.rs::893][malformed public replay cases]].
+The test verifies an untouched control first, then catches two current panics:
+an out-of-range complement relation and an absent closure used by bound-domain
+provenance. Its name and documentation state that this is an existing robustness
+gap; after full validation, replace these expectations with explicit rejection.
+*A passing characterization test means the bug was reproduced, not fixed.*
+
+The narrow API audit also found unchecked aggregate and partial-tuple paths. A
+guard at only the first complement index would leave related malformed shapes
+unhandled. The initial increment therefore leaves production behavior unchanged
+and scopes the full rejection contract for C1215. Editing the private source
+file containing both replay and evaluation also triggers the existing review of
+identity and ThinLTO/performance effects; the test-only increment avoids that
+unmeasured production change.
+
+All *54 relational-lowering tests* passed, including the two panic reproductions
+inside one new test. Pinned formatting and test-target Clippy passed:
+
+#+begin_src sh
+cd /home/tavis/src/ergodis-private
+nix develop /home/tavis/src/ergodis -c cargo test --locked -j 8 -p ergodis-private --test rel_lowering
+nix develop /home/tavis/src/ergodis -c cargo fmt --check
+nix develop /home/tavis/src/ergodis -c cargo clippy --locked -j 8 -p ergodis-private --test rel_lowering -- -D warnings
+#+end_src
+
+** Remaining gates and task state
+
+The matrix run and core acceptance gates are in progress. C1214 and C1215 remain
+IN PROGRESS; neither the independent completeness implementation nor the full
+API cleanup is claimed complete. No support/assurance grade is raised by adding
+a test that records a known panic.
+
+** Matrix execution and build-cache diagnosis
+
+The first matrix invocation selected every row except =browser=. Browser was
+intentionally skipped because the fresh build/smoke had already passed in Phase
+1 and this increment changes only tests; the runner's failure-ordering logic has
+its own regression. Logs/receipts live under
+=~/.cache/ergodis/phase2-remediation/=; =matrix-initial/receipt.json= preserves
+the first run's failures rather than overwriting them.
+
+The first run passed *18/18 provider compilation rows*: component, composition,
+CSS, fault, Hadamard, LRC, parameterization, QEC and scheduling, each checked in a
+separate Cargo invocation for native and wasm32. Default family features were
+used; optional thread/instrumentation combinations were not enumerated. This is
+type-checking evidence only. Native modules passed five tests and retained the
+one explicitly ignored =loaded_transcript= integration test.
+
+Both root test commands failed in that first run with incompatible local
+=ergodis_contract= type identities; Rust described types from the same source
+file as different crate versions. Cargo's locked graph names one contract
+package. The source snapshots remained unchanged. This matches the documented
+shared-target stale-rlib failure mode; no source/dependency change was inferred
+from the compiler's suggested duplicate-version diagnosis.
+
+The primary forced a normal rebuild by touching the four local crate entry
+sources (contract, verify, rules, runtime), without changing their contents,
+cleaning the shared target, or creating a separate target directory. Only the
+two failed core rows were then rerun in =matrix-core-rebuild/=, after the tiny
+fourth-condition strengthening and corresponding manifest regeneration. The
+provider/module results remain for their unchanged source; this test-only edit
+does not modify provider implementation. The rerun result is recorded below
+when complete.
+
+Replay the checked matrix with the committed runner. For example:
+
+#+begin_src sh
+cd /home/tavis/src/othello
+nix develop /home/tavis/src/ergodis -c python3 notes/scripts/ergodis-validation-matrix.py
+# List all rows first; choose explicit rows and a new output directory.
+nix develop /home/tavis/src/ergodis -c python3 notes/scripts/ergodis-validation-matrix.py \
+  --jobs 8 --run core-default core-all-features modules-native \
+  --output /home/tavis/.cache/ergodis/phase2-remediation/replay-core
+#+end_src
+
+The saved receipts retain each actual argv, working directory, compiler string,
+source state, log hash, row result and explicit skip. A successful later retry
+does not turn the first run into a success.
