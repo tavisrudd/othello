@@ -325,7 +325,11 @@ positive path weights.
    hot-loop or hot-record edit use =PERFORMANCE.md='s retained-control,
    interleaved instruction/cycle/branch/cache, profile, allocation, parity,
    single/parallel where applicable and RSS requirements. The C1194 lower
-   stage needs its own matched parse/admit/lower A/B. Add a coverage table
+   stage needs its own matched parse/admit/lower A/B. Retain clean current
+   core/private controls *before* C1194 edits: the older
+   =ergodis-tools-e0e7331= named on C1194's card is historical context, not
+   a matched immediate control after the subsequent API and driver changes.
+   Add a coverage table
    per arithmetic form: parsed, admitted, lowered, executed, certified.
 
 Unresolved risks owned by C1194's implementation and measurement: the
