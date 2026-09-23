@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: QUEUED — allocated by Tavis from C1208.
+**Status**: IN PROGRESS — design memo drafted in `2026-09-22-c1211-min-plus-design.org`; recommended evaluator/certificate architecture awaits Tavis's decision before C1194 code.
 **Authority**: `notes/2026-09-22-c1208-follow-up-triage.md` (approved allocation and order).
 
 Precursor to C1194; approved C1208 alloc-1. Documentation/design only, before min-plus code.

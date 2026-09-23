@@ -229,7 +229,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 - **C1205 `[ergodis]` [IN PROGRESS: a done]** — transferable evidence for the Rel route: prepared-source byte form and checker door in core, self-standing layer records and offline verifier in the driver, externals validation, one backend route → `notes/2026-09-18-c1205-rel-transferable-evidence.md`
 - **C1206 `[ergodis]` [QUEUED]** — structured refusals: every budget and capacity refusal in core `Demand`/admission and the Rel driver carries bound, object, limit, observed figure and knob → `notes/2026-09-18-c1206-structured-refusals.md`
 - **C1207 `[ergodis]` [QUEUED — AUDIT + DESIGN SESSION WITH TAVIS]** — error reporting and error UI across core, private, tools, ABI/WASM and browser: inventory, taxonomy, general error model → `notes/2026-09-18-c1207-error-reporting-audit-and-design.md`
-- **C1211 `[ergodis]` [QUEUED]** — min-plus evaluator/certificate design memo before C1194 → `notes/2026-09-22-c1211-min-plus-design.md`
+- **C1211 `[ergodis]` [IN PROGRESS]** — min-plus evaluator/certificate memo drafted; architecture decision pending before C1194 → `notes/2026-09-22-c1211-min-plus-design.md`
 - **C1212 `[ergodis]` [QUEUED]** — arity-dependent domain ceiling before C1195 sizing → `notes/2026-09-22-c1212-arity-domain-ceiling.md`
 - **C1216 `[ergodis]` [QUEUED]** — Datalog/private Rel module ABI, WASM build gate and eager-commit defaults → `notes/2026-09-22-c1216-datalog-rel-module-abi.md`
 - **C1217 `[ergodis]` [QUEUED]** — formal relational support/completeness argument after the design memo → `notes/2026-09-22-c1217-relational-support-proof.md`

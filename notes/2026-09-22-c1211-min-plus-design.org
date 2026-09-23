@@ -1,0 +1,337 @@
+#+TITLE: C1211 — Min-plus relational evaluator and certificate design
+#+DATE: 2026-09-22
+#+STARTUP: overview
+
+* Status and decision requested
+
+DESIGN PROPOSED; C1194 implementation awaits Tavis's evaluator/certificate
+architecture decision. This memo changes no Rust source, schema or gate. It
+pins core =8aec9aba= and private =cddd241e=. Native and WASM performance
+figures below are cost models, not measurements.
+
+Recommendation: a *separate weighted relaxation kernel* in =ergodis-rules=,
+sharing cold admission, join-shape and index-shape machinery with =Demand=
+where source contracts genuinely coincide. Give it its own cost columns,
+update queue and worker workspace. Start with a source-bound, ranked trace
+certificate whose checker proves both finite-cost support and global closure.
+Keep Boolean =Demand= and its current certificate bytes and hot row layout
+unchanged. C1194 implements this choice only after approval.
+
+* Source boundary and existing facts
+
+- [[file-rev:8aec9ab:~/src/ergodis/crates/contract/src/datalog.rs::251][Datalog admission]] accepts only Boolean; facts are presence bits, and
+  [[file-rev:8aec9ab:~/src/ergodis/crates/contract/src/datalog.rs::433][PreparedSource]] carries flat tuples without costs.
+- [[file-rev:8aec9ab:~/src/ergodis/crates/rules/src/demand.rs::584][Demand]] compiles append-only tuple rows and delta join steps. A repeated
+  tuple is discarded; the row's witness and round are written once. Its
+  [[file-rev:8aec9ab:~/src/ergodis/crates/rules/src/demand.rs::699][workspace]] has no cost column.
+- [[file-rev:8aec9ab:~/src/ergodis/crates/contract/src/derivation.rs::46][Boolean derivation certificates]] list one witness per derived tuple;
+  [[file-rev:8aec9ab:~/src/ergodis/crates/contract/src/ranked.rs::30][ranked certificates]] list tuples and ranks. Both prove a *set*.
+- [[file-rev:8aec9ab:~/src/ergodis/crates/rules/src/lib.rs::54][WeightedRulePlan]] already evaluates grounded bounded min-plus, but
+  [[file-rev:8aec9ab:~/src/ergodis/crates/contract/src/rule_contract.rs::1][the grounded language]] has at most two factors and bounded scalar/product
+  materialization. Its certificate identity and proof do not cover a lazy
+  relational join of up to four atoms.
+- [[file-rev:cddd241:~/src/ergodis-private/src/rel_frontend/lower.rs::96][Rel's current =min= aggregate]] is a boundary operation over integer
+  payloads; it is not recursive min over sums. Rel dictionary integers are
+  signed =i64=, while bounded min-plus admits nonnegative finite =u32= costs.
+- [[file-rev:8aec9ab:~/src/ergodis/crates/contract/src/weight.rs::85][BoundedMinPlus]] uses =u32::MAX= as infinity and saturates addition there.
+  That algebra alone does not certify an exact unbounded path cost.
+- [[file-rev:8aec9ab:~/src/ergodis/crates/rules/src/pages.rs::1][Pages]] reserves lazily on Unix and uses eager zeroed backing on WASM and
+  other non-Unix targets. Correctness transfers; resident-memory behavior does
+  not.
+
+The private driver currently makes layer certificates over its prepared
+projection. Such a certificate binds that projection, not the originating
+Rel text or an omitted layer record. C1205's source/layer authority remains
+separate; the weighted design must not imply it has been repaired.
+
+* Proposed admitted fragment and mathematical meaning
+
+For each weighted relation, designate one integer *cost column*. The key is
+the remaining tuple. A structural Boolean relation contributes zero cost when
+its tuple is present. A cost-bearing input fact supplies one finite cost; two
+facts with the same relation/key combine by =min=. A rule's admitted cost
+expression is exactly the sum of every cost-bearing body factor once, plus
+nonnegative integer literals and nonnegative typed integer *key fields* bound
+by its body. An ordinary structural body factor contributes zero as a
+relation, while one of its integer fields may supply an explicit addend.
+The resulting per-match offset is independent of the *current costs* of
+recursive rows. The head uses =min= to combine candidate costs for one key. The
+lowering must normalize source =+= expressions to this form and reject a
+missing, repeated or extra cost variable. It must also reject subtraction,
+multiplication, a negative cost, a non-integer cost, and cost-dependent
+negation or comparison inside the recursive weighted layer. General
+=count/max/sum= over a weighted recursive relation remains outside this
+fragment; a completed earlier layer may be materialized as immutable input.
+Every structural relation read by a weighted strongly connected component
+is an input or a certified earlier-layer closure, frozen at that layer's
+entry. Same-layer structural recursion needs a separate mixed-carrier proof
+and is rejected in this first fragment.
+
+For relation/key coordinate =x=, let ~B(x)~ be the minimum input cost or
+=INF=. For a rule match =m= with body coordinates =p_1,...,p_k= and the
+nonnegative offset =c_m= computed from its bound integer key fields and
+literals, define ~W(m) = c_m + sum_i V(p_i)~ using checked nonnegative addition.
+The intended valuation is the *least fixed point in the information order*
+(reverse numeric cost order), equivalently the minimum over finite
+derivation trees:
+
+  ~V(x) = min(B(x), {W(m) : m heads x})~.
+
+This is finite-domain relational min-plus. In the initial fragment every
+accepted cost is in =0..u32::MAX=, excluding the sentinel itself. Rel's
+=i64= literal is converted only after checking =0 <= value < u32::MAX=.
+Arithmetic uses a wider temporary or checked addition. A result at or above
+the sentinel causes an explicit cost-range refusal with the source term/rule
+span; no successful execution or certificate silently treats that path as
+absent. This is deliberately conservative: a dominated overflowing path can
+refuse an otherwise representable answer. C1194 must report that refusal as
+a diagnostic, including the limit and offending expression, and test it.
+It may later prove a less conservative rule separately; no unbounded-integer
+optimality is claimed from saturating =BoundedMinPlus= alone.
+
+The fragment is per layer. A weighted strongly connected component is
+monotone because all costs and offsets are nonnegative and alternatives take
+=min=. Boolean strata can supply frozen structural facts. A later stratum
+may inspect a certified weighted closure. Carrier choice is part of the
+layer's admitted source and cannot be inferred just from seeing a =min=
+boundary aggregate.
+
+* Alternatives and decision
+
+| Option | Data flow and updates | Setup/memory | Main risk |
+|-
+| Extend =Demand= and =DemandWorkspace= | Add a cost to each Boolean row; change duplicate handling and delta semantics in its existing loops | Reuses every plan/index and row reservation, at least one 4-byte cost column plus queues per row | Changes the measured Boolean kernel, row layout and =old/delta= assumptions; source and certificate branches invade its hot path |
+| Separate weighted kernel, shared cold shapes (recommended) | Prepare relation/atom/join/index shapes once; weighted execution owns tuple-to-row membership, cost columns, improvement queues and specialized join loops | Small cold shape extraction; second workspace and compiled hot loop; row costs/queue state separately budgeted | Some intentionally distinct hot-loop code and checker work; cold sharing must be measured for Boolean codegen |
+| Wholly independent weighted kernel | Copy planner, index builder and admission conventions as well as execution | Simplest isolation at first edit; duplicated cold work and tests | Planner policy, identity and portability behavior drift over time |
+
+The middle option is a *second kernel*, not a second engine or host. Its common
+pieces are finite source admission, relation/key definitions, join order,
+addressing-kind choice, packed-key helpers and =Pages= backing. Boolean and
+weighted execution have different state transitions and remain specialized.
+If extracting cold helpers changes Boolean ThinLTO output, C1194 measures and
+either repairs that shape or keeps a small bounded cold duplication until it
+can share safely. No generic callback, trait object or carrier switch enters
+either tuple loop.
+
+* Recommended preparation, workspace and updates
+
+1. Lower Rel's weighted layer to a *weighted prepared source*, separate from
+   the current Boolean =PreparedSource=: relations with key arity and cost
+   position, canonical cost-bearing input rows, a typed value table for every
+   key-domain ID (integer entries carry the signed payload), rules with
+   key atoms and a bounded list of offset addends (literal or body atom/typed
+   integer column), and the declared carrier. Validate that every addend is
+   bound and nonnegative when evaluated; include the value table and addend
+   descriptors in the source identity. The checker decodes every typed value
+   strictly: malformed integer payloads are refused, never treated as zero.
+   Without the value table a checker
+   cannot independently recompute =edge(...,w)= from a dictionary ID. The cost column
+   is not a tuple-key digit. Normalize duplicate input keys to their minimum
+   cost before calculating the source identity. Keep a domain-separated
+   canonical encoding so a third party can re-admit the exact source.
+2. Build the same kind of immutable relation/index shapes =Demand= uses where
+   they apply. A weighted step chooses one body relation as its changed input
+   and joins it against all currently present coordinates. It must not reuse
+   Boolean =old= row cutoffs: an existing coordinate can improve without a
+   new row. Run-constant body width and addressing kind dispatch once outside
+   each weighted join loop. A one-time seed pass evaluates rules whose bodies
+   use only frozen structural relations; they have no weighted input event
+   to trigger them.
+3. The weighted workspace holds one row per relation/key, a parallel =u32=
+   best-cost column, and two bounded queues of improved row IDs. Membership
+   and join indexes map tuple keys to *stable row IDs*. Inserting a new key
+   adds one row and indexes it; lowering an existing cost updates that row
+   and enqueues it without reinserting it into an index. A per-row epoch/flag
+   coalesces repeated improvements within a wave. The next wave scans every
+   changed row in every body position. A row changed while its current wave
+   is scanned remains scheduled for a later wave. No queue grows at runtime.
+4. The producer stops only when the improvement queue is empty. It retains
+   separate counts for distinct rows, strict relaxations, join probes,
+   candidates and waves. A row bound limits *keys*, while a work/event budget
+   limits repeated improvements; exhaustion returns a refusal, never an
+   incomplete certificate. A nonnegative finite-domain program has only
+   finitely many strictly decreasing =u32= coordinate values, so fair
+   relaxation terminates in principle. The Boolean rule =rounds <= rows+1=
+   does not apply: cost may improve many times with no new row. The grounded
+   scalar convergence bound is not an implementation bound for this lazy
+   relation store without its own finite-coordinate argument. If the queue
+   empties while some final rule match could lower its head, choose that
+   match's last-improved weighted premise: its eventual scan saw all other
+   final premise costs and would have enqueued the head. Structural-only
+   rules were handled by the seed pass. Thus an empty queue implies local
+   closure, provided every improvement is eventually scanned.
+5. Deletions, increases of a fact cost and changed rules invalidate the
+   source-bound workspace and trigger re-admission/recomputation in C1194.
+   A lower input cost admits a decrease-only incremental route in principle,
+   but it is not part of the first contract. Existing certificates never
+   transfer to a new source identity by themselves.
+
+Cost model before implementation: for =R= retained distinct rows and =A=
+strict improvements, tuple/index storage scales with =R=, while the work of
+join propagation scales with the candidate matches visited over =A= events.
+The additional hot storage is at least one 4-byte cost, approximately two
+4-byte queue slots and one 4-byte queue flag/epoch per potential row: about
+16 bytes per row of capacity before indexes, page staggering and cold
+certificate construction. A capacity of one million rows therefore reserves
+roughly 16 MB for these columns, not a measured RSS prediction. On native
+Unix =Pages= can commit only touched rows; on WASM/other non-Unix its fallback
+commits the reservation eagerly. Preflight total reserved bytes under the
+product budget and offer explicit smaller row bounds on memory-limited hosts.
+
+* Certificate claim and independent check
+
+Propose a new versioned *weighted relational derivation certificate* bound to
+the canonical weighted prepared encoding. It lists each finite relation/key
+once with its claimed =u32= cost and one support choice: an admitted input
+fact with that exact cost, or a source rule plus one earlier certified row per
+body atom in source body order. The list is topologically ranked by position;
+all premise references are strictly earlier. An initial fact later improved
+may be supported by a rule instead. Infinity is represented by absence from
+the list, never by a listed cost. Source ID, fact count, relation count,
+lengths, key domains, offsets and checked arithmetic are all bound and
+validated. A compact rank-only format can be considered later; it would
+move support search into the checker and is not the first C1194 format.
+
+After evaluation, the producer may build this trace *cold* from final costs:
+start with input facts whose costs equal the final row value, then repeatedly
+find rule matches whose already supported premises sum exactly to the final
+head cost. Emit each newly supported row once. This avoids retaining a
+versioned witness in the weighted hot row. Zero-cost cycles are harmless if
+some source-rooted proof exists; a cycle with no root remains unsupported.
+Failure to support a finite row is an internal producer error, not a license
+to serialize a cyclic witness. For a minimum-cost proof tree, replacing any
+premise by a cheaper final proof could only lower the head's cost; with no
+accepted saturation, that would contradict the head's claimed minimum.
+Thus a minimum proof can be chosen with final-valued premises, and choosing
+minimum depth among equal-cost proofs breaks zero-cost support cycles.
+
+The independent checker re-admits the weighted prepared bytes and computes
+its own source ID. Its *support pass* follows the trace: every source fact or
+rule reference exists, premise tuples unify, the head key matches, and the
+claimed cost is exactly the checked sum of the earlier premises and the
+per-match offset recomputed from the source's typed integer fields.
+Its separate *closure pass* checks each source fact has a listed cost no
+greater than its cost and independently joins every source rule over the
+listed finite rows; each match's head must exist at a cost no greater than
+the candidate. It uses its own bounded relation store/index preparation,
+not the producer's plan or join cursor. Only after both passes succeed may it
+issue a verification record binding source identity, certificate digest and
+checker identity. A checker called on an in-process admitted object remains
+the explicitly weaker trusted fast path.
+
+Correctness argument on paper: every listed finite cost with a strictly
+earlier support chain is the cost of an actual finite proof tree. Thus the
+true minimum cost is at most the claimed cost (*soundness of finite rows*).
+Every input and every matched rule candidate is at least the claimed head
+cost by the closure pass. Induction over finite proof trees gives every
+claimed cost at most every derivable cost (*completeness*). The two
+inequalities yield equality. For an unlisted coordinate, closure forbids
+any finite derivation. In Boolean form, the same argument is: supported
+rows lie in the least model; a closed set contains it. This is the
+relational support-plus-closure proof, not a consequence of the grounded
+certificate's bytes. C1217 may formalize the relational statement; no Lean
+work or formal-coverage claim is made here.
+
+* Worked recursive examples
+
+The following is semantic notation, not a claim that today's Rel parser
+accepts this exact syntax.
+
+** Shortest paths, one key improved twice
+
+Input: ~dist(A)=0~; structural rows =edge(A,B,2)=, =edge(B,C,3)=,
+=edge(A,C,9)=, where the third column is a typed nonnegative integer.
+Rule: =dist(v) <- dist(u) + w, edge(u,v,w)=, with min alternatives.
+
+| Wave | dist(A) | dist(B) | dist(C) |
+|-
+| input | 0 | INF | INF |
+| 1 | 0 | 2 | 9 |
+| 2 | 0 | 2 | 5 |
+| fixed | 0 | 2 | 5 |
+
+=C= retains one row: its cost changes =9 -> 5=. A valid final witness is
+~dist(A)=0 -> dist(B)=2 -> dist(C)=5~, using both edge rows; the direct
+cost-9 proof remains a nonminimal alternative checked by closure.
+
+** Minimum component label through zero-cost edges
+
+Input vertex labels: ~label(1)=1~, ~label(2)=2~, ~label(3)=3~,
+~label(5)=5~. Undirected structural edges join =1-2= and =2-3= at cost zero.
+Rule: =label(v) <- label(u) + link(u,v)=; the link contributes zero.
+
+| Wave | label(1) | label(2) | label(3) | label(5) |
+|-
+| input | 1 | 2 | 3 | 5 |
+| 1 | 1 | 1 | 2 | 5 |
+| 2 | 1 | 1 | 1 | 5 |
+| fixed | 1 | 1 | 1 | 5 |
+
+The zero-cost cycle does not justify a label by itself; the trace starts
+from an input label. This example tests min aggregation independently of
+positive path weights.
+
+* Shortcuts rejected by distinguishing counterexamples
+
+| Shortcut | Counterexample and wrong result |
+|-
+| Keep cost as part of the tuple key / set union | In the shortest-path example, =(C,9)= and =(C,5)= coexist; the relation no longer has one minimum per key. |
+| First derivation wins / append-only Boolean =emit= | The direct =A -> C= path inserts 9 before the route through =B= gives 5; the wrong result is 9. |
+| Stop after =rows+1= waves | One row can successively improve =9 -> 7 -> 5= without adding a key; a row-count guard can stop before 5. |
+| Support witnesses without closure | ~dist(C)=9~ has a real direct-edge proof but omits the available cost-5 route. |
+| Closure inequalities without ranked support | With no facts and rules =p <- q + 0=, =q <- p + 0=, the false claim ~p=q=0~ is locally closed but has no finite proof. |
+| Boolean support reused as a weighted certificate | An edge of cost 4 supports the *presence* of =dist(B)=, but a claimed cost 0 is false. |
+| Grounded min-plus certificate reused by schema | A three-atom relational body is admitted by Demand but has no grounded two-factor rule or matching source identity. |
+| Saturation silently treated as absence | A source path costing =u32::MAX-1= followed by a weight-1 edge reaches its endpoint mathematically, while saturation labels it =INF=. |
+| Decrease-only propagation after an increase/deletion | Change the only =A -> B= edge from cost 2 to 8: retaining ~dist(B)=2~ is stale; restart or dependency invalidation is required. |
+
+* C1194 implementation and verification gate after approval
+
+1. Record the approved choice in C1194's card. Define the weighted prepared
+   contract, domain-separated encoding and checked re-admission before the
+   producer. C1194 must give diagnostics for invalid =i64= costs, malformed
+   =+= cost normal forms and representational overflow. Key-producing
+   arithmetic beyond this cost fragment needs its own bounded-domain
+   admission design and is not claimed by this memo. No existing Boolean schema,
+   source identity or certificate encoding changes.
+2. Implement the weighted kernel and source-bound workspace under the common
+   core; preserve Boolean code shape, zero allocations in repeated weighted
+   evaluation, no runtime-length libc calls or per-tuple carrier dispatch.
+   Pre-size row stores, improvement queues and indexes. Profile both kernels
+   and measure any shared cold-plan extraction against retained binaries.
+   Since the weighted kernel has no retained predecessor, its first
+   acceptance also records an instruction and nanosecond budget per row,
+   candidate and strict relaxation on named workloads, plus a retained
+   weighted binary for its next change.
+3. Implement the independent support and closure checker with bounded memory,
+   malformed/mutated certificate cases, zero-cost unsupported cycles, missing
+   cheaper paths and source/cost/offset binding. Do not issue a verification
+   record from the producer's admitted fast path.
+4. Extend the Rel route and its independently written naive reference over
+   the admitted AST, not over RIR or the weighted plan. Run SSSP and component
+   labels plus seeded differential cases for duplicate facts, multiple cost
+   improvements, zero/positive cycles, three/four-body joins, constants,
+   overflow and layer interactions. On the overlap with the grounded language
+   (small finite domain, up to two factors), compare valuations with the
+   existing grounded min-plus oracle; neither certificate is interchangeable.
+5. Use the current pinned native/wasm32 build and exactness gates. For every
+   hot-loop or hot-record edit use =PERFORMANCE.md='s retained-control,
+   interleaved instruction/cycle/branch/cache, profile, allocation, parity,
+   single/parallel where applicable and RSS requirements. The C1194 lower
+   stage needs its own matched parse/admit/lower A/B. Add a coverage table
+   per arithmetic form: parsed, admitted, lowered, executed, certified.
+
+Unresolved risks owned by C1194's implementation and measurement: the
+weighted queue's work on dense zero-cost recursive joins, a useful event
+budget, the conservative overflow refusal's accepted-source coverage, cold
+certificate synthesis cost, and WASM's eager workspace reservation. These
+are named gates, not assumptions that Boolean or grounded results already
+settle them.
+
+* Approval target
+
+Approve or reject the recommended separate weighted relaxation kernel with
+shared cold join/index shapes and the source-bound ranked trace certificate.
+The alternative is to extend =Demand= in place and accept the associated
+Boolean hot-path/layout risk; the fully separate copied planner has the
+maintenance cost above. C1194 remains gated until Tavis chooses.
