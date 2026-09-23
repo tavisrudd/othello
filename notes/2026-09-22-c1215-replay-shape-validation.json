@@ -271,11 +271,12 @@
     "optional_wasm_check": "Not repeated; unchanged Unix dependency failure retained above."
   },
   "performance": {
-    "receipt_commit": "8166ed531b5cf031fb9d5bc6abfb2d4278f697bf",
+    "receipt_commit": "662188fe6c040447b4f9b154327cb9f46beb4559",
     "receipt": "~/src/ergodis-private/analysis/rel-frontend/c1215-replay-performance.json",
-    "receipt_sha256": "31c360c894f1e250b2933f1d3f60d80aaf81361a02de546b2bcec4704a842fda",
+    "receipt_sha256": "6ab570f1e90ea32d2c5cd8e473a629d8b8e217c36f23b22cfee700e3ab34f13d",
     "native_non_regression_pass": false,
-    "decision": "user measured-exception decision pending",
-    "wall_cycle_risk": "unresolved after significant first aggregate byte result and noisy seven-round confirmation"
+    "decision": "kept with explicit user-approved performance exception on 2026-09-22",
+    "wall_cycle_risk": "unresolved after significant first aggregate byte result and noisy seven-round confirmation",
+    "approval_scope": "private ca52a3e replay repair only; future performance rules unchanged"
   }
 }

@@ -5,14 +5,13 @@
 
 * Status and bounded scope
 
-The bounded replay repair is implemented in private =ec7bb32= and native
-validation passed. The first two measured variants failed the performance regression gate.
-The current candidate is private =ca52a3e=; its formatting, Clippy and 116 native
-tests pass. It also failed the aggregate instruction non-regression diagnostic.
-Full impact characterization is complete. A user decision on a measured
-exception remains pending; no performance acceptance is claimed. The broader
-C1215 API migration remains open. This increment repairs malformed public inputs
-to =rel_stratified::verify_records=. The initial audit and two panic reproductions
+The bounded replay repair is *kept with an explicit user-approved performance
+exception* for private =ca52a3e=. Formatting, Clippy and 116 native tests pass.
+Native non-regression failed; the measured instruction increases and unresolved
+aggregate wall/cycle risk remain documented below. The user approved keeping
+this repair on 2026-09-22. Future performance rules are unchanged. The broader
+C1215 builder/API/instrument migration remains open. This increment repairs
+malformed public inputs to =rel_stratified::verify_records=. The initial audit and two panic reproductions
 are recorded in
 [[file-rev:b82b3f040:~/src/othello/notes/2026-09-22-ergodis-phase2-remediation.org][the Phase 2 report]].
 Starting private revision =62fca14=; core =19cee8f=. The user requested Sol
@@ -257,21 +256,22 @@ The =evaluate= symbol changed from 30,311 to 28,858 bytes. Restoring one helper'
 call shape therefore did not restore total cost. Neither formatting-call
 attribution nor a general compiler remedy has been established. Three bounded
 cold variants have been evaluated; further source experiments are not automatic.
-Full frozen-cohort characterization below makes the proposed exception reviewable.
+Full frozen-cohort characterization below records the approved exception’s scope.
 
 * Acceptance boundary
 
 =~/src/ergodis-dev/PERFORMANCE.md= directs that measured losses be reverted and
 uses instruction counts as the decision metric. The code passes correctness
-gates but has not passed native non-regression. Keeping this candidate requires
-an explicit, scoped measured exception; the rule itself is not being weakened.
+gates but has not passed native non-regression. The user explicitly approved
+keeping =ca52a3e= with the documented performance exception on 2026-09-22; the
+rule itself is unchanged.
 No export, push or release has occurred. The candidate and rejected alternatives
 remain reconstructible from their ordinary forward commits and retained binaries.
 
 
-* Full current-candidate characterization — exception decision pending
+* Kept repair characterization — user-approved exception
 
-The [[file-rev:8166ed5:~/src/ergodis-private/analysis/rel-frontend/c1215-replay-performance.json][full four-cohort receipt]]
+The [[file-rev:662188f:~/src/ergodis-private/analysis/rel-frontend/c1215-replay-performance.json][full four-cohort receipt]]
 retains the eight main/cache A/B results, aggregate A/A, source and executable
 hashes, actual sample parity, instructions/cycles/wall intervals and RSS ranges.
 All 320 actual stratify high/low samples verify and agree exactly; all events
@@ -300,7 +300,7 @@ four cohorts/variants the control spans 5,980–6,164 KiB and the candidate span
 6,020–6,216 KiB. They include process/code/allocator effects. Separate cache
 means are descriptive, not a demonstrated cache win or attribution.
 
-Current candidate =c1215-replay-v3-ca52a3e=, private =ca52a3e= / core =19cee8f=, release with no
+Kept control =c1215-replay-v3-ca52a3e=, private =ca52a3e= / core =19cee8f=, release with no
 optional features, pinned rustc 1.95.0. Measured SHA-256:
 =01d9c122de1182f2bde2ca667347cf5bb326f8e133eb011733c67537cb9f2378=.
 The candidate retention was clean. Earlier variants and control remain retained.
@@ -327,17 +327,21 @@ retain all binary identities.
   entry is manufactured. Overall due-diligence B− and portability C− remain.
 
 
-* Recommended disposition for decision
+* Approved disposition
 
-Keep the correctness repair with a *scoped, explicit performance exception* for
-private =ca52a3e=, provided the user accepts the measured instruction increases
-and unresolved aggregate wall/cycle risk. It closes known public replay panics
-and silent malformed-input fallbacks without an API or certificate-format change.
-The primary is not granting that exception under the existing rule. An exception
-would not change future non-regression requirements or establish portable native
-execution. Until the decision, this is a tested candidate, not an accepted gate.
+On 2026-09-22 the user selected: “Keep the repair with a documented exception.”
+Private =ca52a3e= is kept. The exception covers the measured 0.03–0.08%
+instruction increases on three frozen fixtures and the unresolved aggregate
+wall/cycle risk described above. It does not turn the failed native
+non-regression gate into a pass, change future performance requirements, or
+establish native macOS/Windows/ARM support.
 
-No more speculative source variants or timing reruns are planned. If the exception
-is declined, revert the three repair source commits through an ordinary forward
-commit and retain this complete reviewable evidence for a separate isolation
-investigation. The broader C1215 builder/API/instrument work remains allocated.
+The existing clean retained executable =c1215-replay-v3-ca52a3e= is the control
+for subsequent work; its measured hash is recorded above. No source changed
+for this approval, so the validated 116-test snapshot remains the kept source.
+The receipt records the authorization separately from measurements. No further
+source experiments or timing reruns are needed for this increment.
+
+Next C1215 work: a concrete old/new API mapping and caller inventory for the
+approved Demand builder, Prepared naming and instrumentation boundary. The
+parent task stays open; this completes only its public replay repair increment.
