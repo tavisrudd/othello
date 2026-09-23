@@ -289,8 +289,9 @@ Astra independently accepted the R7/R8 test increment by source inspection,
 with the unary/fixed-grammar coverage limits stated. Its suggestion to make the
 fourth condition independently constraining was incorporated before final core
 gates. The primary reviewed all owned diffs and verified the report against
-saved results. The full initial and rebuilt matrix receipts are committed as
-=2026-09-22-ergodis-phase2-validation.json=; bulk logs remain in the cache.
+saved results. The full initial and rebuilt
+[[file-rev:8878418dd:~/src/othello/notes/2026-09-22-ergodis-phase2-validation.json][matrix receipts]]
+are committed; bulk logs remain in the cache.
 
 Remaining work is intentionally explicit:
 
