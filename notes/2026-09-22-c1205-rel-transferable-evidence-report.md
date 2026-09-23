@@ -568,7 +568,9 @@ independent set-based rebuild in its own module; D2, the stratified program stat
 own identity; D3, `Demand::transferable_source()` in one core commit; D4, no verification
 records in the chain, fresh records as the verifier's output. Implemented; the independent
 audit found one High (binding sites trusted), repaired with the other findings in "Repairs
-after audit" (private `c1205b` at `8d11ce4`). The close is Tavis's call.
+after audit" (private `c1205b` at `8d11ce4`). A re-audit of that repair found a second High
+(a statement that is not range-restricted accepted), repaired in "Repairs after re-audit"
+(private `c1205b` at `042c84c`, receipts `2aa6a07`). The close is Tavis's call.
 
 Worktrees, branch `c1205b`: core `~/.cache/ergodis/worktrees/c1205b/ergodis` from core `main`
 `4b57649` (C1213's record API included); private `~/.cache/ergodis/worktrees/c1205b/ergodis-private`
@@ -2053,8 +2055,222 @@ set-based rebuild written for independence and clarity) and runs only in `check`
 offline verifier, never on a timed path; it is an exception to that invariant, not an
 oversight.
 
+#### Repairs after re-audit
+
+The re-audit (`notes/2026-09-22-c1205-milestone-b-reaudit.md`: H1 closed, one new High, one
+Medium, two Low, one Info) is repaired in one private commit on `c1205b`, `042c84c` (on
+`8d11ce4`). Core is unchanged (`064cde2`). Changed files: `src/rel_verify.rs` and
+`tests/rel_chain.rs` only.
+
+| Finding | Disposition | Commit |
+| --- | --- | --- |
+| N1 (High), a statement that is not range-restricted is accepted and its result follows the dictionary | Fixed by range restriction (below). The re-audit's forgery, unpadded and padded with 99, is a refusal test, together with a comparison variable nothing binds (`big(x) = node(x) and exists(y: node(y) and x < y)` with `node(y)` made `node(1)`, forged `big` = {1, 2, 3, 4} against the honest {1, 2, 3}): `a_rule_that_is_not_range_restricted_is_refused` | `042c84c` |
+| N2 (Medium), chain-shape checks not discriminated | Fixed: one consistent forgery each for no-facts, defined-once, unmatched, tree, drop and reader-terms (`forgeries_of_a_binarized_chain_are_refused_by_the_check_they_contradict`), built with the `Layer` re-admit/re-certify helper through a new `restate` helper. Mutation table below. The combined link refusal is split into one message per condition, so each test names the check it hits | `042c84c` |
+| N3 (Low), one lowering has several accepted statements | Fixed for location and binarization: a source body must start directly after its root's head; a rule outside a chain may not read an auxiliary relation positively (which refuses the un-binarized spelling); the literal pool must be held exactly once by rule heads, rule bodies and source bodies (which refuses the orphaned region a relocation leaves and two rules sharing a body). Also fixed, not in the re-audit: a rule's join order must be its body in literal order (the producer always writes that, and any other permutation was a second spelling with a re-certified layer). Recorded, not fixed: the order of the literals inside a source body (below). Test `a_statement_has_one_layout_for_its_rules` | `042c84c` |
+| N4 (Low), out-of-pool `source` refused by one untested line | Fixed: `[n, n + 1]` and `[5, 3]` are refused at `rules[r].source` ("outside the literal pool"), in the same test. Without that line the verifier panics (mutant src-range), and the test fails | `042c84c` |
+| N5 (Info), auxiliary relations in the result table | Recorded as correct, and stated in the verifier's module header: the claim covers every relation the source wrote. An auxiliary relation's entry is its chain's intermediate join, which can exceed the link read alone as a rule and can depend on whether a domain was bound or fell back to the dictionary in the chain's layering. The root derives exactly what the source rule derives, so no source relation depends on either. The table keeps these entries because removing them would move every binarized chain's identity | `042c84c` |
+| Corpus round trip never runs `Binarize` | Fixed: `every_accepted_generated_program_round_trips_through_its_chain` runs both policies. `Nary` gives 470 accepted, 252 with more than one layer and 25 binarized. `Binarize` gives 470 accepted, 252 multi-layer and 294 binarized, with 0 refused. The asserted floors are 200/100/20 and 200/100/200 | `042c84c` |
+| Mutation-table gap (the repair record covered only whole H1 checks) | Fixed: 27 single-point mutants below | `042c84c` |
+
+**Range restriction, the choice.** `validate_range` applies the frontend's rule
+(`passes::range_restrict`) to every rule over its source body. Each variable of the head, and
+of each negated or compared literal, must occur in a positive or aggregate literal of that
+body. For a chain, every member is checked against the shared source body, and the chain checks
+tie the chain's rules to that body. The alternative was to derive the dictionary from the
+inputs and constants and refuse unused values. It was not taken for two reasons. First, it would
+turn the claim into an active-domain semantics that a forger could still shape through any
+value a fact holds (the unpadded forgery puts 5 into `sink` using a value only `mark` holds).
+Second, the verifier would have to argue that the dictionary is the active domain. Range
+restriction removes the dictionary from the result instead, and it is the frontend's own
+condition. Aggregates bind, as in the frontend: a variable only an aggregate binds has no
+binding site and falls back to the whole dictionary. That dictionary holds every group key,
+since keys come from established tuples. It also holds every aggregate result, because the
+construction checker rebuilds a layer's aggregates before its complements and filters, so
+the fallback size already counts the entries they appended.
+
+**Why the offline claim now holds.** An accepted chain has a statement whose every rule is
+range-restricted over its source body, whose binding sites are that body's sites, and whose
+binarized chains derive, at the root, exactly the projection of their source body's join.
+Every construction is rebuilt by the verifier over domains computed from those sites, from
+relations established in earlier layers, or else over the whole dictionary at that layer. The
+layering is a stratification. Under range restriction, every value a variable takes in a
+satisfying assignment of the positive and aggregate literals lies in its domain: a bound domain
+is the union of the columns that hold it, and a fallback domain is every value in the
+dictionary. So each complement or filter agrees with the negated or compared literal on every
+assignment that can reach the head, and each layer's certified least model is the stratum's
+model. The remaining trusted base is the core checkers and admission, `rel_rebuild`'s set
+semantics, and serde.
+
+**Tests and helpers.** `restate(parts, program, edit)` rebuilds every layer's rules from a
+forged statement the way the verifier expects them, resets derived facts and derived inputs,
+applies `edit`, re-certifies each layer through `Demand`, and recomputes the statement identity
+and every result entry. `insert_literal`, `remove_literal` and `move_to_end` renumber the pool
+together with every reference in the statement and the manifest. Every forgery below passes
+every digest and both core checkers. Under the mutant for its check, each one is accepted (or,
+for tree, crashes the verifier). The model each forgery would be accepted with:
+
+| Forgery (source) | Stated rules give | Chain accepted with (under the mutant) | Refused at |
+| --- | --- | --- | --- |
+| no-facts: the link relation of `p` given the statement fact 7 | `p` = {1, 7} | {1} | `rules[l].head`, "a link with statement facts" |
+| defined-once: the root of a second chain made to derive `p`'s link relation | `p` = {1, 7} | {1} | "a link another rule also derives" |
+| reader-terms: `aux(x, y)` read as `aux(y, x)` above `not c(x, y)` | `p` = {2} | {} | "a link not read with its head's terms" |
+| drop: the link projects `x` away, `not c(x, y)` left to bind it | no range-restricted model; source body gives {1} | {1, 3} (`a ∪ f.0`, not `a ∩ f.0`) | "a link that drops a variable the rest of the chain reads" |
+| unmatched: `not c(y)` with `e(y)` in the source body only | no range-restricted model; source body gives {1} | {} | `rules[r].source`, "a source atom the chain does not join" |
+| tree: the root's link read swapped with the first link's first atom (a cycle) | — | verifier panics (`below[&child]`) | "a chain that is not a tree" |
+
+**Mutation table.** A `git archive` export of `042c84c` at
+`~/.cache/ergodis/worktrees/c1205b-rr-mut/ergodis-private`, with sibling `ergodis` a symbolic
+link to the core worktree. It was built under a separate profile
+(`CARGO_PROFILE_RRMUT_INHERITS=dev cargo test --profile rrmut --all-features --no-fail-fast
+--test rel_chain --test rel_check`), so the shared `dev` artifacts are untouched. `driver.py`
+there applies each mutant alone to `src/rel_verify.rs`, restores it afterwards (byte-identical
+to the export, checked), and keeps per-mutant logs in `logs/` and results in `results.json`.
+
+| Mutant | Check removed | Result | Killing test |
+| --- | --- | --- | --- |
+| range | `validate_range` not run | killed: both forgeries accepted | `a_rule_that_is_not_range_restricted_is_refused` |
+| range-body | a negated or compared variable must be bound | killed: the comparison forgery accepted | same |
+| range-head | a head variable must be bound | killed by message only: the sink forgery is then refused by the body branch (`not src(y)`). Equivalent for soundness: a head variable must occur in some body literal (the layer-rule check), so an unbound one is in a negated or compared literal | same |
+| no-facts | a link's relation has no statement facts | killed: accepted, `p` = {1} | `forgeries_of_a_binarized_chain_…` |
+| defined-once | a link's relation has one defining rule | killed: accepted, `p` = {1} | same |
+| reader-terms | a link is read with its head's terms | killed: accepted, `p` = {} | same |
+| drop | a link keeps every variable the rest reads | killed: accepted, `p` = {1, 3} | same |
+| unmatched | every source atom is joined | killed: accepted, `p` = {} | same |
+| tree | every member reached from the root once | killed: the verifier panics on the cycle | same |
+| start | source body directly after its root's head | killed: relocated source accepted | `a_statement_has_one_layout_for_its_rules` |
+| aux-read | no positive auxiliary read outside a chain | killed: un-binarized spelling accepted | same |
+| layout | the pool held exactly once | killed: orphan and shared-body forgeries accepted | same |
+| order | join order is the body in literal order | killed: reversed order accepted | same |
+| src-range | `source` inside the literal pool | killed: the verifier panics (index out of bounds) | same |
+| src-read | no rule reads the source body | killed | `a_binarized_chain_is_checked_against_its_source_body` |
+| atom-in-source | every chain atom is a source atom | killed | same |
+| sites-eq | bindings equal the source body's sites | killed | same, and `a_binding_site_the_rule_does_not_hold_is_refused` |
+| read-once | a link's relation is read once | survives; argued: a second read inside the chain is link-twice, and any read outside it sees the relation the link's one defining rule derives and leaves the chain's own join unchanged | — |
+| aux-flag | a link's relation is flagged auxiliary | survives; equivalent: the parent map takes only auxiliary relations as links, so the check cannot fail | — |
+| reader-sign | a link is read positively | survives; **not covered**. A negated read of a link puts a complement of the link's relation in the root. The layering check requires that relation to be established in an earlier layer, so a forgery needs the chain split across two layers; none was built. It is a correspondence check of the same kind as reader-terms: without it the root need not derive what the source body derives, and an unsafe root could then be accepted. Open | — |
+| head-distinct | a link head holds distinct variables | survives; argued: a repeated variable in a link head only filters the link (`aux(x, x)`), and the reader holds the same terms, so the root's join is unchanged | — |
+| head-in-body | a link head holds only its body's variables | survives; argued: a head variable its body lacks is refused by the layer-rule check ("a head variable no body literal binds") | — |
+| src-own, members<2, heads-distinct, link-twice, one-root | as in the re-audit | survive; equivalent mutants, as the re-audit recorded (src-read, the one-for-one match, defined-once, read-once and tree respectively cover them) | — |
+
+The "argued" rows are not demonstrated by a forgery. They are listed so that a later change
+knows these checks carry no test.
+
+**Recorded, not fixed.** The order of the literals inside a source body is the one free choice
+the `source` field still has. Reversing it in place, with the sites recomputed, gives an
+accepted statement with the same rules and model and a new identity. The body's order is the
+order the frontend read the conjuncts in, before `order_body` chose a join order. Nothing else
+in the statement records it, and fixing another order would move every binarized statement away
+from the RIR's literal ids (D2 as approved). `--source-check` compares it. The same holds for
+the statement's other layout choices, which the lowering fixes and only `--source-check`
+compares: rule order, relation order, value ids, variable numbering, the order of the rules'
+regions in the pool, and a plain rule's conjunct order.
+
+**Preservation.** `tests/rel_layer_identities.rs`, `tests/rel_frontend_portability.rs`,
+`tests/rel_lowering.rs` (parity and fingerprint), `tests/rel_reference_eval.rs` and
+`tests/rel_reference/` are untouched by `042c84c` (`git diff --stat 8d11ce4 042c84c` names only
+`src/rel_verify.rs` and `tests/rel_chain.rs`) and pass in the gate below. No chain identity pin
+exists or moved.
+
+**Gates at `042c84c`** (the real worktree, against core `064cde2`, under `nix develop
+../ergodis`, `choom -n 1000`, `-j 12`, profile `dev`): `cargo fmt --all --check` clean; clippy
+`--all-targets --all-features -D warnings` clean for the root and for `-p ergodis-tools`;
+`cargo test --all-features --no-fail-fast` plus `-p ergodis-tools --all-features`: 47 result
+blocks, 1,251 passed, 0 failed, 17 ignored. Before the gate, `cargo clean -p ergodis-rules
+--profile dev` cleared the known stale-rlib collision (a concurrent session's build of
+`ergodis-rules` from `~/src/ergodis` in the shared target). Iteration before the commit used a
+separate profile, `reaudrep`, for the same reason. The same collision hit the release retain
+once and was cleared with `cargo clean -p ergodis-rules --release`.
+
+**Timed path.** No timed source changed: `042c84c` touches `src/rel_verify.rs` and a test
+file only. Code generation still moved. The candidate `ergodis-tools-c1205b-reaudit-042c84c`
+(private `042c84c`, clean; core `064cde2`; release, default features, rustc 1.95.0;
+`retain-bin.sh tasks/tools ergodis-tools --label ergodis-tools-c1205b-reaudit` with the core
+worktree as sibling; measured sha256
+`d4281b2ef65ec5f9509bc09a682cee23fa802b91f1c905fc59843de4cf8dcf21`) was compared with
+`ergodis-tools-c1205b-repair-43527c6` by normalized `symbol_disasm.py`. Both `evaluate_with`
+instantiations (0x7a9e and the `NoEvidence` 0x7886) differ only in constant-pool labels, and
+`complement_over`, `filter_over`, `layers_of` and `dedup_rows` are equal. `lower::lower` is
+0x934 against 0x500, an inlining change. So the stage A/B and peak RSS were re-run against the
+same control, `ergodis-tools-c1205b-base-482d6e9`.
+
+Stage A/B (receipt `analysis/rel-frontend/performance-v11-chain-reaudit-042c84c.json`, private
+`2aa6a07`; the same `bench.py` command as for `43527c6` with `--binary` the new candidate. The
+six-event set was 100 per cent enabled, load 1.25 to 2.16, and every A/A null was within
+2.2e-5 of unity). Per-iteration instruction differences, candidate minus control:
+
+| Cohort | `stratify` ratio [interval] | `stratify` Δ | own Δ (`stratify` − `lower`) | own Δ at `43527c6` | `lower` ratio | `lower` Δ |
+| --- | --- | --- | --- | --- | --- | --- |
+| `datalog` | 0.99981 [0.999814, 0.999814] | −313,026 | −321,080 | −321,448 | 1.00142 | +8,054 |
+| `stratified` | 0.99938 [0.999385, 0.999385] | −962,728 | −977,697 | −977,666 | 1.00381 | +14,969 |
+| `columns` | 0.99939 [0.999386, 0.999387] | −961,392 | −980,537 | −980,412 | 1.00397 | +19,145 |
+| `columns3` | 1.00369 [1.003693, 1.003694] | +29,959 | +10,829 | +10,843 | 1.00400 | +19,130 |
+| `aggregate` | 0.99932 [0.999319, 0.999322] | −482,084 | −495,085 | −494,884 | 1.00350 | +13,001 |
+
+`stratify`'s own difference is the `43527c6` figure to within 370 per iteration on every cohort,
+as expected from identical `evaluate_with` code. `lower` rises by 8 to 19 thousand per
+iteration (0.14 to 0.40 per cent) with no lowering source changed: this is `lower::lower`'s
+inlining change, the same code-generation term "Stage shifts, explained" attributed at
+`71c25e7`, and it reached `stratify`'s total through the shared stage. `parse` and `admit` are
+at unity within 2.6e-5.
+
+Peak RSS (`peak_rss.py`, `--repeat 2`, 512 definitions, byte scanner; median KiB of five rounds,
+and of three with the fixed mmap threshold; receipts
+`chain-stage-shift/peak-rss-reaudit-042c84c.json` and `-mmap-threshold.json`, private `2aa6a07`):
+
+| Cohort | `stratify` control | candidate `042c84c` | Δ | fixed threshold: control | candidate | Δ | Δ at `43527c6` |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `datalog` | 25,020 | 25,272 | +252 | 24,692 | 24,944 | +252 | +240 |
+| `stratified` | 51,572 | 51,824 | +252 | 50,376 | 50,692 | +316 | +192 |
+| `columns` | 56,980 | 57,220 | +240 | 56,068 | 56,304 | +236 | +296 |
+| `columns3` | 6,736 | 6,924 | +188 | 6,736 | 6,924 | +188 | +196 |
+| `aggregate` | 66,288 | 66,684 | +396 | 61,296 | 61,684 | +388 | +352 |
+
+The same +0.2 to +0.4 MB residual as at `43527c6` and `71c25e7`; nothing retained.
+
+**Replay** (private worktree at `042c84c`, `B=analysis/rel-frontend`, `C=~/.cache/ergodis/bin`,
+`E` the six-event set above):
+
+```sh
+python3 $B/bench.py --binary $C/ergodis-tools-c1205b-reaudit-042c84c \
+    --control $C/ergodis-tools-c1205b-base-482d6e9 --rounds 5 --cpu 5 \
+    --stages parse,admit,lower,stratify --cohorts datalog,stratified,columns,columns3,aggregate \
+    --events $E --out $B/performance-v11-chain-reaudit-042c84c.json
+cd $B/chain-stage-shift
+R=$C/ergodis-tools-c1205b-reaudit-042c84c; K=datalog,stratified,columns,columns3,aggregate
+python3 peak_rss.py 5 peak-rss-reaudit-042c84c.json stratify $R $K
+GLIBC_TUNABLES=glibc.malloc.mmap_threshold=131072 \
+    python3 peak_rss.py 3 peak-rss-reaudit-042c84c-mmap-threshold.json stratify $R $K
+# Mutations: python3 driver.py in ~/.cache/ergodis/worktrees/c1205b-rr-mut, a git archive
+#   export of 042c84c with its sibling ergodis linked to the core worktree.
+```
+
+**Open after these repairs.** The `reader-sign` check has no forgery (above). The source
+body's literal order is a free choice outside `--source-check`. Neither of the earlier open
+items L7 and L8 moved. The fast-forward question in "Divergence" and the `cache-gc.sh` dry run
+remain for the close. A fresh read of the range-restriction repair is Tavis's call.
+`cache-gc.sh` (dry run only): 71 entries scanned, 20 unreferenced and old enough to delete,
+none of them this task's. This task left the following under `~/.cache/ergodis/`, all younger
+than the cut-off: `worktrees/c1205b-rr-mut` (the mutation copy, driver and logs),
+`c1205b-reaudit-bench.log` and `c1205b-reaudit-rss.log` (run logs), the `reaudrep` and `rrmut`
+profile directories under `target/ergodis-private/`, and the retained
+`bin/ergodis-tools-c1205b-reaudit-042c84c`. Deleting them is Tavis's call.
+
 #### Mystery ledger (milestone b)
 
+- **"Auxiliary" names two kinds of relation (settled, found repairing the re-audit's N3).**
+  The first form of the canonical-source check refused any auxiliary relation derived by a rule
+  without a source. The corpus round trip refused `forall-over-derived` at once: the forall
+  witness relation is flagged auxiliary too, and its rule is not a chain. The two kinds differ
+  in how they are read. A binarization link is read positively by a chain member, and a
+  witness is read negatively. So the check pins the positive read instead. A witness relation
+  is an ordinary relation of the statement; the chain checks do not apply to it and it needs
+  none of them.
+- **Two of the six chain forgeries have no stated model to compare with (settled).** Under the
+  drop and unmatched mutants the stated root binds a variable nowhere, so the stated rules have
+  no range-restricted model. The accepted result follows the domains the source body gives:
+  `a ∪ f.0` for drop, and `e` (all inside `c`, so empty) for unmatched. The claim fails
+  because a result is attributed to rules that define none, not because one number differs
+  from another.
 - **The fixture's dictionary-fallback literal records no `Dictionary` domain (settled).** The
   `lone` literal's variable is bound only by `some`, which its own layer derives, so its domain
   falls back to the whole dictionary; that dictionary holds exactly the four integers `node`
