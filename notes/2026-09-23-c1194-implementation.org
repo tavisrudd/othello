@@ -943,6 +943,16 @@ original source binding. The trust boundary remains the shared Rel
 parse/admit/lower/project implementation, followed by independent
 prepared-source checkers. The one-pair record/API stays compatible.
 
+The certification argument is inductive. Stage =A='s detached checker
+establishes the least supported, closed weighted result over its prepared
+source. Stage =B='s prepared source contains only verified =A= rows plus
+source and checked frozen facts; its detached checker then establishes the
+second least weighted result. The final Boolean checker takes these verified
+min heads as fixed inputs. The ordinary evaluator does not participate in
+any of those checks. As before, this proves the prepared semantics and
+source replay consistency under the shared Rel compiler, not a formal
+correctness theorem for lowering.
+
 Red-team gates: reject a swapped or omitted stage claim, a changed =A=
 result that happens to leave =B='s optimum unchanged, a changed source
 with the same optimum, a forged =B= structural seed, an =A=/=B= cycle,
