@@ -27,6 +27,13 @@ traversal covers every body position, including the first; rule and body order
 remain the source order. The first atom scans its relation; subsequent atoms
 use compound indexes. Prepare required indexes per rule before its traversal.
 
+Compile each atom's constant checks, first variable assignments and equality
+checks into fixed capacity arrays before traversal; classify source slots once.
+Compile head constants and variable radix coefficients separately. This avoids
+reinterpreting rule syntax for every candidate and keeps the semantic helpers
+independent of the trace checker. The maximum four-column packed key remains
+=u64::MAX=; do not compute an unused fifth radix power.
+
 This is independent implementation, not algorithmic diversity. Shared trust
 remains in source admission, tuple storage, membership, CSR index construction,
 index probing and its key computation. Ranked support checking also retains
@@ -88,6 +95,24 @@ CARGO_BUILD_JOBS=8 ~/src/ergodis-dev/scripts/retain-bin.sh \
 Measured executable SHA-256:
 =8718d54a4e12b13b900816b59b0cc2554e45e1ac38d66b2fa563df9c0c653b85=.
 Retained name: =c1214b-original-6e31900=.
+
+The matched checker-mode control was retained before any production checker
+edit, with core still =b1b3686= (only the new integration test file dirty).
+Its private harness patch is now committed as =ad5a562=; retention recorded
+private =6e31900= plus those two dirty harness files. No foreign production
+source changes were present. Retained name:
+=c1214b-harness-draft-6e31900=. Measured SHA-256:
+=3eb77daf30e8686bdbc483736f372e86404ab33efbbe465f3b756eb7ee805831=.
+Both arms use release, no optional features, Nix rustc
+=1.95.0 (59807616e 2026-04-14)=.
+
+Harness preparation passed Clippy, all seven program families with both
+checker modes, exact comparison of every checked relation with evaluator rows,
+and three invalid-option checks. A bounded binarized-triangle A/A preflight
+reported instruction ratio =1.00001= with interval =[0.99999, 1.00003]=;
+required events were 100% enabled. This is a harness check, not candidate
+acceptance. Original/modified-driver full-mode smoke results agreed. Their
+wall times changed, reinforcing the need for the matched harness control.
 
 The existing full harness checks each certificate once. Its A/B driver's
 two-point difference isolates repeated evaluation, even in full mode; those
