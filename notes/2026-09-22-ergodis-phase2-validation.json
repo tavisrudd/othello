@@ -1,0 +1,1703 @@
+{
+  "schema": 1,
+  "date": "2026-09-22",
+  "final_core_revision": "b1b36861cdbc6cd2b1472a19a6663e94f2b7f310",
+  "final_private_revision": "6e31900fb51b8b8b049b9e57404c74dbb0207482",
+  "final_core_tree_matches_validated_dirty_patch": true,
+  "initial": {
+    "schema": 1,
+    "started": "2026-09-23T01:52:57.923199+00:00",
+    "repos_root": "/home/tavis/src",
+    "runner_sha256": "fd60ff938e51b342ba5e59a5cda40871c2b983b8227c04ad83e08247b62d137b",
+    "sources": {
+      "ergodis": {
+        "revision": "831d56c68bb9430d11436291de1078a37ad79478",
+        "status": [
+          "M SHA256SUMS",
+          " M crates/verify/tests/prepared_source.rs"
+        ],
+        "tracked_diff_sha256": "4f915e01330900375eaedbafb3f0e0d805b26b04c0cc1cd024df82843fa88413",
+        "untracked_sha256": {}
+      },
+      "ergodis-private": {
+        "revision": "6e31900fb51b8b8b049b9e57404c74dbb0207482",
+        "status": [],
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "untracked_sha256": {}
+      }
+    },
+    "environment": {
+      "RUSTFLAGS": null,
+      "CARGO_ENCODED_RUSTFLAGS": null,
+      "CARGO_TARGET_DIR": null,
+      "CARGO_BUILD_JOBS": "8"
+    },
+    "rows": [
+      {
+        "id": "core-default",
+        "repo": "ergodis",
+        "level": "execute",
+        "commands": [
+          [
+            "cargo",
+            "test",
+            "--locked",
+            "-j",
+            "8"
+          ]
+        ],
+        "status": "failed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "test",
+              "--locked",
+              "-j",
+              "8"
+            ],
+            "cwd": "/home/tavis/src/ergodis",
+            "exit_code": 101,
+            "log": "core-default-0.log",
+            "log_sha256": "d0df2b31f9c3f167d4c49487a6f00594754a690b30ed898668e6a9da903df29a"
+          }
+        ]
+      },
+      {
+        "id": "core-all-features",
+        "repo": "ergodis",
+        "level": "execute",
+        "commands": [
+          [
+            "cargo",
+            "fmt",
+            "--check"
+          ],
+          [
+            "cargo",
+            "clippy",
+            "--locked",
+            "-j",
+            "8",
+            "--all-targets",
+            "--all-features",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          [
+            "cargo",
+            "test",
+            "--locked",
+            "-j",
+            "8",
+            "--all-features"
+          ],
+          [
+            "python3",
+            "python/generate_fixtures.py",
+            "--check"
+          ],
+          [
+            "python3",
+            "python/generate_evidence.py",
+            "--check"
+          ]
+        ],
+        "status": "failed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "fmt",
+              "--check"
+            ],
+            "cwd": "/home/tavis/src/ergodis",
+            "exit_code": 0,
+            "log": "core-all-features-0.log",
+            "log_sha256": "07675762059031049eda7f910b424cd4633bce53f0e48f9f436665de864eba2c"
+          },
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "clippy",
+              "--locked",
+              "-j",
+              "8",
+              "--all-targets",
+              "--all-features",
+              "--",
+              "-D",
+              "warnings"
+            ],
+            "cwd": "/home/tavis/src/ergodis",
+            "exit_code": 0,
+            "log": "core-all-features-1.log",
+            "log_sha256": "51bf77f7a73ea85b2c18504c9fc1f52e1c21bc3d32a721fc80b060ef9e32ce18"
+          },
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "test",
+              "--locked",
+              "-j",
+              "8",
+              "--all-features"
+            ],
+            "cwd": "/home/tavis/src/ergodis",
+            "exit_code": 101,
+            "log": "core-all-features-2.log",
+            "log_sha256": "de906a8864514643c3e3c7e03fff0480e8e4256d713ef333a69acfc17b978cf0"
+          }
+        ]
+      },
+      {
+        "id": "modules-native",
+        "repo": "ergodis",
+        "level": "execute",
+        "commands": [
+          [
+            "cargo",
+            "test",
+            "--locked",
+            "-j",
+            "8",
+            "-p",
+            "ergodis-modules",
+            "--features",
+            "native"
+          ]
+        ],
+        "limitation": "loaded_transcript stays ignored: requires a separately built immutable package and transcript",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "test",
+              "--locked",
+              "-j",
+              "8",
+              "-p",
+              "ergodis-modules",
+              "--features",
+              "native"
+            ],
+            "cwd": "/home/tavis/src/ergodis",
+            "exit_code": 0,
+            "log": "modules-native-0.log",
+            "log_sha256": "1ca780a4df7764d5da5858ff0d8a4623fcf32674b0dc1f96a7b83a31c545f0a7"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "browser",
+        "repo": "ergodis",
+        "level": "execute",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--manifest-path",
+            "wasm/Cargo.toml",
+            "--target",
+            "wasm32-unknown-unknown"
+          ],
+          [
+            "nix",
+            "run",
+            ".#wasm-build"
+          ],
+          [
+            "nix",
+            "run",
+            ".#wasm-test"
+          ],
+          [
+            "nix",
+            "run",
+            ".#wasm-smoke"
+          ]
+        ],
+        "artifacts": [
+          "wasm/www/pkg/ergodis_wasm_bg.wasm",
+          "wasm/www/pkg/ergodis_wasm.js"
+        ],
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "component-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-component-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-component-provider"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "component-native-0.log",
+            "log_sha256": "15677437e2fd4ba440cf0f3b62b5dab2a78aeb318053a2646e5d9d7fe8870143"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "component-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-component-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-component-provider",
+              "--target",
+              "wasm32-unknown-unknown"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "component-wasm32-unknown-unknown-0.log",
+            "log_sha256": "494b04f0836c51efedd4fe9e176965185c141a4ad7aa42d9022a0f0af6095981"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "composition-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-composition-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-composition-provider"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "composition-native-0.log",
+            "log_sha256": "5cc234322233b98a891ea88695a3b0244b78ecd67e873fb87b661b18fb66b276"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "composition-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-composition-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-composition-provider",
+              "--target",
+              "wasm32-unknown-unknown"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "composition-wasm32-unknown-unknown-0.log",
+            "log_sha256": "aa7ec1b22404d87fbf70fb1ed2de81eeac7e6c2caf2d9d358fe61f4330882c64"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "css-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-css-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-css-provider"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "css-native-0.log",
+            "log_sha256": "188fbce098f432ecd97c155733abeee93e95df8360c030c84bac2028da8e203c"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "css-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-css-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-css-provider",
+              "--target",
+              "wasm32-unknown-unknown"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "css-wasm32-unknown-unknown-0.log",
+            "log_sha256": "113040c8edae1bd2f33a9e99d3dec9d19cbe2f46bf1a6decf359f4c11533ae43"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "fault-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-fault-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-fault-provider"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "fault-native-0.log",
+            "log_sha256": "4556044dbdf25bfbff7cef16ba6ed893eb05f870e92bc82ed46afd83f9f32bcc"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "fault-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-fault-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-fault-provider",
+              "--target",
+              "wasm32-unknown-unknown"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "fault-wasm32-unknown-unknown-0.log",
+            "log_sha256": "e9410b2c3a639bf33561a1380fb6ed8a85e3211745c52cb21c2d16246965da0b"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "hadamard-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-hadamard-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-hadamard-provider"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "hadamard-native-0.log",
+            "log_sha256": "9df446e7faee26483e4de71967ff77631a8bdbb5427f9e74a7b44919e72d4e00"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "hadamard-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-hadamard-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-hadamard-provider",
+              "--target",
+              "wasm32-unknown-unknown"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "hadamard-wasm32-unknown-unknown-0.log",
+            "log_sha256": "c60d1f0693b221338be4d5ae0b53627f84c8d2f4afd6805bb5ce72b8fba35941"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "lrc-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-lrc-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-lrc-provider"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "lrc-native-0.log",
+            "log_sha256": "ea5c283db9bb1b6d4b7ee583346a2a2ac7356e520469ba11aa54adbf0a143912"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "lrc-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-lrc-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-lrc-provider",
+              "--target",
+              "wasm32-unknown-unknown"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "lrc-wasm32-unknown-unknown-0.log",
+            "log_sha256": "970224453d6f94799148a4492f98c54a7b6985d45006a262b98584a3cee2a8c7"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "parameterization-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-parameterization-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-parameterization-provider"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "parameterization-native-0.log",
+            "log_sha256": "7a592e265827c8eaf68891b892790264b33aa5eaade28303dc7fe693f28f0094"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "parameterization-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-parameterization-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-parameterization-provider",
+              "--target",
+              "wasm32-unknown-unknown"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "parameterization-wasm32-unknown-unknown-0.log",
+            "log_sha256": "34c85ef73befd3498c854d49917dd657c03e4616461a6c0016c020d323111f71"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "qec-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-qec-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-qec-provider"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "qec-native-0.log",
+            "log_sha256": "c1ce3a8187c9fafcacf3125863ceaa69c92fac6ed8104c70269a4a95a6e2c579"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "qec-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-qec-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-qec-provider",
+              "--target",
+              "wasm32-unknown-unknown"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "qec-wasm32-unknown-unknown-0.log",
+            "log_sha256": "adabc530fe960e0e3194b74af59702c104df6836be8e02dedf2cdb07ea243619"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "scheduling-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-scheduling-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-scheduling-provider"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "scheduling-native-0.log",
+            "log_sha256": "11e428446c3915990873103d35e04a9b836b900e7327992dc0ef990e5b73c893"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "scheduling-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-scheduling-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "check",
+              "--locked",
+              "-j",
+              "8",
+              "--lib",
+              "-p",
+              "ergodis-scheduling-provider",
+              "--target",
+              "wasm32-unknown-unknown"
+            ],
+            "cwd": "/home/tavis/src/ergodis-private",
+            "exit_code": 0,
+            "log": "scheduling-wasm32-unknown-unknown-0.log",
+            "log_sha256": "cf0c069a6a7447c7d63254ee9ba6a08fc0b825ffc0c26967ca0c5d0b1995374c"
+          }
+        ],
+        "artifact_sha256": {}
+      }
+    ],
+    "rustc": "rustc 1.95.0 (59807616e 2026-04-14) (built from a source tarball)\nbinary: rustc\ncommit-hash: 59807616e1fa2540724bfbac14d7976d7e4a3860\ncommit-date: 2026-04-14\nhost: x86_64-unknown-linux-gnu\nrelease: 1.95.0\nLLVM version: 21.1.8",
+    "sources_after": {
+      "ergodis": {
+        "revision": "831d56c68bb9430d11436291de1078a37ad79478",
+        "status": [
+          "M SHA256SUMS",
+          " M crates/verify/tests/prepared_source.rs"
+        ],
+        "tracked_diff_sha256": "4f915e01330900375eaedbafb3f0e0d805b26b04c0cc1cd024df82843fa88413",
+        "untracked_sha256": {}
+      },
+      "ergodis-private": {
+        "revision": "6e31900fb51b8b8b049b9e57404c74dbb0207482",
+        "status": [],
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "untracked_sha256": {}
+      }
+    },
+    "source_state_unchanged": true,
+    "finished": "2026-09-23T01:55:15.304744+00:00",
+    "accepted": false
+  },
+  "core_rebuild": {
+    "schema": 1,
+    "started": "2026-09-23T01:56:28.444786+00:00",
+    "repos_root": "/home/tavis/src",
+    "runner_sha256": "fd60ff938e51b342ba5e59a5cda40871c2b983b8227c04ad83e08247b62d137b",
+    "sources": {
+      "ergodis": {
+        "revision": "831d56c68bb9430d11436291de1078a37ad79478",
+        "status": [
+          "M SHA256SUMS",
+          " M crates/verify/tests/prepared_source.rs"
+        ],
+        "tracked_diff_sha256": "4bc23f4297f7c136b3ae9c5a574d1b06b01c06d5a5ff8175954a59e87e4e0931",
+        "untracked_sha256": {}
+      },
+      "ergodis-private": {
+        "revision": "6e31900fb51b8b8b049b9e57404c74dbb0207482",
+        "status": [],
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "untracked_sha256": {}
+      }
+    },
+    "environment": {
+      "RUSTFLAGS": null,
+      "CARGO_ENCODED_RUSTFLAGS": null,
+      "CARGO_TARGET_DIR": null,
+      "CARGO_BUILD_JOBS": "8"
+    },
+    "rows": [
+      {
+        "id": "core-default",
+        "repo": "ergodis",
+        "level": "execute",
+        "commands": [
+          [
+            "cargo",
+            "test",
+            "--locked",
+            "-j",
+            "8"
+          ]
+        ],
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "test",
+              "--locked",
+              "-j",
+              "8"
+            ],
+            "cwd": "/home/tavis/src/ergodis",
+            "exit_code": 0,
+            "log": "core-default-0.log",
+            "log_sha256": "c3292cae6ad297ff048136b1fc583df7ef8c2f554f3098244c1dbbcbccf2b67e"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "core-all-features",
+        "repo": "ergodis",
+        "level": "execute",
+        "commands": [
+          [
+            "cargo",
+            "fmt",
+            "--check"
+          ],
+          [
+            "cargo",
+            "clippy",
+            "--locked",
+            "-j",
+            "8",
+            "--all-targets",
+            "--all-features",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          [
+            "cargo",
+            "test",
+            "--locked",
+            "-j",
+            "8",
+            "--all-features"
+          ],
+          [
+            "python3",
+            "python/generate_fixtures.py",
+            "--check"
+          ],
+          [
+            "python3",
+            "python/generate_evidence.py",
+            "--check"
+          ]
+        ],
+        "status": "passed",
+        "results": [
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "fmt",
+              "--check"
+            ],
+            "cwd": "/home/tavis/src/ergodis",
+            "exit_code": 0,
+            "log": "core-all-features-0.log",
+            "log_sha256": "07675762059031049eda7f910b424cd4633bce53f0e48f9f436665de864eba2c"
+          },
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "clippy",
+              "--locked",
+              "-j",
+              "8",
+              "--all-targets",
+              "--all-features",
+              "--",
+              "-D",
+              "warnings"
+            ],
+            "cwd": "/home/tavis/src/ergodis",
+            "exit_code": 0,
+            "log": "core-all-features-1.log",
+            "log_sha256": "5cdb8b93a99c24d3a80bd2c3b7778ea6e749a841aad78a169145d952c3b589c0"
+          },
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "cargo",
+              "test",
+              "--locked",
+              "-j",
+              "8",
+              "--all-features"
+            ],
+            "cwd": "/home/tavis/src/ergodis",
+            "exit_code": 0,
+            "log": "core-all-features-2.log",
+            "log_sha256": "c2c1662dbc088e70af6dbb6f5e5edce567524b2364413d992d0ef8ab72feb68b"
+          },
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "python3",
+              "python/generate_fixtures.py",
+              "--check"
+            ],
+            "cwd": "/home/tavis/src/ergodis",
+            "exit_code": 0,
+            "log": "core-all-features-3.log",
+            "log_sha256": "07675762059031049eda7f910b424cd4633bce53f0e48f9f436665de864eba2c"
+          },
+          {
+            "argv": [
+              "nix",
+              "develop",
+              "/home/tavis/src/ergodis",
+              "-c",
+              "python3",
+              "python/generate_evidence.py",
+              "--check"
+            ],
+            "cwd": "/home/tavis/src/ergodis",
+            "exit_code": 0,
+            "log": "core-all-features-4.log",
+            "log_sha256": "07675762059031049eda7f910b424cd4633bce53f0e48f9f436665de864eba2c"
+          }
+        ],
+        "artifact_sha256": {}
+      },
+      {
+        "id": "modules-native",
+        "repo": "ergodis",
+        "level": "execute",
+        "commands": [
+          [
+            "cargo",
+            "test",
+            "--locked",
+            "-j",
+            "8",
+            "-p",
+            "ergodis-modules",
+            "--features",
+            "native"
+          ]
+        ],
+        "limitation": "loaded_transcript stays ignored: requires a separately built immutable package and transcript",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "browser",
+        "repo": "ergodis",
+        "level": "execute",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--manifest-path",
+            "wasm/Cargo.toml",
+            "--target",
+            "wasm32-unknown-unknown"
+          ],
+          [
+            "nix",
+            "run",
+            ".#wasm-build"
+          ],
+          [
+            "nix",
+            "run",
+            ".#wasm-test"
+          ],
+          [
+            "nix",
+            "run",
+            ".#wasm-smoke"
+          ]
+        ],
+        "artifacts": [
+          "wasm/www/pkg/ergodis_wasm_bg.wasm",
+          "wasm/www/pkg/ergodis_wasm.js"
+        ],
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "component-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-component-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "component-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-component-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "composition-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-composition-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "composition-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-composition-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "css-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-css-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "css-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-css-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "fault-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-fault-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "fault-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-fault-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "hadamard-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-hadamard-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "hadamard-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-hadamard-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "lrc-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-lrc-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "lrc-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-lrc-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "parameterization-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-parameterization-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "parameterization-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-parameterization-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "qec-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-qec-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "qec-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-qec-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "scheduling-native",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-scheduling-provider"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      },
+      {
+        "id": "scheduling-wasm32-unknown-unknown",
+        "repo": "ergodis-private",
+        "level": "compile-only",
+        "commands": [
+          [
+            "cargo",
+            "check",
+            "--locked",
+            "-j",
+            "8",
+            "--lib",
+            "-p",
+            "ergodis-scheduling-provider",
+            "--target",
+            "wasm32-unknown-unknown"
+          ]
+        ],
+        "limitation": "type checking only; no linking, ABI transcript, provider execution or threaded-feature coverage",
+        "status": "skipped:not-selected"
+      }
+    ],
+    "rustc": "rustc 1.95.0 (59807616e 2026-04-14) (built from a source tarball)\nbinary: rustc\ncommit-hash: 59807616e1fa2540724bfbac14d7976d7e4a3860\ncommit-date: 2026-04-14\nhost: x86_64-unknown-linux-gnu\nrelease: 1.95.0\nLLVM version: 21.1.8",
+    "sources_after": {
+      "ergodis": {
+        "revision": "831d56c68bb9430d11436291de1078a37ad79478",
+        "status": [
+          "M SHA256SUMS",
+          " M crates/verify/tests/prepared_source.rs"
+        ],
+        "tracked_diff_sha256": "4bc23f4297f7c136b3ae9c5a574d1b06b01c06d5a5ff8175954a59e87e4e0931",
+        "untracked_sha256": {}
+      },
+      "ergodis-private": {
+        "revision": "6e31900fb51b8b8b049b9e57404c74dbb0207482",
+        "status": [],
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "untracked_sha256": {}
+      }
+    },
+    "source_state_unchanged": true,
+    "finished": "2026-09-23T02:01:24.182038+00:00",
+    "accepted": true
+  }
+}

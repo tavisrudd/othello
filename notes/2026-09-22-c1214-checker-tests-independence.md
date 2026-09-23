@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: IN PROGRESS — milestone a started under the user-authorized architecture Phase 2; milestone b remains open.
+**Status**: IN PROGRESS — milestone a bounded fixtures delivered and reviewed (core `b1b3686`); milestone b remains open.
 **Authority**: `notes/2026-09-22-c1208-follow-up-triage.md` (approved allocation and order).
 
 Approved C1208 alloc-2. Two separately reviewable milestones; use C1205 milestone a's
@@ -13,6 +13,12 @@ new-door tests, and does not wait for the format migration to start.
 ## Milestone a — tests first
 
 Current implementation and coverage record: `2026-09-22-ergodis-phase2-remediation.org`.
+
+Delivered: 128 tiny sources, 1,024 independent closure comparisons across both
+formats/source doors/store layouts, exact mutation rejection families and retained
+decoder/source bounds. Gates pass; source review accepted by Astra. The report
+states unary/fixed-grammar limits and the unchanged shared production completeness
+pass. No general completeness or formal soundness claim follows from the tests.
 
 Build checker-crate fixtures and mutate both certificate families, including cases no
 producer emits: support/rank errors, missing/extra/duplicate facts, bad premises and

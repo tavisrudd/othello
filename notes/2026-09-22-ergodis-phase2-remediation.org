@@ -217,10 +217,12 @@ nix develop /home/tavis/src/ergodis -c cargo clippy --locked -j 8 -p ergodis-pri
 
 ** Remaining gates and task state
 
-The matrix run and core acceptance gates are in progress. C1214 and C1215 remain
-IN PROGRESS; neither the independent completeness implementation nor the full
-API cleanup is claimed complete. No support/assurance grade is raised by adding
-a test that records a known panic.
+This bounded Phase 2 increment is implemented, reviewed and committed. C1214
+milestone a's fixture increment is delivered at the finite scope above; milestone
+b remains open. C1215's initial audit and reproductions are delivered; production
+shape validation and the larger API cleanup remain open. Both parent tasks remain
+IN PROGRESS. No support/assurance grade is raised by adding a test that records a
+known panic.
 
 ** Matrix execution and build-cache diagnosis
 
@@ -251,8 +253,13 @@ cleaning the shared target, or creating a separate target directory. Only the
 two failed core rows were then rerun in =matrix-core-rebuild/=, after the tiny
 fourth-condition strengthening and corresponding manifest regeneration. The
 provider/module results remain for their unchanged source; this test-only edit
-does not modify provider implementation. The rerun result is recorded below
-when complete.
+does not modify provider implementation. The rerun passed with unchanged source
+snapshots: *916 default tests* (two ignored) and *1,049 all-feature tests* (three
+ignored), zero failed; formatting, all-target/all-feature Clippy, the bounded
+Python fixture gate and the evidence manifest gate all passed. The manifest
+change is the one checker test file's checksum. Commit core =b1b3686= contains
+precisely the validated test/manifest patch; its Git diff hash was checked
+against the runner's recorded dirty-patch hash.
 
 Replay the checked matrix with the committed runner. For example:
 
@@ -268,3 +275,44 @@ nix develop /home/tavis/src/ergodis -c python3 notes/scripts/ergodis-validation-
 The saved receipts retain each actual argv, working directory, compiler string,
 source state, log hash, row result and explicit skip. A successful later retry
 does not turn the first run into a success.
+
+** Commits, review and next steps
+
+| Repository | Commit | Deliverable |
+|------------+--------+-------------|
+| notes | =3eb321cf5= | Opt-in command matrix and false-green regressions, accepted by Astra after fixes |
+| core | =b1b3686= | [[file-rev:b1b3686:~/src/ergodis/crates/verify/tests/prepared_source.rs::1335][Independent bounded closures and exact rejection fixtures]], plus manifest |
+| private | =6e31900= | Existing public replay panic characterizations, no production repair |
+| private | =5e87740= | Separate Phase 1 Astra follow-up for timing units/test strength |
+
+Astra independently accepted the R7/R8 test increment by source inspection,
+with the unary/fixed-grammar coverage limits stated. Its suggestion to make the
+fourth condition independently constraining was incorporated before final core
+gates. The primary reviewed all owned diffs and verified the report against
+saved results. The full initial and rebuilt matrix receipts are committed as
+=2026-09-22-ergodis-phase2-validation.json=; bulk logs remain in the cache.
+
+Remaining work is intentionally explicit:
+
+1. C1214 b: implement and review an independent production completeness pass,
+   with its own algorithm, bounded-oracle agreement and performance gates. The
+   current two production checkers still share that pass.
+2. C1215: specify and implement complete public record/closure validation, then
+   turn the two panic characterizations into rejection regressions. Address
+   constructor opacity, source binding and instrumentation in the owning API
+   migration; do not mistake the audit for those repairs.
+3. R6 follow-up: decide whether any opt-in row becomes mandatory; provision
+   compatible native Darwin/ARM/Windows runners and provider ABI transcript
+   fixtures. Optional threaded/provider feature combinations remain separate
+   coverage, not implicit in default-family compile checks.
+
+No new kernel or algorithm was introduced, so no performance result or speed
+claim accompanies these test changes. The shared-target stale-artifact incident
+is retained above as a diagnosed validation failure followed by a successful
+rebuild, not hidden behind a clean retry. No genuinely incidental research
+discovery arose; the findings were directly sought by this audit.
+
+Cache closeout: 61 entries scanned, zero unreferenced and old enough to delete;
+dry run only. No retained benchmark binaries or profiles were created. All local
+Org revision links use =~/= as requested and were checked with the custom link
+parser; actual validation commands retain their explicit absolute working paths.

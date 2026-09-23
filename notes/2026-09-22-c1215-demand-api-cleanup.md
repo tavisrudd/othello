@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: IN PROGRESS — initial trust-boundary audit under architecture Phase 2; the larger API migration remains open.
+**Status**: IN PROGRESS — initial trust-boundary audit and panic reproductions delivered; shape validation and the larger API migration remain open.
 **Authority**: `notes/2026-09-22-c1208-follow-up-triage.md` (approved allocation and order).
 
 Approved C1208 alloc-3. After C1205 milestone a's source enum and byte door; use C1213's
@@ -11,6 +11,11 @@ format. Prefer before any separately allocated growing-index successor.
 ## Scope
 
 Current audit and bounded regression work: `2026-09-22-ergodis-phase2-remediation.org`.
+
+Private `6e31900` characterizes two existing public replay panics, with a passing
+valid control. These are reproductions, not repairs. Complete record/closure
+shape validation must replace the panic expectations with explicit rejection;
+the trusted admitted fast path and re-admitting external doors remain distinct.
 
 - Consolidate Demand construction into a builder with production defaults.
 - Expose one checker entry point over the source enum, retaining a clearly documented
