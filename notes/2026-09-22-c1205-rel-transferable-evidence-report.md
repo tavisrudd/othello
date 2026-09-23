@@ -566,8 +566,9 @@ empty under `symbol_disasm.py` against `closure_ballpark-bytes-8de4932`.
 Status: design approved (Tavis, 2026-09-22) with all four recommendations: D1 (a), the
 independent set-based rebuild in its own module; D2, the stratified program statement with its
 own identity; D3, `Demand::transferable_source()` in one core commit; D4, no verification
-records in the chain, fresh records as the verifier's output. Implementation in progress; see
-"Implementation" below.
+records in the chain, fresh records as the verifier's output. Implemented; the independent
+audit found one High (binding sites trusted), repaired with the other findings in "Repairs
+after audit" (private `c1205b` at `8d11ce4`). The close is Tavis's call.
 
 Worktrees, branch `c1205b`: core `~/.cache/ergodis/worktrees/c1205b/ergodis` from core `main`
 `4b57649` (C1213's record API included); private `~/.cache/ergodis/worktrees/c1205b/ergodis-private`
@@ -1262,7 +1263,7 @@ directory of `222b4f8` was written during the run and is read by no test.
 Gates at `71c25e7` (the two fixes; receipts `267acdd` add no code): `cargo fmt --all --check`
 clean; clippy `--all-targets --all-features -D warnings` clean for the root and for `-p
 ergodis-tools`; `rel_chain` (12), `rel_check` (3), `rel_layer_identities` (2, pins
-unedited), `rel_externals` (1), `rel_frontend_portability` (2), `rel_lowering` (53, parity and
+unedited), `rel_externals` (2), `rel_frontend_portability` (2), `rel_lowering` (53, parity and
 fingerprint assertions unedited), `rel_reference_eval` (19, the differential unedited), the
 library's `rel_` unit tests (5) and `ergodis-tools` (41 + 3 + 2, the new refusal test
 included): all green. Full private `cargo test --all-features --no-fail-fast -j 12` at
@@ -1295,7 +1296,9 @@ been throwaway code. What was built, and where it departs from the design text:
   variable pool and so its parent's binding sites, which can name relations the synthetic rule's
   own body does not read. `ProgramRule` therefore has `bindings: Vec<Vec<(relation, column)>>`
   per rule-local variable, read from `Rir::binding_sites`. It is still a pure function of the
-  lowered IR, so D2 stands. Other `P` field shapes: `body: [first, last]`, `order`,
+  lowered IR, so D2 stands. (Superseded after the audit: the verifier took these sites on
+  trust. `P` now also carries each chain rule's source body and the verifier recomputes every
+  site; see "Repairs after audit".) Other `P` field shapes: `body: [first, last]`, `order`,
   `variables`; `ProgramLiteral { sign, op, relation: Option, aggregate_column: Option, terms }`
   with `ProgramTerm::{Constant(id), Variable(var)}`; `type_ranges: Vec<[u32; 2]>` per value kind.
 - **The record types live in `rel_chain`**, re-exported from `rel_stratified` so every existing
@@ -1473,14 +1476,16 @@ core 5, two-point differencing. Runner and logs under `~/.cache/ergodis/c1205b/`
   | `columns3` | 0.99267 / 0.99357 | 0.99772 / 0.99790 | within 1e-5 |
   | `aggregate` | 0.99304 / 0.99385 | 0.99971 / 0.99971 | within 2e-5 |
 
-  Every interval is narrower than 1e-5 and every A/A null reads 1.00000. Cycles settle nothing
+  Every `lower` and `stratify` interval is narrower than 1e-5 (at most 3.6e-6); `scan` and
+  `parse` intervals reach 7.4e-5 and 2.8e-5. Every A/A null reads 1.00000. Cycles settle nothing
   (intervals up to ±20 per cent on `datalog`).
 - **Against the Fermi.** The Fermi predicted the timed `stratify` stage would *gain* a few
   thousand instructions per iteration on the construction cohorts; on four of them it lost
   0.2–0.4 million, and `lower`, which this milestone did not touch, lost 17–35 thousand.
   "Stage shifts, explained" below attributes both: code generation in functions whose source
-  did not change, plus a heap-layout term, with the milestone's own added work (+15 to +20
-  thousand instructions per iteration) visible only on `columns3`, where little else runs.
+  did not change, plus a heap-layout term, with the milestone's own added work bounded above
+  by about 20 thousand instructions per iteration (an upper bound, not an attribution; see
+  item 5 there), visible only on `columns3`, where little else runs.
 - **Evidence out of the hot loop, by disassembly.** The candidate `ergodis-tools` has two
   `evaluate_with` instantiations (0x7ace and 0x7548 bytes). `evaluate` calls the 0x7548 one.
   Its callees do not include `Demand::transferable_source` or `<ChainWriter as Evidence>::layer`,
@@ -1492,8 +1497,8 @@ core 5, two-point differencing. Runner and logs under `~/.cache/ergodis/c1205b/`
 The bench stages are cumulative (`lower` runs parse, admit and lower; `stratify` runs all of
 those and the backend), so each stage's own difference is read as a difference of stages.
 Per-iteration instruction differences, candidate minus control, from the receipts at
-`4138f8b`: scan, parse and admit within 25 on every construction cohort; lower's own
-(`lower` − `admit`) −16,953 (`datalog`), −28,947 (`stratified`), −35,141 (`columns`), −35,064
+`4138f8b`: scan, parse and admit within 25 on every construction cohort; the `lower` stage's
+delta (the stage figure itself; `lower` − `admit` differs from it by at most 22) −16,953 (`datalog`), −28,947 (`stratified`), −35,141 (`columns`), −35,064
 (`columns3`), −25,876 (`aggregate`); on the default cohorts −330 (`ascii`, `unicode`), −18,353
 (`comment-string`) and zero on the two malformed cohorts, which never reach lowering.
 `stratify`'s own (`stratify` − `lower`): −402,650, −399,398, −384,972, +16,598, −178,964.
@@ -1568,8 +1573,14 @@ expose SHA-NI; the buckets keep those apart. Normalized disassembly
      the same kind of term with its own layout: on `aggregate`, +522 thousand memcpy per
      iteration comes entirely from `_int_realloc` copies (realloc calls 220 against 221).
      Not Ergodis work; any change to allocation order moves it.
-  5. **The milestone's own added work** is the "rest of the code" column plus the header
-     compressions: +8 to +13 thousand on `datalog`, `stratified` and `columns` (+2 thousand on
+  5. **The milestone's own added work is at most about 20 thousand per iteration**; the
+     figures below are an upper bound, not an attribution. The "rest of the code" column
+     mixes code generation with work: on `datalog` (one layer, no construction) its +12,724
+     is `ergodis_rules`/`verify`/`contract` +3,954, whose source is unchanged apart from the
+     core commit's perturbation, and other functions +9,176; on `columns3`, +6.8 thousand is
+     the `evaluate` body moving into `evaluate_with`. The attributable part is the header
+     compressions and the per-layer declaration and literal-map vectors. The column plus
+     the header compressions: +8 to +13 thousand on `datalog`, `stratified` and `columns` (+2 thousand on
      `aggregate`, where an inlining move between `aggregate_over` and `BTreeMap::insert`
      offsets part of it), +15 to +20 thousand natively on `columns3` (whose 512-definition run is refused by the complement
      budget in its second layer, so the stage is short and nothing masks it). The Fermi said
@@ -1814,19 +1825,233 @@ updated after it. The design sections above are the specification.
    measured on `db37035`; the staging rename adds one directory rename per run and was not
    re-timed.
 8. **Close.** Full core and private gates at the final commits; fast-forward check of both
-   branches onto their mains; the independent audit; `cache-gc.sh` dry run.
+   branches onto their mains; the independent audit; `cache-gc.sh` dry run. The audit is
+   done (not ready to close) and its findings are repaired or recorded open in "Repairs
+   after audit" (private `8abe414`, `43527c6`, receipts `8d11ce4`; full private gate green at
+   `43527c6`). Left: Tavis's call on a re-audit of the High repair and on landing (the
+   branches are no longer fast-forwards of their mains), the open Low items (L7 decoding
+   bounds, L8 crate split, I3 table rows), and the `cache-gc.sh` dry run. Scratch left for
+   Tavis: `~/.cache/ergodis/worktrees/c1205b-repair-mut` (unregistered export, mutation
+   runs) and its `mutrep` artifacts under `~/.cache/ergodis/target/ergodis-private/mutrep/`.
 
 #### Divergence
 
 Both `c1205b` branches still descend from their start points (core `4b57649`, private
 `482d6e9`; checked with `git merge-base --is-ancestor`), core `c1205b` at `064cde2` and private
-`c1205b` at `267acdd`. The mains have moved since, by other work: core `main` is `831d56c`
+`c1205b` at `267acdd` (since the audit repairs, `8d11ce4`, three forward commits). The mains have moved since, by other work: core `main` is `831d56c`
 (two commits: `b1cd0bc` WASM lock refresh, `831d56c` huge-page advice gated to Linux and
 Android) and private `main` is `5e87740` (two commits on timing units, `85f2586`, `5e87740`).
 So neither branch is a fast-forward of its current main any more; landing needs a rebase or
 merge onto them and the gates again, which is Tavis's call. Not rebased. The scratch worktree `~/.cache/ergodis/worktrees/c1205b-mut` (a detached
 private worktree at `3940964`, clean, and a symbolic link) remains registered in the private
 repository; removing it is Tavis's call.
+
+#### Repairs after audit
+
+The independent audit (`notes/2026-09-22-c1205-milestone-b-audit.md`, verdict "not ready to
+close": one High, two Medium, eight Low, three Info) is repaired in two private commits on
+`c1205b`, `8abe414` and `43527c6`, on top of `267acdd`, with the re-measured receipts in
+`8d11ce4`. Core is unchanged (`064cde2`). Still to do for the close: a re-read of the High
+repair by a fresh auditor if Tavis wants one, the fast-forward question (see "Divergence"),
+and the `cache-gc.sh` dry run.
+
+| Finding | Disposition | Commit |
+| --- | --- | --- |
+| H1, binding sites trusted | Fixed. The verifier recomputes every binding site from its rule's source body and checks each binarized chain against that body (design below). The audit's forgery is a committed refusal test, with a test of the same class on a binarized chain | `8abe414` |
+| M1, nine surviving verifier mutations | Seven killed by new consistent forgeries; two recorded as equivalent mutants (table below) | `8abe414` |
+| M2, free order of the construction lists | Fixed: `complements`, `filters` and `aggregates` must be in declaration order (layer, then declaration) and any other order is refused at `<list>[i].layer` or `.declared`; test `construction_records_in_another_order_are_refused`; the ledger's "one free order" sentence corrected | `8abe414` |
+| L1, `Stratified` vouches for records, not closure | Fixed as documentation: the type's doc now says it vouches for records consistent with the closure it carries, which `check` does not re-establish. The fields stay public because the tamper tests write them | `43527c6` |
+| L2, bench records a run whose record check failed | Fixed: `rel-frontend-bench` returns an error, so the process exits non-zero and no receipt line is written; a backend refusal is still an ordinary outcome | `43527c6` |
+| L3, `--externals` merges a repeated spelling | Fixed: the file is decoded entry by entry in file order, so the library refuses the repeat by name; test `tasks/tools/tests/rel_chain.rs::an_externals_file_repeating_a_spelling_is_refused` | `43527c6` |
+| L4, publish atomic, not durable | Fixed: every file and the staging directory are `sync_all`ed before the rename and the parent after it. A power loss cannot be tested here; the refused-run test still passes | `43527c6` |
+| L5, unread `source.rel` rides along | Fixed: `rel-verify` prints `"source_unchecked": true` when a source is present and `--source-check` is off; the two-process test asserts it both ways | `43527c6` |
+| L6, undefined operators and duplicate names | Fixed in `validate`: an operator outside the `CMP_*`/`AGG_*` set of its sign, a non-zero operator on a positive or negative literal, and a repeated relation name or spelling are refused; test `a_statement_with_an_undefined_operator_or_a_repeated_name_is_refused` | `8abe414` |
+| L7, verifier cost not bounded by its input bounds | Partly fixed: `rel_rebuild::aggregate` interns through a map built once. Open: `site_signature` still builds a whole-dictionary domain per column before the universe bound is tested, and serde decoding of a large `program.json` allocates several times the file. Both are bounded by the caller's size bounds; a real bound needs list-length limits before decoding, which is a decoder change for a later step | `8abe414` |
+| L8, dependency-closure test textual | Partly fixed: the test now follows grouped `use crate::{..}` imports, refuses a `crate::` name that is no module (a re-export alias would be one), and scans the crate root's `use` lines for the forbidden names. Open: compiler-enforced separation needs `rel_chain`, `rel_rebuild` and `rel_verify` in a crate without an `ergodis-rules` dependency, an architecture change for Tavis | `8abe414` |
+| I1, comments | Fixed: `rel_stratified.rs`'s milestone and ADR references and the change-history comment in `tests/rel_externals.rs` rewritten to describe the code | `43527c6` |
+| I2, performance record | Fixed in this report: the 8k–20k figure is stated as an upper bound, not an attribution (Step 7, item 5 of "Stage shifts" and the mystery ledger); the replay commands for the construction-cohort `bench.py` run and the derivation-loop `ab.py` run added below; the between-session reproducibility limit and the `PERFORMANCE.md` invariant 1 exception recorded below | report |
+| I3, loose mutation-table rows | Open: three `LEAF_TABLE`/`LIST_TABLE` rows accept a refusal anywhere in a wider path. Every mutation is still refused; tightening them changes only how precisely the error is named | — |
+| Number slips | Fixed in this report: "every interval narrower than 1e-5" now says it of `lower` and `stratify` and gives the `scan`/`parse` widths; the `lower` delta is labelled as the stage figure, not `lower` − `admit`; `rel_externals` at `71c25e7` had 2 tests, not 1 | report |
+
+**The High repair.** `ProgramRule` gains `source: Option<[u32; 2]>`, serialized only when
+present, so a statement without a binarized rule is byte-identical and keeps its identity
+(the `demo.rel` chain with the fixture's externals is still `c29a38ee…` from both the
+`71c25e7` and the repaired binary). Binarization rewrites a rule's body in place, leaves its
+head and every literal of its old body in the pool, and appends the chain's links with the
+rule's variable base; every rule is built with its body directly after its head. So
+`Program::of`, still a pure function of the lowered IR (D2 as approved), names the old body
+`[head + 1, head + 1 + atoms)` for the parent and each link. The verifier then:
+
+1. groups the rules naming one source body and requires a tree: two or more rules, one
+   root, each other rule deriving an auxiliary relation that no other rule derives and
+   exactly one positive literal of the tree reads with the head's own terms (distinct
+   variables), no facts for it, every member reached from the root once;
+2. requires the tree's non-link body literals to be the source body's literals one for one,
+   and the source body to be read by no rule;
+3. requires each link's head to hold only variables of its body and every variable its
+   subtree's atoms share with the atoms outside it or with the root's head (so projecting
+   the subtree commutes with the rest of the join, and the root derives exactly what the
+   source body derives);
+4. requires every rule's `bindings` to equal the sites the source body gives (a rule's own
+   body when it names none): positive literals naming a relation, body order, then column.
+
+No site is taken on trust, and no architecture change beyond D2 was needed. An auxiliary
+relation holds its chain's intermediate join, which can exceed the source rule's projection
+where a replaced literal is joined before an atom that binds its variable; the verifier's
+module header now says so. The corpus round trip still accepts 470 chains, 252 multi-layer
+and 25 with a binarized chain. The in-process `check` still reads the sites the frontend's
+bind pass wrote; the offline verifier is where they are checked, and `rel_rebuild`'s header
+now says that.
+
+Tests (`tests/rel_chain.rs`): `a_binding_site_the_rule_does_not_hold_is_refused` is the
+audit's forgery (the `stop` rule's site moved from `edge` column 1 to column 0, the complement
+record and layer rebuilt over the new domain, the layer re-certified, the result, statement
+identity and every digest recomputed; the forged model of `stop` is empty against the honest
+`{4}`), refused at `program.json` `rules[r].bindings[v]`. `a_binarized_chain_is_checked_against_its_source_body`,
+on a five-atom body with a negation: a link's site moved to `edge`, refused at its bindings;
+the source body edited (`node(w)` made `edge(w, w)`) with every member's sites recomputed from
+it, refused at `rules[m].source` ("an atom the source body does not hold"); the chain pointed
+at another rule's body, refused ("a source body some rule reads").
+
+**Mutation table.** A `git archive` export of `43527c6` at
+`~/.cache/ergodis/worktrees/c1205b-repair-mut/ergodis-private` (sibling `ergodis` a symbolic
+link to the core worktree), built under a separate profile (`CARGO_PROFILE_MUTREP_INHERITS=dev
+cargo test --profile mutrep`, artifacts under `target/ergodis-private/mutrep/`, so the shared
+`dev` artifacts are untouched). Each mutation applied alone and reverted before the next, run
+against `--test rel_chain --test rel_check`; the source matched `43527c6` afterwards (`diff -r`).
+Mutations are the audit's, by its numbering.
+
+| Mutant | Check removed | Killing test | Result |
+| --- | --- | --- | --- |
+| audit M1 | a complement's relation must be established before its layer | `forgeries_aimed_at_each_statement_check_are_refused` (the two layers of `stop` merged into one) | killed: the merged chain is accepted |
+| audit M2 | the same for an aggregate's relation | same test (the two layers of a `count` over a derived relation merged) | killed: accepted |
+| audit M3 | a derived relation may be an input only after its deriving layer | same test (`stop` declared as an input of layer 0) | killed: accepted |
+| audit M4 | derivation and ranked checkers must establish the same relations | none | survives; equivalent: both core checkers prove the layer's least model (a soundness pass and a closed-world pass, `ergodis-verify` `derivation.rs`), so two accepted certificates of one layer cannot disagree; the check guards against a defect in one checker only |
+| audit M5 | a layer rule's variable count equals the statement's | none | survives; equivalent: `decode_prepared` ends in `admit_prepared`, which refuses a rule whose variable count is not its canonical numbering's, and the expected count is that numbering of the same atoms |
+| audit M6 | a derived relation's facts in its own layer equal the statement's | same test (a fact injected into `sink`) | killed: accepted |
+| audit M9 | a seeded relation holds every statement fact | same test (`mark`'s fact 5 replaced by 1, count unchanged) | killed: accepted |
+| audit M12 | a layer rule's head equals the statement's | same test (`sink`'s rule made to derive `stop`) | killed: accepted |
+| audit M13 | a layer holds exactly the statement's rules | same test (`sink(y) = edge(y, _)` appended) | killed: accepted |
+| H1 sites | every rule's sites equal its source body's | `a_binding_site_the_rule_does_not_hold_is_refused`, `a_binarized_chain_is_checked_against_its_source_body` | killed: the audit's forgery is accepted |
+| H1 chain | the chain is a binarization of its source body | `a_binarized_chain_is_checked_against_its_source_body` | killed: the refusal moves to `complements[0].column_domains[0].source` (that forgery rebuilds no record) |
+| M2 order | construction lists in declaration order | `construction_records_in_another_order_are_refused` | killed: the permuted chain is accepted |
+
+Every forgery in `forgeries_aimed_at_each_statement_check_are_refused` recomputes the layer
+(re-admitted, evaluated and certified by `Demand`), the manifest's identity and certificate
+digests, and the result entries from the forged layer's model, so under each mutant the chain
+is accepted, not refused elsewhere. A generalized forging helper (`Layer`: decode a layer,
+edit its relations, rules or facts, re-certify, install) and `merged` (two layers into one,
+records moved and their digests recomputed) carry them.
+
+**Preservation.** `tests/rel_layer_identities.rs` (both pins), `tests/rel_frontend_portability.rs`,
+`tests/rel_lowering.rs` (53, parity and fingerprint assertions) and `tests/rel_reference_eval.rs`
+(19, the differential) are unedited by these commits and pass. Core `demand_prepared.rs` is
+untouched (no core change).
+
+**Timed path.** No source on the timed `stratify` or `lower` path changed; `rel_stratified.rs`
+changed only in comments and a doc comment. Code generation still moved, as with every change
+to this crate: in the retained candidate `ergodis-tools-c1205b-repair-43527c6` (private
+`43527c6`, core `064cde2`, clean, release, default features, rustc 1.95.0,
+`retain-bin.sh tasks/tools ergodis-tools --label ergodis-tools-c1205b-repair` with the core
+worktree as sibling; measured sha256
+`88a7402757a64c61b7035c32378420ecb3dde120fbd80ac8d792dfd78eff9c42`) the `NoEvidence`
+`evaluate_with` is 0x7886 bytes against 0x7538 in `71c25e7`, and `lower::lower` is a 0x500 shell
+again (0x362f in `71c25e7`), by normalized `symbol_disasm.py`; `complement_over`, `filter_over`
+and `layers_of` are identical. So the stage A/B and peak RSS were re-run against the same
+control, `ergodis-tools-c1205b-base-482d6e9`.
+
+Stage A/B (receipt `analysis/rel-frontend/performance-v11-chain-repair-43527c6.json`, private
+`8d11ce4`; `bench.py --rounds 5 --cpu 5 --stages parse,admit,lower,stratify`, the six-event
+set, 100 per cent enabled, load 1.5–4.2; every A/A null within 1.5e-5 of unity). Two earlier
+runs of the same command without `--events` used the default eight-event set, which
+multiplexed at 69–83 per cent enabled under a concurrent session's builds (A/A nulls up to
+5.5e-3); they were discarded and overwritten. Per-iteration instruction differences,
+candidate minus control:
+
+| Cohort | `stratify` ratio [interval] | `stratify` Δ | own Δ (`stratify` − `lower`) | own Δ at `71c25e7` | `lower` Δ | `lower` Δ at `71c25e7` |
+| --- | --- | --- | --- | --- | --- | --- |
+| `datalog` | 0.99981 [0.999808, 0.999810] | −321,457 | −321,448 | −308,410 | −10 | −16,932 |
+| `stratified` | 0.99938 [0.999375, 0.999376] | −977,687 | −977,666 | −451,407 | −21 | −28,928 |
+| `columns` | 0.99937 [0.999374, 0.999375] | −980,436 | −980,412 | −444,160 | −25 | −35,122 |
+| `columns3` | 1.00133 [1.001333, 1.001335] | +10,821 | +10,843 | +13,496 | −22 | −35,048 |
+| `aggregate` | 0.99930 [0.999301, 0.999304] | −494,925 | −494,884 | −219,794 | −41 | −25,857 |
+
+`lower` is back to the control's instruction count within 41 per iteration, consistent with
+`lower::lower` returning to the control's shell shape: the 17–35 thousand the milestone's
+candidates showed was code generation, as "Stage shifts, explained" said, and it is gone
+without any lowering source change. `stratify`'s own difference fell a further 13 to 529
+thousand per iteration on the four long cohorts; no timed source changed, so this is again
+code generation or the heap-layout term, not attributed here (no callgrind or fixed-threshold
+run was taken for this candidate). On `columns3`, where little else runs, the own difference
+is +10.8 thousand against +13.5 thousand at `71c25e7`, inside the milestone's upper bound of
+about 20 thousand.
+
+Peak RSS (`peak_rss.py`, VmHWM, `--repeat 2`, 512 definitions, byte scanner; median KiB, five
+rounds, and three with the fixed mmap threshold; receipts `chain-stage-shift/peak-rss-repair-43527c6.json`
+and `-mmap-threshold.json`):
+
+| Cohort | `stratify` control | candidate `43527c6` | Δ | fixed threshold: control | candidate | Δ | Δ at `71c25e7` |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `datalog` | 24,964 | 25,204 | +240 | 24,660 | 24,944 | +284 | +124 |
+| `stratified` | 51,688 | 51,880 | +192 | 50,516 | 50,780 | +264 | +260 |
+| `columns` | 57,016 | 57,312 | +296 | 56,164 | 56,372 | +208 | +212 |
+| `columns3` | 6,756 | 6,952 | +196 | 6,816 | 6,896 | +80 | +144 |
+| `aggregate` | 66,336 | 66,688 | +352 | 61,396 | 61,684 | +288 | +264 |
+
+The same +0.1 to +0.4 MB residual as at `71c25e7`; nothing retained.
+
+**Gates at `43527c6`** (against core `064cde2`, under `nix develop ../ergodis`, `choom -n
+1000`, `-j 12`): `cargo fmt --all --check` clean; clippy `--all-targets --all-features -D
+warnings` clean for the root and `-p ergodis-tools`; `cargo test --all-features
+--no-fail-fast`: 43 test binaries, 1,199 passed, 0 failed, 17 ignored; the doctest target
+failed to compile with the known stale-rlib collision (a concurrent session's build of
+`ergodis-rules` from `~/src/ergodis`, which lacks `TransferableSource`), and after `cargo clean
+-p ergodis-rules --profile dev` passed alone (2). `-p ergodis-tools`: 41 + 3 + 3 passed, the
+new externals test included. The pins, parity, fingerprint and differential suites are among
+those. Core gate not rerun: core is unchanged.
+
+**Replay** (private worktree at `43527c6`; arms retained as above;
+`E=instructions,cycles,branches,branch-misses,page-faults,minor-faults`, `A=analysis/datalog-comparison`,
+`B=analysis/rel-frontend`, `C=~/.cache/ergodis/bin`, `ALL` the eighteen cohorts of milestone
+a's replay block):
+
+```sh
+# The milestone b receipts that had no replay command (I2):
+nix develop ../ergodis --command python3 $A/ab.py --a $C/closure_ballpark-c1205b-base-482d6e9 \
+    --a-name control-482d6e9 --b $C/closure_ballpark-c1205b-db37035 --b-name chain-db37035 \
+    --mode evaluate --rounds 5 --cpu 5 --repeats 3 --cohorts $ALL \
+    --work ~/.cache/ergodis/c1205b/ab-evaluate --out $A/ab-2026-09-22-chain-derivation-loop.json
+nix develop ../ergodis --command python3 $B/bench.py --binary $C/ergodis-tools-c1205b-db37035 \
+    --control $C/ergodis-tools-c1205b-base-482d6e9 --rounds 5 --cpu 5 \
+    --cohorts datalog,stratified,columns,columns3,aggregate \
+    --stages scan,parse,admit,lower,stratify --events $E \
+    --out $B/performance-v11-chain-constructions-db37035.json
+# The repaired candidate:
+python3 $B/bench.py --binary $C/ergodis-tools-c1205b-repair-43527c6 \
+    --control $C/ergodis-tools-c1205b-base-482d6e9 --rounds 5 --cpu 5 \
+    --stages parse,admit,lower,stratify --cohorts datalog,stratified,columns,columns3,aggregate \
+    --events $E --out $B/performance-v11-chain-repair-43527c6.json
+cd $B/chain-stage-shift
+R=$C/ergodis-tools-c1205b-repair-43527c6; K=datalog,stratified,columns,columns3,aggregate
+python3 peak_rss.py 5 peak-rss-repair-43527c6.json stratify $R $K
+GLIBC_TUNABLES=glibc.malloc.mmap_threshold=131072 \
+    python3 peak_rss.py 3 peak-rss-repair-43527c6-mmap-threshold.json stratify $R $K
+# Mutations: CARGO_PROFILE_MUTREP_INHERITS=dev cargo test --profile mutrep --all-features \
+#   --no-fail-fast --test rel_chain --test rel_check, in a git archive export of 43527c6.
+```
+
+The receipts' method block records the rounds, cohorts and event set; `ab.py`'s repeats are
+recorded as `[3, 6]` (the two differencing points). Intervals in every receipt are within one
+session: the audit's rerun of the `71c25e7` stage A/B on the same binaries moved `columns3`'s
+`stratify` delta by 1.6 thousand, about a hundred times the receipt's interval half-width,
+through the heap-layout term. A between-session comparison of these figures should allow for
+that.
+
+Deviation recorded (I2): `PERFORMANCE.md` invariant 1 names "check" loops among the
+allocation-free ones. `rel_rebuild` allocates per tuple by the approved design (D1 (a), a
+set-based rebuild written for independence and clarity) and runs only in `check` and the
+offline verifier, never on a timed path; it is an exception to that invariant, not an
+oversight.
 
 #### Mystery ledger (milestone b)
 
@@ -1845,8 +2070,11 @@ repository; removing it is Tavis's call.
   the complement that has none. The second fixture `fallback.rel` now gives a complement a
   `Dictionary` provenance (five values against the bound domain's four), and both mutation
   suites run over it.
-- **Binding sites are not recoverable from a binarized rule's body (settled).** See "Steps 2 and
-  3"; `P` carries them.
+- **Binding sites are not recoverable from a binarized rule's body (settled, then repaired).**
+  See "Steps 2 and 3". Carrying the sites in `P` left them trusted (audit H1). Since private
+  `8abe414` `P` also names each binarized chain's source body, which binarization leaves in
+  the literal pool, and the verifier checks the chain against that body and recomputes every
+  site from it; see "Repairs after audit".
 - **Three premise changes accepted by the derivation checker (settled, correct).** With the
   certificate digest recomputed, moving the premise reference of three `some(x) = unreached(x,
   _)` derivations to the next derivation is accepted, because that derivation is another
@@ -1870,8 +2098,9 @@ repository; removing it is Tavis's call.
   change (−264 to −525 thousand per iteration); the slice sort's small-sort instantiation
   (−78 thousand on `datalog`); a heap-layout term that follows glibc's dynamic mmap
   threshold (−98 to +67 thousand, zeroed by fixing the threshold); and the milestone's real
-  added work, +8 to +20 thousand, including three SHA-256 compressions for the header and a
-  1 per cent slower per-tuple digest feed. With the threshold fixed, the native differences and
+  added work, at most about 20 thousand (the +8 to +20 thousand of item 5 is an upper bound,
+  which mixes code generation with work, not an attribution), including three SHA-256
+  compressions for the header and a 1 per cent slower per-tuple digest feed. With the threshold fixed, the native differences and
   the callgrind code sums agree within 2 to 31 thousand per iteration. The residual is not
   attributed per function natively; doing so would need a native exact per-function count
   (uprobes, which need `perf_event_paranoid` at most 1). `prepare` +174: `Workspace::new` is
@@ -1898,8 +2127,12 @@ repository; removing it is Tavis's call.
   and renamed into place when complete, and a refused `--chain` run exits 1; tested by
   `a_refused_run_exits_with_an_error_and_leaves_no_chain`.
 - **Literal-map order (settled, fixed in `0d270c7`).** The map was checked as a set, so a
-  permuted map was a second spelling with a second chain identity; this was the one case where
-  the manifest had a free order the verifier did not fix.
+  permuted map was a second spelling with a second chain identity. Correction (audit): it was
+  not the only free order. The construction lists `complements`, `filters` and `aggregates`
+  paired records with declarations through the `origin` index only, so a consistent
+  permutation of a list and its origin indices verified under a new chain identity. Fixed in
+  private `8abe414`: each list must be in declaration order, by layer and then by
+  declaration, and any other order is refused.
 
 ## Milestone c
 
