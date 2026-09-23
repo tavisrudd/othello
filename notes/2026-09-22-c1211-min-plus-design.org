@@ -64,7 +64,9 @@ recursive rows. The head uses =min= to combine candidate costs for one key. The
 lowering must normalize source =+= expressions to this form and reject a
 missing, repeated or extra cost variable. It must also reject subtraction,
 multiplication, a negative cost, a non-integer cost, and cost-dependent
-negation or comparison inside the recursive weighted layer. General
+negation or filtering comparison inside the recursive weighted layer. A
+single defining equality for the head cost is cost construction, not a
+filter; C1194's implementation plan pins its Rel source pattern. General
 =count/max/sum= over a weighted recursive relation remains outside this
 fragment; a completed earlier layer may be materialized as immutable input.
 Every structural relation read by a weighted strongly connected component
@@ -91,6 +93,9 @@ span; no successful execution or certificate silently treats that path as
 absent. This is deliberately conservative: a dominated overflowing path can
 refuse an otherwise representable answer. C1194 must report that refusal as
 a diagnostic, including the limit and offending expression, and test it.
+Both producer and checker must compute the checked sum of every actual rule
+match before comparing it with the current head minimum; skipping a dominated
+match could otherwise make an unchecked run succeed while checking refuses.
 It may later prove a less conservative rule separately; no unbounded-integer
 optimality is claimed from saturating =BoundedMinPlus= alone.
 

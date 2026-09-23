@@ -77,6 +77,48 @@ retained for its next edit.
    and the verifier separately. Close with the required arithmetic coverage
    and Mystery ledger.
 
+* Rel source pattern for the first weighted route
+
+Use the existing aggregate surface =d = min[c: candidate(k,c)]= as the
+explicit declaration that =d= is the cost column of =dist(k,d)=. The
+candidate relation may have several rules; one rule may bind its cost by a
+single defining equality =c = a + w + literal=, where =a= is the cost
+column of a weighted body relation and =w= is an integer field of a frozen
+structural body relation. A base candidate may bind =c= directly from a
+structural input field. The compiler fuses this candidate/min pair into
+weighted rules for =dist=; it never materializes the full candidate-cost
+relation. The pair is admitted only when the candidate relation has no other
+consumer, every candidate rule has one cost-defining expression in the
+normal form, and the =min= groups by all remaining candidate columns in
+the same order. Otherwise emit a =REL05xx= refusal with the offending term.
+
+For example, semantic Rel shape (exact binder spelling belongs to the
+parser's existing grammar):
+
+  =candidate(v,c) <- seed(v,c) ; dist(u,a), edge(u,v,w), c=a+w=
+  =dist(v,d) <- d=min[c: candidate(v,c)]=.
+
+This special defining equality is *cost construction*, not a recursive
+Boolean filter. Other comparisons involving a changing cost remain outside
+the first fragment. An =edge= weight is a typed key field and contributes
+as an offset; =dist= contributes its current minimum automatically. This
+pattern avoids enumerating ever longer cyclic candidate paths while giving
+the source an explicit =min= that selects the carrier. The private lowering
+must preserve the existing nonrecursive boundary aggregate behavior for
+other uses of =min=.
+
+Recognition runs before the ordinary stratifier rejects a cycle through an
+aggregate. It accepts only the pattern above, removes that candidate/min
+boundary from the Boolean dependency graph, and compiles the candidate
+rules directly as weighted rules headed by the min relation. The candidate
+relation is not observable elsewhere; source facts on it become weighted
+seed facts. Several mutually recursive min relations may share one weighted
+component. A Boolean relation derived in that component is refused. After
+the weighted closure, the driver interns finite costs into its existing
+typed dictionary for downstream readout/layers; cost is never a key-domain
+digit inside the weighted kernel. The prepared source binds the dictionary
+at entry, and a downstream source binds the enlarged dictionary separately.
+
 * Fermi and red-team gates before implementation
 
 - Hot storage at capacity =R=: approximately 16 bytes per row beyond tuple
@@ -94,6 +136,8 @@ retained for its next edit.
   warrants it and never changes the normal evaluator/result.
 - An overflow in even a dominated candidate is a deliberate refusal in
   the first contract. A test must show this exact conservative behavior;
-  no saturated =INF= may silently certify an unbounded answer.
+  no saturated =INF= may silently certify an unbounded answer. Producer and
+  checker must compute each actual match's sum before a dominance test so
+  opting into checking does not change the refusal result.
 - Source-bound prepared identity is not full Rel text authority. The
   existing layer/source provenance task owns that separate boundary.
