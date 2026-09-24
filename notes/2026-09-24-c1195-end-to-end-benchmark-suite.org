@@ -1,0 +1,36 @@
+#+TITLE: C1195 — Rel source to Soufflé benchmark suite
+#+DATE: 2026-09-24
+#+TODO: TODO NEXT WAIT | DONE CANCELED
+
+* NEXT C1195 — Measure and check the whole Rel route
+:PROPERTIES:
+:LANE: ergodis
+:END:
+
+Authority: [[file-rev:98d5b6553:~/src/othello/notes/2026-09-16-c1195-end-to-end-benchmark-suite.md][C1195 card]]. This report keeps each implementation and validation note under its owning TODO heading. The comparator is Soufflé on the same host, one CPU, with the exact program and output boundaries stated per row. Published numbers are context only.
+
+** DONE Fix the architecture and comparison contract
+The benchmark starts from frozen Rel source, not a prebuilt core program. Its operator receipt must expose parse, admit, lower, layer preparation, evaluation, certificate emission, independent checking, record checking and output time separately. A normal result remains the ordinary relation set; the benchmark path can collect times at cold stage boundaries and stream complete visible relations to files. No clock, formatting, allocation, callback or branch is added to a successful evaluator tuple loop. The ordinary API and output stay unchanged.
+
+Correctness and speed use two distinct gates. First, export each admitted positive =PreparedSource= layer at its actual driver boundary as a Soufflé program plus numeric input facts, run it with one job, and compare every derived relation's exact sorted tuple set against the checked layer closure. This tests the *lowered programs*, including private complement, filter and aggregate materializations; neither a plausible hand translation nor a matching count suffices. It also catches intermediate-layer discrepancies hidden by a final visible output. Second, run a whole-program Soufflé formulation for each supported source family, compare complete visible decoded output sets, and only then compare its process measurements with the Rel path. The whole-program formulation is independently reviewed against the Rel source; an exact layer result does not by itself establish source-level equivalence.
+
+Freeze generated graph edge sets, seeds, sizes and resource limits before a timing run. TC and same generation calibrate the old Boolean path. Stratified negation and aggregation use the same graph input and include their materialization costs. SSSP and component labels use C1194's bounded weighted fragment and detached checker; they need explicit comparator capability checks and exact cost/value output, not a Boolean surrogate. Counting-semiring TC has no admitted Rel carrier and is a capability row, never a fabricated timing cell. Citation-only rows for RecStep, BigDatalog, DDlog, Umbra, VLog, RDFox and Rel carry no unmatched local speed ratio.
+
+The process boundary includes input reading, source parsing, admission, lowering/compilation, execution, complete output materialization and process exit on both engines. Compilation is reported separately: Soufflé compiled mode executes its prebuilt binary, while a distinct compile+run figure includes compilation. Interpreter mode runs source directly. Ergodis's opt-in certification is reported as a separate checked path and as its own stage costs; an unchecked path cannot be described as certified. Repeated measurements interleave arm order, pin one physical CPU, include A/A nulls and non-multiplexed instruction/cycle/branch/fault counters; cache events use a separate set. Report exact row counts, output hashes, structured refusals, peak RSS, load, intervals, censored failures and rows where Soufflé wins. No current host result implies macOS/Windows/ARM runtime performance.
+
+Implementation remains in the private library and =tasks/tools= / =analysis/datalog-comparison=; core changes require a separately justified domain-neutral need. The benchmark script and compact canonical receipts are committed with checksums and exact replay commands. Bulk raw output and perf files live in =~/.cache/ergodis/c1195/=, with their hashes and byte counts in a tracked manifest. Luna xhigh agents implement bounded slices; the primary designs, reviews code and independently verifies measurements.
+
+** TODO Expose benchmark-only operator receipt and lowered-layer export
+Owner: Luna xhigh implementation; primary code review. Extend the existing private Rel route at cold boundaries, with a bounded streaming output/export path and exact stage definitions. Keep source comments professional and avoid task IDs in reusable modules. A retained control and a driver-only A/B are required because ThinLTO can move an untouched kernel. Record code, tests and measured disposition here.
+
+** TODO Implement frozen Boolean cohorts and matched Soufflé harness
+Owner: Luna xhigh implementation; primary code review. Build deterministic fixtures, per-layer tuple checks, whole-program exact checks and interleaved process receipts. No hidden generated answer or counted-only comparison. Record fixture semantics and source hashes here.
+
+** TODO Add weighted SSSP and component-label rows
+Owner: Luna xhigh implementation; primary code review. Use the C1194 weighted Rel bridge and detached checker. Verify Soufflé 2.5's actual recursive-min capability on the installed binary before accepting either comparison; a refusal is recorded as such. Keep certificates separate from ordinary evaluator output. Record API and comparator limits here.
+
+** TODO Run reproducible performance, correctness and portability gates
+Owner: primary. Run the exact tuple-set gate before reading timing ratios. Pin source and binary revisions, toolchain, features, event sets, host, CPU, load, limits, seeds, hashes, raw sample count and A/A null. Inspect any measured loss or source mismatch. Separate cold compilation, process execution and checked route. Include final tests, format, strict Clippy, parity and the relevant WASM/host compile checks; report limits honestly.
+
+** TODO Audit and close the task
+Owner: primary. Independently review receipts and source-to-comparator correspondence, then record the Mystery ledger and any negative rows. Apply archive-first queue lifecycle; keep the lane handoff to a routing pointer. Run cache GC in dry-run mode and leave deletion to Tavis.
