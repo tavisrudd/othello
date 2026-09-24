@@ -20,9 +20,11 @@ Fermi before implementation: C1185 measured the rank column at 8–107 bytes ove
 
 The C1216 ABI task owns the C format tag and Datalog native/WASM host binding. C1196 can compile and test the domain-neutral decoder for wasm32, but a compile gate alone does not claim a browser-facing Datalog ABI. The C1172 guarded Lean audit runs only through its documented entry point, after reading the nested Lean guide; no direct =lean= or =lake= command is permitted.
 
-** NEXT Implement the contract codec
+** DONE Implement the contract codec
 
 Owner: Luna xhigh implementation; primary code review. Keep the old schema untouched; add the new runs schema and canonical binary encoder/visitor decoder in =ergodis-contract=. Preserve row order and cheap emission for JSON runs; do binary sorting only on binary opt-in. Test exact round trips on mixed dense/sparse blocks and malformed headers, run order, key bounds, padding, count arithmetic and truncation. No private fixture or task process reference enters public core source.
+
+Committed core [[file-rev:15f0c9ec6:~/src/ergodis/crates/contract/src/ranked.rs][ranked contract]] with [[file-rev:15f0c9ec6:~/src/ergodis/SHA256SUMS][source evidence]]. Primary review checked unchanged v1 schema and structs, separate JSON/binary schema binding, shortest LEB128, rank deltas, tie-to-gaps, whole-universe bitmap choice, checked =2^64= key handling, parse-before-callback canonicality, and per-relation row cap. Pinned formatting, scoped Clippy with warnings denied, eight focused tests, and the full workspace =cargo test --all-features= passed. The encoder sorts a single global =u64= key scratch (8 bytes per listed tuple, about 126 MB on C1185's largest row) and limits it to 1 GiB; its memory cost is a measured opt-in concern for the size run. The visitor itself allocates no output tuple array and does not materialize a v1 certificate.
 
 ** TODO Integrate the producer and independent checker
 
