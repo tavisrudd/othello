@@ -29,6 +29,8 @@ Fermi before the edit: a handful of clock reads per layer should be negligible a
 
 The clean private revision =02f2bc9= was retained before Rust source edits with =scripts/retain-bin.sh tasks/tools ergodis-tools --label c1195-control= under pinned Nix and =CARGO_BUILD_JOBS=12=. Executable =~/.cache/ergodis/bin/c1195-control-02f2bc9= has SHA-256 =dbb5ac06cb8e37228034b8fa518697a822bd58780a351baf6f338cb01d555073=. On the 104-byte TC smoke source, the control completed all checks, returned three exact =path= tuples and its ordinary v1 receipt. This executable is the A/B control; the cache path is a local measurement artifact, not a replay source.
 
+The retention manifest marks the checkout =dirty= because a 22-byte untracked =dist.csv= from my Soufflé scratch probe was present at the repository root. No tracked Rust source was modified before retention. I moved that scratch output to =~/.cache/ergodis/c1195/probes/subsumption_multi_repo_default_dist.csv= after retention; report the foreign file with the control arm rather than relabeling the manifest clean.
+
 ** TODO Implement frozen Boolean cohorts and matched Soufflé harness
 Owner: Luna xhigh implementation; primary code review. Build deterministic fixtures, per-layer tuple checks, whole-program exact checks and interleaved process receipts. No hidden generated answer or counted-only comparison. Record fixture semantics and source hashes here.
 
