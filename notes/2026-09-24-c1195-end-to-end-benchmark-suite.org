@@ -20,6 +20,8 @@ The process boundary includes input reading, source parsing, admission, lowering
 
 Implementation remains in the private library and =tasks/tools= / =analysis/datalog-comparison=; core changes require a separately justified domain-neutral need. The benchmark script and compact canonical receipts are committed with checksums and exact replay commands. Bulk raw output and perf files live in =~/.cache/ergodis/c1195/=, with their hashes and byte counts in a tracked manifest. Luna xhigh agents implement bounded slices; the primary designs, reviews code and independently verifies measurements.
 
+The card asks for a replay bundle in =ergodis-evidence=, while the current core/private repository boundary makes that sibling a whole-published export of core =evidence/= and excludes private Rel adapters and fixtures. Author the complete source/replay/receipt bundle in =ergodis-private= first. A public-safe derivative, if one is possible, must be authored through core's evidence path and exported one-way; do not copy private Rel source, scripts or capability details into that public repository. Record whether this acceptance item can be met without crossing that boundary at closeout.
+
 ** TODO Expose benchmark-only operator receipt and lowered-layer export
 Owner: Luna xhigh implementation; primary code review. Extend the existing private Rel route at cold boundaries, with a bounded streaming output/export path and exact stage definitions. Keep source comments professional and avoid task IDs in reusable modules. A retained control and a driver-only A/B are required because ThinLTO can move an untouched kernel. Record code, tests and measured disposition here.
 
