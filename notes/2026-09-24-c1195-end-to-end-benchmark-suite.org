@@ -187,7 +187,7 @@ The full =retained-ab-20260924-5c64684-r1= replay reran exactness with the featu
 | Aggregate small | 0.999139 | 0.999025–0.999214 | 0.999917 |
 | Aggregate work | 1.000236 | 1.000232–1.000243 | 0.999994 |
 
-The aggregate-work and stratified-work rows are measured instruction losses under =PERFORMANCE.md=; the prior scoped exceptions do not cover them. The work-sized TC result is effectively a wash, and wall-time intervals are not evidence of an instruction win.
+The aggregate-work and stratified-work rows are measured instruction losses under =PERFORMANCE.md=; the prior scoped exceptions do not cover them. The work-sized TC result is effectively a wash. The retained A/B driver's wall values also share the =Popen.wait(timeout=...)= polling floor discovered above and are excluded from its disposition; the instruction counts, exact outputs/work, RSS and counter-enabled checks are unaffected. The C1195 keep decision below rests on the instruction A/B, not those wall values.
 
 Tavis chose “Keep with scoped exception” on 2026-09-24 for C1195 after reviewing the final clean default A/B above. This exception applies only to retaining the C1195 benchmark implementation and its default =5c64684= lineage despite the measured +0.0236% aggregate-work and +0.0094% stratified-work instruction costs against retained =02f2bc9=. It does not cover future edits, larger losses, other cohorts, or an unmeasured platform; any subsequent change needs a fresh exactness and performance gate. The small-cohort reductions are measured for this host and fixture set, not a general speedup claim. The default no-flag route remains the ordinary API; benchmark receipts require the non-default =rel-benchmark= feature.
 
