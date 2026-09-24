@@ -27,6 +27,8 @@ Owner: Luna xhigh implementation; primary code review. Extend the existing priva
 
 Fermi before the edit: a handful of clock reads per layer should be negligible against a layer with millions of candidates, while streamed tuple output costs one decode and one bounded write per tuple in an explicitly measured output stage. The material risk is ThinLTO moving the unchanged evaluator or frontend symbols when the tool grows; inspect compiled symbols and use a retained, interleaved parity A/B before saying the ordinary path is unaffected. Correctness-only layer export is excluded from timed samples, and certificate size is counted from the actual trace and ranked encodings, not inferred from derivation count.
 
+The clean private revision =02f2bc9= was retained before Rust source edits with =scripts/retain-bin.sh tasks/tools ergodis-tools --label c1195-control= under pinned Nix and =CARGO_BUILD_JOBS=12=. Executable =~/.cache/ergodis/bin/c1195-control-02f2bc9= has SHA-256 =dbb5ac06cb8e37228034b8fa518697a822bd58780a351baf6f338cb01d555073=. On the 104-byte TC smoke source, the control completed all checks, returned three exact =path= tuples and its ordinary v1 receipt. This executable is the A/B control; the cache path is a local measurement artifact, not a replay source.
+
 ** TODO Implement frozen Boolean cohorts and matched Soufflé harness
 Owner: Luna xhigh implementation; primary code review. Build deterministic fixtures, per-layer tuple checks, whole-program exact checks and interleaved process receipts. No hidden generated answer or counted-only comparison. Record fixture semantics and source hashes here.
 
