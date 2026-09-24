@@ -32,6 +32,8 @@ Owner: Luna xhigh implementation; primary code review. Add an opt-in =Demand= pr
 
 Owner: primary. Check wire and prepared sources, empty/input-only relations, multiple derived relations, rank gaps, four-body rules, sorted fallback, source mismatch, duplicate fact/derived tuple and every malformed binary class. Compare complete relations and verification records against v1 JSON on frozen and adversarial programmes; run deterministic byte-size/round-trip tests, allocation regressions, strict format/Clippy/tests, export lint and the guarded C1172 Lean audit. Compile native and wasm32 core doors; leave host ABI completion to C1216.
 
+The binary form deliberately loses the evaluator's within-rank row order when it sorts keys. Exact relation comparison therefore means the same tuple set and rank for every tuple; do not compare the returned row vectors position by position against the v1 JSON checker. Keep legacy ordered-output hashes intact on the v1 path, and use a separately named canonical set digest for cross-format measurement.
+
 Red-team cases to execute: (1) a valid arity-four tuple whose packed key is =u64::MAX=; (2) a duplicate key in a later run even though each run is internally sorted; (3) a bitmap with an extra high padding bit or a popcount inconsistent with its run count; (4) an overlong varint and an increment that wraps =u64= or =u32=; (5) a bitmap selected when gaps are shorter or tied; (6) a huge claimed count with a one-byte tail, which must refuse before reserve; (7) one byte of a checked certificate changed after its verification record is issued. Each refusal must be named and must mint no =Verified= value.
 
 ** TODO Measure the transfer and checker tradeoff
