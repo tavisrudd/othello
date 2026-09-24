@@ -8,9 +8,7 @@ correction trails live in dated reports and the append-only
 
 **Date**: 2026-09-18
 **Mode**: intent-based.
-**Status**: ACTIVE. Immediate engineering frontier is C1190 (Rel lowering; milestones a, b, per-column domains, c and the C1191 direct constructor done and audited; C1192 sparse index and C1188 done and audited; C1198 lazy workspace done, audited (C1199) and repaired (C1200) 2026-09-17; C1193 n-ary bodies done and vetted 2026-09-17; C1201 static index build cost done, audited and repaired 2026-09-17; C1202 probe-count rule, mask demotion and per-link counter done, audited and repaired 2026-09-18; C1203 growing-index crossover done 2026-09-18; C1194–C1196 queued; C1170 frontend closed 2026-09-16 with C1197 queued later; C1189 oracle closed); the
-rule-contract programme C1172–C1177 and the Datalog evaluation tasks C1179/C1182–C1186 are closed. C1143, C1130, C1016,
-C1017, C1061 and C985 remain in progress. C1062 and C1070 await Tavis's close call.
+**Status**: ACTIVE. Next: C1205 b/c → C1218 → C1216; R1/R2 documentation can proceed in parallel. Other open work is routed below.
 
 **Discovery companion**: [ergodis discovery track](../ergodis-discovery-track.md).
 
@@ -353,7 +351,7 @@ core type (keep public or feature-gate); cache-gc lists eight old unreferenced e
 **C1212:** `../2026-09-23-c1212-arity-domain-ceiling.org`.
 **C1206:** `../2026-09-23-c1206-structured-refusals.org`.
 **C1213 Datalog schema and provenance complete (2026-09-22).** Datalog wire programs carry `finite-boolean-datalog-rules.v1` under strict one-door dispatch; certificates carry no provenance; checkers issue verification records after re-admitting checks (`check_recorded`, `replay`); user doc `docs/datalog-certificates.md`. Core `378f146`, `4b57649`; private `69d68f3`, `482d6e9`; report `../2026-09-22-c1213-datalog-schema-provenance-report.md`.
-**Follow-up order and dependencies:** Tavis approved C1210–C1218 on 2026-09-22; full order and dependencies: `../2026-09-22-c1208-follow-up-triage.md`. C1205 a is complete and audited (`../2026-09-22-c1205-rel-transferable-evidence-report.md`); its remaining b/c work follows under the existing card, with b's construction-verifier choice open. C1211 design gates C1194; C1212 domain ceiling gates C1195 sizing; C1213 completed the C1205 a schema/provenance migration before artifact freeze. C1206 refusals is complete; C1207 diagnostics remains queued. C1214 delivered independent ranked completeness; C1215 owns API cleanup, C1216 Datalog/private Rel ABI and WASM gate, C1217 relational formalization, C1218 Rel extraction after C1205 c.
+**Follow-up order and dependencies:** Tavis approved C1210–C1218 on 2026-09-22; full order and dependencies: `../2026-09-22-c1208-follow-up-triage.md`. C1205 a is complete and audited (`../2026-09-22-c1205-rel-transferable-evidence-report.md`); b/c are next under the existing card. C1216 follows C1218's Rel boundary, which follows C1205 c. Other task status remains in the exact queue and linked cards.
 **Programme review and next steps (2026-09-16)**: `../2026-09-16-ergodis-datalog-programme-review.md`
 ranks the gaps against the programme goal and allocates, in EV order: **C1192** (done, above),
 **C1193** bodies of more than two atoms (done, above),

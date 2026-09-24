@@ -79,13 +79,13 @@ source identities remain a preservation requirement.
   module header). An export under the n-ary body policy is admitted by the Datalog admission only,
   never by the grounded one; both checkers admit through the Datalog door, so it is checkable.
 
-## Decision for Tavis before milestone b closes
+## Milestone b construction-verifier decision
 
-Whether the construction rebuild becomes a separately written implementation (the reference
-evaluator's set-based route, promoted out of the test tree) or stays a replay of the builder with
-the module header corrected to say so and oracle agreement made part of the shipped evidence. The
-review recommends the separate implementation for the offline verifier, since the constructions
-are the one step the core checkers cannot see. Milestones a and c do not depend on the answer.
+Tavis accepted the separately written construction rebuild on 2026-09-24. Promote the reference
+evaluator's set-based route out of the test tree for the offline verifier. The core checkers cannot
+see these constructions, so the builder's own replay does not establish their correctness. Keep
+the reconstruction independent of `Demand` and the producing driver. Milestones a and c do not
+depend on this choice.
 
 ## Acceptance
 
