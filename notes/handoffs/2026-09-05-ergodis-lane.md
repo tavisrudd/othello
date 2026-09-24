@@ -359,7 +359,7 @@ ranks the gaps against the programme goal and allocates, in EV order: **C1192** 
 **C1193** bodies of more than two atoms (done, above),
 **C1194** min-plus carrier and term arithmetic through the lowering (`../2026-09-16-c1194-min-plus-lowering.md`),
 **C1195 done** (`../2026-09-24-c1195-end-to-end-benchmark-suite.org`),
-**C1196** rank-run and round-block certificate encoding (`../2026-09-16-c1196-certificate-encoding.md`).
+**C1196 done** rank-run and round-block certificate encoding (`../2026-09-16-c1196-certificate-encoding.md`).
 Still unallocated: a memory model for a layer (`MAX_LAYER_TUPLES` as a byte bound, eager row
 reservation as input); the kernel-scoped profile of `lower::run` closing the two unattributed
 lowering-stage swings; the coverage rows (`exists(x in D: F)`, `not (F and G)`); the `Prepared`

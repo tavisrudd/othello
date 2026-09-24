@@ -2,7 +2,7 @@
 #+DATE: 2026-09-24
 #+TODO: TODO NEXT WAIT | DONE CANCELED
 
-* NEXT C1196 — Compact ranked certificates with independent checking
+* DONE C1196 — Compact ranked certificates with independent checking
 
 Authority: [[file-rev:87751ced5:~/src/othello/notes/2026-09-16-c1196-certificate-encoding.md][task card]], [[file-rev:87751ced5:~/src/othello/notes/2026-09-13-c1185-certificate-size-exploration.md][encoding study]], and [[file-rev:87751ced5:~/src/othello/notes/2026-09-22-c1213-datalog-schema-provenance-report.md][schema/provenance decision]]. Core starts at =cd4a1e9=, private at =7dc275e=, notes at =87751ced5=; the owned paths were clean before C1196 work.
 
@@ -86,6 +86,17 @@ For equal wire-to-verdict checking, =ranked-runs-wire / ranked-wire= instruction
 
 The [[file-rev:66767b1:~/src/ergodis-private/analysis/datalog-comparison/2026-09-24-c1196-ab-check-runs.json][in-memory run diagnostic]] and [[file-rev:66767b1:~/src/ergodis-private/analysis/datalog-comparison/2026-09-24-c1196-ab-check-blocks.json][in-memory binary diagnostic]] timed checking after typed v1/runs certificate construction, while binary still parsed bytes. They show 5.3–6.5% more instructions for runs and 11.2–17.0% for binary. That is a genuine cost if a caller already owns a decoded v1 ranked certificate; it is not the wire-to-verdict acceptance boundary. Existing v1 checking remains available and unchanged. The compact sparse-key collection allocates during setup, so the decoder's zero-allocation regression must not be read as a zero-allocation claim for the entire checker.
 
-** TODO Audit and close
+** DONE Audit and close
 
 Owner: primary. Red-team canonicality, ambiguity, resource exhaustion, identity and refusal mapping; inspect every Luna change. Keep negative rows and a Mystery ledger here. On completion, archive the exact queue row first, delete it from the live queue, leave only a short routing pointer in the Ergodis handoff, and run cache GC dry-run without deleting entries.
+
+Primary review covered all Luna diffs and their resulting commits. The final tree separates four identities cleanly: existing v1 ranked JSON, rank-run JSON, round-block binary, and checker-issued verification records. Source binding, relation order and counts, rank/key canonicality, duplicate facts or claims, support, completeness, budget refusal and replay refusal were exercised. No public core source names private fixtures or task process. The new cold producer methods do not enter ordinary evaluation; retained final default-path A/B independently checks that boundary.
+
+Mystery ledger and negative observations:
+- The first checker comparison mixed decoded JSON with raw binary. Those two [[file-rev:66767b1:~/src/ergodis-private/analysis/datalog-comparison/2026-09-24-c1196-ab-check-runs.json][in-memory]] [[file-rev:66767b1:~/src/ergodis-private/analysis/datalog-comparison/2026-09-24-c1196-ab-check-blocks.json][diagnostics]] are retained as a real cost for callers with an existing typed certificate, but the acceptance comparison was rerun on equal wire-to-verdict boundaries. The reason was a harness boundary error, corrected in =2b20ddc=; it was not a change in the checker result.
+- Binary production on sparse closure 4,096 costs 377.7 ms and requests 249.4 MiB, including the temporary runs object and global key sort. The compact output is 10.1 MiB against 171.9 MiB v1 JSON, so it is sensible when transfer/storage dominates, while latency-sensitive in-process clients should use v1.
+- The binary checker roughly doubles branch misses on both measured checker fixtures despite fewer instructions and cache misses. Wall-time intervals and non-x86 host performance remain unresolved; no universal speed claim follows.
+- The sparse checker gathers candidate keys into growing vectors during setup. The binary visitor itself is allocation-free, and the 1 GiB check bounds output row/rank arrays, but no whole-checker allocation-free or total-RSS bound is claimed. A presized sparse setup is a focused future optimization only if a real workload warrants its extra parse or memory cost.
+- Native macOS, Windows and ARM runtime decode was unavailable on this host. wasm32 compilation covers the domain-neutral code path, and the separate host ABI remains C1216's work.
+
+No incidental discovery-track lead arose outside this task. =cache-gc.sh= completed in dry-run mode only: it scanned 93 cache entries and named 31 old unreferenced candidates, with no deletion. The temporary matched-control worktrees were removed after retaining both clean binaries and committing the evidence. The live queue row was archived before deletion and the Ergodis handoff was reduced to a one-word completion change.
