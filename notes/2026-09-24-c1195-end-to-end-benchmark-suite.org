@@ -48,6 +48,18 @@ The frozen eight-fixture bundle was regenerated in the private analysis director
 
 The fixture generator, eight frozen Rel/Soufflé programs, independent oracle, layer/whole-program exactness checker and direct-min probe are committed at private =22677b347= ([[file-rev:22677b347:~/src/ergodis-private/analysis/datalog-comparison/c1195/README.md][replay instructions]]). The integrated checker repair and compact receipt are committed at =bf90508= ([[file-rev:bf90508:~/src/ergodis-private/analysis/datalog-comparison/c1195/fixtures/exactness-summary.json][exactness summary]]). I independently audited the full hashed cache receipt: eight cohorts, 38 complete decoded visible relations, 14 actual prepared layers, and all 28 corresponding Soufflé interpreter/compiled layer executions exactly match the independently checked exported tuple sets. Every whole-program visible set matches the Python oracle in both modes. The full receipt SHA-256 equals the committed summary's recorded hash. Timed rows are still pending.
 
+Published engines remain citation-only context. The prior [[file-rev:d6bce759a:~/src/othello/notes/2026-09-12-datalog-benchmark-suites.md][benchmark survey]] records their program sets, hardware and limitations; these rows deliberately contain no local time or ratio:
+
+| Engine | Citable comparison context | Boundary for C1195 |
+|--------+-----------------------------+--------------------|
+| RecStep | TC, SG, CC, SSSP on QuickStep; [[https://doi.org/10.14778/3311880.3311886][PVLDB 2018]] | Different engine and hardware; cite only |
+| BigDatalog | CC/SSSP and graph cases on Spark; [[https://doi.org/10.14778/3311880.3311886][RecStep comparison]] | Distributed setup; cite only |
+| DDlog | FlowLog's 41-pair suite; [[https://arxiv.org/abs/2511.00865][FlowLog]] | No local execution; cite only |
+| Umbra | SQL subset of FlowLog's suite; [[https://arxiv.org/abs/2511.00865][FlowLog]] | Some Datalog programs inexpressible there; cite only |
+| VLog | Rulewerk adapter in [[https://arxiv.org/abs/2501.13051][VFLog]] | Different host and harness; cite only |
+| RDFox | VFLog's version-pinned tables; [[https://arxiv.org/abs/2501.13051][VFLog]] | Different host and harness; cite only |
+| Rel | [[https://arxiv.org/abs/2504.10323][Rel paper]] gives language semantics, no published benchmark | No local or cited speed cell |
+
 ** TODO Add weighted SSSP and component-label rows
 Owner: Luna xhigh implementation; primary code review. Use the C1194 weighted Rel bridge and detached checker. Verify Soufflé 2.5's actual recursive-min capability on the installed binary before accepting either comparison; a refusal is recorded as such. Keep certificates separate from ordinary evaluator output. Record API and comparator limits here.
 
