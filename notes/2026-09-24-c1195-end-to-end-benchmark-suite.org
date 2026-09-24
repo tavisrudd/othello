@@ -35,6 +35,8 @@ The opt-in operator and positive prepared-layer exporter are committed at privat
 
 Pinned formatting and strict all-target/all-feature Clippy pass. Focused private Rel tests pass 10/10; the complete tools target passes 51 unit and 3 integration tests, including the exporter regression. A broader private library suite was stopped while running unrelated long proof tests; it has no completed result. The installed =wasm32-unknown-unknown= target cannot compile the private library because existing sibling core Unix control APIs fail first with 52 errors; this is a *blocked portability check*, not evidence that the C1195 additions compile on WASM or a new regression.
 
+After the eight-fixture correctness slice landed, private =22677b3= was clean. The pinned release candidate retained by =scripts/retain-bin.sh tasks/tools ergodis-tools --label c1195-candidate= is =~/.cache/ergodis/bin/c1195-candidate-22677b3=, SHA-256 =8677f71192ac8ff853235f3722d3e2b0f9d2e8c3d63c6eef2702b76d9eb6c59f=; its manifest row says =clean=. A direct TC-small smoke produced one complete exported prepared layer and complete decoded =edge= (17) and =path= (39) files. Soufflé interpreter reproduced the exact 56 numeric prepared-layer tuples. The full eight-fixture layer gate and driver A/B remain open.
+
 ** TODO Implement frozen Boolean cohorts and matched Soufflé harness
 Owner: Luna xhigh implementation; primary code review. Build deterministic fixtures, per-layer tuple checks, whole-program exact checks and interleaved process receipts. No hidden generated answer or counted-only comparison. Record fixture semantics and source hashes here.
 
