@@ -26,9 +26,11 @@ Owner: Luna xhigh implementation; primary code review. Keep the old schema untou
 
 Committed core [[file-rev:15f0c9ec6:~/src/ergodis/crates/contract/src/ranked.rs][ranked contract]] with [[file-rev:15f0c9ec6:~/src/ergodis/SHA256SUMS][source evidence]]. Primary review checked unchanged v1 schema and structs, separate JSON/binary schema binding, shortest LEB128, rank deltas, tie-to-gaps, whole-universe bitmap choice, checked =2^64= key handling, parse-before-callback canonicality, and per-relation row cap. Pinned formatting, scoped Clippy with warnings denied, eight focused tests, and the full workspace =cargo test --all-features= passed. The encoder sorts a single global =u64= key scratch (8 bytes per listed tuple, about 126 MB on C1185's largest row) and limits it to 1 GiB; its memory cost is a measured opt-in concern for the size run. The visitor itself allocates no output tuple array and does not materialize a v1 certificate.
 
-** TODO Integrate the producer and independent checker
+** NEXT Integrate the producer and independent checker
 
 Owner: Luna xhigh implementation; primary code review. Add an opt-in =Demand= producer that reads existing rows/rounds after evaluation, plus a checker path that consumes compact blocks directly into the existing stores and uses the unchanged support and completeness algorithms. Include recorded-check and replay doors with schema-specific canonical digest; preserve all v1 identities. Keep allocation, format dispatch and serialization outside the evaluator and checker hot loops.
+
+Producer committed as core [[file-rev:7a27e29:~/src/ergodis/crates/rules/src/demand.rs][Demand opt-in methods]] with [[file-rev:7a27e29:~/src/ergodis/SHA256SUMS][source evidence]]. Primary review checked the untouched evaluator loop and v1 producer, source-bound cold methods, exact row-order run grouping, and binary order round trip across five relations with rank gaps. Four focused tests, pinned format and scoped all-target Clippy, and both evidence-manifest tests passed. The new binary method currently builds a temporary ranked-runs certificate before encoding; peak memory and latency belong in the measurement below. The independent checker is the remaining work in this heading.
 
 ** TODO Prove exactness, refusal and portability gates
 
