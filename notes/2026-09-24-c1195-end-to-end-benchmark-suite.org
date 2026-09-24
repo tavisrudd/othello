@@ -23,6 +23,8 @@ Implementation remains in the private library and =tasks/tools= / =analysis/data
 ** TODO Expose benchmark-only operator receipt and lowered-layer export
 Owner: Luna xhigh implementation; primary code review. Extend the existing private Rel route at cold boundaries, with a bounded streaming output/export path and exact stage definitions. Keep source comments professional and avoid task IDs in reusable modules. A retained control and a driver-only A/B are required because ThinLTO can move an untouched kernel. Record code, tests and measured disposition here.
 
+Fermi before the edit: a handful of clock reads per layer should be negligible against a layer with millions of candidates, while streamed tuple output costs one decode and one bounded write per tuple in an explicitly measured output stage. The material risk is ThinLTO moving the unchanged evaluator or frontend symbols when the tool grows; inspect compiled symbols and use a retained, interleaved parity A/B before saying the ordinary path is unaffected. Correctness-only layer export is excluded from timed samples, and certificate size is counted from the actual trace and ranked encodings, not inferred from derivation count.
+
 ** TODO Implement frozen Boolean cohorts and matched Soufflé harness
 Owner: Luna xhigh implementation; primary code review. Build deterministic fixtures, per-layer tuple checks, whole-program exact checks and interleaved process receipts. No hidden generated answer or counted-only comparison. Record fixture semantics and source hashes here.
 
