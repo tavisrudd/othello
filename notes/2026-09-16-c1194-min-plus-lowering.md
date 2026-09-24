@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-16
-**Status**: IN PROGRESS 2026-09-23. Ranked third among the Datalog programme's next steps
+**Status**: COMPLETED 2026-09-23. Ranked third among the Datalog programme's next steps
 (`2026-09-16-ergodis-datalog-programme-review.md`); independent of C1192/C1193.
 **Gate (C1204 finding F, C1208 triage 2026-09-21)**: satisfied 2026-09-23 by the
 C1211 architecture decision (`2026-09-22-c1211-min-plus-design.org`). Tavis delegated
@@ -48,7 +48,7 @@ components, two of the five benchmark rows step 5 names, need this.
 - Report with Mystery ledger and the explicit coverage rows (parsed / admitted / lowered /
   executed / certified) for every arithmetic form; audit.
 
-## Current implementation plan
+## Completion and limits
 
 See `2026-09-23-c1194-implementation.org` for the dated implementation,
 TODO states, exact source/result binding, tests and A/B receipts. The first
@@ -65,11 +65,14 @@ exact outcomes and improved the 512-definition stage, but measured small
 16-definition parse, lowering and stratification instruction losses. Tavis
 approved a scoped exception for those exact losses on 2026-09-23. The new
 two-stage binary is measured against `083985f` and has further 16-definition
-stratification and 512-definition lowering instruction losses. That new
-disposition is open under `PERFORMANCE.md`.
-The dense zero-cost checked path passes the bounded fixture; its larger
-scaling behavior remains open. Luna agents implement bounded coding slices;
-the primary agent designs, reviews and verifies them.
+stratification and 512-definition lowering instruction losses. Tavis approved
+keeping this exact retained binary under a second, separate scoped exception
+on 2026-09-23; the Org report fixes its hash, cohorts, ratios and limits.
+The 35-row Addendum A coverage test and 245-case native/WASM frontend parity
+gate pass at the final source. The dense zero-cost checked path passes its
+bounded fixture; larger checker scaling and untested macOS, Windows and ARM
+runtime behavior are successor work. Luna agents implemented bounded coding
+slices; the primary agent designed, reviewed and verified them.
 
 ## Out of scope
 

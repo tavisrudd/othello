@@ -3,7 +3,7 @@
 #+STARTUP: overview
 #+TODO: TODO NEXT WAIT | DONE CANCELED
 
-* TODO C1194 — complete the weighted Rel source route
+* DONE C1194 — complete the weighted Rel source route
 
 ** DONE Decide the opt-in certification architecture
 
@@ -64,29 +64,29 @@ stage two only from that verified result, verify stage two, then check the
 final Boolean closure. Keep every claim byte and checker record off the
 ordinary evaluator/result path.
 
-** WAIT Resolve the two-pair old-Boolean performance disposition
+** DONE Resolve the two-pair old-Boolean performance disposition
 
 Exercise exact sequential minima, new integer IDs, dominated alternatives,
 source/result tampering at either stage, cross-pair cycle refusals and the
 old Boolean A/B. Do not expand the accepted fragment on passing only the
 existing one-pair tests.
 
-The functional and adversarial gates pass. The final retained binary has
-small measured old-Boolean instruction losses outside the approved =083985f=
-exception; the paired receipt and attempted repairs are recorded below.
+The functional and adversarial gates pass. Tavis approved retaining the
+measured losses under a second, separately scoped C1194 exception on
+2026-09-23. The exact binary, ratios and scope are recorded below.
 
 ** DONE Finish the current C1194 acceptance audit
 
 The arithmetic and Mystery ledgers, native/WASM scope, portability limits,
-task card and cache dry-run are current. The performance disposition and
-multiple weighted layers remain separate open tasks above.
+task card and cache dry-run are current. The card's acceptance gates pass;
+larger checker scaling and other weighted shapes are successor work.
 
 * Status and authority
 
-IN PROGRESS. C1211's [[file-rev:add9af95e:~/src/othello/notes/2026-09-22-c1211-min-plus-design.org][decided architecture]] is the
+COMPLETED 2026-09-23. C1211's [[file-rev:add9af95e:~/src/othello/notes/2026-09-22-c1211-min-plus-design.org][decided architecture]] is the
 source of truth for the admitted fragment, semantics, support-plus-closure
-argument, detached certification and performance boundary. This plan records
-implementation order and evidence; it does not claim completion.
+argument, detached certification and performance boundary. This report
+records the accepted fragment, measured limits and scoped exceptions.
 
 Tavis delegated architecture selection on 2026-09-23 and asked for full
 certification on demand, negligible off-path cost, and unchanged evaluator
@@ -658,8 +658,19 @@ above. =Refused= is the intended outcome for excluded forms.
 | Does conservative overflow exclude useful finite answers? | Yes: a dominated candidate crossing the sentinel is refused. The source differential has an explicit case; any relaxation needs a new proof and checker rule. |
 | Does non-Unix workspace reservation fit? | Core compiles for macOS, Windows, ARM Linux and WASM, and private frontend native/WASM bytes match. Eager reservation and runtime RSS on those hosts are still unmeasured. |
 | Can derived Boolean facts feed a weighted layer, and can cost results feed later Boolean rules? | Checked predecessor freezing works, including a negative-literal predecessor. The one-pair pipeline seeds later Boolean layers. The new chain accepts two directly dependent weighted pairs and returns a final Boolean closure; an interposed Boolean layer, cross-pair cycle or third pair remains refused. |
-| Does the old Boolean frontend retain its cost? | The =083985f= short-source losses were kept under Tavis's scoped exception. The two-stage binary introduces a further measured 16-definition stratify and 512-definition lower instruction loss; the prior exception does not cover them. Three repair probes were reverted and the new disposition is open. The old =083985f= 512-definition stratify stage also read about 0.75 MiB more peak RSS than its own control, while one-run Massif live heap and Memcheck allocation counts agreed exactly. |
+| Does the old Boolean frontend retain its cost? | The =083985f= short-source losses were kept under Tavis's first scoped exception. The two-stage binary adds measured 16-definition stratify and 512-definition lower instruction losses, kept under a second separate exception approved on 2026-09-23; three ineffective repair probes were reverted. The old =083985f= 512-definition stratify stage also read about 0.75 MiB more peak RSS than its own control, while one-run Massif live heap and Memcheck allocation counts agreed exactly. |
 | What causes the new old-Boolean instruction difference? | It persists after both stratifier shape probes. An evaluator symbol has the same mnemonic sequence, but the linked binary and allocator state differ; Callgrind and no-inline probes did not isolate a safe win. The final paired receipt, not this incomplete attribution, determines acceptance. |
+
+* ej + tt closeout, 2026-09-23
+
+The cheap task-owned upgrades were final-source replay of the 35-row Addendum
+A outcome table and 245-case native/WASM frontend parity; both passed. The
+composition argument suggests a later acyclic sequence of more than two
+weighted pairs, but its source ordering, dictionary growth, checker cost and
+old-path performance still need separate gates. No new ID is allocated here.
+The Mystery ledger above retains the unexplained instruction difference and
+larger dense-checker/runtime portability limits; no additional task-owned
+mystery was found in this closeout pass.
 
 * First private old-path A/B and correction, 2026-09-23
 
@@ -992,6 +1003,11 @@ tests including four generated six-vertex graph pairs compared with an
 independent Bellman--Ford =A= then =B= oracle; six chain checker tests; three
 shape tests; the older one-pair pipeline and source checker tests; and strict
 =cargo clippy -p ergodis-private --all-targets --all-features -- -D warnings=.
+The final-source 35-row Addendum A Figure 3/4 recorded-outcome test also
+passes (=cargo test --test rel_lowering
+every_figure_three_and_four_equation_has_the_recorded_outcome=). This is
+equation coverage of the stated accepted/refused fragment, not full Rel
+semantics equivalence.
 The standalone frontend portability test compiles under strict Clippy after
 moving shape tests out of the source it path-includes. Its native/WASM replay
 at current source reports 245 cases and 541,205 canonical bytes in exact
@@ -1016,15 +1032,20 @@ case and a direct cross-platform runtime test remain open. Claim bytes are
 canonical prepared-source bindings, not a digest of raw Rel whitespace or
 comments.
 
-** WAIT Resolve the new old-Boolean instruction losses
+** DONE Resolve the new old-Boolean instruction losses
 
 The retained candidate =c1194-chain-final-955182a-955182a= is byte-identical
 to =c1194-chain-86d2125-86d2125=; the latter was measured in five
 interleaved rounds against the immutable =083985f= control on CPU 3, release
 rustc 1.95.0, with all six requested counters 100% enabled. Receipts:
 =~/.cache/ergodis/c1194/rel-ab-chain-86d2125-16.json= and
-=~/.cache/ergodis/c1194/rel-ab-chain-86d2125-512.json=. All compared
-source, parse, admission, lowering and stratification records and exact
+=~/.cache/ergodis/c1194/rel-ab-chain-86d2125-512.json=.
+Both arms were retained from clean =ergodis-private= revisions =86d2125=
+and =083985f= against core =7702f33=, release with no extra features. The
+retain recipe was =ergodis-dev/scripts/retain-bin.sh
+~/src/ergodis-private/tasks/tools ergodis-tools --label <arm-label>=;
+the exact arm labels and hashes are above and below. All compared source,
+parse, admission, lowering and stratification records and exact
 fingerprints match. Ratios below are candidate/control user instructions;
 parentheses give 95% intervals.
 
@@ -1048,7 +1069,17 @@ The exact source of the remaining difference is unresolved: the unseeded
 control and candidate, while ThinLTO changed other cold/readout layout and
 Callgrind attribution was dominated by allocator-state differences. Neither
 observation excuses the measured loss. =PERFORMANCE.md= requires reverting
-it unless Tavis grants a new, specifically scoped exception. Certification
-remains an opt-in detached call and does not change the evaluator's result
-shape; this A/B nevertheless measures a small old-Boolean instruction loss
-from the linked candidate.
+it absent an explicit exception. Tavis approved keeping the two-stage chain
+with a *new scoped exception* on 2026-09-23. It covers only the retained
+=955182a= binary, SHA-256
+=da92d2b008e3444e7ee4665ffe8af32226ac63d4f06f4acec0db5052d821e7e8=,
+against the =083985f= control, SHA-256
+=f879c2a5df945e0665d91d7f459d4f3f5792c4cb9735433c5c2e04730c98d37e=,
+on the 16-definition combined stratification and 512-definition lowering
+instruction ratios and 95% intervals in the table above. The 512-definition
+combined stratification ratios in that table are also measured losses and
+are included in this same binary/cohort scope. The exception does not cover
+later source, toolchain, fixture or binary changes. Certification remains an
+opt-in detached call and does not change the evaluator's result shape; the
+linked candidate nevertheless has the measured old-Boolean instruction
+losses. Absolute cycles and wall time did not decide this exception.
