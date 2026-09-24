@@ -358,8 +358,7 @@ core type (keep public or feature-gate); cache-gc lists eight old unreferenced e
 ranks the gaps against the programme goal and allocates, in EV order: **C1192** (done, above),
 **C1193** bodies of more than two atoms (done, above),
 **C1194** min-plus carrier and term arithmetic through the lowering (`../2026-09-16-c1194-min-plus-lowering.md`),
-**C1195** end-to-end benchmark suite from Rel source against Soufflé
-(`../2026-09-16-c1195-end-to-end-benchmark-suite.md`, after C1192 and C1198; min-plus rows after C1194),
+**C1195 done** (`../2026-09-24-c1195-end-to-end-benchmark-suite.org`),
 **C1196** rank-run and round-block certificate encoding (`../2026-09-16-c1196-certificate-encoding.md`).
 Still unallocated: a memory model for a layer (`MAX_LAYER_TUPLES` as a byte bound, eager row
 reservation as input); the kernel-scoped profile of `lower::run` closing the two unattributed
