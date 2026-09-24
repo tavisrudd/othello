@@ -84,3 +84,15 @@ The first retained-driver measurement slice is committed at private =f1a0ddf= ([
 
 ** TODO Audit and close the task
 Owner: primary. Independently review receipts and source-to-comparator correspondence, then record the Mystery ledger and any negative rows. Apply archive-first queue lifecycle; keep the lane handoff to a routing pointer. Run cache GC in dry-run mode and leave deletion to Tavis.
+
+Mystery ledger, with timing questions still open:
+
+| Observation | Resolution or remaining test |
+|-------------+------------------------------|
+| Six initial Boolean Rel fixtures failed =REL0504= | Missing existential binders / unbound aggregate endpoint were fixed before fixture hashes froze; retained-control admission and complete oracle checks passed. |
+| Direct recursive aggregate =min= refused by Soufflé 2.5 | Both interpreter and compile-only runs report cyclic aggregation; retain as a capability row. Subsumption is an explicitly different comparator formulation. |
+| Weighted adversarial oracle omitted seeded vertex 20 | Added =(20,2)= and independently recomputed the full map before accepting three-case replay. |
+| Soufflé's =number= width was assumed to be 64 bits | The installed binary reports 32 bits; replay enforces signed =i32::MAX= for all facts and conservative relaxation bounds. |
+| First wide-reach validator expected one source stratum | Source has input =e= plus recursive =path= strata, with one checked evaluation layer. The false refusal is preserved as a validator diagnostic; the corrected replay passed. |
+| Draft perf CSV parser read running time as enabled percentage | Local =perf -x,= probe established field five as enabled percentage; parser now checks >=99% for all event sets. No timed sample was accepted under the old parser. |
+| Candidate binary is 744,112 bytes larger than control (+4.66%) | Extra benchmark-route monomorphizations are visible statically; the retained no-flag A/B will determine ordinary-path instruction cost. |
