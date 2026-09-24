@@ -30,6 +30,8 @@ Fermi before the edit: a handful of clock reads per layer should be negligible a
 ** TODO Implement frozen Boolean cohorts and matched Soufflé harness
 Owner: Luna xhigh implementation; primary code review. Build deterministic fixtures, per-layer tuple checks, whole-program exact checks and interleaved process receipts. No hidden generated answer or counted-only comparison. Record fixture semantics and source hashes here.
 
+The >65,536-value reach row follows C1212's already admitted shape: 32,769 sparse binary facts, 65,537 distinct values, 513 definitions of at most 64 facts each, 485,551 source bytes; benchmark limits explicitly set =tokens=2^18=, =nodes=2^19=, =values=70,000= and =source_bytes= to the byte count. This is a separate representability/reach observation, not a throughput point. The earlier single-giant-set shape hit frontend depth admission before the domain rule and is unsuitable evidence for this boundary.
+
 ** TODO Add weighted SSSP and component-label rows
 Owner: Luna xhigh implementation; primary code review. Use the C1194 weighted Rel bridge and detached checker. Verify Soufflé 2.5's actual recursive-min capability on the installed binary before accepting either comparison; a refusal is recorded as such. Keep certificates separate from ordinary evaluator output. Record API and comparator limits here.
 
