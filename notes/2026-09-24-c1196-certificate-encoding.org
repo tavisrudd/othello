@@ -1,0 +1,39 @@
+#+TITLE: C1196 — rank runs and round-block certificate encoding
+#+DATE: 2026-09-24
+#+TODO: TODO NEXT WAIT | DONE CANCELED
+
+* NEXT C1196 — Compact ranked certificates with independent checking
+
+Authority: [[file-rev:87751ced5:~/src/othello/notes/2026-09-16-c1196-certificate-encoding.md][task card]], [[file-rev:87751ced5:~/src/othello/notes/2026-09-13-c1185-certificate-size-exploration.md][encoding study]], and [[file-rev:87751ced5:~/src/othello/notes/2026-09-22-c1213-datalog-schema-provenance-report.md][schema/provenance decision]]. Core starts at =cd4a1e9=, private at =7dc275e=, notes at =87751ced5=; the owned paths were clean before C1196 work.
+
+** DONE Fix the format and trust boundaries
+
+Owner: primary design and review. The existing =finite-boolean-ranked-certificate.v1= JSON, its source identity, checker verdicts and digest stay byte-for-byte compatible. Rank runs are a separate, opt-in JSON certificate schema over the same claim: each relation retains its tuple stream and replaces one rank per tuple with strictly increasing positive =(rank,count)= runs. The evaluator already appends derived rows in non-decreasing round order, which is the producer obligation. A run with zero count or a total different from the tuple count is malformed; the checker must not infer ranks from position alone.
+
+The binary form has its own versioned schema and canonical bytes. Its header binds the literal schema and =source_id=. Each relation has strictly increasing rank runs; each run sorts its packed tuple keys and uses either shortest-form LEB128 first-key/gap-minus-one values or a full-universe bitmap. The deterministic choice is the shorter payload, ties to gaps. Decoder admission must refuse truncation, trailing bytes, nonminimal varints, zero or decreasing runs, key overflow/out-of-universe, duplicate keys within a block, nonzero bitmap padding and a noncanonical coding choice with named errors. The admitted source supplies domain, arities and relation count; no certificate-supplied geometry is trusted. The byte bound is checked before parsing and every count is bounded by the remaining bytes before allocation.
+
+The independent checker will read binary blocks into its existing relation store and rank columns, then run the existing support search and separate closed-world completeness pass. It must not materialize a v1 =RankedCertificate= or JSON. A sorted-store fallback may require one bounded parse to collect keys and a second to insert them; both parses enforce the same canonicality. Verification records bind =(new certificate schema, digest of canonical binary bytes)= and the checked source/output, using the existing separate contract and checker identities. The ordinary evaluator, old JSON route and visible relation output incur no new work until the caller opts into a compact certificate.
+
+Fermi before implementation: C1185 measured the rank column at 8–107 bytes over its largest row streams when run coded, versus one byte per tuple; round blocks cost 0.250–1.064 payload bytes per derived tuple on its eleven rows, versus 5.000 packed or 11.50 JSON bytes on the cited large closure. The cost is cold sorting/encoding, measured at 222.8 ms versus 520.8 ms evaluation on sparse closure 4096 in the old prototype. This predicts a large transfer-size win and a nontrivial opt-in producer cost, not a free latency win. Checker time must be separately compared with the existing JSON path at equal exact output/work; the card rejects a per-derivation regression.
+
+The C1216 ABI task owns the C format tag and Datalog native/WASM host binding. C1196 can compile and test the domain-neutral decoder for wasm32, but a compile gate alone does not claim a browser-facing Datalog ABI. The C1172 guarded Lean audit runs only through its documented entry point, after reading the nested Lean guide; no direct =lean= or =lake= command is permitted.
+
+** NEXT Implement the contract codec
+
+Owner: Luna xhigh implementation; primary code review. Keep the old schema untouched; add the new runs schema and canonical binary encoder/visitor decoder in =ergodis-contract=. Test exact round trips on mixed dense/sparse blocks and malformed headers, run order, key bounds, padding, count arithmetic and truncation. No private fixture or task process reference enters public core source.
+
+** TODO Integrate the producer and independent checker
+
+Owner: Luna xhigh implementation; primary code review. Add an opt-in =Demand= producer that reads existing rows/rounds after evaluation, plus a checker path that consumes compact blocks directly into the existing stores and uses the unchanged support and completeness algorithms. Include recorded-check and replay doors with schema-specific canonical digest; preserve all v1 identities. Keep allocation, format dispatch and serialization outside the evaluator and checker hot loops.
+
+** TODO Prove exactness, refusal and portability gates
+
+Owner: primary. Check wire and prepared sources, empty/input-only relations, multiple derived relations, rank gaps, four-body rules, sorted fallback, source mismatch, duplicate fact/derived tuple and every malformed binary class. Compare complete relations and verification records against v1 JSON on frozen and adversarial programmes; run deterministic byte-size/round-trip tests, allocation regressions, strict format/Clippy/tests, export lint and the guarded C1172 Lean audit. Compile native and wasm32 core doors; leave host ABI completion to C1216.
+
+** TODO Measure the transfer and checker tradeoff
+
+Owner: primary with Luna xhigh harness implementation if needed. Reproduce C1185's eleven row sizes under the stated payload/header boundary. Interleave retained release binaries or matched old/new paths with exact work, primary and separate cache counters, wall intervals, A/A nulls and RSS. Compare checker time per derivation to v1 JSON including decode, support and completeness; report transfer bytes separately from ordinary output. Profile any touched hot checker loop with a zero-allocation and call-free gate. A measured instruction loss strictly below 0.1% per affected fixture is within Tavis's standing reviewer discretion only with an explicit dated retained-control decision; larger losses need their own disposition.
+
+** TODO Audit and close
+
+Owner: primary. Red-team canonicality, ambiguity, resource exhaustion, identity and refusal mapping; inspect every Luna change. Keep negative rows and a Mystery ledger here. On completion, archive the exact queue row first, delete it from the live queue, leave only a short routing pointer in the Ergodis handoff, and run cache GC dry-run without deleting entries.
