@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-16
-**Status**: QUEUED. Ranked fifth among the Datalog programme's next steps
+**Status**: IN PROGRESS (2026-09-24). Ranked fifth among the Datalog programme's next steps
 (`2026-09-16-ergodis-datalog-programme-review.md`); independent of the others, becomes urgent
 for C1195 because certificate emission and size are measured rows there.
 **From the C1204 review (C1208 triage, 2026-09-21)**: (1) the product route is the prepared one,
