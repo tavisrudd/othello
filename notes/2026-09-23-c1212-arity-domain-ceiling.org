@@ -2,7 +2,7 @@
 #+DATE: 2026-09-23
 #+TODO: TODO NEXT WAIT | DONE CANCELED
 
-* NEXT C1212 — Replace the blanket domain ceiling
+* DONE C1212 — Replace the blanket domain ceiling
 :PROPERTIES:
 :LANE: ergodis
 :END:
@@ -81,4 +81,4 @@ The C1212 card requires correctly attributed domain refusals. The private Rel ro
 C1206 core [[file-rev:cbcbcba:~/src/ergodis/crates/contract/src/datalog.rs][cbcbcba]] now returns =DatalogBudget= for domain ceilings. The wire admission regression asserts =Domain=, =Relation { index: 0 }= (the widest relation), =limit=max_domain_for_arity(3)=, =observed=limit+1=, =Values= and no knob; the prepared Demand regression asserts the same fields at its door. Zero domain is separately =Program=, required minimum one, observed zero. Core pinned format, strict Clippy, full all-feature test suite and WASM check pass after this change. Thus the previously waiting C1212 attribution gate is satisfied; lifecycle close remains under this task's root heading.
 
 ** DONE Audit, commit and route the task
-Owner: primary. The reviewed core implementation is =bacab8b=, including its regenerated evidence manifest; private implementation and repairs are =79bda3e=, =ca0f535=, =0251e78=, =f309ff3= and final =a9ea6de=. Both source checkouts are clean. The private all-feature whole-package run was interrupted as stated above; the task-owned Rel gates, pinned core full gate and final portability and A/B gates passed. The 2^32-entry path is established by the parser/node-count proof rather than an impossible large allocation test. The handoff has one routing line to this report. C1212 remains in the live queue and has no archive row while the C1206 core refusal record gate remains open; apply archive-first lifecycle only after that gate passes. No incidental discovery-track item arose: the cache collision and the performance repairs were found while doing this task and are recorded here.
+Owner: primary. The reviewed core implementation is =bacab8b=, including its regenerated evidence manifest; private implementation and repairs are =79bda3e=, =ca0f535=, =0251e78=, =f309ff3= and final =a9ea6de=. Both source checkouts are clean. The private all-feature whole-package run was interrupted as stated above; the task-owned Rel gates, pinned core full gate and final portability and A/B gates passed. The 2^32-entry path is established by the parser/node-count proof rather than an impossible large allocation test. C1206's typed domain refusal satisfied the final attribution gate. C1212 was archived first and removed from the live queue in the same notes commit; the handoff retains a routing pointer only. No incidental discovery-track item arose: the cache collision and performance repairs were task-owned and recorded here.

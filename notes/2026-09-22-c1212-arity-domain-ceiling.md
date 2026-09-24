@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: QUEUED — allocated by Tavis from C1208.
+**Status**: COMPLETED 2026-09-23. Report: `notes/2026-09-23-c1212-arity-domain-ceiling.org`.
 **Authority**: `notes/2026-09-22-c1208-follow-up-triage.md` (approved allocation and order).
 
 Approved C1208 alloc-5. Coordinate with C1206's structured refusal record; preferred
