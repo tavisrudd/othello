@@ -1,0 +1,26 @@
+#+TITLE: C1220 versioned diagnostic envelope and typed conversions
+#+DATE: 2026-09-25
+#+TODO: TODO NEXT WAIT | DONE CANCELED
+
+* TODO C1220 — Implement the adopted common diagnostic vocabulary
+:PROPERTIES:
+:LANE: ergodis
+:END:
+
+Authority: [[file:2026-09-25-c1207-error-model-design.org][C1207 adopted decision]], candidate 2, after [[file:2026-09-25-c1219-diagnostic-factual-loss.org][C1219]]. This slice defines a reusable versioned envelope, a stable code registry, and lossless cold conversion for typed Datalog and representative Rel refusals, including checker rejection versus stored-record mismatch. ABI readout/host migration, CLI exit policy and browser presentation remain separately routed.
+
+** TODO Fix the crate and wire boundary before coding
+
+The envelope belongs in a small public adapter crate above contract and verify, so adding presentation code does not alter their implementation identities or invalidate checker-issued records. The private Rel adapter depends inward on that crate; the public crate must not name private Rel types. Serialize a bounded =ergodis-diagnostic.v1= JSON value with typed class, severity, operation, subject, ordered context, optional budget, trust and nested cause. Encode =u64= magnitudes as decimal strings for exact JS/WASM transport. Retain typed producer errors; construct envelopes only after refusal. Red-team risks: stale record authority, fabricated source spans, duplicate bound mappings, lossy =Debug=, unbounded nested causes/strings, and false precision for saturated projections.
+
+** TODO Implement common schema and Datalog/verification conversions
+
+Map C1206 budget, source and binding records into one envelope without changing producer structs. Make unknown limits explicit, keep object coordinates and source requirements, and give certificate rejection and stored-record mismatch distinct codes/trust meanings. Cover core checker rejection coordinates or fail conversion explicitly with the typed original retained; do not silently flatten any unsupported cause. Add exact JSON/round-trip and size/depth rejection tests.
+
+** TODO Implement private Rel conversion without core/private coupling
+
+Preserve existing =REL= codes and source byte spans with a cold source identity; keep semantic arity numbers, =u64= route projections and full layer/core budget facts. Give Rel record mismatch and checker disagreement distinct trust codes and first-failure coordinates. Do not alter evaluator, parser, checker, certificate or ordinary output paths. Test non-ASCII spans and verifier/record distinctions.
+
+** TODO Validate, review and close
+
+Run scoped pinned native tests, formatting, Clippy and wasm32 checks, then the core all-feature gate and evidence-manifest update if core source/manifest coverage changes. Inspect source diffs for any hot-loop change; if one appears, apply the full retained-control A/B protocol. Document test limits and any incomplete conversion surface. Archive the queue row first, remove the live row, update routing with a short pointer, and apply the discovery-track discriminator. No public export or push is authorized.
