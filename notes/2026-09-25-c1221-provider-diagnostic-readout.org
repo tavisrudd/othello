@@ -1,0 +1,28 @@
+#+TITLE: C1221 provider diagnostic readout and same-instance host retrieval
+#+DATE: 2026-09-25
+#+TODO: TODO NEXT WAIT | DONE CANCELED
+
+* TODO C1221 — Carry typed diagnostics across ABI v1
+:PROPERTIES:
+:LANE: ergodis
+:END:
+
+Authority: [[file-rev:7c1207437:~/src/othello/notes/2026-09-25-c1207-error-model-design.org][adopted C1207 design]], candidate 3, and [[file-rev:0318835bc:~/src/othello/notes/2026-09-25-c1220-diagnostic-envelope.org][C1220 envelope]]. This task adds a descriptor-discovered, bounded =last-diagnostic= readout and immediate retrieval on the same instance in native and Worker/WASM hosts. ABI status 0–5 and zero bytes on rejection remain unchanged. Existing =last-refusal= selectors remain compatible. CLI policy, browser rendering and other provider-family migration belong to later candidates.
+
+** TODO Fix the readout contract and failure lifetime
+
+Use =EXECUTE= with a four-byte little-endian selector, zero handle, empty body, =ergodis-diagnostic.v1= output, and a 4096-byte maximum. Require the descriptor entry's name, format, effect, and bound to agree before the host uses it; older descriptors without the entry remain admissible. A failed operation records one current diagnostic; a successful ordinary operation clears it. Reading succeeds once and consumes it. A missing, already consumed, oversized, malformed, or failed readout becomes a typed host =diagnostic_unavailable= with original status and operation, never a guessed producer reason. Neither retrieval nor legacy refusal reads should replace the failure being retrieved. Keep conversion and JSON outside successful evaluator/checker loops.
+
+Red-team gates: stale failure after success; another call between failure and readout; readout with insufficient capacity; forged descriptor ID/name or oversized envelope; provider failure or WASM trap during retrieval; wrong instance; non-ASCII Rel source span; verifier rejection versus record mismatch. A host helper must preserve the original status even when retrieval fails.
+
+** TODO Implement Datalog and Rel provider adapters
+
+Construct the diagnostic from the typed cold failure where possible, preserving exact budget/source/trust facts. A conversion that cannot fit or has no faithful mapping produces no diagnostic; the host reports unavailable. Retain old selectors and their output. Add tests for one-shot consumption, stale clearing, source/budget, and checker/record distinctions.
+
+** TODO Implement native and Worker/WASM host retrieval
+
+The native helper accepts an exclusive =Provider= borrow and retrieves before returning the failure. The Worker calls it before publishing a failed checkpoint or accepting another provider call. Structured transport carries the provider envelope or a typed unavailable/host fault, including original status and operation. Success returns ordinary output unchanged.
+
+** TODO Review, verify, and close
+
+Review every source diff and independent test result; run formatting, scoped tests, strict Clippy, all-feature core gate, WASM compile/conformance, and evidence manifest checks where affected. Perform an A/B only if a successful hot path changed. Record exact limits and commits here; archive the queue row before removing it, reduce the handoff to a route pointer, and apply the discovery-track discriminator. No export or push.
