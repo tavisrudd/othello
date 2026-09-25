@@ -1,0 +1,29 @@
+#+TITLE: C1218 private Rel crate boundary and frontend measurement gates
+#+DATE: 2026-09-24
+#+AUTHOR: Codex
+#+TODO: TODO INPROGRESS REVIEW BLOCKED | DONE
+#+STARTUP: overview
+
+* INPROGRESS A: Inventory and boundary design
+
+Authority: [[file-rev:7a78f08d0:~/src/othello/notes/2026-09-22-c1218-rel-crate-boundary.md][C1218 card]]. C1205's executed-layer backend is complete, so there is one Rel route to move. The clean private baseline is =abe04f8=, pinned rustc 1.95.0, retained default binary =c1218-control-abe04f8=, SHA-256 =4713725fed117002eb274a99c1343b32e89edbb1f4e44d778034f0b6d9a2bc8b=; it is byte-identical to C1205's retained final binary. No source edits preceded retention.
+
+The planned graph is =ergodis-rel-frontend= (std only) → =ergodis-rel-driver= (frontend + public contract/rules/verify); the private root and tools consume the small crates directly where needed. Neither extracted crate depends on the whole =ergodis= package, and public core never depends on a private crate. The frontend owns scanner, parser, diagnostic recovery, admission, RIR lowering and their fixed-capacity workspace. The driver owns typed readout, prepared-layer evaluation, transferable evidence and offline replay, weighted Rel routes and cold wire export. It does not duplicate the backend.
+
+The extraction should change paths and imports only before measuring any optional instrumentation shape. External clients in this workspace should import the owning crate directly. A blanket re-export through =ergodis-private= would hide the dependency cut and is outside this design. The private root remains a library-only crate and task binaries stay under =tasks/=.
+
+* TODO B: Extract the std-only frontend crate
+
+Move the existing frontend source into one private workspace member with no external dependencies. Retarget the bare-rustc parity probe to that crate's entry source and keep its canonical output bytes/digest. Preserve default parse, admission, lowering and diagnostic behavior. Keep the ordinary API independent of measurement features.
+
+* TODO C: Extract the core-dependent Rel driver crate
+
+Move the current Rel driver modules together so their internal imports remain explicit. Retarget the root integration tests and =ergodis-tools= to the new crates. Remove the root package's Rel modules and its Rel-only contract/rules/verify dependencies only where its other modules permit. Confirm the driver manifest has no whole-=ergodis= dependency and that no root-to-driver-to-root cycle appears.
+
+* TODO D: Gate frontend measurement aids
+
+Identify benchmark-only entry points separately from public conformance and diagnostics. Gate the scan-only and page-touch paths behind a named frontend measurement feature, with the tools benchmark enabling it. Retain scalar parse for parity until the harness and tests can request a feature explicitly; do not sacrifice the default frontend's native/WASM conformance. Record the final gate and binary shape precisely.
+
+* TODO E: Validate, measure, review and close
+
+Run pinned default/measurement builds, bare-rustc native/WASM parity, Rel reference differential, allocation gates, full exactness fixtures and the instrument build. Compare canonical identities and output bytes; source-path hashes may change and must be labelled separately. Measure matched parse/lower/stratify stages and any cross-crate hot accessors against the retained control with the required A/A null and non-multiplexing counters. Record any accepted deviation under =PERFORMANCE.md=, independently review the crate graph and code, then archive the queue row and route C1216.

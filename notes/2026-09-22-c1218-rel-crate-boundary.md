@@ -2,7 +2,8 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: QUEUED — allocated by Tavis from C1208.
+**Status**: IN PROGRESS (2026-09-24); dated design and validation record:
+`notes/2026-09-24-c1218-rel-crate-boundary.org`.
 **Authority**: `notes/2026-09-22-c1208-follow-up-triage.md` (approved allocation and order).
 
 Approved C1208 alloc-7. Mechanical extraction after C1205 milestone c leaves one backend
