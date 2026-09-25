@@ -1,0 +1,30 @@
+#+TITLE: C1219 cold diagnostic factual-loss repair
+#+DATE: 2026-09-25
+#+TODO: TODO NEXT WAIT | DONE CANCELED
+
+* TODO C1219 — Preserve facts at existing error boundaries
+:PROPERTIES:
+:LANE: ergodis
+:END:
+
+Authority: the adopted [[file:2026-09-25-c1207-error-model-design.org][C1207 decision]], implementation candidate 1. This task repairs factual loss in existing private Rel paths. The shared envelope, CLI exit migration, common ABI diagnostic readout, and browser state work remain separate candidates. Core is the producer of typed Datalog budget fields; this task should not change its successful evaluator path.
+
+** TODO Preserve semantic arity counts in cold diagnostics
+
+The producer keeps =found= and =expected= in [[file-rev:8045e30:~/src/ergodis-private/crates/rel-frontend/src/lib.rs][=SemanticFailure=]], while [[file-rev:8045e30:~/src/ergodis-private/crates/rel-frontend/src/diagnostic.rs][the renderer]] receives only =as_failure()=. Add a semantic-specific cold enrichment call and route the =rel-lower= diagnostic sites through it. Bind =REL0402= to its exact observed and expected counts and the existing source spans. Do not widen the scanner/parser failure record or add formatting to successful parse/admission.
+
+** TODO Reject unknown dictionary IDs during readout
+
+[[file-rev:8045e30:~/src/ergodis-private/crates/rel-driver/src/rel_lowering.rs][=Readout::decode=]] currently substitutes ="?"=. Return a typed error with the offending tuple column and ID, propagate it through the existing tool readout, and test valid and unknown IDs. Probe whether accepted public input can reach this state; an invariant-only path is still an error, not a value. No success-loop or certificate bytes should change.
+
+** TODO Retain layer, source location and optional budget facts in provider refusals
+
+[[file-rev:8045e30:~/src/ergodis-private/crates/rel-module/src/lib.rs][=evaluation_refusal=]] currently turns a layer index into a source span and an unknown limit into zero. Keep layer and source span as different fields; preserve the core [[file-rev:2119cbe:~/src/ergodis/crates/contract/src/datalog.rs][=BudgetRefusal=]] bound, object, observed, unit, optional limit/round/knob, and mapped relation where supplied. Use the existing =rel-refusal.v1= readout with additive fields and its 4 KiB cap; do not introduce the common envelope under this task. Exact tests must include an unknown limit and a layer with no source span.
+
+** TODO Verify affected boundaries and performance scope
+
+Run the three affected crate tests, tool checks, ABI native/WASM compilation where available, and direct negative/positive probes. Check that only cold failure/readout code changed; if an actual hot path changes, apply the full retained-control performance gate. Fermi: successful evaluation, admission and checking execute none of these conversions, so intended added successful-path work is zero. A source-only change to an error type can still perturb ThinLTO; record the actual gate and any limit. Before this task's plan was written, one combined local documentation read produced over 10,000 original tokens and was truncated; subsequent reads were bounded to individual files and sections.
+
+** TODO Close lifecycle and route the next candidate
+
+Record exact results and revisions here, archive the C1219 queue row before removing it, then point the Ergodis handoff to the next allocated task or the unallocated envelope candidate. Review incidental observations against the discovery-track discriminator.
