@@ -5309,8 +5309,17 @@
       "last": 1219,
       "purpose": "Repair factual loss on cold C1207 error boundaries",
       "sequence": 590
+    },
+    {
+      "count": 1,
+      "first": 1220,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1220,
+      "purpose": "Implement the C1207 shared diagnostic envelope and typed Datalog and Rel conversions",
+      "sequence": 591
     }
   ],
-  "next_id": 1220,
+  "next_id": 1221,
   "schema": "codex-task-id-allocations-v1"
 }
