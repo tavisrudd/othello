@@ -5318,8 +5318,17 @@
       "last": 1220,
       "purpose": "Implement the C1207 shared diagnostic envelope and typed Datalog and Rel conversions",
       "sequence": 591
+    },
+    {
+      "count": 1,
+      "first": 1221,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1221,
+      "purpose": "Implement the C1207 provider diagnostic readout and same-instance host retrieval under ABI v1",
+      "sequence": 592
     }
   ],
-  "next_id": 1221,
+  "next_id": 1222,
   "schema": "codex-task-id-allocations-v1"
 }
