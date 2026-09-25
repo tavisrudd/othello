@@ -16,6 +16,8 @@ Inventory at the clean baseline: the frontend is =src/rel_frontend/{mod,lexer,pa
 
 The bare-rustc parity runner currently compiles =tests/rel_frontend_portability.rs= with =#[path = "../src/rel_frontend/mod.rs"]=. Retargeting that path to the new crate entry and including it in the runner's source-path manifest preserves the exact source-based byte check. It may change the manifest's source-file hash because paths move; this hash is not the canonical Rel output identity. The canonical native/WASM bytes and digest must remain equal to the baseline.
 
+The root private =instrument= feature is used by no non-Rel source module. After the move it may remain only as a compatibility feature forwarding to the driver, while the tools' instrumentation feature should name the driver/rules explicitly. The frontend's =measurement= feature can expose benchmark-only scan/page-touch methods without forcing them into its ordinary library. The scalar parse variant remains a conformance method for native/WASM parity; its existence alone does not add per-token work to the default const-generic instantiation.
+
 * TODO B: Extract the std-only frontend crate
 
 Move the existing frontend source into one private workspace member with no external dependencies. Retarget the bare-rustc parity probe to that crate's entry source and keep its canonical output bytes/digest. Preserve default parse, admission, lowering and diagnostic behavior. Keep the ordinary API independent of measurement features.
