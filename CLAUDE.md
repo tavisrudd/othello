@@ -80,7 +80,6 @@ with no lane selected — ask which lane. An explicit alias switches lanes.
 | `cubic` | `notes/handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md` |
 | `cubic-threefolds` | `notes/handoffs/2026-08-15-cubic-threefolds.md` |
 | `dihedral` | `notes/handoffs/2026-07-17-dihedral-paper.md` |
-| `ergodis` | `notes/handoffs/2026-09-05-ergodis-lane.md` |
 | `gem-mining` | `notes/handoffs/2026-07-14-gem-mining.md` |
 | `golden` | `notes/handoffs/2026-07-31-golden-operator-paper.md` |
 | `kayles` | `notes/handoffs/2026-07-04-node-kayles-games.md` (dormant) |
@@ -92,6 +91,8 @@ with no lane selected — ask which lane. An explicit alias switches lanes.
 
 Archived lanes (handoffs under `notes/handoffs/done/`): `queens`, `repaircodes`, `repairports`,
 `rp-next`.
+
+Ergodis C work is routed from `~/src/ergodis-private`; C IDs are repository-scoped after its transfer.
 
 Each handoff must declare exactly one `**Lane**: \`alias\`` directly under its H1. A cross-lane
 deliverable is pegged to the lane that owns it, or split into separate tasks.

@@ -8,7 +8,7 @@ correction trails live in dated reports and the append-only
 
 **Date**: 2026-09-18
 **Mode**: intent-based.
-**Status**: ACTIVE. Next: allocate C1207 candidate 4 (CLI exit/schema migration); C1221: `../2026-09-25-c1221-provider-diagnostic-readout.org`. R1/R2 documentation can proceed in parallel. Other open work is routed below.
+**Status**: TRANSFERRED → `~/src/ergodis-private/notes/handoffs/2026-09-05-ergodis-lane.md`.
 
 **Discovery companion**: [ergodis discovery track](../ergodis-discovery-track.md).
 

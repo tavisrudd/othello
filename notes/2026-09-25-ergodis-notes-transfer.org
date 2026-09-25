@@ -1,0 +1,39 @@
+#+title: Ergodis notes and C-task routing transfer
+#+date: 2026-09-25
+
+* DONE Import the Ergodis history into the private repository
+
+The frozen Othello source is =eeeadcda60deeae139cace994cf1f164b71da401=.
+The private authority is =~/src/ergodis-private= at
+=e4889bb52abe865727492e719222ceaef0139311=. The imported history contains
+500 current Ergodis-owned note and evidence files, 39 live task rows and 99
+completion rows. An unmerged C1032 branch is reachable in the private Git
+ancestry without adding its =complete-ports=-owned report to the current tree.
+
+The exact path selection, row filter, validation record and original-to-rewritten
+commit mapping live in the private [[file-rev:e4889bb52abe865727492e719222ceaef0139311:~/src/ergodis-private/notes/migration/README.org][migration record]] and
+[[file-rev:e4889bb52abe865727492e719222ceaef0139311:~/src/ergodis-private/notes/migration/othello-commit-map.tsv][commit map]]. To inspect the frozen source queue, use
+=git -C ~/src/othello show eeeadcda60deeae139cace994cf1f164b71da401:notes/2026-07-07-codex-task-queue.md=;
+=file-rev:= follows the current file while it still exists and therefore does
+not pin that historical queue view.
+
+* DONE Transfer active routing out of Othello
+
+The 39 Ergodis rows were removed from the Othello live queue only after their
+byte-exact imported projection was verified. This is a lane transfer, not a
+completion or re-pegging of the tasks. Othello's Ergodis alias was removed;
+future bare C IDs are scoped to the current repository. The old allocator and
+archived rows remain part of Othello's historical record until cleanup.
+
+* TODO Clean up old Ergodis files in a later Othello commit
+
+Remove the transferred current notes after checking inbound links from the
+remaining Othello lanes. Preserve this transfer receipt and reachable source
+history. Handle the old shared archive rows explicitly; do not count their
+removal as task completion.
+
+* TODO Reorganize both repositories' workflow after cleanup
+
+Plan Org-mode lane queues and C-card directories in both repositories using
+the ownership model in =~/src/agentic-workflow/=. Keep path moves and format
+conversions in separate commits with a path map.
