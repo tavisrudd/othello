@@ -14,6 +14,8 @@ Use two coarse providers under the existing =ergodis-modules= ABI v1 and public 
 
 The ordinary readout returns a compact checked result. Certificate construction, transferable evidence encoding and independent checking are separate opt-in selectors. The checker must re-admit the source and verify its own records, not trust a producer's success bit. A module's certificate bytes are compared with the native direct route on fixed inputs. An ABI success alone is not a certificate of correctness.
 
+The agreed Datalog descriptor uses capability =finite.datalog= and the exact wire schema =finite-boolean-datalog-rules.v1=. Its v1 selectors cover ordinary evaluation, derivation/ranked/ranked-runs/ranked-round-block certificates, independent recorded checking, record replay and last refusal. The round-block selector advertises =finite-boolean-ranked-round-blocks.v1= and returns canonical bytes. The agreed private descriptor uses capability =private.rel= and source schema =rel-source.utf8.v1=. Its selectors cover ordinary typed readout, opt-in transferable evidence, offline verification and last refusal. Rel's =WORKSPACE= accepts the default or an explicit four-byte little-endian row bound; no bound is silently reduced.
+
 Provider defaults must suit eager-commit WASM and small-memory hosts: use a bounded source size, conservative frontend capacities and approximately 4,096 rows per derived relation rather than the native Demand default of =1 << 24=. Before allocating a Demand workspace, inspect its predicted bytes and enforce a small total cap (target 64 MiB). A caller may request larger explicit bounds only within named hard limits. Capacity exhaustion returns a structured refusal; it cannot silently reduce a requested bound. Native direct APIs keep their existing defaults.
 
 Threat cases for review: forged/stale/foreign handles, releasing a plan while a workspace is live, retry after a short output buffer, schema confusion between grounded and Datalog routes, malformed or oversized source/certificate, source or certificate substitution, empty/large input, WASM memory growth invalidating views, and panic containment at the C boundary. Run the compiled modules in the actual public host; merely compiling =wasm32= does not establish host support.
@@ -29,6 +31,15 @@ Owner: Luna xhigh, root design and code review. The implementation belongs in on
 * TODO D: Integrate and red-team the host contract
 
 Root will review both diffs, resolve protocol mismatches, test separately built native/WASM artifacts in the public hosts, compare contracted bytes and exact outcomes with direct APIs, and exercise malformed inputs, capacity retries, stale handles and small-memory defaults. Distinguish implemented API, exposed ABI and actually executed host capabilities.
+
+| Boundary | Required adversarial case | Expected observation |
+|----------+---------------------------+----------------------|
+| Source admission | Wrong schema, malformed/oversized bytes, unsupported Rel source | Rejection and a bounded typed refusal; no live plan |
+| Handles | Foreign nonce, wrong kind, released slot, plan release with live workspace | =STALE= or =BUSY=, zero written bytes, no alias/reuse |
+| Output sizing | One-byte result/certificate/refusal buffer, then adequate retry | =CAPACITY= with no partial output; retry returns identical bytes |
+| Certification | Mutated source id, value, proof tag, record and unrelated Rel source | Checker/replay rejects; no verification record on failure |
+| Memory | Default and explicit row bounds on a small relation, oversized allocation request | Small case executes; oversized case refuses before eager commitment |
+| Host loading | Separate native/WASM builds and manifests, private source hidden from public host | Public host loads and executes each payload without private Cargo dependency |
 
 * TODO E: Performance, portability and closeout
 
