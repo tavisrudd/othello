@@ -49,6 +49,26 @@ theorem chain_derivable_all :
   (closed_rankedSupport_iff_derivable chainProgram Set.univ chainRank
     chain_closed chain_rankedSupport).1
 
+private def partialClaim : Set Bool := {false}
+
+/-- The input fact alone has valid support but omits the chain rule's head. -/
+theorem partial_rankedSupported_but_not_closed :
+    RankedSupport chainProgram partialClaim chainRank ∧
+      ¬ Closed chainProgram partialClaim := by
+  constructor
+  · intro a ha
+    have hfalse : a = false := by simpa [partialClaim] using ha
+    subst a
+    exact Or.inl (by simp [chainProgram])
+  · intro hclosed
+    have hhead : true ∈ partialClaim := hclosed.2 chainRule
+      (by simp [chainProgram]) (by
+        intro b hb
+        have hfalse : b = false := by simpa [chainRule] using hb
+        subst b
+        simp [partialClaim])
+    simp [partialClaim] at hhead
+
 private def cycleRule : GroundRule Bool := ⟨true, [true]⟩
 private def cycleProgram : GroundProgram Bool := ⟨∅, {cycleRule}⟩
 private def cycleClaim : Set Bool := {true}

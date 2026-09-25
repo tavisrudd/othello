@@ -24,6 +24,9 @@ procedure, or certificate byte decoder is imported by these theorems.
 /-- info: 'WeightedRules.RelationalSupport.chain_derivable_all' depends on axioms: [propext, Quot.sound] -/
 #guard_msgs in
 #print axioms WeightedRules.RelationalSupport.chain_derivable_all
+/-- info: 'WeightedRules.RelationalSupport.partial_rankedSupported_but_not_closed' depends on axioms: [propext, Quot.sound] -/
+#guard_msgs in
+#print axioms WeightedRules.RelationalSupport.partial_rankedSupported_but_not_closed
 /-- info: 'WeightedRules.RelationalSupport.cycle_closed_but_not_rankedSupported' depends on axioms: [propext, Quot.sound] -/
 #guard_msgs in
 #print axioms WeightedRules.RelationalSupport.cycle_closed_but_not_rankedSupported
