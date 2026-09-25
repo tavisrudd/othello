@@ -4,7 +4,7 @@
 #+TODO: TODO INPROGRESS REVIEW BLOCKED | DONE
 #+STARTUP: overview
 
-* INPROGRESS A: Inventory and boundary design
+* DONE A: Inventory and boundary design
 
 Authority: [[file-rev:7a78f08d0:~/src/othello/notes/2026-09-22-c1218-rel-crate-boundary.md][C1218 card]]. C1205's executed-layer backend is complete, so there is one Rel route to move. The clean private baseline is =abe04f8=, pinned rustc 1.95.0, retained default binary =c1218-control-abe04f8=, SHA-256 =4713725fed117002eb274a99c1343b32e89edbb1f4e44d778034f0b6d9a2bc8b=; it is byte-identical to C1205's retained final binary. No source edits preceded retention.
 
@@ -18,18 +18,30 @@ The bare-rustc parity runner currently compiles =tests/rel_frontend_portability.
 
 The root private =instrument= feature is used by no non-Rel source module. After the move it may remain only as a compatibility feature forwarding to the driver, while the tools' instrumentation feature should name the driver/rules explicitly. The frontend's =measurement= feature can expose benchmark-only scan/page-touch methods without forcing them into its ordinary library. The scalar parse variant remains a conformance method for native/WASM parity; its existence alone does not add per-token work to the default const-generic instantiation.
 
-* TODO B: Extract the std-only frontend crate
+The first driver-only compile identified four frontend APIs that crossed the old module boundary invisibly: diagnostic refusals =refuse=/=refuse_span= and =Rir::source_limits=/=clone_filtered=. These will become explicit public methods/functions of the private std-only frontend crate with narrow contracts. No internal parser/admission pool needs broad exposure. This is a genuine new crate seam, not a reason to recreate =ergodis-private::rel_frontend= as a forwarding module.
+
+* REVIEW B: Extract the std-only frontend crate
 
 Move the existing frontend source into one private workspace member with no external dependencies. Retarget the bare-rustc parity probe to that crate's entry source and keep its canonical output bytes/digest. Preserve default parse, admission, lowering and diagnostic behavior. Keep the ordinary API independent of measurement features.
 
-* TODO C: Extract the core-dependent Rel driver crate
+The extracted [[file-rev:185df12:~/src/ergodis-private/crates/rel-frontend/src/lib.rs][frontend crate]] has no dependencies. The ten source modules match the previous source except for four documented public boundary APIs and the measurement gates recorded in task D. The bare-rustc probe now enters that crate's =src/lib.rs=; native and WASM replay agree on all 245 cases and 541,205 canonical bytes. Their canonical digest remains =c22885cd48011eb77b423a8cb0c14c7f11d59dc9cc6f56d4d63fb1a3d7ad60d1=. The source-path manifest changes by design and will receive a new source hash; it is separate from this output identity. Pinned =cargo check -p ergodis-rel-frontend= passes with default and =measurement= features. Root review found the source move semantically narrow; final receipt replay remains open.
+
+* REVIEW C: Extract the core-dependent Rel driver crate
 
 Move the current Rel driver modules together so their internal imports remain explicit. Retarget the root integration tests and =ergodis-tools= to the new crates. Remove the root package's Rel modules and its Rel-only contract/rules/verify dependencies only where its other modules permit. Confirm the driver manifest has no whole-=ergodis= dependency and that no root-to-driver-to-root cycle appears.
 
-* TODO D: Gate frontend measurement aids
+The nine driver modules now live under [[file-rev:185df12:~/src/ergodis-private/crates/rel-driver/src/lib.rs][the driver crate]]; the ten old root =rel_*= module declarations and all nineteen old source files are removed. Test/tool imports name =ergodis-rel-frontend= or =ergodis-rel-driver= directly, with no =ergodis-private::rel_*= residue. The root still needs =ergodis-contract= and =ergodis-verify= for other modules. Its =ergodis-rules= edge moved from normal dependencies to dev dependencies because two Rel integration tests import a demand policy; no root library module uses it. The root =instrument= feature forwards to the driver, and the tool =instrument= feature forwards directly to the driver/rules. The driver manifest contains only the frontend, three public core crates, and serialization/hash/error libraries. Pinned default and all-target instrument checks pass. The Git move detector found 95–100% similarity for all nineteen source moves; my independent nine-module driver comparison found only crate imports and rustfmt ordering/wrapping. The source extraction is private commit =185df12=.
+
+* REVIEW D: Gate frontend measurement aids
 
 Identify benchmark-only entry points separately from public conformance and diagnostics. Gate the scan-only and page-touch paths behind a named frontend measurement feature, with the tools benchmark enabling it. Retain scalar parse for parity until the harness and tests can request a feature explicitly; do not sacrifice the default frontend's native/WASM conformance. Record the final gate and binary shape precisely.
+
+The crate now declares a disabled-by-default =measurement= feature. =Workspace::scan_only_variant= and =Workspace::touch=, plus the scanner/admission/parser/lowerer helpers they call, are gated by it. =Workspace::parse_variant= remains available in the default build for native/WASM conformance. The default and measurement-feature crate checks both pass; the tools dependency wiring and retained-binary comparison are still under review.
 
 * TODO E: Validate, measure, review and close
 
 Run pinned default/measurement builds, bare-rustc native/WASM parity, Rel reference differential, allocation gates, full exactness fixtures and the instrument build. Compare canonical identities and output bytes; source-path hashes may change and must be labelled separately. Measure matched parse/lower/stratify stages and any cross-crate hot accessors against the retained control with the required A/A null and non-multiplexing counters. Record any accepted deviation under =PERFORMANCE.md=, independently review the crate graph and code, then archive the queue row and route C1216.
+
+Functional gates at =185df12=: root Rel frontend 28, lowering 76 (including allocation and canonical byte gates), reference 19, other weighted/evidence/wire suites 30; driver 15; tools with =rel-benchmark= 54. All pass. =cargo fmt --check= and =git diff --check= pass. The driver and its public dependencies compile for =wasm32-unknown-unknown=. A trial =aarch64-unknown-linux-gnu= check stops before project code at =E0463= because the pinned Nix compiler lacks that target's =std=/=core=; this does not establish ARM behavior. Native ARM, macOS and Windows execution remain untested. The retained candidate and matched performance gates are next.
+
+The release candidate retained from clean =185df12= with pinned rustc 1.95.0 is =c1218-extract-185df12=, SHA-256 =44f196fb24855c01cd9fbdd4aa1bc162a6f5fda62cccf6375ce122c68f58046e=. The control remains =c1218-control-abe04f8=, SHA-256 =4713725fed117002eb274a99c1343b32e89edbb1f4e44d778034f0b6d9a2bc8b=. Both are default =ergodis-tools= release builds, retained by =../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools --label NAME= under the same pinned compiler. The move creates new cross-crate calls to small =Rir= accessors; they have no inline hints in the pure extraction. The matched stage A/B is measuring this unmodified shape before choosing any accessor change.
