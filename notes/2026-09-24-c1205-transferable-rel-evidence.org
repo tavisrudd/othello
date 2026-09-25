@@ -1,0 +1,118 @@
+#+TITLE: C1205 transferable Rel evidence: milestones b and c
+#+DATE: 2026-09-24
+#+AUTHOR: Codex
+#+TODO: TODO INPROGRESS REVIEW BLOCKED | DONE
+#+STARTUP: overview
+
+* Scope and authority
+
+The [[file-rev:5eeed8891:~/src/othello/notes/2026-09-18-c1205-rel-transferable-evidence.md][C1205 card]] defines milestones b and c. Milestone a is closed in the [[file-rev:5eeed8891:~/src/othello/notes/2026-09-22-c1205-rel-transferable-evidence-report.md][earlier report]]. The lane routing points here through C1205, then C1218 and C1216. This report keeps implementation notes beside each task; the handoff remains routing only.
+
+* DONE B1: Define the evidence boundary and producer record
+
+The ordinary =evaluate= API should remain a compact checked closure. An explicit evidence API will retain a source-bound chain for transfer. It must capture bytes of each prepared layer, both encoded certificates, a digest of each with distinct domain tags, every declared relation's name/arity/input flag, each input's canonical tuple digest, and each non-positive literal's generated relation. The producer verifies both certificates and the construction records before returning either result. Evidence allocation and encoding occur only on the opt-in cold path; no derivation-loop operation changes.
+
+The source identity is the core prepared identity recomputed from bytes. A content digest is a reference, not a substitute for carrying bytes. The offline reader must get enough data to re-admit all layers and check both certificates without the producer's =Demand= plan.
+
+The agreed envelope is an opt-in serializable =EvidenceArtifact= returned beside the ordinary =Stratified=. It carries original source bytes and a tagged source digest, the normalized RIR fingerprint, the body policy and effective frontend limits, validated external seed names with arity/count/digest, and one =LayerEvidence= per layer. A layer carries canonical prepared bytes and their core prepared identity, declared relation metadata, per-input tagged tuple digests, literal-to-materialization mappings, and both certificate byte streams with tagged digests. A wire DTO carries the typed dictionary/readout, construction records and final closure. This DTO avoids making the core evaluator's policy enum part of the wire format; its copies are made only on the opt-in path. The ordinary =Stratified= result remains compact. The layer-zero prepared source supplies the actual claimed external rows, so they need not be copied into the envelope a second time.
+
+The current raw JSON certificate SHA-256 values in benchmark receipts remain unchanged. The evidence digests use tagged records; they are new identities, not replacements for those existing receipts. =BodyPolicy= and =Limits= are written through explicit wire fields, because the frontend source compiles in a standalone parity harness without Cargo dependencies.
+
+Initial code review found a missing use-site entry for a second literal sharing an aggregate result. The first producer diff incremented the aggregate record's =uses= count but skipped the literal-to-result mapping on that reuse branch. The producer is repairing it; a shared-aggregate fixture belongs in the adversarial gate.
+
+The first source-aware check also compared a shared filter record's single representative =literal= against *every* use site's literal, which would reject an honest shared filter. Review requested a representative check plus checks of each mapped use. The aggregate check must bind its recorded aggregated column to the source literal as well as its relation and operator. These are source-binding requirements, not just record-shape checks.
+
+Digest framing is length-delimited. The shared outer frame is =SHA256("ergodis.rel-stratified.evidence.v1/" || field || 0x00 || u64le(payload_length) || payload)=. An input payload carries its relation name, arity, row count, tuple-byte length and canonical little-endian tuple values. A construction record uses field =record= and additionally prefixes the payload with its kind; the relation name and arity precede count and tuple bytes. Thus an equal tuple vector in different relation kinds, names or arities has a different record digest. The verifier restates this framing independently.
+
+The producer implementation is integrated. Its targeted tests pass 4/4, the stratified unit group 10/10, and the pinned Nix Rel lowering integration suite 76/76. Source-aware per-layer mapping checks run inside evaluation; a positive layer with no nonpositive literal skips the new mapping audit, and a nonpositive result replays its construction records before return. The typed result's ordinary output fields remain unchanged.
+
+** Red-team checks
+
+- A chain may omit or duplicate a construction, relation, literal, or layer. The reader must compare inventories derived from the recorded layer source and the original Rel source, rather than only replay supplied records.
+- A record may describe correct tuples for the wrong literal, operator, relation, layer, or dictionary state. The reader must bind each to an independently parsed use site and to the checked prior closure.
+- A dictionary-dependent filter or aggregate can change meaning when a later aggregate interns values. The record must fix its dictionary boundary; replay must refuse a value not present at that boundary.
+- An input digest alone is weak if the source bytes are absent. The reader must recompute it over the re-admitted input rows and establish provenance from earlier checked relations or validated external seeds.
+- Matching two certificates is insufficient if they share an invalid source. Both checker doors must independently re-admit the encoded source, and the recorded identity must equal the bytes' identity.
+- Deserialization must bound sizes before allocation and report a record kind, index, and field on failure. The decode path must not treat untrusted lengths as preallocation advice.
+- The envelope's frontend limits are untrusted values. A small file can request enormous workspace reservations. The offline verifier must cap both individual capacities and their estimated total before constructing a workspace, with explicit higher budgets for large legitimate evidence.
+
+* DONE B2: Implement independent offline verifier and tool command
+
+Use a separately written, set-based construction rebuild promoted from the test reference approach, as accepted in the card. It must not call =Demand= or the producer's complement/filter/aggregate construction functions. Re-admit each layer's bytes and check both certificates with =ergodis-verify=, then compare their checked closures relation by relation. Rebuild and compare constructions and inputs from prior checked closures. Provide a library API and an =ergodis-tools= subcommand that reads an evidence file in a new process.
+
+Root review found a source-provenance gap in the first verifier draft: it checked source facts as a subset of the prepared base facts for a derived relation. That would admit arbitrary extra base facts if an attacker re-certified the forged layer. The verifier must require exact equality to the re-lowered source fact set for every derived relation; only explicitly named free input relations can include validated external rows. A separate guard must check the computed complement/filter product before enumerating it, so malformed metadata cannot force an unbounded offline replay.
+
+Both repairs landed. The independent verifier re-lowers original source bytes, reconstructs each layer's declared relation and full rule shape, admits canonical prepared bytes, checks trace and ranked certificates separately, and carries only their checked closures across layers. It rebuilds aggregate groups and dictionary interning, complement sets and comparison pairs using separate set-based algorithms; it checks the exact prepared facts, record fields/digests, final typed dictionary and relation closures. It computes domain and materialization bounds from the re-lowered RIR and admitted layers before replay allocation. The transfer report contains only source-derived counts and certified derivation counts. Evaluator rounds, probes, candidates and index policy remain diagnostic fields of the ordinary result.
+
+Independent Sol review of private =6a97b55= found that appended construction records with a layer number outside the chain escaped per-layer checks. A global layer-range check now rejects each record family, and a mutation test covers all three. The review also observed that evaluator-only counters could be altered without an independent check. The transferable =EvidenceLayerReport= now omits those counters entirely. Recorded workspace limits are replay capacities chosen by the producer; they are bounded for allocation safety but are not a semantic source claim.
+
+The reviewer raised a possible fact-plus-rule accounting defect, then traced the lowerer's invariant: a fact-set definition becomes =REL_INPUT=, a formula definition becomes =REL_DERIVED=, and a second definition of the same relation is rejected. Thus one admitted RIR relation cannot mix source facts and rules; no code change was retained for that non-finding. The reviewed path has no other identified correctness defect. The independent audit used Sol xhigh, as requested for this implementation lane; the card originally called for Opus, which is unavailable in the current agent set.
+
+* DONE B3: Adversarial and portability gates
+
+Run a mixed negation/comparison/aggregate chain across writer and reader processes. Mutate each field family one at a time and require named refusals. Include fact-only layer zero, shared construction uses, external name and arity refusals, and a later aggregate that extends the dictionary. Check exact C1189 parity, plan fingerprints, prepared identities, certificate digests, and native/WASM compilation where affected.
+
+| Mutated field family | Required detection |
+|----------------------+--------------------|
+| Original source bytes / RIR fingerprint / policy | Source or lowering identity |
+| Layer order, missing/extra layer, prepared identity or byte | Layer index and source field |
+| Declared relation name, arity or input bit | Declared relation index and field |
+| Input relation digest, seed name or row | Input relation and digest/provenance field |
+| Literal mapping, missing/duplicate mapping | Literal index and replacement field |
+| Complement source, domains, counts or digest | Complement record index and first bad field |
+| Comparison literal/operator or filter digest | Filter record index and first bad field |
+| Aggregate relation/operator/column/dictionary or digest | Aggregate record index and first bad field |
+| Either certificate digest or one certificate entry | Layer and certificate kind/field |
+| Claimed final closure or readout | Relation and first differing tuple/field |
+
+The reader should accept only the exact source/layer/record inventory it independently reconstructs. A structurally valid artifact with a changed source and fully recomputed certificates is a *different claim*; callers that require a particular source or external seed set must pin those identities outside the artifact.
+
+An independent integration test now constructs a mixed three-layer source: a negated input, an integer comparison, then an aggregate whose result extends the dictionary. It round-trips the artifact through JSON and separately mutates source digest, prepared identity, declared relation, input digest, each certificate digest, literal mapping, each construction family and final typed result. The test is written; its assertions await the completed offline reconstruction module and process gate.
+
+The offline adversarial integration suite passes 4/4. The separate-process =ergodis-tools rel-evidence write= and =verify= exchange passes on a mixed source: three layers, five source relations, one complement, one comparison and one aggregate. The compact JSON artifact is 13,274 bytes, SHA-256 =ed8a142d79395768b24ecf0d01640859eada5db9e5903c02938fabb22e4b5e05=. The pinned tools target passes 45 binary tests plus three certificate-authority tests. A verifier unit test confirms that adding a base fact to a derived relation, even with an otherwise re-certified layer shape, fails named =Layer.SourceFacts=.
+
+The exact frontend portability runner passes 245 native/WASM cases and emits 541,205 canonical bytes with SHA-256 =c22885cd48011eb77b423a8cb0c14c7f11d59dc9cc6f56d4d63fb1a3d7ad60d1=. A clean =66767b1= archive replay produces the *same* count, byte length and SHA-256. The standalone frontend source also compiles for AArch64 Linux and WASM with the installed host toolchain. Whole-private-crate AArch64 checking succeeds with BLAKE3's pure Rust build path; the pinned Nix rustc lacks that target's standard library and the default host cross build lacks an AArch64 C compiler. Whole-private-crate WASM checking stops in the pre-existing core =ergodis::control= Unix-only imports. These are toolchain/core portability boundaries; this task's frontend parity digest is unchanged. No macOS or Windows target is installed for a cross build.
+
+* DONE C1: Unify the wire backend route
+
+Construct wire export from the same per-layer assembly that =rel_stratified= executes. Compare byte-for-byte with the old positive wire route on its accepted fragment, keep one fragment gate, and route n-ary Datalog bodies through Datalog admission only. Refresh ADR 0004 and the lowering architecture note, including source/implementation/certificate identities and the per-column complement exactness argument.
+
+The conversion boundary is =PreparedSource= as assembled at each layer, before the plan consumes it. A converter emits a Datalog wire =Program= with the same declared relation order, rule slot order, and fact rows; it uses =datalog::admit= as the wire acceptance gate. It cannot claim the prepared identity is the wire identity: these are distinct canonical encodings with distinct domain tags. Legacy positive wire bytes can differ when the old projection kept source fact order or duplicates that prepared admission canonicalizes, or when the prepared assembler renumbered rule variables by first body occurrence while the old projection kept RIR variable labels. Tests classify these identity-shape differences and require equal admitted relation/rule/fact meaning, while pinning byte identity where the two encodings coincide. The old project must stop being an independent production backend after integration.
+
+The initial converter compared admitted facts by cloning every tuple into two sortable vectors. Code review replaced that with one sorted index vector over the wire admission. Prepared admission already stores relation-major sorted tuples, so the comparison still checks exact admitted meaning while avoiding two copied tuple payloads near the layer ceiling. The converter remains a cold export path.
+
+The production =rel_lowering::project= constructor has now been removed. =rel_lowering= retains typed readout and the shared outside-fragment diagnostic. Its three callers in the lowering tests use the exact prepared bytes captured by =evaluate_with_evidence= and =rel_wire_export::from_encoding=. A test-only copy of the retired positive projection compares three executed positive fixtures: a direct rule is byte-identical, while recursion exposes the expected alpha-renaming difference; all three have identical admitted relation, rule and fact meaning. Separate exporter tests establish that source fact order and duplicates can change wire identity while admitted set meaning stays equal; the n-ary case uses Datalog admission, not the grounded two-body door. The four wire tests pass.
+
+The card's byte-identity preservation gate applies to existing *core wire* fixtures and certificates, which this patch does not change. The retired private positive projection had never been the executed prepared-layer source; its own wire bytes were not the core wire fixture identity. The new exporter deliberately reflects the executed prepared layer, so its alpha-renamed wire source ID can differ from that retired projection's ID. The reported identity inventory keeps both cases distinct.
+
+ADR 0004 and the C1190 lowering architecture note now describe the executed prepared-layer backend, cold wire export, transfer evidence, and distinct source/RIR/prepared/wire/certificate identities. The per-column complement exactness argument is recorded there, including the dictionary fallback when a binding relation is derived in the current layer.
+
+* INPROGRESS C2: Retained A/B, review, and close
+
+Retain clean controls before measuring touched stages. Measure derivation, frontend, backend, and tool/evidence cold work separately. Apply =PERFORMANCE.md=, with the user's standing discretion for instruction deviations strictly below 0.1% per affected fixture recorded here. Review the code and reports independently, close the task card and queue archive-first, and leave only a short routing update in the handoff.
+
+** Pre-measurement cost model
+
+The opt-in artifact allocates roughly one copy of the final closure and records plus encoded prepared/certificate bytes; this is paid only by the writer. Its SHA-256 work is linear in those bytes, outside evaluation. The ordinary derivation loop receives no new per-candidate branch or allocation. Source/seed validation is linear in supplied external values; the default empty seed list has only a branch. A source-aware construction replay is proportional to each materialized construction universe and aggregate input set. The producer now records a =has_materialization= flag during its existing layer-rule scan: a positive layer with no recorded use skips the new per-layer mapping audit, while a layer containing a nonpositive literal still audits the complete use inventory even if a producer bug omitted its record. A positive final result also skips the full record replay. The binary grows from the new CLI command and may shift untouched ThinLTO code; retained A/B, not source inspection, decides that risk. The exporter performs two cold admissions plus a fact-set comparison and is not on the default route.
+
+The control tool is =c1205-control-tools-66767b1= under =~/.cache/ergodis/bin/=, retained before source edits with SHA-256 =97f0ac0afc6febdc0fd148f54a8d026395aca3620802edd483b6f229bd2e7834= using the pinned Nix shell. It is a clean private-revision control. The first attempted retention from the workspace root named no binary target; retrying from =tasks/tools= produced this control.
+
+** Measured default route
+
+The implementation is private [[file-rev:6a97b55:~/src/ergodis-private/src/rel_stratified.rs][=6a97b55=]], with the independent verifier at [[file-rev:6a97b55:~/src/ergodis-private/src/rel_evidence_verify.rs][this revision]] and the cold wire exporter at [[file-rev:6a97b55:~/src/ergodis-private/src/rel_wire_export.rs][this revision]]. A clean release candidate was retained by =retain-bin.sh tasks/tools ergodis-tools --label c1205-candidate=: SHA-256 =4713725fed117002eb274a99c1343b32e89edbb1f4e44d778034f0b6d9a2bc8b=. Both arms are release, default features, rustc 1.95.0 in the pinned Nix shell; neither source tree had a foreign or dirty diff at retention. The interleaved five-round script was [[file-rev:6a97b55:~/src/ergodis-private/analysis/rel-frontend/bench.py][=analysis/rel-frontend/bench.py=]] with cohorts =ascii,datalog=, stages =parse,lower,stratify=, CPU 5, and the non-multiplexing =instructions,cycles,branches,branch-misses,page-faults,minor-faults= set. The saved receipt is =~/.cache/ergodis/c1205-ab-frontend-final.json= (measured artifact, not source authority). Every counter was enabled 100%; load 0.52–0.90; parse A/A instruction nulls were 1.000002 and 1.000000, both within five parts per million of one.
+
+| Operation | Candidate/control instructions | 95% interval | Reading |
+|-----------+--------------------------------+--------------+---------|
+| Workspace prepare | 1.028729 | 1.028394–1.029064 | +951 instructions per prepared workspace; measured loss |
+| ASCII byte parse | 0.985235 | 0.985232–0.985238 | whole-binary code-shape gain |
+| ASCII byte lower | 0.989938 | 0.989928–0.989948 | lower-minus-parse 0.999859 |
+| Datalog byte lower | 0.993881 | 0.993875–0.993886 | lower-minus-parse 0.994773 |
+| Datalog byte stratify | 0.999981 | 0.999981–0.999982 | stratify-minus-lower 1.000003 |
+
+The stratification-stage difference is about +0.0003% instruction work; the ordinary evaluator's source bytes, closure and certificate outcomes pass the harness's exact fields. The parser and lowerer gains reflect whole-binary code generation as well as source changes; they are not attributed to a new algorithm. The prepare loss is isolated to a small workspace-creation stage, with an A/B interval far outside the null, and exceeds the standing less-than-0.1% discretion. No performance exception is yet claimed. The task's final disposition must either revert that measured loss with a validated forward patch or obtain a new scoped exception.
+
+** Exactness and review gates
+
+Pinned =cargo fmt --all -- --check= and =cargo clippy -p ergodis-private -p ergodis-tools --all-targets -- -D warnings= pass. Private integration gates pass: =rel_lowering= 76/76, =rel_reference_eval= 19/19, =rel_wire_export= 4/4, =rel_evidence_adversarial= 4/4. The tools target passes 45 binary and three authority tests. Two separate CLI processes write and verify the current mixed artifact; after the certified-report narrowing its size is 13,274 bytes and SHA-256 =ed8a142d79395768b24ecf0d01640859eada5db9e5903c02938fabb22e4b5e05=.
+
+The C1195 [[file-rev:6a97b55:~/src/ergodis-private/analysis/datalog-comparison/c1195/fixtures/manifest.json][eight-fixture manifest]] passes complete visible and lowered-layer exactness with the retained =rel-benchmark= candidate (clean private =6a97b55=, SHA-256 =8a4e227b05c7026c5d70a5f5c94239e2fceeecb03404a89ae7d9966d5f57548e=); run ID =c1205-6a97b55=, status =exact=. The [[file-rev:6a97b55:~/src/ergodis-private/analysis/datalog-comparison/c1195/check.py][checker script]] and manifest are git-visible. The receipt is =~/.cache/ergodis/c1195/correctness/c1205-6a97b55/exactness.json=; it is a measured local artifact. The core checkout is unchanged. Sol xhigh performed an independent read-only review of the current private commit and reported no remaining concrete correctness defect after the two fixes described under B2.
