@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-22
-**Status**: IN PROGRESS (2026-09-24); dated design and validation record:
+**Status**: COMPLETED (2026-09-24); dated design, validation, and approved scoped performance exception:
 `notes/2026-09-24-c1218-rel-crate-boundary.org`.
 **Authority**: `notes/2026-09-22-c1208-follow-up-triage.md` (approved allocation and order).
 
