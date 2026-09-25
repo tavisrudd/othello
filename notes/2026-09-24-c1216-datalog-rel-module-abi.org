@@ -1,0 +1,35 @@
+#+TITLE: C1216 Datalog and Rel module ABI
+#+DATE: 2026-09-24
+#+AUTHOR: Codex
+#+TODO: TODO INPROGRESS REVIEW BLOCKED | DONE
+#+STARTUP: overview
+
+* DONE A: Choose the provider boundary and trust contract
+
+Authority: [[file-rev:479668311:~/src/othello/notes/2026-09-22-c1216-datalog-rel-module-abi.md][C1216 card]]. C1205, C1213 and C1218 are complete. The starting source revisions are core =5ea22b5= and private =704ef47=; this task changes neither the native direct APIs nor public-to-private dependency direction.
+
+Use two coarse providers under the existing =ergodis-modules= ABI v1 and public native/browser hosts. The core Datalog provider owns one admitted Boolean wire program, Demand plan and bounded workspace per instance handle. The private Rel provider owns the source bytes, std-only frontend lowering, private driver, checked result and optional transferable evidence. Rel is one provider because its execution layers, typed readout and evidence share source and workspace authority; dividing it into frontend/lowering/evaluator providers would add cross-provider identities and private serialization between stages. The public host sees only a manifest, descriptor and opaque byte buffers; the private module is built separately and the public core never imports private source.
+
+=PREPARE= admits and stores source authority, =WORKSPACE= creates a bounded execution workspace, =EXECUTE= selects coarse readouts, and =RELEASE= follows the existing nonce-bound ownership rules. A failing ABI call writes zero bytes; a separate cold refusal readout carries a structured error after rejection. A capacity refusal must leave the resource graph valid, so callers may retry with a larger output buffer. The descriptor states the exact schema, selectors and output bounds. Unsupported schemas and selectors fail closed. No per-tuple ABI calls or provider hooks enter a hot loop.
+
+The ordinary readout returns a compact checked result. Certificate construction, transferable evidence encoding and independent checking are separate opt-in selectors. The checker must re-admit the source and verify its own records, not trust a producer's success bit. A module's certificate bytes are compared with the native direct route on fixed inputs. An ABI success alone is not a certificate of correctness.
+
+Provider defaults must suit eager-commit WASM and small-memory hosts: use a bounded source size, conservative frontend capacities and approximately 4,096 rows per derived relation rather than the native Demand default of =1 << 24=. Before allocating a Demand workspace, inspect its predicted bytes and enforce a small total cap (target 64 MiB). A caller may request larger explicit bounds only within named hard limits. Capacity exhaustion returns a structured refusal; it cannot silently reduce a requested bound. Native direct APIs keep their existing defaults.
+
+Threat cases for review: forged/stale/foreign handles, releasing a plan while a workspace is live, retry after a short output buffer, schema confusion between grounded and Datalog routes, malformed or oversized source/certificate, source or certificate substitution, empty/large input, WASM memory growth invalidating views, and panic containment at the C boundary. Run the compiled modules in the actual public host; merely compiling =wasm32= does not establish host support.
+
+* INPROGRESS B: Implement the core Datalog provider
+
+Owner: Luna xhigh, root design and code review. The implementation belongs in a separate public core crate using =ergodis-modules= ABI v1 and the existing Datalog admission, Demand evaluator and independent verifier. Add native and WASM ABI gates on exact result, certificate bytes, structured refusal and lifecycle. Retain the existing =ergodis-rules= module and direct Demand API.
+
+* INPROGRESS C: Implement the private Rel provider
+
+Owner: Luna xhigh, root design and code review. The implementation belongs in one private provider crate consuming =ergodis-rel-frontend= and =ergodis-rel-driver=; it must not turn the private root into a binary or make the public core depend on private code. Native/WASM gates must exercise source preparation, stratified execution, typed readout, opt-in evidence transfer, offline checking and rejection through the real host ABI.
+
+* TODO D: Integrate and red-team the host contract
+
+Root will review both diffs, resolve protocol mismatches, test separately built native/WASM artifacts in the public hosts, compare contracted bytes and exact outcomes with direct APIs, and exercise malformed inputs, capacity retries, stale handles and small-memory defaults. Distinguish implemented API, exposed ABI and actually executed host capabilities.
+
+* TODO E: Performance, portability and closeout
+
+Run the pinned functional gates and a native retained-control A/B for any affected direct path or changed hot loop. Report full provenance and uncertainty for measured effects; no unapproved larger loss is retained. Record macOS, Windows and ARM as compile/run evidence only when actually tested. Run cache GC in dry-run mode, review the discovery discriminator, write final receipts here, and apply archive-first C1216 queue lifecycle when acceptance is met.
