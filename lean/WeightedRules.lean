@@ -12,6 +12,7 @@ import WeightedRules.RoundConvention.DomainFour
 import WeightedRules.RoundConvention.DomainFive
 import WeightedRules.RoundConvention.DomainSix
 import WeightedRules.SupportAxiomAudit
+import WeightedRules.RelationalSupportAxiomAudit
 import WeightedRules.SupportConvention.Raw
 import WeightedRules.SupportConvention.DomainThree
 import WeightedRules.SupportConvention.DomainFour
@@ -26,7 +27,8 @@ rule contract and its bounded min-plus and Boolean instances, scalar-round and
 rule-output convergence over ordered inflationary algebras with their sharpness
 witnesses, reflective certificate checking,
 incremental replay, source lowering squares, finite event lowering, readout
-minimality, and the external witness examples. Each imported audit module
+minimality, finite ground relational support, and the external witness examples.
+Each imported audit module
 asserts the exact logical axioms of its terminals through `#guard_msgs`, so a
 build of this module fails if any terminal acquires `sorryAx`, a native
 evaluation axiom, or any other unexpected dependency. The round-convention
@@ -35,4 +37,7 @@ external producer's grounding, from-zero round counts and incremental sweep
 counts coincide with the synchronous iterate defined here. The support
 modules check the producer's support certificates, whose acceptance proves
 least fixedness in one pass without replaying the iterate.
+The relational support module separately proves least fixedness from strict
+ranked support and closure over admitted ground instances, and exactness of
+column-restricted complement under explicit binding and layer premises.
 -/
