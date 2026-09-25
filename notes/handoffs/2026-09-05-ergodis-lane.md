@@ -8,7 +8,7 @@ correction trails live in dated reports and the append-only
 
 **Date**: 2026-09-18
 **Mode**: intent-based.
-**Status**: ACTIVE. Next: C1217; R1/R2 documentation can proceed in parallel. Other open work is routed below.
+**Status**: ACTIVE. Next: C1207; R1/R2 documentation can proceed in parallel. Other open work is routed below.
 
 **Discovery companion**: [ergodis discovery track](../ergodis-discovery-track.md).
 
@@ -347,7 +347,7 @@ core type (keep public or feature-gate); cache-gc lists eight old unreferenced e
 **C1212:** `../2026-09-23-c1212-arity-domain-ceiling.org`.
 **C1206:** `../2026-09-23-c1206-structured-refusals.org`.
 **C1213 Datalog schema and provenance complete (2026-09-22).** Datalog wire programs carry `finite-boolean-datalog-rules.v1` under strict one-door dispatch; certificates carry no provenance; checkers issue verification records after re-admitting checks (`check_recorded`, `replay`); user doc `docs/datalog-certificates.md`. Core `378f146`, `4b57649`; private `69d68f3`, `482d6e9`; report `../2026-09-22-c1213-datalog-schema-provenance-report.md`.
-**Follow-up order and dependencies:** Tavis approved C1210–C1218 on 2026-09-22; full order and dependencies: `../2026-09-22-c1208-follow-up-triage.md`. C1205, C1218 and C1216 reports: `../2026-09-24-c1205-transferable-rel-evidence.org`, `../2026-09-24-c1218-rel-crate-boundary.org`, `../2026-09-24-c1216-datalog-rel-module-abi.org`. Next C1217. Other task status remains in the exact queue and linked cards.
+**Follow-up order and dependencies:** `../2026-09-22-c1208-follow-up-triage.md`. C1205, C1218, C1216 and C1217 reports: `../2026-09-24-c1205-transferable-rel-evidence.org`, `../2026-09-24-c1218-rel-crate-boundary.org`, `../2026-09-24-c1216-datalog-rel-module-abi.org`, `../2026-09-25-c1217-relational-support-proof.org`. Next C1207. Other task status remains in the exact queue and linked cards.
 **Programme review and next steps (2026-09-16)**: `../2026-09-16-ergodis-datalog-programme-review.md`
 ranks the gaps against the programme goal and allocates, in EV order: **C1192** (done, above),
 **C1193** bodies of more than two atoms (done, above),
