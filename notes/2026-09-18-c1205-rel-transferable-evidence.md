@@ -2,11 +2,13 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-18
-**Status**: IN PROGRESS (allocated by Tavis, 2026-09-18, from the C1204 review's first recommendation).
+**Status**: COMPLETE (2026-09-24). Milestones b/c: private `6a97b55`, measured negative
+`104b451` reverted by `abe04f8`; report `notes/2026-09-24-c1205-transferable-rel-evidence.org`.
 Milestone a done, audited and repaired 2026-09-22 (core `a92050a`, `c73ed85`; report
 `notes/2026-09-22-c1205-rel-transferable-evidence-report.md`, audit
-`notes/2026-09-22-c1205-milestone-a-audit.md`). Milestone b decides `Demand::prepared_encoding`'s
-return type (today `Error::Schema` on a wire plan; the audit recommends a typed return).
+`notes/2026-09-22-c1205-milestone-a-audit.md`). The later core typed prepared-encoding
+door is already in place. The private close has a Tavis-approved scoped workspace-preparation
+performance exception; measurement, exactness and Sol read-only audit are in the dated report.
 
 ## Goal
 
@@ -100,7 +102,8 @@ depend on this choice.
   hot loop. Performance rules: `~/src/ergodis-dev/PERFORMANCE.md` and the playbook.
 - Source comments follow the professional-comment standard: no task IDs, notes paths or process
   narrative.
-- Independent read-only audit by a fresh Opus sub before close.
+- Independent read-only audit by a fresh Sol xhigh sub before close (the available
+  reviewer model under Tavis's later Sol-only routing instruction).
 
 ## Out of scope
 
@@ -112,6 +115,6 @@ contract split; C1213 schema/provenance; C1216 ABI; C1196 encodings; C1206 refus
 
 ## Deliverables
 
-- Dated report `notes/<date>-c1205-rel-transferable-evidence-report.md`, written incrementally,
-  one section per milestone, with the audit beside it.
+- Dated org report `notes/2026-09-24-c1205-transferable-rel-evidence.org`, with each
+  implementation and review note under its TODO heading.
 - Lifecycle close per `notes/task-lifecycle-conventions.md`.

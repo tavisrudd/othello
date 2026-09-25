@@ -87,7 +87,7 @@ The card's byte-identity preservation gate applies to existing *core wire* fixtu
 
 ADR 0004 and the C1190 lowering architecture note now describe the executed prepared-layer backend, cold wire export, transfer evidence, and distinct source/RIR/prepared/wire/certificate identities. The per-column complement exactness argument is recorded there, including the dictionary fallback when a binding relation is derived in the current layer.
 
-* INPROGRESS C2: Retained A/B, review, and close
+* DONE C2: Retained A/B, review, and close
 
 Retain clean controls before measuring touched stages. Measure derivation, frontend, backend, and tool/evidence cold work separately. Apply =PERFORMANCE.md=, with the user's standing discretion for instruction deviations strictly below 0.1% per affected fixture recorded here. Review the code and reports independently, close the task card and queue archive-first, and leave only a short routing update in the handoff.
 
@@ -109,7 +109,11 @@ The implementation is private [[file-rev:6a97b55:~/src/ergodis-private/src/rel_s
 | Datalog byte lower | 0.993881 | 0.993875–0.993886 | lower-minus-parse 0.994773 |
 | Datalog byte stratify | 0.999981 | 0.999981–0.999982 | stratify-minus-lower 1.000003 |
 
-The stratification-stage difference is about +0.0003% instruction work; the ordinary evaluator's source bytes, closure and certificate outcomes pass the harness's exact fields. The parser and lowerer gains reflect whole-binary code generation as well as source changes; they are not attributed to a new algorithm. The prepare loss is isolated to a small workspace-creation stage, with an A/B interval far outside the null, and exceeds the standing less-than-0.1% discretion. No performance exception is yet claimed. The task's final disposition must either revert that measured loss with a validated forward patch or obtain a new scoped exception.
+The stratification-stage difference is about +0.0003% instruction work; the ordinary evaluator's source bytes, closure and certificate outcomes pass the harness's exact fields. The parser and lowerer gains reflect whole-binary code generation as well as source changes; they are not attributed to a new algorithm. The prepare loss is isolated to a small workspace-creation stage, with an A/B interval far outside the null, and exceeds the standing less-than-0.1% discretion.
+
+Tavis asked for an easy reduction and authorized retaining C1205 if none worked (2026-09-24). One bounded candidate moved the replay-capacity copy out of =Rir= and passed =Limits= explicitly to the opt-in evidence API (private =104b451=). Its clean retained default binary =c1205-prepare-fix-104b451= has SHA-256 =7fb673e4f8f6bef9cf1f6682017522b4c374eaafd345df5a9d3c63f6fc52b564=. The same five-round pinned protocol against clean =66767b1= gives prepare 1.027980 (95% interval 1.026888–1.029074), about +932 rather than +951 instructions: a 19-instruction saving that leaves 2.80% of the stage lost. Datalog stratification remains 0.999981 whole-stage instructions and its incremental evaluator work is unchanged to the measurement's resolution; both parse A/A nulls are within seven parts per million, counters 100% enabled. Load was 2.30–3.53; cycles and wall time are not decision metrics on the shared box. Receipt: =~/.cache/ergodis/c1205-ab-prepare-fix.json=. The candidate added an explicit API argument for a negligible saving, so private =abe04f8= forward-reverted it. A path-scoped diff confirms =abe04f8= source is byte-identical to measured =6a97b55=; no build or fixture needed to infer a changed result from that revert.
+
+The final C1205 implementation is retained under Tavis's *new scoped exception* for this workspace-preparation instruction loss only: +2.87%, approximately 951 instructions per workspace, versus clean =66767b1= on the named pinned cohort/stage. The authorization does not cover a larger loss, a different stage, or a future change. The ordinary Datalog evaluator and exactness gates remain binding. No further cheap source edit has an evidenced route to the lost instructions; resolving the remaining call-site/destructor/ThinLTO attribution would require a separate profile and is not claimed here.
 
 ** Exactness and review gates
 
@@ -119,6 +123,6 @@ The C1195 [[file-rev:6a97b55:~/src/ergodis-private/analysis/datalog-comparison/c
 
 ** Mystery ledger
 
-- OPEN: =prepare= rises by about 951 instructions per workspace while its =Workspace::new= symbol is smaller in the candidate binary (0x53b bytes versus 0x6d4). The repeated, same-toolchain A/B and A/A null establish the loss, but do not isolate its call-site, destructor or ThinLTO cause. A kernel-scoped disassembly/profile comparison would be needed before attributing it. The disposition gate is the scoped performance decision above; no floor is asserted.
+- OPEN: =prepare= rises by about 951 instructions per workspace while its =Workspace::new= symbol is smaller in the candidate binary (0x53b bytes versus 0x6d4). Removing the new RIR metadata field saved only 19 instructions and was reverted. The repeated, same-toolchain A/B and A/A null establish the loss, but do not isolate its call-site, destructor or ThinLTO cause. A kernel-scoped disassembly/profile comparison would be needed before attributing it. The scoped exception above settles retention, not attribution; no floor is asserted.
 - SETTLED: the retired private positive projector's recursive wire identity differs after variable renumbering. The old projector and the executed prepared assembler use different variable labels, but admission proves equal rule/fact/relation meaning, and existing core wire identities were untouched. See C1.
 - OPEN, existing portability boundary: native whole-private WASM checking reaches Unix-only core control imports. The frontend standalone native/WASM parity gate passes. C1216 owns the ABI/WASM build boundary after C1218; no portability claim for native Windows or macOS is made.
