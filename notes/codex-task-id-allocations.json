@@ -5300,8 +5300,17 @@
       "last": 1218,
       "purpose": "Approved C1208 follow-ups: small repairs, min-plus design, domain ceiling, Datalog format, checker tests and independence, API cleanup, module ABI, relational proof, Rel crate boundary",
       "sequence": 589
+    },
+    {
+      "count": 1,
+      "first": 1219,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1219,
+      "purpose": "Repair factual loss on cold C1207 error boundaries",
+      "sequence": 590
     }
   ],
-  "next_id": 1219,
+  "next_id": 1220,
   "schema": "codex-task-id-allocations-v1"
 }
