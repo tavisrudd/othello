@@ -218,6 +218,7 @@ All monorepo report paths below are relative to `notes/`.
 | Which terminology needs clarification? | Shipping core `docs/glossary.md` for compatibility names; private `2026-09-08-ergodis-private-terminology-review.md` for missing distinctions. Keep this review private unless the user separately requests public documentation. |
 | Where is the owned Rel frontend contract? | `2026-09-12-c1169-datalog-frontends.md` and `2026-09-12-c1170-owned-rel-frontend.md`. Read performance, recovery, syntax coverage and admission as separate gates; finite native/WASM parity is not complete language support. |
 | Where is the rule-contract proof/evidence boundary? | `2026-09-13-c1172-lean-audit-gate.md`, `2026-09-13-c1173-support-certificate.md` and `2026-09-13-c1174-generic-carrier.md`; programme order and remaining C1176/C1177 debt are in `2026-09-12-ergodis-rule-contract-programme.md` and the live handoff. |
+| What is formally proved for relational support? | `2026-09-25-c1217-relational-support-proof.org`; finite ground support plus closure and complement-domain exactness under explicit premises. Rust correspondence remains an implementation boundary. |
 
 ## Maintenance rule
 
