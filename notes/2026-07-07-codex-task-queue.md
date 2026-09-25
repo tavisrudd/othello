@@ -182,7 +182,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `complete-ports`
 
-- **C1220 `[ergodis]` [IN PROGRESS]** — versioned common diagnostic envelope and typed Datalog, Rel and verification conversions (C1207 candidate 2) → `notes/2026-09-25-c1220-diagnostic-envelope.org`.
 
 - **C1072 `[ergodis]` [QUEUED; ABSORPTION TARGET; NO RELCONIC MANUSCRIPT EDIT]** — secant-block exact cover: equality in the `PG(3,q)` secant-local coverage bound forces the secants of a complete cap into concurrent blocks of size `ρ = k-q-2`, skew across blocks, with the same-block relation on disjoint edge pairs of `K_k` closed under re-pairing; compile the closed block partitions of `E(K_k)` for `ρ ≥ 3`, `k ≤ 14` as a symmetric exact-cover instance and classify nonexistence to quantify the forced slack in `1/2 + 3/√2` → provenance `notes/2026-07-16-relconic-discovery-track.md` (2026-09-06, C1071 item 23).
 - **C1073 `[ergodis]` [QUEUED; ABSORPTION TARGET; NO RELCONIC MANUSCRIPT EDIT]** — independent domination on involution matchings: minimum ordinary completion of a conic-complete arc is `i(Γ_A)` on the union of `k` chord-involution matchings over the uncovered conic locus; build the small-`q` instance family (`q ≤ 19`, the attaining arcs) as a structured benchmark and seek a compiled Ergodis rule for `i(Γ_A)` in terms of the involution cycle structure → provenance `notes/2026-07-16-relconic-discovery-track.md` (2026-09-06, C1071 item 7).

@@ -2,25 +2,37 @@
 #+DATE: 2026-09-25
 #+TODO: TODO NEXT WAIT | DONE CANCELED
 
-* TODO C1220 — Implement the adopted common diagnostic vocabulary
+* DONE C1220 — Implement the adopted common diagnostic vocabulary
 :PROPERTIES:
 :LANE: ergodis
 :END:
 
-Authority: [[file:2026-09-25-c1207-error-model-design.org][C1207 adopted decision]], candidate 2, after [[file:2026-09-25-c1219-diagnostic-factual-loss.org][C1219]]. This slice defines a reusable versioned envelope, a stable code registry, and lossless cold conversion for typed Datalog and representative Rel refusals, including checker rejection versus stored-record mismatch. ABI readout/host migration, CLI exit policy and browser presentation remain separately routed.
+Authority: [[file-rev:7c1207437:~/src/othello/notes/2026-09-25-c1207-error-model-design.org][C1207 adopted decision]], candidate 2, after [[file-rev:7c1207437:~/src/othello/notes/2026-09-25-c1219-diagnostic-factual-loss.org][C1219]]. This slice defines a reusable versioned envelope, a stable code registry, and cold conversion for typed Datalog and Rel refusals, including checker rejection versus stored-record mismatch. ABI readout/host migration, CLI exit policy and browser presentation remain separately routed.
 
-** TODO Fix the crate and wire boundary before coding
+** DONE Fix the crate and wire boundary before coding
 
 The envelope belongs in a small public adapter crate above contract and verify, so adding presentation code does not alter their implementation identities or invalidate checker-issued records. The private Rel adapter depends inward on that crate; the public crate must not name private Rel types. Serialize a bounded =ergodis-diagnostic.v1= JSON value with typed class, severity, operation, subject, ordered context, optional budget, trust and nested cause. Encode =u64= magnitudes as decimal strings for exact JS/WASM transport. Retain typed producer errors; construct envelopes only after refusal. Red-team risks: stale record authority, fabricated source spans, duplicate bound mappings, lossy =Debug=, unbounded nested causes/strings, and false precision for saturated projections.
 
-** TODO Implement common schema and Datalog/verification conversions
+Implementation: public =ergodis-diagnostic= is a new workspace crate above the contract and checker, with no change to their hashed source files; see [[file-rev:ffbdec0:~/src/ergodis/crates/diagnostic/src/lib.rs][schema and registry]]. Private Rel depends on this crate inward. The v1 envelope has a closed code registry and subject-kind enum, typed severity/class/trust, ordered named context, typed budget object, decimal-string =u64=, optional nested cause, and a content identifier explicitly devoid of verification authority. Encoding rejects unknown codes or subjects, forged trust combinations, overlong values, more than 16 context fields, more than two cause levels, and output above 4096 bytes. A conversion that cannot fit fails explicitly; it never truncates a refusal or alters the producer error. =diagnostic_id= is computed from the current value on encoding or via =content_id=.
+
+The checker and contract implementation identities are unchanged by construction: both hash their own source file lists, and this task added neither source nor dependency to either crate. Successful evaluator/checker paths make no envelope calls; runtime effects of changed final linking were not measured.
+
+** DONE Implement common schema and Datalog/verification conversions
 
 Map C1206 budget, source and binding records into one envelope without changing producer structs. Make unknown limits explicit, keep object coordinates and source requirements, and give certificate rejection and stored-record mismatch distinct codes/trust meanings. Cover core checker rejection coordinates or fail conversion explicitly with the typed original retained; do not silently flatten any unsupported cause. Add exact JSON/round-trip and size/depth rejection tests.
 
-** TODO Implement private Rel conversion without core/private coupling
+[[file-rev:ffbdec0:~/src/ergodis/crates/diagnostic/src/core.rs][Core conversions]] exhaustively map Datalog budget objects/bounds/units, source objects/requirements, binding reasons, every contract error variant, and Datalog replay rejection versus stored-record mismatch. Ranked and derivation rejections keep typed reason plus their relation/row or derivation coordinate; compact-codec reasons have explicit names. A replay source-admission refusal is classified as a source/checker refusal, while certificate rejection and a stale record have different trust meanings. An OS reservation with no exposed ceiling has =limit: null= and =limit_source: unknown=; saturated values carry explicit lower-bound flags. Tests cover unknown versus zero limits, exact =u64::MAX= JSON transport, source coordinates, trust distinctions, registry uniqueness, forged values, noncanonical decimal parsing, size/depth bounds, and unknown subjects. No saved verification record becomes an authority token.
+
+** DONE Implement private Rel conversion without core/private coupling
 
 Preserve existing =REL= codes and source byte spans with a cold source identity; keep semantic arity numbers, =u64= route projections and full layer/core budget facts. Give Rel record mismatch and checker disagreement distinct trust codes and first-failure coordinates. Do not alter evaluator, parser, checker, certificate or ordinary output paths. Test non-ASCII spans and verifier/record distinctions.
 
-** TODO Validate, review and close
+[[file-rev:1818182:~/src/ergodis-private/crates/rel-driver/src/rel_diagnostic.rs][Rel conversions]] cover syntax, semantic admission, lowering, and all current stratified error variants. They retain =REL= codes, exact source-byte SHA-256 and byte spans where a span exists, arity counts, all =u64= route/workspace budget values and saturation flags, layer/relation/record coordinates, and the first failed record/evidence field. A checker disagreement carries both compared tuples when they fit; if they exceed the envelope bound, conversion returns an error and the original typed refusal remains available. A record index above =u32::MAX= remains in an exact decimal context field. Tests use non-ASCII bytes, a maximal record index, saturated route fields, an oversized checker disagreement, and an inconsistent route budget. No ordinary output or evaluator call site was changed.
+
+** DONE Validate, review and close
 
 Run scoped pinned native tests, formatting, Clippy and wasm32 checks, then the core all-feature gate and evidence-manifest update if core source/manifest coverage changes. Inspect source diffs for any hot-loop change; if one appears, apply the full retained-control A/B protocol. Document test limits and any incomplete conversion surface. Archive the queue row first, remove the live row, update routing with a short pointer, and apply the discovery-track discriminator. No public export or push is authorized.
+
+Final core =ffbdec0=: =cargo test --all-features=, =cargo fmt --all --check=, strict all-target/all-feature Clippy, and evidence-manifest =--check= passed. Private =1818182=: 89 tests across affected frontend, driver, module and tools targets passed with =--all-features=; driver format check and affected all-target/all-feature Clippy passed with only four allowances for pre-existing =too_many_arguments=, =type_complexity=, =manual_is_multiple_of= and =needless_range_loop= lints in unchanged private code. Strict private Clippy had first stopped at unchanged frontend =too_many_arguments= warnings. Both new crates compiled for =wasm32-unknown-unknown=, =aarch64-unknown-linux-gnu=, =aarch64-apple-darwin= and =x86_64-pc-windows-gnu=. The private default Rust 1.93 toolchain lacks Darwin/Windows std targets, so those two private checks used installed Rust 1.95. These are compile checks; no native macOS, Windows or ARM execution was run.
+
+Performance disposition: the diff adds opt-in cold conversion functions and a dependency but changes no successful-path call site, hot loop, checker, certificate, or ordinary output. Thus no A/B was run and no measured-loss exception is claimed. Future provider ABI, CLI and browser migration remains C1207's subsequent candidates. The 4096-byte cap intentionally makes very large error payloads fail conversion instead of bloating output; callers retain the original typed error. No incidental discovery-track observation arose. The next lane route is candidate 3, a versioned provider diagnostic readout and host retrieval.
